@@ -16,5 +16,6 @@
 
     <h3>J2</h3>
     <h4>{{ponto_j_dois}}</h4>
+    <a href="/hello"><button>Voltar</button></a>
 </body>
 </html>

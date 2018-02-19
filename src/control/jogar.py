@@ -35,6 +35,6 @@ def ponto():
 @view('score')
 def mostrar_score():
 
-    return dict(ponto_j_um = User[j1],ponto_j_dois = User[j2] )
+    return dict(ponto_j_um = User['j1'],ponto_j_dois = User['j2'] )
 
 run(host='localhost', port=8080, debug=True)
