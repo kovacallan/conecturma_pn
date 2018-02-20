@@ -21,5 +21,6 @@
     <form action="/fazer_cadastro">
        <a href="/cadastro"><button>cadastre o aluno</button></a>
     </form>
+    <a href="/turma"><button>turma</button></a>
 </body>
 </html>
