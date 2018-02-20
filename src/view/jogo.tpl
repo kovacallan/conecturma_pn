@@ -18,5 +18,8 @@
     <form action="/mostrar_score">
         <button type="submit" >SCORE</button>
     </form>
+    <form action="/fazer_cadastro">
+       <a href="/cadastro"><button>cadastre o aluno</button></a>
+    </form>
 </body>
 </html>
