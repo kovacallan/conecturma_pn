@@ -21,15 +21,22 @@
 <body>
     <h1>Ver Alunos</h1>
     <div class="id">
-        <h4>ID</h4>
-        % for id in aluno_id:
-            {{id}}
+        <h4>nome da criança</h4>
+        % for nome in aluno_id:
+            {{nome}}
             <br>
         % end
     </div>
     <div class="nome">
-        <h4>Turma nome</h4>
-        % for nome in serie:
+        <h4>serie da criança</h4>
+        % for aluno_id in serie:
+            {{aluno_id}}
+            <br>
+        % end
+    </div>
+    <div class="serie">
+        <h4>serie</h4>
+        % for nome in aluno_id:
             {{nome}}
             <br>
         % end
