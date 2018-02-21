@@ -61,22 +61,33 @@ def turma():
 @view('turma_cadastro')
 def cadastrar_turma():
     return
+
 @get('/cadastro_turma')
 def create_turma():
+
+    turma_obj = DbTurma()
+    for 
     id = request.params['turma_id']
     turma = request.params['turma_nome']
-    Turma.create(id=id, turma_nome=turma)
+
+    turma_obj.create_turma(id, turma)
+
     print("{} = {}".format(id, turma))
+
     bottle.redirect('/turma')
 
 ####-- Read Turma --####
 @route('/turma_read')
 @view('turma_read')
 def read_turma():
+    turma_obj = DbTurma()
+
     turma_dic = {'id' : [] , 'turma_nome' : []}
-    for turma in Turma.query(order_by = Turma.id):
+
+    for turma in turma_obj.read_turma():
         turma_dic['id'].append(turma.id)
         turma_dic['turma_nome'].append(turma.turma_nome)
+
     return dict(turma_id = turma_dic['id'], turma_nome = turma_dic['turma_nome'])
 
 ####-- Update Turma --####
