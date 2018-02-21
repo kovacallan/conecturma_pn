@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>selecione oq fazer nos alunos</h1>
-     <a href="/turma_cadastro"><button>Cadastro turma</button></a>
-     <a href="/turma_read"><button>Ver turma</button></a>
+     <a href="/aluno_cadastro"><button>criar aluno </button></a>
+     <a href="/aluno_read"><button>ver alunos</button></a>.
 </body>
 </html>

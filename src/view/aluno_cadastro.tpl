@@ -11,7 +11,7 @@
      <form action="/aluno_cad">
          Nome do aluno:   <input type="text" name="aluno_id"/>
          serie :          <input type="text" name="serie"/>
-         <button type="submit">Enviar</button>
+         <button type="submit">Enviar</button>.
     </form>
 <a href="/"><button>Voltar</button></a>
 </body>

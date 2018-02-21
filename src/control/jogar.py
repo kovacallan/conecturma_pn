@@ -2,7 +2,7 @@ from bottle import route, run, view, get, request, error
 import bottle
 import os
 from src.model.redis import *
-
+.
 view_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../view')
 bottle.TEMPLATE_PATH.insert(0, view_path)
 
