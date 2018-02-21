@@ -54,13 +54,13 @@ def create_aluno():
 
 #####--- Controle de Turma ---#####
 @route('/turma')
-@view('turma')
+@view('turma/turma')
 def turma():
     return
 
 ####-- Create Turma --####
 @route('/turma_cadastro')
-@view('turma_cadastro')
+@view('turma/turma_cadastro')
 def cadastrar_turma():
     return
 
@@ -68,19 +68,16 @@ def cadastrar_turma():
 def create_turma():
 
     turma_obj = DbTurma()
-    for 
-    id = request.params['turma_id']
+
     turma = request.params['turma_nome']
 
-    turma_obj.create_turma(id, turma)
-
-    print("{} = {}".format(id, turma))
+    turma_obj.create_turma(turma)
 
     bottle.redirect('/turma')
 
 ####-- Read Turma --####
 @route('/turma_read')
-@view('turma_read')
+@view('turma/turma_read')
 def read_turma():
     turma_obj = DbTurma()
 
@@ -94,7 +91,7 @@ def read_turma():
 
 ####-- Update Turma --####
 @route('/turma_update')
-@view('turma_update')
+@view('turma/turma_update')
 def update_turma():
     return
 

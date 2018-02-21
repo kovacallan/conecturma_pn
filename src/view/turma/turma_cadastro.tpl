@@ -10,7 +10,6 @@
 <body>
     <h1>Cadastro de Turmas</h1>
      <form action="/cadastro_turma">
-         Id:     <input type="text" name="turma_id"/>
          Turma:  <input type="text" name="turma_nome"/>
          <button type="submit">Enviar</button>
     </form>
