@@ -21,6 +21,6 @@
     <form action="/aluno">
        <button>cadastre o aluno</button>
     </form>
-    <a href="/turma"><button>turma</button></a>.
+    <a href="/turma"><button>turma</button></a>
 </body>
 </html>

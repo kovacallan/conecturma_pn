@@ -8,7 +8,7 @@
     <title>Conecturma</title>
 </head>
 <body>
-    <h1>Você está jogando o Jogo</h1>
+    <h1>Você está jogando o Jogo</h1>.
     <h2>{{nome_jogo}}</h2>
     <form action="/ponto">
         <input type="hidden" name = 'jogo' value='{{nome_jogo}}'></input>
