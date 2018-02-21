@@ -38,16 +38,18 @@ def ponto():
 def mostrar_score():
     return dict(ponto_j_um=User['j1'], ponto_j_dois=User['j2'])
 
-#####--- Controle de cadastro de aluno ---#####
-@route('/fazer_cadastro')
-@view('cadastro')
-def save_entry(entry):
-    entry.save_to_db()  # Save entry to relational database, etc.
+#####--- Controle de aluno ---#####
+@route('/aluno')
+@view('aluno_cadastro')
+def aluno():
+    return
+@get('/aluno_cad')
+def create_aluno():
+    id = request.params['aluno_id']
+    serie = request.params['serie']
+    DbAluno.create(id=id, serie=serie)
+    bottle.redirect('/')
 
-    ac.store(
-        obj_id=entry.id,
-        title=entry.title,
-        obj_type='entry')
 
 
 #####--- Controle de Turma ---#####

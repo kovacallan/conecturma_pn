@@ -2,9 +2,12 @@ from walrus import *
 
 db = Database(host = 'localhost', port = 6379, db = 0)
 
-class User(Model):
+class DbAluno(Model):
      __database__ = db
-     name = TextField(primary_key=True)
+     id = TextField(primary_key=True)
+     serie = TextField()
+
+
 
 
 class DbTurma(Model):
