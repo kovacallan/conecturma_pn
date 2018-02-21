@@ -8,14 +8,8 @@
     <title>Conecturma</title>
 </head>
 <body>
-    <h1>Bem Vindo!</h1>
-    <h2>A Conecturma</h2>
-     <form action="/fazer_cadastro">
-  Usuario:<br>
-  <input type="text" name="Usuario" value="nome">
-  <br>
-  <input type="submit" value="Submit">
-</form>
-<a href="/"><button>Voltar</button></a>
+    <h1>selecione oq fazer nos alunos</h1>
+     <a href="/turma_cadastro"><button>Cadastro turma</button></a>
+     <a href="/turma_read"><button>Ver turma</button></a>
 </body>
 </html>
