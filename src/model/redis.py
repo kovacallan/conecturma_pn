@@ -13,4 +13,4 @@ class DbAluno(Model):
 class Turma(Model):
     __database__ = db
     id = TextField(primary_key=True)
-    turma_nome = TextField()
+turma_nome = TextField()
