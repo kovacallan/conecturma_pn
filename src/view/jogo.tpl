@@ -22,7 +22,7 @@
        <button>cadastre o aluno</button>
     </form>
     <a href="/turma"><button>turma</button></a>
-    <form action="/delet">
+    <form action="/deletar_aluno">
         <button>deletar coisas</button>
     </form>
 </body>

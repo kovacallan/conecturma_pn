@@ -63,7 +63,7 @@ def create_aluno():
 
     bottle.redirect('/')
 
-######--- read de aluno---#####
+######--- Read de aluno---#####
 @route('/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
@@ -118,6 +118,19 @@ def read_turma():
 @view('turma/turma_update')
 def update_turma():
     return
+
+####-- Deletar aluno(usuario) --####
+@route('/deletar_aluno')
+@view('delete_user')
+def deletar():
+    return
+
+@get('/deletar_alunos')
+def deletar_aluno():
+    nome = request.params['nome']
+    DbAluno.delete(nome=nome)
+
+    bottle.redirect('/')
 
 
 @error(404)
