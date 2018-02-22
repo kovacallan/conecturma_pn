@@ -78,36 +78,44 @@ def read_aluno():
 
 #####--- Controle de Turma ---#####
 @route('/turma')
-@view('turma')
+@view('turma/turma')
 def turma():
     return
 
 ####-- Create Turma --####
 @route('/turma_cadastro')
-@view('turma_cadastro')
+@view('turma/turma_cadastro')
 def cadastrar_turma():
     return
+
 @get('/cadastro_turma')
 def create_turma():
-    id = request.params['turma_id']
+
+    turma_obj = DbTurma()
+
     turma = request.params['turma_nome']
-    Turma.create(id=id, turma_nome=turma)
-    print("{} = {}".format(id, turma))
+
+    turma_obj.create_turma(turma)
+
     bottle.redirect('/turma')
 
 ####-- Read Turma --####
 @route('/turma_read')
-@view('turma_read')
+@view('turma/turma_read')
 def read_turma():
+    turma_obj = DbTurma()
+
     turma_dic = {'id' : [] , 'turma_nome' : []}
-    for turma in Turma.query(order_by = Turma.id):
+
+    for turma in turma_obj.read_turma():
         turma_dic['id'].append(turma.id)
         turma_dic['turma_nome'].append(turma.turma_nome)
+
     return dict(turma_id = turma_dic['id'], turma_nome = turma_dic['turma_nome'])
 
 ####-- Update Turma --####
 @route('/turma_update')
-@view('turma_update')
+@view('turma/turma_update')
 def update_turma():
     return
 
