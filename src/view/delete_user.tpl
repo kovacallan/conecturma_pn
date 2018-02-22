@@ -9,7 +9,7 @@
 </head>
 <body>
      <form action="/deletar_alunos">
-         Id               <input type="text" name="nome"/>
+         nome do aluno      <input type="text" name="aluno_nome"/>
          <button type="submit">Deletar</button>
     </form>
 <a href="/"><button>Voltar</button></a>

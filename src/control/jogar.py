@@ -67,12 +67,14 @@ def create_aluno():
 @route('/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
-    aluno_dic = {'id' : [] , 'nome' : [] , 'serie' : [] }
-    for aluno in DbAluno.query(order_by = DbAluno.nome):
+    aluno_dic = {'id' : [] , 'aluno_nome' : [] , 'senha_aluno' : [] }
+
+    for aluno in DbAluno.query(order_by = DbAluno.aluno_nome):
         aluno_dic['id'].append(aluno.id)
-        aluno_dic['nome'].append(aluno.nome)
-        aluno_dic['serie'].append(aluno.serie)
-    return dict(aluno_id = aluno_dic['id'], aluno_nome = aluno_dic['nome'], serie = aluno_dic['serie'])
+        aluno_dic['aluno_nome'].append(aluno.aluno_nome)
+        aluno_dic['senha_aluno'].append(aluno.senha_aluno)
+
+    return dict(aluno_id = aluno_dic['id'], aluno_nome = aluno_dic['aluno_nome'], senha_aluno= aluno_dic['senha_aluno'])
 
 
 
@@ -127,8 +129,9 @@ def deletar():
 
 @get('/deletar_alunos')
 def deletar_aluno():
-    nome = request.params['nome']
-    DbAluno.delete(nome=nome)
+    nome = request.params['aluno_nome']
+    DbAluno.__database__.delete(aluno_nome=nome)
+
 
     bottle.redirect('/')
 

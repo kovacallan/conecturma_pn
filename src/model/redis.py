@@ -12,6 +12,11 @@ class DbAluno(Model):
      def create_aluno(self, nome, senha):
          return self.create(aluno_nome = nome, senha_aluno = senha)
 
+
+     #def _delete(self, instance):
+     #    self._get_container(instance).clear()
+
+
 class DbTurma(Model):
      __database__ = db
      id = AutoIncrementField(primary_key=True)
@@ -22,3 +27,4 @@ class DbTurma(Model):
 
      def read_turma(self):
           return self.query(order_by=self.id)
+
