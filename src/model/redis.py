@@ -2,6 +2,7 @@ from walrus import *
 
 db = Database(host = 'localhost', port = 6379, db = 0)
 
+# class DbAluno será usada como Usuario generico no spike
 class DbAluno(Model):
      __database__ = db
      id = AutoIncrementField(primary_key=True)
