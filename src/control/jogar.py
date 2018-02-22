@@ -38,17 +38,41 @@ def ponto():
 def mostrar_score():
     return dict(ponto_j_um=User['j1'], ponto_j_dois=User['j2'])
 
-#####--- Controle de aluno ---#####
+
+#####--- Controle aluno ---#####
+
+
 @route('/aluno')
+@view('aluno')
+def aluno_read():
+    return
+
+
+#####--- Cadastro de aluno ---#####
+@route('/cadastro_aluno')
 @view('aluno_cadastro')
 def aluno():
     return
-@get('/aluno_cad')
+
+
+@get('/aluno_cadastro')
 def create_aluno():
-    id = request.params['aluno_id']
-    serie = request.params['serie']
-    DbAluno.create(id=id, serie=serie)
+    id = request.params['id']
+    nome = request.params['aluno_nome']
+    serie= request.params['serie']
+    DbAluno.create(id=id, nome=nome, serie=serie)
     bottle.redirect('/')
+
+######--- read de aluno---#####
+@route('/ler_aluno')
+@view('aluno_read')
+def read_aluno():
+    aluno_dic = {'id' : [] , 'nome' : [] , 'serie' : [] }
+    for aluno in DbAluno.query(order_by = DbAluno.nome):
+        aluno_dic['id'].append(aluno.id)
+        aluno_dic['nome'].append(aluno.nome)
+        aluno_dic['serie'].append(aluno.serie)
+    return dict(aluno_id = aluno_dic['id'], aluno_nome = aluno_dic['nome'], serie = aluno_dic['serie'])
 
 
 

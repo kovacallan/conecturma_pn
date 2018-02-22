@@ -22,5 +22,8 @@
        <button>cadastre o aluno</button>
     </form>
     <a href="/turma"><button>turma</button></a>
+    <form action="/delet">
+        <button>deletar coisas</button>
+    </form>
 </body>
 </html>

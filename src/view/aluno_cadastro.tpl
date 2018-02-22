@@ -8,8 +8,9 @@
     <title>Conecturma</title>
 </head>
 <body>
-     <form action="/aluno_cad">
-         Nome do aluno:   <input type="text" name="aluno_id"/>
+     <form action="/aluno_cadastro">
+         Id               <input type="text" name="id"/>
+         Nome do aluno:   <input type="text" name="aluno_nome"/>
          serie :          <input type="text" name="serie"/>
          <button type="submit">Enviar</button>
     </form>
