@@ -2,10 +2,15 @@ from walrus import *
 
 db = Database(host = 'localhost', port = 6379, db = 0)
 
+# class DbAluno será usada como Usuario generico no spike
 class DbAluno(Model):
      __database__ = db
-     id = TextField(primary_key=True)
-     serie = TextField()
+     id = AutoIncrementField(primary_key=True)
+     aluno_nome = TextField()
+     senha_aluno = TextField()
+
+     def create_aluno(self, nome, senha):
+         return self.create(aluno_nome = nome, senha_aluno = senha)
 
 class DbTurma(Model):
      __database__ = db

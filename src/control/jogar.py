@@ -43,29 +43,29 @@ def mostrar_score():
 
 
 @route('/aluno')
-@view('aluno')
+@view('aluno/aluno')
 def aluno_read():
     return
 
-
 #####--- Cadastro de aluno ---#####
 @route('/cadastro_aluno')
-@view('aluno_cadastro')
+@view('aluno/aluno_cadastro')
 def aluno():
     return
 
-
-@get('/aluno_cadastro')
+@route('/aluno_cadastro', method = 'POST')
 def create_aluno():
-    id = request.params['id']
-    nome = request.params['aluno_nome']
-    serie= request.params['serie']
-    DbAluno.create(id=id, nome=nome, serie=serie)
+    aluno_obj = DbAluno()
+    nome  = request.forms['aluno_nome']
+    senha = request.forms['senha']
+
+    aluno_obj.create_aluno(nome, senha)
+
     bottle.redirect('/')
 
 ######--- Read de aluno---#####
 @route('/ler_aluno')
-@view('aluno_read')
+@view('aluno/aluno_read')
 def read_aluno():
     aluno_dic = {'id' : [] , 'nome' : [] , 'serie' : [] }
     for aluno in DbAluno.query(order_by = DbAluno.nome):

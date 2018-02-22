@@ -8,10 +8,9 @@
     <title>Conecturma</title>
 </head>
 <body>
-     <form action="/aluno_cadastro">
-         Id               <input type="text" name="id"/>
+     <form action="/aluno_cadastro" method="post">
          Nome do aluno:   <input type="text" name="aluno_nome"/>
-         serie :          <input type="text" name="serie"/>
+         Senha :          <input type="password" name="senha"/>
          <button type="submit">Enviar</button>
     </form>
 <a href="/"><button>Voltar</button></a>
