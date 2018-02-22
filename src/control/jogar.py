@@ -119,6 +119,18 @@ def read_turma():
 def update_turma():
     return
 
+####-- Deletar aluno(usuario) --####
+@route('/deletar_aluno')
+@view('delete_user')
+def deletar():
+    return
+
+@get('/deletar_alunos')
+def deletar_aluno():
+    nome = request.params['nome']
+    DbAluno.delete(nome=nome)
+
+    bottle.redirect('/')
 
 
 @error(404)
