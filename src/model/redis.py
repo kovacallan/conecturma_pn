@@ -6,22 +6,16 @@ db = Database(host = 'localhost', port = 6379, db = 0)
 class DbAluno(Model):
      __database__ = db
      id = AutoIncrementField(primary_key=True)
-     aluno_nome = TextField(fts = True, index = True)
+     aluno_nome = TextField()
      senha_aluno = TextField()
 
      def create_aluno(self, nome, senha):
          return self.create(aluno_nome = nome, senha_aluno = senha)
 
-     def pesquisa_aluno(self, nome):
-          aluno_dic = {'id': [], 'nome': [], 'senha': []}
-          for pesquisa in DbAluno.query(DbAluno.aluno_nome == nome, order_by=DbAluno.id):
-               aluno_dic['id'].append(pesquisa.id)
-               aluno_dic['nome'].append(pesquisa.aluno_nome)
-               aluno_dic['senha'].append(pesquisa.senha_aluno)
-          return aluno_dic
 
-     def logar_aluno(self, nome,senha):
-          query = self.query()
+     #def _delete(self, instance):
+     #    self._get_container(instance).clear()
+
 
 class DbTurma(Model):
      __database__ = db
