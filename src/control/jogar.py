@@ -8,9 +8,19 @@ bottle.TEMPLATE_PATH.insert(0, view_path)
 
 User = dict(name="eu", j1=0, j2=0)
 
-#####--- Controle do index ---#####
 @route('/')
-@view('jogo')
+@view('index')
+def index():
+    return
+@route('/login', method = 'POST')
+def login():
+    login_obj = DbAluno()
+    print (login_obj.pesquisa_aluno('teste'))
+    return
+
+#####--- Controle do index ---#####
+@route('/user_menu')
+@view('menu')
 def hello():
     return
 
