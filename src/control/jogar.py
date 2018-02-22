@@ -63,7 +63,7 @@ def create_aluno():
     DbAluno.create(id=id, nome=nome, serie=serie)
     bottle.redirect('/')
 
-######--- read de aluno---#####
+######--- Read de aluno---#####
 @route('/ler_aluno')
 @view('aluno_read')
 def read_aluno():
@@ -110,6 +110,7 @@ def read_turma():
 @view('turma_update')
 def update_turma():
     return
+
 
 
 @error(404)
