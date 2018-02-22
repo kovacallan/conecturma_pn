@@ -12,11 +12,23 @@ User = dict(name="eu", j1=0, j2=0)
 @view('index')
 def index():
     return
+
 @route('/login', method = 'POST')
 def login():
     login_obj = DbAluno()
-    print (login_obj.pesquisa_aluno('teste'))
-    return
+    print('teste')
+    nome  = request.params['usuario']
+    senha = request.params['senha']
+
+    retorno = login_obj.pesquisa_aluno(nome)
+
+    if retorno:
+        if retorno['senha'] == senha:
+            bottle.redirect('/user_menu')
+        else:
+            bottle.redirect('/')
+    else:
+        bottle.redirect('/')
 
 #####--- Controle do index ---#####
 @route('/user_menu')
