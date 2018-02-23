@@ -26,6 +26,10 @@ class DbAluno(Model):
      def logar_aluno(self, nome,senha):
           query = self.query()
 
+     def aluno_delete(self, nome):
+          self.query_delete(self.aluno_nome == nome)
+
+
 class DbTurma(Model):
      __database__ = db
      id = AutoIncrementField(primary_key=True)

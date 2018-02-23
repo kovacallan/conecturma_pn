@@ -98,7 +98,22 @@ def read_aluno():
 
     return dict(aluno_id = aluno_dic['id'], aluno_nome = aluno_dic['aluno_nome'], senha_aluno= aluno_dic['senha_aluno'])
 
+####-- Deletar aluno(usuario) --####
+@route('/deletar_aluno')
+@view('delete_user')
+def deletar():
+    return
 
+@get('/deletar_alunos')
+def deletar_aluno():
+        id_al = request.params['id']
+        aluno_obj = DbAluno(id=id_al)
+        print(id)
+        aluno_obj.delete()
+
+        bottle.redirect('/')
+
+####--Pesquisa ao aluno por nome --####
 
 #####--- Controle de Turma ---#####
 @route('/turma')
@@ -143,24 +158,7 @@ def read_turma():
 def update_turma():
     return
 
-####-- Deletar aluno(usuario) --####
-@route('/deletar_aluno')
-@view('delete_user')
-def deletar():
-    return
 
-@get('/deletar_alunos')
-def deletar_aluno():
-    nome = request.params['aluno_nome']
-    DbAluno.__database__.delete(aluno_nome=nome)
-
-
-    bottle.redirect('/')
-
-
-@error(404)
-def error404(error):
-    return 'Voce errou algum caminho , essa é uma pagina d erro , boa sorte'
 
 
 run(host='localhost', port=8080, debug=True)

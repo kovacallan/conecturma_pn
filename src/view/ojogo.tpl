@@ -13,7 +13,7 @@
     <form action="/ponto">
         <input type="hidden" name = 'jogo' value='{{nome_jogo}}'></input>
         <button type="submit" name = "ponto" value="1">Acertou</button>
-        <button type="submit" name = "ponto" value="1">Errou</button>
+        <button type="submit" name = "ponto" value="0">Errou</button>
     </form>
 </body>
 </html>

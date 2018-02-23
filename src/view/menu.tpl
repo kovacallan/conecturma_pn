@@ -19,7 +19,7 @@
         <button type="submit" >SCORE</button>
     </form>
     <form action="/aluno">
-       <button>cadastre o aluno</button>
+       <button>Aluno</button>
     </form>
     <a href="/turma"><button>turma</button></a>
     <form action="/deletar_aluno">
