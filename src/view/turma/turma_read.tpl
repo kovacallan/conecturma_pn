@@ -39,6 +39,6 @@
     <br>
     <br>
 
-    <a href="/"><button>Voltar</button></a>
+    <a href="/user_menu"><button>Voltar</button></a>
 </body>
 </html>

@@ -1,12 +1,15 @@
 from bottle import route,view, get, request
 import bottle
-#####--- Controle do index ---#####
+
+
+
+""" Controle do index """
 @route('/user_menu')
 @view('menu')
 def hello():
     return
 
-#####--- Controle do jogo ---#####
+"""Controle do jogo """
 @get('/jogos')
 @view('ojogo')
 def jogo():
@@ -14,7 +17,7 @@ def jogo():
     print(jogo)
     return dict(nome_jogo=jogo)
 
-#####--- Controle do score ---#####
+""" Controle do score """
 @get('/ponto')
 def ponto():
     jogo = request.params['jogo']
@@ -24,7 +27,7 @@ def ponto():
 
     bottle.redirect('/')
 
-#####--- Controle que mostra o score ---#####
+"""Controle que mostra o score """
 @get('/mostrar_score')
 @view('score')
 def mostrar_score():

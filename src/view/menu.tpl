@@ -25,5 +25,6 @@
     <form action="/deletar_aluno">
         <button>deletar coisas</button>
     </form>
+    <a href="/"><button>Voltar a tela de login</button></a>
 </body>
 </html>

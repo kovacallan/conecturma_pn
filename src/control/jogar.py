@@ -1,12 +1,16 @@
-from bottle import route, run, view, get, request, error
-import bottle
 import os
-from src.model.redis import *
+from src.control import aluno_controller
+import bottle
+from bottle import get
+from bottle import request
+from bottle import route
+from bottle import run
+from bottle import view
 
 view_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../view')
 bottle.TEMPLATE_PATH.insert(0, view_path)
 
-User = dict(name="eu", j1=0, j2=0)
+User = dict(name="eu", j1=0, j2=0, total=0)
 
 @route('/')
 @view('index')
@@ -30,13 +34,14 @@ def login():
     else:
         bottle.redirect('/')
 
-#####--- Controle do index ---#####
+
+"""" Controle do index """
 @route('/user_menu')
 @view('menu')
 def hello():
     return
 
-#####--- Controle do jogo ---#####
+""" Controle do jogo """
 @get('/jogos')
 @view('ojogo')
 def jogo():
@@ -44,24 +49,27 @@ def jogo():
     print(jogo)
     return dict(nome_jogo=jogo)
 
-#####--- Controle do score ---#####
+""" Controle do score """
 @get('/ponto')
 def ponto():
     jogo = request.params['jogo']
     ponto = int(request.params['ponto'])
+    total = int(request.params['total'])
     User[jogo] += ponto
+    User[total] +=1
     print("{} = {}".format(jogo, User[jogo]))
+    print("total de cliques {}".format(total))
 
-    bottle.redirect('/')
+    bottle.redirect('/user_menu')
 
-#####--- Controle que mostra o score ---#####
+""" Controle que mostra o score """
 @get('/mostrar_score')
 @view('score')
 def mostrar_score():
     return dict(ponto_j_um=User['j1'], ponto_j_dois=User['j2'])
 
 
-#####--- Controle aluno ---#####
+"""Controle aluno """
 
 
 @route('/aluno')
@@ -69,7 +77,7 @@ def mostrar_score():
 def aluno_read():
     return
 
-#####--- Cadastro de aluno ---#####
+"""Cadastro de aluno """
 @route('/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
@@ -80,12 +88,14 @@ def create_aluno():
     aluno_obj = DbAluno()
     nome  = request.forms['aluno_nome']
     senha = request.forms['senha']
-
-    aluno_obj.create_aluno(nome, senha)
+    if(nome.isdigit()==True ):
+        True==True
+    else:
+        aluno_obj.create_aluno(nome, senha)
 
     bottle.redirect('/')
 
-######--- Read de aluno---#####
+""" Read de aluno"""
 @route('/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
@@ -98,7 +108,7 @@ def read_aluno():
 
     return dict(aluno_id = aluno_dic['id'], aluno_nome = aluno_dic['aluno_nome'], senha_aluno= aluno_dic['senha_aluno'])
 
-####-- Deletar aluno(usuario) --####
+""" Deletar aluno(usuario) """
 @route('/deletar_aluno')
 @view('delete_user')
 def deletar():
@@ -111,17 +121,17 @@ def deletar_aluno():
         print(id)
         aluno_obj.delete()
 
-        bottle.redirect('/')
+        bottle.redirect('/user_menu')
 
-####--Pesquisa ao aluno por nome --####
+"""Pesquisa ao aluno por nome"""
 
-#####--- Controle de Turma ---#####
+""" Controle de Turma """
 @route('/turma')
 @view('turma/turma')
 def turma():
     return
 
-####-- Create Turma --####
+""" Create Turma """
 @route('/turma_cadastro')
 @view('turma/turma_cadastro')
 def cadastrar_turma():
@@ -138,7 +148,7 @@ def create_turma():
 
     bottle.redirect('/turma')
 
-####-- Read Turma --####
+""" Read Turma """
 @route('/turma_read')
 @view('turma/turma_read')
 def read_turma():
@@ -152,7 +162,7 @@ def read_turma():
 
     return dict(turma_id = turma_dic['id'], turma_nome = turma_dic['turma_nome'])
 
-####-- Update Turma --####
+""" Update Turma """
 @route('/turma_update')
 @view('turma/turma_update')
 def update_turma():

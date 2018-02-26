@@ -13,6 +13,6 @@
          Turma:  <input type="text" name="turma_nome"/>
          <button type="submit">Enviar</button>
     </form>
-    <a href="/"><button>Voltar</button></a>
+    <a href="/user_menu"><button>Voltar</button></a>
 </body>
 </html>

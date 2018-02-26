@@ -12,6 +12,7 @@
          id     <input type="text" name="id"/>
          <button type="submit">Deletar</button>
     </form>
-<a href="/"><button>Voltar</button></a>
+<a href="/user_menu"><button>Voltar</button></a>
+ <!--Teste-->
 </body>
 </html>
