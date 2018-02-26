@@ -43,6 +43,7 @@ def deletar():
 @get('/deletar_alunos')
 def deletar_aluno():
     facade.DeleteAlunoFacade(request.params['id'])
+    print(request.params['id'])
     bottle.redirect('/aluno')
 
 """Pesquisa ao aluno por nome """

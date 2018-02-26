@@ -41,11 +41,15 @@
             <br>
         % end
     </div>
+    <form action="/deletar_alunos">
+        % for id in aluno_id:
+            <button name="id" value="{{id}}">teste</button>
+        %end
+    </form>
     <br>
     <br>
     <br>
     <br>
-
     <a href="/user_menu"><button>Voltar</button></a>
 </body>
 </html>
