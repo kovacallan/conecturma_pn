@@ -13,6 +13,6 @@
          <button type="submit">Deletar</button>
     </form>
 <a href="/user_menu"><button>Voltar</button></a>
- <!--Teste-->
+
 </body>
 </html>

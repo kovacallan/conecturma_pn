@@ -15,8 +15,15 @@ class Facade:
     def DeleteAlunoFacade(self,id):
         self.aluno.aluno_delete(id)
 
+    """
+        Inicio Facade Turma
+    """
     def CreateTurmaFacade(self,nome):
         self.turma.create_turma(nome)
 
     def ReadTurmaFacada(self):
         return self.turma.read_turma
+
+    """
+        Fim Facade Turma
+    """
