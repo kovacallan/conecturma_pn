@@ -22,12 +22,8 @@
        <button>Aluno</button>
     </form>
     <a href="/turma"><button>turma</button></a>
-<<<<<<< HEAD
-=======
-    <form action="/deletar_aluno">
-        <button>deletar coisas</button>
-    </form>
+
     <a href="/"><button>Voltar a tela de login</button></a>
->>>>>>> 5c652c1c0467dbc1804ac86c818f8dccd1514b07
+
 </body>
 </html>
