@@ -1,18 +1,22 @@
-from bottle import route,view,request
+from bottle import route, view, request
 import bottle
 from src.facade.facade import Facade
+
+facade = Facade()
+
 
 @route('/')
 @view('index')
 def index():
     return
 
-@route('/login', method = 'POST')
+
+@route('/login', method='POST')
 def login():
-    nome  = request.params['usuario']
+    nome = request.params['usuario']
     senha = request.params['senha']
 
-    retorno = login_obj.pesquisa_aluno(nome)
+    retorno = facade.PesquisaAlunoFacade(nome)
 
     if retorno:
         if retorno['senha'] == senha:
@@ -21,5 +25,3 @@ def login():
             bottle.redirect('/')
     else:
         bottle.redirect('/')
-
-

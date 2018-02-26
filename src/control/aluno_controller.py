@@ -10,7 +10,6 @@ facade = Facade()
 def aluno_read():
     return
 
-
 #####--- Cadastro de aluno ---#####
 @route('/cadastro_aluno')
 @view('aluno/aluno_cadastro')
