@@ -3,7 +3,7 @@ from walrus import *
 db = Database(host='localhost', port=6379, db=0)
 
 
-# class DbAluno será usada como Usuario generico no spike
+""" class DbAluno será usada como Usuario generico no spike"""
 class DbUsuario(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
@@ -23,10 +23,10 @@ class DbUsuario(Model):
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
         return usuario_dic
 
-    def pesquisa_usuario(self):
+    def pesquisa_usuario(self,usuario_nome):
         usuario_dic = {'id': 0, 'nome': '', 'senha': ''}
 
-        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == self.nome, order_by=DbUsuario.id):
+        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == self.usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
             usuario_dic['nome'] = pesquisa.usuario_nome
             usuario_dic['senha'] = pesquisa.usuario_senha
@@ -42,7 +42,7 @@ class DbUsuario(Model):
     def aluno_delete(self, id):
         self.query_delete(id)
 
-
+"""verificar de onde vem ... pq erro """
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
