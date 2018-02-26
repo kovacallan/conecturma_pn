@@ -4,14 +4,15 @@ import bottle
 
 facade = Facade()
 
-#####--- Controle aluno ---#####
+
+""" Controle aluno """
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
     return
 
 
-#####--- Cadastro de aluno ---#####
+""" Cadastro de aluno """
 @route('/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
@@ -24,14 +25,15 @@ def create_aluno():
     bottle.redirect('/')
 
 
-######--- Read de aluno---#####
+""" Read de aluno"""
 @route('/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
     usuarios = facade.ReadAlunoFacade()
-    return dict(aluno_id = usuarios['id'], aluno_nome = usuarios['usuario_nome'], senha_aluno= usuarios['usuario_senha'])
+    return dict(aluno_id=usuarios['id'], aluno_nome=usuarios['usuario_nome'], senha_aluno=usuarios['usuario_senha'])
 
-####-- Deletar aluno(usuario) --####
+
+"""Deletar aluno(usuario) """
 @route('/deletar_aluno')
 @view('delete_user')
 def deletar():
@@ -43,4 +45,4 @@ def deletar_aluno():
     facade.DeleteAlunoFacade(request.params['id'])
     bottle.redirect('/aluno')
 
-####--Pesquisa ao aluno por nome --####
+"""Pesquisa ao aluno por nome """
