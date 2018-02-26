@@ -1,29 +1,20 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+% include('header.tpl', title = 'Conecturma')
+    <div class="row">
+        <div align="center" class="col-md-12">
+            <h1>Bem Vindo!</h1>
+            <h2>A Conecturma</h2>
+            <form action="/jogos" method="get">
+                <button type="submit" name="n1" value="j1">Jogo 1</button>
+                <button type="submit" name="n1" value="j2">Jogo 2</button>
+            </form>
+            <br>
+            <a href="/mostrar_score"><button type="submit" >SCORE</button></a>
+            <a href="/aluno"><button>Aluno</button></a>
 
-    <title>Conecturma</title>
-</head>
-<body>
-    <h1>Bem Vindo!</h1>
-    <h2>A Conecturma</h2>
-    <form action="/jogos" method="get">
-        <button type="submit" name="n1" value="j1">Jogo 1</button>
-        <button type="submit" name="n1" value="j2">Jogo 2</button>
-    </form>
-    <br>
-    <form action="/mostrar_score">
-        <button type="submit" >SCORE</button>
-    </form>
-    <form action="/aluno">
-       <button>Aluno</button>
-    </form>
-    <a href="/turma"><button>turma</button></a>
+            <a href="/turma"><button>turma</button></a>
 
-    <a href="/"><button>Voltar a tela de login</button></a>
+            <a href="/"><button>Voltar a tela de login</button></a>
+        </div>
+    </div>
 
-</body>
-</html>
+% include('footer.tpl')
