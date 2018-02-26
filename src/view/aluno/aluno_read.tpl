@@ -1,55 +1,46 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+% include('./header.tpl', title = 'Conecturma')
+   <div align="center" class="col-md-12">
+        <h1>Ver Alunos</h1>
 
-    <title>Conecturma</title>
-    <style>
-        .id{
-            text-align:center;
-            float:left;
-        }
-        .nome{
-            text-align:center;
-            margin-left:10px;
-            float:left;
-        }
-    </style>
-</head>
-<body>.
-    <h1>Ver Alunos</h1>
-    <div class="id">
-        <h4>id da criança</h4>
-        % for id in aluno_id:
-            {{id}}
-            <br>
-        % end
-    </div>
-    <div class="nome">
-        <h4>nome da criança</h4>
-        % for aluno_nome in aluno_nome:
-            {{aluno_nome}}
-            <br>
-        % end
-    </div>
-    <div class="senha">
-        <h4>senha do aluno</h4>
-        % for senha_aluno in senha_aluno:
-            {{senha_aluno}}
-            <br>
-        % end
-    </div>
-    <form action="/deletar_alunos">
-        % for id in aluno_id:
-            <button name="id" value="{{id}}">teste</button>
-        %end
-    </form>
-    <br>
-    <br>
-    <br>
-    <br>
-    <a href="/user_menu"><button>Voltar</button></a>
-</body>
-</html>
+        <div class="row">
+
+            <div class="col-md-3">
+                <h4>Id</h4>
+                % for id in aluno_id:
+                    {{id}}
+                    <br>
+                    <br>
+                % end
+            </div>
+
+            <div class="col-md-3">
+                <h4>Nome</h4>
+                % for aluno_nome in aluno_nome:
+                    {{aluno_nome}}
+                    <br>
+                    <br>
+                % end
+            </div>
+            <div class="col-md-3">
+                 <h4>Senha</h4>
+                % for senha_aluno in senha_aluno:
+                    {{senha_aluno}}
+                    <br>
+                    <br>
+                % end
+            </div>
+            <div class="col-md-3">
+                <h4>Deletar</h4>
+                <form action="/deletar_alunos">
+                % for id in aluno_id:
+                    <button name="id" value="{{id}}">Apagar</button>
+                    <br>
+                    <br>
+                %end
+                </form>
+            </div>
+        </div>
+        <a href="/aluno"><button>Voltar</button></a>
+   </div>
+
+% include('footer.tpl')

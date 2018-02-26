@@ -22,7 +22,7 @@ def aluno():
 @route('/aluno_cadastro', method='POST')
 def create_aluno():
     facade.CreateAlunoFacade(request.forms['aluno_nome'], request.forms['senha'])
-    bottle.redirect('/')
+    bottle.redirect('/aluno')
 
 
 """ Read de aluno"""
