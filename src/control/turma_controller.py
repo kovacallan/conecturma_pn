@@ -1,5 +1,5 @@
 from bottle import route,view, get, request
-from src.model.turma_model import *
+from src.model.redis import *
 import bottle
 #####--- Controle de Turma ---#####
 @route('/turma')

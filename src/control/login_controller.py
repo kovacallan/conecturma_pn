@@ -1,6 +1,6 @@
 from bottle import route,view,request
 import bottle
-from src.model.aluno_model import *
+from src.facade.facade import Facade
 
 @route('/')
 @view('index')
@@ -9,8 +9,6 @@ def index():
 
 @route('/login', method = 'POST')
 def login():
-    login_obj = DbAluno()
-    print('teste')
     nome  = request.params['usuario']
     senha = request.params['senha']
 

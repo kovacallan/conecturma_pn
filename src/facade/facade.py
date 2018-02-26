@@ -1,6 +1,5 @@
 from src.model.redis import DbUsuario
 
-
 class Facade:
 
     def __init__(self):
@@ -14,3 +13,6 @@ class Facade:
 
     def DeleteAlunoFacade(self,id):
         self.aluno.aluno_delete(id)
+
+    def PesquisaAlunoFacade(self, nome):
+        return self.aluno.pesquisa_usuario(nome)

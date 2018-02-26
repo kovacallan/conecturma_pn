@@ -23,24 +23,22 @@ class DbUsuario(Model):
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
         return usuario_dic
 
-    def pesquisa_usuario(self):
+    def pesquisa_usuario(self, nome):
         usuario_dic = {'id': 0, 'nome': '', 'senha': ''}
 
-        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == self.nome, order_by=DbUsuario.id):
+        for pesquisa in self.query(self.usuario_nome == nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
             usuario_dic['nome'] = pesquisa.usuario_nome
             usuario_dic['senha'] = pesquisa.usuario_senha
 
         if usuario_dic['id'] == 0:
-            return False
+            return "Usuario não encontrado"
         else:
             return usuario_dic
 
-    def logar_aluno(self, nome, senha):
-        query = self.query()
-
-    def aluno_delete(self, id):
-        self.query_delete(id)
+    def aluno_delete(self, usuario):
+        teste = DbUsuario(id = usuario)
+        teste.delete()
 
 
 class DbTurma(Model):
