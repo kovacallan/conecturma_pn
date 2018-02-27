@@ -6,7 +6,7 @@
                  Turma:  <input type="text" name="turma_nome"/>
                  <button type="submit">Enviar</button>
             </form>
-            <a href="/user_menu"><button>Voltar</button></a>
+            <a href="/turma"><button>Voltar</button></a>
         </div>
     </div>
 % include('./footer.tpl')

@@ -17,10 +17,16 @@
                 % end
             </div>
             <div class="col-md-4">
+                <form action="/deletar_turma">
                 <h4>Deletar Turma</h4>
+                % for id in turma_id:
+                    <button name="id" value="{{id}}">Deletar</button>
+                    <br><br>
+                % end
+                </form>
             </div>
         </div>
-        <a href="/user_menu"><button>Voltar</button></a>
+        <a href="/turma"><button>Voltar</button></a>
     </div>
 
 % include('./footer.tpl')

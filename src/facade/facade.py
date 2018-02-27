@@ -1,10 +1,11 @@
-from src.model.redis import DbUsuario
+from src.model.redis import DbUsuario,DbTurma
 
 
 class Facade:
 
     def __init__(self):
         self.aluno = DbUsuario()
+        self.turma = DbTurma()
 
     def CreateAlunoFacade(self, nome, senha):
         self.aluno.create_usuario(nome, senha)
@@ -23,6 +24,9 @@ class Facade:
 
     def ReadTurmaFacada(self):
         return self.turma.read_turma
+
+    def DeleteTurmaFacade(self,id):
+        self.turma.delete_turma(id)
 
     """
         Fim Facade Turma
