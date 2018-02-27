@@ -1,4 +1,4 @@
-from bottle import route,view, get, request
+from bottle import route, view, get, request
 from src.model.redis import *
 import bottle
 
@@ -12,10 +12,18 @@ def turma():
 @route('/turma_cadastro')
 @view('turma/turma_cadastro')
 def cadastrar_turma():
+    """
+    pagina de cadastro de turma
+    :return:
+    """
     return
 
 @get('/cadastro_turma')
 def create_turma():
+    """
+    Pagina para chamar a funçao create_turma , pedindo pelo tpl o parametro turma_nome
+    :return: cria uma entrada no banco de dados da turma criada
+    """
 
     turma_obj = DbTurma()
 
@@ -29,6 +37,10 @@ def create_turma():
 @route('/turma_read')
 @view('turma/turma_read')
 def read_turma():
+    """
+    Direciona para a pagina que mostra a turma em ordem de id
+    :return: a entrada de dicionario que contem o id e o turma_nome
+    """
     turma_obj = DbTurma()
 
     turma_dic = {'id' : [] , 'turma_nome' : []}
