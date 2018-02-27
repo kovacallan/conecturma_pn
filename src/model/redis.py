@@ -1,4 +1,5 @@
 from walrus import *
+from random import randrange
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -8,18 +9,27 @@ db = Database(host='localhost', port=6379, db=0)
 class DbUsuario(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
+    matricula = TextField(fts=True, index=True)
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
+    tipo_de_usuario = IntegerField()
+    pontos_de_vida = IntegerField()
+    pontos_de_moedas = IntegerField()
 
     def create_usuario(self, nome, senha):
-        self.create(usuario_nome=nome, usuario_senha=senha)
+        matricula = []
+        for i in range(0, 5):
+            matricula.append(randrange(1, 9))
+        matricula = ''.join(str(x) for x in matricula)
+        self.create(usuario_nome=nome, usuario_senha=senha, matricula=matricula)
 
     def read_usuario(self):
 
-        usuario_dic = {'id': [], 'usuario_nome': [], 'usuario_senha': []}
+        usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': [], 'usuario_senha': []}
 
         for aluno in self.query(order_by=self.usuario_nome):
             usuario_dic['id'].append(aluno.id)
+            usuario_dic['matricula'].append(aluno.matricula)
             usuario_dic['usuario_nome'].append(aluno.usuario_nome)
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
         return usuario_dic
@@ -55,3 +65,7 @@ class DbTurma(Model):
 
     def read_turma(self):
         return self.query(order_by=self.id)
+
+    def delete_turma(self, id):
+        turma = DbTurma(id=id)
+        turma.delete()

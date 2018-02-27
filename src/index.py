@@ -1,17 +1,16 @@
-from bottle import run,route,static_file
-
-import bottle
+from bottle import run
 import os
 
-import src.control.static
-import src.control.aluno_controller
-import src.control.login_controller
-import src.control.jogo_controller
-import src.control.turma_controller
-import src.control.aluno_controller
+from control.static_controller import *
+from control.usuario_controller import *
+from control.login_controller import *
+from control.jogo_controller import *
+from control.turma_controller import *
+
 
 view_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'view')
 bottle.TEMPLATE_PATH.insert(0, view_path)
+
 
 
 run(host='localhost', port=8080, debug=True)

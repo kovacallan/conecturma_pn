@@ -1,6 +1,8 @@
-from bottle import route,view,request
-import bottle
-from src.model.redis import *
+from bottle import route,view,request,redirect
+from bottle import route,view,request,redirect
+from facade.facade import Facade
+
+facade = Facade()
 
 @route('/')
 @view('index')
@@ -9,19 +11,15 @@ def index():
 
 @route('/login', method = 'POST')
 def login():
-    login_obj = DbUsuario()
-    print('teste')
     nome  = request.params['usuario']
     senha = request.params['senha']
 
-    retorno = login_obj.pesquisa_usuario(nome)
+    retorno = facade.PesquisaAlunoFacade(nome)
 
     if retorno:
         if retorno['senha'] == senha:
-            bottle.redirect('/user_menu')
+            redirect('/user_menu')
         else:
-            bottle.redirect('/')
+            redirect('/')
     else:
-        bottle.redirect('/')
-
-
+        redirect('/')

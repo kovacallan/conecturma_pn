@@ -1,4 +1,4 @@
-from src.model.redis import DbUsuario,DbTurma
+from model.redis import DbUsuario,DbTurma
 
 
 class Facade:
@@ -15,6 +15,9 @@ class Facade:
 
     def DeleteAlunoFacade(self,id):
         self.aluno.aluno_delete(id)
+
+    def PesquisaAlunoFacade(self, nome):
+       return self.aluno.pesquisa_usuario(nome)
 
     """
         Inicio Facade Turma

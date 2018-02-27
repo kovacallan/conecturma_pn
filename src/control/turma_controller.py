@@ -1,7 +1,10 @@
 from bottle import route,view, get, request
-from src.model.redis import *
+from model.redis import *
+from facade.facade import *
+
 import bottle
 
+facade = Facade()
 """ Controle de Turma """
 @route('/turma')
 @view('turma/turma')
@@ -44,3 +47,10 @@ def read_turma():
 @view('turma/turma_update')
 def update_turma():
     return
+
+"""Turma Delete"""
+
+@get('/deletar_turma')
+def deletar_turma():
+    facade.DeleteTurmaFacade(request.params['id'])
+    bottle.redirect('/turma')
