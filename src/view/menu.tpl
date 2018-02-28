@@ -10,11 +10,8 @@
             <br>
             <a href="/mostrar_score"><button type="submit" >SCORE</button></a>
             <a href="/aluno"><button>Aluno</button></a>
-
             <a href="/turma"><button>turma</button></a>
-
             <a href="/"><button>Voltar a tela de login</button></a>
         </div>
     </div>
-
 % include('footer.tpl')

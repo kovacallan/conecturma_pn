@@ -11,5 +11,4 @@
             <a href="/formulario_cadastro"><button>Cadastrar</button></a>
         </div>
     </div>
-
 % include('footer.tpl')

@@ -37,6 +37,7 @@ class DbUsuario(Model):
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
         return usuario_dic
 
+
     def pesquisa_usuario(self, usuario_nome):
         usuario_dic = {'id': 0, 'matricula':'', 'nome': '', 'senha': ''}
 
@@ -56,9 +57,7 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-
 """verificar de onde vem ... pq erro """
-
 
 class DbTurma(Model):
     __database__ = db
