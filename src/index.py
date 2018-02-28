@@ -2,6 +2,7 @@ from bottle import run
 import os
 
 from control.static_controller import *
+from control.menu_controller import *
 from control.usuario_controller import *
 from control.login_controller import *
 from control.jogo_controller import *

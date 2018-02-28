@@ -25,7 +25,7 @@ def login():
     retorno = facade.PesquisaAlunoFacade(nome)
     if retorno:
         if retorno['senha'] == senha:
-            response.set_cookie("login", retorno['matricula'], secret='2524')
+            response.set_cookie("login", nome, secret='2524')
             redirect('/user_menu')
         else:
             redirect('/')

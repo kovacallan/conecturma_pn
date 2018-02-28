@@ -26,8 +26,7 @@ class Facade:
         """
         return self.aluno.read_usuario()
 
-
-    def DeleteAlunoFacade(self,id):
+    def DeleteAlunoFacade(self, id):
         """
         facada de deletar o aluno , atravez da id
         futuramente atravez do nome ,por enquanto foi implementada atravez de botao
@@ -39,10 +38,14 @@ class Facade:
     def PesquisaAlunoFacade(self, nome):
         return self.aluno.pesquisa_usuario(nome)
 
+    def PontoJogoFacade(self,usuario, jogo, ponto):
+        self.aluno.pontos_jogo(usuario, jogo, ponto)
+
     """
         Inicio Facade Turma
     """
-    def CreateTurmaFacade(self,nome):
+
+    def CreateTurmaFacade(self, nome):
         """
         facada de criaçao de turma
         :param nome:
@@ -57,8 +60,7 @@ class Facade:
         """
         return self.turma.read_turma
 
-
-    def DeleteTurmaFacade(self,id):
+    def DeleteTurmaFacade(self, id):
         """
         facada de DeleteTurmaFacade
         :param id:

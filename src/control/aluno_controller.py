@@ -26,7 +26,7 @@ def create_aluno():
     :return: cria o aluno e volta para a pagina geral aluno
     """
     facade.CreateAlunoFacade(request.forms['aluno_nome'], request.forms['senha'])
-    bottle.redirect('/')
+    redirect('/')
 
 
 """Read de aluno"""
@@ -55,6 +55,6 @@ def deletar_aluno():
     :return: Deleta a entrada de dicionario e retorna a pagina geral aluno
     """
     facade.DeleteAlunoFacade(request.params['id'])
-    bottle.redirect('/aluno')
+    redirect('/aluno')
 
 """Pesquisa ao aluno por nome"""

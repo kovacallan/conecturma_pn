@@ -9,10 +9,12 @@ db = Database(host='localhost', port=6379, db=0)
 class DbUsuario(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    matricula = TextField(fts=True, index=True)
+    matricula = TextField()
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
     tipo_de_usuario = IntegerField()
+    pontos_j1 = IntegerField()
+    pontos_j2 = IntegerField()
     pontos_de_vida = IntegerField()
     pontos_de_moedas = IntegerField()
 
@@ -23,14 +25,14 @@ class DbUsuario(Model):
         matricula = ''.join(str(x) for x in matricula)
         return matricula
 
-    def create_usuario(self, nome, senha):
+    def create_usuario(self, nome, senha, pontos_j1=0, pontos_j2=0):
         """
         cria um usuario
         :param nome: entra com o nome(e usuário) que sera utilizado
         :param senha: cria a senha para o login
         :return:uma entrada no banco de dados para o novo usuário e sua senha
         """
-        self.create(usuario_nome=nome, usuario_senha=senha,matricula = self.gerar_matricula())
+        self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula(), pontos_j1=0, pontos_j2=0)
 
     def read_usuario(self):
         """
@@ -53,13 +55,15 @@ class DbUsuario(Model):
         :param : id , usuário_nome
         :return: o usuário pesquisado
         """
-        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': ''}
+        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0}
 
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
             usuario_dic['matricula'] = pesquisa.matricula
             usuario_dic['nome'] = pesquisa.usuario_nome
             usuario_dic['senha'] = pesquisa.usuario_senha
+            usuario_dic['pontos_j1'] = pesquisa.pontos_j1
+            usuario_dic['pontos_j2'] = pesquisa.pontos_j2
 
         if usuario_dic['id'] == 0:
             return False
@@ -75,10 +79,22 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
+    def pontos_jogo(self, usuario, jogo, pontos):
+        if pontos == None or pontos == 0:
+            pass
+        elif jogo == 'j1':
+            retorno = self.pesquisa_usuario(usuario)
+            usuario = self.load(retorno['id'])
+            usuario.pontos_j1 += pontos
+            usuario.save()
+        elif jogo == 'j2':
+            retorno = self.pesquisa_usuario(usuario)
+            usuario = self.load(retorno['id'])
+            usuario.pontos_j2 += pontos
+            usuario.save()
 
 
 """Verificar de onde vem ... pq erro """
-
 
 
 class DbTurma(Model):
