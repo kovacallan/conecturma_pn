@@ -1,23 +1,7 @@
-from bottle import route, view, get, request
-
-from src.model.redis import *
-
-""" Controle do index """
-
-
-@route('/user_menu')
-@view('menu')
-def hello():
-    """ pagina inicial após login"""
-    if request.get_cookie("teste", secret='2524'):
-        return
-    else:
-        bottle.redirect('/')
+from bottle import  view, get, request
 
 
 """Controle do jogo """
-
-
 @get('/jogos')
 @view('ojogo')
 def jogo():

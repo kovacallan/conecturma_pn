@@ -30,7 +30,7 @@ class DbUsuario(Model):
         :param senha: cria a senha para o login
         :return:uma entrada no banco de dados para o novo usuário e sua senha
         """
-        self.create(usuario_nome=nome, usuario_senha=senha)
+        self.create(usuario_nome=nome, usuario_senha=senha,matricula = self.gerar_matricula())
 
     def read_usuario(self):
         """
@@ -64,7 +64,6 @@ class DbUsuario(Model):
         if usuario_dic['id'] == 0:
             return False
         else:
-            print('entrei aqui')
             return usuario_dic
 
     def aluno_delete(self, id):
@@ -77,7 +76,9 @@ class DbUsuario(Model):
         usuario.delete()
 
 
+
 """Verificar de onde vem ... pq erro """
+
 
 
 class DbTurma(Model):

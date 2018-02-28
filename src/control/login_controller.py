@@ -7,7 +7,7 @@ facade = Facade()
 @route('/')
 @view('index')
 def index():
-    if request.get_cookie("teste", secret='2524'):
+    if request.get_cookie("login", secret='2524'):
         redirect('/user_menu')
     else:
         return
@@ -23,10 +23,9 @@ def login():
     senha = request.params['senha']
 
     retorno = facade.PesquisaAlunoFacade(nome)
-    print(retorno)
     if retorno:
         if retorno['senha'] == senha:
-            response.set_cookie("teste", nome, secret='2524')
+            response.set_cookie("login", retorno['matricula'], secret='2524')
             redirect('/user_menu')
         else:
             redirect('/')
@@ -43,4 +42,9 @@ def cadastro_view():
 @route('/cadastro', method='POST')
 def cadastro():
     facade.CreateAlunoFacade(request.params['aluno_nome'], request.params['senha'])
+    redirect('/')
+
+@route('/sair')
+def sair():
+    response.delete_cookie("login")
     redirect('/')
