@@ -8,14 +8,15 @@
     <title>Conecturma</title>
 </head>
 <body>
-    <h1>Você está jogando o Jogo</h1>.
+    <h1>Você está jogando o Jogo</h1>
     <h2>{{nome_jogo}}</h2>
-    <form action="/ponto">
-        <input type="hidden" name = 'jogo' value='{{nome_jogo}}'></input>
-        <input type="hidden" name = 'click' value='click'></input>
-        <input type="hidden" name = 'total_de_cliques' value='total'></input>
+    <form action="/ponto" method="get">
+        <input type="hidden" name = "jogo" value='{{nome_jogo}}'></input>
         <button type="submit" name = "ponto" value="1">Acertou</button>
         <button type="submit" name = "ponto" value="0">Errou</button>
     </form>
+    <a href="/user_menu">
+            <button>Voltar</button>
+        </a>
 </body>
 </html>

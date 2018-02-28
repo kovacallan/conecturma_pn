@@ -16,8 +16,8 @@ def index():
 @route('/login', method='POST')
 def login():
     """
-    faz o login na conta do usuario recebendo o usuario e senha
-    :return: da acesso ao menu , caso o usuario e senha digitados estejam certos
+    faz o login na conta do usuário recebendo o usuário e senha
+    :return: da acesso ao menu , caso o usuário e senha digitados estejam certos
     """
     nome = request.params['usuario']
     senha = request.params['senha']
@@ -25,7 +25,7 @@ def login():
     retorno = facade.PesquisaAlunoFacade(nome)
     if retorno:
         if retorno['senha'] == senha:
-            response.set_cookie("login", retorno['matricula'], secret='2524')
+            response.set_cookie("login", nome, secret='2524')
             redirect('/user_menu')
         else:
             redirect('/')
