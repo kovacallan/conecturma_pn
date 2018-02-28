@@ -40,7 +40,6 @@ def create_aluno():
 @route('/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
-
     if request.get_cookie("teste", secret='2524'):
         usuarios = facade.ReadAlunoFacade()
         print(usuarios)
@@ -48,7 +47,6 @@ def read_aluno():
                     senha_aluno=usuarios['usuario_senha'])
     else:
         bottle.redirect('/')
-
 
 
 """Deletar aluno(usuario) """

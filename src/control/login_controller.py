@@ -16,11 +16,12 @@ def index():
 @route('/login', method='POST')
 def login():
     """
-    faz o login na conta do usuario recebendo o usuario e senha
-    :return: da acesso ao menu , caso o usuario e senha digitados estejam certos
+    faz o login na conta do usuário recebendo o usuário e senha
+    :return: da acesso ao menu , caso o usuário e senha digitados estejam certos
     """
     nome = request.params['usuario']
     senha = request.params['senha']
+
     if valida_login(nome, senha):
         create_cookie(nome)
         redirect('/user_menu')
