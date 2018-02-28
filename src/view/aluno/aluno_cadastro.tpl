@@ -1,18 +1,13 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>Conecturma</title>
-</head>
-<body>
-     <form action="/aluno_cadastro" method="post">
-         Nome do aluno:   <input type="text" name="aluno_nome"/>
-         Senha :          <input type="password" name="senha"/>
+%include('./header.tpl', title="Conecturma")
+<div class="row">
+    <div align="center" class="col-md-12">
+        <h1>Cadastro</h1>
+        <form action="/aluno_cadastro" method="post">
+         Nome do aluno:   <input type="text" name="aluno_nome"/><br>
+         Senha :          <input type="password" name="senha"/><br>
          <button type="submit">Enviar</button>
-    </form>
-<a href="/"><button>Voltar</button></a>
-</body>
-</html>
+        </form>
+        <a href="/aluno"><button>Voltar</button></a>
+    </div>
+</div>
+%include('footer.tpl')

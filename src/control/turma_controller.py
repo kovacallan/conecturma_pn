@@ -1,13 +1,16 @@
 from bottle import route,view, get, request
-from src.model.redis import *
+from model.redis import *
+from facade.facade import *
 import bottle
-#####--- Controle de Turma ---#####
+
+facade = Facade()
+""" Controle de Turma """
 @route('/turma')
 @view('turma/turma')
 def turma():
     return
 
-####-- Create Turma --####
+""" Create Turma """
 @route('/turma_cadastro')
 @view('turma/turma_cadastro')
 def cadastrar_turma():
@@ -24,7 +27,7 @@ def create_turma():
 
     bottle.redirect('/turma')
 
-####-- Read Turma --####
+""" Read Turma """
 @route('/turma_read')
 @view('turma/turma_read')
 def read_turma():
@@ -38,8 +41,15 @@ def read_turma():
 
     return dict(turma_id = turma_dic['id'], turma_nome = turma_dic['turma_nome'])
 
-####-- Update Turma --####
+""" Update Turma """
 @route('/turma_update')
 @view('turma/turma_update')
 def update_turma():
     return
+
+"""Turma Delete"""
+
+@get('/deletar_turma')
+def deletar_turma():
+    facade.DeleteTurmaFacade(request.params['id'])
+    bottle.redirect('/turma')

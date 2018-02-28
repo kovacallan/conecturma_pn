@@ -7,7 +7,10 @@ import bottle
 @route('/user_menu')
 @view('menu')
 def hello():
-    return
+    if request.get_cookie("teste", secret='2524'):
+        return
+    else:
+        bottle.redirect('/')
 
 """Controle do jogo """
 @get('/jogos')
