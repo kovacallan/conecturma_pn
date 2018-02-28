@@ -30,7 +30,7 @@ class DbUsuario(Model):
         :param senha: cria a senha para o login
         :return:uma entrada no banco de dados para o novo usuario e sua senha
         """
-        self.create(usuario_nome=nome, usuario_senha=senha)
+        self.create(usuario_nome=nome, usuario_senha=senha,matricula = self.gerar_matricula())
 
     def read_usuario(self):
         """
@@ -53,7 +53,7 @@ class DbUsuario(Model):
         :param id , usuario_nome :
         :return: o usuario pesquisado
         """
-        usuario_dic = {'id': 0, 'matricula':'', 'nome': '', 'senha': ''}
+        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': ''}
 
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
@@ -64,7 +64,6 @@ class DbUsuario(Model):
         if usuario_dic['id'] == 0:
             return False
         else:
-            print('entrei aqui')
             return usuario_dic
 
     def aluno_delete(self, id):
@@ -76,10 +75,11 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
+
 """verificar de onde vem ... pq erro """
 
-class DbTurma(Model):
 
+class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
