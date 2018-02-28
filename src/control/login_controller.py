@@ -23,7 +23,7 @@ def login():
     senha = request.params['senha']
 
     retorno = facade.PesquisaAlunoFacade(nome)
-
+    print(retorno)
     if retorno:
         if retorno['senha'] == senha:
             response.set_cookie("teste", nome, secret='2524')

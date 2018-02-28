@@ -46,7 +46,7 @@ class DbUsuario(Model):
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
         return usuario_dic
 
-    def pesquisa_aluno(self, usuario_nome):
+    def pesquisa_usuario(self, usuario_nome):
 
         """
         pesquisa o aluno atravez da id, ou do nome do aluno
