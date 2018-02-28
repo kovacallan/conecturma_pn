@@ -1,5 +1,5 @@
 from bottle import route, view, request, redirect, response
-from facade.facade import Facade
+from src.facade.facade import Facade
 
 facade = Facade()
 
@@ -22,13 +22,9 @@ def login():
     nome = request.params['usuario']
     senha = request.params['senha']
 
-    retorno = facade.PesquisaAlunoFacade(nome)
-    if retorno:
-        if retorno['senha'] == senha:
-            response.set_cookie("login", nome, secret='2524')
-            redirect('/user_menu')
-        else:
-            redirect('/')
+    if valida_login(nome, senha):
+        create_cookie(nome)
+        redirect('/user_menu')
     else:
         redirect('/')
 
@@ -44,7 +40,21 @@ def cadastro():
     facade.CreateAlunoFacade(request.params['aluno_nome'], request.params['senha'])
     redirect('/')
 
+
 @route('/sair')
 def sair():
     response.delete_cookie("login")
     redirect('/')
+
+
+def valida_login(nome, senha):
+    retorno = facade.PesquisaAlunoFacade(nome)
+
+    if retorno['nome'] == nome and retorno['senha'] == senha:
+        return True
+    else:
+        return False
+
+
+def create_cookie(parametro):
+    response.set_cookie("login", parametro, secret='2524')

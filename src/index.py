@@ -1,9 +1,10 @@
+import bottle
 from bottle import run
 import os
 
 from control.static_controller import *
 from control.menu_controller import *
-from control.usuario_controller import *
+from control.aluno_controller import *
 from control.login_controller import *
 from control.jogo_controller import *
 from control.turma_controller import *
