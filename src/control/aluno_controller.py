@@ -1,6 +1,5 @@
-from bottle import route, view, get, request
+from bottle import route, view, get, request, redirect
 from src.facade.facade import Facade
-import bottle
 
 facade = Facade()
 
@@ -9,6 +8,7 @@ facade = Facade()
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
+
     return
 
 
@@ -26,7 +26,7 @@ def create_aluno():
     :return: cria o aluno e volta para a pagina geral aluno
     """
     facade.CreateAlunoFacade(request.forms['aluno_nome'], request.forms['senha'])
-    bottle.redirect('/')
+    redirect('/')
 
 
 ######--- Read de aluno---#####
@@ -42,11 +42,6 @@ def read_aluno():
 
 
 ####-- Deletar aluno(usuario) --####
-@route('/deletar_aluno')
-@view('delete_user')
-def deletar():
-
-
 @get('/deletar_alunos')
 def deletar_aluno():
     """
@@ -54,6 +49,6 @@ def deletar_aluno():
     :return: Deleta a entrada de dicionario e retorna a pagina geral aluno
     """
     facade.DeleteAlunoFacade(request.params['id'])
-    bottle.redirect('/aluno')
+    redirect('/aluno')
 
 ####--Pesquisa ao aluno por nome --####

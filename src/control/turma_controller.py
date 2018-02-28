@@ -1,9 +1,9 @@
 from bottle import route,view, get, request
-from model.redis import *
-from facade.facade import *
+from src.facade.facade import *
 import bottle
 
 facade = Facade()
+
 """ Controle de Turma """
 @route('/turma')
 @view('turma/turma')
