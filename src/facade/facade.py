@@ -1,4 +1,4 @@
-from src.model.redis import DbUsuario,DbTurma
+from model.redis import DbUsuario, DbTurma
 
 
 class Facade:
@@ -26,6 +26,7 @@ class Facade:
         """
         return self.aluno.read_usuario()
 
+
     def DeleteAlunoFacade(self,id):
         """
         facada de deletar o aluno , atravez da id
@@ -34,6 +35,9 @@ class Facade:
         :return: o metodo que deleta o aluno da base de dados
         """
         self.aluno.aluno_delete(id)
+
+    def PesquisaAlunoFacade(self, nome):
+        return self.aluno.pesquisa_usuario(nome)
 
     """
         Inicio Facade Turma
@@ -46,12 +50,13 @@ class Facade:
         """
         self.turma.create_turma(nome)
 
-    def ReadTurmaFacada(self):
+    def ReadTurmaFacade(self):
         """
         facada de ReadTurmaFacada
         :return:
         """
         return self.turma.read_turma
+
 
     def DeleteTurmaFacade(self,id):
         """

@@ -8,8 +8,7 @@
                 <br>
                 <button type="submit">Entrar</button>
             </form>
-            <a href="/cadastro_aluno"><button>Cadastrar</button></a>
+            <a href="/formulario_cadastro"><button>Cadastrar</button></a>
         </div>
     </div>
-
 % include('footer.tpl')

@@ -4,7 +4,7 @@
 
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-2 offset-2">
                 <h4>Id</h4>
                 % for id in aluno_id:
                     {{id}}
@@ -12,8 +12,16 @@
                     <br>
                 % end
             </div>
+            <div class="col-md-2">
+                <h4>Matricula</h4>
+                % for aluno_matricula in aluno_matricula:
+                    {{aluno_matricula}}
+                    <br>
+                    <br>
+                % end
+            </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h4>Nome</h4>
                 % for aluno_nome in aluno_nome:
                     {{aluno_nome}}
@@ -21,7 +29,7 @@
                     <br>
                 % end
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                  <h4>Senha</h4>
                 % for senha_aluno in senha_aluno:
                     {{senha_aluno}}
@@ -29,7 +37,7 @@
                     <br>
                 % end
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h4>Deletar</h4>
                 <form action="/deletar_alunos">
                 % for id in aluno_id:
