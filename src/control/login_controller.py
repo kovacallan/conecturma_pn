@@ -1,5 +1,4 @@
-from bottle import route,view,request,redirect
-from bottle import route,view,request,redirect
+from bottle import route,view,request,redirect,response
 from facade.facade import Facade
 
 facade = Facade()
@@ -18,8 +17,19 @@ def login():
 
     if retorno:
         if retorno['senha'] == senha:
+            response.set_cookie('acount', secret=retorno['matricula'])
             redirect('/user_menu')
         else:
             redirect('/')
     else:
         redirect('/')
+
+@route('/formulario_cadastro')
+@view('formulario_cadastro')
+def cadastro_view():
+    return
+
+@route('/cadastro', method='POST')
+def cadastro():
+    facade.CreateAlunoFacade(request.params['aluno_nome'],request.params['senha'])
+    redirect('/')

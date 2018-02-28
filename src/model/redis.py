@@ -16,12 +16,15 @@ class DbUsuario(Model):
     pontos_de_vida = IntegerField()
     pontos_de_moedas = IntegerField()
 
-    def create_usuario(self, nome, senha):
+    def gerar_matricula(self):
         matricula = []
         for i in range(0, 5):
             matricula.append(randrange(1, 9))
         matricula = ''.join(str(x) for x in matricula)
-        self.create(usuario_nome=nome, usuario_senha=senha, matricula=matricula)
+
+    def create_usuario(self, nome, senha):
+
+        self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula())
 
     def read_usuario(self):
 
