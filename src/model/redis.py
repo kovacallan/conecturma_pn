@@ -21,9 +21,9 @@ class DbUsuario(Model):
         for i in range(0, 5):
             matricula.append(randrange(1, 9))
         matricula = ''.join(str(x) for x in matricula)
+        return matricula
 
     def create_usuario(self, nome, senha):
-
         self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula())
 
     def read_usuario(self):
@@ -38,16 +38,18 @@ class DbUsuario(Model):
         return usuario_dic
 
     def pesquisa_usuario(self, usuario_nome):
-        usuario_dic = {'id': 0, 'nome': '', 'senha': ''}
+        usuario_dic = {'id': 0, 'matricula':'', 'nome': '', 'senha': ''}
 
-        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == self.usuario_nome, order_by=DbUsuario.id):
+        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
+            usuario_dic['matricula'] = pesquisa.matricula
             usuario_dic['nome'] = pesquisa.usuario_nome
             usuario_dic['senha'] = pesquisa.usuario_senha
 
         if usuario_dic['id'] == 0:
             return False
         else:
+            print('entrei aqui')
             return usuario_dic
 
     def aluno_delete(self, id):
