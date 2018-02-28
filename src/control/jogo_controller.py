@@ -1,18 +1,23 @@
-from bottle import route,view, get, request
-import bottle
+from bottle import route, view, get, request
 
+from src.model.redis import *
 
 """ Controle do index """
+
+
 @route('/user_menu')
 @view('menu')
 def hello():
-    """ pagina inicial apos login"""
+    """ pagina inicial após login"""
     if request.get_cookie("teste", secret='2524'):
         return
     else:
         bottle.redirect('/')
 
+
 """Controle do jogo """
+
+
 @get('/jogos')
 @view('ojogo')
 def jogo():
@@ -24,11 +29,14 @@ def jogo():
     print(jogo)
     return dict(nome_jogo=jogo)
 
+
 """ Controle do score """
+
+
 @get('/ponto')
 def ponto():
     """
-    pega o botao que o jogador clicou e incrementa os pontos, em caso de acerto
+    pega o botão que o jogador clicou e incrementa os pontos, em caso de acerto
     :return:ao termino do jogo volta a pagina do menu
     """
 
@@ -39,12 +47,15 @@ def ponto():
 
     bottle.redirect('/')
 
+
 """Controle que mostra o score """
+
+
 @get('/mostrar_score')
 @view('score')
 def mostrar_score():
     """
-    mostra a potuaçao
+    mostra a pontuação
     :return: O numero de acertos de cada jogo
     """
-    return dict(ponto_j_um=User['j1'], ponto_j_dois=User['j2'])
+    return dict(ponto_j_um=DbUsuario['j1'], ponto_j_dois=DbUsuario['j2'])

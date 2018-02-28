@@ -5,7 +5,7 @@ class Facade:
 
     def __init__(self):
         """
-        metodo para utilizaçao do banco de dados
+        método para utilização do banco de dados
         """
         self.aluno = DbUsuario()
         self.turma = DbTurma()
@@ -22,7 +22,7 @@ class Facade:
     def ReadAlunoFacade(self):
         """
         fachada de leitura de alunos
-        :return:retorna a funçao especifica que retorna os dados dos alunos
+        :return:retorna a função especifica que retorna os dados dos alunos
         """
         return self.aluno.read_usuario()
 

@@ -3,7 +3,7 @@ from random import randrange
 
 db = Database(host='localhost', port=6379, db=0)
 
-""" class DbAluno será usada como Usuario generico no spike"""
+""" class DbUsuário será usada como Usuário genérico no spike"""
 
 
 class DbUsuario(Model):
@@ -26,15 +26,15 @@ class DbUsuario(Model):
     def create_usuario(self, nome, senha):
         """
         cria um usuario
-        :param nome: entra com o nome(e usuario) que sera utilizado
+        :param nome: entra com o nome(e usuário) que sera utilizado
         :param senha: cria a senha para o login
-        :return:uma entrada no banco de dados para o novo usuario e sua senha
+        :return:uma entrada no banco de dados para o novo usuário e sua senha
         """
         self.create(usuario_nome=nome, usuario_senha=senha)
 
     def read_usuario(self):
         """
-        cria uma entrada de dicionario para cada usuario e senha
+        cria uma entrada de dicionario para cada usuário e senha
         :return: o dicionario
         """
         usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': [], 'usuario_senha': []}
@@ -49,11 +49,11 @@ class DbUsuario(Model):
     def pesquisa_usuario(self, usuario_nome):
 
         """
-        pesquisa o aluno atravez da id, ou do nome do aluno
-        :param id , usuario_nome :
-        :return: o usuario pesquisado
+        pesquisa o aluno através da id, ou do nome do aluno
+        :param : id , usuário_nome
+        :return: o usuário pesquisado
         """
-        usuario_dic = {'id': 0, 'matricula':'', 'nome': '', 'senha': ''}
+        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': ''}
 
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
@@ -76,10 +76,11 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-"""verificar de onde vem ... pq erro """
+
+"""Verificar de onde vem ... pq erro """
+
 
 class DbTurma(Model):
-
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
