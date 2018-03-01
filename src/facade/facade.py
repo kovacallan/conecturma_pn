@@ -12,7 +12,7 @@ class Facade:
 
     def CreateAlunoFacade(self, nome, senha):
         """
-        facada de criar aluno
+        facade de criar aluno
         :param nome: nome do aluno/usuario
         :param senha: senha do login
         :return: cria o usuario com a senha e armazena no banco de dados
@@ -21,14 +21,14 @@ class Facade:
 
     def ReadAlunoFacade(self):
         """
-        fachada de leitura de alunos
+        facade de leitura de alunos
         :return:retorna a função especifica que retorna os dados dos alunos
         """
         return self.aluno.read_usuario()
 
     def DeleteAlunoFacade(self, id):
         """
-        facada de deletar o aluno , atravez da id
+        facade de deletar o aluno , atravez da id
         futuramente atravez do nome ,por enquanto foi implementada atravez de botao
         :param id:
         :return: o metodo que deleta o aluno da base de dados

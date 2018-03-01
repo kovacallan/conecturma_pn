@@ -39,13 +39,16 @@ class DbUsuario(Model):
         cria uma entrada de dicionario para cada usuário e senha
         :return: o dicionario
         """
-        usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': [], 'usuario_senha': []}
+        usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': [], 'usuario_senha': [], 'pontos_de_vida': [],
+                       'pontos_de_moedas': []}
 
         for aluno in self.query(order_by=self.usuario_nome):
             usuario_dic['id'].append(aluno.id)
             usuario_dic['matricula'].append(aluno.matricula)
             usuario_dic['usuario_nome'].append(aluno.usuario_nome)
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
+            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vidas)
+            usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)
         return usuario_dic
 
     def pesquisa_usuario(self, usuario_nome):
@@ -55,7 +58,8 @@ class DbUsuario(Model):
         :param : id , usuário_nome
         :return: o usuário pesquisado
         """
-        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0}
+        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0,
+                       'pontos_de_vida': 0, 'pontos_de_moedas': 0}
 
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
@@ -64,6 +68,8 @@ class DbUsuario(Model):
             usuario_dic['senha'] = pesquisa.usuario_senha
             usuario_dic['pontos_j1'] = pesquisa.pontos_j1
             usuario_dic['pontos_j2'] = pesquisa.pontos_j2
+            usuario_dic['pontos_de_moedas'] = pesquisa.pontos_de_moedas
+            usuario_dic['pontos_de_vida'] = pesquisa.pontos_de_vida
 
         if usuario_dic['id'] == 0:
             return False
@@ -86,11 +92,25 @@ class DbUsuario(Model):
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
+            if usuario.pontos_j1 % 3 == 0:
+                usuario.pontos_de_vida += 1
+
+            if usuario.pontos_j1 % 5 == 0:
+                usuario.pontos_de_moedas += 5
+
+            print('vidas:{}   moedas : {}'.format(usuario.pontos_de_vida, usuario.pontos_de_moedas))
+
             usuario.save()
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j2 += pontos
+            if pontos % 3 == 0:
+                usuario.pontos_de_vida += 1
+
+            if pontos % 5 == 0:
+                usuario.pontos_de_moedas += 5
+            print('vidas:{}   moedas : {}'.format(usuario.pontos_de_vida, usuario.pontos_de_moedas))
             usuario.save()
 
 
