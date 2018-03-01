@@ -4,12 +4,10 @@ from src.facade.facade import Facade
 
 facade = Facade()
 
-
 """ Controle aluno """
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
-
     return
 
 
@@ -40,7 +38,7 @@ def read_aluno():
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
     usuarios = facade.ReadAlunoFacade()
-    return dict(aluno_id=usuarios['id'],aluno_matricula = usuarios['matricula'], aluno_nome=usuarios['usuario_nome'], senha_aluno=usuarios['usuario_senha'])
+    return dict(aluno_id=usuarios['id'],aluno_matricula = usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
 
 
 
