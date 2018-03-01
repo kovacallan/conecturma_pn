@@ -6,6 +6,6 @@ from bottle import route,view, request, redirect
 def hello():
     """ pagina inicial apos login"""
     if request.get_cookie("login", secret='2524'):
-        return
+        return dict(usuario = request.get_cookie("login", secret='2524'))
     else:
        redirect('/')

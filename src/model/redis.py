@@ -39,16 +39,13 @@ class DbUsuario(Model):
         cria uma entrada de dicionario para cada usuário e senha
         :return: o dicionario
         """
-        usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': [], 'usuario_senha': [], 'pontos_de_vida': [],
-                       'pontos_de_moedas': []}
+        usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': []}
 
         for aluno in self.query(order_by=self.usuario_nome):
             usuario_dic['id'].append(aluno.id)
             usuario_dic['matricula'].append(aluno.matricula)
             usuario_dic['usuario_nome'].append(aluno.usuario_nome)
-            usuario_dic['usuario_senha'].append(aluno.usuario_senha)
-            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vidas)
-            usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)
+
         return usuario_dic
 
     def pesquisa_usuario(self, usuario_nome):
@@ -98,8 +95,6 @@ class DbUsuario(Model):
             if usuario.pontos_j1 % 5 == 0:
                 usuario.pontos_de_moedas += 5
 
-            print('vidas:{}   moedas : {}'.format(usuario.pontos_de_vida, usuario.pontos_de_moedas))
-
             usuario.save()
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
@@ -110,7 +105,6 @@ class DbUsuario(Model):
 
             if pontos % 5 == 0:
                 usuario.pontos_de_moedas += 5
-            print('vidas:{}   moedas : {}'.format(usuario.pontos_de_vida, usuario.pontos_de_moedas))
             usuario.save()
 
 
@@ -121,21 +115,30 @@ class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
+    quem_criou = TextField()
 
-    def create_turma(self, turma):
+    def create_turma(self, turma, login):
         """
         cria a turma
         :param turma:
         :return: uma entrada no banco de dados para a turma criada
         """
-        return self.create(turma_nome=turma)
+        return self.create(turma_nome=turma, quem_criou=login)
 
     def read_turma(self):
         """
         mostra a turma
         :return: as turmas cadastradas em ordem de id
         """
-        return self.query(order_by=self.id)
+
+        turma_dic = {'id': [], 'nome': [], 'criador': []}
+
+        for turma in self.query(order_by=self.id):
+            turma_dic['id'].append(turma.id)
+            turma_dic['nome'].append(turma.turma_nome)
+            turma_dic['criador'].append(turma.quem_criou)
+
+        return turma_dic
 
     def delete_turma(self, id):
         turma = DbTurma(id=id)

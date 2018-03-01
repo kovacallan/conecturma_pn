@@ -45,20 +45,20 @@ class Facade:
         Inicio Facade Turma
     """
 
-    def CreateTurmaFacade(self, nome):
+    def CreateTurmaFacade(self, nome, login):
         """
         facada de criaçao de turma
         :param nome:
         :return:
         """
-        self.turma.create_turma(nome)
+        self.turma.create_turma(nome, login)
 
     def ReadTurmaFacade(self):
         """
         facada de ReadTurmaFacada
         :return:
         """
-        return self.turma.read_turma
+        return self.turma.read_turma()
 
     def DeleteTurmaFacade(self, id):
         """
