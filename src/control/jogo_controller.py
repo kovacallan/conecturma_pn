@@ -54,4 +54,5 @@ def mostrar_score():
     :return: O numero de acertos de cada jogo
     """
     ponto = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
-    return dict(ponto_j_um = ponto['pontos_j1'],ponto_j_dois = ponto['pontos_j2'])
+    return dict(ponto_j_um=ponto['pontos_j1'], ponto_j_dois=ponto['pontos_j2'], pontos_de_vida=ponto['pontos_de_vida'],
+                pontos_moedas=ponto['pontos_de_moedas'])
