@@ -12,11 +12,11 @@ class DbUsuario(Model):
     matricula = TextField()
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
-    tipo_de_usuario = IntegerField()
-    pontos_j1 = IntegerField()
-    pontos_j2 = IntegerField()
-    pontos_de_vida = IntegerField()
-    pontos_de_moedas = IntegerField()
+    tipo_de_usuario = IntegerField(default=0)
+    pontos_j1 = IntegerField(default=0)
+    pontos_j2 = IntegerField(default=0)
+    pontos_de_vida = IntegerField(default=0)
+    pontos_de_moedas = IntegerField(default=0)
 
     def gerar_matricula(self):
         matricula = []
@@ -47,7 +47,7 @@ class DbUsuario(Model):
             usuario_dic['matricula'].append(aluno.matricula)
             usuario_dic['usuario_nome'].append(aluno.usuario_nome)
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
-            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vidas)
+            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vida)
             usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)
         return usuario_dic
 
