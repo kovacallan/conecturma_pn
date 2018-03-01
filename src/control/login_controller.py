@@ -1,27 +1,60 @@
-from bottle import route,view,request
-import bottle
-from src.model.aluno_model import *
+from bottle import route, view, request, redirect, response
+from src.facade.facade import Facade
+
+facade = Facade()
+
 
 @route('/')
 @view('index')
 def index():
-    return
+    if request.get_cookie("login", secret='2524'):
+        redirect('/user_menu')
+    else:
+        return
 
-@route('/login', method = 'POST')
+
+@route('/login', method='POST')
 def login():
-    login_obj = DbAluno()
-    print('teste')
-    nome  = request.params['usuario']
+    """
+    faz o login na conta do usuário recebendo o usuário e senha
+    :return: da acesso ao menu , caso o usuário e senha digitados estejam certos
+    """
+    nome = request.params['usuario']
     senha = request.params['senha']
 
-    retorno = login_obj.pesquisa_aluno(nome)
-
-    if retorno:
-        if retorno['senha'] == senha:
-            bottle.redirect('/user_menu')
-        else:
-            bottle.redirect('/')
+    if valida_login(nome, senha):
+        create_cookie(nome)
+        redirect('/user_menu')
     else:
-        bottle.redirect('/')
+        redirect('/')
 
 
+@route('/formulario_cadastro')
+@view('formulario_cadastro')
+def cadastro_view():
+    return
+
+
+@route('/cadastro', method='POST')
+def cadastro():
+    facade.CreateAlunoFacade(request.params['aluno_nome'], request.params['senha'])
+    redirect('/')
+
+
+@route('/sair')
+def sair():
+    response.delete_cookie("login")
+    redirect('/')
+
+
+def valida_login(nome, senha):
+    retorno = facade.PesquisaAlunoFacade(nome)
+
+    if retorno['nome'] == nome and retorno['senha'] == senha:
+        return True
+    else:
+        return False
+
+
+def create_cookie(parametro):
+    response.set_cookie("login", parametro, secret='2524')

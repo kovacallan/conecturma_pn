@@ -1,55 +1,58 @@
-from bottle import route, view, get, request
-from src.model.aluno_model import *
-import bottle
+from bottle import route, view, get, request, redirect
+from src.facade.facade import Facade
 
-#####--- Controle aluno ---#####
+
+facade = Facade()
+
+
+""" Controle aluno """
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
+
     return
 
-#####--- Cadastro de aluno ---#####
+
+""" Cadastro de aluno """
 @route('/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
     return
 
-@route('/aluno_cadastro', method = 'POST')
+
+@route('/aluno_cadastro', method='POST')
 def create_aluno():
-    aluno_obj = DbAluno()
-    nome  = request.forms['aluno_nome']
-    senha = request.forms['senha']
+    """
+    Direcionamento a pagina para criar aluno buscando , na tpl os parâmetros usuário , senha e matricula
+    :return: cria o aluno e volta para a pagina geral aluno
+    """
+    facade.CreateAlunoFacade(request.forms['aluno_nome'], request.forms['senha'])
+    redirect('/')
 
-    aluno_obj.create_aluno(nome, senha)
 
-    bottle.redirect('/')
+"""Read de aluno"""
 
-######--- Read de aluno---#####
 @route('/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
-    aluno_dic = {'id' : [] , 'aluno_nome' : [] , 'senha_aluno' : [] }
+    """
+    Direciona para a função ReadAlunoFacade
+    :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
+    """
+    usuarios = facade.ReadAlunoFacade()
+    return dict(aluno_id=usuarios['id'],aluno_matricula = usuarios['matricula'], aluno_nome=usuarios['usuario_nome'], senha_aluno=usuarios['usuario_senha'])
 
-    for aluno in DbAluno.query(order_by = DbAluno.aluno_nome):
-        aluno_dic['id'].append(aluno.id)
-        aluno_dic['aluno_nome'].append(aluno.aluno_nome)
-        aluno_dic['senha_aluno'].append(aluno.senha_aluno)
 
-    return dict(aluno_id = aluno_dic['id'], aluno_nome = aluno_dic['aluno_nome'], senha_aluno= aluno_dic['senha_aluno'])
 
 ####-- Deletar aluno(usuario) --####
-@route('/deletar_aluno')
-@view('delete_user')
-def deletar():
-    return
 
 @get('/deletar_alunos')
 def deletar_aluno():
-        id_al = request.params['id']
-        aluno_obj = DbAluno(id=id_al)
-        print(id)
-        aluno_obj.delete()
+    """
+    Direciona a função DeleteAlunoFacade para a pagina tpl
+    :return: Deleta a entrada de dicionario e retorna a pagina geral aluno
+    """
+    facade.DeleteAlunoFacade(request.params['id'])
+    redirect('/aluno')
 
-        bottle.redirect('/')
-
-####--Pesquisa ao aluno por nome --####
+"""Pesquisa ao aluno por nome"""
