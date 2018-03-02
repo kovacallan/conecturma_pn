@@ -1,7 +1,7 @@
 from bottle import view, get, request, redirect, route, BaseResponse
 
-from src.facade.facade import Facade
-from src.model.redis import DbUsuario
+from facade.facade import Facade
+from model.redis import DbUsuario
 
 facade = Facade()
 
@@ -36,7 +36,7 @@ def ponto():
     ponto = int(request.params['ponto'])
     usuario = request.get_cookie("login", secret="2524")
 
-    facade.PontoJogoFacade(usuario, jogo, ponto, cliques=0)
+    facade.PontoJogoFacade(usuario, jogo, ponto, cliques_totais=0)
 
     redirect('/')
 
@@ -51,8 +51,10 @@ def ponto():
 def mostrar_score():
     """
     mostra a pontuação
+
     :return: O numero de acertos de cada jogo
     """
     ponto = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
     return dict(ponto_j_um=ponto['pontos_j1'], ponto_j_dois=ponto['pontos_j2'], pontos_de_vida=ponto['pontos_de_vida'],
-                pontos_moedas=ponto['pontos_de_moedas'])
+                pontos_moedas=ponto['pontos_de_moedas'], desempenho_j1=ponto['desempenho_aluno_j1'],
+                desempenho_j2=ponto['desempenho_aluno_j2'])

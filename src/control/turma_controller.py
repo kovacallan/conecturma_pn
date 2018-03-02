@@ -1,5 +1,5 @@
 from bottle import route, view, get, request
-from src.facade.facade import *
+from facade.facade import *
 
 import bottle
 

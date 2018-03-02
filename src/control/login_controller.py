@@ -1,5 +1,5 @@
 from bottle import route, view, request, redirect, response
-from src.facade.facade import Facade
+from facade.facade import Facade
 
 facade = Facade()
 

@@ -19,7 +19,8 @@ class DbUsuario(Model):
     total_cliques_j2 = IntegerField(default=0)
     pontos_de_vida = IntegerField(default=0)
     pontos_de_moedas = IntegerField(default=0)
-    desempenho_aluno = FloatField(defalt=0)
+    desempenho_aluno_j1 = FloatField(default=0)
+    desempenho_aluno_j2 = FloatField(default=0)
 
     def gerar_matricula(self):
         matricula = []
@@ -57,7 +58,7 @@ class DbUsuario(Model):
         :return: o usuário pesquisado
         """
         usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0,
-                       'pontos_de_vida': 0, 'pontos_de_moedas': 0}
+                       'pontos_de_vida': 0, 'pontos_de_moedas': 0, 'desempenho_aluno_j1' : 0, 'desempenho_aluno_j2': 0}
 
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
@@ -68,6 +69,8 @@ class DbUsuario(Model):
             usuario_dic['pontos_j2'] = pesquisa.pontos_j2
             usuario_dic['pontos_de_moedas'] = pesquisa.pontos_de_moedas
             usuario_dic['pontos_de_vida'] = pesquisa.pontos_de_vida
+            usuario_dic['desempenho_aluno_j1'] = pesquisa.desempenho_aluno_j1
+            usuario_dic['desempenho_aluno_j2'] = pesquisa.desempenho_aluno_j2
 
         if usuario_dic['id'] == 0:
             return False
@@ -83,17 +86,17 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-    def pontos_jogo(self, usuario, jogo, pontos):
-        if pontos == None or pontos == 0:
+    def pontos_jogo(self, usuario, jogo, pontos, cliques_totais):
+        if pontos is None or pontos == 0:
             pass
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
-            usuario.total_cliques_j1 +=1
+            usuario.total_cliques_j1 += cliques_totais
             print('cliques j1:{}'.format(usuario.total_cliques_j1))
-            usuario.desempenho_aluno = usuario.pontos_j1/usuario.total_cliques_j1
-            print("acertou {} % ".format(usuario.desempenho_aluno))
+            usuario.desempenho_aluno_j1 = usuario.total_cliques_j1/usuario.pontos_j1
+            print("acertou {} % ".format(usuario.desempenho_aluno_j1))
 
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
@@ -106,7 +109,10 @@ class DbUsuario(Model):
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j2 += pontos
-            usuario.total_cliques_j2 += 1
+            usuario.total_cliques_j2 += cliques_totais
+            print('cliques j1:{}'.format(usuario.total_cliques_j2))
+            usuario.desempenho_aluno_j2 = usuario.total_cliques_j2 / usuario.pontos_j1
+            print("acertou {} % ".format(usuario.desempenho_aluno_j2))
             if usuario.pontos_j2 % 3 == 0:
                 usuario.pontos_de_vida += 1
 

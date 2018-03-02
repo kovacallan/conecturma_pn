@@ -1,5 +1,5 @@
 from bottle import route, view, get, request, redirect
-from src.facade.facade import Facade
+from facade.facade import Facade
 
 facade = Facade()
 
@@ -39,6 +39,7 @@ def create_aluno():
 def read_aluno():
     """
     Direciona para a função ReadAlunoFacade
+
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
     usuarios = facade.ReadAlunoFacade()

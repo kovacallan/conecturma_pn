@@ -38,8 +38,11 @@ class Facade:
     def PesquisaAlunoFacade(self, nome):
         return self.aluno.pesquisa_usuario(nome)
 
-    def PontoJogoFacade(self, usuario, jogo, ponto, cliques):
-        self.aluno.pontos_jogo(usuario, jogo, ponto, cliques)
+    def PontoJogoFacade(self, usuario, jogo, ponto, cliques_totais):
+        self.aluno.pontos_jogo(usuario, jogo, ponto, cliques_totais)
+
+
+
 
     """
         Inicio Facade Turma
@@ -47,7 +50,7 @@ class Facade:
 
     def CreateTurmaFacade(self, nome, login):
         """
-        facada de criaçao de turma
+        facade de criaçao de turma
         :param nome:
         :return:
         """
@@ -55,14 +58,14 @@ class Facade:
 
     def ReadTurmaFacade(self):
         """
-        facada de ReadTurmaFacada
+        facade de ReadTurmaFacada
         :return:
         """
         return self.turma.read_turma()
 
     def DeleteTurmaFacade(self, id):
         """
-        facada de DeleteTurmaFacade
+        facade de DeleteTurmaFacade
         :param id:
         :return:
         """
