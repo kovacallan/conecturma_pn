@@ -38,6 +38,21 @@
                 % end
             </div>
             <div class="col-md-2">
+                 <h4>Moedas</h4>
+                % for pontos_de_moedas in pontos_de_moedas:
+                    {{pontos_de_moedas}}
+                    <br>
+                    <br>
+                % end
+            </div><div class="col-md-2">
+                 <h4>Vidas</h4>
+                % for pontos_de_vida in pontos_de_vida:
+                    {{pontos_de_vida}}
+                    <br>
+                    <br>
+                % end
+            </div>
+            <div class="col-md-2">
                 <h4>Deletar</h4>
                 <form action="/deletar_alunos">
                 % for id in aluno_id:

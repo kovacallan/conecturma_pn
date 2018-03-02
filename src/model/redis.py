@@ -25,7 +25,7 @@ class DbUsuario(Model):
         matricula = ''.join(str(x) for x in matricula)
         return matricula
 
-    def create_usuario(self, nome, senha, pontos_j1=0, pontos_j2=0):
+    def create_usuario(self, nome, senha, pontos_j1=0, pontos_j2=0, pontos_de_vida=0, pontos_de_moedas=0):
         """
         cria um usuario
         :param nome: entra com o nome(e usuário) que sera utilizado
@@ -47,7 +47,7 @@ class DbUsuario(Model):
             usuario_dic['matricula'].append(aluno.matricula)
             usuario_dic['usuario_nome'].append(aluno.usuario_nome)
             usuario_dic['usuario_senha'].append(aluno.usuario_senha)
-            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vidas)
+            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vida)
             usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)
         return usuario_dic
 
