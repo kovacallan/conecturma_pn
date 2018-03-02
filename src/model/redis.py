@@ -103,12 +103,12 @@ class DbUsuario(Model):
             usuario = self.load(retorno['id'])
             usuario.pontos_j2 += pontos
             usuario.total_cliques_j2 += 1
-            print('cliques j2:{}'.format(usuario.total_cliques_j2))
-            if pontos % 3 == 0:
-                usuario.pontos_de_vida += 1
 
-            if pontos % 5 == 0:
+            usuario.pontos_de_vida += 1
+
+            if usuario.pontos_j2 % 5 == 0:
                 usuario.pontos_de_moedas += 5
+
             usuario.save()
 
 
