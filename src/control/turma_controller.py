@@ -1,4 +1,4 @@
-from bottle import route,view, get, request
+from bottle import route, view, get, request
 from src.facade.facade import *
 
 import bottle
@@ -33,12 +33,9 @@ def create_turma():
     Pagina para chamar a funçao create_turma , pedindo pelo tpl o parametro turma_nome
     :return: cria uma entrada no banco de dados da turma criada
     """
-
-    turma_obj = DbTurma()
-
     turma = request.params['turma_nome']
 
-    turma_obj.create_turma(turma)
+    facade.CreateTurmaFacade(turma, request.get_cookie("login", secret='2524'))
 
     bottle.redirect('/turma')
 
@@ -53,15 +50,8 @@ def read_turma():
     Direciona para a pagina que mostra a turma em ordem de id
     :return: a entrada de dicionario que contem o id e o turma_nome
     """
-    turma_obj = DbTurma()
-
-    turma_dic = {'id': [], 'turma_nome': []}
-
-    for turma in turma_obj.read_turma():
-        turma_dic['id'].append(turma.id)
-        turma_dic['turma_nome'].append(turma.turma_nome)
-
-    return dict(turma_id=turma_dic['id'], turma_nome=turma_dic['turma_nome'])
+    turma = facade.ReadTurmaFacade()
+    return dict(turma_id=turma['id'], turma_nome=turma['nome'], criador = turma['criador'])
 
 
 """ Update Turma """

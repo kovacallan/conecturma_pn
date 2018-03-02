@@ -30,14 +30,6 @@
                 % end
             </div>
             <div class="col-md-2">
-                 <h4>Senha</h4>
-                % for senha_aluno in senha_aluno:
-                    {{senha_aluno}}
-                    <br>
-                    <br>
-                % end
-            </div>
-            <div class="col-md-2">
                 <h4>Deletar</h4>
                 <form action="/deletar_alunos">
                 % for id in aluno_id:
