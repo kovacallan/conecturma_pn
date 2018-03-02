@@ -14,6 +14,7 @@ class DbUsuario(Model):
     usuario_senha = TextField()
     tipo_de_usuario = IntegerField()
     pontos_j1 = IntegerField()
+    total_cliques_j1 = IntegerField()
     pontos_j2 = IntegerField()
     pontos_de_vida = IntegerField()
     pontos_de_moedas = IntegerField()
@@ -26,12 +27,7 @@ class DbUsuario(Model):
         return matricula
 
     def create_usuario(self, nome, senha, pontos_j1=0, pontos_j2=0, pontos_de_vida=0, pontos_de_moedas=0):
-        """
-        cria um usuario
-        :param nome: entra com o nome(e usuário) que sera utilizado
-        :param senha: cria a senha para o login
-        :return:uma entrada no banco de dados para o novo usuário e sua senha
-        """
+
         self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula(), pontos_j1=0, pontos_j2=0)
 
     def read_usuario(self):
