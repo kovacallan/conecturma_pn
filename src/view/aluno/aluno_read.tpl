@@ -1,7 +1,9 @@
 % include('./header.tpl', title = 'Conecturma')
    <div align="center" class="col-md-12">
-        <h1>Ver Alunos</h1>
+        <h1>Alunos da turma:</h1>
 
+        <h3>pesquisar aluno</h3>
+        <input type="text" name="Nome" size="40" /><button type="submit">Pesquisar</button>
         <div class="row">
 
             <div class="col-md-2 offset-2">

@@ -54,7 +54,9 @@ class DbUsuario(Model):
 
         """
         pesquisa o aluno através da id, ou do nome do aluno
+
         :param : id , usuário_nome
+
         :return: o usuário pesquisado
         """
         usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0,
@@ -87,6 +89,15 @@ class DbUsuario(Model):
         usuario.delete()
 
     def pontos_jogo(self, usuario, jogo, pontos, cliques_totais):
+        """
+        Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais, o desempenho do aluno no jogo ao qual ele esta jogando
+
+        :param usuario: O jogador do jogo que esta nessa sessão de login
+        :param jogo: Qual o jogo que o jogador decidiu jogar , se é j1 ou j2
+        :param pontos: O acrescenta 1 a cada acerto
+        :param cliques_totais: contabiliza a quantidade de cliques totais feitos , independente se o usuario acertar ou errar a resposta
+        :return: None
+        """
         if pontos is None or pontos == 0:
             pass
         elif jogo == 'j1':
@@ -141,8 +152,9 @@ class DbTurma(Model):
 
     def read_turma(self):
         """
-        mostra a turma
-        :return: as turmas cadastradas em ordem de id
+        cadastra todos os dados de uma turma dentro de um dicionario
+
+        :return: Uma entrada de dicionario com os dados da turma
         """
 
         turma_dic = {'id': [], 'nome': [], 'criador': []}
@@ -155,5 +167,12 @@ class DbTurma(Model):
         return turma_dic
 
     def delete_turma(self, id):
+        """
+        deleta as turmas por id , por enquanto nao efetivado
+
+        :param id:
+        :return: None
+        """
         turma = DbTurma(id=id)
         turma.delete()
+

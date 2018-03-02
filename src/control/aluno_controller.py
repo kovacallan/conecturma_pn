@@ -53,6 +53,7 @@ def read_aluno():
 def deletar_aluno():
     """
     Direciona a função DeleteAlunoFacade para a pagina tpl
+
     :return: Deleta a entrada de dicionario e retorna a pagina geral aluno
     """
     facade.DeleteAlunoFacade(request.params['id'])
