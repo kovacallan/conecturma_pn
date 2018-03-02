@@ -13,11 +13,12 @@ class DbUsuario(Model):
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
-    pontos_j1 = IntegerField()
-    total_cliques_j1 = IntegerField()
-    pontos_j2 = IntegerField()
-    pontos_de_vida = IntegerField()
-    pontos_de_moedas = IntegerField()
+    pontos_j1 = IntegerField(default=0)
+    total_cliques_j1 = IntegerField(default=0)
+    pontos_j2 = IntegerField(default=0)
+    total_cliques_j2 = IntegerField(default=0)
+    pontos_de_vida = IntegerField(default=0)
+    pontos_de_moedas = IntegerField(default=0)
 
     def gerar_matricula(self):
         matricula = []
@@ -26,7 +27,7 @@ class DbUsuario(Model):
         matricula = ''.join(str(x) for x in matricula)
         return matricula
 
-    def create_usuario(self, nome, senha, pontos_j1=0, pontos_j2=0, pontos_de_vida=0, pontos_de_moedas=0):
+    def create_usuario(self, nome, senha):
 
         self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula(), pontos_j1=0, pontos_j2=0)
 
@@ -89,7 +90,7 @@ class DbUsuario(Model):
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
             usuario.total_cliques_j1 +=1
-            print('cliques:{}'.format(usuario.total_cliques_j1))
+            print('cliques j1:{}'.format(usuario.total_cliques_j1))
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
 
@@ -101,6 +102,8 @@ class DbUsuario(Model):
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j2 += pontos
+            usuario.total_cliques_j2 += 1
+            print('cliques j2:{}'.format(usuario.total_cliques_j2))
             if pontos % 3 == 0:
                 usuario.pontos_de_vida += 1
 
