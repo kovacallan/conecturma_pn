@@ -100,11 +100,13 @@ class DbUsuario(Model):
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j2 += pontos
-            if pontos % 3 == 0:
+
+            if usuario.pontos_j2 % 3 == 0:
                 usuario.pontos_de_vida += 1
 
-            if pontos % 5 == 0:
+            if usuario.pontos_j2 % 5 == 0:
                 usuario.pontos_de_moedas += 5
+
             usuario.save()
 
 
