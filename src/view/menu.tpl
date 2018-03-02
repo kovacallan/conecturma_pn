@@ -1,7 +1,7 @@
 % include('header.tpl', title = 'Conecturma')
     <div class="row">
         <div align="center" class="col-md-12">
-            <h1>Bem Vindo </h1>
+            <h1>Bem Vindo {{usuario}}</h1>
             <h2>A Conecturma!</h2>
             <form action="/jogos" method="get">
                 <button type="submit" name="n1" value="j1">Jogo 1</button>

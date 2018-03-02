@@ -19,6 +19,7 @@ class DbUsuario(Model):
     total_cliques_j2 = IntegerField(default=0)
     pontos_de_vida = IntegerField(default=0)
     pontos_de_moedas = IntegerField(default=0)
+    desempenho_aluno = FloatField(defalt=0)
 
     def gerar_matricula(self):
         matricula = []
@@ -82,7 +83,7 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-    def pontos_jogo(self, usuario, jogo, pontos,cliques):
+    def pontos_jogo(self, usuario, jogo, pontos):
         if pontos == None or pontos == 0:
             pass
         elif jogo == 'j1':
@@ -91,6 +92,9 @@ class DbUsuario(Model):
             usuario.pontos_j1 += pontos
             usuario.total_cliques_j1 +=1
             print('cliques j1:{}'.format(usuario.total_cliques_j1))
+            usuario.desempenho_aluno = usuario.pontos_j1/usuario.total_cliques_j1
+            print("acertou {} % ".format(usuario.desempenho_aluno))
+
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
 
@@ -103,8 +107,8 @@ class DbUsuario(Model):
             usuario = self.load(retorno['id'])
             usuario.pontos_j2 += pontos
             usuario.total_cliques_j2 += 1
-
-            usuario.pontos_de_vida += 1
+            if usuario.pontos_j2 % 3 == 0:
+                usuario.pontos_de_vida += 1
 
             if usuario.pontos_j2 % 5 == 0:
                 usuario.pontos_de_moedas += 5
