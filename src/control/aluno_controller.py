@@ -1,10 +1,11 @@
 from bottle import route, view, get, request, redirect
 from src.facade.facade import Facade
 
-
 facade = Facade()
 
 """ Controle aluno """
+
+
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
@@ -12,6 +13,8 @@ def aluno_read():
 
 
 """ Cadastro de aluno """
+
+
 @route('/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
@@ -30,6 +33,7 @@ def create_aluno():
 
 """Read de aluno"""
 
+
 @route('/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
@@ -38,12 +42,12 @@ def read_aluno():
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
     usuarios = facade.ReadAlunoFacade()
-    return dict(aluno_id=usuarios['id'],aluno_matricula = usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
+
+    return dict(aluno_id=usuarios['id'], aluno_matricula=usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
 
 
 
-####-- Deletar aluno(usuario) --####
-
+""" Deletar aluno(usuario) """
 @get('/deletar_alunos')
 def deletar_aluno():
     """
@@ -52,5 +56,6 @@ def deletar_aluno():
     """
     facade.DeleteAlunoFacade(request.params['id'])
     redirect('/aluno')
+
 
 """Pesquisa ao aluno por nome"""
