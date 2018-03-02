@@ -12,8 +12,9 @@ class DbUsuario(Model):
     matricula = TextField()
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
-    tipo_de_usuario = IntegerField()
+    """tipo_de_usuario = IntegerField()"""
     pontos_j1 = IntegerField()
+    total_cliques_j1 = IntegerField()
     pontos_j2 = IntegerField()
     pontos_de_vida = IntegerField()
     pontos_de_moedas = IntegerField()
@@ -25,13 +26,8 @@ class DbUsuario(Model):
         matricula = ''.join(str(x) for x in matricula)
         return matricula
 
-    def create_usuario(self, nome, senha, pontos_j1=0, pontos_j2=0):
-        """
-        cria um usuario
-        :param nome: entra com o nome(e usuário) que sera utilizado
-        :param senha: cria a senha para o login
-        :return:uma entrada no banco de dados para o novo usuário e sua senha
-        """
+    def create_usuario(self, nome, senha, pontos_j1=0, pontos_j2=0, pontos_de_vida=0, pontos_de_moedas=0):
+
         self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula(), pontos_j1=0, pontos_j2=0)
 
     def read_usuario(self):
@@ -45,6 +41,9 @@ class DbUsuario(Model):
             usuario_dic['id'].append(aluno.id)
             usuario_dic['matricula'].append(aluno.matricula)
             usuario_dic['usuario_nome'].append(aluno.usuario_nome)
+            """usuario_dic['usuario_senha'].append(aluno.usuario_senha)
+            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vida)
+            usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)"""
 
         return usuario_dic
 
@@ -82,13 +81,15 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-    def pontos_jogo(self, usuario, jogo, pontos):
+    def pontos_jogo(self, usuario, jogo, pontos,cliques):
         if pontos == None or pontos == 0:
             pass
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
+            usuario.total_cliques_j1 +=1
+            print('cliques:{}'.format(usuario.total_cliques_j1))
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
 

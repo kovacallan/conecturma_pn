@@ -36,7 +36,7 @@ def ponto():
     ponto = int(request.params['ponto'])
     usuario = request.get_cookie("login", secret="2524")
 
-    facade.PontoJogoFacade(usuario, jogo, ponto)
+    facade.PontoJogoFacade(usuario, jogo, ponto, cliques=0)
 
     redirect('/')
 
