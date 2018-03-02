@@ -12,7 +12,7 @@ class DbUsuario(Model):
     matricula = TextField()
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
-    tipo_de_usuario = IntegerField()
+    """tipo_de_usuario = IntegerField()"""
     pontos_j1 = IntegerField()
     total_cliques_j1 = IntegerField()
     pontos_j2 = IntegerField()
@@ -41,9 +41,9 @@ class DbUsuario(Model):
             usuario_dic['id'].append(aluno.id)
             usuario_dic['matricula'].append(aluno.matricula)
             usuario_dic['usuario_nome'].append(aluno.usuario_nome)
-            usuario_dic['usuario_senha'].append(aluno.usuario_senha)
+            """usuario_dic['usuario_senha'].append(aluno.usuario_senha)
             usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vida)
-            usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)
+            usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)"""
 
         return usuario_dic
 
@@ -81,13 +81,15 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-    def pontos_jogo(self, usuario, jogo, pontos):
+    def pontos_jogo(self, usuario, jogo, pontos,cliques):
         if pontos == None or pontos == 0:
             pass
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
+            usuario.total_cliques_j1 +=1
+            print('cliques:{}'.format(usuario.total_cliques_j1))
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
 

@@ -43,9 +43,7 @@ def read_aluno():
     """
     usuarios = facade.ReadAlunoFacade()
 
-    return dict(aluno_id=usuarios['id'], aluno_matricula=usuarios['matricula'], aluno_nome=usuarios['usuario_nome'],
-                senha_aluno=usuarios['usuario_senha'], pontos_de_vida=usuarios['pontos_de_vida'],
-                pontos_de_moedas=usuarios['pontos_de_moedas'])
+    return dict(aluno_id=usuarios['id'], aluno_matricula=usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
 
 
 

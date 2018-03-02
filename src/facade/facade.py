@@ -38,8 +38,8 @@ class Facade:
     def PesquisaAlunoFacade(self, nome):
         return self.aluno.pesquisa_usuario(nome)
 
-    def PontoJogoFacade(self,usuario, jogo, ponto):
-        self.aluno.pontos_jogo(usuario, jogo, ponto)
+    def PontoJogoFacade(self, usuario, jogo, ponto, cliques):
+        self.aluno.pontos_jogo(usuario, jogo, ponto, cliques)
 
     """
         Inicio Facade Turma
