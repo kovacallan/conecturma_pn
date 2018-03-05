@@ -1,13 +1,13 @@
 from bottle import run, default_app
-import os
-
 from control.static_controller import *
 from control.menu_controller import *
 from control.aluno_controller import *
 from control.login_controller import *
 from control.jogo_controller import *
 from control.turma_controller import *
-
+from control.loja_controller import *
+import bottle
+import os
 
 view_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'view')
 bottle.TEMPLATE_PATH.insert(0, view_path)

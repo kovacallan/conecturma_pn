@@ -18,6 +18,7 @@ class DbUsuario(Model):
     pontos_j2 = IntegerField()
     pontos_de_vida = IntegerField()
     pontos_de_moedas = IntegerField()
+    medalhas = ListField()
 
     def gerar_matricula(self):
         matricula = []
@@ -81,14 +82,14 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-    def pontos_jogo(self, usuario, jogo, pontos,cliques):
+    def pontos_jogo(self, usuario, jogo, pontos, cliques):
         if pontos == None or pontos == 0:
             pass
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
-            usuario.total_cliques_j1 +=1
+            usuario.total_cliques_j1 += 1
             print('cliques:{}'.format(usuario.total_cliques_j1))
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
@@ -109,6 +110,31 @@ class DbUsuario(Model):
                 usuario.pontos_de_moedas += 5
 
             usuario.save()
+
+    def comprar_medalhas(self, id, id_medalha):
+        usuario = DbUsuario(id=id)
+        medalhas = usuario.load(id)
+        compras = []
+        for medalha in medalhas.medalhas:
+            compras.append(medalha.decode('utf-8'))
+
+        if id_medalha in compras:
+            pass
+        else:
+            medalhas.medalhas.append(id_medalha)
+            medalhas.save()
+
+    def ver_medalhas(self, usuario_nome):
+        medalhas = []
+        i = 0
+        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
+            for x in pesquisa.medalhas:
+                medalhas.append(''.join(x.decode('utf-8')))
+
+        if medalhas == '' or medalhas == None or not medalhas:
+            return False
+        else:
+            return medalhas
 
 
 """Verificar de onde vem ... pq erro """
@@ -146,3 +172,9 @@ class DbTurma(Model):
     def delete_turma(self, id):
         turma = DbTurma(id=id)
         turma.delete()
+
+class DbLoja(Model):
+    __database__ = db
+    id = AutoIncrementField(primary_key= True)
+    nome_item = TextField()
+

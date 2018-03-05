@@ -71,3 +71,17 @@ class Facade:
     """
         Fim Facade Turma
     """
+
+    """
+        Inicio Facade loja
+    """
+
+    def ComprarMedalhaFacade(self, id, id_medalha):
+        self.aluno.comprar_medalhas(id=id, id_medalha=id_medalha)
+
+    def VerMedalhaFacade(self, nome):
+        return self.aluno.ver_medalhas(nome)
+
+    """
+        Fim Facade loja
+    """

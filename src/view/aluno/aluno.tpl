@@ -8,6 +8,9 @@
         <a href="/ler_aluno">
             <button>ver alunos</button>
         </a>
+        <a href="/ver_medalhas">
+            <button>ver medalhas</button>
+        </a>
         <a href="/user_menu">
             <button>Voltar</button>
         </a>

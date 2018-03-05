@@ -1,5 +1,5 @@
 from bottle import route, view, get, request, redirect
-from src.facade.facade import Facade
+from facade.facade import Facade
 
 facade = Facade()
 
@@ -9,7 +9,10 @@ facade = Facade()
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
-    return
+    if request.get_cookie("login", secret='2524'):
+        return
+    else:
+        redirect('/')
 
 
 """ Cadastro de aluno """
@@ -18,7 +21,10 @@ def aluno_read():
 @route('/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
-    return
+    if request.get_cookie("login", secret='2524'):
+        return
+    else:
+        redirect('/')
 
 
 @route('/aluno_cadastro', method='POST')
@@ -41,10 +47,11 @@ def read_aluno():
     Direciona para a função ReadAlunoFacade
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
-    usuarios = facade.ReadAlunoFacade()
-
-    return dict(aluno_id=usuarios['id'], aluno_matricula=usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
-
+    if request.get_cookie("login", secret='2524'):
+        usuarios = facade.ReadAlunoFacade()
+        return dict(aluno_id=usuarios['id'], aluno_matricula=usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
+    else:
+        redirect('/')
 
 
 """ Deletar aluno(usuario) """
@@ -58,4 +65,8 @@ def deletar_aluno():
     redirect('/aluno')
 
 
-"""Pesquisa ao aluno por nome"""
+"""Ver medalhas"""
+@route('/ver_medalhas')
+@view('aluno/view_medalhas')
+def ver_medalhas():
+    return

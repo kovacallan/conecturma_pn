@@ -1,7 +1,7 @@
 from bottle import view, get, request, redirect, route, BaseResponse
 
-from src.facade.facade import Facade
-from src.model.redis import DbUsuario
+from facade.facade import Facade
+from model.redis import DbUsuario
 
 facade = Facade()
 

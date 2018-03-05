@@ -1,8 +1,5 @@
 from bottle import route, view, request, redirect
 
-from src.facade import facade
-from src.model.redis import DbUsuario
-
 """ Controle do index """
 
 

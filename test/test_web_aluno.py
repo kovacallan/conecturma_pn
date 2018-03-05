@@ -17,6 +17,10 @@ class BlackBoxTest(unittest.TestCase):
         self.assertIn('name="usuario"', res.text, res.text)
         # self.assertEqual(res.json['upper_query'], 'FOO')
 
+    def test_loja(self):
+        res = test_app.get('/loja')
+        self.assertIn('<form action="/comprar">', res.text, res.text)
+
     def _test_read_student(self):
         """ A página dos alunos deve permitir deletar aluno. """
         res = test_app.get('/ler_aluno')
