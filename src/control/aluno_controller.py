@@ -1,5 +1,5 @@
 from bottle import route, view, get, request, redirect
-from src.facade.facade import Facade
+from facade.facade import Facade
 
 facade = Facade()
 
@@ -39,8 +39,11 @@ def create_aluno():
 def read_aluno():
     """
     Direciona para a função ReadAlunoFacade
+
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
+    pesquisa_aluno = request.params['']
+    return dict(aluno_pesquisado=pesquisa_aluno)
     usuarios = facade.ReadAlunoFacade()
 
     return dict(aluno_id=usuarios['id'], aluno_matricula=usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
@@ -52,6 +55,7 @@ def read_aluno():
 def deletar_aluno():
     """
     Direciona a função DeleteAlunoFacade para a pagina tpl
+
     :return: Deleta a entrada de dicionario e retorna a pagina geral aluno
     """
     facade.DeleteAlunoFacade(request.params['id'])

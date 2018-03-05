@@ -12,7 +12,7 @@
     <h2>{{nome_jogo}}</h2>
     <form action="/ponto" method="get">
         <input type="hidden" name = "jogo" value='{{nome_jogo}}'></input>
-        <input type="hidden" name = "cliques" value=1></input>
+        <input type="hidden" name = "cliques" value= "1" ></input>
         <button type="submit" name = "ponto" value="1">Acertou</button>
         <button type="submit" name = "ponto" value="0">Errou</button>
     </form>
