@@ -14,9 +14,9 @@ class DbUsuario(Model):
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
     pontos_j1 = IntegerField(default=0)
-    total_cliques_j1 = IntegerField(default=0)
+    cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
-    total_cliques_j2 = IntegerField(default=0)
+    cliques_j2 = IntegerField(default=0)
     pontos_de_vida = IntegerField(default=0)
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
@@ -88,7 +88,7 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-    def pontos_jogo(self, usuario, jogo, pontos, cliques_totais):
+    def pontos_jogo(self, usuario, jogo, pontos, clique):
         """
         Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais, o desempenho do aluno no jogo ao qual ele esta jogando
 
@@ -98,15 +98,15 @@ class DbUsuario(Model):
         :param cliques_totais: contabiliza a quantidade de cliques totais feitos , independente se o usuario acertar ou errar a resposta
         :return: None
         """
-        if pontos is None or pontos == 0:
+        if pontos is None:
             pass
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
-            usuario.total_cliques_j1 += cliques_totais
-            print('cliques j1:{}'.format(usuario.total_cliques_j1))
-            usuario.desempenho_aluno_j1 = usuario.total_cliques_j1/usuario.pontos_j1
+            usuario.cliques_j1 += clique
+            print('cliques j1:{}'.format(usuario.cliques_j1))
+            usuario.desempenho_aluno_j1 = (usuario.pontos_j1/usuario.cliques_j1)*100
             print("acertou {} % ".format(usuario.desempenho_aluno_j1))
 
             if usuario.pontos_j1 % 3 == 0:
@@ -114,15 +114,14 @@ class DbUsuario(Model):
 
             if usuario.pontos_j1 % 5 == 0:
                 usuario.pontos_de_moedas += 5
-
             usuario.save()
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno['id'])
             usuario.pontos_j2 += pontos
-            usuario.total_cliques_j2 += cliques_totais
-            print('cliques j1:{}'.format(usuario.total_cliques_j2))
-            usuario.desempenho_aluno_j2 = usuario.total_cliques_j2 / usuario.pontos_j1
+            usuario.cliques_j2 += clique
+            print('cliques j1:{}'.format(usuario.cliques_j2))
+            usuario.desempenho_aluno_j2 =(usuario.pontos_j2/usuario.cliques_j2)*100
             print("acertou {} % ".format(usuario.desempenho_aluno_j2))
             if usuario.pontos_j2 % 3 == 0:
                 usuario.pontos_de_vida += 1

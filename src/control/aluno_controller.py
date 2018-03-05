@@ -42,6 +42,8 @@ def read_aluno():
 
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
+    pesquisa_aluno = request.params['']
+    return dict(aluno_pesquisado=pesquisa_aluno)
     usuarios = facade.ReadAlunoFacade()
 
     return dict(aluno_id=usuarios['id'], aluno_matricula=usuarios['matricula'], aluno_nome=usuarios['usuario_nome'])
