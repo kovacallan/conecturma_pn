@@ -60,7 +60,7 @@ class DbUsuario(Model):
         :return: o usuário pesquisado
         """
         usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0,
-                       'pontos_de_vida': 0, 'pontos_de_moedas': 0, 'desempenho_aluno_j1' : 0, 'desempenho_aluno_j2': 0}
+                       'pontos_de_vida': 0, 'pontos_de_moedas': 0, 'desempenho_aluno_j1': 0, 'desempenho_aluno_j2': 0}
 
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
@@ -88,7 +88,6 @@ class DbUsuario(Model):
         usuario = DbUsuario(id=id)
         usuario.delete()
 
-
     def pontos_jogo(self, usuario, jogo, pontos, clique):
         """
         Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais, o desempenho do aluno no jogo ao qual ele esta jogando
@@ -107,7 +106,7 @@ class DbUsuario(Model):
             usuario.pontos_j1 += pontos
             usuario.cliques_j1 += clique
             print('cliques j1:{}'.format(usuario.cliques_j1))
-            usuario.desempenho_aluno_j1 = (usuario.pontos_j1/usuario.cliques_j1)*100
+            usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
             print("acertou {} % ".format(usuario.desempenho_aluno_j1))
 
             if usuario.pontos_j1 % 3 == 0:
@@ -122,7 +121,7 @@ class DbUsuario(Model):
             usuario.pontos_j2 += pontos
             usuario.cliques_j2 += clique
             print('cliques j1:{}'.format(usuario.cliques_j2))
-            usuario.desempenho_aluno_j2 =(usuario.pontos_j2/usuario.cliques_j2)*100
+            usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
             print("acertou {} % ".format(usuario.desempenho_aluno_j2))
             if usuario.pontos_j2 % 3 == 0:
                 usuario.pontos_de_vida += 1
@@ -131,31 +130,6 @@ class DbUsuario(Model):
                 usuario.pontos_de_moedas += 5
 
             usuario.save()
-
-    def comprar_medalhas(self, id, id_medalha):
-        usuario = DbUsuario(id=id)
-        medalhas = usuario.load(id)
-        compras = []
-        for medalha in medalhas.medalhas:
-            compras.append(medalha.decode('utf-8'))
-
-        if id_medalha in compras:
-            pass
-        else:
-            medalhas.medalhas.append(id_medalha)
-            medalhas.save()
-
-    def ver_medalhas(self, usuario_nome):
-        medalhas = []
-        i = 0
-        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
-            for x in pesquisa.medalhas:
-                medalhas.append(''.join(x.decode('utf-8')))
-
-        if medalhas == '' or medalhas == None or not medalhas:
-            return False
-        else:
-            return medalhas
 
 
 """Verificar de onde vem ... pq erro """
@@ -204,6 +178,16 @@ class DbTurma(Model):
 
 class DbLoja(Model):
     __database__ = db
-    id = AutoIncrementField(primary_key= True)
+    id = AutoIncrementField(primary_key=True)
     nome_item = TextField()
+    tipo_item = IntegerField(default=0)
+    preco_item = FloatField(default=00.00)
 
+    def create_item(self, nome, tipo, preco):
+        self.create(nome_item=nome, tipo_item=tipo, preco_item=preco)
+
+    def Read_item(self):
+        itens = []
+        for item in self.query(order_by=self.id):
+            itens.append(item)
+        return itens

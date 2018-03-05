@@ -1,4 +1,4 @@
-from model.redis import DbUsuario, DbTurma
+from model.redis import DbUsuario, DbTurma,DbLoja
 
 
 class Facade:
@@ -9,6 +9,7 @@ class Facade:
         """
         self.aluno = DbUsuario()
         self.turma = DbTurma()
+        self.loja = DbLoja()
 
     def CreateAlunoFacade(self, nome, senha):
         """
@@ -76,11 +77,14 @@ class Facade:
         Inicio Facade loja
     """
 
-    def ComprarMedalhaFacade(self, id, id_medalha):
-        self.aluno.comprar_medalhas(id=id, id_medalha=id_medalha)
+    def CriarItemLojaFacade(self, nome, tipo, preco):
+        self.loja.create_item(nome, tipo, preco)
 
-    def VerMedalhaFacade(self, nome):
-        return self.aluno.ver_medalhas(nome)
+    def ReaditemLojaFacade(self):
+        return self.loja.Read_item()
+
+
+
 
     """
         Fim Facade loja
