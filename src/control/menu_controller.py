@@ -1,5 +1,7 @@
 from bottle import route, view, request, redirect
 
+
+
 """ Controle do index """
 
 

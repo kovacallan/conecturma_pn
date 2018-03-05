@@ -45,6 +45,7 @@ def create_aluno():
 def read_aluno():
     """
     Direciona para a função ReadAlunoFacade
+
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
     if request.get_cookie("login", secret='2524'):
@@ -54,11 +55,13 @@ def read_aluno():
         redirect('/')
 
 
+
 """ Deletar aluno(usuario) """
 @get('/deletar_alunos')
 def deletar_aluno():
     """
     Direciona a função DeleteAlunoFacade para a pagina tpl
+
     :return: Deleta a entrada de dicionario e retorna a pagina geral aluno
     """
     facade.DeleteAlunoFacade(request.params['id'])

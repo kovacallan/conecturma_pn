@@ -13,9 +13,10 @@
 
     <h3>J1</h3>
     <h4>{{ponto_j_um}}</h4>
-
+    <h4>Você acertou {{desempenho_j1}} %</h4>
     <h3>J2</h3>
     <h4>{{ponto_j_dois}}</h4>
+    <h4>Você acertou {{desempenho_j2}}%</h4>
     <h3>Vidas</h3>
     <h4>{{pontos_de_vida}}</h4>
     <h3>Moedas</h3>
