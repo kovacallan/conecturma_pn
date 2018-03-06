@@ -1,4 +1,5 @@
-from bottle import route, redirect, request, view, get
+# -*- coding: utf-8 -*-
+from bottle import route, redirect, request, view, get, post
 from facade.facade import Facade
 
 facade = Facade()
@@ -8,11 +9,11 @@ facade = Facade()
 @view('loja/index')
 def index():
     if request.get_cookie("login", secret='2524'):
-        compras = facade.VerMedalhaFacade(request.get_cookie("login", secret='2524'))
-        if compras:
-            return dict(array=compras)
+        if facade.VerItemLojaFacade():
+            itens = facade.VerItemLojaFacade()
+            return dict(itens = itens)
         else:
-            return dict(array=False)
+            return False
     else:
         redirect('/')
 
@@ -26,20 +27,20 @@ def cadastrar_item():
         redirect('/')
 
 
-@get('/cadastro_item')
+@post('/cadastro_item')
 def cadastro_item():
-    nome_item = request.params['nome_item']
-    preco_item = request.params['preco_item']
-    tipo_item = request.params['tipo_item']
+    nome_item = request.forms.nome_item
+    preco_item = request.forms.preco_item
+    tipo_item = request.forms.tipo_item
 
-    facade.CriarItemLojaFacade(nome_item, preco_item, tipo_item)
-
+    facade.CriarItemLojaFacade(nome_item, tipo_item, preco_item)
+    redirect('cadastrar_item')
 
 @route('/ver_item')
 @view('loja/ver_item')
-def cadastrar_item():
+def ver_item():
     if request.get_cookie("login", secret='2524'):
-        read = facade.ReaditemLojaFacade()
+        read = facade.VerItemLojaFacade()
 
         return dict(teste = read)
     else:
@@ -48,8 +49,8 @@ def cadastrar_item():
 
 @get('/compras_loja')
 def compras():
-    id_medalha = request.params['id']
-    id = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
-    facade.ComprarMedalhaFacade(id=id['id'], id_medalha=id_medalha)
+    id_item = request.params['id']
+    usuario_logado = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
+    facade.CompraItemFacade(id_usuario=usuario_logado.id, id_item=id_item)
 
     redirect('/loja')

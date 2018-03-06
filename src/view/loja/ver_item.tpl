@@ -1,30 +1,49 @@
 % include('./header.tpl', title = 'Conecturma')
-   <div align="center" class="col-md-12">
-        <h1>Alunos da turma:</h1>
-        <h3>pesquisar aluno</h3>
-        <input type="text" name="Nome" size="40" /><button type="submit">Pesquisar</button>
-        <div class="row">
-            %for itens in teste:
-                <div class="col-md-3">
-                    {{itens.id}}
-                <br>
-                </br>
-                <div class="col-md-3">
-                    {{itens.nome_item}}
-                    <br>
-                </div>
-                <div class="col-md-3">
-                    {{itens.tipo_item}}
-                    <br>
-                </div>
-                <div class="col-md-3">
-                    {{itens.preco_item}}
-                    <br>
-                </div>
-
-            %end
+<div align="center" class="col-md-12">
+    <h1>Ver Itens Loja:</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <h2>id</h2>
+            <br>
         </div>
-        <a href="/aluno"><button>Voltar</button></a>
-   </div>
+        <div class="col-md-3">
+            <h2>Nome Item</h2>
+            <br>
+        </div>
+        <div class="col-md-3">
+            <h2>Tipo Item</h2>
+            <br>
+        </div>
+        <div class="col-md-3">
+            <h2>Preco Item</h2>
+            <br>
+        </div>
+        %for itens in teste:
+        <div class="col-md-3">
+            {{itens.id}}
+            <br>
+            <br>
+        </div>
+        <div class="col-md-3">
+            {{itens.nome_item}}
+            <br>
+            <br>
+        </div>
+        <div class="col-md-3">
+            {{itens.tipo_item}}
+            <br>
+            <br>
+        </div>
+        <div class="col-md-3">
+            {{itens.preco_item}}
+            <br>
+            <br>
+        </div>
+        %end
+    </div>
+    <a href="/user_menu">
+        <button>Voltar</button>
+    </a>
+</div>
 
-% include('footer.tpl')
+        % include('footer.tpl')

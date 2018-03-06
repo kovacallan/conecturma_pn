@@ -13,6 +13,7 @@ class DbUsuario(Model):
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
+    items_comprado = ListField()
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -59,25 +60,13 @@ class DbUsuario(Model):
 
         :return: o usuário pesquisado
         """
-        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0,
-                       'pontos_de_vida': 0, 'pontos_de_moedas': 0, 'desempenho_aluno_j1': 0, 'desempenho_aluno_j2': 0}
-
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
-            usuario_dic['id'] = pesquisa.id
-            usuario_dic['matricula'] = pesquisa.matricula
-            usuario_dic['nome'] = pesquisa.usuario_nome
-            usuario_dic['senha'] = pesquisa.usuario_senha
-            usuario_dic['pontos_j1'] = pesquisa.pontos_j1
-            usuario_dic['pontos_j2'] = pesquisa.pontos_j2
-            usuario_dic['pontos_de_moedas'] = pesquisa.pontos_de_moedas
-            usuario_dic['pontos_de_vida'] = pesquisa.pontos_de_vida
-            usuario_dic['desempenho_aluno_j1'] = pesquisa.desempenho_aluno_j1
-            usuario_dic['desempenho_aluno_j2'] = pesquisa.desempenho_aluno_j2
+            usuario = pesquisa
 
-        if usuario_dic['id'] == 0:
+        if usuario == '' and usuario == None:
             return False
         else:
-            return usuario_dic
+            return usuario
 
     def aluno_delete(self, id):
         """
@@ -131,6 +120,11 @@ class DbUsuario(Model):
 
             usuario.save()
 
+    def comprar_item(self, id_usuario, id_item):
+        usuario = DbUsuario.load(id_usuario)
+        usuario.items_comprado.append(id_item)
+        usuario.save()
+
 
 """Verificar de onde vem ... pq erro """
 
@@ -181,7 +175,7 @@ class DbLoja(Model):
     id = AutoIncrementField(primary_key=True)
     nome_item = TextField()
     tipo_item = IntegerField(default=0)
-    preco_item = FloatField(default=00.00)
+    preco_item = IntegerField(default=0)
 
     def create_item(self, nome, tipo, preco):
         self.create(nome_item=nome, tipo_item=tipo, preco_item=preco)
@@ -190,4 +184,8 @@ class DbLoja(Model):
         itens = []
         for item in self.query(order_by=self.id):
             itens.append(item)
-        return itens
+
+        if itens != '' and itens != None and itens != 0:
+            return itens
+        else:
+            return False

@@ -2,7 +2,7 @@
 <div class="row">
     <div align="center" class="col-md-12">
         <h1>Cadastro</h1>
-        <form action="/cadastro_item" method="get">
+        <form action="/cadastro_item" method="post">
          Nome do item:   <input type="text" name="nome_item"/><br>
          Preço :         <input type="text" name="preco_item"/><br>
          <select name="tipo_item">
