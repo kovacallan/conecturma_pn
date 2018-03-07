@@ -181,11 +181,10 @@ class DbLoja(Model):
     def create_item(self, nome, tipo, preco):
         self.create(nome_item=nome, tipo_item=tipo, preco_item=preco)
 
-    def Read_item(self, id=0):
+    def Read_item(self):
         itens = []
-        if id != 0;
-            for item in self.query(order_by=self.id):
-                itens.append(item)
+        for item in self.query(order_by=self.id):
+            itens.append(item)
 
         if itens != '' and itens != None and itens != 0:
             return itens
@@ -197,6 +196,7 @@ class DbLoja(Model):
         itens_usuario = [x.decode('utf-8') for x in usuario.pesquisa_usuario(usuario_nome = usuario_logado).items_comprado]
         itens = [str(y.id) for y in self.Read_item()]
         lista_teste = [z for z in itens if z not in itens_usuario]
+
         return lista_teste
 
 

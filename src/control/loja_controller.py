@@ -10,12 +10,11 @@ facade = Facade()
 def index():
     if request.get_cookie("login", secret='2524'):
         itens_comprados = facade.JaTemItemFacade(request.get_cookie("login", secret='2524'))
-        if itens_comprados:
-            """itens = facade.VerItemLojaFacade()"""
-            return dict(itens = itens)
-            pass
+        itens = facade.VerItemLojaFacade()
+        if itens:
+            return dict(itens = itens, itens_comprados = str(itens_comprados))
         else:
-            return False
+            return dict(itens = False)
     else:
         redirect('/')
 

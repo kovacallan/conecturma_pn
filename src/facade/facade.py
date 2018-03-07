@@ -93,7 +93,7 @@ class Facade:
         return self.loja.Read_item()
 
     def JaTemItemFacade(self,usuario_logado):
-        self.loja.ja_possui_item(usuario_logado = usuario_logado)
+        return self.loja.ja_possui_item(usuario_logado = usuario_logado)
     """
         Fim Facade loja
     """
