@@ -14,6 +14,7 @@ class DbUsuario(Model):
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
     items_comprado = ListField()
+    items_equipados = HashField()
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -22,6 +23,10 @@ class DbUsuario(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
+
+    def usuario_logado(self, id_usuario):
+        usuario = DbUsuario(id=id_usuario)
+        return usuario
 
     def gerar_matricula(self):
         matricula = []
@@ -133,6 +138,17 @@ class DbUsuario(Model):
             usuario.items_comprado.append(id_item)
             usuario.save()
 
+    def ver_itens_comprados(self, id_usuario):
+        usuario = self.load(id_usuario)
+        itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.items_comprado]
+        return itens
+
+
+    def equipar_item(self, id_usuario, cor, rosto, cabeca, corpo):
+        usuario = self.usuario_logado(id_usuario)
+        usuario.items_equipados.update(cor_avatar=cor, rosto_avatar=rosto, acessorio_avatar=cabeca, corpo_avatar=corpo)
+        usuario.save()
+
 
 """Verificar de onde vem ... pq erro """
 
@@ -198,7 +214,7 @@ class DbLoja(Model):
         else:
             return False
 
-    def pesquisar_item(self,id):
+    def pesquisar_item(self, id):
 
         for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
             item = pesquisa
@@ -208,12 +224,11 @@ class DbLoja(Model):
         else:
             return item
 
-    def ja_possui_item(self,usuario_logado):
+    def ja_possui_item(self, usuario_logado):
         usuario = DbUsuario()
-        itens_usuario = [x.decode('utf-8') for x in usuario.pesquisa_usuario(usuario_nome = usuario_logado).items_comprado]
+        itens_usuario = [x.decode('utf-8') for x in
+                         usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
         itens = [str(y.id) for y in self.Read_item()]
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste
-
-

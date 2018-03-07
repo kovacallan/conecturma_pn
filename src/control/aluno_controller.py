@@ -55,8 +55,9 @@ def read_aluno():
         redirect('/')
 
 
-
 """ Deletar aluno(usuario) """
+
+
 @get('/deletar_alunos')
 def deletar_aluno():
     """
@@ -69,7 +70,15 @@ def deletar_aluno():
 
 
 """Ver medalhas"""
-@route('/ver_medalhas')
-@view('aluno/view_medalhas')
-def ver_medalhas():
-    return
+
+
+@route('/ver_itens_comprados')
+@view('aluno/view_itens')
+def ver_itens():
+    usuario = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
+    itens_comprado = facade.VerItemCompradoFacade(usuario.id)
+    itens = []
+    for y in itens_comprado:
+        itens.append(facade.PesquisaItemFacade(y))
+
+    print(itens.nome_item)

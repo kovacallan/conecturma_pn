@@ -47,6 +47,12 @@ class Facade:
     def CompraItemFacade(self, id_usuario, id_item):
         self.aluno.comprar_item(id_usuario=id_usuario, id_item=id_item)
 
+    def VerItemCompradoFacade(self, id_usuario):
+        return self.aluno.ver_itens_comprados(id_usuario)
+
+    def EquiparItemFacade(self):
+        pass
+
     """
         Fim Facade Usuario/Aluno
     """
@@ -91,6 +97,8 @@ class Facade:
 
     def VerItemLojaFacade(self):
         return self.loja.Read_item()
+    def PesquisaItemFacade(self,id):
+        return self.loja.pesquisar_item(id)
 
     def JaTemItemFacade(self,usuario_logado):
         return self.loja.ja_possui_item(usuario_logado = usuario_logado)
