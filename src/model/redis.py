@@ -60,6 +60,7 @@ class DbUsuario(Model):
 
         :return: o usuário pesquisado
         """
+        usuario = {}
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario = pesquisa
 
@@ -180,12 +181,22 @@ class DbLoja(Model):
     def create_item(self, nome, tipo, preco):
         self.create(nome_item=nome, tipo_item=tipo, preco_item=preco)
 
-    def Read_item(self):
+    def Read_item(self, id=0):
         itens = []
-        for item in self.query(order_by=self.id):
-            itens.append(item)
+        if id != 0;
+            for item in self.query(order_by=self.id):
+                itens.append(item)
 
         if itens != '' and itens != None and itens != 0:
             return itens
         else:
             return False
+
+    def ja_possui_item(self,usuario_logado):
+        usuario = DbUsuario()
+        itens_usuario = [x.decode('utf-8') for x in usuario.pesquisa_usuario(usuario_nome = usuario_logado).items_comprado]
+        itens = [str(y.id) for y in self.Read_item()]
+        lista_teste = [z for z in itens if z not in itens_usuario]
+        return lista_teste
+
+

@@ -9,9 +9,11 @@ facade = Facade()
 @view('loja/index')
 def index():
     if request.get_cookie("login", secret='2524'):
-        if facade.VerItemLojaFacade():
-            itens = facade.VerItemLojaFacade()
+        itens_comprados = facade.JaTemItemFacade(request.get_cookie("login", secret='2524'))
+        if itens_comprados:
+            """itens = facade.VerItemLojaFacade()"""
             return dict(itens = itens)
+            pass
         else:
             return False
     else:

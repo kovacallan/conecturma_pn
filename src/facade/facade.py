@@ -10,7 +10,9 @@ class Facade:
         self.aluno = DbUsuario()
         self.turma = DbTurma()
         self.loja = DbLoja()
-
+    """
+        Inicio Facade Usuario/Aluno
+    """
     def CreateAlunoFacade(self, nome, senha):
         """
         facade de criar aluno
@@ -44,6 +46,10 @@ class Facade:
 
     def CompraItemFacade(self, id_usuario, id_item):
         self.aluno.comprar_item(id_usuario=id_usuario, id_item=id_item)
+
+    """
+        Fim Facade Usuario/Aluno
+    """
 
     """
         Inicio Facade Turma
@@ -86,6 +92,8 @@ class Facade:
     def VerItemLojaFacade(self):
         return self.loja.Read_item()
 
+    def JaTemItemFacade(self,usuario_logado):
+        self.loja.ja_possui_item(usuario_logado = usuario_logado)
     """
         Fim Facade loja
     """
