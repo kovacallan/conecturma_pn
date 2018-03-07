@@ -92,7 +92,7 @@ class DbUsuario(Model):
             pass
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
-            usuario = self.load(retorno['id'])
+            usuario = self.load(retorno.id)
             usuario.pontos_j1 += pontos
             usuario.cliques_j1 += clique
             print('cliques j1:{}'.format(usuario.cliques_j1))
@@ -107,7 +107,7 @@ class DbUsuario(Model):
             usuario.save()
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
-            usuario = self.load(retorno['id'])
+            usuario = self.load(retorno.id)
             usuario.pontos_j2 += pontos
             usuario.cliques_j2 += clique
             print('cliques j1:{}'.format(usuario.cliques_j2))
@@ -122,9 +122,16 @@ class DbUsuario(Model):
             usuario.save()
 
     def comprar_item(self, id_usuario, id_item):
+        item = DbLoja()
         usuario = DbUsuario.load(id_usuario)
-        usuario.items_comprado.append(id_item)
-        usuario.save()
+        preco = item.pesquisar_item(id_item).preco_item
+
+        if usuario.pontos_de_moedas < preco:
+            print("você não tem moeda")
+        else:
+            usuario.pontos_de_moedas -= preco
+            usuario.items_comprado.append(id_item)
+            usuario.save()
 
 
 """Verificar de onde vem ... pq erro """
@@ -190,6 +197,16 @@ class DbLoja(Model):
             return itens
         else:
             return False
+
+    def pesquisar_item(self,id):
+
+        for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
+            item = pesquisa
+
+        if item == '' and item == None:
+            return False
+        else:
+            return item
 
     def ja_possui_item(self,usuario_logado):
         usuario = DbUsuario()
