@@ -129,6 +129,12 @@ class DbUsuario(Model):
             usuario.save()
 
     def comprar_item(self, id_usuario, id_item):
+        """
+        Metodo para comprar o item
+        :param id_usuario: o id do usuario logado na plataforma
+        :param id_item: O id do item que vai ser comprado
+        :return:
+        """
         item = DbLoja()
         usuario = DbUsuario.load(id_usuario)
         preco = item.pesquisar_item(id_item).preco_item
@@ -141,6 +147,11 @@ class DbUsuario(Model):
             usuario.save()
 
     def ver_itens_comprados(self, id_usuario):
+        """
+        Metodo para mostrar
+        :param id_usuario:
+        :return:
+        """
         usuario = self.load(id_usuario)
         itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.items_comprado]
         return itens
@@ -164,6 +175,7 @@ class DbUsuario(Model):
     def avatar(self, id):
         usuario = self.usuario_logado(id)
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
+
 
 
 """Verificar de onde vem ... pq erro """
@@ -247,6 +259,8 @@ class DbLoja(Model):
         :param id:Id do item
         :return:O objeto que corresponde ao Id
         """
+
+        item = None
         for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
             item = pesquisa
 
@@ -255,11 +269,12 @@ class DbLoja(Model):
         else:
             return item
 
+
     def ja_possui_item(self, usuario_logado):
         """
         Envia se o usuario já comprou o item
         :param usuario_logado: Id do usuario
-        :return:
+        :return: Lista de itens que o usuario não tem
         """
         usuario = DbUsuario()
         itens_usuario = [x.decode('utf-8') for x in
