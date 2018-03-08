@@ -49,8 +49,9 @@ def sair():
 
 def valida_login(nome, senha):
     retorno = facade.PesquisaAlunoFacade(nome)
-    if retorno != False:
-        if retorno['nome'] == nome and retorno['senha'] == senha:
+
+    if retorno:
+        if retorno.usuario_nome == nome and retorno.usuario_senha == senha:
             return True
         else:
             return False

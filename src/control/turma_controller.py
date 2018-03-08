@@ -1,8 +1,6 @@
 from bottle import route, view, get, request
 from facade.facade import *
 
-import bottle
-
 facade = Facade()
 
 """ Controle de Turma """
@@ -11,7 +9,10 @@ facade = Facade()
 @route('/turma')
 @view('turma/turma')
 def turma():
-    return
+    if request.get_cookie("login", secret='2524'):
+        return
+    else:
+        redirect('/')
 
 
 """ Create Turma """
@@ -24,7 +25,10 @@ def cadastrar_turma():
     pagina de cadastro de turma
     :return:
     """
-    return
+    if request.get_cookie("login", secret='2524'):
+        return
+    else:
+        redirect('/')
 
 
 @get('/cadastro_turma')
@@ -37,7 +41,7 @@ def create_turma():
 
     facade.CreateTurmaFacade(turma, request.get_cookie("login", secret='2524'))
 
-    bottle.redirect('/turma')
+    redirect('/turma')
 
 
 """ Read Turma """
@@ -50,18 +54,11 @@ def read_turma():
     Direciona para a pagina que mostra a turma em ordem de id
     :return: a entrada de dicionario que contem o id e o turma_nome
     """
-    turma = facade.ReadTurmaFacade()
-    return dict(turma_id=turma['id'], turma_nome=turma['nome'], criador = turma['criador'])
-
-
-""" Update Turma """
-
-
-@route('/turma_update')
-@view('turma/turma_update')
-def update_turma():
-    return
-
+    if request.get_cookie("login", secret='2524'):
+        turma = facade.ReadTurmaFacade()
+        return dict(turma_id=turma['id'], turma_nome=turma['nome'], criador=turma['criador'])
+    else:
+        redirect('/')
 
 """Turma Delete"""
 
@@ -69,4 +66,4 @@ def update_turma():
 @get('/deletar_turma')
 def deletar_turma():
     facade.DeleteTurmaFacade(request.params['id'])
-    bottle.redirect('/turma')
+    redirect('/turma')

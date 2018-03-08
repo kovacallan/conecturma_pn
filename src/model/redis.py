@@ -13,6 +13,11 @@ class DbUsuario(Model):
     usuario_nome = TextField(fts=True, index=True)
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
+    items_comprado = ListField()
+    cor = IntegerField(default=0)
+    rosto = IntegerField(default=0)
+    acessorio = IntegerField(default=0)
+    corpo = IntegerField(default=0)
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -22,6 +27,10 @@ class DbUsuario(Model):
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
 
+    def usuario_logado(self, id_usuario):
+        usuario = self.load(id_usuario)
+        return usuario
+
     def gerar_matricula(self):
         matricula = []
         for i in range(0, 5):
@@ -30,8 +39,7 @@ class DbUsuario(Model):
         return matricula
 
     def create_usuario(self, nome, senha):
-
-        self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula(), pontos_j1=0, pontos_j2=0)
+        self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula())
 
     def read_usuario(self):
         """
@@ -59,25 +67,14 @@ class DbUsuario(Model):
 
         :return: o usuário pesquisado
         """
-        usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0,
-                       'pontos_de_vida': 0, 'pontos_de_moedas': 0, 'desempenho_aluno_j1' : 0, 'desempenho_aluno_j2': 0}
-
+        usuario = {}
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
-            usuario_dic['id'] = pesquisa.id
-            usuario_dic['matricula'] = pesquisa.matricula
-            usuario_dic['nome'] = pesquisa.usuario_nome
-            usuario_dic['senha'] = pesquisa.usuario_senha
-            usuario_dic['pontos_j1'] = pesquisa.pontos_j1
-            usuario_dic['pontos_j2'] = pesquisa.pontos_j2
-            usuario_dic['pontos_de_moedas'] = pesquisa.pontos_de_moedas
-            usuario_dic['pontos_de_vida'] = pesquisa.pontos_de_vida
-            usuario_dic['desempenho_aluno_j1'] = pesquisa.desempenho_aluno_j1
-            usuario_dic['desempenho_aluno_j2'] = pesquisa.desempenho_aluno_j2
+            usuario = pesquisa
 
-        if usuario_dic['id'] == 0:
+        if usuario == '' and usuario == None:
             return False
         else:
-            return usuario_dic
+            return usuario
 
     def aluno_delete(self, id):
         """
@@ -102,11 +99,11 @@ class DbUsuario(Model):
             pass
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
-            usuario = self.load(retorno['id'])
+            usuario = self.load(retorno.id)
             usuario.pontos_j1 += pontos
             usuario.cliques_j1 += clique
             print('cliques j1:{}'.format(usuario.cliques_j1))
-            usuario.desempenho_aluno_j1 = (usuario.pontos_j1/usuario.cliques_j1)*100
+            usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
             print("acertou {} % ".format(usuario.desempenho_aluno_j1))
 
             if usuario.pontos_j1 % 3 == 0:
@@ -117,11 +114,11 @@ class DbUsuario(Model):
             usuario.save()
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
-            usuario = self.load(retorno['id'])
+            usuario = self.load(retorno.id)
             usuario.pontos_j2 += pontos
             usuario.cliques_j2 += clique
             print('cliques j1:{}'.format(usuario.cliques_j2))
-            usuario.desempenho_aluno_j2 =(usuario.pontos_j2/usuario.cliques_j2)*100
+            usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
             print("acertou {} % ".format(usuario.desempenho_aluno_j2))
             if usuario.pontos_j2 % 3 == 0:
                 usuario.pontos_de_vida += 1
@@ -130,6 +127,43 @@ class DbUsuario(Model):
                 usuario.pontos_de_moedas += 5
 
             usuario.save()
+
+    def comprar_item(self, id_usuario, id_item):
+        item = DbLoja()
+        usuario = DbUsuario.load(id_usuario)
+        preco = item.pesquisar_item(id_item).preco_item
+
+        if usuario.pontos_de_moedas < preco:
+            print("você não tem moeda")
+        else:
+            usuario.pontos_de_moedas -= preco
+            usuario.items_comprado.append(id_item)
+            usuario.save()
+
+    def ver_itens_comprados(self, id_usuario):
+        usuario = self.load(id_usuario)
+        itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.items_comprado]
+        return itens
+
+    def equipar_item(self, id_usuario, itens):
+        usuario = self.load(id_usuario)
+
+        if itens.tipo_item == 1:
+            usuario.cor = itens.id
+        else:
+            if itens.tipo_item == 2:
+                usuario.rosto = itens.id
+            else:
+                if itens.tipo_item == 3:
+                    usuario.acessorio = itens.id
+                else:
+                    if itens.tipo_item == 4:
+                        usuario.corpo = itens.id
+        usuario.save()
+
+    def avatar(self, id):
+        usuario = self.usuario_logado(id)
+        return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
 
 
 """Verificar de onde vem ... pq erro """
@@ -175,3 +209,62 @@ class DbTurma(Model):
         turma = DbTurma(id=id)
         turma.delete()
 
+
+class DbLoja(Model):
+    __database__ = db
+    id = AutoIncrementField(primary_key=True)
+    nome_item = TextField()
+    tipo_item = IntegerField(default=0)
+    preco_item = IntegerField(default=0)
+
+    def create_item(self, nome, tipo, preco):
+        """
+            Cria o item no banco de dados
+        :param nome:Nome do item
+        :param tipo:Se ele é cor,rosto,acessorio,corpo
+        :param preco: é o preço do item
+        :return:
+        """
+        self.create(nome_item=nome, tipo_item=tipo, preco_item=preco)
+
+    def Read_item(self):
+        """
+            Leitura dos itens cadastrados na plataforma
+        :return: Os itens cadastrados
+        """
+        itens = []
+        for item in self.query(order_by=self.id):
+            itens.append(item)
+
+        if itens != '' and itens != None and itens != 0:
+            return itens
+        else:
+            return False
+
+    def pesquisar_item(self, id):
+        """
+        Pesquisa por item especifico
+        :param id:Id do item
+        :return:O objeto que corresponde ao Id
+        """
+        for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
+            item = pesquisa
+
+        if item == '' and item == None:
+            return False
+        else:
+            return item
+
+    def ja_possui_item(self, usuario_logado):
+        """
+        Envia se o usuario já comprou o item
+        :param usuario_logado: Id do usuario
+        :return:
+        """
+        usuario = DbUsuario()
+        itens_usuario = [x.decode('utf-8') for x in
+                         usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
+        itens = [str(y.id) for y in self.Read_item()]
+        lista_teste = [z for z in itens if z not in itens_usuario]
+
+        return lista_teste
