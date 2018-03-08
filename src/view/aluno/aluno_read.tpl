@@ -3,13 +3,11 @@
         <h1>Alunos da turma:</h1>
 
         <h3>pesquisar aluno</h3>
-        <input type="text" name="Nome" size="40" /><button type="submit">Pesquisar</button>
         <div class="row">
-
             <div class="col-md-2 offset-2">
                 <h4>Id</h4>
                 % for id in aluno_id:
-                    {{id}}
+                <input type="checkbox" name="aluno_id" value = '{{id}}'>{{id}}
                     <br>
                     <br>
                 % end
@@ -41,8 +39,20 @@
                 %end
                 </form>
             </div>
-        </div>
-        <a href="/aluno"><button>Voltar</button></a>
+         </div>
+            <form action="/turma_aluno">
+
+                % for id in aluno_id:
+                <input id ={{id}} type="checkbox" name="aluno_id[]" value="20">{{id}}
+                    <br>
+                    <br>
+                % end
+
+                <button type="submit" name ="aluno_id[]" value="20" >inscrever alunos em turma</button>
+            </form>
+         <a href="/user_menu">
+            <button>Voltar</button>
+        </a>
    </div>
 
 % include('footer.tpl')

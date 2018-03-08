@@ -30,6 +30,8 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(15, aluno['pontos_j1'], aluno)
         self.assertEqual(30, aluno['total_cliques_j1'], aluno)
 
+    def test_include_aluno(self):
+        self.facade.IncludeAlunosFacade()
     """def _test_cliquej1(self):
         self.facade.PontoJogoFacade(usuario="egg", jogo="j1", ponto=15, cliques_totais=30)
         aluno = self.facade.PesquisaAlunoFacade("egg")

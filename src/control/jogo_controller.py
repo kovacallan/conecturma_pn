@@ -28,7 +28,9 @@ def jogo():
 @get('/ponto')
 def ponto():
     """
-    pega o botão que o jogador clicou e incrementa os pontos, em caso de acerto
+    Recebe o nome do botão que o jogador clicou para o jogo o valor de 1 em caso de acerto
+    incrementa nos pontos em cada jogo e manda um clique para ser acrescentado a cliques totais , para fins estatisticos
+
     :return:ao termino do jogo volta a pagina do menu
     """
 
@@ -53,9 +55,9 @@ def ponto():
 @view('score')
 def mostrar_score():
     """
-    mostra a pontuação
+    Mostra a pontuação do jogador, a quantidade de vidas ,a quantidade de moedas e o desempenho em cada jogo
 
-    :return: O numero de acertos de cada jogo
+    :return: O numero de acertos , vidas , moedas e o desempenho do jogador em cada jogo (porcentagem de acertos)
     """
     ponto = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
     return dict(ponto_j_um=ponto['pontos_j1'], ponto_j_dois=ponto['pontos_j2'], pontos_de_vida=ponto['pontos_de_vida'],

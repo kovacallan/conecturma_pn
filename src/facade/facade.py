@@ -41,6 +41,12 @@ class Facade:
     def PontoJogoFacade(self, usuario, jogo, ponto, clique):
         self.aluno.pontos_jogo(usuario, jogo, ponto, clique)
 
+    def ColetarAlunos(self, aluno_id):
+        return self.aluno.coletar_alunos(aluno_id)
+
+    def IncludeAlunosFacade(self, id_turma):
+        self.aluno.alunos_in_turma(id_turma)
+
     """
         Inicio Facade Turma
     """

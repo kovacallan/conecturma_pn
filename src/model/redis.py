@@ -21,8 +21,13 @@ class DbUsuario(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
+    aluns_list = []
 
     def gerar_matricula(self):
+        """
+        Usa um algoritmo aleatório para criar um numero de matricula
+        :return: O numero de matricula
+        """
         matricula = []
         for i in range(0, 5):
             matricula.append(randrange(1, 9))
@@ -30,13 +35,21 @@ class DbUsuario(Model):
         return matricula
 
     def create_usuario(self, nome, senha):
+        """
+        Método principal de criação do usuário
+
+        :param nome: Nome do usuário , que vai servir como login
+        :param senha: Senha que será usada pelo usuário para logar na sua conta
+        :return: Um novo usuário para ser incluído no banco
+        """
 
         self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula(), pontos_j1=0, pontos_j2=0)
 
     def read_usuario(self):
         """
-        cria uma entrada de dicionario para cada usuário e senha
-        :return: o dicionario
+        Cria uma entrada de dicionario contendo a id , o nome de usuário e a matricula de todos os usuarios registrados
+
+        :return: O dicionario com os dados da id , nome e matricula dos usuários registrados
         """
         usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': []}
 
@@ -57,10 +70,10 @@ class DbUsuario(Model):
 
         :param : id , usuário_nome
 
-        :return: o usuário pesquisado
+        :return: O usuário pesquisado
         """
         usuario_dic = {'id': 0, 'matricula': '', 'nome': '', 'senha': '', 'pontos_j1': 0, 'pontos_j2': 0,
-                       'pontos_de_vida': 0, 'pontos_de_moedas': 0, 'desempenho_aluno_j1' : 0, 'desempenho_aluno_j2': 0}
+                       'pontos_de_vida': 0, 'pontos_de_moedas': 0, 'desempenho_aluno_j1': 0, 'desempenho_aluno_j2': 0}
 
         for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
             usuario_dic['id'] = pesquisa.id
@@ -82,8 +95,8 @@ class DbUsuario(Model):
     def aluno_delete(self, id):
         """
         deleta o aluno por id , futuramente por matricula e/ou nome
-        :param id:
-        :return: void
+        :param id: o id do usuário no banco de dados
+        :return: None
         """
         usuario = DbUsuario(id=id)
         usuario.delete()
@@ -92,10 +105,10 @@ class DbUsuario(Model):
         """
         Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais, o desempenho do aluno no jogo ao qual ele esta jogando
 
-        :param usuario: O jogador do jogo que esta nessa sessão de login
-        :param jogo: Qual o jogo que o jogador decidiu jogar , se é j1 ou j2
-        :param pontos: O acrescenta 1 a cada acerto
-        :param cliques_totais: contabiliza a quantidade de cliques totais feitos , independente se o usuario acertar ou errar a resposta
+        :param usuario: O jogador do jogo que esta nessa sessão de login :param jogo: Qual o jogo que o jogador
+        decidiu jogar , se é j1 ou j2 :param pontos: O acrescenta 1 a cada acerto :param cliques: variavel auxiliar
+        para acrescentar +1 para o numero total de cliques em cada jogo , independentemente de o jogador ter errado
+        ou acertado no jogo
         :return: None
         """
         if pontos is None:
@@ -105,9 +118,7 @@ class DbUsuario(Model):
             usuario = self.load(retorno['id'])
             usuario.pontos_j1 += pontos
             usuario.cliques_j1 += clique
-            print('cliques j1:{}'.format(usuario.cliques_j1))
-            usuario.desempenho_aluno_j1 = (usuario.pontos_j1/usuario.cliques_j1)*100
-            print("acertou {} % ".format(usuario.desempenho_aluno_j1))
+            usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
 
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
@@ -121,7 +132,7 @@ class DbUsuario(Model):
             usuario.pontos_j2 += pontos
             usuario.cliques_j2 += clique
             print('cliques j1:{}'.format(usuario.cliques_j2))
-            usuario.desempenho_aluno_j2 =(usuario.pontos_j2/usuario.cliques_j2)*100
+            usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
             print("acertou {} % ".format(usuario.desempenho_aluno_j2))
             if usuario.pontos_j2 % 3 == 0:
                 usuario.pontos_de_vida += 1
@@ -131,8 +142,15 @@ class DbUsuario(Model):
 
             usuario.save()
 
+    def coletar_alunos(self, aluno_id):
+        return list(aluno_id)
 
-"""Verificar de onde vem ... pq erro """
+    def alunos_in_turma(self, aluno_id, turma_id):
+        retorno = turma_id
+        turma = DbTurma.load(retorno['turma_id'])
+
+        for aluno_id in aluno_id:
+            turma.alunos_desta_turma.__setitem__(aluno_id)
 
 
 class DbTurma(Model):
@@ -140,18 +158,20 @@ class DbTurma(Model):
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
     quem_criou = TextField()
+    alunos_desta_turma = ListField()
 
     def create_turma(self, turma, login):
         """
-        cria a turma
-        :param turma:
-        :return: uma entrada no banco de dados para a turma criada
+        Cria uma turma e armazena quem criou a turma
+        :param turma: O numero , ou o nome da turma
+        :param login: O nome do login de quem criou a turma
+        :return: Acrescenta a turma criada ao banco de dados
         """
         return self.create(turma_nome=turma, quem_criou=login)
 
     def read_turma(self):
         """
-        cadastra todos os dados de uma turma dentro de um dicionario
+        Cadastra os dados de nome da turma e o nome de usuario de seu criador dentro de um dicionario
 
         :return: Uma entrada de dicionario com os dados da turma
         """
@@ -167,11 +187,10 @@ class DbTurma(Model):
 
     def delete_turma(self, id):
         """
-        deleta as turmas por id , por enquanto nao efetivado
+        Deleta as turmas por id , por enquanto nao implementado
 
-        :param id:
+        :param id: O id da turma
         :return: None
         """
         turma = DbTurma(id=id)
         turma.delete()
-

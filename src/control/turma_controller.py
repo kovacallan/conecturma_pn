@@ -69,4 +69,7 @@ def update_turma():
 @get('/deletar_turma')
 def deletar_turma():
     facade.DeleteTurmaFacade(request.params['id'])
+
     bottle.redirect('/turma')
+
+
