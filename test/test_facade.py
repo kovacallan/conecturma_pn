@@ -23,8 +23,10 @@ class FacadeTest(unittest.TestCase):
         aluno = self.facade.PesquisaAlunoFacade("egg")
         self.assertIn("egg", aluno['nome'], aluno)
 
-    def test_jogos(self):
-        self.facade.PontoJogoFacade(usuario="egg", jogo="j1", ponto=15, cliques_totais=30)
+
+    def test_life_points(self):
+        self.facade.CreateAlunoFacade("egg", "spam")
+        self.facade.PontoJogoFacade(usuario="egg", jogo="j1", ponto=15, cliques = 15)
         aluno = self.facade.PesquisaAlunoFacade("egg")
         self.assertIn("egg", aluno['nome'], aluno)
         self.assertEqual(15, aluno['pontos_j1'], aluno)
