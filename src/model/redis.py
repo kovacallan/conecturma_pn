@@ -14,7 +14,10 @@ class DbUsuario(Model):
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
     items_comprado = ListField()
-    items_equipados = HashField()
+    cor = IntegerField(default=0)
+    rosto = IntegerField(default=0)
+    acessorio = IntegerField(default=0)
+    corpo = IntegerField(default=0)
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -25,7 +28,7 @@ class DbUsuario(Model):
     desempenho_aluno_j2 = FloatField(default=0)
 
     def usuario_logado(self, id_usuario):
-        usuario = DbUsuario(id=id_usuario)
+        usuario = self.load(id_usuario)
         return usuario
 
     def gerar_matricula(self):
@@ -36,8 +39,7 @@ class DbUsuario(Model):
         return matricula
 
     def create_usuario(self, nome, senha):
-
-        self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula(), pontos_j1=0, pontos_j2=0)
+        self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula())
 
     def read_usuario(self):
         """
@@ -145,13 +147,23 @@ class DbUsuario(Model):
 
     def equipar_item(self, id_usuario, itens):
         usuario = self.load(id_usuario)
-        usuario.items_equipados.update(cor_avatar=itens[1], rosto_avatar=itens[2],
-                                       acessorio_avatar=itens[3], corpo_avatar=itens[4])
+
+        if itens.tipo_item == 1:
+            usuario.cor = itens.id
+        else:
+            if itens.tipo_item == 2:
+                usuario.rosto = itens.id
+            else:
+                if itens.tipo_item == 3:
+                    usuario.acessorio = itens.id
+                else:
+                    if itens.tipo_item == 4:
+                        usuario.corpo = itens.id
         usuario.save()
 
-    def avatar(self, id_usuario):
-        usuario = self.load(id_usuario)
-        return usuario.items_equipados
+    def avatar(self, id):
+        usuario = self.usuario_logado(id)
+        return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
 
 
 """Verificar de onde vem ... pq erro """
@@ -206,9 +218,20 @@ class DbLoja(Model):
     preco_item = IntegerField(default=0)
 
     def create_item(self, nome, tipo, preco):
+        """
+            Cria o item no banco de dados
+        :param nome:Nome do item
+        :param tipo:Se ele é cor,rosto,acessorio,corpo
+        :param preco: é o preço do item
+        :return:
+        """
         self.create(nome_item=nome, tipo_item=tipo, preco_item=preco)
 
     def Read_item(self):
+        """
+            Leitura dos itens cadastrados na plataforma
+        :return: Os itens cadastrados
+        """
         itens = []
         for item in self.query(order_by=self.id):
             itens.append(item)
@@ -219,7 +242,11 @@ class DbLoja(Model):
             return False
 
     def pesquisar_item(self, id):
-
+        """
+        Pesquisa por item especifico
+        :param id:Id do item
+        :return:O objeto que corresponde ao Id
+        """
         for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
             item = pesquisa
 
@@ -229,6 +256,11 @@ class DbLoja(Model):
             return item
 
     def ja_possui_item(self, usuario_logado):
+        """
+        Envia se o usuario já comprou o item
+        :param usuario_logado: Id do usuario
+        :return:
+        """
         usuario = DbUsuario()
         itens_usuario = [x.decode('utf-8') for x in
                          usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]

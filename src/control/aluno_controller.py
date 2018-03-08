@@ -86,10 +86,11 @@ def ver_itens():
 
 @route('/equipar_item', method='POST')
 def equipar_item():
-    id = request.forms['id']
     usuario = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
-    itens_equipar = {1: 0, 2: 0, 3: 0, 4: 0}
-    atributos_item = facade.PesquisaItemFacade(id)
-    itens_equipar[atributos_item.tipo_item] = atributos_item.id
-    facade.equipar_item_facade(usuario.id, itens_equipar)
+
+    id_item = request.forms['id']
+    item = facade.PesquisaItemFacade(id_item)
+
+    facade.equipar_item_facade(usuario.id, item)
+
     redirect('/ver_itens_comprados')
