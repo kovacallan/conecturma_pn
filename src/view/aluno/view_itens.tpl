@@ -1,7 +1,21 @@
-% include('./header.tpl', title = 'Conecturma')
+%include('./header.tpl', title = 'Conecturma')
    <div align="center" class="col-md-12">
-        <h1>Ver Medalhas</h1>
+        <h1>Ver Itens</h1>
+        <div class="row">
+            <%
+                for itens in lista_itens:
 
+            %>
+                    <div class="col-md-3">
+                        {{itens.nome_item}}<br>
+                    <form action="/equipar_item" method="post">
+                        <button name="id" value="{{itens.id}}">Equipar</button>
+                    </form>
+                    </div>
+            <%
+                end
+            %>
+        </div>
         <a href="/aluno"><button>Voltar</button></a>
    </div>
 

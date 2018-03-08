@@ -143,11 +143,15 @@ class DbUsuario(Model):
         itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.items_comprado]
         return itens
 
-
-    def equipar_item(self, id_usuario, cor, rosto, cabeca, corpo):
-        usuario = self.usuario_logado(id_usuario)
-        usuario.items_equipados.update(cor_avatar=cor, rosto_avatar=rosto, acessorio_avatar=cabeca, corpo_avatar=corpo)
+    def equipar_item(self, id_usuario, itens):
+        usuario = self.load(id_usuario)
+        usuario.items_equipados.update(cor_avatar=itens[1], rosto_avatar=itens[2],
+                                       acessorio_avatar=itens[3], corpo_avatar=itens[4])
         usuario.save()
+
+    def avatar(self, id_usuario):
+        usuario = self.load(id_usuario)
+        return usuario.items_equipados
 
 
 """Verificar de onde vem ... pq erro """

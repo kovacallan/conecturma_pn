@@ -50,8 +50,11 @@ class Facade:
     def VerItemCompradoFacade(self, id_usuario):
         return self.aluno.ver_itens_comprados(id_usuario)
 
-    def EquiparItemFacade(self):
-        pass
+    def equipar_item_facade(self, id, itens):
+        self.aluno.equipar_item(id_usuario=id, itens=itens)
+
+    def avatar_facade(self, id):
+        return self.aluno.avatar(id)
 
     """
         Fim Facade Usuario/Aluno

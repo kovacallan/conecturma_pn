@@ -81,4 +81,15 @@ def ver_itens():
     for y in itens_comprado:
         itens.append(facade.PesquisaItemFacade(y))
 
-    print(itens.nome_item)
+    return dict(lista_itens=itens)
+
+
+@route('/equipar_item', method='POST')
+def equipar_item():
+    id = request.forms['id']
+    usuario = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
+    itens_equipar = {1: 0, 2: 0, 3: 0, 4: 0}
+    atributos_item = facade.PesquisaItemFacade(id)
+    itens_equipar[atributos_item.tipo_item] = atributos_item.id
+    facade.equipar_item_facade(usuario.id, itens_equipar)
+    redirect('/ver_itens_comprados')
