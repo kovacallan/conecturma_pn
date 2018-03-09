@@ -2,18 +2,10 @@
     <div class="row">
         <div align="center" class="col-md-3">
             <h1>Avatar </h1>
-            <%
-                if avatar:
-            %>
-                    Cor:{{avatar['cor'].nome_item}}<br/>
-                    Rosto:{{avatar['rosto'].nome_item}}<br/>
-                    Acessorio:{{avatar['acessorio'].nome_item}}<br/>
-                    Corpo:{{avatar['corpo'].nome_item}}<br/>
-             <%
-                else:
-                    pass
-                end
-             %>
+            Cor:{{avatar['cor']}}<br/>
+            Rosto:{{avatar['rosto']}}<br/>
+            Acessorio:{{avatar['acessorio']}}<br/>
+            Corpo:{{avatar['corpo']}}<br/>
         </div>
 
         <div align="center" class="col-md-6">
