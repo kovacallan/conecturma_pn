@@ -100,8 +100,12 @@ class Facade:
 
     def VerItemLojaFacade(self):
         return self.loja.Read_item()
+
     def PesquisaItemFacade(self,id):
         return self.loja.pesquisar_item(id)
+
+    def deletar_item(self, id):
+        self.loja.item_delete(id)
 
     def JaTemItemFacade(self,usuario_logado):
         return self.loja.ja_possui_item(usuario_logado = usuario_logado)

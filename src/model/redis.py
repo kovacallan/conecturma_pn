@@ -225,9 +225,9 @@ class DbTurma(Model):
 class DbLoja(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    nome_item = TextField()
-    tipo_item = IntegerField(default=0)
-    preco_item = IntegerField(default=0)
+    nome = TextField()
+    tipo= IntegerField(default=0)
+    preco = IntegerField(default=0)
 
     def create_item(self, nome, tipo, preco):
         """
@@ -237,7 +237,7 @@ class DbLoja(Model):
         :param preco: é o preço do item
         :return:
         """
-        self.create(nome_item=nome, tipo_item=tipo, preco_item=preco)
+        self.create(nome=nome, tipo=tipo, preco=preco)
 
     def Read_item(self):
         """
@@ -246,7 +246,7 @@ class DbLoja(Model):
         """
         itens = []
         for item in self.query(order_by=self.id):
-            itens.append(item)
+            itens.append(dict(id = item.id, nome = item.nome, tipo = item.tipo, preco = item.preco))
 
         if itens != '' and itens != None and itens != 0:
             return itens
@@ -269,6 +269,14 @@ class DbLoja(Model):
         else:
             return item
 
+    def item_delete(self, id):
+        """
+        deleta o item por id
+        :param id:
+        :return: void
+        """
+        loja = DbLoja(id=id)
+        loja.delete()
 
     def ja_possui_item(self, usuario_logado):
         """
