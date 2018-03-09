@@ -14,10 +14,10 @@ class DbUsuario(Model):
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
     items_comprado = ListField()
-    cor = IntegerField(default=0)
-    rosto = IntegerField(default=0)
-    acessorio = IntegerField(default=0)
-    corpo = IntegerField(default=0)
+    cor = IntegerField(default=1)
+    rosto = IntegerField(default=1)
+    acessorio = IntegerField(default=1)
+    corpo = IntegerField(default=1)
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -51,7 +51,6 @@ class DbUsuario(Model):
         :param senha: Senha que será usada pelo usuário para logar na sua conta
         :return: Um novo usuário para ser incluído no banco
         """
-
 
         self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula())
 
@@ -143,10 +142,8 @@ class DbUsuario(Model):
 
             usuario.save()
 
-
     def coletar_alunos(self, aluno_id):
         return list(aluno_id)
-
 
     def alunos_in_turma(self, aluno_id, turma_id):
         retorno = turma_id
@@ -235,6 +232,7 @@ class DbTurma(Model):
         turma = DbTurma(id=id)
         turma.delete()
 
+
 class DbLoja(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
@@ -272,6 +270,7 @@ class DbLoja(Model):
         :param id:Id do item
         :return:O objeto que corresponde ao Id
         """
+        item = ""
         for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
             item = pesquisa
 
@@ -293,4 +292,3 @@ class DbLoja(Model):
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste
-
