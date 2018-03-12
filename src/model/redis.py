@@ -6,7 +6,7 @@ db = Database(host='localhost', port=6379, db=0)
 """ class DbUsuário será usada como Usuário genérico no spike"""
 
 
-class DbUsuario(Model):
+class DbAluno(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     matricula = TextField()
@@ -14,10 +14,10 @@ class DbUsuario(Model):
     usuario_senha = TextField()
     """tipo_de_usuario = IntegerField()"""
     items_comprado = ListField()
-    cor = IntegerField(default=1)
-    rosto = IntegerField(default=1)
-    acessorio = IntegerField(default=1)
-    corpo = IntegerField(default=1)
+    cor = IntegerField(default=0)
+    rosto = IntegerField(default=0)
+    acessorio = IntegerField(default=0)
+    corpo = IntegerField(default=0)
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -26,7 +26,7 @@ class DbUsuario(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
-    aluns_list = []
+    turma_do_aluno = TextField(fts=True)
 
     def usuario_logado(self, id_usuario):
         usuario = self.load(id_usuario)
@@ -60,16 +60,10 @@ class DbUsuario(Model):
 
         :return: O dicionario com os dados da id , nome e matricula dos usuários registrados
         """
-        usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': []}
+        usuario_dic = []
 
         for aluno in self.query(order_by=self.usuario_nome):
-            usuario_dic['id'].append(aluno.id)
-            usuario_dic['matricula'].append(aluno.matricula)
-            usuario_dic['usuario_nome'].append(aluno.usuario_nome)
-            """usuario_dic['usuario_senha'].append(aluno.usuario_senha)
-            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vida)
-            usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)"""
-
+            usuario_dic.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.usuario_nome))
         return usuario_dic
 
     def pesquisa_usuario(self, usuario_nome):
@@ -83,7 +77,7 @@ class DbUsuario(Model):
         """
 
         usuario = {}
-        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
+        for pesquisa in DbAluno.query(DbAluno.usuario_nome == usuario_nome, order_by=DbAluno.id):
             usuario = pesquisa
 
         if usuario == '' and usuario == None:
@@ -97,7 +91,10 @@ class DbUsuario(Model):
         :param id: o id do usuário no banco de dados
         :return: None
         """
-        usuario = DbUsuario(id=id)
+        retorno = self.pesquisa_usuario(id)
+        usuario = self.load(retorno)
+
+        # usuario = DbAluno(id=id)
         usuario.delete()
 
     def pontos_jogo(self, usuario, jogo, pontos, clique):
@@ -142,12 +139,12 @@ class DbUsuario(Model):
 
             usuario.save()
 
-    def coletar_alunos(self, aluno_id):
-        return list(aluno_id)
+    def alunos_in_turma(self, escolhidos, turma_add):
 
-    def alunos_in_turma(self, aluno_id, turma_id):
-        retorno = turma_id
-        turma = DbTurma.load(retorno['turma_id'])
+        retorno = self.pesquisa_usuario(escolhidos)
+        usuario = self.load(retorno)
+        for escolhidos in DbAluno:
+            escolhidos= self.load(usuario)
 
         for aluno_id in aluno_id:
             turma.alunos_desta_turma.__setitem__(aluno_id)
@@ -160,7 +157,7 @@ class DbUsuario(Model):
         :return:
         """
         item = DbLoja()
-        usuario = DbUsuario.load(id_usuario)
+        usuario = DbAluno.load(id_usuario)
         preco = item.pesquisar_item(id_item).preco_item
 
         if usuario.pontos_de_moedas < preco:
@@ -201,15 +198,13 @@ class DbUsuario(Model):
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
 
 
-"""Verificar de onde vem ... pq erro """
-
 
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
     quem_criou = TextField()
-    alunos_desta_turma = ListField()
+
 
     def create_turma(self, turma, login):
         """
@@ -222,17 +217,13 @@ class DbTurma(Model):
 
     def read_turma(self):
         """
-        Cadastra os dados de nome da turma e o nome de usuario de seu criador dentro de um dicionario
 
-        :return: Uma entrada de dicionario com os dados da turma
         """
 
-        turma_dic = {'id': [], 'nome': [], 'criador': []}
+        turma_dic = []
 
         for turma in self.query(order_by=self.id):
-            turma_dic['id'].append(turma.id)
-            turma_dic['nome'].append(turma.turma_nome)
-            turma_dic['criador'].append(turma.quem_criou)
+            turma_dic.append(dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou))
 
         return turma_dic
 
@@ -245,6 +236,18 @@ class DbTurma(Model):
         """
         turma = DbTurma(id=id)
         turma.delete()
+    def pesquisaturma(self):
+
+        turma = {}
+        for pesquisa in DbTurma.query(DbTurma.turma_nome == turma_nme, order_by=DbTurma.id):
+            turma = pesquisa
+
+        if turma == '' and turma is None:
+            return False
+        else:
+            return usuario
+
+
 
 
 class DbLoja(Model):
@@ -287,7 +290,7 @@ class DbLoja(Model):
 
         item = None
 
-        for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
+        for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbAluno.id):
             item = pesquisa
 
         if item == '' and item == None:
@@ -301,7 +304,7 @@ class DbLoja(Model):
         :param usuario_logado: Id do usuario
         :return: Lista de itens que o usuario não tem
         """
-        usuario = DbUsuario()
+        usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
                          usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
         itens = [str(y.id) for y in self.Read_item()]

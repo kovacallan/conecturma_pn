@@ -3,52 +3,37 @@
         <h1>Alunos da turma:</h1>
 
         <h3>pesquisar aluno</h3>
-        <div class="row">
-            <div class="col-md-2 offset-2">
-                <h4>Id</h4>
-                % for id in aluno_id:
-                <input type="checkbox" name="aluno_id" value = '{{id}}'>{{id}}
-                    <br>
-                    <br>
-                % end
-            </div>
-            <div class="col-md-2">
-                <h4>Matricula</h4>
-                % for aluno_matricula in aluno_matricula:
-                    {{aluno_matricula}}
-                    <br>
-                    <br>
-                % end
-            </div>
+        <div>
+        <h4>Id</h4>
+        <form action="/turma_aluno">
+        <table>
+        <tr>
+        <th>Nome do Aluno</th><th>Matricula</th><th>Apagar</th>
+        </tr>
 
-            <div class="col-md-2">
-                <h4>Nome</h4>
-                % for aluno_nome in aluno_nome:
-                    {{aluno_nome}}
-                    <br>
-                    <br>
-                % end
-            </div>
-            <div class="col-md-2">
-                <h4>Deletar</h4>
-                <form action="/deletar_alunos">
-                % for id in aluno_id:
-                    <button name="id" value="{{id}}">Apagar</button>
-                    <br>
-                    <br>
-                %end
-                </form>
-            </div>
-         </div>
-            <form action="/turma_aluno">
+                % for id, aluno, matricula in aluno_id:
+                <tr>
+                    <td>
+                    <input type="checkbox" name="aluno_{{id}}">{{aluno}}</input>
+                    </td>
+                    <td>
+                    {{matricula}}
+                    </td><td>
 
-                % for id in aluno_id:
-                <input id ={{id}} type="checkbox" name="aluno_id[]" value="20">{{id}}
-                    <br>
-                    <br>
+                </tr>
                 % end
+        </table>
+        </div>
 
-                <button type="submit" name ="aluno_id[]" value="20" >inscrever alunos em turma</button>
+ <select name="escolhidos">
+ % for turma in turmas:
+  <option value="{{turma['id']}}">{{turma['nome']}}</option>
+
+ % end
+</select>
+               <button type="submit"  value="deletar">Apagar</button></td>
+               <button type="submit" name ="colocar_na_turma" >inscrever alunos em turma</button>
+
             </form>
          <a href="/user_menu">
             <button>Voltar</button>

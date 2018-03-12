@@ -1,4 +1,4 @@
-from model.redis import DbUsuario, DbTurma, DbLoja
+from model.redis import DbAluno, DbTurma, DbLoja
 
 
 class Facade:
@@ -7,12 +7,14 @@ class Facade:
         """
         método para utilização do banco de dados
         """
-        self.aluno = DbUsuario()
+        self.aluno = DbAluno()
         self.turma = DbTurma()
         self.loja = DbLoja()
+
     """
         Inicio Facade Usuario/Aluno
     """
+
     def CreateAlunoFacade(self, nome, senha):
         """
         facade de criar aluno
@@ -44,15 +46,12 @@ class Facade:
     def PontoJogoFacade(self, usuario, jogo, ponto, clique):
         self.aluno.pontos_jogo(usuario, jogo, ponto, clique)
 
+    def include_aluno_in_turma(self, escolhidos, turma_add):
+        self.aluno.alunos_in_turma(escolhidos, turma_add)
 
-    def ColetarAlunos(self, aluno_id):
-        return self.aluno.coletar_alunos(aluno_id)
-
-    def IncludeAlunosFacade(self, id_turma):
-        self.aluno.alunos_in_turma(id_turma)
 
     def CompraItemFacade(self, id_usuario, id_item):
-        self.aluno.comprar_item(id_usuario=id_usuario, id_item=id_item)
+            self.aluno.comprar_item(id_usuario=id_usuario, id_item=id_item)
 
     def VerItemCompradoFacade(self, id_usuario):
         return self.aluno.ver_itens_comprados(id_usuario)
@@ -107,11 +106,13 @@ class Facade:
 
     def VerItemLojaFacade(self):
         return self.loja.Read_item()
-    def PesquisaItemFacade(self,id):
+
+    def PesquisaItemFacade(self, id):
         return self.loja.pesquisar_item(id)
 
-    def JaTemItemFacade(self,usuario_logado):
-        return self.loja.ja_possui_item(usuario_logado = usuario_logado)
+    def JaTemItemFacade(self, usuario_logado):
+        return self.loja.ja_possui_item(usuario_logado=usuario_logado)
+
     """
         Fim Facade loja
     """
