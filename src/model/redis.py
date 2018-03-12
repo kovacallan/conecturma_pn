@@ -6,7 +6,7 @@ db = Database(host='localhost', port=6379, db=0)
 """ class DbUsuário será usada como Usuário genérico no spike"""
 
 
-class DbUsuario(Model):
+class DbAluno(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     matricula = TextField()
@@ -26,12 +26,17 @@ class DbUsuario(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
+    turma_do_aluno = TextField(fts=True)
 
     def usuario_logado(self, id_usuario):
         usuario = self.load(id_usuario)
         return usuario
 
     def gerar_matricula(self):
+        """
+        Usa um algoritmo aleatório para criar um numero de matricula
+        :return: O numero de matricula
+        """
         matricula = []
         for i in range(0, 5):
             matricula.append(randrange(1, 9))
@@ -39,23 +44,26 @@ class DbUsuario(Model):
         return matricula
 
     def create_usuario(self, nome, senha):
+        """
+        Método principal de criação do usuário
+
+        :param nome: Nome do usuário , que vai servir como login
+        :param senha: Senha que será usada pelo usuário para logar na sua conta
+        :return: Um novo usuário para ser incluído no banco
+        """
+
         self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula())
 
     def read_usuario(self):
         """
-        cria uma entrada de dicionario para cada usuário e senha
-        :return: o dicionario
+        Cria uma entrada de dicionario contendo a id , o nome de usuário e a matricula de todos os usuarios registrados
+
+        :return: O dicionario com os dados da id , nome e matricula dos usuários registrados
         """
-        usuario_dic = {'id': [], 'matricula': [], 'usuario_nome': []}
+        usuario_dic = []
 
         for aluno in self.query(order_by=self.usuario_nome):
-            usuario_dic['id'].append(aluno.id)
-            usuario_dic['matricula'].append(aluno.matricula)
-            usuario_dic['usuario_nome'].append(aluno.usuario_nome)
-            """usuario_dic['usuario_senha'].append(aluno.usuario_senha)
-            usuario_dic['pontos_de_vida'].append(aluno.pontos_de_vida)
-            usuario_dic['pontos_de_moedas'].append(aluno.pontos_de_moedas)"""
-
+            usuario_dic.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.usuario_nome))
         return usuario_dic
 
     def pesquisa_usuario(self, usuario_nome):
@@ -65,10 +73,11 @@ class DbUsuario(Model):
 
         :param : id , usuário_nome
 
-        :return: o usuário pesquisado
+        :return: O usuário pesquisado
         """
+
         usuario = {}
-        for pesquisa in DbUsuario.query(DbUsuario.usuario_nome == usuario_nome, order_by=DbUsuario.id):
+        for pesquisa in DbAluno.query(DbAluno.usuario_nome == usuario_nome, order_by=DbAluno.id):
             usuario = pesquisa
 
         if usuario == '' and usuario == None:
@@ -79,20 +88,23 @@ class DbUsuario(Model):
     def aluno_delete(self, id):
         """
         deleta o aluno por id , futuramente por matricula e/ou nome
-        :param id:
-        :return: void
+        :param id: o id do usuário no banco de dados
+        :return: None
         """
-        usuario = DbUsuario(id=id)
+        retorno = self.pesquisa_usuario(id)
+        usuario = self.load(retorno)
+
+        # usuario = DbAluno(id=id)
         usuario.delete()
 
     def pontos_jogo(self, usuario, jogo, pontos, clique):
         """
         Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais, o desempenho do aluno no jogo ao qual ele esta jogando
 
-        :param usuario: O jogador do jogo que esta nessa sessão de login
-        :param jogo: Qual o jogo que o jogador decidiu jogar , se é j1 ou j2
-        :param pontos: O acrescenta 1 a cada acerto
-        :param cliques_totais: contabiliza a quantidade de cliques totais feitos , independente se o usuario acertar ou errar a resposta
+        :param usuario: O jogador do jogo que esta nessa sessão de login :param jogo: Qual o jogo que o jogador
+        decidiu jogar , se é j1 ou j2 :param pontos: O acrescenta 1 a cada acerto :param cliques: variavel auxiliar
+        para acrescentar +1 para o numero total de cliques em cada jogo , independentemente de o jogador ter errado
+        ou acertado no jogo
         :return: None
         """
         if pontos is None:
@@ -102,9 +114,8 @@ class DbUsuario(Model):
             usuario = self.load(retorno.id)
             usuario.pontos_j1 += pontos
             usuario.cliques_j1 += clique
-            print('cliques j1:{}'.format(usuario.cliques_j1))
             usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
-            print("acertou {} % ".format(usuario.desempenho_aluno_j1))
+            usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
 
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
@@ -128,6 +139,16 @@ class DbUsuario(Model):
 
             usuario.save()
 
+    def alunos_in_turma(self, escolhidos, turma_add):
+
+        retorno = self.pesquisa_usuario(escolhidos)
+        usuario = self.load(retorno)
+        for escolhidos in DbAluno:
+            escolhidos= self.load(usuario)
+
+        for aluno_id in aluno_id:
+            turma.alunos_desta_turma.__setitem__(aluno_id)
+
     def comprar_item(self, id_usuario, id_item):
         """
         Metodo para comprar o item
@@ -136,7 +157,7 @@ class DbUsuario(Model):
         :return:
         """
         item = DbLoja()
-        usuario = DbUsuario.load(id_usuario)
+        usuario = DbAluno.load(id_usuario)
         preco = item.pesquisar_item(id_item).preco_item
 
         if usuario.pontos_de_moedas < preco:
@@ -178,48 +199,55 @@ class DbUsuario(Model):
 
 
 
-"""Verificar de onde vem ... pq erro """
-
-
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
     quem_criou = TextField()
 
+
     def create_turma(self, turma, login):
         """
-        cria a turma
-        :param turma:
-        :return: uma entrada no banco de dados para a turma criada
+        Cria uma turma e armazena quem criou a turma
+        :param turma: O numero , ou o nome da turma
+        :param login: O nome do login de quem criou a turma
+        :return: Acrescenta a turma criada ao banco de dados
         """
         return self.create(turma_nome=turma, quem_criou=login)
 
     def read_turma(self):
         """
-        cadastra todos os dados de uma turma dentro de um dicionario
 
-        :return: Uma entrada de dicionario com os dados da turma
         """
 
-        turma_dic = {'id': [], 'nome': [], 'criador': []}
+        turma_dic = []
 
         for turma in self.query(order_by=self.id):
-            turma_dic['id'].append(turma.id)
-            turma_dic['nome'].append(turma.turma_nome)
-            turma_dic['criador'].append(turma.quem_criou)
+            turma_dic.append(dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou))
 
         return turma_dic
 
     def delete_turma(self, id):
         """
-        deleta as turmas por id , por enquanto nao efetivado
+        Deleta as turmas por id , por enquanto nao implementado
 
-        :param id:
+        :param id: O id da turma
         :return: None
         """
         turma = DbTurma(id=id)
         turma.delete()
+    def pesquisaturma(self):
+
+        turma = {}
+        for pesquisa in DbTurma.query(DbTurma.turma_nome == turma_nme, order_by=DbTurma.id):
+            turma = pesquisa
+
+        if turma == '' and turma is None:
+            return False
+        else:
+            return usuario
+
+
 
 
 class DbLoja(Model):
@@ -261,7 +289,8 @@ class DbLoja(Model):
         """
 
         item = None
-        for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbUsuario.id):
+
+        for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbAluno.id):
             item = pesquisa
 
         if item == '' and item == None:
@@ -269,14 +298,13 @@ class DbLoja(Model):
         else:
             return item
 
-
     def ja_possui_item(self, usuario_logado):
         """
         Envia se o usuario já comprou o item
         :param usuario_logado: Id do usuario
         :return: Lista de itens que o usuario não tem
         """
-        usuario = DbUsuario()
+        usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
                          usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
         itens = [str(y.id) for y in self.Read_item()]

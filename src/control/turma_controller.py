@@ -1,4 +1,4 @@
-from bottle import route, view, get, request
+from bottle import route, view, get, request , redirect
 from facade.facade import *
 
 facade = Facade()
