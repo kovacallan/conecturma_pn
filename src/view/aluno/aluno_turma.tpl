@@ -1,11 +1,12 @@
 % include('./header.tpl', title = 'Conecturma')
     <div align="center" class="col-md-12">
-        <h1>Ver turmas</h1>
+        <h1>Incluir Aluno em Turma</h1>
         <div class="row">
             <div class="col-md-3">
+            <form action="/turma_aluno">
                 <h4>ID</h4>
                 % for id in turma_id:
-                    {{id}}
+                    <input type="radio" name="{{turma_id}}">{{id}}
                     <br><br>
                 % end
             </div>
@@ -23,17 +24,13 @@
                     <br><br>
                 % end
             </div>
-            <div class="col-md-3">
-                <form action="/deletar_turma">
-                <h4>Deletar Turma</h4>
-                % for id in turma_id:
-                    <button name="id" value="{{id}}">Deletar</button>
-                    <br><br>
-                % end
-                </form>
-            </div>
+            </form>
         </div>
-        <a href="/turma"><button>Voltar</button></a>
+            <button type="submit" name="submit" >Selecionar uma turma para esses alunos</button>
+        </form>
+         <a href="/aluno">
+            <button>Voltar</button>
+        </a>
     </div>
 
 % include('./footer.tpl')
