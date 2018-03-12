@@ -3,7 +3,7 @@ from random import randrange
 
 db = Database(host='localhost', port=6379, db=0)
 
-""" class DbUsuário será usada como Usuário genérico no spike"""
+""" class DbAluno será usada como Usuário genérico no spike"""
 
 
 class DbAluno(Model):
@@ -26,7 +26,7 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
-    turma_do_aluno = TextField(fts=True)
+    turma_do_aluno = TextField()
 
     def usuario_logado(self, id_usuario):
         usuario = self.load(id_usuario)
@@ -91,11 +91,11 @@ class DbAluno(Model):
         :param id: o id do usuário no banco de dados
         :return: None
         """
-        retorno = self.pesquisa_usuario(id)
-        usuario = self.load(retorno)
+
+        usuario = self.load(id)
 
         # usuario = DbAluno(id=id)
-        usuario.delete()
+        usuario.delete(str('id'))
 
     def pontos_jogo(self, usuario, jogo, pontos, clique):
         """
@@ -139,15 +139,13 @@ class DbAluno(Model):
 
             usuario.save()
 
-    def alunos_in_turma(self, escolhidos, turma_add):
+    def alunos_in_turma(self, escolha, turma_add):
 
-        retorno = self.pesquisa_usuario(escolhidos)
-        usuario = self.load(retorno)
-        for escolhidos in DbAluno:
-            escolhidos= self.load(usuario)
-
-        for aluno_id in aluno_id:
-            turma.alunos_desta_turma.__setitem__(aluno_id)
+        for escolha in escolha:
+            print(escolha)
+            usuario = self.load(escolha)
+            usuario.turma_do_aluno = turma_add
+            print(usuario.turma_do_aluno)
 
     def comprar_item(self, id_usuario, id_item):
         """
@@ -198,13 +196,11 @@ class DbAluno(Model):
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
 
 
-
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
     quem_criou = TextField()
-
 
     def create_turma(self, turma, login):
         """
@@ -236,6 +232,7 @@ class DbTurma(Model):
         """
         turma = DbTurma(id=id)
         turma.delete()
+
     def pesquisaturma(self):
 
         turma = {}
@@ -246,8 +243,6 @@ class DbTurma(Model):
             return False
         else:
             return usuario
-
-
 
 
 class DbLoja(Model):

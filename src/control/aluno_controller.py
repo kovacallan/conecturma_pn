@@ -69,11 +69,11 @@ def read_aluno():
 def aluno_in_turma():
 
     escolhidos = request.query_string
-    escolha=[aluno.split('=')[0].split('_')[1]for aluno in escolhidos.split('&')if 'aluno'in aluno]
-    turma_add=request.query.get('escolhidos')
+    escolha = [aluno.split('=')[0].split('_')[1]for aluno in escolhidos.split('&')if 'aluno'in aluno]
+    turma_add = request.query.get('escolhidos')
     print(escolhidos, escolha, turma_add)
-    facade.include_aluno_in_turma(escolhidos, turma_add)
-    deletar_aluno()
+    facade.include_aluno_in_turma(escolha, turma_add)
+    redirect('/')
 
 
 """ Deletar aluno(usuario) """

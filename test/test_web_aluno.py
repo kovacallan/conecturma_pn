@@ -48,7 +48,7 @@ class BlackBoxTest(unittest.TestCase):
         self._fixaluno()
         res = test_app.get('/ler_aluno')
         self.assertEqual(res.status_int, 200)
-        self.assertIn('''<input type="checkbox" name="aluno_id" value = 'id'>egg''', res.text, res.text)
+        self.assertIn('''<input type="checkbox" name="aluno_id">egg''', res.text, res.text)
         self.assertIn('''dead</option>''', res.text, res.text)
 
 

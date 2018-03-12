@@ -19,7 +19,7 @@
                     <td>
                     {{matricula}}
                     </td><td>
-
+                    <button name="id" value="{{id}}" forms= >Apagar</button></td>
                 </tr>
                 % end
         </table>
@@ -31,9 +31,7 @@
 
  % end
 </select>
-               <button type="submit"  value="deletar">Apagar</button></td>
-               <button type="submit" name ="colocar_na_turma" >inscrever alunos em turma</button>
-
+                <button type="submit" name ="colocar_na_turma">inscrever alunos em turma</button>
             </form>
          <a href="/user_menu">
             <button>Voltar</button>
