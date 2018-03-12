@@ -25,7 +25,7 @@ class FacadeTest(unittest.TestCase):
         self.assertIn("egg", aluno.usuario_nome, aluno)
 
     def test_ponto_jogo(self):
-
+        pass
 
     def test_crud_item(self):
         item = self.facade.VerItemLojaFacade()
