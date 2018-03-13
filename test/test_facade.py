@@ -13,14 +13,14 @@ class FacadeTest(unittest.TestCase):
     def tearDown(self):
         alunos = self.facade.ReadAlunoFacade()
         for aluno in alunos:
-            self.facade.DeleteAlunoFacade(aluno['id'])
+            self.facade.deleteAlunoFacade(aluno['id'])
 
     def test_create_user(self):
         self.facade.CreateAlunoFacade("egg", "spam")
         alunos = self.facade.ReadAlunoFacade()
         self.assertIn("egg", alunos[0]["usuario_nome"], alunos)
         # for aluno in alunos:
-        #     self.facade.DeleteAlunoFacade(aluno['id'])
+        #     self.facade.deleteAlunoFacade(aluno['id'])
 
     def _test_search_user(self):
         aluno = self.facade.PesquisaAlunoFacade("egg")
@@ -37,7 +37,7 @@ class FacadeTest(unittest.TestCase):
     def test_create_turma(self):
         self.facade.CreateTurmaFacade("dead", "parrot")
         turma1 = self.facade.ReadTurmaFacade()
-        self.assertIn("egg", turma1[1]['criador'], turma1)
+        self.assertIn("egg", turma1[0]['criador'], turma1)
         self.facade.CreateTurmaFacade("KND", "egg")
         turma = self.facade.ReadTurmaFacade()
         self.assertIn("egg", turma[0]['criador'], turma)

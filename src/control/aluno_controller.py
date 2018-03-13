@@ -67,9 +67,8 @@ def read_aluno():
 
 @get('/turma_aluno')
 def aluno_in_turma():
-
     escolhidos = request.query_string
-    escolha = [aluno.split('=')[0].split('_')[1]for aluno in escolhidos.split('&')if 'aluno'in aluno]
+    escolha = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
     turma_add = request.query.get('escolhidos')
     print(escolhidos, escolha, turma_add)
     facade.include_aluno_in_turma(escolha, turma_add)
@@ -79,24 +78,18 @@ def aluno_in_turma():
 """ Deletar aluno(usuario) """
 
 
-@get('/aluno_em_turma')
-def colocar_aluno():
-    id_aluno = request.params['dic_id']
-    dict(dic_id=estudante)
-
-
-""" Deletar aluno(usuario) """
-
-
 @get('/deletar_alunos')
-def deletar_aluno(id):
+def deletar_aluno():
     """
-    Direciona a função DeleteAlunoFacade para a pagina tpl
+    Direciona a função deleteAlunoFacade para a pagina tpl
 
     :return: Deleta a entrada de dicionario equivalente e retorna ao menu
     """
-    facade.DeleteAlunoFacade(id)
-    redirect('/aluno')
+    escolhidos = request.query_string
+    deletar_ids = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
+    print(escolhidos, deletar_ids)
+    facade.deleteAlunoFacade(deletar_ids)
+    redirect('/')
 
 
 @route('/turma_read')

@@ -31,14 +31,14 @@ class Facade:
         """
         return self.aluno.read_usuario()
 
-    def DeleteAlunoFacade(self, id):
+    def deleteAlunoFacade(self, deletar_ids):
         """
         facade de deletar o aluno , atravez da id
         futuramente atravez do nome ,por enquanto foi implementada atravez de botao
         :param id:
         :return: o metodo que deleta o aluno da base de dados
         """
-        self.aluno.aluno_delete(id)
+        self.aluno.aluno_delete(deletar_ids)
 
     def PesquisaAlunoFacade(self, nome):
         return self.aluno.pesquisa_usuario(nome)
