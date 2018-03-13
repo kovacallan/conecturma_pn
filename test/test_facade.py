@@ -9,6 +9,7 @@ class FacadeTest(unittest.TestCase):
     def setUp(self):
         self.facade = Facade()
         self.facade.CreateAlunoFacade("egg", "spam")
+        self.facade.CriarItemLojaFacade("egg", 1, 10)
 
     def tearDown(self):
         alunos = self.facade.ReadAlunoFacade()
@@ -24,7 +25,24 @@ class FacadeTest(unittest.TestCase):
 
     def _test_search_user(self):
         aluno = self.facade.PesquisaAlunoFacade("egg")
-        self.assertIn("egg", aluno['nome'], aluno)
+        self.assertIn("egg", aluno.usuario_nome, aluno)
+
+    def test_ponto_jogo(self):
+        pass
+
+    def test_crud_item(self):
+        item = self.facade.VerItemLojaFacade()
+        for teste in item:
+            self.assertIn("egg", teste['nome'], teste)
+
+        for id in item:
+            self.facade.deletar_item(id['id'])
+
+    def test_search_item(self):
+        item = self.facade.VerItemLojaFacade()
+        for teste in item:
+            search_item = self.facade.PesquisaItemFacade(teste['id'])
+            self.assertIn("egg", search_item.nome, search_item)
 
     def test_life_points(self):
         self.facade.CreateAlunoFacade("egg", "spam")
@@ -50,20 +68,3 @@ class FacadeTest(unittest.TestCase):
 
 
     bottle.response.delete_cookie("login")
-
-
-"""def _test_cliquej1(self):
-    self.facade.PontoJogoFacade(usuario="egg", jogo="j1", ponto=15, cliques_totais=30)
-    aluno = self.facade.PesquisaAlunoFacade("egg")
-    self.assertIn("egg", aluno['nome'], aluno)
-    self.assertEqual(15, 30, aluno['total_cliques_j1'], aluno)
-
-def _test_cliquej2(self):
-    self.facade.PontoJogoFacade(usuario="egg", jogo="j2", ponto=15, cliques_totais=30)
-    aluno = self.facade.PesquisaAlunoFacade("egg")
-    self.assertIn("egg", aluno['nome'], aluno)
-    self.assertEqual(15, aluno['total_cliques_j2'], aluno)"""
-
-"""def test_score(self):
-    self.facade.PesquisaAlunoFacade("egg")
-    self.facade."""
