@@ -4,8 +4,7 @@
 
         <h3>pesquisar aluno</h3>
         <div>
-            <h4>Id</h4>
-                <form action="/turma_aluno" >
+             <form action="/turma_aluno" >
                 <table>
                 <tr>
                 <th>Nome do Aluno</th><th>Matricula</th>

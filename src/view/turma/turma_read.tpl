@@ -1,16 +1,31 @@
 % include('./header.tpl', title = 'Conecturma')
-    <div align="center" class="col-md-12">
+<div align="center" class="col-md-12">
         <h1>Ver turmas</h1>
-        <div class="row">
+        <div>
+        <table>
+        <tr>
+                <th>Nome da turma</th><th>Criador</th>
+                </tr>
             <%
                 for x in turma:
             %>
-                {{x['id']}}
+            <tr>
+                <td>
                 {{x['nome']}}
-                {{x['criador']}}<br>
+
+                </td>
+
+                <td>
+
+                {{x['criador']}}
+                </td><td>
+                {{x['desempenho_j1']}}
+                </td><td>
+            </tr>
            <%
                 end
            %>
+           </table>
         </div>
         <a href="/turma"><button>Voltar</button></a>
     </div>

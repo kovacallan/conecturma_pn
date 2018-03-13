@@ -229,6 +229,8 @@ class DbTurma(Model):
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
     quem_criou = TextField()
+    desempenho_j1 = FloatField(default=0)
+    desempenho_j2 = FloatField(default=0)
 
     def create_turma(self, turma, login):
         """
@@ -250,7 +252,9 @@ class DbTurma(Model):
         turma_dic = []
 
         for turma in self.query(order_by=self.id):
-            turma_dic.append(dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou))
+            turma_dic.append(
+                dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, desempenho_j1=turma.desempenho_j1,
+                     desempenho_j2=turma.desempenho_j2))
 
         return turma_dic
 
@@ -264,7 +268,7 @@ class DbTurma(Model):
         turma = DbTurma(id=id)
         turma.delete()
 
-    def pesquisaturma(self):
+    def pesquisaturma(self,turma_nome):
         """
         Ainda nao implementado
         :return:
@@ -276,9 +280,10 @@ class DbTurma(Model):
         if turma == '' and turma is None:
             return False
         else:
-            return usuario
+            return turma
 
-    def calcular_media_turma(self):
+    def calcular_desempenho_jogos(self):
+
 
 
 class DbLoja(Model):
