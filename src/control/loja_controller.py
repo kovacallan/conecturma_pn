@@ -28,13 +28,13 @@ def cadastrar_item():
         redirect('/')
 
 
-@post('/cadastro_item')
+@route('/cadastro_item', method='post')
 def cadastro_item():
-    nome_item = request.forms.nome_item
-    preco_item = request.forms.preco_item
-    tipo_item = request.forms.tipo_item
+    nome = request.forms.nome
+    preco = request.forms.preco
+    tipo = request.forms.tipo
 
-    facade.CriarItemLojaFacade(nome_item, tipo_item, preco_item)
+    facade.CriarItemLojaFacade(nome, tipo, preco)
     redirect('cadastrar_item')
 
 @route('/ver_item')

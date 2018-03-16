@@ -4,39 +4,43 @@
 
         <h3>pesquisar aluno</h3>
         <div>
-             <form action="/turma_aluno" >
+            <form action="/turma_aluno" >
                 <table>
-                <tr>
-                <th>Nome do Aluno</th><th>Matricula</th>
-                </tr>
+                    <tr>
+                        <th>Nome do Aluno</th><th>Matricula</th><th>id da turma que pertence</th>
+                    </tr>
 
-                        % for id, aluno, matricula in aluno_id:
-                        <tr>
-                            <td>
+                        % for id, aluno, matricula, turma_do_aluno in aluno_id:
+                    <tr>
+                        <td>
                             <input type="checkbox" name="aluno_{{id}}">{{aluno}}</input>
-                            </td>
-                            <td>
+                        </td>
+                        <td>
                             {{matricula}}
-                            </td><td>
-                        </tr>
+                        </td>
+                        <td>
+                            {{turma_do_aluno}}
+                        </td>
+                        <td>
+                    </tr>
                         % end
                 </table>
-                </div>
+        </div>
 
-         <select name="escolhidos">
-         % for turma in turmas:
-          <option value="{{turma['id']}}">{{turma['nome']}}</option>
+        <select name="escolhidos">
+        % for turma in turmas:
+        <option value="{{turma['id']}}">{{turma['nome']}}</option>
 
-         % end
+            % end
         </select>
-                        <button type="submit" name ="colocar_na_turma">inscrever alunos em turma</button>
+        <button type="submit" name ="colocar_na_turma">inscrever alunos em turma</button>
 
-                        <button type="submit" name ="deletar_da_turma" formaction="/deletar_alunos">deletar alunos selecionados</button>
+        <button type="submit" name ="deletar_da_turma" formaction="/deletar_alunos">deletar alunos selecionados</button>
 
 
         </form>
-    <a href="/user_menu">
+        <a href="/user_menu">
         <button>Voltar</button>
-    </a>
-</div>
+        </a>
+    </div>
 % include('footer.tpl')

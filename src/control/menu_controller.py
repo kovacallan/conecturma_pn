@@ -16,20 +16,20 @@ def hello():
         if usuario.cor == 0:
             cor = 'default'
         else:
-            cor = facade.PesquisaItemFacade(avatar['cor']).nome_item
+            cor = facade.PesquisaItemFacade(avatar['cor']).nome
 
         if usuario.rosto == 0:
             rosto = 'default'
         else:
-            rosto = facade.PesquisaItemFacade(avatar['rosto']).nome_item
+            rosto = facade.PesquisaItemFacade(avatar['rosto']).nome
         if usuario.acessorio == 0:
             acessorio = 'default'
         else:
-            acessorio = facade.PesquisaItemFacade(avatar['acessorio']).nome_item
+            acessorio = facade.PesquisaItemFacade(avatar['acessorio']).nome
         if usuario.corpo == 0:
             corpo = 'default'
         else:
-            corpo = facade.PesquisaItemFacade(avatar['corpo']).nome_item
+            corpo = facade.PesquisaItemFacade(avatar['corpo']).nome
 
         avatar_pecas = {'cor': cor,
                         'rosto': rosto,
