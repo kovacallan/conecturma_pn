@@ -4,7 +4,6 @@ from webtest import TestApp
 import sys
 from test import *
 
-
 sys.path.append('../')
 from index import application
 
@@ -12,11 +11,13 @@ from index import application
 test_app = TestApp(application)
 test_app.set_cookie('login', '2524')
 
+
 class BlackBoxTest(unittest.TestCase):
     def setUp(self):
         pass
+
     def _fixaluno(self):
-        res=test_app.post('/aluno_cadastro', dict(aluno_nome='egg', senha='spam'))
+        res = test_app.post('/aluno_cadastro', dict(aluno_nome='egg', senha='spam'))
 
     def test_index(self):
         """ o indice dev eser servido """
@@ -34,25 +35,32 @@ class BlackBoxTest(unittest.TestCase):
         res = test_app.get('/ler_aluno')
         self.assertEqual(res.status_int, 200)
         self.assertIn('<form action="/deletar_alunos">', res.text, res.text)
+
     """def _test_aluno_cadastro(self):
         res = test_app.get('/cadastro_aluno')
         res = form.submit()
         res = form.submit('submit')
         print(res)"""
+
     def _test_score(self):
         """A pagina de Score deve mostrar a pontuaçao de J1 , J2 , Moedas , Vidas e desempenho do aluno em cada jogo"""
         res = test_app.get('/mostrar_score')
         self.assertEqual(res.status_int, 200)
         self.assertEqual('{{desempenho_j1}}', 2.0)
-    def test_alun_in_turma(self):
+
+    def _test_alun_in_turma(self):
         self._fixaluno()
         res = test_app.get('/ler_aluno')
         self.assertEqual(res.status_int, 200)
-        self.assertIn('''<input type="checkbox" name="aluno_id" value = 'id'>egg''', res.text, res.text)
+        self.assertIn('''<input type="checkbox" name="aluno_id">egg''', res.text, res.text)
         self.assertIn('''dead</option>''', res.text, res.text)
 
-
-
+    def _test_del_alunos(self):
+        res = test_app.get('/ler_aluno')
+        self.assertIn(
+            '<button type="submit" name ="deletar_da_turma" formaction="/deletar_alunos">deletar alunos selecionados</button>',
+            res.text,
+            res.text)
 
 
 if __name__ == '__main__':
