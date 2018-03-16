@@ -70,7 +70,8 @@ class DbAluno(Model):
         usuario_dic = []
 
         for aluno in self.query(order_by=self.usuario_nome):
-            usuario_dic.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.usuario_nome))
+            usuario_dic.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.usuario_nome,
+                                    turma_do_aluno=aluno.turma_do_aluno))
         return usuario_dic
 
     def pesquisa_usuario(self, usuario_nome):
@@ -157,10 +158,14 @@ class DbAluno(Model):
         :param turma_add: o id da turma escolhida para ser acrescida aos alunos
         :return: None
         """
-
+        res = DbTurma.load(turma_add)
+        turma_add= res.turma_nome
+        print(turma_add)
         for escolha in escolha:
             usuario = self.load(escolha)
             usuario.turma_do_aluno = turma_add
+            print(usuario.usuario_nome, usuario.turma_do_aluno)
+            usuario.save()
 
     def comprar_item(self, id_usuario, id_item):
         """
@@ -172,7 +177,7 @@ class DbAluno(Model):
         """
         item = DbLoja()
         usuario = DbAluno.load(id_usuario)
-        preco = item.pesquisar_item(id_item).preco_item
+        preco = item.pesquisar_item(id_item).preco
 
         if usuario.pontos_de_moedas < preco:
             print("você não tem moeda")
@@ -200,16 +205,16 @@ class DbAluno(Model):
         """
         usuario = self.load(id_usuario)
 
-        if itens.tipo_item == 1:
+        if itens.tipo == 1:
             usuario.cor = itens.id
         else:
-            if itens.tipo_item == 2:
+            if itens.tipo == 2:
                 usuario.rosto = itens.id
             else:
-                if itens.tipo_item == 3:
+                if itens.tipo == 3:
                     usuario.acessorio = itens.id
                 else:
-                    if itens.tipo_item == 4:
+                    if itens.tipo == 4:
                         usuario.corpo = itens.id
         usuario.save()
 
@@ -268,7 +273,7 @@ class DbTurma(Model):
         turma = DbTurma(id=id)
         turma.delete()
 
-    def pesquisaturma(self,turma_nome):
+    def pesquisa_turma(self, turma_nome):
         """
         Ainda nao implementado
         :return:
@@ -282,15 +287,30 @@ class DbTurma(Model):
         else:
             return turma
 
-    def calcular_desempenho_jogos(self):
+    def turma_in(self):
+        pass
 
+
+    def calcular_desempenho_jogos(self):
+        soma = 0
+        soma2 = 0
+        x = 0
+        y = 0
+        for DbAluno.id in DbTurma:
+            retorno = self.pesquisa_turma(DbAluno.id)
+            usuario = self.load(retorno)
+            soma += usuario.desempenho_j1
+            soma2 += usuario.desempenho_j2
+            x += 1
+            y += 1
+        return soma / x, soma2 / y
 
 
 class DbLoja(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     nome = TextField()
-    tipo= IntegerField(default=0)
+    tipo = IntegerField(default=0)
     preco = IntegerField(default=0)
     media_turma_jogos = FloatField(default=0)
 
@@ -311,7 +331,7 @@ class DbLoja(Model):
         """
         itens = []
         for item in self.query(order_by=self.id):
-            itens.append(dict(id = item.id, nome = item.nome, tipo = item.tipo, preco = item.preco))
+            itens.append(dict(id=item.id, nome=item.nome, tipo=item.tipo, preco=item.preco))
 
         if itens != '' and itens != None and itens != 0:
             return itens
@@ -353,7 +373,7 @@ class DbLoja(Model):
         usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
                          usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
-        itens = [str(y.id) for y in self.Read_item()]
+        itens = [str(y['id']) for y in self.Read_item()]
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste

@@ -59,7 +59,7 @@ def read_aluno():
     if True or request.get_cookie("login", secret='2524'):
         usuarios = facade.ReadAlunoFacade()
         turma = facade.ReadTurmaFacade()
-        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula']) for aluno in usuarios]
+        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['turma_do_aluno']) for aluno in usuarios]
         return dict(aluno_id=alunos, turmas=turma)
     else:
         redirect('/')
@@ -68,6 +68,7 @@ def read_aluno():
 @get('/turma_aluno')
 def aluno_in_turma():
     escolhidos = request.query_string
+    print(escolhidos)
     escolha = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
     turma_add = request.query.get('escolhidos')
     print(escolhidos, escolha, turma_add)

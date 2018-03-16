@@ -7,7 +7,7 @@
 
             %>
                     <div class="col-md-3">
-                        {{itens.nome_item}}<br>
+                        {{itens.nome}}<br>
                     <form action="/equipar_item" method="post">
                         <button name="id" value="{{itens.id}}">Equipar</button>
                     </form>
@@ -15,6 +15,7 @@
             <%
                 end
             %>
+
         </div>
         <a href="/aluno"><button>Voltar</button></a>
    </div>

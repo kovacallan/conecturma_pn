@@ -28,13 +28,15 @@ class BlackBoxTest(unittest.TestCase):
 
     def _test_loja(self):
         res = test_app.get('/loja')
-        self.assertIn('<form action="/comprar">', res.text, res.text)
+        self.assertIn('<form action="/compras_loja">', res.text, res.text)
 
-    def _test_read_student(self):
+    def test_read_student(self):
         """ A página dos alunos deve permitir deletar aluno. """
         res = test_app.get('/ler_aluno')
         self.assertEqual(res.status_int, 200)
-        self.assertIn('<form action="/deletar_alunos">', res.text, res.text)
+        self.assertIn(
+            '<button type="submit" name ="deletar_da_turma" formaction="/deletar_alunos">deletar alunos selecionados</button>',
+            res.text, res.text)
 
     """def _test_aluno_cadastro(self):
         res = test_app.get('/cadastro_aluno')
@@ -42,11 +44,15 @@ class BlackBoxTest(unittest.TestCase):
         res = form.submit('submit')
         print(res)"""
 
-    def _test_score(self):
+    def test_score_coins_lifes(self):
         """A pagina de Score deve mostrar a pontuaçao de J1 , J2 , Moedas , Vidas e desempenho do aluno em cada jogo"""
+
         res = test_app.get('/mostrar_score')
         self.assertEqual(res.status_int, 200)
-        self.assertEqual('{{desempenho_j1}}', 2.0)
+        # self.assertEqual('{{desempenho_j1}}', 10)
+        # self.assertEqual('{{desempenho_j2}}', 2.0)
+        #self.assertEqual('{{pontos_de_vida}}', 2.0)
+        #self.assertEqual('{{pontos_moedas}}', 2.0)
 
     def _test_alun_in_turma(self):
         self._fixaluno()
@@ -61,6 +67,10 @@ class BlackBoxTest(unittest.TestCase):
             '<button type="submit" name ="deletar_da_turma" formaction="/deletar_alunos">deletar alunos selecionados</button>',
             res.text,
             res.text)
+
+    def ver_itens(self):
+        res = test_app.get('/ver_itens_comprados')
+        self.assertIn('<form action="/equipar_item" method="post">')
 
 
 if __name__ == '__main__':

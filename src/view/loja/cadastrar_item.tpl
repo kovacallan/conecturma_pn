@@ -3,9 +3,9 @@
     <div align="center" class="col-md-12">
         <h1>Cadastro</h1>
         <form action="/cadastro_item" method="post">
-         Nome do item:   <input type="text" name="nome_item"/><br>
-         Preço :         <input type="text" name="preco_item"/><br>
-         <select name="tipo_item">
+         Nome do item:   <input type="text" name="nome"/><br>
+         Preço :         <input type="text" name="preco"/><br>
+         <select name="tipo">
            <option value="1">Cores</option>
            <option value="2">Rosto</option>
            <option value="3">Acessorios</option>
