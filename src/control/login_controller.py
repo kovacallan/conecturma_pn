@@ -37,7 +37,7 @@ def cadastro_view():
 
 @route('/cadastro', method='POST')
 def cadastro():
-    facade.CreateAlunoFacade(request.params['aluno_nome'], request.params['senha'])
+    facade.create_aluno_facade(request.params['aluno_nome'], request.params['senha'])
     redirect('/')
 
 
@@ -48,7 +48,7 @@ def sair():
 
 
 def valida_login(nome, senha):
-    retorno = facade.PesquisaAlunoFacade(nome)
+    retorno = facade.pesquisa_aluno_facade(nome)
 
     if retorno:
         if retorno.usuario_nome == nome and retorno.usuario_senha == senha:

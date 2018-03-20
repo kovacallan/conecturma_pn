@@ -104,7 +104,7 @@ class DbAluno(Model):
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
 
-    def pontos_jogo(self, usuario, jogo, pontos, clique):
+    def pontos_jogo(self, usuario, jogo, pontos):
         """
         Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais,
         o desempenho do aluno no jogo ao qual ele esta jogando
@@ -119,36 +119,62 @@ class DbAluno(Model):
         :return: None
         """
         if pontos is None:
-            pass
+            return False
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno.id)
             usuario.pontos_j1 += pontos
-            usuario.cliques_j1 += clique
+            usuario.cliques_j1 += 1
             usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
             usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
 
-            if usuario.pontos_j1 % 3 == 0:
+            if usuario.pontos_j1 % 3 == 0 and pontos == 1:
                 usuario.pontos_de_vida += 1
 
-            if usuario.pontos_j1 % 5 == 0:
+            if usuario.pontos_j1 % 5 == 0 and pontos == 1:
                 usuario.pontos_de_moedas += 5
+
+
             usuario.save()
+            return True
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno.id)
             usuario.pontos_j2 += pontos
-            usuario.cliques_j2 += clique
+            usuario.cliques_j2 += 1
             print('cliques j1:{}'.format(usuario.cliques_j2))
             usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
             print("acertou {} % ".format(usuario.desempenho_aluno_j2))
-            if usuario.pontos_j2 % 3 == 0:
+            if usuario.pontos_j2 % 3 == 0 and pontos == 1:
                 usuario.pontos_de_vida += 1
 
             if usuario.pontos_j2 % 5 == 0:
                 usuario.pontos_de_moedas += 5
+                usuario.mais_dinheiro(usuario)
 
             usuario.save()
+            return True
+        usuario.save()
+
+    def mais_dinheiro(self,usuario):
+        retorno = self.pesquisa_usuario(usuario)
+        usuario = self.load(retorno.id)
+        self.pontos_de_moedas += 5
+        usuario.save()
+
+    def mais_vidas(self,usuario):
+        retorno = self.pesquisa_usuario(usuario)
+        usuario = self.load(retorno.id)
+        if pontos % 3 == 0:
+             self.pontos_de_vida += 1
+        usuario.save()
+
+    def desempenho_jogoj1(self):
+        pass
+
+    def desempenho_jogoj2(self):
+
+        pass
 
     def alunos_in_turma(self, escolha, turma_add):
         """

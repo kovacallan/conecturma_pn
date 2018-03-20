@@ -15,7 +15,7 @@ class Facade:
         Inicio Facade Usuario/Aluno
     """
 
-    def CreateAlunoFacade(self, nome, senha):
+    def create_aluno_facade(self, nome, senha):
         """
         facade de criar aluno
         :param nome: nome do aluno/usuario
@@ -24,36 +24,36 @@ class Facade:
         """
         self.aluno.create_usuario(nome, senha)
 
-    def ReadAlunoFacade(self):
+    def read_aluno_facade(self):
         """
         facade de leitura de alunos
         :return:retorna a função especifica que retorna os dados dos alunos
         """
         return self.aluno.read_usuario()
 
-    def deleteAlunoFacade(self, deletar_ids):
+    def delete_aluno_facade(self, deletar_ids):
         """
         facade de deletar o aluno , atravez da id
-        futuramente atravez do nome ,por enquanto foi implementada atravez de botao
-        :param id:
+        futuramente atravez do nome ,foi implementado por nome e checkbox
+        :param id:uma lista de ids a serem deletados
         :return: o metodo que deleta o aluno da base de dados
         """
         self.aluno.aluno_delete(deletar_ids)
 
-    def PesquisaAlunoFacade(self, nome):
+    def pesquisa_aluno_facade(self, nome):
         return self.aluno.pesquisa_usuario(nome)
 
-    def PontoJogoFacade(self, usuario, jogo, ponto, clique):
-        self.aluno.pontos_jogo(usuario, jogo, ponto, clique)
+    def ponto_jogo_facade(self, usuario, jogo, ponto):
+        self.aluno.pontos_jogo(usuario, jogo, ponto)
 
-    def include_aluno_in_turma(self, escolhidos, turma_add):
+    def aluno_in_turma_facade(self, escolhidos, turma_add):
         self.aluno.alunos_in_turma(escolhidos, turma_add)
 
 
-    def CompraItemFacade(self, id_usuario, id_item):
+    def compra_item_facade(self, id_usuario, id_item):
             self.aluno.comprar_item(id_usuario=id_usuario, id_item=id_item)
 
-    def VerItemCompradoFacade(self, id_usuario):
+    def ver_item_comprado_facade(self, id_usuario):
         return self.aluno.ver_itens_comprados(id_usuario)
 
     def equipar_item_facade(self, id, itens):
@@ -70,7 +70,7 @@ class Facade:
         Inicio Facade Turma
     """
 
-    def CreateTurmaFacade(self, nome, login):
+    def create_turma_facade(self, nome, login):
         """
         facade de criaçao de turma
         :param nome:
@@ -78,16 +78,16 @@ class Facade:
         """
         self.turma.create_turma(nome, login)
 
-    def ReadTurmaFacade(self):
+    def read_turma_facade(self):
         """
         facade de ReadTurmaFacada
         :return:
         """
         return self.turma.read_turma()
 
-    def DeleteTurmaFacade(self, id):
+    def delete_turma_facade(self, id):
         """
-        facade de DeleteTurmaFacade
+        facade de delete_turma_facade
         :param id:
         :return:
         """
@@ -101,19 +101,19 @@ class Facade:
         Inicio Facade loja
     """
 
-    def CriarItemLojaFacade(self, nome, tipo, preco):
+    def criar_item_loja_facade(self, nome, tipo, preco):
         self.loja.create_item(nome, tipo, preco)
 
-    def VerItemLojaFacade(self):
+    def ver_item_loja_facade(self):
         return self.loja.Read_item()
 
-    def PesquisaItemFacade(self,id):
+    def pesquisa_item_facade(self, id):
         return self.loja.pesquisar_item(id)
 
     def deletar_item(self, id):
         self.loja.item_delete(id)
 
-    def JaTemItemFacade(self,usuario_logado):
+    def ja_tem_item_facade(self, usuario_logado):
         return self.loja.ja_possui_item(usuario_logado = usuario_logado)
 
     """

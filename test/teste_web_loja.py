@@ -14,5 +14,18 @@ test_app.set_cookie('login', '2524')
 class BlackBoxTest(unittest.TestCase):
     def setUp(self):
             pass
+
+    def _fixloja(self):
+        res = test_app.post('/aluno_cadastro', dict(aluno_nome='egg', senha='spam'))
+        res1= test_app.post('/cadastro_item' , dict(nome='knight', preco= 5 , tipo=2 ))
+
     def loja_inicial(self):
-        res=test_app
+        self._fixloja()
+        res = test_app.get('/loja')
+        self.assertEqual(res.status_int, 200)
+        self.assertIn('<form action="/compras_loja">', res.text, res.text)
+
+
+
+if __name__ == '__main__':
+    unittest.main()
