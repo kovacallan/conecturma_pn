@@ -97,7 +97,7 @@ class DbAluno(Model):
         # usuario = DbAluno(id=id)
         usuario.delete()
 
-    def pontos_jogo(self, usuario, jogo, pontos, clique):
+    def pontos_jogo(self, usuario, jogo, pontos):
         """
         Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais, o desempenho do aluno no jogo ao qual ele esta jogando
 
@@ -113,24 +113,22 @@ class DbAluno(Model):
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno.id)
             usuario.pontos_j1 += pontos
-            usuario.cliques_j1 += clique
+            usuario.cliques_j1 += 1
             usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
             usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
-
             if usuario.pontos_j1 % 3 == 0:
                 usuario.pontos_de_vida += 1
 
             if usuario.pontos_j1 % 5 == 0:
                 usuario.pontos_de_moedas += 5
             usuario.save()
+            return True
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno.id)
             usuario.pontos_j2 += pontos
-            usuario.cliques_j2 += clique
-            print('cliques j1:{}'.format(usuario.cliques_j2))
+            usuario.cliques_j2 += 1
             usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
-            print("acertou {} % ".format(usuario.desempenho_aluno_j2))
             if usuario.pontos_j2 % 3 == 0:
                 usuario.pontos_de_vida += 1
 
@@ -138,6 +136,9 @@ class DbAluno(Model):
                 usuario.pontos_de_moedas += 5
 
             usuario.save()
+            return True
+        else:
+            return False
 
     def alunos_in_turma(self, escolhidos, turma_add):
 

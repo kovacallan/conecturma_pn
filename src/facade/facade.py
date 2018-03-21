@@ -43,8 +43,8 @@ class Facade:
     def PesquisaAlunoFacade(self, nome):
         return self.aluno.pesquisa_usuario(nome)
 
-    def PontoJogoFacade(self, usuario, jogo, ponto, clique):
-        self.aluno.pontos_jogo(usuario, jogo, ponto, clique)
+    def PontoJogoFacade(self, usuario, jogo, ponto):
+        return self.aluno.pontos_jogo(usuario, jogo, ponto)
 
     def include_aluno_in_turma(self, escolhidos, turma_add):
         self.aluno.alunos_in_turma(escolhidos, turma_add)
@@ -104,7 +104,7 @@ class Facade:
     def CriarItemLojaFacade(self, nome, tipo, preco):
         self.loja.create_item(nome, tipo, preco)
 
-    def VerItemLojaFacade(self):
+    def ver_item_loja_facade(self):
         return self.loja.Read_item()
 
     def PesquisaItemFacade(self,id):
