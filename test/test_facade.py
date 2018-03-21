@@ -9,6 +9,8 @@ class FacadeTest(unittest.TestCase):
     def setUp(self):
         self.facade = Facade()
         self.facade.create_aluno_facade("egg", "spam")
+        self.facade.create_aluno_facade("ni", "spam")
+        self.facade.create_aluno_facade("parrot", "spam")
         self.facade.criar_item_loja_facade("egg", 1, 10)
 
     def tearDown(self):
@@ -28,7 +30,6 @@ class FacadeTest(unittest.TestCase):
         alunos = self.facade.read_aluno_facade()
         self.assertIn("egg", alunos[0]["usuario_nome"], alunos)
 
-
     def test_search_user(self):
         self.facade.create_aluno_facade("egg", "spam")
         aluno = self.facade.pesquisa_aluno_facade("egg")
@@ -36,15 +37,20 @@ class FacadeTest(unittest.TestCase):
 
     def test_ponto_jogo(self):
         aluno = self.facade.pesquisa_aluno_facade("egg")
-        self.facade.ponto_jogo_facade("egg", 'j1', 1)
-        self.facade.ponto_jogo_facade("egg", 'j1', 1)
-        self.assertEqual(1, aluno.pontos_j1)
-
-
+        print(aluno)
+        self.facade.ponto_jogo_facade(usuario="egg",jogo= 'j1',ponto= 1)
+        print(self.facade.ponto_jogo_facade(usuario="egg",jogo= 'j1',ponto= 1))
+        # self.facade.ponto_jogo_facade("egg", 'j2', 1)
+        # aluno.save()
+        self.assertEquals(1, aluno.pontos_j1)
+        # self.assertEqual(1, aluno.pontos_j1)
+        # self.assert
     def test_delete_aluno_facade(self):
+        """Ja feito dentro do tear down"""
         pass
 
     def test_aluno_in_turma_facade(self):
+
         pass
 
     def test_compra_item_facade(self):
@@ -52,19 +58,14 @@ class FacadeTest(unittest.TestCase):
 
     def test_ver_item_comprado_facade(self):
         pass
+
     def test_equipar_item_facade(self):
         pass
+
     def avatar_facade(self):
         pass
 
     """FIM DE TESTE USUARIO"""
-
-
-
-
-
-
-
 
     def test_crud_item(self):
         item = self.facade.ver_item_loja_facade()
@@ -91,7 +92,7 @@ class FacadeTest(unittest.TestCase):
     def test_create_turma(self):
         self.facade.create_turma_facade("dead", "parrot")
         turma1 = self.facade.read_turma_facade()
-        self.assertIn("dead", turma1[-1]['nome'],turma1)
+        self.assertIn("dead", turma1[-1]['nome'], turma1)
         self.assertIn("parrot", turma1[-1]['criador'], turma1)
 
     def _test_aluno_in_turma(self):
@@ -101,5 +102,4 @@ class FacadeTest(unittest.TestCase):
         self.facade.create_aluno_facade("knights", "Ni")
         self.facade.aluno_in_turma_facade(escolhidos=[""])
 
-
-    bottle.response.delete_cookie("login")
+    bottle.response.delete_cookie("login", secret='2524')
