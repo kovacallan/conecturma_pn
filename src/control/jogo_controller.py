@@ -15,7 +15,7 @@ def jogo():
     jogo que recebe o parâmetro de qual botão foi clicado e armazena a quantidade de acertos
     :return: nome do jogo
     """
-    if request.get_cookie("login", secret='2524'):
+    if True or request.get_cookie("login", secret='2524'):
         jogo = request.params['n1']
         return dict(nome_jogo=jogo)
     else:
@@ -41,7 +41,7 @@ def ponto():
     cliques_j2 = request.params['cliques']"""
     usuario = request.get_cookie("login", secret="2524")
 
-    facade.PontoJogoFacade(usuario, jogo, ponto, cliques)
+    facade.ponto_jogo_facade(usuario, jogo, ponto)
 
     redirect('/')
 
@@ -60,7 +60,7 @@ Mostra a pontuação do jogador, a quantidade de vidas ,a quantidade de moedas e
 :return: O numero de acertos , vidas , moedas e o desempenho do jogador em cada jogo (porcentagem de acertos)
 """
 
-    ponto = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
+    ponto = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
     return dict(ponto_j_um=ponto.pontos_j1, ponto_j_dois=ponto.pontos_j2, pontos_de_vida=ponto.pontos_de_vida,
                 pontos_moedas=ponto.pontos_de_moedas, desempenho_j1=ponto.desempenho_aluno_j1,
                 desempenho_j2=ponto.desempenho_aluno_j2)

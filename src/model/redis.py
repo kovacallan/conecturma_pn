@@ -104,7 +104,7 @@ class DbAluno(Model):
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
 
-    def pontos_jogo(self, usuario, jogo, pontos, clique):
+    def pontos_jogo(self, usuario, jogo, pontos):
         """
         Contabiliza os pontos ganhos pelo usuário ,os cliques totais e , através dos cliques totais,
         o desempenho do aluno no jogo ao qual ele esta jogando
@@ -119,36 +119,56 @@ class DbAluno(Model):
         :return: None
         """
         if pontos is None:
-            pass
+            return False
         elif jogo == 'j1':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno.id)
             usuario.pontos_j1 += pontos
-            usuario.cliques_j1 += clique
-            usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
-            usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
+            usuario.cliques_j1 += 1
+            self.desempenho_jogoj1(usuario)
+            # print('cliques j1:{}'.format(usuario.cliques_j1))
 
-            if usuario.pontos_j1 % 3 == 0:
-                usuario.pontos_de_vida += 1
+            if usuario.pontos_j1 % 3 == 0 and pontos == 1:
+                self.mais_vidas(usuario)
 
-            if usuario.pontos_j1 % 5 == 0:
+
+            if usuario.pontos_j1 % 5 == 0 and pontos == 1:
                 usuario.pontos_de_moedas += 5
+                self.mais_dinheiro(usuario)
+
             usuario.save()
         elif jogo == 'j2':
             retorno = self.pesquisa_usuario(usuario)
             usuario = self.load(retorno.id)
             usuario.pontos_j2 += pontos
-            usuario.cliques_j2 += clique
-            print('cliques j1:{}'.format(usuario.cliques_j2))
+            usuario.cliques_j2 += 1
+            print('cliques j2:{}'.format(usuario.cliques_j2))
             usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
             print("acertou {} % ".format(usuario.desempenho_aluno_j2))
-            if usuario.pontos_j2 % 3 == 0:
+            if usuario.pontos_j2 % 3 == 0 and pontos == 1:
                 usuario.pontos_de_vida += 1
 
             if usuario.pontos_j2 % 5 == 0:
                 usuario.pontos_de_moedas += 5
+                usuario.mais_dinheiro(usuario)
 
             usuario.save()
+
+    def mais_dinheiro(self, usuario):
+        self.pontos_de_moedas += 5
+        usuario.save()
+
+    def mais_vidas(self,usuario):
+        self.pontos_de_vida += 1
+        usuario.save()
+
+    def desempenho_jogoj1(self, usuario):
+        usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
+        usuario.save()
+
+    def desempenho_jogoj2(self,usuario):
+        usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
+        usuario.save()
 
     def alunos_in_turma(self, escolha, turma_add):
         """
@@ -159,7 +179,7 @@ class DbAluno(Model):
         :return: None
         """
         res = DbTurma.load(turma_add)
-        turma_add= res.turma_nome
+        turma_add = res.turma_nome
         print(turma_add)
         for escolha in escolha:
             usuario = self.load(escolha)
@@ -188,9 +208,9 @@ class DbAluno(Model):
 
     def ver_itens_comprados(self, id_usuario):
         """
-        Mostra os itens cujo usuário tem posse
+        Mostra os itens cujos os quais usuário tem posse
         :param id_usuario: O usuário que tem os itens
-        :return: os itens
+        :return: A lista dos itens
         """
         usuario = self.load(id_usuario)
         itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.items_comprado]
@@ -236,6 +256,7 @@ class DbTurma(Model):
     quem_criou = TextField()
     desempenho_j1 = FloatField(default=0)
     desempenho_j2 = FloatField(default=0)
+    professor_encarregado = TextField()
 
     def create_turma(self, turma, login):
         """
@@ -316,7 +337,7 @@ class DbLoja(Model):
 
     def create_item(self, nome, tipo, preco):
         """
-            Cria o item no banco de dados
+        Cria o item no banco de dados
         :param nome:Nome do item
         :param tipo:Se ele é cor,rosto,acessório,corpo
         :param preco: é o preço do item
@@ -324,9 +345,9 @@ class DbLoja(Model):
         """
         self.create(nome=nome, tipo=tipo, preco=preco)
 
-    def Read_item(self):
+    def read_item(self):
         """
-            Leitura dos itens cadastrados na plataforma
+        Leitura dos itens cadastrados na plataforma
         :return: Os itens cadastrados
         """
         itens = []

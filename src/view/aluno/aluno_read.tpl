@@ -35,7 +35,7 @@
         </select>
         <button type="submit" name ="colocar_na_turma">inscrever alunos em turma</button>
 
-        <button type="submit" name ="deletar_da_turma" formaction="/deletar_alunos">deletar alunos selecionados</button>
+        <button type="submit" name ="deletar_estudantes" formaction="/deletar_alunos">deletar alunos selecionados</button>
 
 
         </form>

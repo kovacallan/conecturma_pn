@@ -15,51 +15,92 @@ class Facade:
         Inicio Facade Usuario/Aluno
     """
 
-    def CreateAlunoFacade(self, nome, senha):
+    def create_aluno_facade(self, nome, senha):
         """
-        facade de criar aluno
+        Cria um aluno no banco de dados
         :param nome: nome do aluno/usuario
-        :param senha: senha do login
-        :return: cria o usuario com a senha e armazena no banco de dados
+        :param senha: senha para logar
+        :return:None
         """
         self.aluno.create_usuario(nome, senha)
 
-    def ReadAlunoFacade(self):
+    def read_aluno_facade(self):
         """
-        facade de leitura de alunos
-        :return:retorna a função especifica que retorna os dados dos alunos
+        Visualiza todos os alunos criados
+        :return: Um dicionario com os principais dados de aluno: id , matricula , nome e turma
         """
         return self.aluno.read_usuario()
 
-    def deleteAlunoFacade(self, deletar_ids):
+    def delete_aluno_facade(self, deletar_ids):
         """
-        facade de deletar o aluno , atravez da id
-        futuramente atravez do nome ,por enquanto foi implementada atravez de botao
-        :param id:
-        :return: o metodo que deleta o aluno da base de dados
+        Cria uma lista de ids de alunos e os deleta do banco de dados
+        :param deletar_ids: lista de ids a serem deletados
+        :return: None
         """
         self.aluno.aluno_delete(deletar_ids)
 
-    def PesquisaAlunoFacade(self, nome):
+    def pesquisa_aluno_facade(self, nome):
+        """
+        Pesquisa pelo aluno através do nome , apenas usado na tela de login e como auxiliar para modificar atributos do
+         aluno
+        :param nome: Nome dado do aluno
+        :return:retorna o usuario aluno (objeto)
+        """
         return self.aluno.pesquisa_usuario(nome)
 
-    def PontoJogoFacade(self, usuario, jogo, ponto, clique):
-        self.aluno.pontos_jogo(usuario, jogo, ponto, clique)
+    def ponto_jogo_facade(self, usuario, jogo, ponto):
+        """
+        Faz a contagem de pontos e as suas consequencias (vidas , moedas , contador de cliques e medidor de desempenho)
+        (A ser melhorada , para diminuir)
+        :param usuario: O objeto do aluno que esta jogando o jogo
+        :param jogo: O jogo , j1 ou j2
+        :param ponto: O valor de pontos acrescidos , 0 ou 1
+        :return: None
+        """
+        self.aluno.pontos_jogo(usuario, jogo, ponto)
 
-    def include_aluno_in_turma(self, escolhidos, turma_add):
+    def aluno_in_turma_facade(self, escolhidos, turma_add):
+        """
+        Pega uma lista de alunos previamente selecionados(lista de id's) e acrescenta o id da turma em seus atributos
+        :param escolhidos: Lista de alunos
+        :param turma_add: Id da turma
+        :return: None
+        """
         self.aluno.alunos_in_turma(escolhidos, turma_add)
 
+    def compra_item_facade(self, id_usuario, id_item):
+        """
+        Acrescenta o id do item a lista items_comprado do usuario que comprou o item
+        :param id_usuario: id do usuario(aluno) que comprará o item
+        :param id_item: id do item a ser comprado
+        :return: None
+        """
+        self.aluno.comprar_item(id_usuario=id_usuario, id_item=id_item)
 
-    def CompraItemFacade(self, id_usuario, id_item):
-            self.aluno.comprar_item(id_usuario=id_usuario, id_item=id_item)
-
-    def VerItemCompradoFacade(self, id_usuario):
+    def ver_item_comprado_facade(self, id_usuario):
+        """
+        Coloca os ids dos itens do usuario numa lista e mostra
+        :param id_usuario: id do usuario que quer ver seus itens (dentro da lista items_comprado)
+        :return: A lista de ids dos itens do usuario
+        """
         return self.aluno.ver_itens_comprados(id_usuario)
 
     def equipar_item_facade(self, id, itens):
+        """
+        Equipa o item no avatar do usuario
+        :param id: id do usuario que vai equipar os itens
+        :param itens: id do item a ser equipado no avatar
+        :return: None
+        """
         self.aluno.equipar_item(id_usuario=id, itens=itens)
 
     def avatar_facade(self, id):
+        """
+        Mostra o avatar
+        :param id: id do usuario atual usando a aplicaçao
+        :return: Um dicionario com o avatar equipado com cor, rosto, acessorio e  corpo , caso nada esteja equipado ,
+        tudo fica com o valor default
+        """
         return self.aluno.avatar(id)
 
     """
@@ -70,26 +111,27 @@ class Facade:
         Inicio Facade Turma
     """
 
-    def CreateTurmaFacade(self, nome, login):
+    def create_turma_facade(self, nome, login):
         """
-        facade de criaçao de turma
-        :param nome:
-        :return:
+        Cria uma turma no banco de dados
+        :param nome: Nome da turma
+        :param login: Nome do criador da turma
+        :return: None
         """
         self.turma.create_turma(nome, login)
 
-    def ReadTurmaFacade(self):
+    def read_turma_facade(self):
         """
-        facade de ReadTurmaFacada
-        :return:
+        Mostra as turmas criadas
+        :return:Um dicionario com os valores:id , nome da turma , criador , desempenho j1 e desempenho j2 da turma
         """
         return self.turma.read_turma()
 
-    def DeleteTurmaFacade(self, id):
+    def delete_turma_facade(self, id):
         """
-        facade de DeleteTurmaFacade
-        :param id:
-        :return:
+        Deleta uma turma pelo id
+        :param id:id da turma
+        :return:None
         """
         self.turma.delete_turma(id)
 
@@ -101,19 +143,45 @@ class Facade:
         Inicio Facade loja
     """
 
-    def CriarItemLojaFacade(self, nome, tipo, preco):
+    def criar_item_loja_facade(self, nome, tipo, preco):
+        """
+        Cria o item no banco de dados
+        :param nome:nome do item
+        :param tipo:Se é cor(1) , rosto(2) , acessorio(3) ou corpo(4)
+        :param preco:preço atribuido ao item
+        :return:None
+        """
         self.loja.create_item(nome, tipo, preco)
 
-    def VerItemLojaFacade(self):
+    def ver_item_loja_facade(self):
+        """
+        cria uma lista com os itens armazenados na base de dados , com seus valores de id , nome ,tipo e preço
+        :return:Lista dos itens criados
+        """
         return self.loja.Read_item()
 
-    def PesquisaItemFacade(self,id):
+    def pesquisa_item_facade(self, id):
+        """
+        pesquisa itens por id (ainda nao implementado)
+        :param id: id do item
+        :return: o objeto do item
+        """
         return self.loja.pesquisar_item(id)
 
     def deletar_item(self, id):
+        """
+        deleta o item por id (ainda nao implementado)
+        :param id: o id do item
+        :return: None
+        """
         self.loja.item_delete(id)
 
-    def JaTemItemFacade(self,usuario_logado):
+    def ja_tem_item_facade(self, usuario_logado):
+        """
+        Mostra se o usuario ja comprou o item
+        :param usuario_logado:autoexplicativo
+        :return:lista de itens q ele nao tem
+        """
         return self.loja.ja_possui_item(usuario_logado = usuario_logado)
 
     """
