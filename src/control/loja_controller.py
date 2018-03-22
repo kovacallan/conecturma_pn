@@ -9,7 +9,7 @@ facade = Facade()
 @view('loja/index')
 def index():
     if request.get_cookie("login", secret='2524'):
-        itens_comprados = facade.JaTemItemFacade(request.get_cookie("login", secret='2524'))
+        itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
         itens = facade.ver_item_loja_facade()
         if itens:
             return dict(itens = itens, itens_comprados = str(itens_comprados))
@@ -28,13 +28,13 @@ def cadastrar_item():
         redirect('/')
 
 
-@post('/cadastro_item')
+@route('/cadastro_item', method='post')
 def cadastro_item():
-    nome_item = request.forms.nome_item
-    preco_item = request.forms.preco_item
-    tipo_item = request.forms.tipo_item
+    nome = request.forms.nome
+    preco = request.forms.preco
+    tipo = request.forms.tipo
 
-    facade.CriarItemLojaFacade(nome_item, tipo_item, preco_item)
+    facade.criar_item_loja_facade(nome, tipo, preco)
     redirect('cadastrar_item')
 
 @route('/ver_item')
@@ -51,7 +51,7 @@ def ver_item():
 @get('/compras_loja')
 def compras():
     id_item = request.params['id']
-    usuario_logado = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
-    facade.CompraItemFacade(id_usuario=usuario_logado.id, id_item=id_item)
+    usuario_logado = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    facade.compra_item_facade(id_usuario=usuario_logado.id, id_item=id_item)
 
     redirect('/loja')

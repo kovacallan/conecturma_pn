@@ -1,27 +1,18 @@
-% include('./header.tpl', title = 'Conecturma')
+%include('header.tpl', title="Conecturma")
 <div align="center" class="col-md-12">
-        <h1>Ver turmas</h1>
+        <h1>Ver alunos da turma</h1>
         <div>
         <table>
         <tr>
-                <th>Nome da turma</th><th>Criador</th>
+                <th>{{nome_turma}}</th>
                 </tr>
             <%
-                for x in turma:
+                for x in alunos:
             %>
             <tr>
                 <td>
                 {{x['nome']}}
-<!-- <a href="/turma_in">  </a> -->
-                </td>
 
-                <td>
-
-                {{x['criador']}}
-                </td><td>
-                {{x['desempenho_j1']}}
-                </td><td>
-                {{x['desempenho_j2']}}
                 </td>
             </tr>
            <%

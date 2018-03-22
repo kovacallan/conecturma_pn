@@ -37,7 +37,7 @@ def create_aluno():
     Direcionamento a pagina para criar aluno buscando , na tpl os parâmetros usuário , senha e matricula
     :return: cria o aluno e volta para a pagina geral aluno
     """
-    facade.CreateAlunoFacade(request.forms['aluno_nome'], request.forms['senha'])
+    facade.create_aluno_facade(request.forms['aluno_nome'], request.forms['senha'])
     redirect('/')
 
 
@@ -48,7 +48,7 @@ def create_aluno():
 @view('aluno/aluno_read')
 def read_aluno():
     """
-    Direciona para a função ReadAlunoFacade
+    Direciona para a função read_aluno_facade
 
     :return: o dicionario com a id , usuário_nome e senha_aluno para ser usado pela tpl
     """
@@ -57,9 +57,9 @@ def read_aluno():
     """ return dict(aluno_pesquisado=pesquisa_aluno)"""
 
     if True or request.get_cookie("login", secret='2524'):
-        usuarios = facade.ReadAlunoFacade()
-        turma = facade.ReadTurmaFacade()
-        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula']) for aluno in usuarios]
+        usuarios = facade.read_aluno_facade()
+        turma = facade.read_turma_facade()
+        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['turma_do_aluno']) for aluno in usuarios]
         return dict(aluno_id=alunos, turmas=turma)
     else:
         redirect('/')
@@ -67,54 +67,33 @@ def read_aluno():
 
 @get('/turma_aluno')
 def aluno_in_turma():
-
     escolhidos = request.query_string
-    escolha=[aluno.split('=')[0].split('_')[1]for aluno in escolhidos.split('&')if 'aluno'in aluno]
-    turma_add=request.query.get('escolhidos')
+    print(escolhidos)
+    escolha = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
+    turma_add = request.query.get('escolhidos')
     print(escolhidos, escolha, turma_add)
-    facade.include_aluno_in_turma(escolhidos, turma_add)
-    deletar_aluno()
-
-
-""" Deletar aluno(usuario) """
-
-
-@get('/aluno_em_turma')
-def colocar_aluno():
-    id_aluno = request.params['dic_id']
-    dict(dic_id=estudante)
+    facade.aluno_in_turma_facade(escolha, turma_add)
+    redirect('/')
 
 
 """ Deletar aluno(usuario) """
 
 
 @get('/deletar_alunos')
-def deletar_aluno(id):
+def deletar_aluno():
     """
-    Direciona a função DeleteAlunoFacade para a pagina tpl
+    Direciona a função delete_aluno_facade para a pagina tpl
 
     :return: Deleta a entrada de dicionario equivalente e retorna ao menu
     """
-    facade.DeleteAlunoFacade(id)
-    redirect('/aluno')
-
-
-@route('/turma_read')
-@view('turma/turma_read')
-def read_turma():
-    """
-    Direciona para a pagina que mostra a turma em ordem de id
-    :return: a entrada de dicionario que contem o id e o turma_nome
-    """
-    turma = facade.ReadTurmaFacade()
-    return dict(turma_id=turma['id'], turma_nome=turma['nome'], criador=turma['criador'])
-
-
-@get('/escolha_turma')
-def escolha_turma():
-    facade.IncludeAlunosFacade(request.params('turma_selecionada'))
-
+    escolhidos = request.query_string
+    deletar_ids = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
+    print(escolhidos, deletar_ids)
+    facade.delete_aluno_facade(deletar_ids)
     redirect('/')
+
+
+
 
 
 """Ver medalhas"""
@@ -123,21 +102,21 @@ def escolha_turma():
 @route('/ver_itens_comprados')
 @view('aluno/view_itens')
 def ver_itens():
-    usuario = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
-    itens_comprado = facade.VerItemCompradoFacade(usuario.id)
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    itens_comprado = facade.ver_item_comprado_facade(usuario.id)
     itens = []
     for y in itens_comprado:
-        itens.append(facade.PesquisaItemFacade(y))
+        itens.append(facade.pesquisa_item_facade(y))
 
     return dict(lista_itens=itens)
 
 
 @route('/equipar_item', method='POST')
 def equipar_item():
-    usuario = facade.PesquisaAlunoFacade(request.get_cookie("login", secret='2524'))
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
 
     id_item = request.forms['id']
-    item = facade.PesquisaItemFacade(id_item)
+    item = facade.pesquisa_item_facade(id_item)
 
     facade.equipar_item_facade(usuario.id, item)
 
