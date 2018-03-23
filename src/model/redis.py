@@ -5,13 +5,14 @@ db = Database(host='localhost', port=6379, db=0)
 
 """A classe DbAluno será usada como Usuário genérico no spike que é , por enquanto, um aluno onipotente"""
 
+"""INICIO Dbaluno"""
 
 class DbAluno(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     matricula = TextField()
-    usuario_nome = TextField(fts=True, index=True)
-    usuario_senha = TextField()
+    nome = TextField(fts=True, index=True)
+    senha = TextField()
     """tipo_de_usuario = IntegerField()"""
     items_comprado = ListField()
     cor = IntegerField(default=0)
@@ -50,7 +51,13 @@ class DbAluno(Model):
         matricula = ''.join(str(x) for x in matricula)
         return matricula
 
-    def create_usuario(self, nome, senha):
+    def validar_senha_vazia(self,senha):
+        if senha == "" or senha == None:
+            return True
+        else:
+            return False
+
+    def create_aluno(self, nome, senha):
         """
         Método principal de criação do usuário no banco de dados
 
@@ -59,7 +66,32 @@ class DbAluno(Model):
         :return: Um novo usuário para ser incluído no banco
         """
 
-        self.create(usuario_nome=nome, usuario_senha=senha, matricula=self.gerar_matricula())
+        if not self.validar_senha_vazia(senha):
+            matricula = self.gerar_matricula()
+            self.create(nome=nome, senha=senha, matricula=matricula)
+            return True
+        else:
+            return TypeError("Não foi possivel salvar o Usuário")
+
+    def update_aluno(self,id,nome,senha):
+        """
+            Metodo principal para updade de
+        :param id:
+        :param nome:
+        :param senha:
+        :return:
+        """
+        if self.validar_senha_vazia(senha):
+            aluno = self.load(id)
+            aluno.nome = nome
+            aluno.senha = senha
+            if aluno.save():
+                return True
+            else:
+                return False
+        else:
+            return False
+
 
     def read_usuario(self):
         """
@@ -67,12 +99,12 @@ class DbAluno(Model):
 
         :return: O dicionario com os dados da id , nome e matricula dos usuários registrados
         """
-        usuario_dic = []
+        alunos = []
 
-        for aluno in self.query(order_by=self.usuario_nome):
-            usuario_dic.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.usuario_nome,
+        for aluno in self.query(order_by=self.nome):
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.nome,
                                     turma_do_aluno=aluno.turma_do_aluno))
-        return usuario_dic
+        return alunos
 
     def pesquisa_usuario(self, usuario_nome):
 
@@ -84,10 +116,9 @@ class DbAluno(Model):
         :return: O usuário pesquisado
         """
 
-        usuario = {}
-        for pesquisa in DbAluno.query(DbAluno.usuario_nome == usuario_nome, order_by=DbAluno.id):
+        usuario = None
+        for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome, order_by=DbAluno.id):
             usuario = pesquisa
-
         if usuario == '' and usuario == None:
             return False
         else:
@@ -158,7 +189,7 @@ class DbAluno(Model):
         self.pontos_de_moedas += 5
         usuario.save()
 
-    def mais_vidas(self,usuario):
+    def mais_vidas(self, usuario):
         self.pontos_de_vida += 1
         usuario.save()
 
@@ -166,7 +197,7 @@ class DbAluno(Model):
         usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
         usuario.save()
 
-    def desempenho_jogoj2(self,usuario):
+    def desempenho_jogoj2(self, usuario):
         usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
         usuario.save()
 
@@ -248,7 +279,7 @@ class DbAluno(Model):
         usuario = self.usuario_logado(id)
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
 
-
+"""FIM Dbaluno"""
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
@@ -266,7 +297,10 @@ class DbTurma(Model):
         :param login: O nome do login de quem criou a turma
         :return: Acrescenta a turma criada ao banco de dados
         """
-        return self.create(turma_nome=turma, quem_criou=login)
+        if self.create(turma_nome=turma, quem_criou=login):
+            return True
+        else:
+            return TypeError("Não foi possivel salvar o Aluno")
 
     def read_turma(self):
         """
@@ -310,7 +344,6 @@ class DbTurma(Model):
 
     def turma_in(self):
         pass
-
 
     def calcular_desempenho_jogos(self):
         soma = 0
@@ -394,7 +427,7 @@ class DbLoja(Model):
         usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
                          usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
-        itens = [str(y['id']) for y in self.Read_item()]
+        itens = [str(y['id']) for y in self.read_item()]
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste

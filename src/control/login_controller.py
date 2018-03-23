@@ -26,6 +26,7 @@ def login():
         create_cookie(nome)
         redirect('/user_menu')
     else:
+        print("deu ruim no valida login")
         redirect('/')
 
 
@@ -49,9 +50,8 @@ def sair():
 
 def valida_login(nome, senha):
     retorno = facade.pesquisa_aluno_facade(nome)
-
     if retorno:
-        if retorno.usuario_nome == nome and retorno.usuario_senha == senha:
+        if retorno.nome == nome and retorno.senha == senha:
             return True
         else:
             return False
