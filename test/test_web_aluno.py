@@ -91,12 +91,19 @@ class BlackBoxTest(unittest.TestCase):
 
         """FINAL DE TEST DA PASTA ALUNO"""
 
-        """INICIO DE TEST DA PASTA TURMA"""
-
-    """Pagina turma.tpl"""
-
-    def _test_turma_inicio(self):
+        """INICIO DE TEST DE PASTA TURMA"""
+    """Teste turma.tpl"""
+    def test_turma_inicio(self):
+        res = test_app.get('/turma')
+        self._fixaluno()
+        self.assertEqual(res.status_int, 200)
         self.assertIn('<a href="/turma_cadastro"><button>Cadastro turma</button></a>', res.text, res.text)
+        self.assertIn('<a href="/turma_read"><button>Ver turma</button></a>', res.text, res.text)
+        self.assertIn('<a href="/user_menu"><button>Voltar</button></a>', res.text, res.text)
+
+    """Teste """
+
+
 
 
     def test_jogo(self):
