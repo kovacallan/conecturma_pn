@@ -34,6 +34,33 @@ class BlackBoxTest(unittest.TestCase):
         self.assertIn('name="usuario"', res.text, res.text)
         # self.assertEqual(res.json['upper_query'], 'FOO')
 
+
+    """Pagina aluno.tpl"""
+    def test_aluno_inicio(self):
+        res = test_app.get('/aluno')
+        self.assertEqual(res.status_int, 200)
+        self.assertIn('''<a href="/cadastro_aluno">
+            <button>criar aluno</button>
+            </a>''', res.text, res.text)
+        self.assertIn('''<a href="/ler_aluno">
+            <button>ver alunos</button>
+            </a>''', res.text, res.text)
+        self.assertIn('''<a href="/ver_itens_comprados">
+            <button>Ver Itens Comprados</button>
+            </a>''', res.text, res.text)
+        self.assertIn('''<a href="/user_menu">
+            <button>Voltar</button>
+            </a>''', res.text, res.text)
+
+    """Pagina aluno cadastro(aluno_cadastro.tpl"""
+    def test_aluno_cadastro(self):
+
+
+
+
+
+
+        """Pagina de ler aluno (aluno_read.tpl) """
     def test_read_student(self):
         """ A página dos alunos deve permitir deletar aluno. """
         self._fixaluno()

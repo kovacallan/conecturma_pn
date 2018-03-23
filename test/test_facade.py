@@ -59,6 +59,7 @@ class FacadeTest(unittest.TestCase):
         aluno = self.facade.pesquisa_aluno_facade("ni1")
         aluno2 = self.facade.pesquisa_aluno_facade("parrot1")
         turma = self.facade.pesquisa_turma_facade("cheese shop1")
+        print(aluno.get_id())
         self.facade.aluno_in_turma_facade([aluno.get_id(), aluno2.get_id()], turma.get_id())
         print(aluno.turma_do_aluno)
         self.assertEqual("cheese shop1", aluno.turma_do_aluno)
