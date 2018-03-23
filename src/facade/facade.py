@@ -62,7 +62,7 @@ class Facade:
     def aluno_in_turma_facade(self, escolhidos, turma_add):
         """
         Pega uma lista de alunos previamente selecionados(lista de id's) e acrescenta o id da turma em seus atributos
-        :param escolhidos: Lista de alunos
+        :param escolhidos: Lista de alunos , ids
         :param turma_add: Id da turma
         :return: None
         """
@@ -135,6 +135,9 @@ class Facade:
         """
         self.turma.delete_turma(id)
 
+    def pesquisa_turma_facade(self, turma_nome):
+        return self.turma.pesquisa_turma(turma_nome)
+
     """
         Fim Facade Turma
     """
@@ -158,7 +161,7 @@ class Facade:
         cria uma lista com os itens armazenados na base de dados , com seus valores de id , nome ,tipo e preço
         :return:Lista dos itens criados
         """
-        return self.loja.Read_item()
+        return self.loja.read_item()
 
     def pesquisa_item_facade(self, id):
         """

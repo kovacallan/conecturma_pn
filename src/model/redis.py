@@ -5,6 +5,8 @@ db = Database(host='localhost', port=6379, db=0)
 
 """A classe DbAluno será usada como Usuário genérico no spike que é , por enquanto, um aluno onipotente"""
 
+""" INICIO DA CLASSE DbAluno"""
+
 
 class DbAluno(Model):
     __database__ = db
@@ -26,7 +28,7 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
-    turma_do_aluno = TextField()
+    turma_do_aluno = TextField(fts=True, index=True)
 
     def usuario_logado(self, id_usuario):
         """
@@ -131,7 +133,6 @@ class DbAluno(Model):
             if usuario.pontos_j1 % 3 == 0 and pontos == 1:
                 self.mais_vidas(usuario)
 
-
             if usuario.pontos_j1 % 5 == 0 and pontos == 1:
                 usuario.pontos_de_moedas += 5
                 self.mais_dinheiro(usuario)
@@ -158,7 +159,7 @@ class DbAluno(Model):
         self.pontos_de_moedas += 5
         usuario.save()
 
-    def mais_vidas(self,usuario):
+    def mais_vidas(self, usuario):
         self.pontos_de_vida += 1
         usuario.save()
 
@@ -166,7 +167,7 @@ class DbAluno(Model):
         usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
         usuario.save()
 
-    def desempenho_jogoj2(self,usuario):
+    def desempenho_jogoj2(self, usuario):
         usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
         usuario.save()
 
@@ -249,10 +250,15 @@ class DbAluno(Model):
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
 
 
+"""FINAL DA CLASSE DbAluno"""
+
+"""INICIO DA CLASSE DbTurma"""
+
+
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    turma_nome = TextField(index=True)
+    turma_nome = TextField(fts=True,index=True)
     quem_criou = TextField()
     desempenho_j1 = FloatField(default=0)
     desempenho_j2 = FloatField(default=0)
@@ -266,7 +272,7 @@ class DbTurma(Model):
         :param login: O nome do login de quem criou a turma
         :return: Acrescenta a turma criada ao banco de dados
         """
-        return self.create(turma_nome=turma, quem_criou=login)
+        self.create(turma_nome=turma, quem_criou=login)
 
     def read_turma(self):
         """
@@ -308,10 +314,6 @@ class DbTurma(Model):
         else:
             return turma
 
-    def turma_in(self):
-        pass
-
-
     def calcular_desempenho_jogos(self):
         soma = 0
         soma2 = 0
@@ -325,6 +327,10 @@ class DbTurma(Model):
             x += 1
             y += 1
         return soma / x, soma2 / y
+
+
+"""FIM DA CLASSE DbTurma"""
+"""INICIO DA CLASSE DbLoja"""
 
 
 class DbLoja(Model):
@@ -394,7 +400,10 @@ class DbLoja(Model):
         usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
                          usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
-        itens = [str(y['id']) for y in self.Read_item()]
+        itens = [str(y['id']) for y in self.read_item()]
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste
+
+
+"""FINAL DA CLASSE DbLoja"""

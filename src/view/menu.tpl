@@ -16,8 +16,8 @@
                 <button type="submit" name="n1" value="j2">Jogo 2</button>
             </form>
             <br>
-            <a href="/mostrar_score"><button type="submit" >SCORE</button></a>
-            <a href="/aluno"><button>Aluno</button></a>
+            <a href="/mostrar_score"><button id="1" type="submit" >SCORE</button></a>
+            <a id="2" href="/aluno"><button>Aluno</button>
             <a href="/turma"><button>turma</button></a>
             <a href="/loja"><button>Loja</button></a>
             <a href="/sair"><button>Sair</button></a>
