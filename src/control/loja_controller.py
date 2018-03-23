@@ -34,7 +34,7 @@ def cadastro_item():
     preco = request.forms.preco
     tipo = request.forms.tipo
 
-    facade.criar_item_loja_facade(nome, tipo, preco)
+    facade.criar_item_loja_facade(nome=request.forms.nome, tipo=request.forms.tipo, preco=request.forms.preco)
     redirect('cadastrar_item')
 
 @route('/ver_item')

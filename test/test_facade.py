@@ -52,7 +52,7 @@ class FacadeTest(unittest.TestCase):
         """Ja feito dentro do tear down"""
         pass
 
-    def test_aluno_in_turma_facade(self):
+    def _test_aluno_in_turma_facade(self):
         self.facade.create_aluno_facade("ni1", "spam")
         self.facade.create_aluno_facade("parrot1", "spam")
         self.facade.create_turma_facade("cheese shop1", "egg")
