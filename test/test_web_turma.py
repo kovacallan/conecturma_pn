@@ -41,6 +41,7 @@ class BlackBoxTest(unittest.TestCase):
         self.assertIn('<a href="/turma_cadastro"><button>Cadastro turma</button></a>', res.text, res.text)
         self.assertIn('<a href="/turma_read"><button>Ver turma</button></a>', res.text, res.text)
         self.assertIn('<a href="/user_menu"><button>Voltar</button></a>', res.text, res.text)
+        test_app.post('/cadastro_turma', dict(turma_nome='ni'))
 
 
 

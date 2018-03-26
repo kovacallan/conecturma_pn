@@ -37,7 +37,7 @@ def create_turma():
     Pagina para chamar a funçao create_turma , pedindo pelo tpl o parametro turma_nome
     :return: cria uma entrada no banco de dados da turma criada
     """
-    turma = request.params['turma_nome']
+    turma = request.forms['turma_nome']
 
     facade.create_turma_facade(turma, request.get_cookie("login", secret='2524'))
 
