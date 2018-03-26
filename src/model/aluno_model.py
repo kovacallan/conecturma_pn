@@ -25,7 +25,7 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
-    turma_do_aluno = TextField()
+    turma_do_aluno = TextField(fts=True, index=True)
 
     def usuario_logado(self, id_usuario):
         """
@@ -151,7 +151,6 @@ class DbAluno(Model):
                 return True
             else:
                 return False
-
         elif jogo == 'j2':
             if self.jogo_j2(retorno.id, pontos):
                 return True
@@ -270,8 +269,3 @@ class DbAluno(Model):
         """
         usuario = self.usuario_logado(id)
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
-
-
-
-
-

@@ -4,9 +4,7 @@
             <h1>selecione oq fazer nos alunos</h1>
 
             <a href="/cadastro_aluno">
-
             <button>criar aluno</button>
-
             </a>
 
             <a href="/ler_aluno">
