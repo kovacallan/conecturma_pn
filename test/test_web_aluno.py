@@ -7,7 +7,7 @@ import sys
 from test import *
 import re
 
-from model.redis import DbAluno
+from model.aluno_model import DbAluno
 
 sys.path.append('../')
 from index import application

@@ -10,7 +10,7 @@ facade = Facade()
 def index():
     if request.get_cookie("login", secret='2524'):
         itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
-        itens = facade.ver_item_loja_facade()
+        itens = facade.read_item_loja_facade()
         if itens:
             return dict(itens = itens, itens_comprados = str(itens_comprados))
         else:
@@ -41,7 +41,7 @@ def cadastro_item():
 @view('loja/ver_item')
 def ver_item():
     if request.get_cookie("login", secret='2524'):
-        read = facade.ver_item_loja_facade()
+        read = facade.read_item_loja_facade()
 
         return dict(teste = read)
     else:

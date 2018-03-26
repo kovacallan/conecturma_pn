@@ -1,7 +1,7 @@
 from bottle import view, get, request, redirect, route, BaseResponse, post
 
 from facade.facade import Facade
-from model.redis import DbAluno
+from model.aluno_model import DbAluno
 
 facade = Facade()
 
@@ -36,13 +36,10 @@ def ponto():
 
     jogo = request.params['jogo']
     ponto = int(request.params['ponto'])
-    cliques = int(request.params['cliques'])
-    """cliques_j1 = request.params['cliques']
-    cliques_j2 = request.params['cliques']"""
     usuario = request.get_cookie("login", secret="2524")
 
-    facade.ponto_jogo_facade(usuario, jogo, ponto)
 
+    facade.ponto_jogo_facade(usuario, jogo, ponto)
     redirect('/')
 
     """ redirect('/jogos', BaseResponse.add_header(jogo=jogo ,value=jogo))"""

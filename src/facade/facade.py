@@ -1,5 +1,6 @@
-from model.redis import DbAluno, DbTurma, DbLoja
-
+from model.aluno_model import DbAluno
+from model.turma_model import DbTurma
+from model.loja_model import DbLoja
 
 class Facade:
 
@@ -22,7 +23,7 @@ class Facade:
         :param senha: senha para logar
         :return:None
         """
-        self.aluno.create_usuario(nome, senha)
+        return self.aluno.create_aluno(nome, senha)
 
     def read_aluno_facade(self):
         """
@@ -30,6 +31,9 @@ class Facade:
         :return: Um dicionario com os principais dados de aluno: id , matricula , nome e turma
         """
         return self.aluno.read_usuario()
+
+    def update_aluno_facade(self,id,nome,senha):
+        return self.aluno.update_aluno(id=id,nome=nome,senha=senha)
 
     def delete_aluno_facade(self, deletar_ids):
         """
@@ -57,7 +61,7 @@ class Facade:
         :param ponto: O valor de pontos acrescidos , 0 ou 1
         :return: None
         """
-        self.aluno.pontos_jogo(usuario, jogo, ponto)
+        return self.aluno.pontos_jogo(usuario, jogo, ponto)
 
     def aluno_in_turma_facade(self, escolhidos, turma_add):
         """
@@ -118,7 +122,7 @@ class Facade:
         :param login: Nome do criador da turma
         :return: None
         """
-        self.turma.create_turma(nome, login)
+        return self.turma.create_turma(nome, login)
 
     def read_turma_facade(self):
         """
@@ -153,12 +157,13 @@ class Facade:
         """
         self.loja.create_item(nome, tipo, preco)
 
-    def ver_item_loja_facade(self):
+    def read_item_loja_facade(self):
         """
         cria uma lista com os itens armazenados na base de dados , com seus valores de id , nome ,tipo e preço
         :return:Lista dos itens criados
         """
-        return self.loja.Read_item()
+
+        return self.loja.read_item()
 
     def pesquisa_item_facade(self, id):
         """
