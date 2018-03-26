@@ -5,8 +5,6 @@ db = Database(host='localhost', port=6379, db=0)
 
 """A classe DbAluno será usada como Usuário genérico no spike que é , por enquanto, um aluno onipotente"""
 
-"""INICIO Dbaluno"""
-
 class DbAluno(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
@@ -51,7 +49,7 @@ class DbAluno(Model):
         matricula = ''.join(str(x) for x in matricula)
         return matricula
 
-    def validar_senha_vazia(self,senha):
+    def validar_senha_vazia(self, senha):
         if senha == "" or senha == None:
             return True
         else:
@@ -73,7 +71,7 @@ class DbAluno(Model):
         else:
             return TypeError("Não foi possivel salvar o Usuário")
 
-    def update_aluno(self,id,nome,senha):
+    def update_aluno(self, id, nome, senha):
         """
             Metodo principal para updade de
         :param id:
@@ -81,17 +79,14 @@ class DbAluno(Model):
         :param senha:
         :return:
         """
-        if self.validar_senha_vazia(senha):
+        if not self.validar_senha_vazia(senha):
             aluno = self.load(id)
             aluno.nome = nome
             aluno.senha = senha
-            if aluno.save():
-                return True
-            else:
-                return False
+            aluno.save()
+            return True
         else:
             return False
-
 
     def read_usuario(self):
         """
@@ -103,7 +98,7 @@ class DbAluno(Model):
 
         for aluno in self.query(order_by=self.nome):
             alunos.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.nome,
-                                    turma_do_aluno=aluno.turma_do_aluno))
+                               turma_do_aluno=aluno.turma_do_aluno))
         return alunos
 
     def pesquisa_usuario(self, usuario_nome):
@@ -119,10 +114,8 @@ class DbAluno(Model):
         usuario = None
         for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome, order_by=DbAluno.id):
             usuario = pesquisa
-        if usuario == '' and usuario == None:
-            return False
-        else:
-            return usuario
+
+        return usuario
 
     def aluno_delete(self, deletar_ids):
         """
@@ -149,57 +142,58 @@ class DbAluno(Model):
         ou acertado no jogo
         :return: None
         """
-        if pontos is None:
+        retorno = self.pesquisa_usuario(usuario)
+
+        if pontos == None:
             return False
         elif jogo == 'j1':
-            retorno = self.pesquisa_usuario(usuario)
-            usuario = self.load(retorno.id)
-            usuario.pontos_j1 += pontos
-            usuario.cliques_j1 += 1
-            self.desempenho_jogoj1(usuario)
-            # print('cliques j1:{}'.format(usuario.cliques_j1))
-
-            if usuario.pontos_j1 % 3 == 0 and pontos == 1:
-                self.mais_vidas(usuario)
-
-            if usuario.pontos_j1 % 5 == 0 and pontos == 1:
-                usuario.pontos_de_moedas += 5
-                self.mais_dinheiro(usuario)
-            usuario.save()
+            if self.jogo_j1(retorno.id, pontos):
+                return True
+            else:
+                return False
 
         elif jogo == 'j2':
-            retorno = self.pesquisa_usuario(usuario)
-            usuario = self.load(retorno.id)
-            usuario.pontos_j2 += pontos
-            usuario.cliques_j2 += 1
-            usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
-            if usuario.pontos_j2 % 3 == 0 and pontos == 1:
-                usuario.pontos_de_vida += 1
+            if self.jogo_j2(retorno.id, pontos):
+                return True
+            else:
+                return False
 
-            if usuario.pontos_j2 % 5 == 0:
-                usuario.pontos_de_moedas += 5
-                usuario.mais_dinheiro(usuario)
+    def jogo_j1(self, id, pontos):
+        usuario = self.load(id)
+        usuario.pontos_j1 += pontos
+        usuario.cliques_j1 += 1
+        self.desempenho_jogoj1(usuario)
+        if usuario.pontos_j1 % 3 == 0 and pontos == 1:
+            self.mais_vidas(usuario)
+        if usuario.pontos_j1 % 5 == 0 and pontos == 1:
+            self.mais_dinheiro(usuario)
+        usuario.save()
+        return True
 
-            usuario.save()
-            return True
-        else:
-            return False
+    def jogo_j2(self, id, pontos):
+        usuario = self.load(id)
+        usuario.pontos_j2 += pontos
+        usuario.cliques_j2 += 1
+        self.desempenho_jogoj2(usuario)
+        if usuario.pontos_j2 % 3 == 0 and pontos == 1:
+            usuario.mais_vidas(usuario)
+
+        if usuario.pontos_j2 % 5 == 0 and pontos == 1:
+            usuario.mais_dinheiro(usuario)
+        usuario.save()
+        return True
 
     def mais_dinheiro(self, usuario):
-        self.pontos_de_moedas += 5
-        usuario.save()
+        usuario.pontos_de_moedas += 5
 
     def mais_vidas(self, usuario):
-        self.pontos_de_vida += 1
-        usuario.save()
+        usuario.pontos_de_vida += 1
 
     def desempenho_jogoj1(self, usuario):
         usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
-        usuario.save()
 
     def desempenho_jogoj2(self, usuario):
         usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
-        usuario.save()
 
     def alunos_in_turma(self, escolha, turma_add):
         """
@@ -211,11 +205,9 @@ class DbAluno(Model):
         """
         res = DbTurma.load(turma_add)
         turma_add = res.turma_nome
-        print(turma_add)
         for escolha in escolha:
             usuario = self.load(escolha)
             usuario.turma_do_aluno = turma_add
-            print(usuario.usuario_nome, usuario.turma_do_aluno)
             usuario.save()
 
     def comprar_item(self, id_usuario, id_item):
@@ -279,155 +271,7 @@ class DbAluno(Model):
         usuario = self.usuario_logado(id)
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
 
-"""FIM Dbaluno"""
-class DbTurma(Model):
-    __database__ = db
-    id = AutoIncrementField(primary_key=True)
-    turma_nome = TextField(index=True)
-    quem_criou = TextField()
-    desempenho_j1 = FloatField(default=0)
-    desempenho_j2 = FloatField(default=0)
-    professor_encarregado = TextField()
-
-    def create_turma(self, turma, login):
-        """
-        Cria uma turma e armazena no banco de dados ,com o dado de quem criou a turma
-
-        :param turma: O numero , ou o nome da turma
-        :param login: O nome do login de quem criou a turma
-        :return: Acrescenta a turma criada ao banco de dados
-        """
-        if self.create(turma_nome=turma, quem_criou=login):
-            return True
-        else:
-            return TypeError("Não foi possivel salvar o Aluno")
-
-    def read_turma(self):
-        """
-        Cria um dicionario vazio e acrescenta os valores de cada turma armazenada
-
-        :return: O dicionario preenchido com as turmas
-        """
-
-        turma_dic = []
-
-        for turma in self.query(order_by=self.id):
-            turma_dic.append(
-                dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, desempenho_j1=turma.desempenho_j1,
-                     desempenho_j2=turma.desempenho_j2))
-
-        return turma_dic
-
-    def delete_turma(self, id):
-        """
-        Deleta as turmas por id , por enquanto nao implementado
-
-        :param id: O id da turma
-        :return: None
-        """
-        turma = DbTurma(id=id)
-        turma.delete()
-
-    def pesquisa_turma(self, turma_nome):
-        """
-        Ainda nao implementado
-        :return:
-        """
-        turma = {}
-        for pesquisa in DbTurma.query(DbTurma.turma_nome == turma_nome, order_by=DbTurma.id):
-            turma = pesquisa
-
-        if turma == '' and turma is None:
-            return False
-        else:
-            return turma
-
-    def turma_in(self):
-        pass
-
-    def calcular_desempenho_jogos(self):
-        soma = 0
-        soma2 = 0
-        x = 0
-        y = 0
-        for DbAluno.id in DbTurma:
-            retorno = self.pesquisa_turma(DbAluno.id)
-            usuario = self.load(retorno)
-            soma += usuario.desempenho_j1
-            soma2 += usuario.desempenho_j2
-            x += 1
-            y += 1
-        return soma / x, soma2 / y
 
 
-class DbLoja(Model):
-    __database__ = db
-    id = AutoIncrementField(primary_key=True)
-    nome = TextField()
-    tipo = IntegerField(default=0)
-    preco = IntegerField(default=0)
-    media_turma_jogos = FloatField(default=0)
 
-    def create_item(self, nome, tipo, preco):
-        """
-        Cria o item no banco de dados
-        :param nome:Nome do item
-        :param tipo:Se ele é cor,rosto,acessório,corpo
-        :param preco: é o preço do item
-        :return:
-        """
-        self.create(nome=nome, tipo=tipo, preco=preco)
 
-    def read_item(self):
-        """
-        Leitura dos itens cadastrados na plataforma
-        :return: Os itens cadastrados
-        """
-        itens = []
-        for item in self.query(order_by=self.id):
-            itens.append(dict(id=item.id, nome=item.nome, tipo=item.tipo, preco=item.preco))
-
-        if itens != '' and itens != None and itens != 0:
-            return itens
-        else:
-            return False
-
-    def pesquisar_item(self, id):
-        """
-        Pesquisa por item especifico
-        :param id:Id do item
-        :return:O objeto que corresponde ao Id
-        """
-
-        item = None
-
-        for pesquisa in DbLoja.query(DbLoja.id == id, order_by=DbAluno.id):
-            item = pesquisa
-
-        if item == '' and item == None:
-            return False
-        else:
-            return item
-
-    def item_delete(self, id):
-        """
-        deleta o item por id
-        :param id:
-        :return: void
-        """
-        loja = DbLoja(id=id)
-        loja.delete()
-
-    def ja_possui_item(self, usuario_logado):
-        """
-        Envia se o usuario já comprou o item
-        :param usuario_logado: Id do usuario
-        :return: Lista de itens que o usuario não tem
-        """
-        usuario = DbAluno()
-        itens_usuario = [x.decode('utf-8') for x in
-                         usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
-        itens = [str(y['id']) for y in self.read_item()]
-        lista_teste = [z for z in itens if z not in itens_usuario]
-
-        return lista_teste

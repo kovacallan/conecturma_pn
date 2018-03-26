@@ -1,6 +1,6 @@
 from bottle import *
 
-from model.redis import DbTurma
+from model.aluno_model import DbTurma
 
 """route, view, get, request, redirect, post"""
 from facade.facade import Facade

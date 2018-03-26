@@ -1,5 +1,6 @@
-from model.redis import DbAluno, DbTurma, DbLoja
-
+from model.aluno_model import DbAluno
+from model.turma_model import DbTurma
+from model.loja_model import DbLoja
 
 class Facade:
 
@@ -60,7 +61,7 @@ class Facade:
         :param ponto: O valor de pontos acrescidos , 0 ou 1
         :return: None
         """
-        self.aluno.pontos_jogo(usuario, jogo, ponto)
+        return self.aluno.pontos_jogo(usuario, jogo, ponto)
 
     def aluno_in_turma_facade(self, escolhidos, turma_add):
         """
@@ -121,7 +122,7 @@ class Facade:
         :param login: Nome do criador da turma
         :return: None
         """
-        self.turma.create_turma(nome, login)
+        return self.turma.create_turma(nome, login)
 
     def read_turma_facade(self):
         """
