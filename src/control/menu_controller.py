@@ -35,6 +35,6 @@ def hello():
                         'rosto': rosto,
                         'acessorio': acessorio,
                         'corpo': corpo}
-        return dict(usuario=usuario.usuario_nome, avatar = avatar_pecas)
+        return dict(usuario=usuario.nome, avatar = avatar_pecas)
     else:
         redirect('/')

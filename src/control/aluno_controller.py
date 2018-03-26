@@ -1,6 +1,6 @@
 from bottle import *
 
-from model.redis import DbTurma
+from model.aluno_model import DbTurma
 
 """route, view, get, request, redirect, post"""
 from facade.facade import Facade
@@ -37,8 +37,10 @@ def create_aluno():
     Direcionamento a pagina para criar aluno buscando , na tpl os parâmetros usuário , senha e matricula
     :return: cria o aluno e volta para a pagina geral aluno
     """
-    facade.create_aluno_facade(request.forms['aluno_nome'], request.forms['senha'])
-    redirect('/')
+    if facade.create_aluno_facade(request.forms['aluno_nome'], request.forms['senha']):
+        redirect('/')
+    else:
+        print("deu erro na criação do ALuno")
 
 
 """Read de aluno"""
