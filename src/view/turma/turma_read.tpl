@@ -12,7 +12,6 @@
             <tr>
                 <td>
                 {{x['nome']}}
-<!-- <a href="/turma_in">  </a> -->
                 </td>
 
                 <td>

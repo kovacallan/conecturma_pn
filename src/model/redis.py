@@ -131,11 +131,12 @@ class DbAluno(Model):
             # print('cliques j1:{}'.format(usuario.cliques_j1))
 
             if usuario.pontos_j1 % 3 == 0 and pontos == 1:
-                self.mais_vidas(usuario)
+                usuario.pontos_de_vida += 1
+                # self.mais_vidas(usuario)
 
             if usuario.pontos_j1 % 5 == 0 and pontos == 1:
                 usuario.pontos_de_moedas += 5
-                self.mais_dinheiro(usuario)
+                # self.mais_dinheiro(usuario)
 
             usuario.save()
         elif jogo == 'j2':
@@ -149,19 +150,19 @@ class DbAluno(Model):
             if usuario.pontos_j2 % 3 == 0 and pontos == 1:
                 usuario.pontos_de_vida += 1
 
-            if usuario.pontos_j2 % 5 == 0:
+            if usuario.pontos_j2 % 5 == 0 and pontos == 1:
                 usuario.pontos_de_moedas += 5
                 usuario.mais_dinheiro(usuario)
 
             usuario.save()
 
-    def mais_dinheiro(self, usuario):
-        self.pontos_de_moedas += 5
-        usuario.save()
-
-    def mais_vidas(self, usuario):
-        self.pontos_de_vida += 1
-        usuario.save()
+    # def mais_dinheiro(self, usuario):
+    #     self.pontos_de_moedas += 5
+    #     usuario.save()
+    #
+    # def mais_vidas(self, usuario):
+    #     self.pontos_de_vida += 1
+    #     usuario.save()
 
     def desempenho_jogoj1(self, usuario):
         usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100

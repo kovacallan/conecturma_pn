@@ -92,57 +92,7 @@ class BlackBoxTest(unittest.TestCase):
         """FINAL DE TEST DA PASTA ALUNO"""
 
         """INICIO DE TEST DE PASTA TURMA"""
-    """Teste turma.tpl"""
-    def test_turma_inicio(self):
-        res = test_app.get('/turma')
-        self._fixaluno()
-        self.assertEqual(res.status_int, 200)
-        self.assertIn('<a href="/turma_cadastro"><button>Cadastro turma</button></a>', res.text, res.text)
-        self.assertIn('<a href="/turma_read"><button>Ver turma</button></a>', res.text, res.text)
-        self.assertIn('<a href="/user_menu"><button>Voltar</button></a>', res.text, res.text)
-
-    """Teste """
-
-
-
-
-    def test_jogo(self):
-        self._fixaluno()
-        res = test_app.get("/jogos?n1=j1")
-        res = test_app.get("/jogos?n1=j2")
-        # res1 = test_follow.follow()
-        self.assertEqual(res.status_int, 200)
-        self.assertIn(' <form action="/ponto" method="get">', res.text, res.text)
-
-    def test_score_coins_lifes(self):
-        """A pagina de Score deve mostrar a pontuaçao de J1 , J2 , Moedas , Vidas e desempenho do aluno em cada jogo"""
-        res = test_app.get('/mostrar_score')
-        self.assertEqual(res.status_int, 200)
-        self.assertIn('<h4>Você acertou', res.text)
-        self.assertIn('    <h3>J2</h3>', res.text)
-        self.assertIn('<h4>Você acertou ', res.text)
-        self.assertIn('<h3>Vidas</h3>', res.text)
-
-    def _test_alun_in_turma(self):
-        self._fixaluno()
-        res = test_app.get('/ler_aluno')
-        self.assertEqual(res.status_int, 200)
-        self.assertIn('''<input type="checkbox" name="aluno''', res.text, res.text)
-        self.assertIn("egg</input>", res.text, res.text)
-        self.assertIn("<option value=", res.text, res.text)
-
-    def test_del_alunos(self):
-        res = test_app.get('/ler_aluno')
-        self.assertIn(
-            '<button type="submit" name ="deletar_estudantes" formaction="/deletar_alunos">deletar alunos selecionados</button>',
-            res.text,
-            res.text)
-
-    def ver_itens(self):
-        res = test_app.get('/ver_itens_comprados')
-        self.assertEqual(res.status_int, 200)
-        self.assertIn('<form action="/equipar_item" method="post">')
-
+    """testa todos os camihos de butoes referentes a aluno"""
     def _test_butoes(self):
         res = test_app.get('/user_menu')
         test_response.click(description='<a id="2" href="/aluno"><button>Aluno</button></a>', linkid="2",
