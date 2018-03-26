@@ -87,3 +87,33 @@ class FacadeTest(unittest.TestCase):
 
     def test_create_turma(self):
         self._create_turma()
+
+    """FIM TESTE LOJA"""
+
+    """TESTE REDE"""
+    def _create_rede(self):
+        rede = self.facade.create_rede_facade("egg", "2546","(21)9999-9999")
+        self.assertIs(rede,True)
+
+    def _update_rede(self):
+        pass
+
+    def _delete_rede(self):
+        rede = self.facade.read_rede_facade()
+        escolhidos = []
+        for redes in rede:
+            escolhidos.append(redes['id'])
+        self.facade.delete_rede_facade(escolhidos)
+
+    def _pesquisa_rede(self):
+        aluno = self.facade.pesquisa_aluno_facade("Brian")
+        self.assertIs(aluno,aluno)
+        aluno = self.facade.pesquisa_aluno_facade("Sily walk")
+        self.assertIs(aluno, None)
+
+    def test_create_rede(self):
+        self._create_rede()
+
+    def test_delete_rede(self):
+        self._delete_rede()
+    """FIM TESTE REDE"""
