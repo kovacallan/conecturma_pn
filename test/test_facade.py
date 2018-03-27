@@ -19,6 +19,10 @@ class FacadeTest(unittest.TestCase):
         aluno = self.facade.create_aluno_facade("Brian", "")
         self.assertTrue(aluno, TypeError)
 
+    def _create_aluno_aluno_vazio(self):
+        aluno = self.facade.create_aluno_facade(" "," 123")
+        self.asserrTrue(TypeError, True)
+
     def _create_aluno_fail(self):
         aluno = self.facade.create_aluno_facade("Brian", "123")
         self.assertEqual(aluno, TypeError)
@@ -26,7 +30,7 @@ class FacadeTest(unittest.TestCase):
         aluno = self.facade.create_aluno_facade("egg", "")
         self.assertEqual(aluno, True)
 
-    def _update_aluno(self):
+    def update_aluno(self):
         aluno = self.facade.pesquisa_aluno_facade("egg")
         updadate = self.facade.update_aluno_facade(aluno.id, "knight", "ni")
         self.assertIs(updadate, True)
@@ -52,6 +56,20 @@ class FacadeTest(unittest.TestCase):
             escolhidos += [aluno['id']]
         self.facade.delete_aluno_facade(escolhidos)
 
+    def _test_mudar_senha(self):
+        """
+        Cria usuario, o facade deve receber a senha antiga e a nova
+
+        :return:None
+        """
+        aluno = self.facade.create_aluno_facade("egg", "123")
+        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        self.facade.new_senha_facade(aluno1.id, "123", "321")
+
+    def _test_mudar_usuario_nome(self):
+        aluno = self.facade.pesquisa_aluno_facade("egg")
+        self.facade.new_nome_user_facade(aluno.id, "egg", "123" "spam")
+
     """Métododos de Test"""
     def test_create_aluno(self):
         self._create_aluno()
@@ -60,19 +78,33 @@ class FacadeTest(unittest.TestCase):
         self._create_aluno_senha_vazia()
 
     @unittest.expectedFailure
-    def test_create_aluno_fail(self):
+    def test_all_aluno(self):
+        self._create_aluno_fail()
+        self._update_aluno()
+        self._pesquisa_aluno()
+        self._pontos_jogo()
+        self._create_aluno_aluno_vazio()
+        self._delete_alunos()
+
+    def _test_create_aluno_fail(self):
         self._create_aluno_fail()
 
-    def test_create_update_aluno(self):
+    def _test_create_update_aluno(self):
         self._update_aluno()
 
-    def test_pesquisa_aluno(self):
+    def _test_pesquisa_aluno(self):
         self._pesquisa_aluno()
 
     def _test_pontos_jogo(self):
         self._pontos_jogo()
 
-    def test_delete_alunos(self):
+    def _test_delete_alunos(self):
+
+        self._delete_alunos()
+    def _test_all_aluno(self):
+        self._create_aluno_fail()
+        self._update_aluno()
+        self._pesquisa_aluno()
         self._pontos_jogo()
         self._delete_alunos()
 

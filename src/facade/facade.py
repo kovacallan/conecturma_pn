@@ -32,8 +32,8 @@ class Facade:
         """
         return self.aluno.read_usuario()
 
-    def update_aluno_facade(self,id,nome,senha):
-        return self.aluno.update_aluno(id=id,nome=nome,senha=senha)
+    def update_aluno_facade(self, id, nome,senha):
+        return self.aluno.update_aluno(id=id, nome=nome, senha=senha)
 
     def delete_aluno_facade(self, deletar_ids):
         """
@@ -106,6 +106,13 @@ class Facade:
         tudo fica com o valor default
         """
         return self.aluno.avatar(id)
+
+    # def new_senha_facade(self,usuario,senha_antiga, senha_nova):
+    #     self.aluno.definir_nova_senha(usuario,senha_antiga,senha_nova)
+    #
+    # def new_nome_user_facade(self, usuario, senha, novo_nome):
+    #     self.aluno.definir_novo_usuario_nome(usuario, senha, novo_nome)
+
 
     """
         Fim Facade Usuario/Aluno

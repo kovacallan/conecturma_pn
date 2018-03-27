@@ -20,6 +20,9 @@
             <a id="2" href="/aluno"><button>Aluno</button>
             <a href="/turma"><button>turma</button></a>
             <a href="/loja"><button>Loja</button></a>
+            <a href="/alterar_senha"><button>Modificar a senha</button></a>
+            <a href="/alterar_usuario_nome"><button>Modificar o Nome</button></a>
+            <button>configuraçoes de perfil</button>
             <a href="/sair"><button>Sair</button></a>
         </div>
     </div>

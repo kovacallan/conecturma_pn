@@ -97,6 +97,13 @@ class BlackBoxTest(unittest.TestCase):
         res = test_app.get('/user_menu')
         test_response.click(description='<a id="2" href="/aluno"><button>Aluno</button></a>', linkid="2",
                             href="/aluno", verbose=True)
+    def test_mudar_senha(self):
+        res = test_app.get('/new_senha')
+        self.assertEqual(res.status_int, 200)
+        self.assertIn('<form action="/new_senha" method="post">')
+
+
+
 
 
 test_app.reset()
