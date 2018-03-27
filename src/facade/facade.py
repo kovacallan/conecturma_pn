@@ -1,7 +1,10 @@
 from model.aluno_model import DbAluno
+from model.observador_model import DbObservador
+from model.rede_model import DbRede
 from model.turma_model import DbTurma
 from model.loja_model import DbLoja
 from model.rede_model import DbRede
+
 
 class Facade:
 
@@ -10,8 +13,10 @@ class Facade:
         método para utilização do banco de dados
         """
         self.aluno = DbAluno()
+        self.observador = DbObservador()
         self.rede = DbRede()
         self.turma = DbTurma()
+        self.loja = DbLoja()
         self.loja = DbLoja()
 
     """
@@ -34,7 +39,7 @@ class Facade:
         """
         return self.aluno.read_usuario()
 
-    def update_aluno_facade(self, id, nome,senha):
+    def update_aluno_facade(self, id, nome, senha):
         return self.aluno.update_aluno(id=id, nome=nome, senha=senha)
 
     def delete_aluno_facade(self, deletar_ids):
@@ -115,24 +120,45 @@ class Facade:
     # def new_nome_user_facade(self, usuario, senha, novo_nome):
     #     self.aluno.definir_novo_usuario_nome(usuario, senha, novo_nome)
 
-
     """
         Fim Facade Usuario/Aluno
     """
 
     """
+        Inicio Facade observador
+    """
+    def create_observador_facade(self,nome, senha, telefone, cpf, email,tipo):
+        return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,tipo=tipo)
+
+    def read_observador_facade(self):
+        return self.observador.read_observador()
+
+    def update_observador_facade(self,id,nome,senha,telefone,cpf,email):
+        return self.observador.update_observador(id,nome,senha,telefone,cpf,email)
+
+    def delete_observador_facade(self):
+        pass
+    def search_observador_facade(self,nome):
+        return self.observador.search_observador(nome)
+
+    """
+        Fim Facade observador
+    """
+
+    """
         Inicio Facade Rede
     """
-    def create_rede_facade(self, nome,cod,telefone):
-        return self.rede.create_rede(nome = nome,cod=cod,telefone=telefone)
+
+    def create_rede_facade(self, nome, cod, telefone):
+        return self.rede.create_rede(nome=nome, cod=cod, telefone=telefone)
 
     def read_rede_facade(self):
         return self.rede.read_rede()
 
-    def update_rede_facade(self,id,nome,cod,telefone):
-        return self.rede.update_rede(id,nome,cod,telefone)
+    def update_rede_facade(self, id, nome, cod, telefone):
+        return self.rede.update_rede(id, nome, cod, telefone)
 
-    def delete_rede_facade(self,ids):
+    def delete_rede_facade(self, ids):
         return self.rede.delete_rede(ids)
 
     def pesquisa_rede_facade(self, rede):
@@ -220,9 +246,8 @@ class Facade:
         :param usuario_logado:autoexplicativo
         :return:lista de itens q ele nao tem
         """
-        return self.loja.ja_possui_item(usuario_logado = usuario_logado)
+        return self.loja.ja_possui_item(usuario_logado=usuario_logado)
 
     """
         Fim Facade loja
     """
-
