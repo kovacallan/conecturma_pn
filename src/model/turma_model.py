@@ -1,5 +1,8 @@
 from walrus import *
-from model.aluno_model import *
+
+
+from model.aluno_model import DbAluno
+
 db = Database(host='localhost', port=6379, db=0)
 
 class DbTurma(Model):

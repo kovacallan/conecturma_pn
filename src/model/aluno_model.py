@@ -7,6 +7,7 @@ db = Database(host='localhost', port=6379, db=0)
 
 """A classe DbAluno será usada como Usuário genérico no spike que é , por enquanto, um aluno onipotente"""
 
+
 class DbAluno(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
@@ -83,8 +84,14 @@ class DbAluno(Model):
         """
         if not self.validar_senha_vazia(senha):
             aluno = self.load(id)
-            aluno.nome = nome
-            aluno.senha = senha
+            if nome ==aluno.nome:
+                pass
+            else:
+                aluno.nome = nome
+            if senha != aluno.senha and senha != "":
+                aluno.senha = senha
+            else:
+                pass
             aluno.save()
             return True
         else:
@@ -271,3 +278,16 @@ class DbAluno(Model):
         """
         usuario = self.usuario_logado(id)
         return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)
+
+    def definir_nova_senha(self, usuario_id, senha_antiga, senha_nova):
+        """Pega o id do usuario e muda a senha"""
+
+        usuario = self.load(usuario_id)
+        if senha_antiga == usuario.senha:
+            usuario.senha = senha_nova
+            usuario.save()
+            print(usuario.senha, usuario)
+        else:
+            print("senha antiga errada")
+    # def definir_novo_usuario_nome(self,usuario_id, senha, novo_nome):
+    #     usuario = self.load(usuario_id)
