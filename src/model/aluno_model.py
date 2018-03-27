@@ -1,5 +1,7 @@
 from walrus import *
 from random import randrange
+from src.model.loja_model import *
+from src.model.turma_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 

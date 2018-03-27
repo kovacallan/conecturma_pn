@@ -1,6 +1,7 @@
 from model.aluno_model import DbAluno
 from model.turma_model import DbTurma
 from model.loja_model import DbLoja
+from model.rede_model import DbRede
 
 class Facade:
 
@@ -9,6 +10,7 @@ class Facade:
         método para utilização do banco de dados
         """
         self.aluno = DbAluno()
+        self.rede = DbRede()
         self.turma = DbTurma()
         self.loja = DbLoja()
 
@@ -119,6 +121,28 @@ class Facade:
     """
 
     """
+        Inicio Facade Rede
+    """
+    def create_rede_facade(self, nome,cod,telefone):
+        return self.rede.create_rede(nome = nome,cod=cod,telefone=telefone)
+
+    def read_rede_facade(self):
+        return self.rede.read_rede()
+
+    def update_rede_facade(self,id,nome,cod,telefone):
+        return self.rede.update_rede(id,nome,cod,telefone)
+
+    def delete_rede_facade(self,ids):
+        return self.rede.delete_rede(ids)
+
+    def pesquisa_rede_facade(self, rede):
+        return self.rede.pesquisa_rede(rede)
+
+    """
+        Fim Facade Rede
+    """
+
+    """
         Inicio Facade Turma
     """
 
@@ -201,3 +225,4 @@ class Facade:
     """
         Fim Facade loja
     """
+

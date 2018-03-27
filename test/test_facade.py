@@ -1,3 +1,4 @@
+# coding: utf-8
 import unittest
 # from unittest.mock import MagicMock
 import bottle
@@ -119,3 +120,50 @@ class FacadeTest(unittest.TestCase):
 
     def test_create_turma(self):
         self._create_turma()
+
+    """FIM TESTE LOJA"""
+
+    """TESTE REDE"""
+    def _create_rede(self):
+        rede = self.facade.create_rede_facade("egg", "2546","(21)9999-9999")
+        self.assertIs(rede,True)
+
+    def _update_rede(self):
+        rede = self.facade.pesquisa_rede_facade("egg")
+        self.facade.update_rede_facade(rede.id, "Ni","2222","(11)8888-8888")
+        rede = self.facade.pesquisa_rede_facade("Ni")
+        self.assertEqual(rede.nome,"Ni")
+        self.assertEqual(rede.cod, "2222")
+        self.assertEqual(rede.telefone, "(11)8888-8888")
+
+    def _pesquisa_rede(self):
+        rede = self.facade.pesquisa_rede_facade("Ni")
+        self.assertIs(rede,rede)
+        rede = self.facade.pesquisa_rede_facade("Sily walk")
+        self.assertIs(rede, None)
+
+    def _delete_rede(self):
+        rede = self.facade.read_rede_facade()
+        escolhidos = []
+        for redes in rede:
+            escolhidos.append(redes['id'])
+        self.facade.delete_rede_facade(escolhidos)
+
+
+
+    def test_create_rede(self):
+        self._create_rede()
+
+    def _test_update_rede(self):
+        self._update_rede()
+
+    def test_pesquisa_rede(self):
+        self._pesquisa_rede()
+
+    def test_delete_rede(self):
+        self._update_rede()
+        self._delete_rede()
+    """FIM TESTE REDE"""
+
+    if __name__ == '__main__':
+        unittest.main()
