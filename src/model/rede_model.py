@@ -6,7 +6,7 @@ class DbRede(Model):
     __database__= db
 
     id = AutoIncrementField(primary_key = True)
-    nome = TextField()
+    nome = TextField(fts=True, index=True)
     cod = TextField()
     telefone = TextField()
 
@@ -25,9 +25,21 @@ class DbRede(Model):
 
         return redes
 
-    def update_rede(self,id,nome):
+    def update_rede(self,id,nome,cod,telefone):
         rede = self.load(id)
-        rede.nome = nome
+        if nome == "" or nome == None:
+            pass
+        else:
+            rede.nome = nome
+        if cod == "" or cod == None:
+            pass
+        else:
+            rede.cod = cod
+        if telefone == "" or telefone == None:
+            pass
+        else:
+            rede.telefone = telefone
+
         rede.save()
 
     def delete_rede(self,deletar_ids):
@@ -37,8 +49,8 @@ class DbRede(Model):
 
     def pesquisa_rede(self,rede):
 
-        rede = None
-        for pesquisa in self.query(self.nome == rede, order_by=self.id):
-            rede = pesquisa
+        rede_pesquisa = None
+        for pesquisa in DbRede.query(DbRede.nome == rede, order_by=self.id):
+            rede_pesquisa = pesquisa
 
-        return rede
+        return rede_pesquisa

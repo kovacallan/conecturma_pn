@@ -122,8 +122,8 @@ class Facade:
     def read_rede_facade(self):
         return self.rede.read_rede()
 
-    def update_rede_facade(self,id,nome):
-        return self.rede.update_rede(id,nome)
+    def update_rede_facade(self,id,nome,cod,telefone):
+        return self.rede.update_rede(id,nome,cod,telefone)
 
     def delete_rede_facade(self,ids):
         return self.rede.delete_rede(ids)
