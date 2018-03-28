@@ -77,10 +77,10 @@ class DbAluno(Model):
     def update_aluno(self, id, nome, senha):
         """
             Metodo principal para updade de
-        :param id:
-        :param nome:
-        :param senha:
-        :return:
+        :param id:O id do usuario a tomar update
+        :param nome:novo nome , se n tiver um novo nome mantem o antigo
+        :param senha: A senha a ser modificada , se n tiver uma nova senha mantem o antigo
+        :return:True se conseguir fazer o update e false se nao conseguir mudar nada
         """
         if not self.validar_senha_vazia(senha):
             aluno = self.load(id)

@@ -13,6 +13,7 @@ class FacadeTest(unittest.TestCase):
     """TESTE USUARIO/ALUNO"""
 
     def _create_aluno(self):
+
         aluno = self.facade.create_aluno_facade("egg", "123")
         self.assertEqual(aluno, True)
 

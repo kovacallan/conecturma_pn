@@ -25,7 +25,7 @@ class DbTurma(Model):
         if self.create(turma_nome=turma, quem_criou=login):
             return True
         else:
-            return TypeError("Não foi possivel salvar o Aluno")
+            return TypeError("Não foi possivel salvar a turma")
 
     def read_turma(self):
         """

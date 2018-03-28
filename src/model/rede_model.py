@@ -12,12 +12,23 @@ class DbRede(Model):
     telefone = TextField()
 
     def create_rede(self, nome, cod, telefone):
+        """
+        Cria rede com nome , código da rede e o telefone
+        :param nome: nome da rede
+        :param cod: Codigo de identificaçao de rede
+        :param telefone: telefone da rede da rede
+        :return: True se conseguir criar e false se der alguém erro
+        """
         if self.create(nome=nome, cod=cod, telefone=telefone):
             return True
         else:
             return False
 
     def read_rede(self):
+        """
+        Cria uma lista que coloca os valores a ser mostrados pela rede
+        :return: a lista
+        """
 
         redes = []
         for rede in self.query(order_by=self.id):
@@ -27,6 +38,15 @@ class DbRede(Model):
         return redes
 
     def update_rede(self, id, nome, cod, telefone):
+        """
+        Pega o id da rede a ser modificada , o novo nome , o novo codigo de identificaçao e o novo telefone da sededa rede
+
+        :param id: id da rede que vai ser mudada
+        :param nome:novo nome da rede para trocar
+        :param cod: codigo de identificaçao da rede
+        :param telefone:telefone da sede da rede
+        :return:
+        """
         rede = self.load(id)
         if nome == "" or nome == None:
             pass
@@ -44,6 +64,11 @@ class DbRede(Model):
         rede.save()
 
     def delete_rede(self, deletar_ids):
+        """
+        deleta as redes por lista de ids
+        :param deletar_ids:lista de ids das redes a serem deletadas
+        :return:None
+        """
         for deletar_ids in deletar_ids:
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
