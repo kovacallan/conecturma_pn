@@ -13,8 +13,8 @@ class DbObservador(Model):
     email = TextField()
     tipo = IntegerField()
 
-    def create_observador(self, nome, senha, telefone, cpf, email,tipo):
-        if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,tipo=tipo):
+    def create_observador(self, nome, senha, telefone, cpf, email, tipo):
+        if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo):
             return True
         else:
             return False
@@ -27,19 +27,17 @@ class DbObservador(Model):
 
         return observador
 
-    def update_observador(self, id,nome,senha,telefone,cpf,email):
+    def update_observador(self, id, nome, telefone, cpf, email):
 
         observador = DbObservador.load(id)
         observador.nome = nome
-        observador.senha = senha
         observador.telefone = telefone
         observador.cpf = cpf
         observador.email = email
 
         observador.save()
 
-
-    def delete_observador(self,deletar_ids):
+    def delete_observador(self, deletar_ids):
         for deletar_ids in deletar_ids:
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
@@ -48,6 +46,7 @@ class DbObservador(Model):
 
         observador = None
         for search in DbObservador.query(DbObservador.nome == nome):
-            observador = search
+            observador=dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                              cpf=search.cpf, email=search.email,tipo = search.tipo)
 
         return observador

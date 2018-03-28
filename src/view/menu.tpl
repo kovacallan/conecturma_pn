@@ -18,6 +18,7 @@
             <br>
             <a href="/mostrar_score"><button id="1" type="submit" >SCORE</button></a>
             <a id="2" href="/aluno"><button>Aluno</button>
+            <a href="/observador"><button>Observador</button>
             <a href="/turma"><button>turma</button></a>
             <a href="/loja"><button>Loja</button></a>
             <a href="/alterar_senha"><button>Modificar a senha</button></a>

@@ -2,6 +2,7 @@ from bottle import run, default_app
 from control.static_controller import *
 from control.menu_controller import *
 from control.aluno_controller import *
+from control.observador_controller import *
 from control.login_controller import *
 from control.jogo_controller import *
 from control.turma_controller import *

@@ -122,24 +122,23 @@ class FacadeTest(unittest.TestCase):
 
     def _update_observador(self):
         observador = self.facade.search_observador_facade('Egg')
-        observador_update = self.facade.update_observador_facade(id=observador.id, nome='Knight', senha='ni',
+        observador_update = self.facade.update_observador_facade(id=observador['id'], nome='Knight',
                                                                  telefone='(11)8888-8888', cpf='999999999',
                                                                  email='knight@ni.com')
         observador = self.facade.search_observador_facade('Knight')
-        self.assertEqual(observador.nome, 'Knight')
-        self.assertEqual(observador.senha, 'ni')
-        self.assertEqual(observador.telefone, '(11)8888-8888')
-        self.assertEqual(observador.cpf, '999999999')
-        self.assertEqual(observador.email, 'knight@ni.com')
+        self.assertEqual(observador['nome'], 'Knight')
+        self.assertEqual(observador['telefone'], '(11)8888-8888')
+        self.assertEqual(observador['cpf'], '999999999')
+        self.assertEqual(observador['email'], 'knight@ni.com')
 
     def _search_observador(self):
         observador = self.facade.search_observador_facade('Egg')
-        self.assertEqual(observador.nome, 'Egg')
-        self.assertEqual(observador.senha, 'span')
-        self.assertEqual(observador.telefone, '(21)9999-9999')
-        self.assertEqual(observador.cpf, '123456789')
-        self.assertEqual(observador.email, 'egg@span.com.br')
-        self.assertEqual(observador.tipo, 0)
+        self.assertEqual(observador['nome'], 'Egg')
+        self.assertEqual(observador['senha'], 'span')
+        self.assertEqual(observador['telefone'], '(21)9999-9999')
+        self.assertEqual(observador['cpf'], '123456789')
+        self.assertEqual(observador['email'], 'egg@span.com.br')
+        self.assertEqual(observador['tipo'], 0)
         observador = self.facade.search_observador_facade('Ni')
         self.assertIs(observador, None)
 

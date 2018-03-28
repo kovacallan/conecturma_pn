@@ -133,8 +133,8 @@ class Facade:
     def read_observador_facade(self):
         return self.observador.read_observador()
 
-    def update_observador_facade(self,id,nome,senha,telefone,cpf,email):
-        return self.observador.update_observador(id,nome,senha,telefone,cpf,email)
+    def update_observador_facade(self,id,nome,telefone,cpf,email):
+        return self.observador.update_observador(id,nome,telefone,cpf,email)
 
     def delete_observador_facade(self,deletar_ids):
         self.observador.delete_observador(deletar_ids = deletar_ids)
