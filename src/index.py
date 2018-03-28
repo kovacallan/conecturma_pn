@@ -6,6 +6,7 @@ from control.login_controller import *
 from control.jogo_controller import *
 from control.turma_controller import *
 from control.loja_controller import *
+from control.rede_controller import *
 import bottle
 import os
 
