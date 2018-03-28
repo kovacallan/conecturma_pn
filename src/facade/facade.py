@@ -3,6 +3,7 @@ from model.turma_model import DbTurma
 from model.loja_model import DbLoja
 from model.rede_model import DbRede
 
+
 class Facade:
 
     def __init__(self):
@@ -34,7 +35,7 @@ class Facade:
         """
         return self.aluno.read_usuario()
 
-    def update_aluno_facade(self, id, nome,senha):
+    def update_aluno_facade(self, id, nome, senha):
         return self.aluno.update_aluno(id=id, nome=nome, senha=senha)
 
     def delete_aluno_facade(self, deletar_ids):
@@ -109,13 +110,6 @@ class Facade:
         """
         return self.aluno.avatar(id)
 
-    # def new_senha_facade(self,usuario,senha_antiga, senha_nova):
-    #     self.aluno.definir_nova_senha(usuario,senha_antiga,senha_nova)
-    #
-    # def new_nome_user_facade(self, usuario, senha, novo_nome):
-    #     self.aluno.definir_novo_usuario_nome(usuario, senha, novo_nome)
-
-
     """
         Fim Facade Usuario/Aluno
     """
@@ -123,16 +117,17 @@ class Facade:
     """
         Inicio Facade Rede
     """
-    def create_rede_facade(self, nome,cod,telefone):
-        return self.rede.create_rede(nome = nome,cod=cod,telefone=telefone)
+
+    def create_rede_facade(self, nome, cod, telefone):
+        return self.rede.create_rede(nome=nome, cod=cod, telefone=telefone)
 
     def read_rede_facade(self):
         return self.rede.read_rede()
 
-    def update_rede_facade(self,id,nome,cod,telefone):
-        return self.rede.update_rede(id,nome,cod,telefone)
+    def update_rede_facade(self, id, nome, cod, telefone):
+        return self.rede.update_rede(id, nome, cod, telefone)
 
-    def delete_rede_facade(self,ids):
+    def delete_rede_facade(self, ids):
         return self.rede.delete_rede(ids)
 
     def pesquisa_rede_facade(self, rede):
@@ -220,9 +215,8 @@ class Facade:
         :param usuario_logado:autoexplicativo
         :return:lista de itens q ele nao tem
         """
-        return self.loja.ja_possui_item(usuario_logado = usuario_logado)
+        return self.loja.ja_possui_item(usuario_logado=usuario_logado)
 
     """
         Fim Facade loja
     """
-

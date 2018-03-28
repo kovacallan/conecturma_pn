@@ -1,7 +1,7 @@
 from walrus import *
 
 
-from model.aluno_model import DbAluno
+import model.aluno_model
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -75,8 +75,8 @@ class DbTurma(Model):
         soma2 = 0
         x = 0
         y = 0
-        for DbAluno.id in DbTurma:
-            retorno = self.pesquisa_turma(DbAluno.id)
+        for model.aluno_model.DbAluno.id in DbTurma:
+            retorno = self.pesquisa_turma(model.aluno_model.DbAluno.id)
             usuario = self.load(retorno)
             soma += usuario.desempenho_j1
             soma2 += usuario.desempenho_j2
