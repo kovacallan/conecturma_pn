@@ -1,5 +1,5 @@
 from walrus import *
-from src.model.aluno_model import DbAluno
+from src.model.aluno_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 

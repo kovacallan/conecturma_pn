@@ -4,6 +4,7 @@ db = Database(host='localhost', port=6379, db=0)
 
 
 class DbObservador(Model):
+    __database__ = db
     id = AutoIncrementField(primary_key=True)
     nome = TextField(fts=True)
     senha = TextField()
@@ -19,7 +20,7 @@ class DbObservador(Model):
             return False
 
     def read_observador(self):
-        observador = None
+        observador = []
         for read in DbObservador.all():
             observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
                                    email=read.email, tipo=read.tipo))
@@ -38,8 +39,10 @@ class DbObservador(Model):
         observador.save()
 
 
-    def delete_observador(self):
-        pass
+    def delete_observador(self,deletar_ids):
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
 
     def search_observador(self, nome):
 

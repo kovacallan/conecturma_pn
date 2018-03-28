@@ -1,7 +1,7 @@
 from walrus import *
 
 
-from model.aluno_model import *
+from src.model.aluno_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 

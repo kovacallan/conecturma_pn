@@ -120,8 +120,49 @@ class FacadeTest(unittest.TestCase):
                                                           cpf='123456789', email='egg@span.com.br', tipo=0)
         self.assertIs(observador, True)
 
-    def test_create_observador(self):
+    def _update_observador(self):
+        observador = self.facade.search_observador_facade('Egg')
+        observador_update = self.facade.update_observador_facade(id=observador.id, nome='Knight', senha='ni',
+                                                                 telefone='(11)8888-8888', cpf='999999999',
+                                                                 email='knight@ni.com')
+        observador = self.facade.search_observador_facade('Knight')
+        self.assertEqual(observador.nome, 'Knight')
+        self.assertEqual(observador.senha, 'ni')
+        self.assertEqual(observador.telefone, '(11)8888-8888')
+        self.assertEqual(observador.cpf, '999999999')
+        self.assertEqual(observador.email, 'knight@ni.com')
+
+    def _search_observador(self):
+        observador = self.facade.search_observador_facade('Egg')
+        self.assertEqual(observador.nome, 'Egg')
+        self.assertEqual(observador.senha, 'span')
+        self.assertEqual(observador.telefone, '(21)9999-9999')
+        self.assertEqual(observador.cpf, '123456789')
+        self.assertEqual(observador.email, 'egg@span.com.br')
+        self.assertEqual(observador.tipo, 0)
+        observador = self.facade.search_observador_facade('Ni')
+        self.assertIs(observador, None)
+
+    def _delete_observador(self):
+        observador = self.facade.read_observador_facade()
+        escolhidos = []
+        for observados in observador:
+            escolhidos.append(observados['id'])
+        self.facade.delete_observador_facade(escolhidos)
+
+    def test_create_delete_observador(self):
         self._create_observador()
+        self._delete_observador()
+
+    def test_create_search_delete_observador(self):
+        self._create_observador()
+        self._search_observador()
+        self._delete_observador()
+
+    def test_create_update_delete_observador(self):
+        self._create_observador()
+        self._update_observador()
+        self._delete_observador()
 
     """FIM TESTE OBSERVADOR"""
 

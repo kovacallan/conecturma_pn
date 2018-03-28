@@ -1,9 +1,9 @@
-from model.aluno_model import DbAluno
-from model.observador_model import DbObservador
-from model.rede_model import DbRede
-from model.turma_model import DbTurma
-from model.loja_model import DbLoja
-from model.rede_model import DbRede
+from src.model.aluno_model import DbAluno
+from src.model.observador_model import DbObservador
+from src.model.rede_model import DbRede
+from src.model.turma_model import DbTurma
+from src.model.loja_model import DbLoja
+from src.model.rede_model import DbRede
 
 
 class Facade:
@@ -136,8 +136,9 @@ class Facade:
     def update_observador_facade(self,id,nome,senha,telefone,cpf,email):
         return self.observador.update_observador(id,nome,senha,telefone,cpf,email)
 
-    def delete_observador_facade(self):
-        pass
+    def delete_observador_facade(self,deletar_ids):
+        self.observador.delete_observador(deletar_ids = deletar_ids)
+
     def search_observador_facade(self,nome):
         return self.observador.search_observador(nome)
 
