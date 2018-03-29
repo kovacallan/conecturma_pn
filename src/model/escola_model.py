@@ -50,17 +50,17 @@ class DbEscola(Model):
                      estado=escola.estado, cidade=escola.cidade))
         return escola_dic
 
-    def update_escola(self, id, nome,rua,numero,telefone,rede_pertencente, cod_identificacao):
+    def update_escola(self, id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao):
         """
         muda os atributos da escola pelo id
         :param id: id da escola que vai ter as mudanças
-        :param nome:
-        :param rua:
-        :param numero:
-        :param telefone:
-        :param rede_pertencente:
-        :param cod_identificacao:
-        :return:
+        :param nome:novo nome da escola
+        :param rua:nova rua da escola
+        :param numero:novo numero da escola
+        :param telefone:novo telefone da escola
+        :param rede_pertencente:nova rede a qual pertence a escola
+        :param cod_identificacao:novo codigo de identificaçao da escola
+        :return:None
         """
         escola = self.load(id)
         if nome == "" or nome == None:
@@ -93,3 +93,13 @@ class DbEscola(Model):
             escola.cod_identificacao = cod_identificacao
 
         escola.save()
+
+    def delete_escola(self, deletar_ids):
+        """
+        Deleta a lista de ids selecionados
+        :param deletar_ids: lista de ids a serem deletados
+        :return: None
+        """
+        for deletar_ids in deletar_ids:
+            escola = self.load(deletar_ids)
+            escola.delete(deletar_ids)

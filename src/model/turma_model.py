@@ -43,15 +43,16 @@ class DbTurma(Model):
 
         return turma_dic
 
-    def delete_turma(self, id):
+    def delete_turma(self, deletar_ids):
         """
         Deleta as turmas por id , por enquanto nao implementado
 
         :param id: O id da turma
         :return: None
         """
-        turma = DbTurma(id=id)
-        turma.delete()
+        for deletar_ids in deletar_ids:
+            turma = self.load(deletar_ids)
+            turma.delete(deletar_ids)
 
     def pesquisa_turma(self, turma_nome):
         """

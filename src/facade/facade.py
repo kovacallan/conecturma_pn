@@ -156,17 +156,12 @@ class Facade:
     def delete_rede_facade(self, ids):
         """
         deleta a rede por uma lista de ids d redes a serem deletados
-        :param ids: lista de id de redes
+        :param ids: lista de
         :return:
         """
         return self.rede.delete_rede(ids)
 
     def pesquisa_rede_facade(self, rede):
-        """
-        pesquisa a rede
-        :param rede: nome da rede
-        :return: a rede pesquisada
-        """
         return self.rede.pesquisa_rede(rede)
 
     """
