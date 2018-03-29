@@ -6,6 +6,7 @@ from src.model.loja_model import DbLoja
 from src.model.rede_model import DbRede
 
 
+
 class Facade:
 
     def __init__(self):
@@ -40,6 +41,13 @@ class Facade:
         return self.aluno.read_usuario()
 
     def update_aluno_facade(self, id, nome, senha):
+        """
+        modifica o usuario(nome) e senha do aluno
+        :param id: id od usuario a ser modificado
+        :param nome:novo nome
+        :param senha:nova senha
+        :return:se conseguiu modificar com sucesso
+        """
         return self.aluno.update_aluno(id=id, nome=nome, senha=senha)
 
     def delete_aluno_facade(self, deletar_ids):
@@ -114,12 +122,6 @@ class Facade:
         """
         return self.aluno.avatar(id)
 
-    # def new_senha_facade(self,usuario,senha_antiga, senha_nova):
-    #     self.aluno.definir_nova_senha(usuario,senha_antiga,senha_nova)
-    #
-    # def new_nome_user_facade(self, usuario, senha, novo_nome):
-    #     self.aluno.definir_novo_usuario_nome(usuario, senha, novo_nome)
-
     """
         Fim Facade Usuario/Aluno
     """
@@ -151,15 +153,42 @@ class Facade:
     """
 
     def create_rede_facade(self, nome, cod, telefone):
+        """
+        cria uma rede no banco de dados
+        :param nome: nome da rede
+        :param cod: codigo de identificaçao
+        :param telefone: telefone da sede
+        :return: o rede criada no banco de dados
+        """
         return self.rede.create_rede(nome=nome, cod=cod, telefone=telefone)
 
     def read_rede_facade(self):
+        """
+        Ver as redes que se encontram no banco d dados . com id , nome , cod e telefone da rede
+        :return:a lista de ree com os atributos relevantes da rede a serem mostrados
+        """
         return self.rede.read_rede()
 
     def update_rede_facade(self, id, nome, cod, telefone):
         return self.rede.update_rede(id, nome, cod, telefone)
 
     def delete_rede_facade(self, ids):
+        """
+        muda o nome , o cogigo ou o telefone da rede
+        :param id: id da rede a ser modificada
+        :param nome: novo nome da rede
+        :param cod: novo codigo da rede
+        :param telefone: novo telefone da sede da rede
+        :return: se foi bem sucessedido retorna true , se n , false
+        """
+        return self.rede.update_rede(id, nome, cod, telefone)
+
+    def delete_rede_facade(self, ids):
+        """
+        deleta a rede por uma lista de ids d redes a serem deletados
+        :param ids: lista de
+        :return:
+        """
         return self.rede.delete_rede(ids)
 
     def pesquisa_rede_facade(self, rede):

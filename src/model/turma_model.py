@@ -1,7 +1,6 @@
 from walrus import *
+import model.aluno_model
 
-
-from src.model.aluno_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -25,7 +24,7 @@ class DbTurma(Model):
         if self.create(turma_nome=turma, quem_criou=login):
             return True
         else:
-            return TypeError("Não foi possivel salvar o Aluno")
+            return TypeError("Não foi possivel salvar a turma")
 
     def read_turma(self):
         """
@@ -43,15 +42,16 @@ class DbTurma(Model):
 
         return turma_dic
 
-    def delete_turma(self, id):
+    def delete_turma(self, deletar_ids):
         """
         Deleta as turmas por id , por enquanto nao implementado
 
         :param id: O id da turma
         :return: None
         """
-        turma = DbTurma(id=id)
-        turma.delete()
+        for deletar_ids in deletar_ids:
+            turma = self.load(deletar_ids)
+            turma.delete(deletar_ids)
 
     def pesquisa_turma(self, turma_nome):
         """
@@ -75,8 +75,8 @@ class DbTurma(Model):
         soma2 = 0
         x = 0
         y = 0
-        for DbAluno.id in DbTurma:
-            retorno = self.pesquisa_turma(DbAluno.id)
+        for model.aluno_model.DbAluno.id in DbTurma:
+            retorno = self.pesquisa_turma(model.aluno_model.DbAluno.id)
             usuario = self.load(retorno)
             soma += usuario.desempenho_j1
             soma2 += usuario.desempenho_j2
