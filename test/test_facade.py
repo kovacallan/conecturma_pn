@@ -219,6 +219,11 @@ class FacadeTest(unittest.TestCase):
         self._delete_rede()
 
     """FIM TESTE REDE"""
+    """TESTE FACADE ESCOLA"""
+
+    def test_create_escola(self):
+        escola = self.facade.create_escola_facade('Do bairro', 'de baixo', '665', '21 ', 'RJ', 'Pindamonhagaba', 'KNDPI')
+        # self.assertIs(escola, True)
 
     if __name__ == '__main__':
         unittest.main()

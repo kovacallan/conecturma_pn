@@ -1,10 +1,9 @@
 from src.model.aluno_model import DbAluno
 from src.model.observador_model import DbObservador
-from src.model.rede_model import DbRede
 from src.model.turma_model import DbTurma
 from src.model.loja_model import DbLoja
 from src.model.rede_model import DbRede
-
+from src.model.escola_model import DbEscola
 
 
 class Facade:
@@ -13,6 +12,7 @@ class Facade:
         """
         método para utilização do banco de dados
         """
+        self.escola = DbEscola
         self.aluno = DbAluno()
         self.observador = DbObservador()
         self.rede = DbRede()
@@ -129,19 +129,21 @@ class Facade:
     """
         Inicio Facade observador
     """
-    def create_observador_facade(self,nome, senha, telefone, cpf, email,tipo):
-        return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,tipo=tipo)
+
+    def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo):
+        return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
+                                                 tipo=tipo)
 
     def read_observador_facade(self):
         return self.observador.read_observador()
 
-    def update_observador_facade(self,id,nome,telefone,cpf,email):
-        return self.observador.update_observador(id,nome,telefone,cpf,email)
+    def update_observador_facade(self, id, nome, telefone, cpf, email):
+        return self.observador.update_observador(id, nome, telefone, cpf, email)
 
-    def delete_observador_facade(self,deletar_ids):
-        self.observador.delete_observador(deletar_ids = deletar_ids)
+    def delete_observador_facade(self, deletar_ids):
+        self.observador.delete_observador(deletar_ids=deletar_ids)
 
-    def search_observador_facade(self,nome):
+    def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)
 
     """
@@ -181,7 +183,7 @@ class Facade:
         :param telefone: novo telefone da sede da rede
         :return: se foi bem sucessedido retorna true , se n , false
         """
-        return self.rede.update_rede(id, nome, cod, telefone)
+        return self.rede.update_rede(ids)
 
     def delete_rede_facade(self, ids):
         """
@@ -232,7 +234,21 @@ class Facade:
     """
         Fim Facade Turma
     """
+    """Inicio Facade Escola"""
 
+    def create_escola_facade(self, nome, rua, numero, telefone, estado, cidade, cod_identificacao):
+        return self.escola.create_escola(nome, rua, numero, telefone, estado, cidade, cod_identificacao)
+
+    def read_escola_facade(self):
+        return self.escola.read_escola()
+
+    def update_escola(self, id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao):
+        return self.escola.update_escola(id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao)
+
+    def delete_escola(self, deletar_ids):
+        return self.escola.delete_escola(deletar_ids)
+
+    """Fim Facade Escola"""
     """
         Inicio Facade loja
     """

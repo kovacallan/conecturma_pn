@@ -12,7 +12,7 @@ class DbEscola(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     nome = TextField(fts=True, index=True)
-    rua = TextField(fts=true, index=True)
+    rua = TextField()
     numero = IntegerField(default=0)
     telefone = TextField()
     estado = TextField()
@@ -22,15 +22,8 @@ class DbEscola(Model):
     desempenho = FloatField()
 
     def create_escola(self, nome, rua, numero, telefone, estado, cidade, cod_identificacao):
-        """
-        Cria uma turma e armazena no banco de dados ,com o dado de quem criou a turma
-
-        :param turma: O numero , ou o nome da turma
-        :param login: O nome do login de quem criou a turma
-        :return: Acrescenta a turma criada ao banco de dados
-        """
         if self.create(nome=nome, rua=rua, numero=numero, telefone=telefone, estado=estado, cidade=cidade,
-                       cod=cod_identificacao):
+                       cod_identificaçao=cod_identificacao):
             return True
         else:
             return TypeError("Não foi possivel salvar a escola")
