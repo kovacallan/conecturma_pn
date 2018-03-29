@@ -1,6 +1,5 @@
 % include('./header.tpl', title = 'Conecturma')
  <div>
-            <form action="/turma_aluno" >
                 <table>
                     <tr>
                         <th>ID</th><th>Nome da rede</th><th>COD</th><th>telefone</th>
@@ -24,5 +23,6 @@
                     </tr>
                         % end
                 </table>
+                <a href="/rede"><button>Voltar</button></a>
         </div>
 % include('./header.tpl', title = 'Conecturma')

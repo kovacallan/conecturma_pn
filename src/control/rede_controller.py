@@ -10,12 +10,20 @@ facade = Facade()
 @route('/rede')
 @view("rede/rede")
 def view_index_rede():
+    """
+    pagina inicial de rede
+    :return: None
+    """
     pass
 
 
 @route('/create_rede')
 @view('rede/create_rede')
 def view_rede_cadastro():
+    """
+    Vizualizaçao da pagina de criar redes
+    :return: vazio
+    """
     return
 
 

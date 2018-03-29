@@ -1,4 +1,4 @@
-from bottle import route, view, get, request , redirect
+from bottle import route, view, get, request, redirect
 from facade.facade import *
 
 facade = Facade()
@@ -55,8 +55,10 @@ def read_turma():
     :return: a entrada de dicionario que contem o id e o turma_nome
     """
     if request.get_cookie("login", secret='2524'):
-        turma = facade.read_turma_facade()
-        return dict(turma = turma)
+        turmi = facade.read_turma_facade()
+        turmas = [(turma['id'], turma['nome'],turma['criador'], turma['desempenho_j1'], turma['desempenho_j2']) for turma
+                  in turmi]
+        return dict(turma=turmas)
     else:
         redirect('/')
 
