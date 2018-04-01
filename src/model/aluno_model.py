@@ -15,7 +15,7 @@ class DbAluno(Model):
     nome = TextField(fts=True, index=True)
     senha = TextField()
     """tipo_de_usuario = IntegerField()"""
-    items_comprado = ListField()
+    itens_comprados = ListField()
     cor = IntegerField(default=0)
     rosto = IntegerField(default=0)
     acessorio = IntegerField(default=0)
@@ -234,7 +234,7 @@ class DbAluno(Model):
             print("você não tem moeda")
         else:
             usuario.pontos_de_moedas -= preco
-            usuario.items_comprado.append(id_item)
+            usuario.itens_comprados.append(id_item)
             usuario.save()
 
     def ver_itens_comprados(self, id_usuario):
@@ -244,7 +244,7 @@ class DbAluno(Model):
         :return: A lista dos itens
         """
         usuario = self.load(id_usuario)
-        itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.items_comprado]
+        itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.itens_comprados]
         return itens
 
     def equipar_item(self, id_usuario, itens):
