@@ -1,7 +1,9 @@
-from model.aluno_model import DbAluno
-from model.turma_model import DbTurma
-from model.loja_model import DbLoja
-from model.rede_model import DbRede
+from src.model.aluno_model import DbAluno
+from src.model.observador_model import DbObservador
+from src.model.turma_model import DbTurma
+from src.model.loja_model import DbLoja
+from src.model.rede_model import DbRede
+from src.model.escola_model import DbEscola
 
 
 class Facade:
@@ -10,9 +12,12 @@ class Facade:
         """
         método para utilização do banco de dados
         """
+        self.escola = DbEscola()
         self.aluno = DbAluno()
+        self.observador = DbObservador()
         self.rede = DbRede()
         self.turma = DbTurma()
+        self.loja = DbLoja()
         self.loja = DbLoja()
 
     """
@@ -84,7 +89,7 @@ class Facade:
 
     def compra_item_facade(self, id_usuario, id_item):
         """
-        Acrescenta o id do item a lista items_comprado do usuario que comprou o item
+        Acrescenta o id do item a lista itens_comprados do usuario que comprou o item
         :param id_usuario: id do usuario(aluno) que comprará o item
         :param id_item: id do item a ser comprado
         :return: None
@@ -122,6 +127,30 @@ class Facade:
     """
 
     """
+        Inicio Facade observador
+    """
+
+    def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo):
+        return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
+                                                 tipo=tipo)
+
+    def read_observador_facade(self):
+        return self.observador.read_observador()
+
+    def update_observador_facade(self, id, nome, telefone, cpf, email):
+        return self.observador.update_observador(id, nome, telefone, cpf, email)
+
+    def delete_observador_facade(self, deletar_ids):
+        self.observador.delete_observador(deletar_ids=deletar_ids)
+
+    def search_observador_facade(self, nome):
+        return self.observador.search_observador(nome)
+
+    """
+        Fim Facade observador
+    """
+
+    """
         Inicio Facade Rede
     """
 
@@ -143,6 +172,9 @@ class Facade:
         return self.rede.read_rede()
 
     def update_rede_facade(self, id, nome, cod, telefone):
+        return self.rede.update_rede(id, nome, cod, telefone)
+
+    def delete_rede_facade(self, ids):
         """
         muda o nome , o cogigo ou o telefone da rede
         :param id: id da rede a ser modificada
@@ -151,7 +183,7 @@ class Facade:
         :param telefone: novo telefone da sede da rede
         :return: se foi bem sucessedido retorna true , se n , false
         """
-        return self.rede.update_rede(id, nome, cod, telefone)
+        return self.rede.update_rede(ids)
 
     def delete_rede_facade(self, ids):
         """
@@ -202,7 +234,23 @@ class Facade:
     """
         Fim Facade Turma
     """
+    """Inicio Facade Escola"""
 
+    def create_escola_facade(self, nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao):
+        return self.escola.create_escola(nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao)
+
+    def read_escola_facade(self):
+        return self.escola.read_escola()
+
+    def update_escola_facade(self, id, nome, rua, numero,cidade,estado, telefone, rede_pertencente, cod_identificacao):
+        return self.escola.update_escola(id, nome, rua, numero,cidade,estado, telefone, rede_pertencente, cod_identificacao)
+
+    def delete_escola_facade(self, deletar_ids):
+        return self.escola.delete_escola(deletar_ids)
+
+    def pesquisa_escola_facade(self, nome):
+       return self.escola.search_escola(nome)
+    """Fim Facade Escola"""
     """
         Inicio Facade loja
     """

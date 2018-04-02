@@ -8,7 +8,6 @@ test_app = TestApp(application, cookiejar=CookieJar())
 test_response = TestResponse()
 
 sys.path.append('../')
-
 class BlackBoxTest(unittest.TestCase):
 
     def setUp(self):
