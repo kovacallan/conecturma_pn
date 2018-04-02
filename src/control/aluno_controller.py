@@ -13,7 +13,7 @@ facade = Facade()
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
-    if request.get_cookie("login", secret='2524'):
+    if request.get_cookie("login", secret='2525'):
         return
     else:
         redirect('/')
@@ -25,7 +25,7 @@ def aluno_read():
 @route('/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
-    if request.get_cookie("login", secret='2524'):
+    if request.get_cookie("login", secret='2525'):
         return
     else:
         redirect('/')
@@ -58,7 +58,7 @@ def read_aluno():
     """pesquisa_aluno = request.params['']"""
     """ return dict(aluno_pesquisado=pesquisa_aluno)"""
 
-    if True or request.get_cookie("login", secret='2524'):
+    if True or request.get_cookie("login", secret='2525'):
         usuarios = facade.read_aluno_facade()
         turma = facade.read_turma_facade()
         alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['turma_do_aluno']) for aluno in usuarios]
@@ -104,7 +104,7 @@ def deletar_aluno():
 @route('/ver_itens_comprados')
 @view('aluno/view_itens')
 def ver_itens():
-    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2525'))
     itens_comprado = facade.ver_item_comprado_facade(usuario.id)
     itens = []
     for y in itens_comprado:
@@ -115,7 +115,7 @@ def ver_itens():
 
 @route('/equipar_item', method='POST')
 def equipar_item():
-    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2525'))
 
     id_item = request.forms['id']
     item = facade.pesquisa_item_facade(id_item)

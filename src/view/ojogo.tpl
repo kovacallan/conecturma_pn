@@ -15,7 +15,7 @@
         <button type="submit" name = "ponto" value="1">Acertou</button>
         <button type="submit" name = "ponto" value="0">Errou</button>
     </form>
-    <a href="/user_menu">
+    <a href="/">
             <button>Voltar</button>
         </a>
 </body>

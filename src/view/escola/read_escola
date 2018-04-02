@@ -34,7 +34,7 @@
             </tr>
             %end
         </table>
-        <a href="/user_menu">
+        <a href="/escola">
             <button>voltar</button>
         </a>
     </div>

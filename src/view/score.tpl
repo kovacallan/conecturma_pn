@@ -21,6 +21,6 @@
     <h4>{{pontos_de_vida}}</h4>
     <h3>Moedas</h3>
     <h4>{{pontos_moedas}}</h4>
-    <a href="/user_menu"><button>Voltar</button></a>
+    <a href="/"><button>Voltar</button></a>
 </body>
 </html>

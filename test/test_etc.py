@@ -20,7 +20,7 @@ class BlackBoxTest(unittest.TestCase):
         test_app.post('/aluno_cadastro', dict(aluno_nome='eric', senha='idle'))
         test_app.post('/login', dict(usuario='eric', senha='idle'))
 
-    """teste de menu(menu.tpl)"""
+    """teste de menu(jogar_conecturma.tpl)"""
 
     def test_menu(self):
         res = test_app.get('/user_menu')
