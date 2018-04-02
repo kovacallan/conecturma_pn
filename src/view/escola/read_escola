@@ -5,34 +5,36 @@
         <br>
         <table>
             <tr>
-                <th>Nome </th><th>Telefone </th><th>cpf </th><th>Email </th><th>Tipo </th>
+                <th>Nome </th><th>Telefone </th><th>rua </th><th>numero </th><th>estado </th><th>cidade</th>
             </tr>
-            % for observadores in observador:
+            % for escolas in escola:
             <tr>
                 <td>
-                    {{observadores['nome']}}
+                    {{escolas['nome']}}
                 </td>
                 <td>
-                    {{observadores['telefone']}}
+                    {{escolas['telefone']}}
                 </td>
                 <td>
-                    {{observadores['cpf']}}
+                    {{escolas['rua']}}
+                <td>
+                    {{escolas['numero']}}
                 </td>
                 <td>
-                    {{observadores['email']}}
+                    {{escolas['estado']}}
                 </td>
                 <td>
-                    {{observadores['tipo']}}
+                    {{escolas['cidade']}}
                 </td>
                 <td>
-                    <form action="/observador/editar">
-                        <button type="submit" name="nome" value="{{observadores['nome']}}">Editar</button>
+                    <form action="/escola/editar">
+                        <button type="submit" name="nome" value="{{escolas['nome']}}">Editar</button>
                     </form>
                 </td>
             </tr>
             %end
         </table>
-        <a href="/observador">
+        <a href="/escola">
             <button>voltar</button>
         </a>
     </div>

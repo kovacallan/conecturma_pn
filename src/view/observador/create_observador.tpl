@@ -9,14 +9,14 @@
             telefone*:<input type="text" name="telefone"> <br>
             cpf*:<input type="text" name="cpf"> <br>
             email*:<input type="email" name="email"> <br>
-            <input type="radio" name="tipo" value="0">Administrador
-            <input type="radio" name="tipo" value="1">Gestor
-            <input type="radio" name="tipo" value="2">Diretor
-            <input type="radio" name="tipo" value="3">Professor
-            <input type="radio" name="tipo" value="4">Responsavel<br>
+            <input type="radio" name="tipo" value="administrador">Administrador
+            <input type="radio" name="tipo" value="gestor">Gestor
+            <input type="radio" name="tipo" value="diretor">Diretor
+            <input type="radio" name="tipo" value="professor">Professor
+            <input type="radio" name="tipo" value="responsavel">Responsavel<br>
             <button type="submit">Enviar</button>
         </form>
-        <a href="/user_menu">
+        <a href="/observador">
             <button>voltar</button>
         </a>
     </div>

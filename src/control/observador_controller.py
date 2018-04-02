@@ -41,7 +41,7 @@ def controller_observador_cadastro():
     tipo = request.params['tipo']
 
     if filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
-        facade.create_observador_facade(nome, senha, telefone, cpf, email, tipo)
+        facade.create_observador_facade(nome, senha, telefone, cpf, email, tipo.upper())
         redirect('/observador/cadastro')
     else:
         print("Erro para salvar")
@@ -50,7 +50,7 @@ def controller_observador_cadastro():
 def controller_observador_read():
     observadores = []
     for observador in facade.read_observador_facade():
-        observador['tipo'] = tipo_observador(observador['tipo'])
+        observador['tipo'] = observador['tipo']
         observadores.append(observador)
 
     return observadores
@@ -63,24 +63,6 @@ def controller_observador_update():
                                     telefone=request.params['telefone'], cpf=request.params['cpf'],
                                     email=request.params['email'])
     redirect('/observador/read_observador')
-
-
-def controller_observador_update(id):
-    facade.up
-
-
-def tipo_observador(tipo):
-    if tipo == 0:
-        return "Administrador"
-    elif tipo == 1:
-        return "Gestor"
-    elif tipo == 2:
-        return "Diretor"
-    elif tipo == 3:
-        return "Professor"
-    elif tipo == 4:
-        return "Responsavel"
-
 
 def filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
     if nome == "":

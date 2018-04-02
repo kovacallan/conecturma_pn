@@ -12,25 +12,19 @@ class DbEscola(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     nome = TextField(fts=True, index=True)
-    rua = TextField(fts=true, index=True)
+    rua = TextField()
     numero = IntegerField(default=0)
     telefone = TextField()
     estado = TextField()
     cidade = TextField()
     rede_pertencente = TextField()
     cod_identificacao = TextField()
-    desempenho = FloatField()
+    desempenho = FloatField(default=0)
 
-    def create_escola(self, nome, rua, numero, telefone, estado, cidade, cod_identificacao):
-        """
-        Cria uma turma e armazena no banco de dados ,com o dado de quem criou a turma
-
-        :param turma: O numero , ou o nome da turma
-        :param login: O nome do login de quem criou a turma
-        :return: Acrescenta a turma criada ao banco de dados
-        """
+    def create_escola(self, nome, rua, numero, telefone, estado, cidade, rede_pertencente, cod_identificacao):
         if self.create(nome=nome, rua=rua, numero=numero, telefone=telefone, estado=estado, cidade=cidade,
-                       cod=cod_identificacao):
+                       rede_pertencente=rede_pertencente,
+                       cod_identificaçao=cod_identificacao):
             return True
         else:
             return TypeError("Não foi possivel salvar a escola")
@@ -46,11 +40,11 @@ class DbEscola(Model):
 
         for escola in self.query(order_by=self.id):
             escola_dic.append(
-                dict(id=escola.id, nome=escola.turma_nome, rua=escola.rua, numero=escola.rua, telefone=escola.telefone,
+                dict(id=escola.id, nome=escola.nome, rua=escola.rua, numero=escola.numero, telefone=escola.telefone,
                      estado=escola.estado, cidade=escola.cidade))
         return escola_dic
 
-    def update_escola(self, id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao):
+    def update_escola(self, id, nome, rua, numero, telefone,cidade,estado,rede_pertencente, cod_identificacao):
         """
         muda os atributos da escola pelo id
         :param id: id da escola que vai ter as mudanças
@@ -82,7 +76,6 @@ class DbEscola(Model):
             pass
         else:
             escola.telefone = telefone
-
         if rede_pertencente == "" or nome == None:
             pass
         else:
@@ -93,6 +86,16 @@ class DbEscola(Model):
             escola.cod_identificacao = cod_identificacao
 
         escola.save()
+
+    def search_escola(self, nome):
+
+        escolas = None
+        for search in DbEscola.query(DbEscola.nome == nome):
+            escolas = dict(id=search.id, nome=search.nome, rua=search.rua, numero=search.numero,
+                           telefone=search.telefone, estado=search.estado, cidade=search.cidade,
+                           rede_pertencente=search.rede_pertencente, cod_identificacao=search.cod_identificacao,
+                           desempenho=search.desempenho)
+        return escolas
 
     def delete_escola(self, deletar_ids):
         """

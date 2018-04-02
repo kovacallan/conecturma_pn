@@ -9,7 +9,7 @@
             <a href="/read_rede">
             <button>ver redes</button>
             </a>
-            <a href="/user_menu">
+            <a href="/">
             <button>voltar</button>
         </a>
         </div>
