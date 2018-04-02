@@ -23,6 +23,7 @@
             <a href="/loja"><button>Loja</button></a>
             <a href="/alterar_senha"><button>Modificar a senha</button></a>
             <a href="/alterar_usuario_nome"><button>Modificar o Nome</button></a>
+            <a href="/escola"><button>Escola</button></a>
             <a href="/rede"><button>rede</button></a>
             <button>configuraçoes de perfil</button>
             <a href="/sair"><button>Sair</button></a>

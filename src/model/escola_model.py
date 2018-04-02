@@ -19,10 +19,11 @@ class DbEscola(Model):
     cidade = TextField()
     rede_pertencente = TextField()
     cod_identificacao = TextField()
-    desempenho = FloatField()
+    desempenho = FloatField(default=0)
 
-    def create_escola(self, nome, rua, numero, telefone, estado, cidade, cod_identificacao):
+    def create_escola(self, nome, rua, numero, telefone, estado, cidade, rede_pertencente, cod_identificacao):
         if self.create(nome=nome, rua=rua, numero=numero, telefone=telefone, estado=estado, cidade=cidade,
+                       rede_pertencente=rede_pertencente,
                        cod_identificaçao=cod_identificacao):
             return True
         else:
@@ -39,11 +40,11 @@ class DbEscola(Model):
 
         for escola in self.query(order_by=self.id):
             escola_dic.append(
-                dict(id=escola.id, nome=escola.turma_nome, rua=escola.rua, numero=escola.rua, telefone=escola.telefone,
+                dict(id=escola.id, nome=escola.nome, rua=escola.rua, numero=escola.numero, telefone=escola.telefone,
                      estado=escola.estado, cidade=escola.cidade))
         return escola_dic
 
-    def update_escola(self, id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao):
+    def update_escola(self, id, nome, rua, numero, telefone,cidade,estado,rede_pertencente, cod_identificacao):
         """
         muda os atributos da escola pelo id
         :param id: id da escola que vai ter as mudanças
@@ -75,7 +76,6 @@ class DbEscola(Model):
             pass
         else:
             escola.telefone = telefone
-
         if rede_pertencente == "" or nome == None:
             pass
         else:
@@ -87,12 +87,15 @@ class DbEscola(Model):
 
         escola.save()
 
-    def pesquisa_escola(self, escola):
+    def search_escola(self, nome):
 
-        escola_pesquisa = None
-        for pesquisa in DbEscola.query(DbEscola.nome == escola, order_by=self.id):
-            escola_pesquisa = pesquisa
-        return escola_pesquisa
+        escolas = None
+        for search in DbEscola.query(DbEscola.nome == nome):
+            escolas = dict(id=search.id, nome=search.nome, rua=search.rua, numero=search.numero,
+                           telefone=search.telefone, estado=search.estado, cidade=search.cidade,
+                           rede_pertencente=search.rede_pertencente, cod_identificacao=search.cod_identificacao,
+                           desempenho=search.desempenho)
+        return escolas
 
     def delete_escola(self, deletar_ids):
         """

@@ -236,20 +236,20 @@ class Facade:
     """
     """Inicio Facade Escola"""
 
-    def create_escola_facade(self, nome, rua, numero, telefone, estado, cidade, cod_identificacao):
-        return self.escola.create_escola(nome, rua, numero, telefone, estado, cidade, cod_identificacao)
+    def create_escola_facade(self, nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao):
+        return self.escola.create_escola(nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao)
 
     def read_escola_facade(self):
         return self.escola.read_escola()
 
-    def update_escola_facade(self, id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao):
-        return self.escola.update_escola(id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao)
+    def update_escola_facade(self, id, nome, rua, numero,cidade,estado, telefone, rede_pertencente, cod_identificacao):
+        return self.escola.update_escola(id, nome, rua, numero,cidade,estado, telefone, rede_pertencente, cod_identificacao)
 
     def delete_escola_facade(self, deletar_ids):
         return self.escola.delete_escola(deletar_ids)
 
-    def pesquisa_escola_facade(self, escola):
-       return self.escola.pesquisa_escola(escola)
+    def pesquisa_escola_facade(self, nome):
+       return self.escola.search_escola(nome)
     """Fim Facade Escola"""
     """
         Inicio Facade loja

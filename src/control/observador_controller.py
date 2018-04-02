@@ -64,11 +64,6 @@ def controller_observador_update():
                                     email=request.params['email'])
     redirect('/observador/read_observador')
 
-
-def controller_observador_update(id):
-    facade.up
-
-
 def tipo_observador(tipo):
     if tipo == 0:
         return "Administrador"

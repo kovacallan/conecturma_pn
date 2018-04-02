@@ -26,9 +26,8 @@ class BlackBoxTest(unittest.TestCase):
                             cpf='159852654-82', email='adm@adm.adm.br1', tipo=0)
         res2 = test_app.post('/observador/cadastro', nome='parrot', senha='123', telefone='(21)25696969',
                             cpf='149852654-82', email='adm@adm.adm.br1', tipo=0)
-        res3 = test_app.post('/observador/cadastro', nome='parrot', senha='123', telefone='(21)25696969',
-                            cpf='159852654-82', email='adm@adm.adm.br1', tipo=0)
-
+    def test_teste(self):
+        self._fixobservador
 
 if __name__ == '__main__':
     unittest.main()
