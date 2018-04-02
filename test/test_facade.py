@@ -221,9 +221,45 @@ class FacadeTest(unittest.TestCase):
     """FIM TESTE REDE"""
     """TESTE FACADE ESCOLA"""
 
-    def test_create_escola(self):
-        escola = self.facade.create_escola_facade('Do bairro', 'de baixo', '665', '21 ', 'RJ', 'Pindamonhagaba', 'KNDPI')
-        # self.assertIs(escola, True)
+    def _create_escola(self):
+        escola = self.facade.create_escola_facade('Do bairro', 'de baixo', '665', '21 ', 'RJ', 'Pindamonhagaba',
+                                                  'KNDPI')
+        self.assertIs(escola, True)
+
+    def _update_escola(self):
+        escola = self.facade.pesquisa_escola_facade("Do bairro")
+        self.facade.update_escola_facade(escola.id, "Ni", "eggs", "88", "33355567", "abelhinha", "KND2")
+        escola = self.facade.pesquisa_escola_facade("Ni")
+        self.assertEqual(escola.nome, "Ni")
+        self.assertEqual(escola.rua, "eggs")
+        self.assertEqual(escola.numero, 88)
+        self.assertEqual(escola.rede_pertencente, "abelhinha")
+        self.assertEqual(escola.telefone, "33355567")
+        self.assertEqual(escola.cod_identificacao, "KND2")
+
+    def test_pesquisa_escola(self):
+
+
+
+    def _delete_escola(self):
+        escola = self.facade.read_escola_facade()
+        escolhidos = []
+        for escola in escola:
+            escolhidos.append(escola['id'])
+        self.facade.delete_escola_facade(escolhidos)
+
+    def test_create_rede(self):
+        self._create_rede()
+
+    def _test_update_rede(self):
+        self._update_rede()
+
+    def test_pesquisa_rede(self):
+        self._pesquisa_rede()
+
+    def test_delete_rede(self):
+        self._update_rede()
+        self._delete_rede()
 
     if __name__ == '__main__':
         unittest.main()

@@ -12,7 +12,7 @@ class Facade:
         """
         método para utilização do banco de dados
         """
-        self.escola = DbEscola
+        self.escola = DbEscola()
         self.aluno = DbAluno()
         self.observador = DbObservador()
         self.rede = DbRede()
@@ -242,12 +242,14 @@ class Facade:
     def read_escola_facade(self):
         return self.escola.read_escola()
 
-    def update_escola(self, id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao):
+    def update_escola_facade(self, id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao):
         return self.escola.update_escola(id, nome, rua, numero, telefone, rede_pertencente, cod_identificacao)
 
-    def delete_escola(self, deletar_ids):
+    def delete_escola_facade(self, deletar_ids):
         return self.escola.delete_escola(deletar_ids)
 
+    def pesquisa_escola_facade(self, escola):
+       return self.escola.pesquisa_escola(escola)
     """Fim Facade Escola"""
     """
         Inicio Facade loja

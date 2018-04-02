@@ -87,6 +87,13 @@ class DbEscola(Model):
 
         escola.save()
 
+    def pesquisa_escola(self, escola):
+
+        escola_pesquisa = None
+        for pesquisa in DbEscola.query(DbEscola.nome == escola, order_by=self.id):
+            escola_pesquisa = pesquisa
+        return escola_pesquisa
+
     def delete_escola(self, deletar_ids):
         """
         Deleta a lista de ids selecionados
