@@ -14,7 +14,7 @@ def view_index_rede():
     pagina inicial de rede
     :return: None
     """
-    pass
+    return
 
 
 @route('/create_rede')
