@@ -14,6 +14,7 @@ def controller_login_entrar_aluno():
 
     if valida_login_aluno(nome, senha):
         create_cookie(nome)
+        facade.create_historico_facade(nome, "ALUNO")
         redirect('/jogar_conecturma')
     else:
         redirect('/')

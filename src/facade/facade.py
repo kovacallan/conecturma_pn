@@ -4,7 +4,7 @@ from src.model.turma_model import DbTurma
 from src.model.loja_model import DbLoja
 from src.model.rede_model import DbRede
 from src.model.escola_model import DbEscola
-
+from src.model.historico_model import DbHistorico
 
 class Facade:
 
@@ -18,7 +18,7 @@ class Facade:
         self.rede = DbRede()
         self.turma = DbTurma()
         self.loja = DbLoja()
-        self.loja = DbLoja()
+        self.historico = DbHistorico()
 
     """
         Inicio Facade Usuario/Aluno
@@ -146,6 +146,8 @@ class Facade:
     def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)
 
+    def login_date_facade(self, id , data):
+        self.observador.login_date(id,data)
     """
         Fim Facade observador
     """
@@ -298,4 +300,16 @@ class Facade:
 
     """
         Fim Facade loja
+    """
+
+    """
+        Inicio Facade Historico
+    """
+    def create_historico_facade(self, nome,tipo):
+        self.historico.create_historico(nome,tipo)
+
+    def read_historico_facade(self):
+        return self.historico.read_historico()
+    """
+       Fim Facade Historico
     """

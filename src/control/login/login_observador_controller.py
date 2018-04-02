@@ -1,4 +1,5 @@
 from bottle import route, request, redirect, response
+from datetime import datetime
 from facade.facade import Facade
 
 facade = Facade()
@@ -11,9 +12,12 @@ def controller_login_entrar_observador():
     """
     nome = request.params['usuario']
     senha = request.params['senha']
-
-    if valida_login_observador(nome, senha):
+    observador = valida_login_observador(nome, senha)
+    if observador:
         create_cookie(nome)
+        now = datetime.now()
+        facade.login_date_facade(observador['id'],now)
+        facade.create_historico_facade(observador['nome'], observador['tipo'])
         redirect('/gestao_aprendizagem')
     else:
         redirect('/')
@@ -24,7 +28,7 @@ def valida_login_observador(nome, senha):
     retorno = facade.search_observador_facade(nome)
     if retorno:
         if retorno['nome'] == nome and retorno['senha'] == senha:
-            return True
+            return retorno
         else:
             return False
     else:

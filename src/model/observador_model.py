@@ -11,8 +11,8 @@ class DbObservador(Model):
     telefone = TextField()
     cpf = TextField()
     email = TextField()
-    tipo = IntegerField()
-    data_login = ListField()
+    tipo = TextField()
+    data_ultimo_login = TextField()
 
     def create_observador(self, nome, senha, telefone, cpf, email, tipo):
         if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo):
@@ -47,7 +47,14 @@ class DbObservador(Model):
 
         observador = None
         for search in DbObservador.query(DbObservador.nome == nome):
-            observador=dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                              cpf=search.cpf, email=search.email,tipo = search.tipo)
+            observador = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                              cpf=search.cpf, email=search.email, tipo=search.tipo)
 
         return observador
+
+    def login_date(self, id, data):
+        observador = self.load(id)
+        observador.data_login = data
+        observador.save()
+
+

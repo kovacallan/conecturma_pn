@@ -8,6 +8,7 @@ from control.turma_controller import *
 from control.loja_controller import *
 from control.escola_controller import *
 from control.rede_controller import *
+from control.historico_controller import *
 from control.login.login_controller import *
 from control.login.login_observador_controller import *
 from control.login.login_aluno_controller import *
