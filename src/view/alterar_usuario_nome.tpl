@@ -9,7 +9,7 @@
                 <br>
                 <button type="submit">Entrar</button>
             </form>
-            <a href="/user_menu">
+            <a href="/">
             <button>Voltar</button>
         </a>
         </div>

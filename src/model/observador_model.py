@@ -12,6 +12,7 @@ class DbObservador(Model):
     cpf = TextField()
     email = TextField()
     tipo = IntegerField()
+    data_login = ListField()
 
     def create_observador(self, nome, senha, telefone, cpf, email, tipo):
         if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo):

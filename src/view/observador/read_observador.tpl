@@ -32,7 +32,7 @@
             </tr>
             %end
         </table>
-        <a href="/user_menu">
+        <a href="/observador">
             <button>voltar</button>
         </a>
     </div>

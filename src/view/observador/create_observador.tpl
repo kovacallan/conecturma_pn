@@ -16,7 +16,7 @@
             <input type="radio" name="tipo" value="4">Responsavel<br>
             <button type="submit">Enviar</button>
         </form>
-        <a href="/user_menu">
+        <a href="/observador">
             <button>voltar</button>
         </a>
     </div>
