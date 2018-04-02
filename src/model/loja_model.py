@@ -1,5 +1,5 @@
 from walrus import *
-from src.model.aluno_model import *
+from model.aluno_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -69,7 +69,7 @@ class DbLoja(Model):
         """
         usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
-                         usuario.pesquisa_usuario(usuario_nome=usuario_logado).items_comprado]
+                         usuario.pesquisa_usuario(usuario_nome=usuario_logado).itens_comprados]
         itens = [str(y['id']) for y in self.read_item()]
         lista_teste = [z for z in itens if z not in itens_usuario]
 

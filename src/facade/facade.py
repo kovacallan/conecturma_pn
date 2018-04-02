@@ -89,7 +89,7 @@ class Facade:
 
     def compra_item_facade(self, id_usuario, id_item):
         """
-        Acrescenta o id do item a lista items_comprado do usuario que comprou o item
+        Acrescenta o id do item a lista itens_comprados do usuario que comprou o item
         :param id_usuario: id do usuario(aluno) que comprará o item
         :param id_item: id do item a ser comprado
         :return: None
