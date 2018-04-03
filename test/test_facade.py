@@ -224,19 +224,19 @@ class FacadeTest(unittest.TestCase):
 
     def _create_escola(self):
         escola = self.facade.create_escola_facade('Do bairro', 'de baixo', '665', '21 ', 'RJ', 'Pindamonhagaba',
-                                                  'KNDPI')
+                                                  'KNDPI','shyes')
         self.assertIs(escola, True)
 
     def _update_escola(self):
         escola = self.facade.pesquisa_escola_facade("Do bairro")
-        self.facade.update_escola_facade(escola.id, "Ni", "eggs", "88", "33355567", "abelhinha", "KND2")
+        self.facade.update_escola_facade(escola['id'], "Ni", "eggs", "88", "RIO DE JANEIRO",'RJ',"33355567", "abelhinha", "KND2",)
         escola = self.facade.pesquisa_escola_facade("Ni")
-        self.assertEqual(escola.nome, "Ni")
-        self.assertEqual(escola.rua, "eggs")
-        self.assertEqual(escola.numero, 88)
-        self.assertEqual(escola.rede_pertencente, "abelhinha")
-        self.assertEqual(escola.telefone, "33355567")
-        self.assertEqual(escola.cod_identificacao, "KND2")
+        self.assertEqual(escola['nome'], "Ni")
+        self.assertEqual(escola['rua'], "eggs")
+        self.assertEqual(escola['numero'], 88)
+        self.assertEqual(escola['rede_pertencente'], "abelhinha")
+        self.assertEqual(escola['telefone'], "33355567")
+        self.assertEqual(escola['cod_identificacao'], "KND2")
     def _pesquisa_escola(self):
         escola = self.facade.pesquisa_escola_facade("Do bairro")
         self.assertIs(escola, escola)
