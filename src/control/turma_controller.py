@@ -9,10 +9,7 @@ facade = Facade()
 @route('/turma')
 @view('turma/turma')
 def turma():
-    if request.get_cookie("login", secret='2524'):
-        return
-    else:
-        redirect('/')
+    return
 
 
 """ Create Turma """
@@ -25,11 +22,7 @@ def cadastrar_turma():
     pagina de cadastro de turma
     :return:
     """
-    if request.get_cookie("login", secret='2524'):
-        return
-    else:
-        redirect('/')
-
+    return
 
 @route('/cadastro_turma', method='POST')
 def create_turma():
@@ -54,13 +47,11 @@ def read_turma():
     Direciona para a pagina que mostra a turma em ordem de id
     :return: a entrada de dicionario que contem o id e o turma_nome
     """
-    if request.get_cookie("login", secret='2524'):
-        turmi = facade.read_turma_facade()
-        turmas = [(turma['id'], turma['nome'],turma['criador'], turma['desempenho_j1'], turma['desempenho_j2']) for turma
-                  in turmi]
-        return dict(turma=turmas)
-    else:
-        redirect('/')
+
+    turmi = facade.read_turma_facade()
+    turmas = [(turma['id'], turma['nome'],turma['criador'], turma['desempenho_j1'], turma['desempenho_j2']) for turma
+              in turmi]
+    return dict(turma=turmas)
 
 """Turma Delete"""
 

@@ -15,7 +15,7 @@ class DbHistorico(Model):
 
     def read_historico(self):
         historico = []
-        for i in self.all():
+        for i in self.query():
             historico.append(dict(nome = i.nome, tipo = i.tipo, data = i.data_acesso))
 
         return historico

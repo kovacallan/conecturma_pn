@@ -233,6 +233,9 @@ class Facade:
     def pesquisa_turma_facade(self, turma_nome):
         return self.turma.pesquisa_turma(turma_nome)
 
+    def vincular_professor_turma_facade(self, id, nome, email):
+        self.turma.vincular_professores_turma(id = id, nome = nome, email = email)
+
     """
         Fim Facade Turma
     """
