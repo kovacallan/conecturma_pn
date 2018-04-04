@@ -118,7 +118,11 @@ class FacadeTest(unittest.TestCase):
 
     def _create_observador(self):
         observador = self.facade.create_observador_facade(nome='Egg', senha='span', telefone='(21)9999-9999',
-                                                          cpf='123456789', email='egg@span.com.br', tipo=0)
+                                                          cpf='123456789', email='egg@span.com.br', tipo='ADMINISTRADOR')
+
+        observador_professor = self.facade.create_observador_facade(nome='Monty', senha='python', telefone='(21)9999-9999',
+                                                          cpf='123456789', email='Monty@python.com.br',
+                                                          tipo='ADMINISTRADOR')
         self.assertIs(observador, True)
 
     def _update_observador(self):
@@ -139,7 +143,7 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(observador['telefone'], '(21)9999-9999')
         self.assertEqual(observador['cpf'], '123456789')
         self.assertEqual(observador['email'], 'egg@span.com.br')
-        self.assertEqual(observador['tipo'], 0)
+        self.assertEqual(observador['tipo'], 'ADMINISTRADOR')
         observador = self.facade.search_observador_facade('Ni')
         self.assertIs(observador, None)
 
@@ -165,18 +169,6 @@ class FacadeTest(unittest.TestCase):
         self._delete_observador()
 
     """FIM TESTE OBSERVADOR"""
-
-    """TESTE TURMA"""
-
-    def _create_turma(self):
-        turma = self.facade.create_turma_facade("Knigh", "Ni")
-        self.assertIs(turma, True)
-        turma = self.facade.create_turma_facade("Knigh", "Ni")
-
-    def test_create_turma(self):
-        self._create_turma()
-
-    """FIM TESTE TURMA """
 
     """TESTE REDE"""
 
@@ -220,6 +212,7 @@ class FacadeTest(unittest.TestCase):
         self._delete_rede()
 
     """FIM TESTE REDE"""
+
     """TESTE FACADE ESCOLA"""
 
     def _create_escola(self):
@@ -267,6 +260,66 @@ class FacadeTest(unittest.TestCase):
     def test_delete_escola(self):
         self._update_rede()
         self._delete_rede()
+
+    """FIM TESTE ESCOLA"""
+    """TESTE TURMA"""
+
+    def _create_turma(self):
+        turma = self.facade.create_turma_facade("Knight", "Ni")
+
+    def _search_turma(self):
+        turma = self.facade.pesquisa_turma_facade("Knight")
+        self.assertIn(turma['nome'], "Knight")
+        self.assertIn(turma['criador'], "Ni")
+
+    def _vincular_professor_turma(self):
+        turma = self.facade.pesquisa_turma_facade("Knight")
+        professor = self.facade.search_observador_facade("Monty")
+        self.facade.vincular_professor_turma_facade(turma['id'], professor['nome'],professor['email'])
+
+    def _delete_turma(self):
+        turma = self.facade.read_turma_facade()
+
+        escolhidos = []
+        for turmas in turma:
+            escolhidos.append(turmas['id'])
+        self.facade.delete_turma_facade(escolhidos)
+
+    def test_create_delete_turma(self):
+        self._create_turma()
+        self._delete_turma()
+
+    def test_vincular_professor_turma(self):
+        self._create_turma()
+        self._create_observador()
+        self._vincular_professor_turma()
+        self._delete_observador()
+        self._delete_turma()
+
+    def test_create_search_delete_turma(self):
+        self._create_turma()
+        self._search_turma()
+        self._delete_turma()
+
+    """FIM TESTE TURMA """
+
+    """TESTE FACADE HISTORICO"""
+    def _create_historico(self):
+        self.facade.create_historico_facade("Egg", "ADMINISTRADOR")
+
+    def _read_historico(self):
+        historico = self.facade.read_historico_facade()
+
+        self.assertTrue(historico, None)
+
+    def test_create_historico(self):
+        self._create_aluno()
+
+    def test_read_historico(self):
+        self._read_historico()
+
+
+    """FIM TESTE FACADE HISTORICO"""
 
     if __name__ == '__main__':
         unittest.main()

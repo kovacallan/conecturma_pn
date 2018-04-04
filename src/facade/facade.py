@@ -251,10 +251,14 @@ class Facade:
     def update_turma_facade(self, id, turma_nome, professor_encarregado):
         self.turma.turma_update(id, turma_nome, professor_encarregado)
 
+
+    def vincular_professor_turma_facade(self, id, nome, email):
+        self.turma.vincular_professores_turma(id = id, nome = nome, email = email)
+
     """
-    
+
             Fim Facade Turma
-    
+
     """
 
     """
