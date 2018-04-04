@@ -8,8 +8,9 @@ facade = Facade()
 
 @route('/turma')
 @view('turma/turma')
-def turma():
-    return
+def view_turma():
+    turmas = controller_read_turma()
+    return dict(turma = turmas)
 
 
 """ Create Turma """
@@ -17,15 +18,25 @@ def turma():
 
 @route('/turma_cadastro')
 @view('turma/turma_cadastro')
-def cadastrar_turma():
+def view_cadastrar_turma():
     """
     pagina de cadastro de turma
     :return:
     """
     return
 
+def controller_read_turma():
+    """
+    Direciona para a pagina que mostra a turma em ordem de id
+    :return: a entrada de dicionario que contem o id e o turma_nome
+    """
+
+    turma = facade.read_turma_facade()
+    return turma
+
+
 @route('/cadastro_turma', method='POST')
-def create_turma():
+def controller_create_turma():
     """
     Pagina para chamar a funçao create_turma , pedindo pelo tpl o parametro turma_nome
     :return: cria uma entrada no banco de dados da turma criada
@@ -36,22 +47,6 @@ def create_turma():
 
     redirect('/turma')
 
-
-""" Read Turma """
-
-
-@route('/turma_read')
-@view('turma/turma_read')
-def read_turma():
-    """
-    Direciona para a pagina que mostra a turma em ordem de id
-    :return: a entrada de dicionario que contem o id e o turma_nome
-    """
-
-    turmi = facade.read_turma_facade()
-    turmas = [(turma['id'], turma['nome'],turma['criador'], turma['desempenho_j1'], turma['desempenho_j2']) for turma
-              in turmi]
-    return dict(turma=turmas)
 
 """Turma Delete"""
 

@@ -7,7 +7,7 @@ db = Database(host='localhost', port=6379, db=0)
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    turma_nome = TextField(index=True)
+    turma_nome = TextField(fts = True)
     quem_criou = TextField()
     professores = ListField()
     desempenho_j1 = FloatField(default=0)
@@ -53,7 +53,7 @@ class DbTurma(Model):
             turma = self.load(deletar_ids)
             turma.delete(deletar_ids)
 
-    def pesquisa_turma(self, turma_nome):
+    def search_turma(self, turma_nome):
         """
         Ainda nao implementado
         :return:
@@ -71,7 +71,7 @@ class DbTurma(Model):
         x = 0
         y = 0
         for model.aluno_model.DbAluno.id in DbTurma:
-            retorno = self.pesquisa_turma(model.aluno_model.DbAluno.id)
+            retorno = self.search_turma(model.aluno_model.DbAluno.id)
             usuario = self.load(retorno)
             soma += usuario.desempenho_j1
             soma2 += usuario.desempenho_j2
@@ -79,14 +79,15 @@ class DbTurma(Model):
             y += 1
         return soma / x, soma2 / y
 
-    def vincular_professores_turma(self, id, nome, email):
-        professor = dict(professor_nome = nome, professor_email = email)
+    def vincular_professores_turma(self, id, professor_id):
         turma = self.load(id)
-        turma.professores.append(professor)
+        turma.professores.append(professor_id)
         turma.save()
 
-    def mostrar_professores_turma(self, id):
+        self.ver_professores_turma(turma.id)
+
+    def ver_professores_turma(self, id):
         turma = self.load(id)
+        professores = [int(''.join(str(x.decode('utf-8')))) for x in turma.professores]
 
-
-
+        return professores

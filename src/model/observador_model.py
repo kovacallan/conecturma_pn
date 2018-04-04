@@ -43,6 +43,11 @@ class DbObservador(Model):
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
 
+    def search_observador_id(self, id):
+        observador = self.load(id)
+
+        return observador
+
     def search_observador(self, nome):
 
         observador = None

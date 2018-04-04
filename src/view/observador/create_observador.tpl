@@ -13,7 +13,7 @@
             <input type="radio" name="tipo" value="gestor">Gestor
             <input type="radio" name="tipo" value="diretor">Diretor
             <input type="radio" name="tipo" value="professor">Professor
-            <input type="radio" name="tipo" value="responsavel">Responsavel<br>
+            <input type="radio" name="tipo" value="responsavel" checked>Responsavel<br>
             <button type="submit">Enviar</button>
         </form>
         <a href="/observador">

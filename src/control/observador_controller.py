@@ -1,4 +1,5 @@
 from bottle import route, view, get, request, redirect, template
+from control.classes.validar_cadastros_updates import *
 from facade.facade import *
 
 facade = Facade()
@@ -27,7 +28,7 @@ def view_observador_read():
 def view_observador_update():
     nome = request.params['nome']
     observador = facade.search_observador_facade(nome)
-    return template('observador/update_observador', id =observador['id'], nome=observador['nome'],
+    return template('observador/update_observador', id=observador['id'], nome=observador['nome'],
                     telefone=observador['telefone'], cpf=observador['cpf'], email=observador['email'])
 
 
@@ -42,9 +43,10 @@ def controller_observador_cadastro():
 
     if filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
         facade.create_observador_facade(nome, senha, telefone, cpf, email, tipo.upper())
-        redirect('/observador/cadastro')
+        redirect('/')
     else:
         print("Erro para salvar")
+        redirect('/observador/cadastro')
 
 
 def controller_observador_read():
@@ -58,24 +60,12 @@ def controller_observador_read():
 
 @route('/observador/update_observador', method='POST')
 def controller_observador_update():
-
-    facade.update_observador_facade(id=request.params['id'] , nome=request.params['nome'],
+    facade.update_observador_facade(id=request.params['id'], nome=request.params['nome'],
                                     telefone=request.params['telefone'], cpf=request.params['cpf'],
                                     email=request.params['email'])
     redirect('/observador/read_observador')
 
+
 def filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
-    if nome == "":
-        return False
-    elif senha == "":
-        return False
-    elif telefone == "":
-        return False
-    elif cpf == "":
-        return False
-    elif email == "":
-        return False
-    elif tipo == "":
-        return False
-    else:
-        return True
+    valida = ValidaNome(ValidaSenha(ValidaTelefone(ValidaCpf(ValidaEmail(ValidaTipo(ValidaOk()))))))
+    return valida.validacao(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo)

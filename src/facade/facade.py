@@ -143,6 +143,9 @@ class Facade:
     def delete_observador_facade(self, deletar_ids):
         self.observador.delete_observador(deletar_ids=deletar_ids)
 
+    def search_observador_id_facade(self, id):
+        return self.observador.search_observador_id(id = id)
+
     def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)
 
@@ -230,11 +233,14 @@ class Facade:
         """
         self.turma.delete_turma(id)
 
-    def pesquisa_turma_facade(self, turma_nome):
-        return self.turma.pesquisa_turma(turma_nome)
+    def search_turma_facade(self, turma_nome):
+        return self.turma.search_turma(turma_nome)
 
-    def vincular_professor_turma_facade(self, id, nome, email):
-        self.turma.vincular_professores_turma(id = id, nome = nome, email = email)
+    def vincular_professor_turma_facade(self, id, professor_id):
+        self.turma.vincular_professores_turma(id = id, professor_id = professor_id)
+
+    def ver_professor_turma_facade(self,id):
+        return self.turma.ver_professores_turma(id = id)
 
     """
         Fim Facade Turma
