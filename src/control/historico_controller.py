@@ -6,6 +6,10 @@ facade = Facade()
 @route('/historico')
 @view('historico_login')
 def view_historico_login():
+    """
+
+    :return:
+    """
     historico = controller_historico_login()
     return dict(historico = historico)
 

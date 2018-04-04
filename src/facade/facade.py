@@ -1,3 +1,4 @@
+from src.model.medalha_model import DbMedalha
 from src.model.aluno_model import DbAluno
 from src.model.observador_model import DbObservador
 from src.model.turma_model import DbTurma
@@ -19,9 +20,11 @@ class Facade:
         self.turma = DbTurma()
         self.loja = DbLoja()
         self.historico = DbHistorico()
+        self.medalha = DbMedalha()
 
     """
         Inicio Facade Usuario/Aluno
+        
     """
 
     def create_aluno_facade(self, nome, senha):
@@ -123,11 +126,15 @@ class Facade:
         return self.aluno.avatar(id)
 
     """
+    
         Fim Facade Usuario/Aluno
+        
     """
 
     """
+    
         Inicio Facade observador
+        
     """
 
     def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo):
@@ -149,11 +156,15 @@ class Facade:
     def login_date_facade(self, id , data):
         self.observador.login_date(id,data)
     """
+    
         Fim Facade observador
+        
     """
 
     """
+    
         Inicio Facade Rede
+        
     """
 
     def create_rede_facade(self, nome, cod, telefone):
@@ -199,11 +210,15 @@ class Facade:
         return self.rede.pesquisa_rede(rede)
 
     """
+    
         Fim Facade Rede
+        
     """
 
     """
+    
         Inicio Facade Turma
+        
     """
 
     def create_turma_facade(self, nome, login):
@@ -233,10 +248,20 @@ class Facade:
     def pesquisa_turma_facade(self, turma_nome):
         return self.turma.pesquisa_turma(turma_nome)
 
+    def update_turma_facade(self, id, turma_nome, professor_encarregado):
+        self.turma.turma_update(id, turma_nome, professor_encarregado)
+
     """
-        Fim Facade Turma
+    
+            Fim Facade Turma
+    
     """
-    """Inicio Facade Escola"""
+
+    """
+    
+            Inicio Facade Escola
+    
+    """
 
     def create_escola_facade(self, nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao):
         return self.escola.create_escola(nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao)
@@ -252,9 +277,20 @@ class Facade:
 
     def pesquisa_escola_facade(self, nome):
        return self.escola.search_escola(nome)
-    """Fim Facade Escola"""
+
+
     """
+    
+            Fim Facade Escola
+            
+    """
+
+
+    """
+    
         Inicio Facade loja
+        
+        
     """
 
     def criar_item_loja_facade(self, nome, tipo, preco):
@@ -299,17 +335,52 @@ class Facade:
         return self.loja.ja_possui_item(usuario_logado=usuario_logado)
 
     """
+    
+    
         Fim Facade loja
+        
+        
+    """
+
+
+    """
+    
+        Inicio Facade Medalhas
+        
+    """
+    def create_medalha_facade(self, nome, tipo):
+        self.medalha.create_medalha(nome, tipo)
+
+    def read_medalha_facade(self):
+        self.medalha.read_medalha()
+
+    def delete_medalha_facade(self, delete_ids):
+        self.medalha.delete_medalha(delete_ids)
+
+    def pesquisa_medalha_facade(self, nome):
+        self.medalha.pesquisa_medalha(nome)
+
+    """
+          Fim de Facade Medalhas
+            
     """
 
     """
         Inicio Facade Historico
+        
+        
     """
+
     def create_historico_facade(self, nome,tipo):
         self.historico.create_historico(nome,tipo)
 
     def read_historico_facade(self):
         return self.historico.read_historico()
+
     """
-       Fim Facade Historico
+           
+           Fim Facade Historico
+           
+           
     """
+

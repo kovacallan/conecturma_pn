@@ -289,5 +289,7 @@ class DbAluno(Model):
             print(usuario.senha, usuario)
         else:
             print("senha antiga errada")
+
+
     # def definir_novo_usuario_nome(self,usuario_id, senha, novo_nome):
     #     usuario = self.load(usuario_id)

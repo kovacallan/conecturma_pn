@@ -15,6 +15,8 @@
             <button>Ver Itens Comprados</button>
             </a>
 
+            <a href="/medalha_read">
+            <button>ver medalhas do aluno<button>
             <a href="/">
             <button>Voltar</button>
             </a>

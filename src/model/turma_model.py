@@ -67,8 +67,17 @@ class DbTurma(Model):
         else:
             return turma
 
-    def turma_in(self):
-        pass
+    def turma_update(self,id, turma_nome, professor_encarregado):
+        turma=self.load(id)
+        if turma_nome == "" or turma_nome == None or turma.turma_nome ==turma_nome:
+            pass
+        else:
+            turma.turma_nome = turma_nome
+        if professor_encarregado == "" or professor_encarregado == None or turma.professor_encarregado == professor_encarregado:
+            pass
+        else:
+            turma.professor_encarregado = professor_encarregado
+        turma.save()
 
     def calcular_desempenho_jogos(self):
         soma = 0
