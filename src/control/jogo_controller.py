@@ -1,9 +1,9 @@
 from bottle import view, get, request, redirect, route, BaseResponse, post
 
-from facade.facade import Facade
+from facade.historico_facade import HistoricoFacade
 from model.aluno_model import DbAluno
 
-facade = Facade()
+facade = HistoricoFacade()
 
 """Controle do jogo """
 

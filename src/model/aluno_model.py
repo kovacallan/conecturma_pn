@@ -28,6 +28,7 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
+    vinculo_escola = TextField(fts=True)
     turma_do_aluno = TextField(fts=True, index=True)
 
     def usuario_logado(self, id_usuario):

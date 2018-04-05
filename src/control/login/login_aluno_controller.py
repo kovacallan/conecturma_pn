@@ -1,7 +1,7 @@
 from bottle import route,request, redirect, response
-from facade.facade import Facade
+from facade.aluno_facade import AlunoFacade
 
-facade = Facade()
+facade = AlunoFacade()
 
 @route('/login_aluno', method='POST')
 def controller_login_entrar_aluno():

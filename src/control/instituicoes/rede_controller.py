@@ -1,9 +1,9 @@
 from bottle import *
 
 """route, view, get, request, redirect, post"""
-from facade.facade import Facade
+from facade.rede_facade import RedeFacade
 
-facade = Facade()
+facade = RedeFacade()
 """Controle da rede"""
 
 
@@ -17,7 +17,7 @@ def view_index_rede():
     return
 
 
-@route('/create_rede')
+@route('/rede/create_rede')
 @view('rede/create_rede')
 def view_rede_cadastro():
     """
@@ -27,7 +27,7 @@ def view_rede_cadastro():
     return
 
 
-@route('/criar_rede', method='POST')
+@route('/rede/criar_rede', method='POST')
 def create_rede_controller():
     nome = request.params['nome_rede']
     cod = request.params['cod']
@@ -36,7 +36,7 @@ def create_rede_controller():
     redirect('/rede')
 
 
-@route('/read_rede')
+@route('/rede/read_rede')
 @view('rede/ler_redes')
 def view_read_rede():
     nome = facade.read_rede_facade()
@@ -44,7 +44,7 @@ def view_read_rede():
     return dict(rede_id=redes)
 
 
-@route('/update_rede')
+@route('/rede/update_rede')
 @view('modificar_rede')
 def view_modificar_rede():
     pass

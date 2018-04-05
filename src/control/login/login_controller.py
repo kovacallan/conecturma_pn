@@ -1,7 +1,7 @@
 from bottle import route, view, request, redirect, response
-from facade.facade import Facade
+from facade.aluno_facade import AlunoFacade
 
-facade = Facade()
+facade = AlunoFacade()
 
 @route('/')
 @view('index')

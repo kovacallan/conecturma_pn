@@ -1,8 +1,8 @@
 from bottle import route, request, redirect, response
 from datetime import datetime
-from facade.facade import Facade
+from facade.observador_facade import ObservadorFacade
 
-facade = Facade()
+facade = ObservadorFacade()
 
 @route('/login_observador', method='POST')
 def controller_login_entrar_observador():

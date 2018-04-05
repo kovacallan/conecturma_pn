@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from bottle import route, redirect, request, view, get, post
-from facade.facade import Facade
+from facade.loja_facade import LojaFacade
 
-facade = Facade()
+facade = LojaFacade()
 
 
 @route('/loja')

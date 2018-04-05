@@ -3,10 +3,9 @@ from bottle import *
 
 
 """route, view, get, request, redirect, post"""
-from facade.facade import Facade
+from facade.aluno_facade import AlunoFacade
 
-facade = Facade()
-
+facade = AlunoFacade()
 """ Controle aluno """
 
 

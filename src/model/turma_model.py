@@ -10,10 +10,12 @@ class DbTurma(Model):
     turma_nome = TextField(fts = True)
     quem_criou = TextField()
     professores = ListField()
+    serie = IntegerField()
+    vinculo_escola = IntegerField()
     desempenho_j1 = FloatField(default=0)
     desempenho_j2 = FloatField(default=0)
 
-    def create_turma(self, turma, login):
+    def create_turma(self, turma, login, serie,escola):
         """
         Cria uma turma e armazena no banco de dados ,com o dado de quem criou a turma
 
@@ -21,7 +23,7 @@ class DbTurma(Model):
         :param login: O nome do login de quem criou a turma
         :return: Acrescenta a turma criada ao banco de dados
         """
-        if self.create(turma_nome=turma, quem_criou=login):
+        if self.create(turma_nome=turma, quem_criou=login, serie=serie,vinculo_escola=escola):
             return True
         else:
             return TypeError("Não foi possivel salvar a turma")
@@ -37,9 +39,7 @@ class DbTurma(Model):
 
         for turma in self.query(order_by=self.id):
             turma_dic.append(
-                dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, desempenho_j1=turma.desempenho_j1,
-                     desempenho_j2=turma.desempenho_j2))
-
+                dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, escola = turma.vinculo_escola, serie=turma.serie))
         return turma_dic
 
     def delete_turma(self, deletar_ids):

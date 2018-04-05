@@ -2,8 +2,7 @@
     <div class="row">
         <div align="center" class="col-md-12">
            <h1>Turmas</h1>
-            <a href="/turma_cadastro"><button>Cadastro turma</button></a>
-            <a href="/turma_read"><button>Ver turma</button></a>
+            <a href="/turma/turma_cadastro"><button>Cadastro turma</button></a>
             <a href="/"><button>Voltar</button></a>
         </div>
     </div>
@@ -25,23 +24,27 @@
                     Série
                 </div>
             </div>
+            <%
+                for t in turma:
+            %>
             <div class="row">
                 <div class="col-md-2">
-                    {{turma}}
                 </div>
                 <div class="col-md-2">
-                    Nome
+                    {{t['nome']}}
                 </div>
                 <div class="col-md-2">
-                    Professor(es)
                 </div>
                 <div class="col-md-2">
-                    Escola
+                    {{t['escola']}}
                 </div>
                 <div class="col-md-2">
-                    Série
+                    {{t['serie']}}
                 </div>
             </div>
+            <%
+                end
+            %>
         </div>
     </div>
 

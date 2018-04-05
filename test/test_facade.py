@@ -3,7 +3,7 @@ import unittest
 # from unittest.mock import MagicMock
 import bottle
 
-from src.facade.facade import *
+from src.facade.historico_facade import *
 
 
 class FacadeTest(unittest.TestCase):

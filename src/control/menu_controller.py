@@ -1,10 +1,11 @@
 from bottle import route, view, request, redirect
-from facade.facade import Facade
+from facade.aluno_facade import AlunoFacade
+from facade.observador_facade import ObservadorFacade
 
 """ Controle do index """
 
-facade = Facade()
-
+facade = AlunoFacade()
+facade_observador = ObservadorFacade()
 
 @route('/jogar_conecturma')
 @view('jogar_conecturma')
@@ -43,7 +44,7 @@ def view_jogar_conecturma():
 @view('gestao_aprendizagem')
 def view_gestao_aprendizagem():
     if request.get_cookie("login", secret='2525'):
-        observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+        observador = facade_observador.search_observador_facade(request.get_cookie("login", secret='2525'))
         return dict(usuario = observador['nome'], tipo = observador['tipo'])
 
 @route('/alterar_senha')

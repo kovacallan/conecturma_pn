@@ -17,13 +17,13 @@ class DbEscola(Model):
     telefone = TextField()
     estado = TextField()
     cidade = TextField()
-    rede_pertencente = TextField()
+    vinculo_rede = TextField(fts=True)
     cod_identificacao = TextField()
     desempenho = FloatField(default=0)
 
-    def create_escola(self, nome, rua, numero, telefone, estado, cidade, rede_pertencente, cod_identificacao):
+    def create_escola(self, nome, rua, numero, telefone, estado, cidade, vinculo_rede, cod_identificacao):
         if self.create(nome=nome, rua=rua, numero=numero, telefone=telefone, estado=estado, cidade=cidade,
-                       rede_pertencente=rede_pertencente,
+                       vinculo_rede=vinculo_rede,
                        cod_identificaçao=cod_identificacao):
             return True
         else:
@@ -38,13 +38,14 @@ class DbEscola(Model):
 
         escola_dic = []
 
-        for escola in self.query(order_by=self.id):
+        for escola in self.query(order_by=DbEscola.id):
             escola_dic.append(
-                dict(id=escola.id, nome=escola.nome, rua=escola.rua, numero=escola.numero, telefone=escola.telefone,
-                     estado=escola.estado, cidade=escola.cidade))
+                dict(id=escola.id, nome=escola.nome, rua=escola.rua, cod_identificacao=escola.cod_identificacao,
+                     rede=escola.vinculo_rede))
+
         return escola_dic
 
-    def update_escola(self, id, nome, rua, numero, telefone,cidade,estado,rede_pertencente, cod_identificacao):
+    def update_escola(self, id, nome, rua, numero, telefone, cidade, estado, rede_pertencente, cod_identificacao):
         """
         muda os atributos da escola pelo id
         :param id: id da escola que vai ter as mudanças
@@ -76,10 +77,10 @@ class DbEscola(Model):
             pass
         else:
             escola.telefone = telefone
-        if rede_pertencente == "" or nome == None:
+        if vinculo_rede == "" or nome == None:
             pass
         else:
-            escola.rede_pertencente = rede_pertencente
+            escola.vinculo_rede = rede_pertencente
         if cod_identificacao == "" or cod_identificacao == None:
             pass
         else:
@@ -87,13 +88,20 @@ class DbEscola(Model):
 
         escola.save()
 
+    def search_escola_id(self, id):
+        search = self.load(id)
+        escolas = dict(id=search.id, nome=search.nome, rua=search.rua, numero=search.numero,
+                       telefone=search.telefone, estado=search.estado, cidade=search.cidade,
+                       vinculo_rede=search.vinculo_rede, cod_identificacao=search.cod_identificacao)
+        return escolas
+
     def search_escola(self, nome):
 
         escolas = None
         for search in DbEscola.query(DbEscola.nome == nome):
             escolas = dict(id=search.id, nome=search.nome, rua=search.rua, numero=search.numero,
                            telefone=search.telefone, estado=search.estado, cidade=search.cidade,
-                           rede_pertencente=search.rede_pertencente, cod_identificacao=search.cod_identificacao,
+                           vinculo_rede=search.vinculo_rede, cod_identificacao=search.cod_identificacao,
                            desempenho=search.desempenho)
         return escolas
 

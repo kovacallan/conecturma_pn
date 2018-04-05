@@ -1,28 +1,38 @@
 from bottle import route, view, get, request, redirect, template
 from control.classes.validar_cadastros_updates import *
-from facade.facade import *
+from facade.observador_facade import ObservadorFacade
+from facade.rede_facade import  RedeFacade
+from facade.escola_facade import EscolaFacade
 
-facade = Facade()
-
+facade = ObservadorFacade()
+escolafacade = EscolaFacade()
+redefacade = RedeFacade()
 
 @route('/observador')
 @view('observador/index')
 def view_observador_index():
-    return
+    observador=controller_observador_read()
+    return dict(observador = observador)
 
 
 @route('/observador/cadastro')
-@view('observador/create_observador')
 def view_observador_cadastro():
-    return
+    tipo_observador = int(request.params['tipo_observador'])
+    escola = escolafacade.read_escola_facade()
+    rede = redefacade.read_rede_facade()
 
-
-@route('/observador/read_observador')
-@view('observador/read_observador')
-def view_observador_read():
-    observador = controller_observador_read()
-    return dict(observador=observador)
-
+    if tipo_observador == 0:
+        return template('observador/create_observador_administrador',tipo = tipo_observador)
+    elif tipo_observador == 1:
+        return template('observador/create_observador_gestor',tipo = tipo_observador, rede = rede)
+    elif tipo_observador == 2:
+        return template('observador/create_observador_diretor', tipo = tipo_observador, escola = escola)
+    elif tipo_observador == 3:
+        return template('observador/create_observador_professor',tipo = tipo_observador, escola = escola)
+    elif tipo_observador == 4:
+        redirect('/observador')
+    else:
+        redirect('/observador')
 
 @get('/observador/editar')
 def view_observador_update():
@@ -32,29 +42,8 @@ def view_observador_update():
                     telefone=observador['telefone'], cpf=observador['cpf'], email=observador['email'])
 
 
-@get('/observador/create_observador')
-def controller_observador_cadastro():
-    nome = request.params['nome']
-    senha = request.params['senha']
-    telefone = request.params['telefone']
-    cpf = request.params['cpf']
-    email = request.params['email']
-    tipo = request.params['tipo']
-
-    if filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
-        facade.create_observador_facade(nome, senha, telefone, cpf, email, tipo.upper())
-        redirect('/')
-    else:
-        print("Erro para salvar")
-        redirect('/observador/cadastro')
-
-
 def controller_observador_read():
-    observadores = []
-    for observador in facade.read_observador_facade():
-        observador['tipo'] = observador['tipo']
-        observadores.append(observador)
-
+    observadores=facade.read_observador_facade()
     return observadores
 
 
