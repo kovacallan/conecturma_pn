@@ -1,35 +1,37 @@
 from bottle import route, view, request, redirect
-from facade.facade import Facade
-
+from facade.aluno_facade import AlunoFacade
+from facade.observador_facade import ObservadorFacade
+from facade.loja_facade import LojaFacade
 """ Controle do index """
 
-facade = Facade()
-
+aluno_facade = AlunoFacade()
+loja_facade = LojaFacade()
+facade_observador = ObservadorFacade()
 
 @route('/jogar_conecturma')
 @view('jogar_conecturma')
 def view_jogar_conecturma():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
     if request.get_cookie("login", secret='2524'):
-        usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
-        avatar = facade.avatar_facade(usuario.id)
+        usuario = aluno_facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+        avatar = aluno_facade.avatar_facade(usuario.id)
         if usuario.cor == 0:
             cor = 'default'
         else:
-            cor = facade.pesquisa_item_facade(avatar['cor']).nome
+            cor = loja_facade.pesquisa_item_facade(avatar['cor']).nome
 
         if usuario.rosto == 0:
             rosto = 'default'
         else:
-            rosto = facade.pesquisa_item_facade(avatar['rosto']).nome
+            rosto = loja_facade.pesquisa_item_facade(avatar['rosto']).nome
         if usuario.acessorio == 0:
             acessorio = 'default'
         else:
-            acessorio = facade.pesquisa_item_facade(avatar['acessorio']).nome
+            acessorio = loja_facade.pesquisa_item_facade(avatar['acessorio']).nome
         if usuario.corpo == 0:
             corpo = 'default'
         else:
-            corpo = facade.pesquisa_item_facade(avatar['corpo']).nome
+            corpo = loja_facade.pesquisa_item_facade(avatar['corpo']).nome
 
         avatar_pecas = {'cor': cor,
                         'rosto': rosto,
@@ -43,7 +45,7 @@ def view_jogar_conecturma():
 @view('gestao_aprendizagem')
 def view_gestao_aprendizagem():
     if request.get_cookie("login", secret='2525'):
-        observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+        observador = facade_observador.search_observador_facade(request.get_cookie("login", secret='2525'))
         return dict(usuario = observador['nome'], tipo = observador['tipo'])
 
 @route('/alterar_senha')
@@ -60,9 +62,9 @@ def controller_new_senha():
     senha_conf = request.params['senha_conf']
     if senha_nova != senha_conf:
         redirect('/new_senha')
-    retorno = facade.pesquisa_aluno_facade(nome)
+    retorno = aluno_facade.pesquisa_aluno_facade(nome)
     if valida_login(nome, senha):
-        facade.aluno.update_aluno(retorno.id, nome, senha_nova)
+        aluno_facade.aluno.update_aluno(retorno.id, nome, senha_nova)
         redirect('/user_menu')
     else:
         print("deu ruim tentando mudar a senha")
@@ -78,9 +80,9 @@ def controller_new_usuario_nome():
     nome = request.params['usuario']
     senha = request.params['senha']
     nome_novo= request.params['nome_novo']
-    retorno = facade.pesquisa_aluno_facade(nome)
+    retorno = aluno_facade.pesquisa_aluno_facade(nome)
     if valida_login(nome, senha):
-        facade.aluno.update_aluno(retorno.id, nome_novo, senha)
+        aluno_facade.aluno.update_aluno(retorno.id, nome_novo, senha)
         create_cookie(nome_novo)
         redirect('/')
     else:

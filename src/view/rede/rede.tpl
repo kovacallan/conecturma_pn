@@ -2,11 +2,11 @@
 <div class="row">
         <div align="center" class="col-md-12">
 
-            <a href="/create_rede">
+            <a href="/rede/create_rede">
             <button>criar rede</button>
             </a>
 
-            <a href="/read_rede">
+            <a href="/rede/read_rede">
             <button>ver redes</button>
             </a>
             <a href="/">

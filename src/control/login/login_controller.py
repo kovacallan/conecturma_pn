@@ -1,13 +1,13 @@
 from bottle import route, view, request, redirect, response
-from facade.facade import Facade
+from facade.aluno_facade import AlunoFacade
 
-facade = Facade()
+facade = AlunoFacade()
 
 @route('/')
 @view('index')
 def view_login_index():
     if request.get_cookie("login", secret='2524'):
-        redirect('/user_menu')
+        redirect('/jogar_conecturma')
     elif request.get_cookie("login", secret='2525'):
         redirect('/gestao_aprendizagem')
     else:

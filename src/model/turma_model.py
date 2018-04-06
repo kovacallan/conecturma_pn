@@ -7,13 +7,15 @@ db = Database(host='localhost', port=6379, db=0)
 class DbTurma(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    turma_nome = TextField(index=True)
+    turma_nome = TextField(fts = True)
     quem_criou = TextField()
     professores = ListField()
+    serie = IntegerField()
+    vinculo_escola = IntegerField()
     desempenho_j1 = FloatField(default=0)
     desempenho_j2 = FloatField(default=0)
 
-    def create_turma(self, turma, login):
+    def create_turma(self, turma, login, serie,escola):
         """
         Cria uma turma e armazena no banco de dados ,com o dado de quem criou a turma
 
@@ -21,7 +23,7 @@ class DbTurma(Model):
         :param login: O nome do login de quem criou a turma
         :return: Acrescenta a turma criada ao banco de dados
         """
-        if self.create(turma_nome=turma, quem_criou=login):
+        if self.create(turma_nome=turma, quem_criou=login, serie=serie,vinculo_escola=escola):
             return True
         else:
             return TypeError("Não foi possivel salvar a turma")
@@ -37,9 +39,7 @@ class DbTurma(Model):
 
         for turma in self.query(order_by=self.id):
             turma_dic.append(
-                dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, desempenho_j1=turma.desempenho_j1,
-                     desempenho_j2=turma.desempenho_j2))
-
+                dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, escola = turma.vinculo_escola, serie=turma.serie))
         return turma_dic
 
     def delete_turma(self, deletar_ids):
@@ -53,7 +53,7 @@ class DbTurma(Model):
             turma = self.load(deletar_ids)
             turma.delete(deletar_ids)
 
-    def pesquisa_turma(self, turma_nome):
+    def search_turma(self, turma_nome):
         """
         Ainda nao implementado
         :return:
@@ -83,7 +83,7 @@ class DbTurma(Model):
         x = 0
         y = 0
         for model.aluno_model.DbAluno.id in DbTurma:
-            retorno = self.pesquisa_turma(model.aluno_model.DbAluno.id)
+            retorno = self.search_turma(model.aluno_model.DbAluno.id)
             usuario = self.load(retorno)
             soma += usuario.desempenho_j1
             soma2 += usuario.desempenho_j2
@@ -101,11 +101,13 @@ class DbTurma(Model):
         """
         professor = dict(professor_nome = nome, professor_email = email)
         turma = self.load(id)
-        turma.professores.append(professor)
+        turma.professores.append(professor_id)
         turma.save()
 
-    def mostrar_professores_turma(self, id):
+        self.ver_professores_turma(turma.id)
+
+    def ver_professores_turma(self, id):
         turma = self.load(id)
+        professores = [int(''.join(str(x.decode('utf-8')))) for x in turma.professores]
 
-
-
+        return professores

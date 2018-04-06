@@ -1,8 +1,9 @@
 from bottle import *
-from facade.facade import *
+from facade.escola_facade import EscolaFacade
+from facade.rede_facade import RedeFacade
 
-facade = Facade()
-
+facade = EscolaFacade()
+rede_facade = RedeFacade()
 
 @route('/escola')
 @view('escola/index')
@@ -11,14 +12,17 @@ def view_escola_index():
     view inicial de escola
     :return:
     """
-    return
+    escola = controller_escola_read()
+    return dict(escola=escola)
+
 
 
 @route('/escola/cadastro')
 @view('escola/create_escola')
 def view_escola_cadastro():
-    """mostra a pagina de cadastro"""
-    return
+    rede = rede_facade.read_rede_facade()
+    return dict(rede = rede)
+
 
 
 @route('/escola/read_escola')
@@ -76,9 +80,12 @@ def controller_escola_read():
     :return: a lista de escolas q serao mostradas
     """
     escolas = []
-    for escola in facade.read_escola_facade():
-        escolas.append(escola)
-
+    escola = facade.read_escola_facade()
+    for e in escola:
+        if int(e['rede']) > 0:
+            rede = rede_facade.search_rede_id_facade(e['rede'])
+            e['rede'] = rede['nome']
+        escolas.append(e)
     return escolas
 
 

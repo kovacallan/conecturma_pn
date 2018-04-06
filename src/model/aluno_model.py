@@ -28,6 +28,7 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
+    vinculo_escola = TextField(fts=True)
     turma_do_aluno = TextField(fts=True, index=True)
 
     def usuario_logado(self, id_usuario):
@@ -121,8 +122,7 @@ class DbAluno(Model):
         :return: O usuário pesquisado
         """
 
-        usuario = None
-        for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome, order_by=DbAluno.id):
+        for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome):
             usuario = pesquisa
 
         return usuario
