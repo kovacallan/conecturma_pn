@@ -71,7 +71,7 @@ class DbMedalha(Model):
             medalha.nome = nome
         medalha.save()
 
-    # def ja_possui_item(self, usuario_logado):
+    # def ja_possui_medalha(self, usuario_logado):
     #     """
     #
     #     """
