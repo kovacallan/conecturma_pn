@@ -22,6 +22,18 @@ class DbEscola(Model):
     desempenho = FloatField(default=0)
 
     def create_escola(self, nome, rua, numero, telefone, estado, cidade, rede_pertencente, cod_identificacao):
+        """
+        metodo de criar a escola
+        :param nome: nome da escola
+        :param rua: rua da escola
+        :param numero: numero da escola
+        :param telefone: telefone da escola
+        :param estado: estado que esta a escola
+        :param cidade: cidade que esta a escola
+        :param rede_pertencente: qual a rede que pertence
+        :param cod_identificacao: codigo de identificaçao da escola
+        :return: true se cponseguiu criar a escola e false se nao conseguiu
+        """
         if self.create(nome=nome, rua=rua, numero=numero, telefone=telefone, estado=estado, cidade=cidade,
                        rede_pertencente=rede_pertencente,
                        cod_identificaçao=cod_identificacao):
@@ -88,6 +100,12 @@ class DbEscola(Model):
         escola.save()
 
     def search_escola(self, nome):
+        """
+        pesquisa a escola
+        :param nome: nome da escola
+        :return: o dicionjario com todos os dados da escola
+
+        """
 
         escolas = None
         for search in DbEscola.query(DbEscola.nome == nome):

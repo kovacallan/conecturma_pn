@@ -8,61 +8,56 @@ facade = Facade()
 
 @route('/medalha')
 @view('medalha/medalha')
-def turma():
-    if request.get_cookie("login", secret='2524'):
-        return
-    else:
-        redirect('/')
-
+def medalha():
+    """pagina inicial de medalha"""
+    return
 
 """ Create medalha """
 
 
 @route('/medalha_cadastro')
-@view('observador/medalha_cadastro')
+@view('observador/medalha_cadastro.tpl')
 def cadastrar_medalha():
     """
-    pagina de cadastro de turma
+    pagina de cadastro de medalha
     :return:
     """
     return
 
 
-@route('/cadastro_medalha', method='POST')
-def create_medalha():
-    """
-    Pagina para chamar a funçao create_turma , pedindo pelo tpl o parametro turma_nome
-    :return: cria uma entrada no banco de dados da turma criada
-    """
-    medalha_nome = request.forms['nome']
+@get('/create_medalha')
+def controller_medalha_cadastro():
 
-    facade.create_medalha_facade(medalha_nome, request.get_cookie("login", secret='2524'))
+    nome = request.params['nome']
+    facade.create_medalha_facade(nome)
+    redirect('/gestao_aprendizagem')
 
-    redirect('/')
+""" Read medalha """
 
 
-""" Read Turma """
+@route('/ler_medalha')
+@view('observador/read_medalhas.tpl')
+def read_de_medalha():
+    medalhas = []
 
+    for medalha in facade.read_medalha_facade():
+        medalhas.append(medalha)
 
-@route('/medalha_read')
-@view('aluno/medalha_read')
-def read_turma():
-    """
-    Direciona para a pagina que mostra a turma em ordem de id
-    :return: a entrada de dicionario que contem o id e o turma_nome
-    """
-    if request.get_cookie("login", secret='2524'):
-        turmi = facade.read_turma_facade()
-        turmas = [(turma['id'], turma['nome'],turma['criador'], turma['desempenho_j1'], turma['desempenho_j2']) for turma
-                  in turmi]
-        return dict(turma=turmas)
-    else:
-        redirect('/')
+    return dict(medalhas=medalhas)
 
-"""Turma Delete"""
+    # medalhas = facade.read_medalha_facade()
+    #
+    # medalhais = [(medalha['id'], medalha['nome']) for medalha in medalhas]
+    # return dict(medalha=medalhais)
+
+"""DELETE MEDALHA"""
 
 
 @get('/delete_medalha')
 def deletar_turma():
+    """
+    Pega os ids das medalhas e deleta
+    :return:
+    """
     facade.delete_medalha_facade(request.params['id'])
     redirect('/')

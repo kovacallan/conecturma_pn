@@ -138,22 +138,61 @@ class Facade:
     """
 
     def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo):
+        """
+        cria um observador
+        :param nome:nome do observador
+        :param senha:senha do observador
+        :param telefone:telefone do observador(nao tera para professor )
+        :param cpf:cpf (vai ser tirado)
+        :param email:email
+        :param tipo:adm , gestor , professor e responsavel
+        :return:o metodo de criar observador
+        """
         return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
                                                  tipo=tipo)
 
     def read_observador_facade(self):
+        """
+        facade de ler observador
+        :return: metodo de ler observador
+        """
         return self.observador.read_observador()
 
     def update_observador_facade(self, id, nome, telefone, cpf, email):
+        """
+        edita o observador
+        :param id: id do observador a ser editado
+        :param nome: novo nome
+        :param telefone: novo telefone(alguns tipos nao precisarao ter telefone)
+        :param cpf:cpf (futuramente nao existira mais
+        :param email:novo email
+        :return:o metodo que fazo update
+        """
         return self.observador.update_observador(id, nome, telefone, cpf, email)
 
     def delete_observador_facade(self, deletar_ids):
+        """
+        deleta a lista de ids de observador(futuramente so vai para o "cemiterio")
+        :param deletar_ids: lista de ids a serem deletados
+        :return:
+        """
         self.observador.delete_observador(deletar_ids=deletar_ids)
 
     def search_observador_facade(self, nome):
+        """
+        pesquisa um observador
+        :param nome: nome da pessoa
+        :return: encaminha para o metodo que faz a pesquisa
+        """
         return self.observador.search_observador(nome)
 
     def login_date_facade(self, id , data):
+        """
+        registra o historico de login
+        :param id: id de quem logou
+        :param data: dia , hora e minuto
+        :return:
+        """
         self.observador.login_date(id,data)
     """
     
@@ -185,6 +224,14 @@ class Facade:
         return self.rede.read_rede()
 
     def update_rede_facade(self, id, nome, cod, telefone):
+        """
+
+        :param id:
+        :param nome:
+        :param cod:
+        :param telefone:
+        :return:
+        """
         return self.rede.update_rede(id, nome, cod, telefone)
 
     def delete_rede_facade(self, ids):
@@ -352,11 +399,11 @@ class Facade:
         Inicio Facade Medalhas
         
     """
-    def create_medalha_facade(self, nome, tipo):
-        self.medalha.create_medalha(nome, tipo)
+    def create_medalha_facade(self, nome):
+        self.medalha.create_medalha(nome)
 
     def read_medalha_facade(self):
-        self.medalha.read_medalha()
+        return self.medalha.read_medalha()
 
     def delete_medalha_facade(self, delete_ids):
         self.medalha.delete_medalha(delete_ids)

@@ -58,5 +58,6 @@ def read_turma():
 
 @get('/deletar_turma')
 def deletar_turma():
+    """deleta a turma(futuramente apenas colocará no cemiterio)"""
     facade.delete_turma_facade(request.params['id'])
     redirect('/turma')

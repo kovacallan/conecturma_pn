@@ -92,6 +92,13 @@ class DbTurma(Model):
         return soma / x, soma2 / y
 
     def vincular_professores_turma(self, id, nome, email):
+        """
+        coloca professores responsaveis por uma turma
+        :param id: id da turma
+        :param nome: nome do professor
+        :param email: emkail do mesmo
+        :return:
+        """
         professor = dict(professor_nome = nome, professor_email = email)
         turma = self.load(id)
         turma.professores.append(professor)

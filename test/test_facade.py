@@ -321,5 +321,14 @@ class FacadeTest(unittest.TestCase):
 
     """FIM TESTE FACADE HISTORICO"""
 
+    """TESTE FACADE MEDALHAS"""
+
+    def _create_medalha(self):
+        medalha = self.facade.create_medalha_facade('cheese')
+        self.assertIs(medalha, True)
+
+    def test_create_escola(self):
+            self._create_escola()
+
     if __name__ == '__main__':
         unittest.main()

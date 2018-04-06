@@ -12,7 +12,7 @@ from control.historico_controller import *
 from control.login.login_controller import *
 from control.login.login_observador_controller import *
 from control.login.login_aluno_controller import *
-
+from control.medalha_controller import *
 
 
 import bottle

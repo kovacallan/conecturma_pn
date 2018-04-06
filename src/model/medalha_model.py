@@ -1,5 +1,4 @@
 from walrus import *
-import model.aluno_model
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -10,33 +9,34 @@ class DbMedalha(Model):
     nome = TextField(index=True)
     tipo = IntegerField(default=0)
 
-    def create_medalha(self, nome, tipo):
+    def create_medalha(self, nome):
         """
         cria uma medalha e poe no banco de dados
         :param nome: nome da medalha
         :param tipo: se a medalha é socio-educativa ou de desempenho
-        :return:
+        :return:true se tiver criado certinho e false se tiver dado ruim
         """
-        if self.create(nome=nome, tipo=tipo):
+        if self.create(nome=nome):
             return True
         else:
-            return TypeError("Não foi possivel salvar a turma")
+            return TypeError("Não foi possivel salvar a medalha")
 
     def read_medalha(self):
+        """
+        armazena os atributos da medalha em uma entrada de dicionario
+        :return: o dicionario com os valores
+        """
+        medalha = []
+        for read in DbMedalha.all():
+            medalha.append(dict(id=read.id, nome=read.nome))
 
-        medalha_dic = []
-
-        for medalha in self.query(order_by=self.id):
-            medalha_dic.append(
-                dict(id=medalha.id, nome=medalha.nome, tipo=medalha.tipo))
-
-        return medalha_dic
+        return medalha
 
     def delete_medalha(self, deletar_ids):
         """
-        Deleta as turmas por id , por enquanto nao implementado
+        Deleta as medalhas por id , por enquanto nao implementado
 
-        :param id: O id da turma
+        :param ids: Os ids das medalhas
         :return: None
         """
         for deletar_ids in deletar_ids:
@@ -45,8 +45,9 @@ class DbMedalha(Model):
 
     def pesquisa_medalha(self, nome):
         """
-        Ainda nao implementado
-        :return:
+        pesquisa a medalha
+        :param nome: nome da medalha
+        :return: false se nao achou a medalha e a medalha se achar
         """
         medalha = {}
         for pesquisa in DbMedalha.query(DbMedalha.nome == nome, order_by=DbMedalha.id):
@@ -58,6 +59,11 @@ class DbMedalha(Model):
             return medalha
 
     def update_medalha(self, nome):
+        """
+        edita o nome da medalha
+        :param nome: nome da medalha
+        :return:
+        """
         medalha = DbMedalha.load(id)
         if medalha.nome == nome:
             pass
@@ -65,14 +71,14 @@ class DbMedalha(Model):
             medalha.nome = nome
         medalha.save()
 
-    def ja_possui_item(self, usuario_logado):
-        """
-
-        """
-        usuario = DbAluno()
-        itens_usuario = [x.decode('utf-8') for x in
-                         usuario.pesquisa_usuario(usuario_nome=usuario_logado).itens_comprados]
-        itens = [str(y['id']) for y in self.read_item()]
-        lista_teste = [z for z in itens if z not in itens_usuario]
-
-        return lista_teste
+    # def ja_possui_item(self, usuario_logado):
+    #     """
+    #
+    #     """
+    #     usuario = DbAluno()
+    #     itens_usuario = [x.decode('utf-8') for x in
+    #                      usuario.pesquisa_usuario(usuario_nome=usuario_logado).itens_comprados]
+    #     itens = [str(y['id']) for y in self.read_item()]
+    #     lista_teste = [z for z in itens if z not in itens_usuario]
+    #
+    #     return lista_teste
