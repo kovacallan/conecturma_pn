@@ -36,7 +36,7 @@
         <a href="/cadastrar_item">
              <button>cadastrar item</button>
         </a>
-        <a href="/user_menu">
+        <a href="/">
             <button>voltar</button>
         </a>
     </div>

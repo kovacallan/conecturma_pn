@@ -39,7 +39,7 @@
 
 
         </form>
-        <a href="/user_menu">
+        <a href="/aluno">
         <button>Voltar</button>
         </a>
     </div>

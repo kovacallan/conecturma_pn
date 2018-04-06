@@ -9,7 +9,7 @@
         <a href="observador/read_observador">
             <button>Read Observador</button>
         </a>
-        <a href="/user_menu">
+        <a href="/">
             <button>voltar</button>
         </a>
     </div>

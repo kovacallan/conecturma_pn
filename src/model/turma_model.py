@@ -9,9 +9,9 @@ class DbTurma(Model):
     id = AutoIncrementField(primary_key=True)
     turma_nome = TextField(index=True)
     quem_criou = TextField()
+    professores = ListField()
     desempenho_j1 = FloatField(default=0)
     desempenho_j2 = FloatField(default=0)
-    professor_encarregado = TextField()
 
     def create_turma(self, turma, login):
         """
@@ -58,17 +58,12 @@ class DbTurma(Model):
         Ainda nao implementado
         :return:
         """
-        turma = {}
-        for pesquisa in DbTurma.query(DbTurma.turma_nome == turma_nome, order_by=DbTurma.id):
-            turma = pesquisa
 
-        if turma == '' and turma is None:
-            return False
-        else:
-            return turma
+        for turma in DbTurma.query(DbTurma.turma_nome == turma_nome, order_by=DbTurma.id):
+            turma_dic = dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, desempenho_j1=turma.desempenho_j1,
+                     desempenho_j2=turma.desempenho_j2)
 
-    def turma_in(self):
-        pass
+        return turma_dic
 
     def calcular_desempenho_jogos(self):
         soma = 0
@@ -83,3 +78,15 @@ class DbTurma(Model):
             x += 1
             y += 1
         return soma / x, soma2 / y
+
+    def vincular_professores_turma(self, id, nome, email):
+        professor = dict(professor_nome = nome, professor_email = email)
+        turma = self.load(id)
+        turma.professores.append(professor)
+        turma.save()
+
+    def mostrar_professores_turma(self, id):
+        turma = self.load(id)
+
+
+

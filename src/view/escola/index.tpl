@@ -11,7 +11,7 @@
             <button>ver escolas cadastradas</button>
             </a>
 
-            <a href="/user_menu">
+            <a href="/">
             <button>Voltar</button>
             </a>
         </div>

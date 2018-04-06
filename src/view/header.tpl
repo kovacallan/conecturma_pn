@@ -9,4 +9,4 @@
     <link rel="stylesheet" href="static/bootstrap-grid.min.css">
 </head>
 <body>
-    <div class="container">
+    <div align="center" class="container">

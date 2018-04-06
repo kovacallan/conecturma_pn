@@ -10,7 +10,7 @@
             email*:<input type="email" name="email" value="{{email}}"> <br>
             <button type="submit" name="id" value="{{id}}">Enviar</button>
         </form>
-        <a href="/user_menu">
+        <a href="/observador">
             <button>voltar</button>
         </a>
     </div>
