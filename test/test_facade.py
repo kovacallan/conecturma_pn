@@ -73,9 +73,10 @@ class FacadeTest(unittest.TestCase):
         self.facade.new_nome_user_facade(aluno.id, "egg", "123" "spam")
 
     def test_anotacoes_no_aluno(self):
+        x=0
         self.facade.create_aluno_facade('spam','123')
         aluno=self.facade.pesquisa_aluno_facade('spam')
-        self.facade.aluno.anotacoes_aluno(aluno['id'],mensagem=['sapecagem'])
+        self.facade.aluno.anotacoes_aluno(aluno,mensagem=["sapecagem"])
 
     """Métododos de Test"""
 

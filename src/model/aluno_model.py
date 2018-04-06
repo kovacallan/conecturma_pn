@@ -292,8 +292,9 @@ class DbAluno(Model):
             print("senha antiga errada")
 
     def anotacoes_no_aluno(self,aluno_id,mensagem):
+        x=0
         usuario= self.load(aluno_id)
-        usuario.anotacoes_aluno([mensagem])
+        usuario.anotacoes_aluno
         usuario.save()
 
     # def definir_novo_usuario_nome(self,usuario_id, senha, novo_nome):
