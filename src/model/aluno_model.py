@@ -294,7 +294,8 @@ class DbAluno(Model):
     def anotacoes_no_aluno(self,aluno_id,mensagem):
         x=0
         usuario= self.load(aluno_id)
-        usuario.anotacoes_aluno
+        usuario.anotacoes_aluno.__setitem__(aluno_id,mensagem)
+
         usuario.save()
 
     # def definir_novo_usuario_nome(self,usuario_id, senha, novo_nome):

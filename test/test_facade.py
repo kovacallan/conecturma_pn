@@ -76,7 +76,7 @@ class FacadeTest(unittest.TestCase):
         x=0
         self.facade.create_aluno_facade('spam','123')
         aluno=self.facade.pesquisa_aluno_facade('spam')
-        self.facade.aluno.anotacoes_aluno(aluno,mensagem=["sapecagem"])
+        self.facade.aluno.anotacoes_aluno()
 
     """Métododos de Test"""
 
