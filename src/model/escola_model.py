@@ -1,4 +1,4 @@
-from walrus import *
+
 from random import randrange
 from src.model.loja_model import *
 from src.model.turma_model import *

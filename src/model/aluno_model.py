@@ -14,7 +14,7 @@ class DbAluno(Model):
     matricula = TextField()
     nome = TextField(fts=True, index=True)
     senha = TextField()
-    tipo_de_usuario = TextField(fts=True,default = "ALUNO")
+    tipo_aluno = IntegerField(default=0)
     itens_comprados = ListField()
     cor = IntegerField(default=0)
     rosto = IntegerField(default=0)
