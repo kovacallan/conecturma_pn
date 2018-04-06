@@ -7,16 +7,12 @@
             <button>criar aluno</button>
             </a>
 
-            <a href="/aluno//ler_aluno">
+            <a href="/aluno/ler_aluno">
             <button>ver alunos</button>
             </a>
 
-            <a href="/aluno/ver_itens_comprados">
-            <button>Ver Itens Comprados</button>
-            </a>
-
             <a href="/medalha_read">
-            <button>ver medalhas do aluno<button>
+            <button>ver medalhas do aluno</ button>
             <a href="/">
             <button>Voltar</button>
             </a>

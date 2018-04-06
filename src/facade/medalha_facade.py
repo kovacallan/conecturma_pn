@@ -1,5 +1,6 @@
 from src.model.medalha_model import DbMedalha
-class Facade:
+
+class MedalhaFacade:
 
     def __init__(self):
         """

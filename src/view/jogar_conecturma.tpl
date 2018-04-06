@@ -17,6 +17,7 @@
             </form>
             <br>
             <a href="/loja"><button>Loja</button></a>
+            <a href="/aluno/ver_itens_comprados"><button>Ver Itens</button></a>
             <a href="/sair"><button>Sair</button></a>
         </div>
     </div>

@@ -2,8 +2,8 @@ from bottle import route, view, get, request, redirect
 from facade.turma_facade import TurmaFacade
 from facade.escola_facade import EscolaFacade
 
-facade = TurmaFacade()
-
+turma_facade = TurmaFacade()
+escola_facade = EscolaFacade()
 """ Controle de Turma """
 
 
@@ -24,7 +24,7 @@ def view_cadastrar_turma():
     pagina de cadastro de turma
     :return:
     """
-    escola = EscolaFacade.escola.read_escola()
+    escola = escola_facade.escola.read_escola()
     return dict(escolas=escola)
 
 
@@ -37,7 +37,7 @@ def controller_create_turma():
     turma = request.forms['turma_nome']
     serie = request.forms['serie']
     escola = request.forms['escola']
-    facade.create_turma_facade(nome=turma, login=request.get_cookie("login", secret='2524'),serie=serie,escola=escola)
+    turma_facade.create_turma_facade(nome=turma, login=request.get_cookie("login", secret='2524'), serie=serie, escola=escola)
 
     redirect('/turma')
 
@@ -46,10 +46,10 @@ def controller_read_turma():
     Direciona para a pagina que mostra a turma em ordem de id
     :return: a entrada de dicionario que contem o id e o turma_nome
     """
-    turmas = facade.read_turma_facade()
+    turmas = turma_facade.read_turma_facade()
     turma = []
     for t in turmas:
-        escola = EscolaFacade.search_escola_id_facade(t['escola'])
+        escola = escola_facade.search_escola_id_facade(t['escola'])
         t['escola'] = escola['nome']
 
         if t['serie'] == 0:
@@ -74,5 +74,5 @@ def controller_read_turma():
 
 @get('/deletar_turma')
 def deletar_turma():
-    facade.delete_turma_facade(request.params['id'])
+    turma_facade.delete_turma_facade(request.params['id'])
     redirect('/turma')

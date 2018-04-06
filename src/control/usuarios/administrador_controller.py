@@ -7,7 +7,7 @@ facade = ObservadorFacade()
 escolafacade = EscolaFacade()
 
 
-@route('/observador/create_observador_gestor', method="POST")
+@route('/observador/create_observador_administrador', method="POST")
 def controller_observador_cadastro():
     nome = request.params['nome']
     senha = request.params['senha']
@@ -15,7 +15,7 @@ def controller_observador_cadastro():
     cpf = 0
     email = request.params['email']
     tipo = int(request.params['tipo_observador'])
-    rede = int(request.params['rede'])
+    rede = 0
     escola = 0
 
     if rede == 0:

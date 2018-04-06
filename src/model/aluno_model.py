@@ -122,8 +122,7 @@ class DbAluno(Model):
         :return: O usuário pesquisado
         """
 
-        usuario = None
-        for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome, order_by=DbAluno.id):
+        for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome):
             usuario = pesquisa
 
         return usuario

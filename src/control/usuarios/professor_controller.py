@@ -3,8 +3,8 @@ from control.classes.validar_cadastros_updates import *
 from facade.observador_facade import ObservadorFacade
 from facade.escola_facade import EscolaFacade
 
-facade = ObservadorFacade()
-escolafacade = EscolaFacade()
+observador_facade = ObservadorFacade()
+escola_facade = EscolaFacade()
 
 
 @route('/observador/create_observador_professor', method="POST")
@@ -16,13 +16,14 @@ def controller_observador_cadastro():
     email = request.params['email']
     tipo = int(request.params['tipo_observador'])
     escola = int(request.params['escola'])
+    rede = 0
 
     if escola == 0:
         redirect('/observador/cadastro?tipo_observador=3')
     else:
         if filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
-            facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf,email=email, tipo=tipo,
-                                            escola=escola)
+            observador_facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
+                                                       escola=escola, rede=rede)
             redirect('/observador')
         else:
             print("Erro para salvar")

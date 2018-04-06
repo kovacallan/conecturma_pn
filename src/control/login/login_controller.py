@@ -7,7 +7,7 @@ facade = AlunoFacade()
 @view('index')
 def view_login_index():
     if request.get_cookie("login", secret='2524'):
-        redirect('/user_menu')
+        redirect('/jogar_conecturma')
     elif request.get_cookie("login", secret='2525'):
         redirect('/gestao_aprendizagem')
     else:

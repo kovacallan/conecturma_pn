@@ -1,11 +1,13 @@
 from bottle import *
-
-
-
-"""route, view, get, request, redirect, post"""
+from facade.turma_facade import  TurmaFacade
 from facade.aluno_facade import AlunoFacade
+from facade.loja_facade import LojaFacade
 
-facade = AlunoFacade()
+turma_facade = TurmaFacade()
+aluno_facade = AlunoFacade()
+loja_facade = LojaFacade()
+
+
 """ Controle aluno """
 
 
@@ -26,7 +28,7 @@ def aluno_read():
 """ Cadastro de aluno """
 
 
-@route('/cadastro_aluno')
+@route('/aluno/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
     """
@@ -46,7 +48,7 @@ def create_aluno():
     Chama a funçao create_aluno_facade
     :return:
     """
-    if facade.create_aluno_facade(request.forms['aluno_nome'], request.forms['senha']):
+    if aluno_facade.create_aluno_facade(request.forms['aluno_nome'], request.forms['senha']):
         redirect('/')
     else:
         print("deu erro na criação do ALuno")
@@ -55,7 +57,7 @@ def create_aluno():
 """Read de aluno"""
 
 
-@route('/ler_aluno')
+@route('/aluno/ler_aluno')
 @view('aluno/aluno_read')
 def read_aluno():
     """
@@ -69,8 +71,8 @@ def read_aluno():
     """ return dict(aluno_pesquisado=pesquisa_aluno)"""
 
     if True or request.get_cookie("login", secret='2525'):
-        usuarios = facade.read_aluno_facade()
-        turma = facade.read_turma_facade()
+        usuarios = aluno_facade.read_aluno_facade()
+        turma = turma_facade.read_turma_facade()
         alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['turma_do_aluno']) for aluno in usuarios]
         return dict(aluno_id=alunos, turmas=turma)
     else:
@@ -89,7 +91,7 @@ def aluno_in_turma():
     escolha = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
     turma_add = request.query.get('escolhidos')
     print(escolhidos, escolha, turma_add)
-    facade.aluno_in_turma_facade(escolha, turma_add)
+    aluno_facade.aluno_in_turma_facade(escolha, turma_add)
     redirect('/')
 
 
@@ -106,7 +108,7 @@ def deletar_aluno():
     escolhidos = request.query_string
     deletar_ids = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
     print(escolhidos, deletar_ids)
-    facade.delete_aluno_facade(deletar_ids)
+    aluno_facade.delete_aluno_facade(deletar_ids)
     redirect('/')
 
 
@@ -116,7 +118,7 @@ def deletar_aluno():
 """Ver medalhas"""
 
 
-@route('/ver_itens_comprados')
+@route('/aluno/ver_itens_comprados')
 @view('aluno/view_itens')
 def ver_itens():
     """
@@ -127,11 +129,11 @@ def ver_itens():
     :return: dicionario de itens
     """
 
-    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2525'))
-    itens_comprado = facade.ver_item_comprado_facade(usuario.id)
+    usuario = aluno_facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    itens_comprado = aluno_facade.ver_item_comprado_facade(usuario.id)
     itens = []
     for y in itens_comprado:
-        itens.append(facade.pesquisa_item_facade(y))
+        itens.append(loja_facade.pesquisa_item_facade(y))
 
     return dict(lista_itens=itens)
 
@@ -144,14 +146,14 @@ def equipar_item():
     :return:
     """
 
-    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2525'))
+    usuario = aluno_facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
 
     id_item = request.forms['id']
-    item = facade.pesquisa_item_facade(id_item)
+    item = loja_facade.pesquisa_item_facade(id_item)
 
-    facade.equipar_item_facade(usuario.id, item)
+    aluno_facade.equipar_item_facade(usuario.id, item)
 
-    redirect('/ver_itens_comprados')
+    redirect('/aluno/ver_itens_comprados')
 
 # """Pagina de aluno , anotaçoes"""
 # @route('/anotacoes_aluno')
