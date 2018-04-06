@@ -5,17 +5,17 @@
             <h2>A Conecturma!</h2>
             <br>
             % if tipo == "PROFESSOR":
-                <a id="2" href="/aluno"><button>Aluno</button>
-                <a id="3" href="/medalha_cadastro"><button>Criar medalha</button>
+                <a href="/aluno"><button>Aluno</button>
+                <a href="/medalha_cadastro"><button>Criar medalha</button>
                 <a id="4" href="/ler_medalha"><button>Ler medalhas criadas</button></a>
             % elif tipo == "DIRETOR":
                 <a href="/turma"><button>turma</button></a>
-                <a id="2" href="/aluno"><button>Aluno</button>
+                <a href="/aluno"><button>Aluno</button>
             % elif tipo == "GESTOR":
                 <a href="/rede"><button>rede</button></a>
                 <a href="/escola"><button>escola</button></a>
                 <a href="/turma"><button>turma</button></a>
-                <a id="2" href="/aluno"><button>Aluno</button>
+                <a href="/aluno"><button>Aluno</button>
             % end
             <a href="/sair"><button>Sair</button></a>
         </div>

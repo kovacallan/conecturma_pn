@@ -29,7 +29,8 @@ def cadastrar_medalha():
 def controller_medalha_cadastro():
 
     nome = request.params['nome']
-    facade.create_medalha_facade(nome)
+    tipo = request.params['tipos']
+    facade.create_medalha_facade(nome,tipo)
     redirect('/gestao_aprendizagem')
 
 """ Read medalha """

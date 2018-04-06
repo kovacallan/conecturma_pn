@@ -59,6 +59,7 @@ class FacadeTest(unittest.TestCase):
         self.facade.delete_aluno_facade(escolhidos)
 
     def _test_mudar_senha(self):
+        pass
         """
         Cria usuario, o facade deve receber a senha antiga e a nova
 
@@ -73,10 +74,11 @@ class FacadeTest(unittest.TestCase):
         self.facade.new_nome_user_facade(aluno.id, "egg", "123" "spam")
 
     def test_anotacoes_no_aluno(self):
-        x=0
         self.facade.create_aluno_facade('spam','123')
-        aluno=self.facade.pesquisa_aluno_facade('spam')
-        self.facade.aluno.anotacoes_aluno()
+        aluno=self.facade.pesquisa_aluno_facade('spam').get_id()
+        mensagem=[10]
+        mensagem[0]=['uma parada']
+        self.facade.anotacoes_in_aluno_facade(aluno, mensagem[0])
 
     """Métododos de Test"""
 

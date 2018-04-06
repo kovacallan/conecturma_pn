@@ -125,8 +125,8 @@ class Facade:
         """
         return self.aluno.avatar(id)
 
-    # def anotacoes_in_aluno_facade(self,aluno_id,mensagem):
-    #     self.aluno.anotacoes_aluno( aluno_id, mensagem)
+    def anotacoes_in_aluno_facade(self,aluno_id, mensagem):
+        self.aluno.anotacoes_aluno(aluno_id, mensagem)
 
     """
     
@@ -402,8 +402,8 @@ class Facade:
         Inicio Facade Medalhas
         
     """
-    def create_medalha_facade(self, nome):
-        self.medalha.create_medalha(nome)
+    def create_medalha_facade(self, nome,tipo):
+        self.medalha.create_medalha(nome,tipo)
 
     def read_medalha_facade(self):
         return self.medalha.read_medalha()

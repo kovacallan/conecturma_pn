@@ -14,7 +14,7 @@ class DbAluno(Model):
     matricula = TextField()
     nome = TextField(fts=True, index=True)
     senha = TextField()
-    tipo_de_usuario = TextField(fts=True,default = "ALUNO")
+    tipo_de_usuario = TextField(fts=True, default="ALUNO")
     itens_comprados = ListField()
     cor = IntegerField(default=0)
     rosto = IntegerField(default=0)
@@ -29,6 +29,7 @@ class DbAluno(Model):
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
     turma_do_aluno = TextField(fts=True, index=True)
+    anotacoes_aluno = ListField()
 
     def usuario_logado(self, id_usuario):
         """
@@ -85,7 +86,7 @@ class DbAluno(Model):
         """
         if not self.validar_senha_vazia(senha):
             aluno = self.load(id)
-            if nome ==aluno.nome:
+            if nome == aluno.nome:
                 pass
             else:
                 aluno.nome = nome
@@ -323,3 +324,20 @@ class DbAluno(Model):
         else:
             print("senha antiga errada")
 
+    def anotacoes_do_aluno(self, id_usuario, mensagem):
+        """
+        Mostra os itens cujos os quais usuário tem posse
+        :param id_usuario: O usuário que tem os itens
+        :return: A lista dos itens
+        """
+        msg = dict(mensagem)
+        usuario = self.load(id_usuario)
+        usuario.anotacoes_aluno.append(msg)
+        usuario.save()
+    # def ver_anotacoes_aluno(self,id_aluno):
+    #
+    #     aluno=self.load(id_aluno)
+    #     anotacoes =[]
+    #     for anotacao,msg in DbAluno.anotacoes_aluno:
+    #         anotacoes.append(aluno.anotacoes_aluno[anotacao][msg])
+    #     return dict(anotacoes=anotacoes)

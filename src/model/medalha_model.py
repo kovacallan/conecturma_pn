@@ -9,14 +9,14 @@ class DbMedalha(Model):
     nome = TextField(index=True)
     tipo = IntegerField(default=0)
 
-    def create_medalha(self, nome):
+    def create_medalha(self, nome, tipo):
         """
         cria uma medalha e poe no banco de dados
         :param nome: nome da medalha
         :param tipo: se a medalha é socio-educativa ou de desempenho
         :return:true se tiver criado certinho e false se tiver dado ruim
         """
-        if self.create(nome=nome):
+        if self.create(nome=nome, tipo=tipo):
             return True
         else:
             return TypeError("Não foi possivel salvar a medalha")
@@ -28,7 +28,7 @@ class DbMedalha(Model):
         """
         medalha = []
         for read in DbMedalha.all():
-            medalha.append(dict(id=read.id, nome=read.nome))
+            medalha.append(dict(id=read.id, nome=read.nome,tipo=read.tipo))
 
         return medalha
 

@@ -5,15 +5,15 @@
         <br>
         <table>
             <tr>
-
+            <tr>nome da medalha   </tr>   <tr>    tipo da medalha</tr>
             </tr>
             % for medalhas in medalhas:
             <tr>
                 <td>
-                {{medalhas['id']}}
+                    {{medalhas['nome']}}
                 </td>
                 <td>
-                    {{medalhas['nome']}}
+                    {{medalhas['tipo']}}
                 </td>
                 <td>
 
