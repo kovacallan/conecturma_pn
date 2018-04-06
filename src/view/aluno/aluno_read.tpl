@@ -13,7 +13,7 @@
                         % for id, aluno, matricula, turma_do_aluno in aluno_id:
                     <tr>
                         <td>
-                            <input type="checkbox" name="aluno_{{id}}">{{aluno}}</input>
+                            <input type="checkbox" name="aluno_{{id}}">{{aluno}}</input><button href="/anotacoes_aluno" >anotaçoes</button>
                         </td>
                         <td>
                             {{matricula}}

@@ -8,8 +8,13 @@ rede_facade = RedeFacade()
 @route('/escola')
 @view('escola/index')
 def view_escola_index():
+    """
+    view inicial de escola
+    :return:
+    """
     escola = controller_escola_read()
     return dict(escola=escola)
+
 
 
 @route('/escola/cadastro')
@@ -19,15 +24,25 @@ def view_escola_cadastro():
     return dict(rede = rede)
 
 
+
 @route('/escola/read_escola')
 @view('escola/read_escola')
 def view_escola_read():
+    """
+    chama o metodo controller_escola_read , para colocar tudo dentro de um dicionario
+    :return: o dicionario
+    """
     escola = controller_escola_read()
     return dict(escola=escola)
 
 
 @get('/escola/editar')
 def view_escola_update():
+    """
+    Edita os atributos de escola , recebendo o parametro de nome da escola
+    metodos usados : pesquisa_escola_facade
+    :return: o template referente a pagina de update
+    """
     nome = request.params['nome']
     escolas = facade.pesquisa_escola_facade(nome)
     return template('escola/update_escola', id=escolas['id'], nome=escolas['nome'], numero=escolas['numero'],estado=escolas['estado'],cidade=['cidade'],
@@ -37,6 +52,11 @@ def view_escola_update():
 
 @get('/escola/create_escola')
 def controller_escola_cadastro():
+    """
+    Metodo de cadastrar escola , com os atributos que a escola recebe
+    usa os metodos : filtro_cadastro(do proprio controller) e create_escola_facade
+    :return:
+    """
     nome = request.params['nome']
     rua = request.params['rua']
     numero = request.params['numero']
@@ -54,6 +74,11 @@ def controller_escola_cadastro():
 
 
 def controller_escola_read():
+    """
+    Cria uma lista , coloca as escolas do banco na lista para mostrar na tela
+    metodos usados: read_escola_facade
+    :return: a lista de escolas q serao mostradas
+    """
     escolas = []
     escola = facade.read_escola_facade()
     for e in escola:
@@ -61,12 +86,15 @@ def controller_escola_read():
             rede = rede_facade.search_rede_id_facade(e['rede'])
             e['rede'] = rede['nome']
         escolas.append(e)
-
     return escolas
 
 
 @route('/escola/update_escola', method='POST')
 def controller_escola_update():
+    """
+    modifica os dados da escola
+    :return:
+    """
     facade.update_escola_facade(id=request.params['id'], nome=request.params['nome'], rua=request.params['rua'],
                                   numero=request.params['numero'],
                                   telefone=request.params['telefone'], estado=request.params['estado'],
@@ -76,6 +104,17 @@ def controller_escola_update():
 
 
 def filtro_cadastro(nome, telefone, rua, numero, estado, cidade, cod_identificacao):
+    """
+    impede que os parametros do cadastro sejam postados vazios
+    :param nome: nome da escola
+    :param telefone: telefone da escola
+    :param rua: rua em que reside a escola
+    :param numero: numero da casa da escola(na rua)
+    :param estado: estado da escola
+    :param cidade: cidade da escola
+    :param cod_identificacao: codigo identificador da escola , no cadastro do governo
+    :return: false se alguns desses parametros vier vazio e true se todos vierem preenchidos
+    """
     if nome == "":
         return False
     elif telefone == "":

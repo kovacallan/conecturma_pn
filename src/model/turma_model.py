@@ -62,8 +62,20 @@ class DbTurma(Model):
         for turma in DbTurma.query(DbTurma.turma_nome == turma_nome, order_by=DbTurma.id):
             turma_dic = dict(id=turma.id, nome=turma.turma_nome, criador=turma.quem_criou, desempenho_j1=turma.desempenho_j1,
                      desempenho_j2=turma.desempenho_j2)
-
         return turma_dic
+
+    def turma_update(self,id, turma_nome, professor_encarregado):
+        turma=self.load(id)
+        if turma_nome == "" or turma_nome == None or turma.turma_nome ==turma_nome:
+            pass
+        else:
+            turma.turma_nome = turma_nome
+        if professor_encarregado == "" or professor_encarregado == None or turma.professor_encarregado == professor_encarregado:
+            pass
+        else:
+            turma.professor_encarregado = professor_encarregado
+        turma.save()
+
 
     def calcular_desempenho_jogos(self):
         soma = 0
@@ -79,7 +91,15 @@ class DbTurma(Model):
             y += 1
         return soma / x, soma2 / y
 
-    def vincular_professores_turma(self, id, professor_id):
+    def vincular_professores_turma(self, id, nome, email):
+        """
+        coloca professores responsaveis por uma turma
+        :param id: id da turma
+        :param nome: nome do professor
+        :param email: emkail do mesmo
+        :return:
+        """
+        professor = dict(professor_nome = nome, professor_email = email)
         turma = self.load(id)
         turma.professores.append(professor_id)
         turma.save()

@@ -80,6 +80,11 @@ class DbRede(Model):
         return redes
 
     def pesquisa_rede(self, rede):
+        """
+        pesquisa a rede pelo nome e coloca os dados da rede em uma lista
+        :param rede: nome da rede
+        :return: retorna a entrada de dicionario com a rede
+        """
 
         rede_pesquisa = None
         for pesquisa in DbRede.query(DbRede.nome == rede, order_by=self.id):
