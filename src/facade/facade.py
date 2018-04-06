@@ -1,3 +1,4 @@
+from src.model.medalha_model import DbMedalha
 from src.model.aluno_model import DbAluno
 from src.model.observador_model import DbObservador
 from src.model.turma_model import DbTurma
@@ -19,9 +20,11 @@ class Facade:
         self.turma = DbTurma()
         self.loja = DbLoja()
         self.historico = DbHistorico()
+        self.medalha = DbMedalha()
 
     """
         Inicio Facade Usuario/Aluno
+        
     """
 
     def create_aluno_facade(self, nome, senha):
@@ -122,38 +125,88 @@ class Facade:
         """
         return self.aluno.avatar(id)
 
+    # def anotacoes_in_aluno_facade(self,aluno_id,mensagem):
+    #     self.aluno.anotacoes_aluno( aluno_id, mensagem)
+
     """
+    
         Fim Facade Usuario/Aluno
+        
     """
 
     """
+    
         Inicio Facade observador
+        
     """
 
     def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo):
+        """
+        cria um observador
+        :param nome:nome do observador
+        :param senha:senha do observador
+        :param telefone:telefone do observador(nao tera para professor )
+        :param cpf:cpf (vai ser tirado)
+        :param email:email
+        :param tipo:adm , gestor , professor e responsavel
+        :return:o metodo de criar observador
+        """
         return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
                                                  tipo=tipo)
 
     def read_observador_facade(self):
+        """
+        facade de ler observador
+        :return: metodo de ler observador
+        """
         return self.observador.read_observador()
 
     def update_observador_facade(self, id, nome, telefone, cpf, email):
+        """
+        edita o observador
+        :param id: id do observador a ser editado
+        :param nome: novo nome
+        :param telefone: novo telefone(alguns tipos nao precisarao ter telefone)
+        :param cpf:cpf (futuramente nao existira mais
+        :param email:novo email
+        :return:o metodo que fazo update
+        """
         return self.observador.update_observador(id, nome, telefone, cpf, email)
 
     def delete_observador_facade(self, deletar_ids):
+        """
+        deleta a lista de ids de observador(futuramente so vai para o "cemiterio")
+        :param deletar_ids: lista de ids a serem deletados
+        :return:
+        """
         self.observador.delete_observador(deletar_ids=deletar_ids)
 
     def search_observador_facade(self, nome):
+        """
+        pesquisa um observador
+        :param nome: nome da pessoa
+        :return: encaminha para o metodo que faz a pesquisa
+        """
         return self.observador.search_observador(nome)
 
     def login_date_facade(self, id , data):
+        """
+        registra o historico de login
+        :param id: id de quem logou
+        :param data: dia , hora e minuto
+        :return:
+        """
         self.observador.login_date(id,data)
     """
+    
         Fim Facade observador
+        
     """
 
     """
+    
         Inicio Facade Rede
+        
     """
 
     def create_rede_facade(self, nome, cod, telefone):
@@ -174,6 +227,14 @@ class Facade:
         return self.rede.read_rede()
 
     def update_rede_facade(self, id, nome, cod, telefone):
+        """
+
+        :param id:
+        :param nome:
+        :param cod:
+        :param telefone:
+        :return:
+        """
         return self.rede.update_rede(id, nome, cod, telefone)
 
     def delete_rede_facade(self, ids):
@@ -199,11 +260,15 @@ class Facade:
         return self.rede.pesquisa_rede(rede)
 
     """
+    
         Fim Facade Rede
+        
     """
 
     """
+    
         Inicio Facade Turma
+        
     """
 
     def create_turma_facade(self, nome, login):
@@ -233,13 +298,24 @@ class Facade:
     def pesquisa_turma_facade(self, turma_nome):
         return self.turma.pesquisa_turma(turma_nome)
 
+    def update_turma_facade(self, id, turma_nome, professor_encarregado):
+        self.turma.turma_update(id, turma_nome, professor_encarregado)
+
+
     def vincular_professor_turma_facade(self, id, nome, email):
         self.turma.vincular_professores_turma(id = id, nome = nome, email = email)
 
     """
-        Fim Facade Turma
+
+            Fim Facade Turma
+
     """
-    """Inicio Facade Escola"""
+
+    """
+    
+            Inicio Facade Escola
+    
+    """
 
     def create_escola_facade(self, nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao):
         return self.escola.create_escola(nome, rua, numero, telefone, estado, cidade,rede_pertencente, cod_identificacao)
@@ -255,9 +331,20 @@ class Facade:
 
     def pesquisa_escola_facade(self, nome):
        return self.escola.search_escola(nome)
-    """Fim Facade Escola"""
+
+
     """
+    
+            Fim Facade Escola
+            
+    """
+
+
+    """
+    
         Inicio Facade loja
+        
+        
     """
 
     def criar_item_loja_facade(self, nome, tipo, preco):
@@ -302,17 +389,52 @@ class Facade:
         return self.loja.ja_possui_item(usuario_logado=usuario_logado)
 
     """
+    
+    
         Fim Facade loja
+        
+        
+    """
+
+
+    """
+    
+        Inicio Facade Medalhas
+        
+    """
+    def create_medalha_facade(self, nome):
+        self.medalha.create_medalha(nome)
+
+    def read_medalha_facade(self):
+        return self.medalha.read_medalha()
+
+    def delete_medalha_facade(self, delete_ids):
+        self.medalha.delete_medalha(delete_ids)
+
+    def pesquisa_medalha_facade(self, nome):
+        self.medalha.pesquisa_medalha(nome)
+
+    """
+          Fim de Facade Medalhas
+            
     """
 
     """
         Inicio Facade Historico
+        
+        
     """
+
     def create_historico_facade(self, nome,tipo):
         self.historico.create_historico(nome,tipo)
 
     def read_historico_facade(self):
         return self.historico.read_historico()
+
     """
-       Fim Facade Historico
+           
+           Fim Facade Historico
+           
+           
     """
+

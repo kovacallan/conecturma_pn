@@ -1,7 +1,7 @@
 from walrus import *
 from random import randrange
-from src.model.loja_model import *
-from src.model.turma_model import *
+from model.loja_model import *
+from model.turma_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -53,6 +53,7 @@ class DbAluno(Model):
         return matricula
 
     def validar_senha_vazia(self, senha):
+        """backup para evitar a possibilidade de colocar senha vazia"""
         if senha == "" or senha == None:
             return True
         else:
@@ -167,6 +168,12 @@ class DbAluno(Model):
                 return False
 
     def jogo_j1(self, id, pontos):
+        """
+        metodo para cuidar do jogo j1
+        :param id:id de quem esta jogando o jogo
+        :param pontos: da 0(caso resposta errado) ou 1 (caso resposta certo)
+        :return:true , o jogo funcionando
+        """
         usuario = self.load(id)
         usuario.pontos_j1 += pontos
         usuario.cliques_j1 += 1
@@ -179,6 +186,12 @@ class DbAluno(Model):
         return True
 
     def jogo_j2(self, id, pontos):
+        """
+         metodo para cuidar do jogo j2
+        :param id:id de quem esta jogando o jogo
+        :param pontos: da 0 (caso resposta errado) ou 1 (caso resposta certo)
+        :return:true , o jogo funcionando
+        """
         usuario = self.load(id)
         usuario.pontos_j2 += pontos
         usuario.cliques_j2 += 1
@@ -192,15 +205,35 @@ class DbAluno(Model):
         return True
 
     def mais_dinheiro(self, usuario):
+        """
+        da dinheiro ao usuario
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.pontos_de_moedas += 5
 
     def mais_vidas(self, usuario):
+        """
+        da vida ao usuario
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.pontos_de_vida += 1
 
     def desempenho_jogoj1(self, usuario):
+        """
+        ve o desempenho do usuario j1 o em porcentagem de acertos
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
 
     def desempenho_jogoj2(self, usuario):
+        """
+        ve o desempenho do usuario do j2 o em porcentagem de acertos
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
 
     def alunos_in_turma(self, escolha, turma_add):
@@ -289,5 +322,4 @@ class DbAluno(Model):
             print(usuario.senha, usuario)
         else:
             print("senha antiga errada")
-    # def definir_novo_usuario_nome(self,usuario_id, senha, novo_nome):
-    #     usuario = self.load(usuario_id)
+

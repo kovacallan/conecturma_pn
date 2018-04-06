@@ -29,6 +29,10 @@ def view_rede_cadastro():
 
 @route('/criar_rede', method='POST')
 def create_rede_controller():
+    """
+    criar rede
+    :return:
+    """
     nome = request.params['nome_rede']
     cod = request.params['cod']
     telefone = request.params['telefone']
@@ -39,6 +43,10 @@ def create_rede_controller():
 @route('/read_rede')
 @view('rede/ler_redes')
 def view_read_rede():
+    """
+    pagina de ler as redes criadas , armazena os atributos da rede em uma entrada de dicionario
+    :return: o dicionario com os atributos de rede a serem mostrados
+    """
     nome = facade.read_rede_facade()
     redes = [(rede['id'], rede['nome'], rede['cod'], rede['telefone']) for rede in nome]
     return dict(rede_id=redes)

@@ -9,7 +9,7 @@ facade = Facade()
 @route('/jogar_conecturma')
 @view('jogar_conecturma')
 def view_jogar_conecturma():
-    """ pagina inicial apos login"""
+    """ pagina inicial apos login , que mostra os itens equipados no avatar"""
     if request.get_cookie("login", secret='2524'):
         usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
         avatar = facade.avatar_facade(usuario.id)
