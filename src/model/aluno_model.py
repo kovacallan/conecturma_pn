@@ -29,6 +29,7 @@ class DbAluno(Model):
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
     turma_do_aluno = TextField(fts=True, index=True)
+    anotacoes_aluno = HashField()
 
     def usuario_logado(self, id_usuario):
         """
@@ -115,7 +116,7 @@ class DbAluno(Model):
         """
         pesquisa o aluno através da id, ou do nome do aluno , ainda nao implentado
 
-        :param : id , usuário_nome
+        :param : usuário_nome
 
         :return: O usuário pesquisado
         """
@@ -123,7 +124,7 @@ class DbAluno(Model):
         usuario = None
         for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome, order_by=DbAluno.id):
             usuario = pesquisa
-
+        print(usuario)
         return usuario
 
     def aluno_delete(self, deletar_ids):
@@ -289,5 +290,11 @@ class DbAluno(Model):
             print(usuario.senha, usuario)
         else:
             print("senha antiga errada")
+
+    def anotacoes_no_aluno(self,aluno_id,mensagem):
+        usuario= self.load(aluno_id)
+        usuario.anotacoes_aluno([mensagem])
+        usuario.save()
+
     # def definir_novo_usuario_nome(self,usuario_id, senha, novo_nome):
     #     usuario = self.load(usuario_id)

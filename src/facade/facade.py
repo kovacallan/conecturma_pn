@@ -122,6 +122,9 @@ class Facade:
         """
         return self.aluno.avatar(id)
 
+    def anotacoes_in_aluno_facade(self,aluno_id,mensagem):
+        self.aluno.anotacoes_aluno( aluno_id, mensagem)
+
     """
         Fim Facade Usuario/Aluno
     """

@@ -123,3 +123,9 @@ def equipar_item():
     facade.equipar_item_facade(usuario.id, item)
 
     redirect('/ver_itens_comprados')
+
+"""Pagina de aluno , anotaçoes"""
+@route('/anotacoes_aluno')
+@view('pagina_anotaçoes.tpl')
+def anotacoes_aluno():
+    pass
