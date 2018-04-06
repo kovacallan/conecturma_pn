@@ -6,6 +6,7 @@ from control.usuarios.observador_controller import *
 from control.usuarios.diretor_controller import *
 from control.usuarios.professor_controller import *
 from control.usuarios.gestor_controller import *
+from control.usuarios.administrador_controller import *
 from control.jogo_controller import *
 from control.instituicoes.turma_controller import *
 from control.loja_controller import *
