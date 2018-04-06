@@ -11,10 +11,12 @@ class DbObservador(Model):
     telefone = TextField()
     cpf = TextField()
     email = TextField()
-    tipo = TextField()
+    tipo = IntegerField()
+    vinculo_rede = IntegerField(default=0)
+    vinculo_escola = IntegerField(default=0)
     data_ultimo_login = TextField()
 
-    def create_observador(self, nome, senha, telefone, cpf, email, tipo):
+    def create_observador(self, nome, senha, telefone, cpf, email, tipo, rede, escola):
         """
         cria um observador
         :param nome: nome do observador
@@ -25,7 +27,9 @@ class DbObservador(Model):
         :param tipo: o tipo de observador , professor , responsave, diretor , gestor ou administrador
         :return: true se criou certinho e false se n deu certo
         """
-        if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo):
+
+        if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
+                       vinculo_escola=escola):
             return True
         else:
             return False
@@ -38,7 +42,7 @@ class DbObservador(Model):
         observador = []
         for read in DbObservador.all():
             observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
-                                   email=read.email, tipo=read.tipo))
+                                   email=read.email, tipo=read.tipo, escola=read.vinculo_escola))
 
         return observador
 
@@ -70,6 +74,11 @@ class DbObservador(Model):
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
 
+    def search_observador_id(self, id):
+        observador = self.load(id)
+
+        return observador
+
     def search_observador(self, nome):
         """
         procura o observador e coloca os dados em uma entrada de dicionario
@@ -94,5 +103,3 @@ class DbObservador(Model):
         observador = self.load(id)
         observador.data_login = data
         observador.save()
-
-

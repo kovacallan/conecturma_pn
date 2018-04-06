@@ -4,14 +4,14 @@
             <h1>Bem Vindo {{usuario}} </h1>
             <h2>A Conecturma!</h2>
             <br>
-            % if tipo == "PROFESSOR":
+            % if tipo == 3:
                 <a href="/aluno"><button>Aluno</button>
                 <a href="/medalha_cadastro"><button>Criar medalha</button>
-                <a id="4" href="/ler_medalha"><button>Ler medalhas criadas</button></a>
-            % elif tipo == "DIRETOR":
+                <a href="/ler_medalha"><button>Ler medalhas criadas</button></a>
+            % elif tipo == 2:
                 <a href="/turma"><button>turma</button></a>
                 <a href="/aluno"><button>Aluno</button>
-            % elif tipo == "GESTOR":
+            % elif tipo == 1:
                 <a href="/rede"><button>rede</button></a>
                 <a href="/escola"><button>escola</button></a>
                 <a href="/turma"><button>turma</button></a>

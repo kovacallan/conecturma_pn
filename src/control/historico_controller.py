@@ -1,7 +1,7 @@
 from bottle import route,view, request, redirect, response
-from facade.facade import Facade
+from facade.historico_facade import HistoricoFacade
 
-facade = Facade()
+facade = HistoricoFacade()
 
 @route('/historico')
 @view('historico_login')

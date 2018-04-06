@@ -73,6 +73,12 @@ class DbRede(Model):
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
 
+    def search_rede_id(self, id):
+        rede = self.load(id)
+        redes = dict(id=rede.id, nome=rede.nome, cod=rede.cod, telefone=rede.telefone)
+
+        return redes
+
     def pesquisa_rede(self, rede):
         """
         pesquisa a rede pelo nome e coloca os dados da rede em uma lista

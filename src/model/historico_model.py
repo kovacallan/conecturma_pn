@@ -4,10 +4,10 @@ db = Database(host='localhost', port=6379, db=0)
 
 
 class DbHistorico(Model):
-    __database__ =  db
+    __database__ = db
     id = AutoIncrementField(primary_key=True)
     nome = TextField(fts=True)
-    tipo = TextField(fts=True)
+    tipo = IntegerField()
     data_acesso = DateTimeField(default = datetime.datetime.now)
 
     def create_historico(self,nome, tipo):

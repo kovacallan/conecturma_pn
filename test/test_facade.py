@@ -3,7 +3,7 @@ import unittest
 # from unittest.mock import MagicMock
 import bottle
 
-from src.facade.facade import *
+from src.facade.historico_facade import *
 
 
 class FacadeTest(unittest.TestCase):
@@ -278,14 +278,24 @@ class FacadeTest(unittest.TestCase):
         turma = self.facade.create_turma_facade("Knight", "Ni")
 
     def _search_turma(self):
-        turma = self.facade.pesquisa_turma_facade("Knight")
+        turma = self.facade.search_turma_facade("Knight")
         self.assertIn(turma['nome'], "Knight")
         self.assertIn(turma['criador'], "Ni")
 
     def _vincular_professor_turma(self):
-        turma = self.facade.pesquisa_turma_facade("Knight")
+        turma = self.facade.search_turma_facade("Knight")
         professor = self.facade.search_observador_facade("Monty")
-        self.facade.vincular_professor_turma_facade(turma['id'], professor['nome'],professor['email'])
+        self.facade.vincular_professor_turma_facade(turma['id'], professor['id'])
+
+    def _ver_professor_turma(self):
+        turma = self.facade.search_turma_facade("Knight")
+        professor_vinculado = self.facade.ver_professor_turma_facade(turma['id'])
+        for p in professor_vinculado:
+            prof = p
+        professor = self.facade.search_observador_id_facade(prof)
+
+        self.assertEqual(professor.nome, 'Monty')
+        self.assertEqual(professor.email, 'Monty@python.com.br')
 
     def _delete_turma(self):
         turma = self.facade.read_turma_facade()
@@ -303,8 +313,10 @@ class FacadeTest(unittest.TestCase):
         self._create_turma()
         self._create_observador()
         self._vincular_professor_turma()
+        self._ver_professor_turma()
         self._delete_observador()
         self._delete_turma()
+
 
     def test_create_search_delete_turma(self):
         self._create_turma()
@@ -320,7 +332,7 @@ class FacadeTest(unittest.TestCase):
     def _read_historico(self):
         historico = self.facade.read_historico_facade()
 
-        self.assertTrue(historico, None)
+        self.assertTrue(historico, [])
 
     def test_create_historico(self):
         self._create_aluno()
