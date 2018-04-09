@@ -9,8 +9,8 @@ class MedalhaFacade:
         self.medalha = DbMedalha()
 
 
-    def create_medalha_facade(self, nome):
-        self.medalha.create_medalha(nome)
+    def create_medalha_facade(self, nome, tipo):
+        self.medalha.create_medalha(nome, tipo)
 
     def read_medalha_facade(self):
         return self.medalha.read_medalha()

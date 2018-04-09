@@ -19,7 +19,7 @@ sys.path.append('../')
 class BlackBoxTest(unittest.TestCase):
     def setUp(self):
         test_app.post('/aluno_cadastro', dict(aluno_nome='eric', senha='idle'))
-        test_app.post('/login', dict(usuario='eric', senha='idle'))
+        test_app.post('/login_aluno', dict(usuario='eric', senha='idle'))
 
     def _fixaluno(self):
         res = test_app.post('/aluno_cadastro', dict(aluno_nome='egg', senha='spam'))
@@ -29,7 +29,7 @@ class BlackBoxTest(unittest.TestCase):
 
     def _test_index(self):
         """ o indice desse servidor """
-        res = test_app.get('/')
+        res = test_app.get('/aluno')
         self.assertEqual(res.status_int, 200)
         self.assertIn('name="usuario"', res.text, res.text)
         # self.assertEqual(res.json['upper_query'], 'FOO')
@@ -39,30 +39,22 @@ class BlackBoxTest(unittest.TestCase):
     """Pagina aluno.tpl"""
 
     def test_aluno_inicio(self):
-        res = test_app.get('/aluno')
+        res = test_app.get('/jogar_conecturma')
         self.assertEqual(res.status_int, 200)
-        self.assertIn('''<a href="/cadastro_aluno">
-            <button>criar aluno</button>
-            </a>''', res.text, res.text)
-        self.assertIn('''<a href="/ler_aluno">
-            <button>ver alunos</button>
-            </a>''', res.text, res.text)
-        self.assertIn('''<a href="/ver_itens_comprados">
-            <button>Ver Itens Comprados</button>
-            </a>''', res.text, res.text)
-        self.assertIn('''<a href="/user_menu">
-            <button>Voltar</button>
-            </a>''', res.text, res.text)
+        self.assertIn('''<form action="/jogos" method="get">''', res.text, res.text)
+        self.assertIn('''<a href="/loja"><button>Loja</button></a>''', res.text, res.text)
+        self.assertIn('''<a href="/aluno/ver_itens_comprados"><button>Ver Itens</button></a>''', res.text, res.text)
+        self.assertIn('''<a href="/sair"><button>Sair</button></a>''', res.text, res.text)
 
     """Pagina aluno cadastro(aluno_cadastro.tpl)"""
 
     def test_aluno_cadastro(self):
-        res = test_app.get('/cadastro_aluno')
+        res = test_app.get('/formulario_cadastro')
         self.assertEqual(res.status_int, 200)
-        self.assertIn('<form action="/aluno_cadastro" method="post">', res.text)
+        self.assertIn('<form action="/cadastro" method="post">', res.text,res.text)
         self.assertIn('''<button type="submit">Enviar</button>
         </form>''', res.text, res.text)
-        self.assertIn('''<a href="/aluno"><button>Voltar</button></a>''', res.text)
+        self.assertIn('''<a href="/"><button>Voltar</button></a>''', res.text)
 
     """Teste ler aluno(aluno_read.tpl"""
 

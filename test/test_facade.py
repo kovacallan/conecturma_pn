@@ -3,7 +3,7 @@ import unittest
 # from unittest.mock import MagicMock
 import bottle
 
-from src.facade.historico_facade import *
+from src.facade.aluno_facade import *
 
 
 class FacadeTest(unittest.TestCase):
@@ -76,9 +76,9 @@ class FacadeTest(unittest.TestCase):
     def test_anotacoes_no_aluno(self):
         self.facade.create_aluno_facade('spam','123')
         aluno=self.facade.pesquisa_aluno_facade('spam').get_id()
-        mensagem=[10]
+        # mensagem=[10]
         mensagem[0]=['uma parada']
-        self.facade.anotacoes_in_aluno_facade(aluno, mensagem[0])
+        self.facade.anotacoes_in_aluno_facade(aluno, mensagem)
 
     """Métododos de Test"""
 
