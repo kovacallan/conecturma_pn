@@ -155,8 +155,17 @@ def equipar_item():
 
     redirect('/aluno/ver_itens_comprados')
 
-# """Pagina de aluno , anotaçoes"""
-# @route('/anotacoes_aluno')
-# @view('pagina_anotaçoes.tpl')
-# def anotacoes_aluno():
-#     pass
+"""Pagina de aluno , anotaçoes"""
+@route('/anotacoes_aluno', method="GET")
+def anotacoes_aluno():
+    aluno_anot = int(request.params['aluno_anot'])
+
+    return template('aluno/anotacoes', id_user=aluno_anot)
+
+@get('/anotacoes_on_aluno')
+def observacoes_aluno():
+    anotacoes=request.params['anotacoes']
+    usuario_id=request.params['usuario_id']
+    aluno_facade.anotacoes_aluno_facade(usuario_id, anotacoes)
+    redirect('/anotacoes_aluno')
+

@@ -2,8 +2,9 @@
 <div class="row">
     <div align="center" class="col-md-12">
         <h1>Escrever anotações</h1>
-        <form action="/anotaçoes_aluno" method="post">
-         <input type="text" name="Nome" size="100" />
+        <form action="/anotacoes_on_aluno">
+         <input type="hidden" name="usuario_id" value="{{id_user}}">
+         <input type="text" name="anotacoes" name="aluno" size="100" />
          <button type="submit">Enviar</button>
         </form>
         <a href="/aluno"><button>Voltar</button></a>
