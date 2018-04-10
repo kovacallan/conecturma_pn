@@ -16,6 +16,12 @@
                 <a href="/escola"><button>escola</button></a>
                 <a href="/turma"><button>turma</button></a>
                 <a href="/aluno"><button>Aluno</button>
+            % elif tipo == 0:
+                <a href="/loja"><button>loja</button></a>
+                <a href="/rede"><button>rede</button></a>
+                <a href="/escola"><button>escola</button></a>
+                <a href="/turma"><button>turma</button></a>
+                <a href="/aluno"><button>Aluno</button></a>
             % end
             <a href="/sair"><button>Sair</button></a>
         </div>

@@ -6,7 +6,7 @@ db = Database(host='localhost', port=6379, db=0)
 class DbObservador(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    nome = TextField(fts=True)
+    nome = TextField(fts=True, index=True)
     senha = TextField()
     telefone = TextField()
     cpf = TextField()

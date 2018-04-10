@@ -11,7 +11,7 @@ escola_facade = EscolaFacade()
 @view('turma/turma')
 def view_turma():
     turmas = controller_read_turma()
-    return dict(turma = turmas)
+    return dict(turma=turmas)
 
 
 """ Create Turma """
@@ -24,7 +24,7 @@ def view_cadastrar_turma():
     pagina de cadastro de turma
     :return:
     """
-    escola = escola_facade.escola.read_escola()
+    escola = escola_facade.read_escola_facade()
     return dict(escolas=escola)
 
 
@@ -47,26 +47,30 @@ def controller_read_turma():
     :return: a entrada de dicionario que contem o id e o turma_nome
     """
     turmas = turma_facade.read_turma_facade()
-    turma = []
-    for t in turmas:
-        escola = escola_facade.search_escola_id_facade(t['escola'])
-        t['escola'] = escola['nome']
+    if turmas == None:
+        return None
+    else:
 
-        if t['serie'] == 0:
-            t['serie'] = "Pré-escola"
-        elif t['serie'] == 1:
-            t['serie'] = "1ª Ano"
-        elif t['serie'] == 2:
-            t['serie'] = "2ª Ano"
-        elif t['serie'] == 3:
-            t['serie'] = "3ª Ano"
-        elif t['serie'] == 4:
-            t['serie'] = "4ª Ano"
-        elif t['serie'] == 5:
-            t['serie'] = "5ª Ano"
-        turma.append(t)
+        turma = []
+        for t in turmas:
+            escola = escola_facade.search_escola_id_facade(t['escola'])
+            t['escola'] = escola['nome']
 
-    return turma
+            if t['serie'] == 0:
+                t['serie'] = "Pré-escola"
+            elif t['serie'] == 1:
+                t['serie'] = "1ª Ano"
+            elif t['serie'] == 2:
+                t['serie'] = "2ª Ano"
+            elif t['serie'] == 3:
+                t['serie'] = "3ª Ano"
+            elif t['serie'] == 4:
+                t['serie'] = "4ª Ano"
+            elif t['serie'] == 5:
+                t['serie'] = "5ª Ano"
+            turma.append(t)
+
+        return turma
 
 
 """Turma Delete"""

@@ -1,4 +1,4 @@
-from src.model.medalha_model import DbMedalha
+from model.medalha_model import DbMedalha
 
 class MedalhaFacade:
 

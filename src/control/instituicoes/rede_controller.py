@@ -14,7 +14,8 @@ def view_index_rede():
     pagina inicial de rede
     :return: None
     """
-    return
+    redes = controller_read_rede()
+    return dict(redes=redes)
 
 
 @route('/rede/create_rede')
@@ -26,33 +27,38 @@ def view_rede_cadastro():
     """
     return
 
+@route('/rede/update_rede')
+@view('modificar_rede')
+def view_modificar_rede():
+    pass
+
 
 @route('/rede/criar_rede', method='POST')
-def create_rede_controller():
+def controller_create_rede():
     """
     criar rede
     :return:
     """
     nome = request.params['nome_rede']
-    cod = request.params['cod']
     telefone = request.params['telefone']
-    facade.create_rede_facade(nome, cod, telefone)
+    facade.create_rede_facade(nome, telefone)
     redirect('/rede')
 
 
-@route('/rede/read_rede')
-@view('rede/ler_redes')
-def view_read_rede():
+def controller_read_rede():
     """
     pagina de ler as redes criadas , armazena os atributos da rede em uma entrada de dicionario
     :return: o dicionario com os atributos de rede a serem mostrados
     """
-    nome = facade.read_rede_facade()
-    redes = [(rede['id'], rede['nome'], rede['cod'], rede['telefone']) for rede in nome]
-    return dict(rede_id=redes)
+    redes = facade.read_rede_facade()
+    rede = []
+    if redes is None:
+        return None
+    else:
+        for x in redes:
+            rede.append(x)
+
+        return rede
 
 
-@route('/rede/update_rede')
-@view('modificar_rede')
-def view_modificar_rede():
-    pass
+

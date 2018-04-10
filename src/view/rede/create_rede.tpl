@@ -6,7 +6,6 @@
         <h1>Cadastro</h1>
         <form action="/rede/criar_rede" method="post">
          Nome da rede  <input type="text" name="nome_rede"/><br>
-         Cod :          <input type="text" name="cod"/><br>
          Telefone:      <input type="text" name="telefone" >
          <button type="submit">Enviar</button>
         </form>

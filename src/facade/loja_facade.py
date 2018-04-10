@@ -1,12 +1,13 @@
-from src.model.loja_model import DbLoja
+from model.estrutura_model import DbEstrutura
 
+estrutura='4'
 class LojaFacade:
 
     def __init__(self):
         """
         método para utilização do banco de dados
         """
-        self.loja = DbLoja()
+        self.loja = DbEstrutura()
 
     def criar_item_loja_facade(self, nome, tipo, preco):
         """
@@ -16,14 +17,14 @@ class LojaFacade:
         :param preco:preço atribuido ao item
         :return:None
         """
-        self.loja.create_item(nome, tipo, preco)
+        self.loja.create_estrutura(nome=nome,tipo_estrutura=estrutura, tipo_item=tipo, preco = preco)
 
     def read_item_loja_facade(self):
         """
         cria uma lista com os itens armazenados na base de dados , com seus valores de id , nome ,tipo e preço
         :return:Lista dos itens criados
         """
-        return self.loja.read_item()
+        return self.loja.read_estrutura(tipo_estrutura=estrutura)
 
     def pesquisa_item_facade(self, id):
         """
@@ -31,7 +32,7 @@ class LojaFacade:
         :param id: id do item
         :return: o objeto do item
         """
-        return self.loja.pesquisar_item(id)
+        return self.loja.search_estrutura_id(id = id)
 
     def deletar_item(self, id):
         """

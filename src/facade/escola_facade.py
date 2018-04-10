@@ -1,4 +1,6 @@
-from src.model.escola_model import DbEscola
+from model.estrutura_model import DbEstrutura
+
+estrutura = '2'
 
 class EscolaFacade:
 
@@ -6,15 +8,14 @@ class EscolaFacade:
         """
         método para utilização do banco de dados
         """
-        self.escola = DbEscola()
+        self.escola = DbEstrutura()
 
-
-    def create_escola_facade(self, nome, rua, numero, telefone, estado, cidade, vinculo_rede, cod_identificacao):
-        return self.escola.create_escola(nome, rua, numero, telefone, estado, cidade, vinculo_rede,
-                                         cod_identificacao)
+    def create_escola_facade(self, nome, numero, telefone, estado, uf,vinculo_rede, cep):
+        return self.escola.create_estrutura(nome=nome, tipo_estrutura=estrutura,telefone=telefone, cep=cep,estado=estado,
+                                            uf=uf, numero=numero, vinculo_rede=vinculo_rede)
 
     def read_escola_facade(self):
-        return self.escola.read_escola()
+        return self.escola.read_estrutura(tipo_estrutura=estrutura)
 
     def update_escola_facade(self, id, nome, rua, numero, cidade, estado, telefone, rede_pertencente,
                              cod_identificacao):
@@ -25,8 +26,7 @@ class EscolaFacade:
         return self.escola.delete_escola(deletar_ids)
 
     def search_escola_id_facade(self, id):
-        return self.escola.search_escola_id(id=id)
+        return self.escola.search_estrutura_id(id=id)
 
-    def pesquisa_escola_facade(self, nome):
-        return self.escola.search_escola(nome)
-
+    def search_escola_facade(self, nome):
+        return self.escola.search_estrutura(tipo_estrutura=estrutura,nome=nome)

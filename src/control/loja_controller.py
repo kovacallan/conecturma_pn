@@ -15,28 +15,23 @@ def index():
     :return: um dicionario com os itens comprados e disponiveis , caso um item nao tenha sido criado previamente
     retorna um dicionario vazio
     """
-    if request.get_cookie("login", secret='2524'):
-        itens_comprados = loja_facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
-        itens = loja_facade.read_item_loja_facade()
-        if itens:
-            return dict(itens=itens, itens_comprados=str(itens_comprados))
-        else:
-            return dict(itens=False)
+
+    itens_comprados = loja_facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
+    itens = loja_facade.read_item_loja_facade()
+    if itens:
+        return dict(itens=itens, itens_comprados=str(itens_comprados))
     else:
-        redirect('/')
+        return dict(itens=False)
 
 
-@route('/cadastrar_item')
+@route('/loja/cadastrar_item')
 @view('loja/cadastrar_item')
 def cadastrar_item():
     """
     verifica se existe o cookie
     :return:
     """
-    if request.get_cookie("login", secret='2524'):
-        return
-    else:
-        redirect('/')
+    return
 
 
 @route('/cadastro_item', method='post')
