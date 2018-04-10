@@ -22,26 +22,27 @@
                     Rede
                 </div>
                 <div class="col-md-3">
-                    Cod_escola
                 </div>
             </div>
-            % for e in escola:
-            <div class="row">
-                <div class="col-md-2">
+            %if escola == None:
+                <h1>Não tem escola Cadastrada</h1>
+            %else:
+            %   for e in escola:
+                    <div class="row">
+                        <div class="col-md-2">
 
-                </div>
-                <div class="col-md-3">
-                    {{e['nome']}}
-                </div>
-                <div class="col-md-3">
-                    {{e['rede']}}
-                </div>
-                <div class="col-md-3">
-                    {{e['nome']}}
-                </div>
-            </div>
-            % end
-
+                        </div>
+                        <div class="col-md-3">
+                            {{e['nome']}}
+                        </div>
+                        <div class="col-md-3">
+                            {{e['vinculo_rede']}}
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+            %   end
+            %end
         </div>
     </div>
 %include('footer.tpl')

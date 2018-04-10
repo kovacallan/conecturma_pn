@@ -25,7 +25,12 @@
                 </div>
             </div>
             <%
-                for t in turma:
+                if turma == None:
+            %>
+            <h1> Sem turma Cadastrada</h1>
+            <%
+                else:
+                    for t in turma:
             %>
             <div class="row">
                 <div class="col-md-2">

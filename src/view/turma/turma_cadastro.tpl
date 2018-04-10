@@ -12,11 +12,14 @@
                  </select>
                  Escola*
                  <select name="escola">
-                    %   for e in escolas:
-                        <option value="{{e['id']}}">{{e['nome']}}</option>
+                    %   if escolas == None:
+                            <option value="0">Sem escola Cadastrada</option>
+                        %else:
+                    %       for e in escolas:
+                            <option value="{{e['id']}}">{{e['nome']}}</option>
+                    %       end
                     %   end
-                 </select>
-
+                 </select><br>
                  <button type="submit">Enviar</button>
             </form>
             <a href="/turma"><button>Voltar</button></a>

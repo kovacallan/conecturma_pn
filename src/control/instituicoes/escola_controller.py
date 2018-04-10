@@ -5,6 +5,7 @@ from facade.rede_facade import RedeFacade
 facade = EscolaFacade()
 rede_facade = RedeFacade()
 
+
 @route('/escola')
 @view('escola/index')
 def view_escola_index():
@@ -16,13 +17,11 @@ def view_escola_index():
     return dict(escola=escola)
 
 
-
 @route('/escola/cadastro')
 @view('escola/create_escola')
 def view_escola_cadastro():
     rede = rede_facade.read_rede_facade()
-    return dict(rede = rede)
-
+    return dict(rede=rede)
 
 
 @route('/escola/read_escola')
@@ -44,8 +43,9 @@ def view_escola_update():
     :return: o template referente a pagina de update
     """
     nome = request.params['nome']
-    escolas = facade.pesquisa_escola_facade(nome)
-    return template('escola/update_escola', id=escolas['id'], nome=escolas['nome'], numero=escolas['numero'],estado=escolas['estado'],cidade=['cidade'],
+    escolas = facade.search_escola_facade(nome)
+    return template('escola/update_escola', id=escolas['id'], nome=escolas['nome'], numero=escolas['numero'],
+                    estado=escolas['estado'], cidade=['cidade'],
                     telefone=escolas['telefone'], rua=escolas['rua'], rede_pertencente=escolas['rede_pertencente'],
                     cod_identificacao=escolas['cod_identificacao'])
 
@@ -58,16 +58,16 @@ def controller_escola_cadastro():
     :return:
     """
     nome = request.params['nome']
-    rua = request.params['rua']
-    numero = request.params['numero']
     telefone = request.params['telefone']
+    cep = request.params['cep']
     estado = request.params['estado']
-    cidade = request.params['cidade']
+    uf = request.params['uf']
+    numero = request.params['numero']
     rede_pertencente = request.params['rede']
-    cod_identificacao = request.params['cod_id']
 
-    if filtro_cadastro(nome, rua, numero, telefone, estado, cidade, cod_identificacao):
-        facade.create_escola_facade(nome, rua, numero, telefone, estado, cidade, rede_pertencente, cod_identificacao)
+    if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
+        facade.create_escola_facade(nome=nome, cep=cep, numero=numero, telefone=telefone, estado=estado, uf=uf,
+                                    vinculo_rede=rede_pertencente)
         redirect('/escola/cadastro')
     else:
         print("Erro para salvar")
@@ -81,12 +81,15 @@ def controller_escola_read():
     """
     escolas = []
     escola = facade.read_escola_facade()
-    for e in escola:
-        if int(e['rede']) > 0:
-            rede = rede_facade.search_rede_id_facade(e['rede'])
-            e['rede'] = rede['nome']
-        escolas.append(e)
-    return escolas
+    if escola is None:
+        return None
+    else:
+        for e in escola:
+            if int(e['vinculo_rede']) > 0:
+                rede = rede_facade.search_rede_id_facade(e['vinculo_rede'])
+                e['vinculo_rede'] = rede['nome']
+            escolas.append(e)
+        return escolas
 
 
 @route('/escola/update_escola', method='POST')
@@ -96,14 +99,14 @@ def controller_escola_update():
     :return:
     """
     facade.update_escola_facade(id=request.params['id'], nome=request.params['nome'], rua=request.params['rua'],
-                                  numero=request.params['numero'],
-                                  telefone=request.params['telefone'], estado=request.params['estado'],
-                                  cidade=request.params['cidade'], rede_pertencente=request.params['rede_pertencente'],
-                                  cod_identificacao=request.params['cod_identificacao'])
+                                numero=request.params['numero'],
+                                telefone=request.params['telefone'], estado=request.params['estado'],
+                                cidade=request.params['cidade'], rede_pertencente=request.params['rede_pertencente'],
+                                cod_identificacao=request.params['cod_identificacao'])
     redirect('/escola/read_escola')
 
 
-def filtro_cadastro(nome, telefone, rua, numero, estado, cidade, cod_identificacao):
+def filtro_cadastro(nome, cep, numero, telefone, estado, uf):
     """
     impede que os parametros do cadastro sejam postados vazios
     :param nome: nome da escola
@@ -115,19 +118,5 @@ def filtro_cadastro(nome, telefone, rua, numero, estado, cidade, cod_identificac
     :param cod_identificacao: codigo identificador da escola , no cadastro do governo
     :return: false se alguns desses parametros vier vazio e true se todos vierem preenchidos
     """
-    if nome == "":
-        return False
-    elif telefone == "":
-        return False
-    elif rua == "":
-        return False
-    elif numero == "":
-        return False
-    elif estado == "":
-        return False
-    elif cidade == "":
-        return False
-    elif cod_identificacao == "":
-        return False
-    else:
-        return True
+
+    return True

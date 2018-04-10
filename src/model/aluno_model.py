@@ -1,7 +1,6 @@
 from walrus import *
 from random import randrange
-from model.loja_model import *
-from model.turma_model import *
+from model.estrutura_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -14,7 +13,7 @@ class DbAluno(Model):
     matricula = TextField()
     nome = TextField(fts=True, index=True)
     senha = TextField()
-    tipo_de_usuario = TextField(fts=True,default = "ALUNO")
+    tipo_aluno = IntegerField(default=0)
     itens_comprados = ListField()
     cor = IntegerField(default=0)
     rosto = IntegerField(default=0)
@@ -121,7 +120,7 @@ class DbAluno(Model):
 
         :return: O usuário pesquisado
         """
-
+        usuario = []
         for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome):
             usuario = pesquisa
 
@@ -259,9 +258,9 @@ class DbAluno(Model):
         :param id_item: O id do item que vai ser comprado
         :return:
         """
-        item = DbLoja()
+        item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
-        preco = item.pesquisar_item(id_item).preco
+        preco = item.search_estrutura_id(id_item)['preco']
 
         if usuario.pontos_de_moedas < preco:
             print("você não tem moeda")
@@ -288,18 +287,18 @@ class DbAluno(Model):
         :return: O avatar usando o item(mostrado na pagina do menu)
         """
         usuario = self.load(id_usuario)
-
-        if itens.tipo == 1:
-            usuario.cor = itens.id
+        print(itens)
+        if itens['tipo_item'] == '1':
+            usuario.cor = itens['id']
         else:
-            if itens.tipo == 2:
-                usuario.rosto = itens.id
+            if itens['tipo_item'] == '2':
+                usuario.rosto = itens['id']
             else:
-                if itens.tipo == 3:
-                    usuario.acessorio = itens.id
+                if itens['tipo_item'] == '3':
+                    usuario.acessorio = itens['id']
                 else:
-                    if itens.tipo == 4:
-                        usuario.corpo = itens.id
+                    if itens['tipo_item'] == '4':
+                        usuario.corpo = itens['id']
         usuario.save()
 
     def avatar(self, id):

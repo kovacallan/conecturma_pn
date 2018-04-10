@@ -6,7 +6,7 @@ db = Database(host='localhost', port=6379, db=0)
 class DbObservador(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    nome = TextField(fts=True)
+    nome = TextField(fts=True, index=True)
     senha = TextField()
     telefone = TextField()
     cpf = TextField()
@@ -16,7 +16,7 @@ class DbObservador(Model):
     vinculo_escola = IntegerField(default=0)
     data_ultimo_login = TextField()
 
-    def create_observador(self, nome, senha, telefone, cpf, email, tipo, rede, escola):
+    def create_observador(self, nome, senha, telefone, email, tipo, rede, escola, cpf="0"):
         """
         cria um observador
         :param nome: nome do observador

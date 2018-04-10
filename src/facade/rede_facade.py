@@ -1,5 +1,6 @@
-from src.model.rede_model import DbRede
+from model.estrutura_model import DbEstrutura
 
+estrutura = '1'
 
 class RedeFacade:
 
@@ -7,13 +8,13 @@ class RedeFacade:
         """
         método para utilização do banco de dados
         """
-        self.rede = DbRede()
+        self.rede = DbEstrutura()
 
     """
         Inicio Facade Rede
     """
 
-    def create_rede_facade(self, nome, cod, telefone):
+    def create_rede_facade(self, nome, telefone):
         """
         cria uma rede no banco de dados
         :param nome: nome da rede
@@ -21,14 +22,15 @@ class RedeFacade:
         :param telefone: telefone da sede
         :return: o rede criada no banco de dados
         """
-        return self.rede.create_rede(nome=nome, cod=cod, telefone=telefone)
+        return self.rede.create_estrutura(nome=nome, tipo_estrutura=estrutura,telefone=telefone)
 
     def read_rede_facade(self):
         """
         Ver as redes que se encontram no banco d dados . com id , nome , cod e telefone da rede
         :return:a lista de ree com os atributos relevantes da rede a serem mostrados
         """
-        return self.rede.read_rede()
+
+        return self.rede.read_estrutura(tipo_estrutura=estrutura)
 
     def update_rede_facade(self, id, nome, cod, telefone):
         return self.rede.update_rede(id, nome, cod, telefone)
@@ -42,7 +44,7 @@ class RedeFacade:
         return self.rede.delete_rede(ids)
 
     def search_rede_id_facade(self, id):
-        return self.rede.search_rede_id(id=id)
+        return self.rede.search_estrutura_id(id=id)
 
-    def pesquisa_rede_facade(self, rede):
-        return self.rede.pesquisa_rede(rede)
+    def search_rede_facade(self, rede):
+        return self.rede.search_estrutura(tipo_estrutura=estrutura ,nome=rede)
