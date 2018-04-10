@@ -2,13 +2,26 @@
 import unittest
 # from unittest.mock import MagicMock
 import bottle
-
-from src.facade.historico_facade import *
+from src.facade.aluno_facade import AlunoFacade
+from src.facade.observador_facade import ObservadorFacade
+from src.facade.rede_facade import RedeFacade
+from src.facade.escola_facade import EscolaFacade
+from src.facade.turma_facade import TurmaFacade
+from src.facade.loja_facade import  LojaFacade
+from src.facade.medalha_facade import MedalhaFacade
+from src.facade.historico_facade import HistoricoFacade
 
 
 class FacadeTest(unittest.TestCase):
     def setUp(self):
-        self.facade = Facade()
+        aluno = AlunoFacade()
+        observador = ObservadorFacade()
+        rede = RedeFacade()
+        escola = EscolaFacade()
+        turma = TurmaFacade()
+        loja = LojaFacade()
+        medalha = MedalhaFacade()
+        historico = HistoricoFacade()
 
     """TESTE USUARIO/ALUNO"""
 
