@@ -15,6 +15,7 @@
                         <td>
                             <input type="checkbox" name="aluno_{{id}}">{{aluno}}</input>
                             <button type=submit name="aluno_anot" formaction="/anotacoes_aluno" value="{{id}}">anotaçoes</button>
+                            <button type=submit name="aluno_anot" formaction="/aluno/anotacoes_aluno_read" value="{{id}}">ver anotacoes do aluno</button>
 
                         </td>
                         <td>

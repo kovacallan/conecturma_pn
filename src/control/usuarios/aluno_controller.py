@@ -158,7 +158,7 @@ def equipar_item():
 """Pagina de aluno , anotaçoes"""
 @route('/anotacoes_aluno', method="GET")
 def anotacoes_aluno():
-    aluno_anot = int(request.params['aluno_anot'])
+    aluno_anot = request.params['aluno_anot']
 
     return template('aluno/anotacoes', id_user=aluno_anot)
 
@@ -167,5 +167,13 @@ def observacoes_aluno():
     anotacoes=request.params['anotacoes']
     usuario_id=request.params['usuario_id']
     aluno_facade.anotacoes_aluno_facade(usuario_id, anotacoes)
-    redirect('/anotacoes_aluno')
+    redirect('/aluno')
 
+@route('/aluno/anotacoes_aluno_read', method="GET")
+@view('aluno/read_anotacoes.tpl')
+def ver_anotacoes_aluno():
+    aluno_anot = request.params['aluno_anot']
+    alunois =aluno_facade.read_anotacoes_aluno_facade(aluno_anot)
+
+
+    return dict(alunois=alunois)
