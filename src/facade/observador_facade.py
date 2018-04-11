@@ -1,4 +1,4 @@
-from src.model.observador_model import DbObservador
+from model.observador_model import DbObservador
 
 class ObservadorFacade:
 

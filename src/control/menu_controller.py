@@ -18,20 +18,20 @@ def view_jogar_conecturma():
         if usuario.cor == 0:
             cor = 'default'
         else:
-            cor = loja_facade.pesquisa_item_facade(avatar['cor']).nome
+            cor = loja_facade.pesquisa_item_facade(avatar['cor'])['nome']
 
         if usuario.rosto == 0:
             rosto = 'default'
         else:
-            rosto = loja_facade.pesquisa_item_facade(avatar['rosto']).nome
+            rosto = loja_facade.pesquisa_item_facade(avatar['rosto'])['nome']
         if usuario.acessorio == 0:
             acessorio = 'default'
         else:
-            acessorio = loja_facade.pesquisa_item_facade(avatar['acessorio']).nome
+            acessorio = loja_facade.pesquisa_item_facade(avatar['acessorio'])['nome']
         if usuario.corpo == 0:
             corpo = 'default'
         else:
-            corpo = loja_facade.pesquisa_item_facade(avatar['corpo']).nome
+            corpo = loja_facade.pesquisa_item_facade(avatar['corpo'])['nome']
 
         avatar_pecas = {'cor': cor,
                         'rosto': rosto,

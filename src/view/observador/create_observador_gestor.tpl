@@ -12,7 +12,6 @@
             email*:<input type="email" name="email"> <br>
             rede*:
             <select name="rede">
-                <option value="0"></option>
                 % for e in rede:
                     <option value="{{e['id']}}">{{e['nome']}}</option>
                 % end

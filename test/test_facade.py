@@ -188,17 +188,17 @@ class FacadeTest(unittest.TestCase):
 
     def _update_rede(self):
         rede = self.facade.create_rede_facade("egg", "2546", "(21)9999-9999")
-        rede = self.facade.pesquisa_rede_facade("egg")
+        rede = self.facade.search_rede_facade("egg")
         self.facade.update_rede_facade(rede.id, "Ni", "2222", "(11)8888-8888")
-        rede = self.facade.pesquisa_rede_facade("Ni")
+        rede = self.facade.search_rede_facade("Ni")
         self.assertEqual(rede.nome, "Ni")
         self.assertEqual(rede.cod, "2222")
         self.assertEqual(rede.telefone, "(11)8888-8888")
 
     def _pesquisa_rede(self):
-        rede = self.facade.pesquisa_rede_facade("Ni")
+        rede = self.facade.search_rede_facade("Ni")
         self.assertIs(rede, rede)
-        rede = self.facade.pesquisa_rede_facade("Sily walk")
+        rede = self.facade.search_rede_facade("Sily walk")
         self.assertIs(rede, None)
 
     def _delete_rede(self):
@@ -231,9 +231,9 @@ class FacadeTest(unittest.TestCase):
         self.assertIs(escola, True)
 
     def _update_escola(self):
-        escola = self.facade.pesquisa_escola_facade("Do bairro")
+        escola = self.facade.search_escola_facade("Do bairro")
         self.facade.update_escola_facade(escola['id'], "Ni", "eggs", "88", "RIO DE JANEIRO",'RJ',"33355567", "abelhinha", "KND2",)
-        escola = self.facade.pesquisa_escola_facade("Ni")
+        escola = self.facade.search_escola_facade("Ni")
         self.assertEqual(escola['nome'], "Ni")
         self.assertEqual(escola['rua'], "eggs")
         self.assertEqual(escola['numero'], 88)
@@ -241,9 +241,9 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(escola['telefone'], "33355567")
         self.assertEqual(escola['cod_identificacao'], "KND2")
     def _pesquisa_escola(self):
-        escola = self.facade.pesquisa_escola_facade("Do bairro")
+        escola = self.facade.search_escola_facade("Do bairro")
         self.assertIs(escola, escola)
-        escola = self.facade.pesquisa_escola_facade("Sily walk")
+        escola = self.facade.search_escola_facade("Sily walk")
         self.assertIs(escola, None)
         pass
 
