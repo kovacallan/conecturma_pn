@@ -338,3 +338,7 @@ class DbAluno(Model):
             anotacoes.append(x.decode('utf-8'))
 
         return anotacoes
+
+    def pesquisa_aluno_turma(aluno_,turma_):
+
+       DbAluno.pesquisa_usuario(aluno_, turma_)

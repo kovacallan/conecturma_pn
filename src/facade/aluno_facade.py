@@ -110,3 +110,6 @@ class AlunoFacade:
         self.aluno.anotacoes_do_aluno(usuario_id, mensagem)
     def read_anotacoes_aluno_facade(self,usuario_id):
         return self.aluno.ver_anotacoes_aluno(usuario_id)
+
+    def pesquisa_aluno_turma_facade(self,aluno_, turma_):
+        return self.aluno.pesquisa_aluno_turma(aluno_,turma_)

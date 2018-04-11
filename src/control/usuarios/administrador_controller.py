@@ -2,9 +2,12 @@ from bottle import route, view, get, request, redirect, template
 from control.classes.validar_cadastros_updates import *
 from facade.observador_facade import ObservadorFacade
 from facade.escola_facade import EscolaFacade
+from facade.aluno_facade import AlunoFacade
+
 
 facade = ObservadorFacade()
 escolafacade = EscolaFacade()
+aluno_facade = AlunoFacade()
 
 
 @route('/observador/create_observador_administrador', method="POST")
@@ -26,6 +29,16 @@ def controller_observador_cadastro():
         print("Erro para salvar")
         redirect('/observador')
 
+@route('/pag_administrador')
+@view('administrativo.tpl')
+def view_adm():
+    pass
+
+@get('/pesquisa_aluno_in_turma')
+def pesquisar_aluno_turma():
+    aluno_=request.params['nome_do_aluno']
+    turma_=request.params['nome_da_turma']
+    aluno_facade.pesquisa_aluno_turma_facade(aluno_, turma_)
 
 def filtro_cadastro(nome, senha, telefone, email, cpf,tipo):
     valida = ValidaNome(ValidaSenha(ValidaTelefone(ValidaCpf(ValidaEmail(ValidaTipo(ValidaOk()))))))
