@@ -1,7 +1,6 @@
 from walrus import *
 from random import randrange
-from src.model.loja_model import *
-from src.model.turma_model import *
+from model.estrutura_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -14,7 +13,7 @@ class DbAluno(Model):
     matricula = TextField()
     nome = TextField(fts=True, index=True)
     senha = TextField()
-    tipo_de_usuario = TextField(fts=True,default = "ALUNO")
+    tipo_aluno = TextField(default='0')
     itens_comprados = ListField()
     cor = IntegerField(default=0)
     rosto = IntegerField(default=0)
@@ -28,7 +27,8 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
-    turma_do_aluno = TextField(fts=True, index=True)
+    vinculo_escola = TextField(fts=True)
+    turma_do_aluno = TextField(fts=True, index=True, default=None)
 
     def usuario_logado(self, id_usuario):
         """
@@ -53,12 +53,13 @@ class DbAluno(Model):
         return matricula
 
     def validar_senha_vazia(self, senha):
+        """backup para evitar a possibilidade de colocar senha vazia"""
         if senha == "" or senha == None:
             return True
         else:
             return False
 
-    def create_aluno(self, nome, senha):
+    def create_aluno(self, nome, vinculo_escola, senha):
         """
         Método principal de criação do usuário no banco de dados
 
@@ -69,7 +70,7 @@ class DbAluno(Model):
 
         if not self.validar_senha_vazia(senha):
             matricula = self.gerar_matricula()
-            self.create(nome=nome, senha=senha, matricula=matricula)
+            self.create(nome=nome, tipo_aluno='6',vinculo_escola = vinculo_escola,senha=senha, matricula=matricula)
             return True
         else:
             return TypeError("Não foi possivel salvar o Usuário")
@@ -97,7 +98,7 @@ class DbAluno(Model):
         else:
             return False
 
-    def read_usuario(self):
+    def read_aluno(self):
         """
         Cria uma entrada de dicionario vazia e adiciona os campos de id , matricula e nome do usuario/login
 
@@ -106,8 +107,8 @@ class DbAluno(Model):
         alunos = []
 
         for aluno in self.query(order_by=self.nome):
-            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.nome,
-                               turma_do_aluno=aluno.turma_do_aluno))
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno,cpf=None,nome=aluno.nome,vinculo_rede = None,vinculo_escola = aluno.vinculo_escola,
+                               vinculo_turma=aluno.turma_do_aluno))
         return alunos
 
     def pesquisa_usuario(self, usuario_nome):
@@ -119,9 +120,8 @@ class DbAluno(Model):
 
         :return: O usuário pesquisado
         """
-
-        usuario = None
-        for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome, order_by=DbAluno.id):
+        usuario = []
+        for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome):
             usuario = pesquisa
 
         return usuario
@@ -167,6 +167,12 @@ class DbAluno(Model):
                 return False
 
     def jogo_j1(self, id, pontos):
+        """
+        metodo para cuidar do jogo j1
+        :param id:id de quem esta jogando o jogo
+        :param pontos: da 0(caso resposta errado) ou 1 (caso resposta certo)
+        :return:true , o jogo funcionando
+        """
         usuario = self.load(id)
         usuario.pontos_j1 += pontos
         usuario.cliques_j1 += 1
@@ -179,6 +185,12 @@ class DbAluno(Model):
         return True
 
     def jogo_j2(self, id, pontos):
+        """
+         metodo para cuidar do jogo j2
+        :param id:id de quem esta jogando o jogo
+        :param pontos: da 0 (caso resposta errado) ou 1 (caso resposta certo)
+        :return:true , o jogo funcionando
+        """
         usuario = self.load(id)
         usuario.pontos_j2 += pontos
         usuario.cliques_j2 += 1
@@ -192,15 +204,35 @@ class DbAluno(Model):
         return True
 
     def mais_dinheiro(self, usuario):
+        """
+        da dinheiro ao usuario
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.pontos_de_moedas += 5
 
     def mais_vidas(self, usuario):
+        """
+        da vida ao usuario
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.pontos_de_vida += 1
 
     def desempenho_jogoj1(self, usuario):
+        """
+        ve o desempenho do usuario j1 o em porcentagem de acertos
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
 
     def desempenho_jogoj2(self, usuario):
+        """
+        ve o desempenho do usuario do j2 o em porcentagem de acertos
+        :param usuario: id do usuario
+        :return:
+        """
         usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
 
     def alunos_in_turma(self, escolha, turma_add):
@@ -211,8 +243,8 @@ class DbAluno(Model):
         :param turma_add: o id da turma escolhida para ser acrescida aos alunos
         :return: None
         """
-        res = DbTurma.load(turma_add)
-        turma_add = res.turma_nome
+        res = DbEstrutura.load(turma_add)
+        turma_add = res.nome
         for escolha in escolha:
             usuario = self.load(escolha)
             usuario.turma_do_aluno = turma_add
@@ -226,9 +258,9 @@ class DbAluno(Model):
         :param id_item: O id do item que vai ser comprado
         :return:
         """
-        item = DbLoja()
+        item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
-        preco = item.pesquisar_item(id_item).preco
+        preco = item.search_estrutura_id(id_item)['preco']
 
         if usuario.pontos_de_moedas < preco:
             print("você não tem moeda")
@@ -255,18 +287,18 @@ class DbAluno(Model):
         :return: O avatar usando o item(mostrado na pagina do menu)
         """
         usuario = self.load(id_usuario)
-
-        if itens.tipo == 1:
-            usuario.cor = itens.id
+        print(itens)
+        if itens['tipo_item'] == '1':
+            usuario.cor = itens['id']
         else:
-            if itens.tipo == 2:
-                usuario.rosto = itens.id
+            if itens['tipo_item'] == '2':
+                usuario.rosto = itens['id']
             else:
-                if itens.tipo == 3:
-                    usuario.acessorio = itens.id
+                if itens['tipo_item'] == '3':
+                    usuario.acessorio = itens['id']
                 else:
-                    if itens.tipo == 4:
-                        usuario.corpo = itens.id
+                    if itens['tipo_item'] == '4':
+                        usuario.corpo = itens['id']
         usuario.save()
 
     def avatar(self, id):
@@ -289,5 +321,4 @@ class DbAluno(Model):
             print(usuario.senha, usuario)
         else:
             print("senha antiga errada")
-    # def definir_novo_usuario_nome(self,usuario_id, senha, novo_nome):
-    #     usuario = self.load(usuario_id)
+

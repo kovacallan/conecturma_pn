@@ -8,10 +8,10 @@
             {{x['nome']}}
         </div>
         <div class="col-md-1">
-            {{x['tipo']}}
+            {{x['tipo_usuario']}}
         </div>
         <div class="col-md-3">
-            {{x['data']}}
+            {{x['data_acesso']}}
         </div>
     </div>
     <br>

@@ -3,22 +3,22 @@
     <div align="center" class="col-md-12">
         <h1>Cadastro</h1>
         <br>
-        <form action="create_observador"> <br>
+        <form action="/observador/create_observador_gestor" method="post"> <br>
+            <input type="hidden" name="tipo_observador" value="{{tipo}}">
             nome*: <input type="text" name="nome"> <br>
             senha*: <input type="password" name="senha"> <br>
             telefone*:<input type="text" name="telefone"> <br>
             cpf*:<input type="text" name="cpf"> <br>
             email*:<input type="email" name="email"> <br>
-            <input type="radio" name="tipo" value="administrador">Administrador
-            <input type="radio" name="tipo" value="gestor">Gestor
-            <input type="radio" name="tipo" value="diretor">Diretor
-            <input type="radio" name="tipo" value="professor">Professor
-            <input type="radio" name="tipo" value="responsavel">Responsavel<br>
+            rede*:
+            <select name="rede">
+                % for e in rede:
+                    <option value="{{e['id']}}">{{e['nome']}}</option>
+                % end
+            </select>
+            <br>
             <button type="submit">Enviar</button>
         </form>
-        <a href="/observador">
-            <button>voltar</button>
-        </a>
     </div>
 </div>
 % include('./footer.tpl')
