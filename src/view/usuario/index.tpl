@@ -12,12 +12,11 @@
                 </form>
             </div>
             <form action="/filtro_usuario" method="post">
-                 <select name="filtro_escola">
-                    % for i in escolas:
-                        <option value="{{i['id']}}">{{i['nome']}}</option>
+                <select name="filtro_escola">
+                    % for e in escolas:
+                        <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
                     % end
                 </select><br>
-            <button type="submit">Enviar</button>
             </form>
             <div class="row">
                 <div class="col-md-2">
