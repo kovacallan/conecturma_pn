@@ -21,8 +21,8 @@ def view_usuario_index():
     :return: None
     """
     if request.get_cookie("login", secret='2525'):
-        usuarios = controller_usuario_index()
-        return dict(usuarios=usuarios)
+        usuarios, escola, rede = controller_usuario_index()
+        return dict(usuarios=usuarios, escolas = escola, redes = rede)
     else:
         redirect('/')
 
@@ -76,7 +76,7 @@ def controller_usuario_index():
             usuario.append(x)
 
 
-    return usuario
+    return usuario,escola,rede
 
 def tipo_usuario(id_tipo):
     if id_tipo is '1':

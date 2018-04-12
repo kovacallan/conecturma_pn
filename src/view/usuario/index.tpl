@@ -11,7 +11,14 @@
                     <button type="submit" >+ Usuário</button>
                 </form>
             </div>
-
+            <form action="/filtro_usuario" method="post">
+                 <select name="filtro_escola">
+                    % for i in escolas:
+                        <option value="{{i['id']}}">{{i['nome']}}</option>
+                    % end
+                </select><br>
+            <button type="submit">Enviar</button>
+            </form>
             <div class="row">
                 <div class="col-md-2">
                     Nome
