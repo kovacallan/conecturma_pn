@@ -5,7 +5,7 @@
         <form action="/aluno_cadastro" method="post">
              Nome do aluno:   <input type="text" name="aluno_nome"/><br>
              Senha :          <input type="password" name="senha"/><br>
-            <select name="escola">
+             Escola: <select name="escola">
                 % for i in escolas:
                     <option value="{{i['id']}}">{{i['nome']}}</option>
                 % end
