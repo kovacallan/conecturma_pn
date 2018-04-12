@@ -30,7 +30,6 @@ class DbAluno(Model):
     vinculo_escola = TextField(fts=True)
     turma_do_aluno = TextField(fts=True, index=True)
     anotacoes_aluno =ListField()
-    # db.List('anotacoes')
 
     def usuario_logado(self, id_usuario):
         """
@@ -245,8 +244,8 @@ class DbAluno(Model):
         :param turma_add: o id da turma escolhida para ser acrescida aos alunos
         :return: None
         """
-        res = DbTurma.load(turma_add)
-        turma_add = res.turma_nome
+        res = DbEstrutura.load(turma_add)
+        turma_add = res.nome
         for escolha in escolha:
             usuario = self.load(escolha)
             usuario.turma_do_aluno = turma_add

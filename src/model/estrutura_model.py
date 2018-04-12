@@ -34,7 +34,11 @@ class DbEstrutura(Model):
                          descricao=None,
                          descricao_completa=None, nome_usuario=None, tipo_usuario=None):
 
-        self.create(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone, vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, cep=cep, endereco=endereco, numero=numero, estado=estado, uf=uf, quem_criou=quem_criou, serie=serie,tipo_item=tipo_item, preco=preco, tipo_medalha=tipo_medalha, descricao=descricao,descricao_completa=descricao_completa, nome_usuario=nome_usuario,tipo_usuario=tipo_usuario)
+        self.create(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone, vinculo_rede=vinculo_rede,
+                    vinculo_escola=vinculo_escola, cep=cep, endereco=endereco, numero=numero, estado=estado, uf=uf,
+                    quem_criou=quem_criou, serie=serie, tipo_item=tipo_item, preco=preco, tipo_medalha=tipo_medalha,
+                    descricao=descricao, descricao_completa=descricao_completa, nome_usuario=nome_usuario,
+                    tipo_usuario=tipo_usuario)
 
     def read_estrutura(self, tipo_estrutura):
 
@@ -48,7 +52,8 @@ class DbEstrutura(Model):
                                estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
                                preco=lista.preco, tipo_medalha=lista.tipo_medalha,
                                descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                               nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,data_acesso=lista.data_acesso
+                               nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                               data_acesso=lista.data_acesso
                                ))
 
         return listas
@@ -82,7 +87,6 @@ class DbEstrutura(Model):
                              )
 
             return lista_dic
-
 
     def ja_possui_item(self, usuario_logado):
         """

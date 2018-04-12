@@ -11,7 +11,7 @@ class ObservadorFacade:
 
     def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo,rede,escola):
         return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
-                                                 tipo=tipo, rede=rede,escola=escola)
+                                                 tipo=tipo, rede=rede, escola=escola)
 
     def read_observador_facade(self):
         return self.observador.read_observador()

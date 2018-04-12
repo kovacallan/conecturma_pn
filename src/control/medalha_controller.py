@@ -1,7 +1,7 @@
 from bottle import route, view, get, request, redirect
-from facade.medalha_facade import DbMedalha
+from facade.medalha_facade import MedalhaFacade
 
-facade = DbMedalha()
+facade = MedalhaFacade()
 
 """ Controle de medalha """
 

@@ -53,7 +53,7 @@ def controller_read_turma():
 
         turma = []
         for t in turmas:
-            escola = escola_facade.search_escola_id_facade(t['escola'])
+            escola = escola_facade.search_escola_id_facade(int(t['escola']))
             t['escola'] = escola['nome']
 
             if t['serie'] == 0:

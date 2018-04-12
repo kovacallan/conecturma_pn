@@ -19,10 +19,7 @@ def controller_login_entrar_observador():
         now = datetime.now()
         observador_facade.login_date_facade(observador['id'], now)
         historico_facade.create_historico_facade(observador['nome'], observador['tipo'])
-        if observador['tipo']==0:
-            redirect('/pag_administrador')
-        else:
-            redirect('/gestao_aprendizagem')
+        redirect('/gestao_aprendizagem')
     else:
         redirect('/')
 
