@@ -40,16 +40,20 @@
             </select><br>
          Numero:    <input type="text" name="numero"/><br>
          Rede:
-            <select name = "rede">
-                %if rede is None:
-                    <option value="0">Nenhuma rede encontrada</option>
-                %else:
-                <option value="0"></option>
-                %   for r in rede:
-                    <option value="{{r['id']}}">{{r['nome']}}</option>
-                %   end
-                %end
-            </select><br>
+            %if observador_tipo == '1':
+                <select name = "rede">
+                    <option value="{{rede['id']}}">{{rede['nome']}}</option>
+                </select><br>
+            % else:
+                <select name = "rede">
+                    %if observador_tipo == '0':
+                        <option value="0"></option>
+                        % for e in rede:
+                            <option value="{{e['id']}}">{{e['nome']}}</option>
+                        % end
+                    %end
+                </select><br>
+            % end
          <button type="submit">Enviar</button>
         </form>
         <a href="/escola"><button>Voltar</button></a>

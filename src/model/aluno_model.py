@@ -111,6 +111,8 @@ class DbAluno(Model):
                                vinculo_turma=aluno.turma_do_aluno))
         return alunos
 
+
+
     def pesquisa_usuario(self, usuario_nome):
 
         """

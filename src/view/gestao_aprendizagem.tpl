@@ -21,13 +21,12 @@
                 <h2>Menu</h2>
                 % if tipo == '3':
                     <a href="/usuario">USUÁRIOS</a><br>
-                    <a href="/medalha_cadastro"><button>Criar medalha</button></a><br>
-                    <a href="/ler_medalha"><button>Ler medalhas criadas</button><</a><br>
+                    <a href="/medalha_cadastro">Criar medalha</a><br>
+                    <a href="/ler_medalha">Ler medalhas criadas<</a><br>
                 % elif tipo == '2':
                     <a href="/turma">TURMA</a><br>
                     <a href="/usuario">USUÁRIOS</a><br>
                 % elif tipo == '1':
-                    <a href="/rede">REDE</a><br>
                     <a href="/escola">ESCOLA</a><br>
                     <a href="/turma">TURMA</a><br>
                     <a href="/usuario">USUÁRIOS</a><br>
