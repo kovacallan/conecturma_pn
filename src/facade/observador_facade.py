@@ -28,6 +28,9 @@ class ObservadorFacade:
     def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)
 
+    def search_observador_tipo_facade(self, tipo):
+        return self.observador.search_observador(tipo)
+
     def login_date_facade(self, id, data):
         self.observador.login_date(id, data)
 

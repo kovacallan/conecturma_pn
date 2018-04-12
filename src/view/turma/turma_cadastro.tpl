@@ -11,15 +11,21 @@
                      <option value="3">3ª Ano</option>
                  </select>
                  Escola*
-                 <select name="escola">
-                    %   if escolas == None:
-                            <option value="0">Sem escola Cadastrada</option>
-                        %else:
-                    %       for e in escolas:
-                            <option value="{{e['id']}}">{{e['nome']}}</option>
-                    %       end
-                    %   end
-                 </select><br>
+                 % if observador_tipo is '2':
+                    <select name="escola">
+                        <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
+                     </select><br>
+                 % else:
+                    <select name="escola">
+                        %   if escolas == None:
+                                <option value="0">Sem escola Cadastrada</option>
+                            %else:
+                        %       for e in escolas:
+                                <option value="{{e['id']}}">{{e['nome']}}</option>
+                        %       end
+                        %   end
+                     </select><br>
+                 % end
                  <button type="submit">Enviar</button>
             </form>
             <a href="/turma"><button>Voltar</button></a>
