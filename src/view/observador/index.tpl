@@ -41,7 +41,7 @@
                     {{e['tipo']}}
                 </div>
                 <div class="col-md-3">
-                    {{e['escola']}}
+                    {{e['vinculo_escola']}}
                 </div>
             </div>
             % end

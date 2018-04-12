@@ -11,9 +11,9 @@ class DbObservador(Model):
     telefone = TextField()
     cpf = TextField()
     email = TextField()
-    tipo = IntegerField()
-    vinculo_rede = IntegerField(default=0)
-    vinculo_escola = IntegerField(default=0)
+    tipo = TextField()
+    vinculo_rede = TextField(default='0')
+    vinculo_escola = TextField(default='0')
     data_ultimo_login = TextField()
 
     def create_observador(self, nome, senha, telefone, email, tipo, rede, escola, cpf="0"):
@@ -42,7 +42,7 @@ class DbObservador(Model):
         observador = []
         for read in DbObservador.all():
             observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
-                                   email=read.email, tipo=read.tipo, escola=read.vinculo_escola))
+                                   email=read.email, tipo=read.tipo, vinculo_rede=read.vinculo_rede,vinculo_escola=read.vinculo_escola))
 
         return observador
 
