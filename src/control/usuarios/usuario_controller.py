@@ -27,6 +27,7 @@ def view_usuario_index():
 
         return dict(observador_tipo=observador['tipo'], usuarios=usuarios, escolas=escola, redes=rede)
     else:
+
         redirect('/')
 
 
