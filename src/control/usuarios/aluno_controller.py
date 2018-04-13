@@ -13,7 +13,7 @@ loja_facade = LojaFacade()
 
 """ Controle aluno """
 
-
+"""Tipo=6"""
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():

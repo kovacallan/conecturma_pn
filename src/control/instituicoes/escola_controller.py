@@ -10,8 +10,9 @@ rede_facade = RedeFacade()
 @view('escola/index')
 def view_escola_index():
     """
-    view inicial de escola
-    :return:
+    view inicial de escola, mostrando as escolas cadastradas no sistema
+    usa o metodo: controller_escola_read :interno:
+    :return:dicionario com os valores da escola a serem mostrados
     """
     escola = controller_escola_read()
     return dict(escola=escola)
@@ -20,6 +21,11 @@ def view_escola_index():
 @route('/escola/cadastro')
 @view('escola/create_escola')
 def view_escola_cadastro():
+    """
+    Pagina de cadastro de escola , que recebe Nome da escola, Telefone, Cep, Estado ,Uf, Numero e Rede
+    metodos usados: rede_facade.read_rede_facade: mostra as redess disponiveis no banco , para a escola ser acrescida ou nao
+    :return: As redes cadastradas a serem usadas na possivel escolha de qual rede pertence a escola
+    """
     rede = rede_facade.read_rede_facade()
     return dict(rede=rede)
 
@@ -28,7 +34,9 @@ def view_escola_cadastro():
 @view('escola/read_escola')
 def view_escola_read():
     """
-    chama o metodo controller_escola_read , para colocar tudo dentro de um dicionario
+    Chama o metodo controller_escola_read , para colocar todos os parametros q serao mostrados de escola
+    dentro de um dicionario
+    metodo usado: controller_escola_read   :interno:
     :return: o dicionario
     """
     escola = controller_escola_read()

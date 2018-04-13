@@ -9,9 +9,13 @@ facade = ObservadorFacade()
 escolafacade = EscolaFacade()
 aluno_facade = AlunoFacade()
 
-
+"""Tipo = 0"""
 @route('/observador/create_observador_administrador', method="POST")
 def controller_observador_cadastro():
+    """
+    Cria o administradores , com nome , senha e telefone (tipo==0)
+    :return:
+    """
     nome = request.params['nome']
     senha = request.params['senha']
     telefone = request.params['telefone']
@@ -32,10 +36,18 @@ def controller_observador_cadastro():
 @route('/pag_administrador')
 @view('administrativo.tpl')
 def view_adm():
+    """
+    view de administrativo
+    :return:
+    """
     pass
 
 @get('/pesquisa_aluno_in_turma')
 def pesquisar_aluno_turma():
+    """
+    Pesquisa o aluno dentro da turma
+    :return:
+    """
     aluno_=request.params['nome_do_aluno']
     turma_=request.params['nome_da_turma']
     aluno_facade.pesquisa_aluno_turma_facade(aluno_, turma_)

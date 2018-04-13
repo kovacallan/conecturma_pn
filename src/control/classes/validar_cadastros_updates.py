@@ -3,6 +3,17 @@ class ValidaNome:
         self.proxima_validacao = proxima_validacao
 
     def validacao(self, nome, senha, telefone, cpf, email, tipo):
+        """
+        Recebe todos os dados , verifica se o nome recebeu vazio , se n for , avança para o proximo metodo
+        Obs: alguns usuarios nao usam esse padrao , entao alguns desses campos tem default None
+        :param nome: nome recebido no cadastro
+        :param senha: senha recebida no cadastro
+        :param telefone: telefone recebido no cadastro
+        :param cpf: cpf recebido no cadastro
+        :param email: email recebido no cadastro
+        :param tipo: tipó recebido no cadastro
+        :return:
+        """
         if nome == "":
             return False
         else:
@@ -11,9 +22,18 @@ class ValidaNome:
 
 class ValidaSenha:
     def __init__(self, proxima_validacao):
+
         self.proxima_validacao = proxima_validacao
 
     def validacao(self, senha, telefone, cpf, email, tipo):
+        """Recebe os dados , verifica se a senha recebeu vazio , se n for , avança para o proximo metodo
+        :param senha: senha recebida no cadastro
+        :param telefone: telefone recebido no cadastro
+        :param cpf: cpf recebido no cadastro
+        :param email: email recebido no cadastro
+        :param tipo: tipó recebido no cadastro
+        :return:
+        """
         if senha == "":
             return False
         else:
@@ -25,6 +45,14 @@ class ValidaTelefone:
         self.proxima_validacao = proxima_validacao
 
     def validacao(self, telefone, cpf, email, tipo):
+        """
+        Recebe os dados , verifica se o telefone recebeu vazio , se n for , avança para o proximo metodo
+        :param telefone: telefone recebido no cadastro
+        :param cpf: cpf recebido no cadastro
+        :param email: email recebido no cadastro
+        :param tipo: tipó recebido no cadastro
+        :return:
+              """
         if telefone == "":
             return False
         else:
@@ -36,6 +64,13 @@ class ValidaCpf:
         self.proxima_validacao = proxima_validacao
 
     def validacao(self, cpf, email, tipo):
+        """
+                Recebe os dados , verifica se o telefone  recebeu vazio , se n for , avança para o proximo metodo
+                :param cpf: cpf recebido no cadastro
+                :param email: email recebido no cadastro
+                :param tipo: tipó recebido no cadastro
+                :return:
+                      """
         if cpf == "":
             return False
         else:
@@ -47,6 +82,12 @@ class ValidaEmail:
         self.proxima_validacao = proxima_validacao
 
     def validacao(self, email, tipo):
+        """
+                        Recebe os dados , verifica se o email recebeu vazio , se n for , avança para o proximo metodo
+                        :param email: email recebido no cadastro
+                        :param tipo: tipó recebido no cadastro
+                        :return:
+                              """
         if email == "":
             return False
         else:
@@ -58,6 +99,12 @@ class ValidaTipo:
         self.proxima_validacao = proxima_validacao
 
     def validacao(self, tipo):
+        """
+                                Recebe os dados , verifica se o tipo recebeu vazio , se n for , avança para o proximo metodo
+                                :param email: email recebido no cadastro
+                                :param tipo: tipó recebido no cadastro
+                                :return:
+                                      """
         if tipo == "":
             return False
         else:
@@ -66,4 +113,8 @@ class ValidaTipo:
 
 class ValidaOk:
     def validacao(self):
+        """
+        Se a funçao chegar aqui é pq todos os dados que precisam ser preenchidos foram preenchidos
+        :return:
+        """
         return True

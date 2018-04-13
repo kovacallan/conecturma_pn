@@ -13,8 +13,8 @@ loja_facade = LojaFacade()
 medalha_facade = MedalhaFacade()
 turma_facade = TurmaFacade()
 
-observador_facade.create_observador_facade(nome="administrator", senha="@onde2929", telefone="21999999999", cpf="0",email="admin", tipo=0,
-                                            rede=0,escola=0)
+observador_facade.create_observador_facade(nome="administrator", senha="@onde2929", telefone="21999999999", cpf="0",
+                                           email="admin", tipo='0', rede='0',escola='0')
 
 rede_facade.create_rede_facade(nome="Rede Conecturma", telefone="(21)99999999")
 

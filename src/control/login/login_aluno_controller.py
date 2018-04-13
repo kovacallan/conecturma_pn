@@ -9,8 +9,8 @@ historico_facade = HistoricoFacade()
 @route('/login_aluno', method='POST')
 def controller_login_entrar_aluno():
     """
-    faz o login na conta do usuário recebendo o usuário e senha
-    :return: da acesso ao menu , caso o usuário e senha digitados estejam certos
+    faz o login na conta do aluno recebendo o usuário e senha
+    :return: da acesso a pagina "jogar conecturma" , caso o usuário e senha digitados estejam certos
     """
     nome = request.params['usuario']
     senha = request.params['senha']
@@ -24,6 +24,12 @@ def controller_login_entrar_aluno():
 
 
 def valida_login_aluno(nome, senha):
+    """
+    Valida o login do aluno ,
+    :param nome: nome de login
+    :param senha: senha do usuario
+    :return: true se o aluno existir e se estiver com usuario e a senha certa
+    """
     retorno = aluno_facade.pesquisa_aluno_facade(nome)
     if retorno:
         if retorno.nome == nome and retorno.senha == senha:

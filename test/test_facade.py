@@ -238,7 +238,7 @@ class FacadeTest(unittest.TestCase):
     """TESTE FACADE ESCOLA"""
 
     def _create_escola(self):
-        escola = escola_facade.create_escola_facade('Do bairro', 'de baixo', '665', '21 ', 'RJ', 'Pindamonhagaba',
+        escola = self.escola.create_escola_facade('Do bairro', 'de baixo', '665', '21 ', 'RJ', 'Pindamonhagaba',
                                                     'KNDPI')
         self.assertIs(escola, True)
 
@@ -255,9 +255,9 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(escola['cod_identificacao'], "KND2")
 
     def _pesquisa_escola(self):
-        escola = escola_facade.search_escola_facade("Do bairro")
+        escola = self.escola.search_escola_facade("Do bairro")
         self.assertIs(escola, escola)
-        escola = escola_facade.search_escola_facade("Sily walk")
+        escola = self.escola.search_escola_facade("Sily walk")
         self.assertIs(escola, None)
         pass
 
@@ -288,35 +288,35 @@ class FacadeTest(unittest.TestCase):
     """TESTE TURMA"""
 
     def _create_turma(self):
-        turma = turma_facade.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
+        turma = self.turma.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
 
     def _search_turma(self):
-        turma = turma_facade.search_turma_facade("Knight")
+        turma = self.turma.search_turma_facade("Knight")
         self.assertIn(turma['nome'], "Knight")
         self.assertIn(turma['criador'], "Ni")
 
     def _vincular_professor_turma(self):
-        turma = turma_facade.search_turma_facade("Knight")
-        professor = observador_facade.search_observador_facade("Monty")
+        turma = self.turma.search_turma_facade("Knight")
+        professor = self.observador.search_observador_facade("Monty")
         # turma_facade.vincular_professor_turma_facade(turma['id'], professor['id'])
 
     def _ver_professor_turma(self):
-        turma = turma_facade.search_turma_facade("Knight")
-        professor_vinculado = turma_facade.ver_professor_turma_facade(turma['id'])
+        turma = self.turma.search_turma_facade("Knight")
+        professor_vinculado = self.turma.ver_professor_turma_facade(turma['id'])
         for p in professor_vinculado:
             prof = p
-        professor = turma_facade.search_observador_id_facade(prof)
+        professor = self.turma.search_observador_id_facade(prof)
 
         self.assertEqual(professor.nome, 'Monty')
         self.assertEqual(professor.email, 'Monty@python.com.br')
 
     def _delete_turma(self):
-        turma = turma_facade.read_turma_facade()
+        turma = self.turma.read_turma_facade()
 
         escolhidos = []
         for turmas in turma:
             escolhidos.append(turmas['id'])
-        turma_facade.delete_turma_facade(escolhidos)
+        self.turma.delete_turma_facade(escolhidos)
 
     def test_create_delete_turma(self):
         self._create_turma()

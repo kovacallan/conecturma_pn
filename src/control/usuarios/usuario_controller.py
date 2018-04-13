@@ -1,6 +1,6 @@
 from bottle import *
-from facade.rede_facade import  RedeFacade
-from facade.escola_facade import  EscolaFacade
+from facade.rede_facade import RedeFacade
+from facade.escola_facade import EscolaFacade
 from facade.aluno_facade import AlunoFacade
 from facade.loja_facade import LojaFacade
 from facade.observador_facade import ObservadorFacade
@@ -16,15 +16,15 @@ observador_facade = ObservadorFacade()
 @view('usuario/index')
 def view_usuario_index():
     """
-    Cria o cookie para a sessao atual do aluno
-    pagina inicial do aluno
-    :return: None
+    Cria o cookie para o obsevador e mostra todos os usuarios , escolas e redes cadastradas
+    :return:
     """
     if request.get_cookie("login", secret='2525'):
         usuarios, escola, rede = controller_usuario_index()
-        return dict(usuarios=usuarios, escolas = escola, redes = rede)
+        return dict(usuarios=usuarios, escolas=escola, redes=rede)
     else:
         redirect('/')
+
 
 @route('/usuario/redirect_cadastro')
 def controller_redirect_cadastro():
@@ -39,6 +39,7 @@ def controller_redirect_cadastro():
         redirect('/aluno/cadastro_aluno')
 
     redirect('/usuario')
+
 
 def controller_usuario_index():
     aluno = aluno_facade.read_aluno_facade()
@@ -75,8 +76,8 @@ def controller_usuario_index():
 
             usuario.append(x)
 
+    return usuario, escola, rede
 
-    return usuario,escola,rede
 
 def tipo_usuario(id_tipo):
     if id_tipo is '1':
