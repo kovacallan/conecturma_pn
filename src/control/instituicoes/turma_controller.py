@@ -1,9 +1,11 @@
 from bottle import route, view, get, request, redirect
 from facade.turma_facade import TurmaFacade
 from facade.escola_facade import EscolaFacade
+from facade.observador_facade import ObservadorFacade
 
 turma_facade = TurmaFacade()
 escola_facade = EscolaFacade()
+observador_facade = ObservadorFacade()
 """ Controle de Turma """
 
 
@@ -30,8 +32,22 @@ def view_cadastrar_turma():
     metodos usados: read_escola_facade
     :return:o dicionario com as escolas
     """
-    escola = escola_facade.read_escola_facade()
-    return dict(escolas=escola)
+
+    observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    if observador['tipo'] == '2':
+        escola = escola_facade.search_escola_id_facade(int(observador['vinculo_escola']))
+        return dict(escolas=escola, observador_tipo = observador['tipo'])
+    elif observador['tipo'] == '1':
+        escola = []
+        escolas = escola_facade.read_escola_facade()
+        for e in escolas:
+            if e['vinculo_rede'] is observador['vinculo_rede']:
+                escola.append(e)
+
+        return dict(escolas=escola, observador_tipo = observador['tipo'])
+    elif observador['tipo'] == '0':
+        escola = escola_facade.read_escola_facade()
+        return dict(escolas=escola, observador_tipo=observador['tipo'])
 
 
 @route('/turma/cadastro_turma', method='POST')

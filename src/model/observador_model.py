@@ -89,7 +89,23 @@ class DbObservador(Model):
         observador = None
         for search in DbObservador.query(DbObservador.nome == nome):
             observador = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                              cpf=search.cpf, email=search.email, tipo=search.tipo)
+                              cpf=search.cpf, email=search.email, tipo=search.tipo, vinculo_escola = search.vinculo_escola,
+                              vinculo_rede = search.vinculo_rede)
+
+        return observador
+
+    def search_observador_tipo(self, tipo):
+        """
+        procura o observador e coloca os dados em uma entrada de dicionario
+        :param nome: nome do observador
+        :return:
+        """
+
+        observador = []
+        for search in DbObservador.query(DbObservador.tipo == tipo):
+            observador.append(dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                              cpf=search.cpf, email=search.email, tipo=search.tipo, vinculo_escola = search.vinculo_escola,
+                              vinculo_rede = search.vinculo_rede))
 
         return observador
 

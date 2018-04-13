@@ -1,13 +1,17 @@
 from bottle import *
 
+from facade.rede_facade import RedeFacade
 from facade.escola_facade import EscolaFacade
 from facade.turma_facade import  TurmaFacade
 from facade.aluno_facade import AlunoFacade
+from facade.observador_facade import ObservadorFacade
 from facade.loja_facade import LojaFacade
 
 escola_facade = EscolaFacade()
 turma_facade = TurmaFacade()
 aluno_facade = AlunoFacade()
+observador_facade = ObservadorFacade()
+rede_facade = RedeFacade()
 loja_facade = LojaFacade()
 
 
@@ -39,8 +43,24 @@ def aluno():
     :return:
     """
     if request.get_cookie("login", secret='2525'):
-        escolas = escola_facade.read_escola_facade()
-        return dict(escolas = escolas)
+        observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+        if observador['tipo'] == '0':
+            escolas = escola_facade.read_escola_facade()
+            return dict(escolas = escolas,tipo_observador = observador['tipo'])
+        elif observador['tipo'] == '1':
+            escola = escola_facade.read_escola_facade()
+            escolas = []
+            for e in escola:
+                if e['vinculo_rede'] is observador['vinculo_rede']:
+                    escolas.append(e)
+            return dict(escolas=escolas, tipo_observador=observador['tipo'])
+        elif observador['tipo'] == '2':
+            escolas = escola_facade.search_escola_id_facade(int(observador['vinculo_escola']))
+            return dict(escolas=escolas, tipo_observador=observador['tipo'])
+
+        elif observador['tipo'] == '3':
+            escolas = escola_facade.search_escola_id_facade(int(observador['vinculo_escola']))
+            return dict(escolas=escolas, tipo_observador=observador['tipo'])
     else:
         redirect('/')
 
