@@ -9,7 +9,6 @@ class RedeFacade:
         método para utilização do banco de dados
         """
         self.rede = DbEstrutura()
-
     """
         Inicio Facade Rede
     """
@@ -47,4 +46,4 @@ class RedeFacade:
         return self.rede.search_estrutura_id(id=id)
 
     def search_rede_facade(self, rede):
-        return self.rede.search_estrutura(tipo_estrutura=estrutura ,nome=rede)
+        return self.rede.search_estrutura(nome=rede,tipo_estrutura=estrutura)

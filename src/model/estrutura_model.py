@@ -31,10 +31,9 @@ class DbEstrutura(Model):
     def create_estrutura(self, nome, tipo_estrutura, telefone=None, vinculo_rede=None, vinculo_escola=None,
                          cep=None, endereco=None, numero=None, estado=None, uf=None, quem_criou=None, serie=None,
                          tipo_item=None, preco=None, tipo_medalha=None,
-                         descricao=None,
-                         descricao_completa=None, nome_usuario=None, tipo_usuario=None):
+                         descricao=None, descricao_completa=None, nome_usuario=None, tipo_usuario=None):
 
-        self.create(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone, vinculo_rede=vinculo_rede,
+        return self.create(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone, vinculo_rede=vinculo_rede,
                     vinculo_escola=vinculo_escola, cep=cep, endereco=endereco, numero=numero, estado=estado, uf=uf,
                     quem_criou=quem_criou, serie=serie, tipo_item=tipo_item, preco=preco, tipo_medalha=tipo_medalha,
                     descricao=descricao, descricao_completa=descricao_completa, nome_usuario=nome_usuario,
@@ -59,6 +58,7 @@ class DbEstrutura(Model):
         return listas
 
     def search_estrutura_id(self, id):
+
         lista = DbEstrutura.load(id)
         lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                          serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
@@ -73,9 +73,7 @@ class DbEstrutura(Model):
         return lista_dic
 
     def search_estrutura(self, tipo_estrutura, nome):
-
-        for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome,
-                                       order_by=DbEstrutura.nome):
+        for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
             lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                              serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
                              vinculo_rede=lista.vinculo_rede,
@@ -101,3 +99,5 @@ class DbEstrutura(Model):
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste
+    def delete_estrutura_test(self):
+        pass

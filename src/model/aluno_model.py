@@ -113,7 +113,6 @@ class DbAluno(Model):
         return alunos
 
 
-
     def pesquisa_usuario(self, usuario_nome):
 
         """

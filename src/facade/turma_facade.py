@@ -26,12 +26,11 @@ class TurmaFacade:
         """
         return self.turma.read_estrutura(tipo_estrutura='3')
 
-    """def delete_turma_facade(self, id):
-        Deleta uma turma pelo id
-        :param id:id da turma
-        :return:None
-        
-        self.turma.delete_turma(id)"""
+    def delete_turma_facade_test(self, deletar_ids):
+
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
 
     def search_turma_facade(self, turma_nome):
         return self.turma.search_estrutura(tipo_estrutura='3', nome=turma_nome)
