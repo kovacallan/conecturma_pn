@@ -12,9 +12,10 @@
             </a>
 
             <a href="/medalha_read">
-            <button>ver medalhas do aluno</ button>
+                <button>ver medalhas do aluno</button>
+            </a>
             <a href="/">
-            <button>Voltar</button>
+                <button>Voltar</button>
             </a>
 
 

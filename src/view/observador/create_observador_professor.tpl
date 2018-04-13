@@ -18,9 +18,6 @@
             <br>
             <button type="submit">Enviar</button>
         </form>
-        <a href="/observador">
-            <button>voltar</button>
-        </a>
     </div>
 </div>
 % include('./footer.tpl')

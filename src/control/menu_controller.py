@@ -1,12 +1,18 @@
 from bottle import route, view, request, redirect
-from facade.aluno_facade import AlunoFacade
+from facade.rede_facade import RedeFacade
+from facade.escola_facade import EscolaFacade
+from facade.turma_facade import TurmaFacade
 from facade.observador_facade import ObservadorFacade
+from facade.aluno_facade import AlunoFacade
 from facade.loja_facade import LojaFacade
-""" Controle do index """
 
+""" Controle do index """
+rede_facade = RedeFacade()
+escola_facade = EscolaFacade()
+turma_facade = TurmaFacade()
+facade_observador = ObservadorFacade()
 aluno_facade = AlunoFacade()
 loja_facade = LojaFacade()
-facade_observador = ObservadorFacade()
 
 @route('/jogar_conecturma')
 @view('jogar_conecturma')

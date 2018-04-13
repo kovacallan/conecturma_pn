@@ -13,7 +13,7 @@ class DbAluno(Model):
     matricula = TextField()
     nome = TextField(fts=True, index=True)
     senha = TextField()
-    tipo_aluno = IntegerField(default=0)
+    tipo_aluno = TextField(default='0')
     itens_comprados = ListField()
     cor = IntegerField(default=0)
     rosto = IntegerField(default=0)
@@ -28,8 +28,8 @@ class DbAluno(Model):
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
     vinculo_escola = TextField(fts=True)
-    turma_do_aluno = TextField(fts=True, index=True)
     anotacoes_aluno =ListField()
+    turma_do_aluno = TextField(fts=True, index=True, default=None)
 
     def usuario_logado(self, id_usuario):
         """
@@ -60,7 +60,7 @@ class DbAluno(Model):
         else:
             return False
 
-    def create_aluno(self, nome, senha):
+    def create_aluno(self, nome, vinculo_escola, senha):
         """
         Método principal de criação do usuário no banco de dados
 
@@ -71,7 +71,7 @@ class DbAluno(Model):
 
         if not self.validar_senha_vazia(senha):
             matricula = self.gerar_matricula()
-            self.create(nome=nome, senha=senha, matricula=matricula)
+            self.create(nome=nome, tipo_aluno='6',vinculo_escola = vinculo_escola,senha=senha, matricula=matricula)
             return True
         else:
             return TypeError("Não foi possivel salvar o Usuário")
@@ -99,7 +99,7 @@ class DbAluno(Model):
         else:
             return False
 
-    def read_usuario(self):
+    def read_aluno(self):
         """
         Cria uma entrada de dicionario vazia e adiciona os campos de id , matricula e nome do usuario/login
 
@@ -108,8 +108,8 @@ class DbAluno(Model):
         alunos = []
 
         for aluno in self.query(order_by=self.nome):
-            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, usuario_nome=aluno.nome,
-                               turma_do_aluno=aluno.turma_do_aluno))
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno,cpf=None,nome=aluno.nome,vinculo_rede = None,vinculo_escola = aluno.vinculo_escola,
+                               vinculo_turma=aluno.turma_do_aluno))
         return alunos
 
     def pesquisa_usuario(self, usuario_nome):

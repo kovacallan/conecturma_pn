@@ -1,8 +1,11 @@
 from bottle import *
+
+from facade.escola_facade import EscolaFacade
 from facade.turma_facade import  TurmaFacade
 from facade.aluno_facade import AlunoFacade
 from facade.loja_facade import LojaFacade
 
+escola_facade = EscolaFacade()
 turma_facade = TurmaFacade()
 aluno_facade = AlunoFacade()
 loja_facade = LojaFacade()
@@ -36,7 +39,8 @@ def aluno():
     :return:
     """
     if request.get_cookie("login", secret='2525'):
-        return
+        escolas = escola_facade.read_escola_facade()
+        return dict(escolas = escolas)
     else:
         redirect('/')
 
@@ -48,8 +52,9 @@ def create_aluno():
     Chama a funçao create_aluno_facade
     :return:
     """
-    if aluno_facade.create_aluno_facade(request.forms['aluno_nome'], request.forms['senha']):
-        redirect('/')
+    escola = request.forms['escola']
+    if aluno_facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola,senha=request.forms['senha']):
+        redirect('/usuario')
     else:
         print("deu erro na criação do ALuno")
 
