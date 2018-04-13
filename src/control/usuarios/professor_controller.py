@@ -12,11 +12,11 @@ def controller_observador_cadastro():
     nome = request.params['nome']
     senha = request.params['senha']
     telefone = request.params['telefone']
-    cpf = 0
+    cpf = '0'
     email = request.params['email']
-    tipo = int(request.params['tipo_observador'])
-    escola = int(request.params['escola'])
-    rede = 0
+    tipo = request.params['tipo_observador']
+    escola = request.params['escola']
+    rede = '0'
 
     if escola == 0:
         redirect('/observador/cadastro?tipo_observador=3')
