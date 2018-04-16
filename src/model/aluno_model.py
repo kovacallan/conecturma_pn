@@ -246,9 +246,12 @@ class DbAluno(Model):
         :return: None
         """
         res = DbEstrutura.load(turma_add)
-        turma_add = res.nome
+        escolhas= []
         for escolha in escolha:
-            usuario = self.load(escolha)
+            escolhas.append(escolha.id)
+        turma_add = res.nome
+        for escolhas in escolhas:
+            usuario = self.load(escolhas)
             usuario.turma_do_aluno = turma_add
             usuario.save()
 

@@ -1,17 +1,17 @@
 # coding: utf-8
 import unittest
 # from unittest.mock import MagicMock
-
+# from src.model.estrutura_model import DbEstrutura
+"""possivel erro de importaçao de DbAluno acima"""
 from src.facade.aluno_facade import AlunoFacade
 from src.facade.observador_facade import ObservadorFacade
-from src. facade.rede_facade import RedeFacade
+from src.facade.rede_facade import RedeFacade
 from src.facade.escola_facade import EscolaFacade
 from src.facade.turma_facade import TurmaFacade
 from src.facade.loja_facade import LojaFacade
 from src.facade.medalha_facade import MedalhaFacade
 from src.facade.historico_facade import HistoricoFacade
 from src.facade.Facade_main import Facade
-
 
 
 class FacadeTest(unittest.TestCase):
@@ -93,13 +93,15 @@ class FacadeTest(unittest.TestCase):
         self._create_turma()
         self._create_aluno()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
-        aluno2 = self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma")
+        self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma")
+        aluno2 = self.facade.pesquisa_aluno_facade("Ni")
         escolhidos = [aluno1, aluno2]
-        turma1 = self.facade.search_turma_facade("Ni")
-        print("essa deve ser a turma: {}".format(turma1))
-        self.facade.aluno_in_turma_facade(escolhidos, turma1 )
-
-
+        turma1 = self.facade.search_turma_facade("Knight")
+        self.facade.aluno_in_turma_facade(escolhidos, turma1)
+        aluntest = self.facade.pesquisa_aluno_facade("egg")
+        aluntest2 = self.facade.pesquisa_aluno_facade('Ni')
+        self.assertEqual(aluntest.turma_do_aluno,turma1['nome'])
+        self.assertEqual(aluntest2.turma_do_aluno,turma1['nome'])
 
     def test_update_aluno(self):
         self._update_aluno()
@@ -168,13 +170,13 @@ class FacadeTest(unittest.TestCase):
 
     def _create_observador(self):
         observador1 = self.facade.create_observador_facade(nome='Egg', senha='span', telefone='(21)9999-9999',
-                                                              cpf='123456789', email='egg@span.com.br',rede=0,escola=0,
-                                                              tipo='ADMINISTRADOR')
+                                                           cpf='123456789', email='egg@span.com.br', rede=0, escola=0,
+                                                           tipo='ADMINISTRADOR')
 
         observador_professor = self.facade.create_observador_facade(nome='Monty', senha='python',
-                                                                        telefone='(21)9999-9999',
-                                                                        cpf='123456789', email='Monty@python.com.br',
-                                                                        tipo='3', rede=0, escola=0)
+                                                                    telefone='(21)9999-9999',
+                                                                    cpf='123456789', email='Monty@python.com.br',
+                                                                    tipo='3', rede=0, escola=0)
 
         self.assertIs(observador1, True)
         self.assertIs(observador_professor, True)
@@ -182,8 +184,8 @@ class FacadeTest(unittest.TestCase):
     def _update_observador(self):
         observador1 = self.facade.search_observador_facade('Egg')
         observador_update = self.facade.update_observador_facade(id=observador1['id'], nome='Knight',
-                                                                    telefone='(11)8888-8888', cpf='999999999',
-                                                                     email='knight@ni.com')
+                                                                 telefone='(11)8888-8888', cpf='999999999',
+                                                                 email='knight@ni.com')
         observador2 = self.facade.search_observador_facade('Knight')
         self.assertEqual(observador2['nome'], 'Knight')
         self.assertEqual(observador2['telefone'], '(11)8888-8888')
@@ -228,8 +230,7 @@ class FacadeTest(unittest.TestCase):
 
     def _create_rede(self):
         rede = self.facade.create_rede_facade("egg", "(21)9999-9999")
-        rede2=self.facade.search_rede_facade("egg")
-        print(rede2)
+        rede2 = self.facade.search_rede_facade("egg")
 
     def _update_rede(self):
         rede = self.facade.create_rede_facade("egg", "2546", "(21)9999-9999")
@@ -321,10 +322,11 @@ class FacadeTest(unittest.TestCase):
     """TESTE TURMA"""
 
     def _create_turma(self):
-        self.facade.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
+        turma1 = self.facade.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
+
 
     def _search_turma(self):
-        turma1 = self.facade.turma.search_turma_facade("Knight")
+        turma1 = self.facade.search_turma_facade("Knight")
         self.assertIn(turma1['nome'], "Knight")
         self.assertIn(turma1['criador'], "Ni")
 
@@ -352,7 +354,7 @@ class FacadeTest(unittest.TestCase):
 
     def _test_create_delete_turma(self):
         self._create_turma()
-        self._delete_turma()
+        # self._delete_turma()
 
     def _test_vincular_professor_turma(self):
         self._create_turma()
@@ -362,10 +364,10 @@ class FacadeTest(unittest.TestCase):
         self._delete_observador()
         # self._delete_turma()
 
-    def _test_create_search_delete_turma(self):
+    def test_create_search_delete_turma(self):
         self._create_turma()
         self._search_turma()
-        self._delete_turma()
+        # self._delete_turma()
 
     """FIM TESTE TURMA """
 

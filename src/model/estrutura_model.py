@@ -7,7 +7,7 @@ db = Database(host='localhost', port=6379, db=0)
 class DbEstrutura(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    nome = TextField()
+    nome = TextField(index=True)
     tipo_estrutura = TextField(fts=True, index=True)
     telefone = TextField(default=None)
     vinculo_rede = TextField(default=None)
@@ -73,19 +73,17 @@ class DbEstrutura(Model):
         return lista_dic
 
     def search_estrutura(self, tipo_estrutura, nome):
-        lista_dic = {}
-        for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
-            lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                             serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                             vinculo_rede=lista.vinculo_rede,
-                             cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                             estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                             preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                             descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                             nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario
-                             )
-
-            return lista_dic
+        lista_dic = None
+        for search in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
+            lista_dic = dict(id=search.id, nome=search.nome, criador=search.quem_criou, escola=search.vinculo_escola,
+                             serie=search.serie, tipo_estrutura=search.tipo_estrutura, telefone=search.telefone,
+                             vinculo_rede=search.vinculo_rede,
+                             cep=search.cep, endereco=search.endereco, numero=search.numero,
+                             estado=search.estado, uf=search.uf, tipo_item=search.tipo_item,
+                             preco=search.preco, tipo_medalha=search.tipo_medalha,
+                             descricao=search.descricao, descricao_completa=search.descricao_completa,
+                             nome_usuario=search.nome_usuario, tipo_usuario=search.tipo_usuario)
+        return lista_dic
 
     def ja_possui_item(self, usuario_logado):
         """
