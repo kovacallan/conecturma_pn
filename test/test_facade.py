@@ -103,6 +103,19 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(aluntest.turma_do_aluno,turma1['nome'])
         self.assertEqual(aluntest2.turma_do_aluno,turma1['nome'])
 
+    def _comprar_item(self):
+        self._create_item()
+        self._create_aluno()
+        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        self.facade.compra_item_facade(aluno1.id, 2)
+        self.assertIn("2",aluno1.itens_comprados[0].decode('utf-8'))
+
+    def _ver_iten_comprado(self):
+        self._comprar_item()
+        aluno1=self.facade.pesquisa_aluno_facade("egg")
+        iten =self.facade.ver_item_comprado_facade(aluno1.id)
+        self.assertEqual([int(aluno1.itens_comprados[0].decode('utf-8'))],iten)
+
     def test_update_aluno(self):
         self._update_aluno()
 
@@ -123,6 +136,12 @@ class FacadeTest(unittest.TestCase):
 
     def test_aluno_in_turma(self):
         self._aluno_in_turma()
+
+    def test_compra_item(self):
+        self._comprar_item()
+
+    def test_ver_itens_comprados(self):
+        self._ver_iten_comprado()
 
     """Métododos de Test"""
 
@@ -233,9 +252,9 @@ class FacadeTest(unittest.TestCase):
         rede2 = self.facade.search_rede_facade("egg")
 
     def _update_rede(self):
-        rede = self.facade.create_rede_facade("egg", "2546", "(21)9999-9999")
+        rede = self.facade.create_rede_facade("egg", "(21)9999-9999")
         rede = self.facade.search_rede_facade("egg")
-        self.facade.update_rede_facade(rede.id, "Ni", "2222", "(11)8888-8888")
+        self.facade.update_rede_facade(rede['id'], "Ni", "2222", "(11)8888-8888")
         rede = self.facade.search_rede_facade("Ni")
         self.assertEqual(rede.nome, "Ni")
         self.assertEqual(rede.cod, "2222")
@@ -263,7 +282,7 @@ class FacadeTest(unittest.TestCase):
     def _test_pesquisa_rede(self):
         self._pesquisa_rede()
 
-    def _test_delete_rede(self):
+    def test_delete_rede(self):
         self._update_rede()
         self._delete_rede()
 
@@ -323,6 +342,7 @@ class FacadeTest(unittest.TestCase):
 
     def _create_turma(self):
         turma1 = self.facade.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
+        self.assertIsNot(turma1, None)
 
 
     def _search_turma(self):
@@ -400,3 +420,14 @@ class FacadeTest(unittest.TestCase):
 
     if __name__ == '__main__':
         unittest.main()
+    """FIM DE TESTE FACADE MEDALHAS"""
+
+    """INICIO DE TESTE FACADE DE LOJA"""
+
+    def _create_item(self):
+        iten1 = self.facade.criar_item_loja_facade(nome="burroquandofoge", tipo='1', preco=0)
+        self.assertIsNot(iten1,None)
+        # print(iten1)
+
+    def test_create_iten(self):
+        self._create_item()

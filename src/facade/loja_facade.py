@@ -17,7 +17,8 @@ class LojaFacade:
         :param preco:preço atribuido ao item
         :return:None
         """
-        self.loja.create_estrutura(nome=nome,tipo_estrutura=estrutura, tipo_item=tipo, preco = preco)
+
+        return self.loja.create_estrutura(nome=nome,tipo_estrutura=estrutura, tipo_item=tipo, preco = preco)
 
     def read_item_loja_facade(self):
         """

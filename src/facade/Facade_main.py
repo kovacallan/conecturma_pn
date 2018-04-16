@@ -14,3 +14,4 @@ class Facade(AlunoFacade,ObservadorFacade,EscolaFacade,HistoricoFacade,LojaFacad
         ObservadorFacade.__init__(self)
         RedeFacade.__init__(self)
         TurmaFacade.__init__(self)
+        LojaFacade.__init__(self)
