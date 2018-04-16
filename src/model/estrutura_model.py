@@ -73,6 +73,7 @@ class DbEstrutura(Model):
         return lista_dic
 
     def search_estrutura(self, tipo_estrutura, nome):
+        lista_dic = {}
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
             lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                              serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,

@@ -1,5 +1,5 @@
 from model.estrutura_model import DbEstrutura
-
+# turma =DbEstrutura()
 class TurmaFacade:
 
     def __init__(self):

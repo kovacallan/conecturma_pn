@@ -13,3 +13,4 @@ class Facade(AlunoFacade,ObservadorFacade,EscolaFacade,HistoricoFacade,LojaFacad
         # # super(ObservadorFacade, self).__init__()
         ObservadorFacade.__init__(self)
         RedeFacade.__init__(self)
+        TurmaFacade.__init__(self)

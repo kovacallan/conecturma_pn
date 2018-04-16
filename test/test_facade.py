@@ -95,8 +95,11 @@ class FacadeTest(unittest.TestCase):
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         aluno2 = self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma")
         escolhidos = [aluno1, aluno2]
-        # turma1=
-        self.facade.aluno_in_turma_facade(escolhidos, )
+        turma1 = self.facade.search_turma_facade("Ni")
+        print("essa deve ser a turma: {}".format(turma1))
+        self.facade.aluno_in_turma_facade(escolhidos, turma1 )
+
+
 
     def test_update_aluno(self):
         self._update_aluno()
@@ -116,7 +119,7 @@ class FacadeTest(unittest.TestCase):
     def test_read_anotacoes_aluno(self):
         self._read_anotaçoes_no_aluno()
 
-    def _test(self):
+    def test_aluno_in_turma(self):
         self._aluno_in_turma()
 
     """Métododos de Test"""
@@ -318,12 +321,12 @@ class FacadeTest(unittest.TestCase):
     """TESTE TURMA"""
 
     def _create_turma(self):
-        turma.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
+        self.facade.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
 
     def _search_turma(self):
-        turma1 = turma.search_turma_facade("Knight")
-        self.assertIn(turma['nome'], "Knight")
-        self.assertIn(turma['criador'], "Ni")
+        turma1 = self.facade.turma.search_turma_facade("Knight")
+        self.assertIn(turma1['nome'], "Knight")
+        self.assertIn(turma1['criador'], "Ni")
 
     def _vincular_professor_turma(self):
         turma = self.turma.search_turma_facade("Knight")
@@ -341,11 +344,11 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(professor.email, 'Monty@python.com.br')
 
     def _delete_turma(self):
-        turmas = turma.read_turma_facade()
+        turmas = self.turma.read_turma_facade()
         escolhidos = []
         for turmas in turmas:
             escolhidos.append(turmas['id'])
-        turma.delete_turma_facade_test(escolhidos)
+        self.turma.delete_turma_facade_test(escolhidos)
 
     def _test_create_delete_turma(self):
         self._create_turma()
