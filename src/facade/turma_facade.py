@@ -29,10 +29,7 @@ class TurmaFacade:
         return self.turma.read_estrutura(tipo_estrutura=estrutura)
 
     def delete_turma_facade_test(self, deletar_ids):
-
-        for deletar_ids in deletar_ids:
-            usuario = self.load(deletar_ids)
-            usuario.delete(deletar_ids)
+        return self.turma.delete_estrutura_test(deletar_ids)
 
     def search_turma_facade(self, turma_nome):
         return self.turma.search_estrutura(tipo_estrutura=estrutura, nome=turma_nome)

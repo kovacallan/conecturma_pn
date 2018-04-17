@@ -292,7 +292,7 @@ class DbAluno(Model):
         :return: O avatar usando o item(mostrado na pagina do menu)
         """
         usuario = self.load(id_usuario)
-        print(itens)
+        # print(itens)
         if itens['tipo_item'] == '1':
             usuario.cor = itens['id']
         else:

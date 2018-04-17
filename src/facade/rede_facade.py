@@ -31,8 +31,8 @@ class RedeFacade:
 
         return self.rede.read_estrutura(tipo_estrutura=estrutura)
 
-    def update_rede_facade(self, id, nome, cod, telefone):
-        return self.rede.update_rede(id, nome, cod, telefone)
+    def update_rede_facade(self, id, nome, telefone):
+        return self.rede.update_estrutura(id, nome, telefone)
 
     def delete_rede_facade(self, ids):
         """
@@ -40,7 +40,7 @@ class RedeFacade:
         :param ids: lista de
         :return:
         """
-        return self.rede.delete_rede(ids)
+        return self.rede.delete_estrutura_test(ids)
 
     def search_rede_id_facade(self, id):
         return self.rede.search_estrutura_id(id=id)

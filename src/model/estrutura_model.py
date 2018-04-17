@@ -101,13 +101,14 @@ class DbEstrutura(Model):
 
         return lista_teste
 
-    def update_estrutura(self,update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None, numero=None,
+    def update_estrutura(self,update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None, numero=None,cidade=None,
                          estado=None, uf=None, serie=None, tipo_item=None, preco=None, tipo_medalha=None, descricao=None,
                          descricao_completa=None, nome_usuario=None, tipo_usuario=None):
         estrutura=self.load(update_id)
         if nome is not None:
             estrutura.nome=nome
-
+        else:
+            pass
         if telefone is not None:
             estrutura.telefone=telefone
         if vinculo_rede is not None:
@@ -118,6 +119,8 @@ class DbEstrutura(Model):
             estrutura.endereco=endereco
         if numero is not None:
             estrutura.numero=numero
+        if cidade is not None:
+            estrutura.cidade=cidade
         if estado is not None:
             estrutura.estado=estado
         if uf is not None:
@@ -140,5 +143,9 @@ class DbEstrutura(Model):
             estrutura.tipo_usuario=tipo_usuario
         estrutura.save()
 
-    def delete_estrutura_test(self):
-        pass
+    def delete_estrutura_test(self,deletar_ids):
+
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
+

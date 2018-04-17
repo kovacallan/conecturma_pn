@@ -27,6 +27,9 @@ class LojaFacade:
         """
         return self.loja.read_estrutura(tipo_estrutura=estrutura)
 
+    def pesquisa_item_facade_nome(self,nome):
+        return self.loja.search_estrutura(tipo_estrutura=estrutura, nome=nome)
+
     def pesquisa_item_facade(self, id):
         """
         pesquisa itens por id (ainda nao implementado)
@@ -41,7 +44,7 @@ class LojaFacade:
         :param id: o id do item
         :return: None
         """
-        self.loja.item_delete(id)
+        self.loja.delete_estrutura_test(id)
 
     def ja_tem_item_facade(self, usuario_logado):
         """
