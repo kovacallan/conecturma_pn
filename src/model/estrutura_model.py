@@ -60,7 +60,6 @@ class DbEstrutura(Model):
         return listas
 
     def search_estrutura_id(self, id):
-
         lista = DbEstrutura.load(id)
         lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                          serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
@@ -149,3 +148,5 @@ class DbEstrutura(Model):
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
 
+    def vincular_prof_turma(self,prof_id,turma_id,tipo_estrutura):
+        pass

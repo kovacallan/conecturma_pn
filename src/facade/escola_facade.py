@@ -23,7 +23,7 @@ class EscolaFacade:
         return self.escola.update_estrutura(id, nome, telefone, vinculo_rede, cep, endereco, numero, cidade, estado)
 
     def delete_escola_facade(self, deletar_ids):
-        return self.escola.delete_escola(deletar_ids)
+        return self.escola.delete_estrutura_test(deletar_ids)
 
     def search_escola_id_facade(self, id):
         return self.escola.search_estrutura_id(id=id)

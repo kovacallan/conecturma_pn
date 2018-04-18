@@ -110,19 +110,19 @@ class FacadeTest(unittest.TestCase):
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         item1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.facade.compra_item_facade(aluno1.id, item1['id'])
-        self.assertIn(str(item1['id']), aluno1.itens_comprados[0].decode('utf-8'))
+        self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
 
     def _ver_iten_comprado(self):
         self._comprar_item()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         iten = self.facade.ver_item_comprado_facade(aluno1.id)
         self.assertEqual([int(aluno1.itens_comprados[0].decode('utf-8'))], iten)
-        self._delete_alunos()
+
 
     def _equipar_item_facade(self):
         self._comprar_item()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
-        iten = self.facade.pesquisa_item_facade(2)
+        iten = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.facade.equipar_item_facade(aluno1.id, iten)
         aluno2 = self.facade.pesquisa_aluno_facade("egg")
         self.assertEqual(aluno2.cor, iten['id'])
@@ -131,8 +131,10 @@ class FacadeTest(unittest.TestCase):
         self._equipar_item_facade()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         self.facade.avatar_facade(aluno1.id)
-        self.assertEqual(self.facade.avatar_facade(aluno1.id)['cor'], 2)
+        iten1=self.facade.pesquisa_item_facade_nome("burroquandofoge")
+        self.assertEqual(self.facade.avatar_facade(aluno1.id)['cor'], iten1['id'])
         self._delete_item()
+        self._delete_alunos()
 
     def test_update_aluno(self):
         self._update_aluno()
@@ -162,16 +164,15 @@ class FacadeTest(unittest.TestCase):
     def test_ver_itens_comprados(self):
         self._ver_iten_comprado()
 
-    def _test_equipar_item(self):
+    def test_equipar_item(self):
         self._equipar_item_facade()
 
-    def _test_ver_avatar(self):
+    def test_ver_avatar(self):
         self._mostrar_avatar()
 
-    """Métododos de Test"""
-
-    def _test_create_aluno(self):
+    def test_create_delete_aluno(self):
         self._create_aluno()
+        self._delete_alunos()
 
     def _test_create_aluno_senha_vazia(self):
         self._create_aluno_senha_vazia()
@@ -270,11 +271,15 @@ class FacadeTest(unittest.TestCase):
 
     """FIM TESTE OBSERVADOR"""
 
+
+
     """TESTE REDE"""
 
     def _create_rede(self):
         rede = self.facade.create_rede_facade("egg", "(21)9999-9999")
         rede2 = self.facade.search_rede_facade("egg")
+        self.assertIsNot(rede, None)
+        self.assertIsNot(rede2, None)
 
     def _update_rede(self):
         rede = self.facade.create_rede_facade("egg", "(21)9999-9999")
@@ -300,13 +305,13 @@ class FacadeTest(unittest.TestCase):
     def test_create_rede(self):
         self._create_rede()
 
-    def _test_update_rede(self):
+    def test_update_rede(self):
         self._update_rede()
 
     def test_pesquisa_rede(self):
         self._pesquisa_rede()
 
-    def _test_delete_rede(self):
+    def test_delete_rede(self):
         self._update_rede()
         self._delete_rede()
 
@@ -345,20 +350,23 @@ class FacadeTest(unittest.TestCase):
             escolhidos.append(escola['id'])
         self.facade.delete_escola_facade(escolhidos)
 
+    def test_create_delete_escola(self):
+        self._create_escola()
+        self._delete_escola()
+
     def test_pesquisa_escola(self):
         self._pesquisa_escola()
-
-    def test_create_escola(self):
-        self._create_escola()
+        self._delete_escola()
 
     def test_update_escola(self):
         self._create_escola()
         self._update_escola()
+        self._delete_escola()
 
-    def _test_pesquisa_escola(self):
+    def test_pesquisa_escola(self):
         self._pesquisa_escola()
 
-    def _test_delete_escola(self):
+    def test_delete_escola(self):
         self._update_rede()
         self._delete_rede()
 
@@ -375,9 +383,9 @@ class FacadeTest(unittest.TestCase):
         self.assertIn(turma1['criador'], "Ni")
 
     def _vincular_professor_turma(self):
-        turma = self.turma.search_turma_facade("Knight")
-        professor = self.observador.search_observador_facade("Monty")
-        # turma_facade.vincular_professor_turma_facade(turma['id'], professor['id'])
+        turma = self.facade.search_turma_facade("Knight")
+        professor = self.facade.search_observador_facade("Monty")
+        self.facade.vincular_professor_turma_facade(turma['id'], professor['id'])
 
     def _ver_professor_turma(self):
         turma = self.turma.search_turma_facade("Knight")
@@ -404,9 +412,9 @@ class FacadeTest(unittest.TestCase):
         self._create_turma()
         self._create_observador()
         self._vincular_professor_turma()
-        # self._ver_professor_turma()
+        self._ver_professor_turma()
         self._delete_observador()
-        # self._delete_turma()
+        self._delete_turma()
 
     def test_create_search_delete_turma(self):
         self._create_turma()
@@ -438,8 +446,8 @@ class FacadeTest(unittest.TestCase):
         medalha = self.facade.create_medalha_facade('cheese')
         self.assertIs(medalha, True)
 
-    def _test_create_escola(self):
-        self._create_escola()
+    def _test_create_medalha(self):
+        self._create_medalha()
 
 
     """FIM DE TESTE FACADE MEDALHAS"""

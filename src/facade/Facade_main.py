@@ -17,3 +17,4 @@ class Facade(AlunoFacade,ObservadorFacade,EscolaFacade,HistoricoFacade,LojaFacad
         LojaFacade.__init__(self)
         EscolaFacade.__init__(self)
         HistoricoFacade.__init__(self)
+        MedalhaFacade.__init__(self)
