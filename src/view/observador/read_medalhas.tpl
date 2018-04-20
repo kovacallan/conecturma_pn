@@ -13,15 +13,12 @@
                     {{medalhas['nome']}}
                 </td>
                 <td>
-                    {{medalhas['tipo']}}
-                </td>
-                <td>
 
                 </td>
             </tr>
             %end
         </table>
-        <a href="/observador">
+        <a href="/">
             <button>voltar</button>
         </a>
     </div>

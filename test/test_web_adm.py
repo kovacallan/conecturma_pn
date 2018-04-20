@@ -1,5 +1,5 @@
 import unittest
-from src.facade.aluno_facade import *
+
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):

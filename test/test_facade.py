@@ -97,10 +97,13 @@ class FacadeTest(unittest.TestCase):
         self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma")
         aluno2 = self.facade.pesquisa_aluno_facade("Ni")
         escolhidos = [aluno1, aluno2]
+        # print("escolhidos",escolhidos)
         turma1 = self.facade.search_turma_facade("Knight")
+        # print("turma1,func",turma1)
         self.facade.aluno_in_turma_facade(escolhidos, turma1)
         aluntest = self.facade.pesquisa_aluno_facade("egg")
         aluntest2 = self.facade.pesquisa_aluno_facade('Ni')
+        # print("aluntest",aluntest.turma_do_aluno)
         self.assertEqual(aluntest.turma_do_aluno, turma1['nome'])
         self.assertEqual(aluntest2.turma_do_aluno, turma1['nome'])
 
@@ -375,6 +378,7 @@ class FacadeTest(unittest.TestCase):
 
     def _create_turma(self):
         turma1 = self.facade.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
+        # print("turma1",turma1)
         self.assertIsNot(turma1, None)
 
     def _search_turma(self):
@@ -430,7 +434,7 @@ class FacadeTest(unittest.TestCase):
 
     def _read_historico(self):
         historico = self.facade.read_historico_facade()
-        self.assertEqual(historico, [])
+        self.assertIsNot(historico, [])
 
     def test_create_historico(self):
         self._create_aluno()
@@ -444,10 +448,30 @@ class FacadeTest(unittest.TestCase):
 
     def _create_medalha(self):
         medalha = self.facade.create_medalha_facade('cheese')
-        self.assertIs(medalha, True)
+        print("medalha",medalha)
+        self.assertIsNot(medalha, None)
 
-    def _test_create_medalha(self):
+    def _read_medalha(self):
+        medalha =self.facade.read_medalha_facade()
+        medalha1=self.facade.pesquisa_medalha_facade('cheese')
+        self.assertIn(medalha1['id'],medalha[-1].values())
+
+    def _delete_medalha(self):
+        medalhas = self.facade.read_medalha_facade()
+        escolhidos = []
+        for medalhas in medalhas:
+            escolhidos.append(medalhas['id'])
+        self.facade.delete_medalha_facade(escolhidos)
+
+    def test_create_delete_medalha(self):
         self._create_medalha()
+        self._delete_medalha()
+
+    def test_read_medalha(self):
+        self._create_medalha()
+        self._read_medalha()
+        self._delete_medalha()
+
 
 
     """FIM DE TESTE FACADE MEDALHAS"""

@@ -27,7 +27,7 @@ def controller_observador_cadastro():
     else:
         if filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
             observador_facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
-                                                       escola=escola, rede=rede)
+                                                       escola=escola, rede=0)
             redirect('/usuario')
         else:
             print("Erro para salvar")

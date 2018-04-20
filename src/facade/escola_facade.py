@@ -26,6 +26,7 @@ class EscolaFacade:
         return self.escola.delete_estrutura_test(deletar_ids)
 
     def search_escola_id_facade(self, id):
+        # print("idfacadeescola", id)
         return self.escola.search_estrutura_id(id=id)
 
     def search_escola_facade(self, nome):

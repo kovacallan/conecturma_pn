@@ -2,6 +2,7 @@
     <div class="row">
         <div align="center" class="col-md-12">
             <h1>Listagem de Usuários</h1>
+
                 % if observador_tipo == '3':
                     <div class="col-md-4">
                         <div class="row">
@@ -9,7 +10,7 @@
                                 <input type="radio" name="tipo_usuario" value="6">Aluno
                                 <button type="submit" >+ Usuário</button>
                             </form>
-                        </div>
+
                     </div>
                     <br>
                     <div class="row">
@@ -162,7 +163,7 @@
                                     <input type="radio" name="tipo_usuario" value="1">Gestor
                                     <input type="radio" name="tipo_usuario" value="2">Diretor
                                     <input type="radio" name="tipo_usuario" value="3">Professor
-                                    <input type="radio" name="tipo_usuario" value="6">Aluno
+                                    <input type="radio" name="tipo_usuario" value="6" checked=true>Aluno
                                     <button type="submit" >+ Usuário</button>
                                 </form>
                             </div>
@@ -238,5 +239,9 @@
                     %>
                 % end
         </div>
+<a href="/">
+                             <button>voltar</button>
+                            </a>
+                        </div>
     </div>
 %include('footer.tpl')

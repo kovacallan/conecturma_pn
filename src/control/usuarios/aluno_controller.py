@@ -38,10 +38,7 @@ def aluno_read():
 @route('/aluno/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
-    """
-    Cookie e view para cadastrar aluno
-    :return:
-    """
+
     if request.get_cookie("login", secret='2525'):
         observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
         if observador['tipo'] == '0':
@@ -74,7 +71,7 @@ def create_aluno():
     """
     escola = request.forms['escola']
     if aluno_facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola,senha=request.forms['senha']):
-        redirect('/usuario')
+        redirect('/aluno')
     else:
         print("deu erro na criação do ALuno")
 
@@ -192,7 +189,7 @@ def observacoes_aluno():
     anotacoes=request.params['anotacoes']
     usuario_id=request.params['usuario_id']
     aluno_facade.anotacoes_aluno_facade(usuario_id, anotacoes)
-    redirect('/aluno')
+    redirect('/usuario')
 
 @route('/aluno/anotacoes_aluno_read', method="GET")
 @view('aluno/read_anotacoes.tpl')

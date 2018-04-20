@@ -7,7 +7,9 @@ from facade.observador_facade import ObservadorFacade
 from facade.rede_facade import RedeFacade
 from facade.turma_facade import TurmaFacade
 
-class Facade(AlunoFacade,ObservadorFacade,EscolaFacade,HistoricoFacade,LojaFacade,MedalhaFacade,RedeFacade,TurmaFacade):
+
+class Facade(AlunoFacade, ObservadorFacade, EscolaFacade, HistoricoFacade, LojaFacade, MedalhaFacade, RedeFacade,
+             TurmaFacade):
     def __init__(self):
         super(Facade, self).__init__()
         # # super(ObservadorFacade, self).__init__()
