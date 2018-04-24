@@ -27,6 +27,7 @@ def view_usuario_index():
 
         return dict(observador_tipo=observador['tipo'], usuarios=usuarios, escolas=escola, redes=rede)
     else:
+
         redirect('/')
 
 
@@ -47,20 +48,69 @@ def controller_redirect_cadastro():
 
 @route('/usuario/filtro_usuario', method="POST")
 def controller_filtro_usuario():
-    filtro_escola = request.params['filtro_escola']
-    filtro_rede = request.params['filtro_rede']
-    filtro_usuario = request.params['filtro_tipo_usuario']
+    filtro_escola = request.params['escola']
+    filtro_rede = request.params['rede']
+    filtro_usuario = request.params['tipo_usuario']
+    observador_logado = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
 
     if filtro_rede is '0':
         if filtro_escola is '0':
-            if filtro_usuario is not'0':
+            if filtro_usuario is not '0':
                 if filtro_usuario == '1' or filtro_usuario == '2' or filtro_usuario == '3':
-                    observador = observador_facade.search_observador_tipo_facade(filtro_usuario)
-                    return ObservadorFacade
+                    usuarios = observador_facade.search_observador_tipo_facade(filtro_usuario)
+
                 elif filtro_usuario == '6':
-                    pass
-                else:
-                    return False
+                   usuarios = aluno_facade.read_aluno_facade()
+
+            else:
+                usuarios = controller_usuario_index(observador_logado)
+        else:
+            if filtro_usuario is '0':
+                usuarios = []
+                observador = observador_facade.read_observador_facade()
+                aluno = aluno_facade.read_aluno_facade()
+                for o in observador:
+                    if o['vinculo_escola'] is filtro_escola:
+                        usuarios.append(o)
+
+                for a in aluno:
+                    if a['vinculo_escola'] is filtro_escola:
+                        usuarios.append(a)
+            else:
+                if filtro_usuario == '1' or filtro_usuario == '2' or filtro_usuario == '3':
+                    usuarios = []
+                    observador = observador_facade.read_observador_facade()
+                    for o in observador:
+                        if o['vinculo_escola'] is filtro_escola:
+                            if o['tipo'] is filtro_usuario:
+                                usuarios.append(o)
+                elif filtro_usuario == '6':
+                   usuarios = []
+                   aluno = aluno_facade.read_aluno_facade()
+                   for a in aluno:
+                       if a['vinculo_escola'] is filtro_escola:
+                           if a['tipo'] is filtro_usuario:
+                                usuarios.append(a)
+    else:
+        if filtro_usuario is '0':
+            usuarios = []
+            observador = observador_facade.read_observador_facade()
+            aluno = aluno_facade.read_aluno_facade()
+            escola = escola_facade.read_escola_facade()
+            for e in escola:
+                if e['vinculo_rede'] is filtro_rede:
+                    for o in observador:
+                        if int(o['vinculo_escola']) is e['id']:
+                            usuarios.append(o)
+                    for a in aluno:
+                        if int(a['vinculo_escola']) is e['id']:
+                            usuarios.append(a)
+
+
+
+    return template('bottle/usuario/bottle_usuario_read_usuarios.tpl',
+                    usuarios=usuarios, observador_tipo=observador_logado)
+
 
 def controller_filtro_lista_usuarios():
     escola = escola_facade.read_escola_facade()
@@ -236,6 +286,7 @@ def usuario_logado_diretor(observador_logado):
                 usuario.append(x)
 
     return usuario
+
 
 def usuario_logado_professor(observador_logado):
     aluno = aluno_facade.read_aluno_facade()

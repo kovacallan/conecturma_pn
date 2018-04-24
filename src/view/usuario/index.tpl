@@ -238,10 +238,12 @@
                         end
                     %>
                 % end
+
         </div>
 <a href="/">
                              <button>voltar</button>
                             </a>
                         </div>
     </div>
+</div>
 %include('footer.tpl')

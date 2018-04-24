@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
     <link rel="stylesheet" href="static/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
     <div align="center" class="container">
