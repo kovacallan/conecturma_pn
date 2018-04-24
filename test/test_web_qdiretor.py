@@ -12,7 +12,7 @@ sys.path.append('../')
 class MyTestCase(unittest.TestCase):
     def setUp(self):
         # test_app.post('/login_observador',dict(usuario= 'administrator', senha="@onde2929"))
-        test_app.post('/observador/create_observador_gestor',
+        test_app.post('/observador/create_observador_diretor',
                       dict(nome='dir', senha="quero", telefone="21 99887342", cpf="98536161",
                            email="teste@teste.test.te", tipo_observador="2", escola="1", rede='0'))
         test_app.post('/login_observador', dict(usuario='dir', senha='quero'))

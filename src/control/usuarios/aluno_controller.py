@@ -109,10 +109,10 @@ def aluno_in_turma():
     :return:
     """
     escolhidos = request.query_string
-    print(escolhidos)
+    print("aluno controller L112",escolhidos)
     escolha = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
     turma_add = request.query.get('escolhidos')
-    print(escolhidos, escolha, turma_add)
+    print("AC L115",escolhidos, escolha, turma_add)
     aluno_facade.aluno_in_turma_facade(escolha, turma_add)
     redirect('/')
 
@@ -129,7 +129,7 @@ def deletar_aluno():
     """
     escolhidos = request.query_string
     deletar_ids = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
-    print(escolhidos, deletar_ids)
+    print("AC , L132", escolhidos, deletar_ids)
     aluno_facade.delete_aluno_facade(deletar_ids)
     redirect('/')
 
