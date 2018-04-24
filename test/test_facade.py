@@ -1,6 +1,6 @@
 # coding: utf-8
 import unittest
-
+import redis
 # from unittest.mock import MagicMock
 # from src.model.estrutura_model import DbEstrutura
 """possivel erro de importaçao de DbAluno acima"""
@@ -159,6 +159,7 @@ class FacadeTest(unittest.TestCase):
 
     def test_aluno_in_turma(self):
         self._aluno_in_turma()
+        self._delete_turma()
 
     def test_compra_item(self):
         self._comprar_item()
@@ -500,6 +501,9 @@ class FacadeTest(unittest.TestCase):
     def test_read_item(self):
         self._read_item()
 
+
+    def test_fhush(self):
+        self.facade.flush()
 
 if __name__ == '__main__':
     unittest.main()

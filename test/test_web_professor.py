@@ -17,17 +17,16 @@ test_response = TestResponse()
 sys.path.append('../')
 
 
-class MyTestCase(unittest.TestCase):
+class BlackBoxTest(unittest.TestCase):
     def setUp(self):
         # test_app.post('/login_observador',dict(usuario= 'administrator', senha="@onde2929"))
         test_app.post('/observador/create_observador_professor',
                       dict(nome='proof', senha="spam", telefone="21 99887342", email="teste@teste.test.te",
-                           tipo_observador="3", escola="1",vinculo_rede="0"))
+                           tipo_observador="3", escola="2",vinculo_rede="0"))
         test_app.post('/login_observador', dict(usuario='proof', senha='spam'))
 
     def _fixprof(self):
         res =test_app.post('/create_medalha', dict(nome="Medalha0",tipos="1"))
-        pass
     # res1 = test_app.post('/observador/create_observador_gestor',)
 
     def test_pagina_inicial(self):

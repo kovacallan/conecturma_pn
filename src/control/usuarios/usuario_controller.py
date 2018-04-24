@@ -215,9 +215,11 @@ def usuario_logado_diretor(observador_logado):
                     escola = escola_facade.search_escola_id_facade(int(x['vinculo_escola']))
                     print("o maior erro? linha212 usuario controller")
                     if int(x['vinculo_escola']) is escola['id']:
+                        print("aqui?")
                         x['tipo'] = tipo_usuario(x['tipo'])
                         x['vinculo_escola'] = escola['nome']
                     elif escola['vinculo_rede'] is not '0':
+                        print("ou aqui?")
                         rede = rede_facade.search_rede_id_facade(int(escola['vinculo_rede']))
                         x['vinculo_rede'] = rede['nome']
                 else:

@@ -15,6 +15,7 @@ class DbObservador(Model):
     vinculo_rede = TextField(default='0')
     vinculo_escola = TextField(default='0')
     data_ultimo_login = TextField()
+    anotacoes_observador=ListField()
 
     def create_observador(self, nome, senha, telefone, email, tipo, rede, escola, cpf=0):
         """

@@ -27,6 +27,7 @@ class DbEstrutura(Model):
     nome_usuario = TextField(default=None)
     tipo_usuario = TextField(default=None)
     data_acesso = DateTimeField(default=datetime.datetime.now)
+    anotacoes_estrutura=ListField()
 
     def create_estrutura(self, nome, tipo_estrutura, telefone=None, vinculo_rede=None, vinculo_escola=None,
                          cep=None, endereco=None, numero=None, estado=None, uf=None, quem_criou=None, serie=None,
