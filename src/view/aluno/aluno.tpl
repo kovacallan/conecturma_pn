@@ -17,6 +17,8 @@
             <a href="/">
                 <button>Voltar</button>
             </a>
+
+
         </div>
     </div>
-%include('footer.tpl')
+

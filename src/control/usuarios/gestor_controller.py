@@ -6,9 +6,13 @@ from facade.escola_facade import EscolaFacade
 facade = ObservadorFacade()
 escolafacade = EscolaFacade()
 
-
+"""Tipo = 1"""
 @route('/observador/create_observador_gestor', method="POST")
 def controller_observador_cadastro():
+    """
+    Cria gestor , com nome , senha , telefone , email, e rede (Tipo=1)
+    :return:
+    """
     nome = request.params['nome']
     senha = request.params['senha']
     telefone = request.params['telefone']
@@ -31,5 +35,15 @@ def controller_observador_cadastro():
 
 
 def filtro_cadastro(nome, senha, telefone, email, cpf,tipo):
+    """
+    verifica se algum dos parametros obrigatorios esta vazio , se estiver nao permite o cadastro
+    :param nome:
+    :param senha:
+    :param telefone:
+    :param email:
+    :param cpf:
+    :param tipo:
+    :return:
+    """
     valida = ValidaNome(ValidaSenha(ValidaTelefone(ValidaCpf(ValidaEmail(ValidaTipo(ValidaOk()))))))
     return valida.validacao(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo)

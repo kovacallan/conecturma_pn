@@ -7,7 +7,7 @@ db = Database(host='localhost', port=6379, db=0)
 class DbEstrutura(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    nome = TextField()
+    nome = TextField(index=True)
     tipo_estrutura = TextField(fts=True, index=True)
     telefone = TextField(default=None)
     vinculo_rede = TextField(default=None)
@@ -31,10 +31,15 @@ class DbEstrutura(Model):
     def create_estrutura(self, nome, tipo_estrutura, telefone=None, vinculo_rede=None, vinculo_escola=None,
                          cep=None, endereco=None, numero=None, estado=None, uf=None, quem_criou=None, serie=None,
                          tipo_item=None, preco=None, tipo_medalha=None,
-                         descricao=None,
-                         descricao_completa=None, nome_usuario=None, tipo_usuario=None):
+                         descricao=None, descricao_completa=None, nome_usuario=None, tipo_usuario=None):
 
-        self.create(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone, vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, cep=cep, endereco=endereco, numero=numero, estado=estado, uf=uf, quem_criou=quem_criou, serie=serie,tipo_item=tipo_item, preco=preco, tipo_medalha=tipo_medalha, descricao=descricao,descricao_completa=descricao_completa, nome_usuario=nome_usuario,tipo_usuario=tipo_usuario)
+        return self.create(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone, vinculo_rede=vinculo_rede,
+                           vinculo_escola=vinculo_escola, cep=cep, endereco=endereco, numero=numero, estado=estado,
+                           uf=uf,
+                           quem_criou=quem_criou, serie=serie, tipo_item=tipo_item, preco=preco,
+                           tipo_medalha=tipo_medalha,
+                           descricao=descricao, descricao_completa=descricao_completa, nome_usuario=nome_usuario,
+                           tipo_usuario=tipo_usuario)
 
     def read_estrutura(self, tipo_estrutura):
 
@@ -48,13 +53,17 @@ class DbEstrutura(Model):
                                estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
                                preco=lista.preco, tipo_medalha=lista.tipo_medalha,
                                descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                               nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,data_acesso=lista.data_acesso
+                               nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                               data_acesso=lista.data_acesso
                                ))
 
         return listas
 
     def search_estrutura_id(self, id):
+        # print("id",id)
+        # print("look at me again , here", DbEstrutura.load(id))
         lista = DbEstrutura.load(id)
+        # print("lista",lista)
         lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                          serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
                          vinculo_rede=lista.vinculo_rede,
@@ -68,21 +77,17 @@ class DbEstrutura(Model):
         return lista_dic
 
     def search_estrutura(self, tipo_estrutura, nome):
-
-        for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome,
-                                       order_by=DbEstrutura.nome):
-            lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                             serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                             vinculo_rede=lista.vinculo_rede,
-                             cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                             estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                             preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                             descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                             nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario
-                             )
-
-            return lista_dic
-
+        lista_dic = None
+        for search in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
+            lista_dic = dict(id=search.id, nome=search.nome, criador=search.quem_criou, escola=search.vinculo_escola,
+                             serie=search.serie, tipo_estrutura=search.tipo_estrutura, telefone=search.telefone,
+                             vinculo_rede=search.vinculo_rede,
+                             cep=search.cep, endereco=search.endereco, numero=search.numero,
+                             estado=search.estado, uf=search.uf, tipo_item=search.tipo_item,
+                             preco=search.preco, tipo_medalha=search.tipo_medalha,
+                             descricao=search.descricao, descricao_completa=search.descricao_completa,
+                             nome_usuario=search.nome_usuario, tipo_usuario=search.tipo_usuario)
+        return lista_dic
 
     def ja_possui_item(self, usuario_logado):
         """
@@ -97,3 +102,54 @@ class DbEstrutura(Model):
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste
+
+    def update_estrutura(self,update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None, numero=None,cidade=None,
+                         estado=None, uf=None, serie=None, tipo_item=None, preco=None, tipo_medalha=None, descricao=None,
+                         descricao_completa=None, nome_usuario=None, tipo_usuario=None):
+        estrutura=self.load(update_id)
+        if nome is not None:
+            estrutura.nome=nome
+        else:
+            pass
+        if telefone is not None:
+            estrutura.telefone=telefone
+        if vinculo_rede is not None:
+            estrutura.vinculo_rede=vinculo_rede
+        if cep is not None:
+            estrutura.cep=cep
+        if endereco is not None:
+            estrutura.endereco=endereco
+        if numero is not None:
+            estrutura.numero=numero
+        if cidade is not None:
+            estrutura.cidade=cidade
+        if estado is not None:
+            estrutura.estado=estado
+        if uf is not None:
+            estrutura.uf=uf
+        if serie is not None:
+            estrutura.serie=serie
+        if tipo_item is not None:
+            estrutura.tipo_item=tipo_item
+        if preco is not None:
+            estrutura.preco=preco
+        if tipo_medalha is not None:
+            estrutura.tipo_medalha=tipo_medalha
+        if descricao is not None:
+            estrutura.descricao=descricao
+        if descricao_completa is not None:
+            estrutura.descricao_completa=descricao_completa
+        if nome_usuario is not None:
+            estrutura.nome_usuario=nome_usuario
+        if tipo_usuario is not None:
+            estrutura.tipo_usuario=tipo_usuario
+        estrutura.save()
+
+    def delete_estrutura_test(self,deletar_ids):
+
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
+
+    def vincular_prof_turma(self,prof_id,turma_id,tipo_estrutura):
+        pass

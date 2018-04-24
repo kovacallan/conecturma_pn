@@ -28,6 +28,7 @@ class DbAluno(Model):
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
     vinculo_escola = TextField(fts=True)
+    anotacoes_aluno =ListField()
     turma_do_aluno = TextField(fts=True, index=True, default=None)
 
     def usuario_logado(self, id_usuario):
@@ -85,7 +86,7 @@ class DbAluno(Model):
         """
         if not self.validar_senha_vazia(senha):
             aluno = self.load(id)
-            if nome ==aluno.nome:
+            if nome == aluno.nome:
                 pass
             else:
                 aluno.nome = nome
@@ -110,7 +111,6 @@ class DbAluno(Model):
             alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno,cpf=None,nome=aluno.nome,vinculo_rede = None,vinculo_escola = aluno.vinculo_escola,
                                vinculo_turma=aluno.turma_do_aluno))
         return alunos
-
 
 
     def pesquisa_usuario(self, usuario_nome):
@@ -246,9 +246,12 @@ class DbAluno(Model):
         :return: None
         """
         res = DbEstrutura.load(turma_add)
-        turma_add = res.nome
+        escolhas= []
         for escolha in escolha:
-            usuario = self.load(escolha)
+            escolhas.append(escolha.id)
+        turma_add = res.nome
+        for escolhas in escolhas:
+            usuario = self.load(escolhas)
             usuario.turma_do_aluno = turma_add
             usuario.save()
 
@@ -289,7 +292,7 @@ class DbAluno(Model):
         :return: O avatar usando o item(mostrado na pagina do menu)
         """
         usuario = self.load(id_usuario)
-        print(itens)
+        # print(itens)
         if itens['tipo_item'] == '1':
             usuario.cor = itens['id']
         else:
@@ -324,3 +327,20 @@ class DbAluno(Model):
         else:
             print("senha antiga errada")
 
+    def anotacoes_do_aluno(self, id_usuario, mensagem):
+        usuario = self.load(id_usuario)
+        usuario.anotacoes_aluno.append(mensagem)
+        usuario.save()
+
+    def ver_anotacoes_aluno(self,id_aluno):
+        aluno=self.load(id_aluno)
+
+        anotacoes = []
+        for x in aluno.anotacoes_aluno:
+            anotacoes.append(x.decode('utf-8'))
+
+        return anotacoes
+
+    def pesquisa_aluno_turma(aluno_,turma_):
+
+       DbAluno.pesquisa_usuario(aluno_, turma_)

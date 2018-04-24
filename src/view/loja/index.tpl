@@ -33,9 +33,6 @@
                 %end
             </div>
         </form>
-        <a href="/cadastrar_item">
-             <button>cadastrar item</button>
-        </a>
         <a href="/">
             <button>voltar</button>
         </a>

@@ -17,7 +17,8 @@ class LojaFacade:
         :param preco:preço atribuido ao item
         :return:None
         """
-        self.loja.create_estrutura(nome=nome,tipo_estrutura=estrutura, tipo_item=tipo, preco = preco)
+
+        return self.loja.create_estrutura(nome=nome,tipo_estrutura=estrutura, tipo_item=tipo, preco = preco)
 
     def read_item_loja_facade(self):
         """
@@ -25,6 +26,9 @@ class LojaFacade:
         :return:Lista dos itens criados
         """
         return self.loja.read_estrutura(tipo_estrutura=estrutura)
+
+    def pesquisa_item_facade_nome(self,nome):
+        return self.loja.search_estrutura(tipo_estrutura=estrutura, nome=nome)
 
     def pesquisa_item_facade(self, id):
         """
@@ -40,7 +44,7 @@ class LojaFacade:
         :param id: o id do item
         :return: None
         """
-        self.loja.item_delete(id)
+        self.loja.delete_estrutura_test(id)
 
     def ja_tem_item_facade(self, usuario_logado):
         """

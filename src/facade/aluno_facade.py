@@ -69,7 +69,8 @@ class AlunoFacade:
         :param turma_add: Id da turma
         :return: None
         """
-        self.aluno.alunos_in_turma(escolhidos, turma_add)
+
+        self.aluno.alunos_in_turma(escolhidos, turma_add['id'])
 
     def compra_item_facade(self, id_usuario, id_item):
         """
@@ -106,3 +107,11 @@ class AlunoFacade:
         """
         return self.aluno.avatar(id)
 
+    def anotacoes_aluno_facade(self,usuario_id, mensagem):
+        self.aluno.anotacoes_do_aluno(usuario_id, mensagem)
+
+    def read_anotacoes_aluno_facade(self,usuario_id):
+        return self.aluno.ver_anotacoes_aluno(usuario_id)
+
+    def pesquisa_aluno_turma_facade(self,aluno_, turma_):
+        return self.aluno.pesquisa_aluno_turma(aluno_,turma_)

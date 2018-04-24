@@ -10,15 +10,15 @@ escola_facade = EscolaFacade()
 aluno_facade = AlunoFacade()
 loja_facade = LojaFacade()
 observador_facade = ObservadorFacade()
+escola_facade = EscolaFacade()
 
 
 @route('/usuario')
 @view('usuario/index')
 def view_usuario_index():
     """
-    Cria o cookie para a sessao atual do aluno
-    pagina inicial do aluno
-    :return: None
+    Cria o cookie para o obsevador e mostra todos os usuarios , escolas e redes cadastradas
+    :return:
     """
     if request.get_cookie("login", secret='2525'):
         observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
@@ -155,7 +155,10 @@ def usuario_logado_administrador():
     aluno = aluno_facade.read_aluno_facade()
     observador = observador_facade.read_observador_facade()
     usuario = []
+    print("USUARIO CONTROLER aluno l108",aluno)
+    print("observador(usuario controler linha 109)",observador)
     for i in aluno:
+        print("escola encontrada abaixo(L111 UC)", i['vinculo_escola'])
         escola = escola_facade.search_escola_id_facade(int(i['vinculo_escola']))
         i['tipo'] = tipo_usuario(i['tipo'])
         i['vinculo_escola'] = escola['nome']
@@ -164,18 +167,25 @@ def usuario_logado_administrador():
             i['vinculo_rede'] = rede['nome']
         else:
             i['vinculo_rede'] = ""
+
+        print("ue (usuario_controler linha119")
         usuario.append(i)
 
     for x in observador:
         if x['tipo'] is not '0':
+            print("entao , vinculo escola", x['vinculo_escola'])
             if x['vinculo_escola'] is not '0':
                 escola = escola_facade.search_escola_id_facade(int(x['vinculo_escola']))
                 x['tipo'] = tipo_usuario(x['tipo'])
                 x['vinculo_escola'] = escola['nome']
-                if escola['vinculo_rede'] is not '0':
+                print("entao as vezes vira...", x['vinculo_escola'])
+                print("pois , por algum motivo , nome escola é", escola['nome'])
+                if escola['vinculo_rede'] is not '0' and None:
+                    print("escola , vinculo rede ...", escola['vinculo_rede'])
                     rede = rede_facade.search_rede_id_facade(int(escola['vinculo_rede']))
                     x['vinculo_rede'] = rede['nome']
                 else:
+                    print("to aqui :/")
                     x['vinculo_rede'] = ""
 
             elif x['vinculo_rede'] is not '0':
@@ -187,6 +197,7 @@ def usuario_logado_administrador():
             usuario.append(x)
     return usuario
 
+    return usuario, escola, rede
 
 def usuario_logado_gestor(observador_logado):
     aluno = aluno_facade.read_aluno_facade()
@@ -231,6 +242,7 @@ def usuario_logado_gestor(observador_logado):
 def usuario_logado_diretor(observador_logado):
     aluno = aluno_facade.read_aluno_facade()
     observador = observador_facade.read_observador_facade()
+    escola1 =escola_facade.read_escola_facade()
     usuario = []
     for i in aluno:
         if i['vinculo_escola'] is observador_logado['vinculo_escola']:
@@ -245,21 +257,25 @@ def usuario_logado_diretor(observador_logado):
             usuario.append(i)
 
     for x in observador:
+        print("vinculorede?", x['vinculo_rede'])
         if x['tipo'] is not '0' and x['tipo'] is not '1':
             if x['vinculo_escola'] is not '0':
                 if x['vinculo_escola'] == observador_logado['vinculo_escola']:
+                    print("entrei aqui e o erro esta em escola no prox if")
                     escola = escola_facade.search_escola_id_facade(int(x['vinculo_escola']))
+                    print("o maior erro? linha212 usuario controller")
                     if int(x['vinculo_escola']) is escola['id']:
                         x['tipo'] = tipo_usuario(x['tipo'])
                         x['vinculo_escola'] = escola['nome']
-                if escola['vinculo_rede'] is not '0':
-                    rede = rede_facade.search_rede_id_facade(int(escola['vinculo_rede']))
-                    x['vinculo_rede'] = rede['nome']
+                    elif escola['vinculo_rede'] is not '0':
+                        rede = rede_facade.search_rede_id_facade(int(escola['vinculo_rede']))
+                        x['vinculo_rede'] = rede['nome']
                 else:
                     x['vinculo_rede'] = ""
                 usuario.append(x)
 
-            elif x['vinculo_rede'] is not '0':
+            elif x['vinculo_rede'] is not '0' and None:
+                print("print", x['vinculo_rede'])
                 rede = rede_facade.search_rede_id_facade(int(x['vinculo_rede']))
                 x['vinculo_escola'] = ""
                 x['vinculo_rede'] = rede['nome']
@@ -289,8 +305,13 @@ def usuario_logado_professor(observador_logado):
     for x in observador:
         if x['tipo'] is not '0' and x['tipo'] is not '1' and x['tipo'] is not '2':
             if x['vinculo_escola'] is not '0':
+                # print("vinculo escola",x['vinculo_escola'])
                 if x['vinculo_escola'] == observador_logado['vinculo_escola']:
+                    # print("estou aqui")
+                    # print("eis a informaçao q quer:", observador_logado['vinculo_escola'])
+                    # print("erro>>", escola_facade.search_escola_id_facade(int(x['vinculo_escola'])))
                     escola = escola_facade.search_escola_id_facade(int(x['vinculo_escola']))
+
                     if int(x['vinculo_escola']) is escola['id']:
                         x['tipo'] = tipo_usuario(x['tipo'])
                         x['vinculo_escola'] = escola['nome']
@@ -310,3 +331,4 @@ def usuario_logado_professor(observador_logado):
                 usuario.append(x)
 
     return usuario
+

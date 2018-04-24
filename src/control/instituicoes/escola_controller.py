@@ -12,8 +12,9 @@ observador_facade = ObservadorFacade()
 @view('escola/index')
 def view_escola_index():
     """
-    view inicial de escola
-    :return:
+    view inicial de escola, mostrando as escolas cadastradas no sistema
+    usa o metodo: controller_escola_read :interno:
+    :return:dicionario com os valores da escola a serem mostrados
     """
     escola = controller_escola_read()
     return dict(escola=escola)
@@ -32,12 +33,13 @@ def view_escola_cadastro():
         return dict(rede=rede, observador_tipo=observador['tipo'])
 
 
-
 @route('/escola/read_escola')
 @view('escola/read_escola')
 def view_escola_read():
     """
-    chama o metodo controller_escola_read , para colocar tudo dentro de um dicionario
+    Chama o metodo controller_escola_read , para colocar todos os parametros q serao mostrados de escola
+    dentro de um dicionario
+    metodo usado: controller_escola_read   :interno:
     :return: o dicionario
     """
     escola = controller_escola_read()

@@ -1,5 +1,7 @@
 from model.estrutura_model import DbEstrutura
+# turma =DbEstrutura()
 
+estrutura='3'
 class TurmaFacade:
 
     def __init__(self):
@@ -17,21 +19,20 @@ class TurmaFacade:
         :param login: Nome do criador da turma
         :return: None
         """
-        return self.turma.create_estrutura(nome=nome, tipo_estrutura='3', quem_criou=login, serie=serie, vinculo_escola=escola)
+        return self.turma.create_estrutura(nome=nome, tipo_estrutura=estrutura, quem_criou=login, serie=serie, vinculo_escola=escola)
 
     def read_turma_facade(self):
         """
         Mostra as turmas criadas
         :return:Um dicionario com os valores:id , nome da turma , criador , desempenho j1 e desempenho j2 da turma
         """
-        return self.turma.read_estrutura(tipo_estrutura='3')
+        return self.turma.read_estrutura(tipo_estrutura=estrutura)
 
-    """def delete_turma_facade(self, id):
-        Deleta uma turma pelo id
-        :param id:id da turma
-        :return:None
-        
-        self.turma.delete_turma(id)"""
+    def delete_turma_facade_test(self, deletar_ids):
+        return self.turma.delete_estrutura_test(deletar_ids)
 
     def search_turma_facade(self, turma_nome):
-        return self.turma.search_estrutura(tipo_estrutura='3', nome=turma_nome)
+        return self.turma.search_estrutura(tipo_estrutura=estrutura, nome=turma_nome)
+
+    def vincular_professor_turma_facade(self,prof_id , turma_id):
+        return self.turma.vincular_prof_turma(prof_id, turma_id, tipo_estrutura=estrutura)

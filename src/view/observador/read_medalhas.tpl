@@ -5,13 +5,10 @@
         <br>
         <table>
             <tr>
-
+            <tr>nome da medalha   </tr>   <tr>    tipo da medalha</tr>
             </tr>
             % for medalhas in medalhas:
             <tr>
-                <td>
-                {{medalhas['id']}}
-                </td>
                 <td>
                     {{medalhas['nome']}}
                 </td>
@@ -21,7 +18,7 @@
             </tr>
             %end
         </table>
-        <a href="/observador">
+        <a href="/">
             <button>voltar</button>
         </a>
     </div>
