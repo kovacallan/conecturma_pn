@@ -11,7 +11,7 @@ class DbObservador(Model):
     telefone = TextField()
     cpf = TextField()
     email = TextField()
-    tipo = TextField()
+    tipo = TextField(fts=True)
     vinculo_rede = TextField(default='0')
     vinculo_escola = TextField(default='0')
     data_ultimo_login = TextField()
@@ -100,9 +100,8 @@ class DbObservador(Model):
         :param nome: nome do observador
         :return:
         """
-
         observador = []
-        for search in DbObservador.query(DbObservador.tipo == tipo):
+        for search in DbObservador.query(DbObservador.tipo == tipo, order_by=DbObservador.nome):
             observador.append(dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
                               cpf=search.cpf, email=search.email, tipo=search.tipo, vinculo_escola = search.vinculo_escola,
                               vinculo_rede = search.vinculo_rede))
