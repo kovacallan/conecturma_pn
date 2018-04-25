@@ -60,7 +60,7 @@ def controller_filtro_usuario():
                     usuarios = observador_facade.search_observador_tipo_facade(filtro_usuario)
 
                 elif filtro_usuario == '6':
-                   usuarios = aluno_facade.read_aluno_facade()
+                    usuarios = aluno_facade.read_aluno_facade()
 
             else:
                 usuarios = controller_usuario_index(observador_logado)
@@ -85,11 +85,11 @@ def controller_filtro_usuario():
                             if o['tipo'] is filtro_usuario:
                                 usuarios.append(o)
                 elif filtro_usuario == '6':
-                   usuarios = []
-                   aluno = aluno_facade.read_aluno_facade()
-                   for a in aluno:
-                       if a['vinculo_escola'] is filtro_escola:
-                           if a['tipo'] is filtro_usuario:
+                    usuarios = []
+                    aluno = aluno_facade.read_aluno_facade()
+                    for a in aluno:
+                        if a['vinculo_escola'] is filtro_escola:
+                            if a['tipo'] is filtro_usuario:
                                 usuarios.append(a)
     else:
         if filtro_usuario is '0':
@@ -105,8 +105,6 @@ def controller_filtro_usuario():
                     for a in aluno:
                         if int(a['vinculo_escola']) is e['id']:
                             usuarios.append(a)
-
-
 
     return template('bottle/usuario/bottle_usuario_read_usuarios.tpl',
                     usuarios=usuarios, observador_tipo=observador_logado)
@@ -155,8 +153,8 @@ def usuario_logado_administrador():
     aluno = aluno_facade.read_aluno_facade()
     observador = observador_facade.read_observador_facade()
     usuario = []
-    print("USUARIO CONTROLER aluno l108",aluno)
-    print("observador(usuario controler linha 109)",observador)
+    print("USUARIO CONTROLER aluno l108", aluno)
+    print("observador(usuario controler linha 109)", observador)
     for i in aluno:
         print("escola encontrada abaixo(L111 UC)", i['vinculo_escola'])
         escola = escola_facade.search_escola_id_facade(int(i['vinculo_escola']))
@@ -198,6 +196,7 @@ def usuario_logado_administrador():
     return usuario
 
     return usuario, escola, rede
+
 
 def usuario_logado_gestor(observador_logado):
     aluno = aluno_facade.read_aluno_facade()
@@ -242,7 +241,7 @@ def usuario_logado_gestor(observador_logado):
 def usuario_logado_diretor(observador_logado):
     aluno = aluno_facade.read_aluno_facade()
     observador = observador_facade.read_observador_facade()
-    escola1 =escola_facade.read_escola_facade()
+    escola1 = escola_facade.read_escola_facade()
     usuario = []
     for i in aluno:
         if i['vinculo_escola'] is observador_logado['vinculo_escola']:
@@ -333,4 +332,3 @@ def usuario_logado_professor(observador_logado):
                 usuario.append(x)
 
     return usuario
-

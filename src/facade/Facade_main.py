@@ -1,3 +1,4 @@
+from walrus import *
 from facade.aluno_facade import AlunoFacade
 from facade.escola_facade import EscolaFacade
 from facade.historico_facade import HistoricoFacade

@@ -501,9 +501,5 @@ class FacadeTest(unittest.TestCase):
     def test_read_item(self):
         self._read_item()
 
-
-    def test_fhush(self):
-        self.facade.flush()
-
 if __name__ == '__main__':
     unittest.main()
