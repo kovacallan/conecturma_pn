@@ -500,6 +500,5 @@ class FacadeTest(unittest.TestCase):
     def test_read_item(self):
         self._read_item()
 
-
 if __name__ == '__main__':
     unittest.main()
