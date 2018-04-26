@@ -23,7 +23,7 @@ class BlackBoxTest(unittest.TestCase):
         test_app.post('/login_aluno', dict(usuario='eric', senha='idle'))
 
     def _fixaluno(self):
-        res = test_app.post('/aluno_cadastro', dict(aluno_nome='egg', senha='spam'))
+
         res2 = test_app.get('/turma_cadastro', dict(turma_nome='ni'))
         res3 = test_app.get('/turma_cadastro', dict(turma_nome='parrot'))
         # res4 = test_app.get('/cadastro_item' , dict(nome='burro quando foge',tipo='3',preco='5'))

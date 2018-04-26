@@ -18,6 +18,7 @@
             <br>
             <button type="submit">Enviar</button>
         </form>
+        <a href="/usuario"><button>Voltar</button></a>
     </div>
 </div>
 % include('./footer.tpl')

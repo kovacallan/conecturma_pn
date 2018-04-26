@@ -18,6 +18,10 @@ class BlackBoxTest(unittest.TestCase):
         test_app.post('/login_observador', dict(usuario='dir', senha='quero'))
     def _fixdir(self):
         res=test_app.post('/turma/cadastro_turma',dict(turma_nome="cruchy frog",serie="2",escola="1",))
+        res1=test_app.post('/aluno_cadastro', dict(aluno_nome='Bings', escola="2", senha='naosei'))
+        res2=test_app.post('/observador/create_observador_professor',
+                      dict(nome='theLarch', senha="spam", telefone="21 99887342", email="teste@teste.test.te",
+                           tipo_observador="3", escola="2",vinculo_rede="0"))
 
     def test_inicial(self):
         res = test_app.get('/gestao_aprendizagem')
@@ -34,7 +38,7 @@ class BlackBoxTest(unittest.TestCase):
         self.assertIn('''<a href="/"><button>Voltar</button></a>''', res.text, res.text)
         self.assertIn('''cruchy frog''', res.text, res.text)
 
-    def cadastrar_turma(self):
+    def test_cadastrar_turma(self):
         res = test_app.get('/turma/turma_cadastro')
         self.assertEqual(res.status_int, 200)
         self.assertIn('''<form action="/turma/cadastro_turma" method="post">''', res.text, res.text)
@@ -44,16 +48,36 @@ class BlackBoxTest(unittest.TestCase):
                      <option value="2">2ª Ano</option>
                      <option value="3">3ª Ano</option>
                  </select>''', res.text, res.text)
-        self.assertIn('''<button type="submit">Enviar</button>''')
+        self.assertIn('''<button type="submit">Enviar</button>''',res.text,res.text)
         self.assertIn('''<a href="/turma"><button>Voltar</button></a>''', res.text, res.text)
 
-    def _test_turma_after(self):
-        self._fixdir()
-        res = test_app.get('/turma')
+    def test_usuario(self):
+        res=test_app.get('/usuario')
         self.assertEqual(res.status_int, 200)
-        self.assertIn('''<a href="/turma/turma_cadastro"><button>Cadastro turma</button></a>''',res.text,res.text)
-        self.assertIn('''<a href="/"><button>Voltar</button></a>''', res.text, res.text)
-        self.assertIn('''cruchy frog ''',res.text,res.text)
+        self.assertIn('''<form action="usuario/redirect_cadastro">''', res.text, res.text)
+        self.assertIn('''<button type="submit" >+ Usuário</button>''', res.text, res.text)
+        self.assertIn(''' <input type="radio" name="tipo_usuario" value="3">Professor
+    <input type="radio" name="tipo_usuario" value="6">Aluno''', res.text, res.text)
+        self.assertIn("dir",res.text,res.text)
+        self.assertIn("Bings", res.text, res.text)
+        self.assertIn("theLarch", res.text, res.text)
+
+    def test_aluno_cadastro(self):
+        res=test_app.get('/aluno/cadastro_aluno')
+        self.assertEqual(res.status_int, 200)
+        self.assertIn('''<form action="/aluno_cadastro" method="post">''', res.text,res.text)
+        self.assertIn('''<button type="submit">Enviar</button>
+        </form>
+        <a href="/usuario"><button>Voltar</button></a>
+    </div>''',res.text,res.text)
+
+    def test_professor_cadastro(self):
+        res=test_app.get('/observador/cadastro?tipo_observador=3')
+        self.assertEqual(res.status_int,200)
+        self.assertIn('''<form action="/observador/create_observador_professor" method="post"> <br>''', res.text,res.text)
+        self.assertIn(' <button type="submit">Enviar</button>', res.text, res.text)
+        self.assertIn('''<a href="/usuario"><button>Voltar</button></a>''', res.text, res.text)
+
 
 if __name__ == '__main__':
     unittest.main()
