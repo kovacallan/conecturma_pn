@@ -33,7 +33,8 @@ def cadastro_escola():
 def view_escola_cadastro():
     observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
     if observador['tipo'] == '1':
-        rede = rede_facade.search_rede_id_facade(int(observador['vinculo_rede']))
+        rede = int(observador['vinculo_rede'])
+        print("pegou isso em rede",rede)
         nome = request.params['nome']
         telefone = request.params['telefone']
         cep = request.params['cep']
@@ -43,6 +44,7 @@ def view_escola_cadastro():
         if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
             facade.create_escola_facade(nome=nome, telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
                                         vinculo_rede=rede)
+            print("pegou isso em rede", rede)
             print("sucesso")
             redirect("/escola")
     elif observador['tipo'] == '0':

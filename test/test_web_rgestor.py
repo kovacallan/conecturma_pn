@@ -22,7 +22,7 @@ class BlackBoxTest(unittest.TestCase):
         res2 = test_app.post('/observador/create_observador_professor',
                              dict(nome='theLarch', senha="spam", telefone="21 99887342", email="teste@teste.test.te",
                                   tipo_observador="3", escola="2", vinculo_rede="0"))
-        res3 = test_app.post('/escola/escola_cadastro', dict(nome="confuse-a-cat", telefone="159874365", cep="22298111",
+        res3 = test_app.post('/escola/create_escola', dict(nome="confuse-a-cat", telefone="159874365", cep="22298111",
                                                           estado="Solido molinho , meio liquido", uf="AC",
                                                           numero="42"))
 
