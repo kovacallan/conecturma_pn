@@ -17,7 +17,7 @@ class DbObservador(Model):
     data_ultimo_login = TextField()
     anotacoes_observador=ListField()
 
-    def create_observador(self, nome, senha, telefone, email, tipo, escola, rede='0', cpf='0'):
+    def create_observador(self, nome, senha,telefone,email,tipo, escola,rede='0', cpf='0' ):
         """
         cria um observador
         :param nome: nome do observador

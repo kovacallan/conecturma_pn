@@ -22,7 +22,9 @@ def view_usuario_index():
     """
     if request.get_cookie("login", secret='2525'):
         observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+        print("observador l25 usuario",observador)
         usuarios = controller_usuario_index(observador)
+        print("usuario l27 user_control", usuarios)
         escola, rede = controller_filtro_lista_usuarios()
 
         return dict(observador_tipo=observador['tipo'], usuarios=usuarios, escolas=escola, redes=rede)
@@ -157,7 +159,7 @@ def usuario_logado_administrador():
         escola = escola_facade.search_escola_id_facade(int(i['vinculo_escola']))
         i['tipo'] = tipo_usuario(i['tipo'])
         i['vinculo_escola'] = escola['nome']
-        if escola['vinculo_rede'] is not '0':
+        if escola['vinculo_rede'] is not '0' and "":
             print("usuario linha 161",escola['vinculo_rede'])
             rede = rede_facade.search_rede_id_facade(int(escola['vinculo_rede']))
             i['vinculo_rede'] = rede['nome']
@@ -240,7 +242,7 @@ def usuario_logado_diretor(observador_logado):
             escola = escola_facade.search_escola_id_facade(int(i['vinculo_escola']))
             i['tipo'] = tipo_usuario(i['tipo'])
             i['vinculo_escola'] = escola['nome']
-            if escola['vinculo_rede'] is not '0':
+            if escola['vinculo_rede'] is not '0' and "":
                 rede = rede_facade.search_rede_id_facade(int(escola['vinculo_rede']))
                 i['vinculo_rede'] = rede['nome']
             else:

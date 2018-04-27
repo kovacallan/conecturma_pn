@@ -32,7 +32,7 @@ class BlackBoxTest(unittest.TestCase):
 
     def test_turma(self):
         self._fixdir()
-        res = test_app.get('/turma')
+        res = test_app.get('/turma' )
         self.assertEqual(res.status_int, 200)
         self.assertIn('''<a href="/turma/turma_cadastro"><button>Cadastro turma</button></a>''',res.text,res.text)
         self.assertIn('''<a href="/"><button>Voltar</button></a>''', res.text, res.text)
@@ -52,7 +52,7 @@ class BlackBoxTest(unittest.TestCase):
         self.assertIn('''<a href="/turma"><button>Voltar</button></a>''', res.text, res.text)
 
     def test_usuario(self):
-        res=test_app.get('/usuario')
+        res = test_app.get('/usuario')
         self.assertEqual(res.status_int, 200)
         self.assertIn('''<form action="usuario/redirect_cadastro">''', res.text, res.text)
         self.assertIn('''<button type="submit" >+ Usuário</button>''', res.text, res.text)
