@@ -24,9 +24,9 @@ class BlackBoxTest(unittest.TestCase):
 
     def _fixaluno(self):
 
-        res2 = test_app.get('/turma_cadastro', dict(turma_nome='ni'))
-        res3 = test_app.get('/turma_cadastro', dict(turma_nome='parrot'))
-        # res4 = test_app.get('/cadastro_item' , dict(nome='burro quando foge',tipo='3',preco='5'))
+        # res2 = test_app.post('/turma_cadastro', dict(turma_nome='ni'))
+        # res3 = test_app.post('/turma_cadastro', dict(turma_nome='parrot'))
+        res4 = test_app.post('/cadastro_item' , dict(nome='burro quando foge',tipo='3',preco='0'))
 
     def _test_index(self):
         """ o indice desse servidor """
@@ -48,6 +48,7 @@ class BlackBoxTest(unittest.TestCase):
         self.assertIn('''<a href="/sair"><button>Sair</button></a>''', res.text, res.text)
 
     def test_acesso_loja(self):
+        self._fixaluno()
         res= test_app.get('/loja')
         self.assertEqual(res.status_int,200)
         self.assertIn('<form action="/compras_loja">', res.text, res.text)

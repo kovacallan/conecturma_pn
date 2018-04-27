@@ -158,6 +158,7 @@ def usuario_logado_administrador():
         i['tipo'] = tipo_usuario(i['tipo'])
         i['vinculo_escola'] = escola['nome']
         if escola['vinculo_rede'] is not '0':
+            print("usuario linha 161",escola['vinculo_rede'])
             rede = rede_facade.search_rede_id_facade(int(escola['vinculo_rede']))
             i['vinculo_rede'] = rede['nome']
         else:

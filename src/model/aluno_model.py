@@ -344,3 +344,6 @@ class DbAluno(Model):
     def pesquisa_aluno_turma(aluno_,turma_):
 
        DbAluno.pesquisa_usuario(aluno_, turma_)
+
+    def apagartudo(self):
+        db.flushall()

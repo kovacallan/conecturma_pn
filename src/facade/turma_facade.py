@@ -36,3 +36,6 @@ class TurmaFacade:
 
     def vincular_professor_turma_facade(self,prof_id , turma_id):
         return self.turma.vincular_prof_turma(prof_id, turma_id, tipo_estrutura=estrutura)
+
+    def apagartudo(self):
+        return self.turma.darflush()

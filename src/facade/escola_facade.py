@@ -31,3 +31,6 @@ class EscolaFacade:
 
     def search_escola_facade(self, nome):
         return self.escola.search_estrutura(tipo_estrutura=estrutura, nome=nome)
+
+    def apagartudo(self):
+        return self.escola.darflush()

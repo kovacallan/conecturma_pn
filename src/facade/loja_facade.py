@@ -55,3 +55,5 @@ class LojaFacade:
         return self.loja.ja_possui_item(usuario_logado=usuario_logado)
 
 
+    def apagartudo(self):
+        return self.loja.darflush()

@@ -501,5 +501,8 @@ class FacadeTest(unittest.TestCase):
     def test_read_item(self):
         self._read_item()
 
+    def tearDown(self):
+        self.facade.apagartudo()
+
 if __name__ == '__main__':
     unittest.main()

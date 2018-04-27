@@ -21,3 +21,6 @@ class Facade(AlunoFacade, ObservadorFacade, EscolaFacade, HistoricoFacade, LojaF
         EscolaFacade.__init__(self)
         HistoricoFacade.__init__(self)
         MedalhaFacade.__init__(self)
+
+    # def apagartudo(self):
+    #     return self.darflush()

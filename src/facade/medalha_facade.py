@@ -21,3 +21,6 @@ class MedalhaFacade:
 
     def pesquisa_medalha_facade(self, nome):
         return self.medalha.search_estrutura(nome=nome, tipo_estrutura=estrutura)
+
+    def apagartudo(self):
+        return self.medalha.darflush()

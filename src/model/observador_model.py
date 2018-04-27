@@ -122,3 +122,6 @@ class DbObservador(Model):
         observador = self.load(id)
         observador.data_login = data
         observador.save()
+
+    # def darflush(self):
+    #     db.flushdb()

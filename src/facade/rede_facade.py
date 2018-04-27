@@ -47,3 +47,6 @@ class RedeFacade:
 
     def search_rede_facade(self, rede):
         return self.rede.search_estrutura(nome=rede,tipo_estrutura=estrutura)
+
+    def apagartudo(self):
+        return self.rede.darflush()
