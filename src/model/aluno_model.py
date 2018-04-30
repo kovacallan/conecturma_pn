@@ -2,6 +2,7 @@ from walrus import *
 from random import randrange
 from model.estrutura_model import *
 
+
 db = Database(host='localhost', port=6379, db=0)
 
 """A classe DbAluno será usada como Usuário genérico no spike que é , por enquanto, um aluno onipotente"""
@@ -29,7 +30,7 @@ class DbAluno(Model):
     desempenho_aluno_j2 = FloatField(default=0)
     vinculo_escola = TextField(fts=True)
     anotacoes_aluno =ListField()
-    turma_do_aluno = TextField(fts=True, index=True, default=None)
+    vinculo_turma = TextField(fts=True, index=True, default=None)
 
     def usuario_logado(self, id_usuario):
         """
@@ -109,7 +110,7 @@ class DbAluno(Model):
 
         for aluno in self.query(order_by=self.nome):
             alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno,cpf=None,nome=aluno.nome,vinculo_rede = None,vinculo_escola = aluno.vinculo_escola,
-                               vinculo_turma=aluno.turma_do_aluno))
+                               vinculo_turma=aluno.vinculo_turma))
         return alunos
 
 
@@ -125,19 +126,7 @@ class DbAluno(Model):
         usuario = []
         for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome):
             usuario = pesquisa
-
         return usuario
-
-    def aluno_delete(self, deletar_ids):
-        """
-        deleta o(s) aluno(s) percorrendo a lista de ids de usuários selecionados
-
-        :param deletar_ids: Uma lista dos usuários a serem deletados
-        :return: None
-        """
-        for deletar_ids in deletar_ids:
-            usuario = self.load(deletar_ids)
-            usuario.delete(deletar_ids)
 
     def pontos_jogo(self, usuario, jogo, pontos):
         """
@@ -252,7 +241,7 @@ class DbAluno(Model):
         turma_add = res.nome
         for escolhas in escolhas:
             usuario = self.load(escolhas)
-            usuario.turma_do_aluno = turma_add
+            usuario.vinculo_turma = turma_add
             usuario.save()
 
     def comprar_item(self, id_usuario, id_item):
@@ -345,5 +334,21 @@ class DbAluno(Model):
 
        DbAluno.pesquisa_usuario(aluno_, turma_)
 
+    def aluno_delete(self, deletar_ids):
+        """
+        deleta o(s) aluno(s) percorrendo a lista de ids de usuários selecionados
+
+        :param deletar_ids: Uma lista dos usuários a serem deletados
+        :return: None
+        """
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
+
+
     def apagartudo(self):
         db.flushall()
+
+
+
+

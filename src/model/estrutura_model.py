@@ -64,7 +64,6 @@ class DbEstrutura(Model):
         # print("id",id)
         # print("look at me again , here", DbEstrutura.load(id))
         lista = DbEstrutura.load(id)
-        # print("lista",lista)
         lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                          serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
                          vinculo_rede=lista.vinculo_rede,

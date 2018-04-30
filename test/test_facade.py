@@ -92,20 +92,18 @@ class FacadeTest(unittest.TestCase):
 
     def _aluno_in_turma(self):
         self._create_turma()
-        self._create_aluno()
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123")
+        self.assertEqual(aluno1, True)
+        alunoer1 = self.facade.pesquisa_aluno_facade("egg")
         self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma")
         aluno2 = self.facade.pesquisa_aluno_facade("Ni")
-        escolhidos = [aluno1, aluno2]
-        # print("escolhidos",escolhidos)
+        escolhidos = [alunoer1, aluno2]
         turma1 = self.facade.search_turma_facade("Knight")
-        # print("turma1,func",turma1)
         self.facade.aluno_in_turma_facade(escolhidos, turma1)
-        aluntest = self.facade.pesquisa_aluno_facade("egg")
         aluntest2 = self.facade.pesquisa_aluno_facade('Ni')
-        # print("aluntest",aluntest.turma_do_aluno)
-        self.assertEqual(aluntest.turma_do_aluno, turma1['nome'])
-        self.assertEqual(aluntest2.turma_do_aluno, turma1['nome'])
+        aluntest = self.facade.pesquisa_aluno_facade('egg')
+        self.assertEqual(aluntest.vinculo_turma, turma1['nome'])
+        self.assertEqual(aluntest2.vinculo_turma, turma1['nome'])
 
     def _comprar_item(self):
         self._create_item()

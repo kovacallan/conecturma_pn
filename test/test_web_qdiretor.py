@@ -52,6 +52,7 @@ class BlackBoxTest(unittest.TestCase):
         self.assertIn('''<a href="/turma"><button>Voltar</button></a>''', res.text, res.text)
 
     def test_usuario(self):
+        self._fixdir()
         res = test_app.get('/usuario')
         self.assertEqual(res.status_int, 200)
         self.assertIn('''<form action="usuario/redirect_cadastro">''', res.text, res.text)

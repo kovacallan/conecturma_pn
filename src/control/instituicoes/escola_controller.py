@@ -129,7 +129,6 @@ def controller_escola_read():
         return None
     else:
         for e in escola:
-            print(e['vinculo_rede'])
             if int(e['vinculo_rede']) > 0:
                 rede = rede_facade.search_rede_id_facade(e['vinculo_rede'])
                 e['vinculo_rede'] = rede['nome']
