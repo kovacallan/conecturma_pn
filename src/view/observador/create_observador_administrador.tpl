@@ -3,7 +3,7 @@
     <div align="center" class="col-md-12">
         <h1>Cadastro</h1>
         <br>
-        <form action="create_observador_administrador"> <br>
+        <form action="create_observador_administrador", method="POST"> <br>
             <input type="hidden" name="tipo_observador" value="{{tipo}}">
             nome*: <input type="text" name="nome"> <br>
             senha*: <input type="password" name="senha"> <br>

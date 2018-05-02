@@ -1,59 +1,48 @@
 %include('./header.tpl', title = 'Conecturma')
-    <div class="row">
-        <div align="center" class="col-md-12">
-            <h1>Listagem de Usuários</h1>
+  <div class="row">
+    <div align="center" class="col-md-12">
+
+        <div align="right">
+            <a href="/">
+                <button>voltar</button>
+            </a>
+        </div>
+        <h1>Listagem de Usuários</h1>
+         <div class="col-md-4">
             <div class="row">
                 <form action="usuario/redirect_cadastro">
-                    <input type="radio" name="tipo_usuario" value="1">Gestor
-                    <input type="radio" name="tipo_usuario" value="2">Diretor
-                    <input type="radio" name="tipo_usuario" value="3">Professor
-                    <input type="radio" name="tipo_usuario" value="6">Aluno
+                    %include('bottle/usuario/bottle_usuario_cadastro.tpl')
                     <button type="submit" >+ Usuário</button>
                 </form>
             </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                    Nome
-                </div>
-                <div class="col-md-2">
-                    CPF
-                </div>
-                <div class="col-md-2">
-                    Escola
-                </div>
-                <div class="col-md-2">
-                    Rede
-                </div>
-                <div class="col-md-2">
-                    Tipo
-                </div>
-            </div>
-            <%
-                for i in usuarios:
-            %>
-                <div class="row">
-
-                    <div class="col-md-2">
-                        {{i['nome']}}
-                    </div>
-                    <div class="col-md-2">
-                        {{i['cpf']}}
-                    </div>
-                    <div class="col-md-2">
-                        {{i['vinculo_escola']}}
-                    </div>
-                    <div class="col-md-2">
-                        {{i['vinculo_rede']}}
-                    </div>
-                    <div class="col-md-2">
-                        {{i['tipo']}}
-                    </div>
-                </div>
-
-            <%
-                end
-            %>
         </div>
-    </div>
+         <div class="col-md-8">
+            <div class="row">
+                %include('bottle/usuario/bottle_usuario_filtros.tpl')
+                <button id="botao-filtro" onclick="filtro_usuario()">Filtrar</button>
+            </div>
+         </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">
+                <strong>Nome</strong>
+            </div>
+            <div class="col-md-2">
+                <strong>CPF</strong>
+            </div>
+            <div class="col-md-2">
+                <strong>Escola</strong>
+            </div>
+            <div class="col-md-2">
+                <strong>Rede</strong>
+            </div>
+            <div class="col-md-2">
+                <strong>Tipo</strong>
+            </div>
+       </div>
+       <div id="usuarios_sistema">
+          %include('bottle/usuario/bottle_usuario_read_usuarios')
+         </div>
+     </div>
+</div>
 %include('footer.tpl')

@@ -1,15 +1,15 @@
 from bottle import route, request, redirect, response
 from datetime import datetime
-from facade.observador_facade import ObservadorFacade
-from facade.historico_facade import HistoricoFacade
+from facade.Facade_main import Facade
 
-observador_facade = ObservadorFacade()
-historico_facade = HistoricoFacade()
+facade = Facade()
+
 @route('/login_observador', method='POST')
 def controller_login_entrar_observador():
     """
-    faz o login na conta do usuário recebendo o usuário e senha
-    :return: da acesso ao menu , caso o usuário e senha digitados estejam certos
+    Faz o login na conta do usuário recebendo o usuário e senha
+
+    :return: da acesso a pagina de gestao de aprendizagem(menu), caso o usuário e senha digitados estejam certos
     """
     nome = request.params['usuario']
     senha = request.params['senha']
@@ -17,8 +17,8 @@ def controller_login_entrar_observador():
     if observador:
         create_cookie(nome)
         now = datetime.now()
-        observador_facade.login_date_facade(observador['id'], now)
-        historico_facade.create_historico_facade(observador['nome'], observador['tipo'])
+        facade.login_date_facade(observador['id'], now)
+        facade.create_historico_facade(observador['nome'], observador['tipo'])
         redirect('/gestao_aprendizagem')
     else:
         redirect('/')
@@ -26,7 +26,14 @@ def controller_login_entrar_observador():
 
 
 def valida_login_observador(nome, senha):
-    retorno = observador_facade.search_observador_facade(nome)
+
+    """
+    Valida o login do aluno ,
+    :param nome: nome de login
+    :param senha: senha do usuario
+    :return: true se o observador existir e se estiver com usuario e a senha certa
+    """
+    retorno = facade.search_observador_facade(nome)
     if retorno:
         if retorno['nome'] == nome and retorno['senha'] == senha:
             return retorno

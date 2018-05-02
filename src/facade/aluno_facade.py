@@ -42,6 +42,10 @@ class AlunoFacade:
         """
         self.aluno.aluno_delete(deletar_ids)
 
+    def search_aluno_escola_facade(self, id_escola):
+
+        return self.aluno.search_aluno_by_escola(escola = id_escola)
+
     def pesquisa_aluno_facade(self, nome):
         """
         Pesquisa pelo aluno através do nome , apenas usado na tela de login e como auxiliar para modificar atributos do
@@ -62,14 +66,15 @@ class AlunoFacade:
         """
         return self.aluno.pontos_jogo(usuario, jogo, ponto)
 
-    def aluno_in_turma_facade(self, escolhidos, turma_add):
+    def aluno_in_turma_facade(self, id_aluno, vinculo_turma):
         """
         Pega uma lista de alunos previamente selecionados(lista de id's) e acrescenta o id da turma em seus atributos
         :param escolhidos: Lista de alunos , ids
         :param turma_add: Id da turma
         :return: None
         """
-        self.aluno.alunos_in_turma(escolhidos, turma_add)
+
+        self.aluno.alunos_in_turma(id_aluno=id_aluno, vinculo_turma=vinculo_turma)
 
     def compra_item_facade(self, id_usuario, id_item):
         """
@@ -106,3 +111,11 @@ class AlunoFacade:
         """
         return self.aluno.avatar(id)
 
+    def anotacoes_aluno_facade(self,usuario_id, mensagem):
+        self.aluno.anotacoes_do_aluno(usuario_id, mensagem)
+
+    def read_anotacoes_aluno_facade(self,usuario_id):
+        return self.aluno.ver_anotacoes_aluno(usuario_id)
+
+    def pesquisa_aluno_turma_facade(self,aluno_, turma_):
+        return self.aluno.pesquisa_aluno_turma(aluno_,turma_)

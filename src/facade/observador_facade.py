@@ -11,7 +11,10 @@ class ObservadorFacade:
 
     def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo,rede,escola):
         return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
-                                                 tipo=tipo, rede=rede,escola=escola)
+                                                 tipo=tipo, rede=rede, escola=escola)
+    def create_professor_facade(self,nome, senha, telefone, cpf, email, tipo,escola, rede):
+
+        return self.observador.create_observador(nome=nome,senha=senha,telefone=telefone,cpf=cpf,email=email,tipo=tipo,escola=escola)
 
     def read_observador_facade(self):
         return self.observador.read_observador()
@@ -27,6 +30,13 @@ class ObservadorFacade:
 
     def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)
+
+    def search_observador_tipo_facade(self, tipo):
+        return self.observador.search_observador_tipo(tipo)
+
+    def search_observador_professor_by_escola_facade(self, vinculo_escola):
+        return self.observador.search_observador_professor_by_escola(vinculo_escola)
+
 
     def login_date_facade(self, id, data):
         self.observador.login_date(id, data)

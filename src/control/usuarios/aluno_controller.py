@@ -1,19 +1,23 @@
 from bottle import *
 
+from facade.rede_facade import RedeFacade
 from facade.escola_facade import EscolaFacade
 from facade.turma_facade import  TurmaFacade
 from facade.aluno_facade import AlunoFacade
+from facade.observador_facade import ObservadorFacade
 from facade.loja_facade import LojaFacade
 
 escola_facade = EscolaFacade()
 turma_facade = TurmaFacade()
 aluno_facade = AlunoFacade()
+observador_facade = ObservadorFacade()
+rede_facade = RedeFacade()
 loja_facade = LojaFacade()
 
 
 """ Controle aluno """
 
-
+"""Tipo=6"""
 @route('/aluno')
 @view('aluno/aluno')
 def aluno_read():
@@ -34,13 +38,26 @@ def aluno_read():
 @route('/aluno/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
-    """
-    Cookie e view para cadastrar aluno
-    :return:
-    """
+
     if request.get_cookie("login", secret='2525'):
-        escolas = escola_facade.read_escola_facade()
-        return dict(escolas = escolas)
+        observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+        if observador['tipo'] == '0':
+            escolas = escola_facade.read_escola_facade()
+            return dict(escolas = escolas,tipo_observador = observador['tipo'])
+        elif observador['tipo'] == '1':
+            escola = escola_facade.read_escola_facade()
+            escolas = []
+            for e in escola:
+                if e['vinculo_rede'] is observador['vinculo_rede']:
+                    escolas.append(e)
+            return dict(escolas=escolas, tipo_observador=observador['tipo'])
+        elif observador['tipo'] == '2':
+            escolas = escola_facade.search_escola_id_facade(int(observador['vinculo_escola']))
+            return dict(escolas=escolas, tipo_observador=observador['tipo'])
+
+        elif observador['tipo'] == '3':
+            escolas = escola_facade.search_escola_id_facade(int(observador['vinculo_escola']))
+            return dict(escolas=escolas, tipo_observador=observador['tipo'])
     else:
         redirect('/')
 
@@ -54,7 +71,7 @@ def create_aluno():
     """
     escola = request.forms['escola']
     if aluno_facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola,senha=request.forms['senha']):
-        redirect('/usuario')
+        redirect('/aluno')
     else:
         print("deu erro na criação do ALuno")
 
@@ -78,7 +95,7 @@ def read_aluno():
     if True or request.get_cookie("login", secret='2525'):
         usuarios = aluno_facade.read_aluno_facade()
         turma = turma_facade.read_turma_facade()
-        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['turma_do_aluno']) for aluno in usuarios]
+        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['vinculo_turma']) for aluno in usuarios]
         return dict(aluno_id=alunos, turmas=turma)
     else:
         redirect('/')
@@ -92,10 +109,10 @@ def aluno_in_turma():
     :return:
     """
     escolhidos = request.query_string
-    print(escolhidos)
+    print("aluno controller L112",escolhidos)
     escolha = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
     turma_add = request.query.get('escolhidos')
-    print(escolhidos, escolha, turma_add)
+    print("AC L115",escolhidos, escolha, turma_add)
     aluno_facade.aluno_in_turma_facade(escolha, turma_add)
     redirect('/')
 
@@ -112,7 +129,7 @@ def deletar_aluno():
     """
     escolhidos = request.query_string
     deletar_ids = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
-    print(escolhidos, deletar_ids)
+    print("AC , L132", escolhidos, deletar_ids)
     aluno_facade.delete_aluno_facade(deletar_ids)
     redirect('/')
 
@@ -160,8 +177,25 @@ def equipar_item():
 
     redirect('/aluno/ver_itens_comprados')
 
-# """Pagina de aluno , anotaçoes"""
-# @route('/anotacoes_aluno')
-# @view('pagina_anotaçoes.tpl')
-# def anotacoes_aluno():
-#     pass
+"""Pagina de aluno , anotaçoes"""
+@route('/anotacoes_aluno', method="GET")
+def anotacoes_aluno():
+    aluno_anot = request.params['aluno_anot']
+
+    return template('aluno/anotacoes', id_user=aluno_anot)
+
+@get('/anotacoes_on_aluno')
+def observacoes_aluno():
+    anotacoes=request.params['anotacoes']
+    usuario_id=request.params['usuario_id']
+    aluno_facade.anotacoes_aluno_facade(usuario_id, anotacoes)
+    redirect('/usuario')
+
+@route('/aluno/anotacoes_aluno_read', method="GET")
+@view('aluno/read_anotacoes.tpl')
+def ver_anotacoes_aluno():
+    aluno_anot = request.params['aluno_anot']
+    alunois =aluno_facade.read_anotacoes_aluno_facade(aluno_anot)
+
+
+    return dict(alunois=alunois)

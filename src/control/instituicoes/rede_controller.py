@@ -11,8 +11,9 @@ facade = RedeFacade()
 @view("rede/rede")
 def view_index_rede():
     """
-    pagina inicial de rede
-    :return: None
+    pagina inicial de rede , que mostra , tambem , as redes disponiveis no banco
+    metodos usados: controller_read_rede :interno:
+    :return: Dicionario de redes
     """
     redes = controller_read_rede()
     return dict(redes=redes)
@@ -36,7 +37,8 @@ def view_modificar_rede():
 @route('/rede/criar_rede', method='POST')
 def controller_create_rede():
     """
-    criar rede
+    Cria rede com os parametros de nome da rede e o telefone da mesma
+    metodos usados:create rede facade
     :return:
     """
     nome = request.params['nome_rede']

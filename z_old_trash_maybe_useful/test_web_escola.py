@@ -17,11 +17,10 @@ sys.path.append('../')
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        test_app.post('/aluno_cadastro', dict(aluno_nome='eric', senha='idle'))
-        test_app.post('/login', dict(usuario='eric', senha='idle'))
+        test_app.post('/observador/create_observador_administrador', dict(usuario='Adm',senha='idle' ,Telefone="(21) 1666-4269",  email="teste@teste.com.br",tipo_observador="0"))
+        test_app.post('/login_observador', dict(usuario='Adm', senha='idle'))
 
     def _fixaluno_turma_escola(self):
-        res = test_app.post('/aluno_cadastro', dict(aluno_nome='egg', senha='spam'))
         res = test_app.post('/escola_cadastro', dict(nome='cheese shop', rua='de tras', numero=88, telefone=22668743))
 
     """Pagina de cadastro(escola.tpl)"""

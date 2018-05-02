@@ -1,17 +1,20 @@
 from bottle import *
 from facade.escola_facade import EscolaFacade
 from facade.rede_facade import RedeFacade
+from facade.observador_facade import ObservadorFacade
 
 facade = EscolaFacade()
 rede_facade = RedeFacade()
+observador_facade = ObservadorFacade()
 
 
 @route('/escola')
 @view('escola/index')
 def view_escola_index():
     """
-    view inicial de escola
-    :return:
+    view inicial de escola, mostrando as escolas cadastradas no sistema
+    usa o metodo: controller_escola_read :interno:
+    :return:dicionario com os valores da escola a serem mostrados
     """
     escola = controller_escola_read()
     return dict(escola=escola)
@@ -20,15 +23,23 @@ def view_escola_index():
 @route('/escola/cadastro')
 @view('escola/create_escola')
 def view_escola_cadastro():
-    rede = rede_facade.read_rede_facade()
-    return dict(rede=rede)
+
+    observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    if observador['tipo'] == '1':
+        rede = rede_facade.search_rede_id_facade(int(observador['vinculo_rede']))
+        return dict(rede=rede, observador_tipo = observador['tipo'])
+    elif observador['tipo'] == '0':
+        rede = rede_facade.read_rede_facade()
+        return dict(rede=rede, observador_tipo=observador['tipo'])
 
 
 @route('/escola/read_escola')
 @view('escola/read_escola')
 def view_escola_read():
     """
-    chama o metodo controller_escola_read , para colocar tudo dentro de um dicionario
+    Chama o metodo controller_escola_read , para colocar todos os parametros q serao mostrados de escola
+    dentro de um dicionario
+    metodo usado: controller_escola_read   :interno:
     :return: o dicionario
     """
     escola = controller_escola_read()
