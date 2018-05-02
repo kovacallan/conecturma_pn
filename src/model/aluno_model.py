@@ -328,7 +328,6 @@ class DbAluno(Model):
         if senha_antiga == usuario.senha:
             usuario.senha = senha_nova
             usuario.save()
-            print(usuario.senha, usuario)
         else:
             print("senha antiga errada")
 

@@ -12,7 +12,7 @@ from src.facade.turma_facade import TurmaFacade
 from src.facade.loja_facade import LojaFacade
 from src.facade.medalha_facade import MedalhaFacade
 from src.facade.historico_facade import HistoricoFacade
-from src.facade.Facade_main import Facade
+from src.facade.facade_main import Facade
 
 
 class FacadeTest(unittest.TestCase):

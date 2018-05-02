@@ -28,6 +28,9 @@ class ObservadorFacade:
     def search_observador_id_facade(self, id):
         return self.observador.search_observador_id(id=id)
 
+    def search_observador_email(self, email):
+        return self.observador.search_observador_email(email)
+
     def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)
 

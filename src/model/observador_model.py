@@ -10,7 +10,7 @@ class DbObservador(Model):
     senha = TextField()
     telefone = TextField()
     cpf = TextField()
-    email = TextField()
+    email = TextField(fts=True)
     tipo = TextField(fts=True)
     vinculo_rede = TextField(default=None)
     vinculo_escola = TextField(default=None)
@@ -80,6 +80,16 @@ class DbObservador(Model):
         observador = self.load(id)
 
         return observador
+
+    def search_observador_email(self, email):
+
+        observador = None
+        for search in DbObservador.query(DbObservador.email == email):
+            print(search)
+            observador = search
+
+        return observador
+
 
     def search_observador(self, nome):
         """

@@ -4,7 +4,7 @@ from facade.aluno_facade import AlunoFacade
 facade = AlunoFacade()
 
 @route('/')
-@view('index')
+@view('login/index')
 def view_login_index():
     """
     Cria um cookie com base no usuario que loga , sendo diferentes os cookies para o aluno e para os observadores
