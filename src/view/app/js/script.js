@@ -24,8 +24,12 @@ function cadastro_observador(){
             if(!validar_campo_vazio(telefone)){
         
                 if(!validar_campo_vazio(email)){
-                    alert('entrei aqui')
-                    validar_se_email_existe(email)
+                    if(validar_se_email_existe(email) && !validar_campo_vazio(escola.value)){
+                        $.post('/observador/create_observador_professor', {nome:nome,senha:senha,telefone:telefone,email:email,escola:escola},function(data){
+
+                        });
+                            return false;
+                    }
                 }
             }
         }
@@ -57,7 +61,12 @@ function emailValidador(){
 
 function validar_se_email_existe(email){
     $.post('/observador/email_existe', {teste_email:email.value},function(data){
-        console.log(data)
+        if(data == email.value){
+            return false
+        }
+        else{
+            return true
+        }
    });
     return false;
 }

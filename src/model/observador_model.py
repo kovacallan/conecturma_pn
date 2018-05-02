@@ -85,8 +85,10 @@ class DbObservador(Model):
 
         observador = None
         for search in DbObservador.query(DbObservador.email == email):
-            print(search)
-            observador = search
+            observador = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                                   cpf=search.cpf, email=search.email, tipo=search.tipo,
+                                   vinculo_escola=search.vinculo_escola,
+                                   vinculo_rede=search.vinculo_rede,vinculo_turma=search.vinculo_turma)
 
         return observador
 

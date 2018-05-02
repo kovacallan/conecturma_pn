@@ -34,10 +34,12 @@ def controller_observador_cadastro():
 
 @route('/observador/email_existe', method='POST')
 def controller_checar_se_email_existe():
-    print('entrei aqui')
     email = request.params['teste_email']
-    print(email)
-    return facade.search_observador_email(email)
+    verificacao = facade.search_observador_email(email)
+    if verificacao is not None:
+        return verificacao['email']
+    else:
+        return None
 
 
 def filtro_cadastro(nome, senha, telefone, email, cpf,tipo):
