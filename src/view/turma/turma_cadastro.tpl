@@ -4,6 +4,7 @@
             <h1>Cadastro de Turmas</h1>
              <form action="/turma/cadastro_turma" method="post">
                  Turma:*  <input type="text" name="turma_nome"/>
+                 Ano*:
                  <select name="serie">
                      <option value="0">pré-escola</option>
                      <option value="1">1ª Ano</option>

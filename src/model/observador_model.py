@@ -12,8 +12,9 @@ class DbObservador(Model):
     cpf = TextField()
     email = TextField()
     tipo = TextField(fts=True)
-    vinculo_rede = TextField(default='0')
-    vinculo_escola = TextField(default='0')
+    vinculo_rede = TextField(default=None)
+    vinculo_escola = TextField(default=None)
+    vinculo_turma = TextField(default=None)
     data_ultimo_login = TextField()
 
     def create_observador(self, nome, senha, telefone, email, tipo, escola, rede='0', cpf='0'):
@@ -93,6 +94,21 @@ class DbObservador(Model):
                               cpf=search.cpf, email=search.email, tipo=search.tipo,
                               vinculo_escola=search.vinculo_escola,
                               vinculo_rede=search.vinculo_rede)
+
+        return observador
+
+    def search_observador_professor_by_escola(self,vinculo_escola):
+        """
+        procura o observador e coloca os dados em uma entrada de dicionario
+        :param nome: nome do observador
+        :return:
+        """
+        observador = []
+        for search in DbObservador.query(DbObservador.vinculo_escola == vinculo_escola and DbObservador.tipo == '3', order_by=DbObservador.nome):
+            observador.append(dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                                   cpf=search.cpf, email=search.email, tipo=search.tipo,
+                                   vinculo_escola=search.vinculo_escola,
+                                   vinculo_rede=search.vinculo_rede,vinculo_turma=search.vinculo_turma))
 
         return observador
 

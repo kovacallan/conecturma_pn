@@ -95,7 +95,7 @@ def read_aluno():
     if True or request.get_cookie("login", secret='2525'):
         usuarios = aluno_facade.read_aluno_facade()
         turma = turma_facade.read_turma_facade()
-        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['turma_do_aluno']) for aluno in usuarios]
+        alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['vinculo_turma']) for aluno in usuarios]
         return dict(aluno_id=alunos, turmas=turma)
     else:
         redirect('/')

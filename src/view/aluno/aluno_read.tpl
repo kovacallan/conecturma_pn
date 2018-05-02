@@ -32,7 +32,7 @@
 
         <select name="escolhidos">
         % for turma in turmas:
-        <option value="{{turma['id']}}">{{turma['nome']}}</option>
+            <option value="{{turma['id']}}">{{turma['nome']}}</option>
 
             % end
         </select>

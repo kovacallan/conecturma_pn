@@ -123,6 +123,10 @@ def controller_filtro_lista_usuarios():
 
     return escolas, redes
 
+def controller_lista_usuarios():
+    aluno = aluno_facade.read_aluno_facade()
+    observador = observador_facade.read_observador_facade()
+
 
 def controller_usuario_index(observador_logado):
     if observador_logado['tipo'] == '0':

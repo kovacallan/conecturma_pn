@@ -103,7 +103,7 @@ class FacadeTest(unittest.TestCase):
         self.facade.aluno_in_turma_facade(escolhidos, turma1)
         aluntest = self.facade.pesquisa_aluno_facade("egg")
         aluntest2 = self.facade.pesquisa_aluno_facade('Ni')
-        # print("aluntest",aluntest.turma_do_aluno)
+        # print("aluntest",aluntest.vinculo_turma)
         self.assertEqual(aluntest.turma_do_aluno, turma1['nome'])
         self.assertEqual(aluntest2.turma_do_aluno, turma1['nome'])
 
