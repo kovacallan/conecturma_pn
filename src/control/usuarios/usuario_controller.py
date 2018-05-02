@@ -312,7 +312,7 @@ def usuario_logado_professor(observador_logado):
                 if x['vinculo_escola'] == observador_logado['vinculo_escola']:
                     # print("estou aqui")
                     # print("eis a informaçao q quer:", observador_logado['vinculo_escola'])
-                    # print("erro>>", escola_facade.search_escola_id_facade(int(x['vinculo_escola'])))
+                    # print("erro>>", facade.search_escola_id_facade(int(x['vinculo_escola'])))
                     escola = escola_facade.search_escola_id_facade(int(x['vinculo_escola']))
 
                     if int(x['vinculo_escola']) is escola['id']:

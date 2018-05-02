@@ -1,10 +1,9 @@
 from bottle import route, view, get, request, redirect, template
 from control.classes.validar_cadastros_updates import *
-from facade.observador_facade import ObservadorFacade
-from facade.escola_facade import EscolaFacade
+from facade.facade_main import Facade
 
-observador_facade = ObservadorFacade()
-escola_facade = EscolaFacade()
+
+facade = Facade()
 
 """Tipo = 3"""
 @route('/observador/create_observador_professor', method="POST")
@@ -26,12 +25,21 @@ def controller_observador_cadastro():
         redirect('/observador/cadastro?tipo_observador=3')
     else:
         if filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
-            observador_facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
-                                                       escola=escola, rede=0)
+            facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
+                                            escola=escola, rede=0)
             redirect('/usuario')
         else:
             print("Erro para salvar")
             redirect('/observador/cadastro?tipo_observador=3')
+
+@route('/observador/email_existe', method='POST')
+def controller_checar_se_email_existe():
+    email = request.params['teste_email']
+    verificacao = facade.search_observador_email(email)
+    if verificacao is not None:
+        return verificacao['email']
+    else:
+        return None
 
 
 def filtro_cadastro(nome, senha, telefone, email, cpf,tipo):

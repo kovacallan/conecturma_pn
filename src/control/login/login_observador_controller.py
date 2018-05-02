@@ -1,6 +1,6 @@
-from bottle import route, request, redirect, response
+from bottle import route, request, redirect, response, template
 from datetime import datetime
-from facade.Facade_main import Facade
+from facade.facade_main import Facade
 
 facade = Facade()
 
@@ -23,7 +23,9 @@ def controller_login_entrar_observador():
     else:
         redirect('/')
 
-
+@route('/esqueci_senha')
+def view_esqueci_senha():
+    return template('login/esqueci_senha.tpl')
 
 def valida_login_observador(nome, senha):
 
