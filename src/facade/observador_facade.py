@@ -34,6 +34,10 @@ class ObservadorFacade:
     def search_observador_tipo_facade(self, tipo):
         return self.observador.search_observador_tipo(tipo)
 
+    def search_observador_professor_by_escola_facade(self, vinculo_escola):
+        return self.observador.search_observador_professor_by_escola(vinculo_escola)
+
+
     def login_date_facade(self, id, data):
         self.observador.login_date(id, data)
 
