@@ -1,3 +1,12 @@
+function esqueci_senha(){
+    email = document.getElementById('email')
+    if(validar_se_email_existe(email)){
+         window.location="/view_reformular_senha?email="+email.value;
+    }
+    else{
+        document.getElementById('mensagem_erro').innerHTML='Email digitado não existe =('
+    }
+}
 function filtro_usuario(){
     filtro_escola = document.getElementById('filtro_escola').value;
     filtro_rede = document.getElementById('filtro_rede').value;
@@ -11,24 +20,26 @@ function filtro_usuario(){
 }
 
 function cadastro_observador(){
+    tipo = document.getElementById('tipo');
     nome = document.getElementById('nome');
     senha = document.getElementById('senha');
     telefone =  document.getElementById('telefone');
+    cpf = document.getElementById('cpf');
     email = document.getElementById('email');
     escola = document.getElementById('escola');
+    rede = document.getElementById('rede');
 
     if(!validar_campo_vazio(nome)){
-        
         if(!validar_campo_vazio(senha)){
-        
             if(!validar_campo_vazio(telefone)){
-        
                 if(!validar_campo_vazio(email)){
-                    if(validar_se_email_existe(email) && !validar_campo_vazio(escola.value)){
-                        $.post('/observador/create_observador_professor', {nome:nome,senha:senha,telefone:telefone,email:email,escola:escola},function(data){
-
+                    if(!validar_se_email_existe(email) && !validar_campo_vazio(cpf) && !validar_campo_vazio(rede) && !validar_campo_vazio(escola)){
+                        $.post('/observador/create_observador', {tipo:tipo.value,nome:nome.value,senha:senha.value,telefone:telefone.value,cpf:cpf.value,email:email.value,escola:escola.value,rede:rede.value},function(){
                         });
-                            return false;
+                        window.location="/usuario";
+                    }
+                    else{
+                        document.getElementById('erro_email').innerHTML = "Email já foi cadastrado";
                     }
                 }
             }
@@ -60,13 +71,21 @@ function emailValidador(){
 
 
 function validar_se_email_existe(email){
-    $.post('/observador/email_existe', {teste_email:email.value},function(data){
-        if(data == email.value){
-            return false
+    var retorno;
+    $.ajax({
+        url:    "/observador/email_existe",
+        type:   "post",
+        data:   {teste_email:email.value},
+        async: false,
+
+        success: function( data ){
+            retorno = data;
         }
-        else{
-            return true
-        }
-   });
-    return false;
+    });
+    if(retorno == email.value){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
