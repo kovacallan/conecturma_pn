@@ -30,7 +30,7 @@ class DbAluno(Model):
     desempenho_aluno_j2 = FloatField(default=0)
     vinculo_escola = TextField(fts=True)
     anotacoes_aluno =ListField()
-    vinculo_turma = TextField(fts=True, index=True, default=None)
+    vinculo_turma = TextField(fts=True,index=True, default="0")
 
     def usuario_logado(self, id_usuario):
         """
@@ -330,9 +330,9 @@ class DbAluno(Model):
 
         return anotacoes
 
-    def pesquisa_aluno_turma(aluno_,turma_):
+    def pesquisa_aluno_turma(self,aluno_,turma_):
 
-       DbAluno.pesquisa_usuario(aluno_, turma_)
+       DbAluno.pesquisa_usuario(self,aluno_, turma_)
 
     def aluno_delete(self, deletar_ids):
         """

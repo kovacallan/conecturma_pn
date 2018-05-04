@@ -112,6 +112,13 @@ class DbObservador(Model):
 
         return observador
 
+    def search_observador_inativos(self,nome_observador):
+        usuario = []
+        for pesquisa in DbObservador.query(DbObservador.nome == nome_observador):
+            usuario = pesquisa
+        return usuario
+
+
     def login_date(self, id, data):
         """
         Armazena o historico de login

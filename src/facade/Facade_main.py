@@ -7,10 +7,10 @@ from facade.medalha_facade import MedalhaFacade
 from facade.observador_facade import ObservadorFacade
 from facade.rede_facade import RedeFacade
 from facade.turma_facade import TurmaFacade
-
+from facade.zInativos_facade import ZinativosFacade
 
 class Facade(AlunoFacade, ObservadorFacade, EscolaFacade, HistoricoFacade, LojaFacade, MedalhaFacade, RedeFacade,
-             TurmaFacade):
+             TurmaFacade,ZinativosFacade):
     def __init__(self):
         super(Facade, self).__init__()
         # # super(ObservadorFacade, self).__init__()
@@ -21,6 +21,7 @@ class Facade(AlunoFacade, ObservadorFacade, EscolaFacade, HistoricoFacade, LojaF
         EscolaFacade.__init__(self)
         HistoricoFacade.__init__(self)
         MedalhaFacade.__init__(self)
+        ZinativosFacade.__init__(self)
 
     # def apagartudo(self):
     #     return self.darflush()

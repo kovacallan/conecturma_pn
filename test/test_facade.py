@@ -78,9 +78,11 @@ class FacadeTest(unittest.TestCase):
 
     def _anotacoes_no_aluno(self):
         self._create_aluno()
+        mensagem2="tetativa..."
         mensagem = "Isto é uma mensagem de teste"
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem)
+        self.facade.anotacoes_aluno_facade(aluno1.id,mensagem2)
         self.assertEqual(aluno1.anotacoes_aluno[0], mensagem.encode('utf-8'))
 
     def _read_anotaçoes_no_aluno(self):
@@ -447,7 +449,6 @@ class FacadeTest(unittest.TestCase):
 
     def _create_medalha(self):
         medalha = self.facade.create_medalha_facade('cheese',tipo="1")
-        print("medalha",medalha)
         self.assertIsNot(medalha, None)
 
     def _read_medalha(self):
@@ -498,6 +499,51 @@ class FacadeTest(unittest.TestCase):
 
     def test_read_item(self):
         self._read_item()
+
+    """TESTE INATIVOS"""
+
+    def _transferir_atores_inativos(self):
+        self._anotacoes_no_aluno()
+        iten1 = self.facade.criar_item_loja_facade(nome="burroquandofoge", tipo='1', preco=0)
+        self.assertIsNot(iten1, None)
+        aluno1 = self.facade.create_aluno_facade(nome="thanos", escola="Estalo", senha="mor")
+        item2 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
+        self._create_observador()
+        self.assertEqual(aluno1, True)
+        alunoer1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno2=self.facade.pesquisa_aluno_facade("thanos")
+        self.facade.compra_item_facade(aluno2.id, item2['id'])
+        aluno2_pos=self.facade.pesquisa_aluno_facade("thanos")
+        observador1=self.facade.search_observador_inativos_facade("Monty")
+        inativados = [alunoer1, aluno2_pos]
+        self.facade.create_zInativos_atores_facade(inativados)
+        ovo_morto=self.facade.pesquisa_inativos_facade("egg")
+        mensagem = "Isto é uma mensagem de teste"
+        mensagem2 = "tetativa..."
+        print("deletou??",alunoer1.nome)
+        print("ue..",ovo_morto)
+        self.assertEqual(ovo_morto.nome,alunoer1.nome)
+        self.assertEqual(ovo_morto.anotacoes_aluno[0],mensagem.encode('utf-8'))
+        self.assertEqual(ovo_morto.anotacoes_aluno[1], mensagem2.encode('utf-8'))
+        thanos_morto=self.facade.pesquisa_inativos_facade("thanos")
+        self.assertEqual(thanos_morto.nome,aluno2.nome)
+        self.assertEqual(thanos_morto.senha, aluno2.senha)
+        self.assertEqual(thanos_morto.tipo_usuario, aluno2.tipo_aluno)
+        self.assertEqual(thanos_morto.cor, aluno2.cor)
+        self.assertEqual(thanos_morto.rosto, aluno2.rosto)
+        self.assertEqual(thanos_morto.acessorio, aluno2.acessorio)
+        self.assertEqual(thanos_morto.corpo, aluno2.corpo)
+        self.assertEqual(thanos_morto.pontos_de_vida, aluno2.pontos_de_vida)
+        self.assertEqual(thanos_morto.pontos_de_moedas, aluno2.pontos_de_moedas)
+        self.assertEqual(thanos_morto.vinculo_escola, aluno2.vinculo_escola)
+        self.assertEqual(thanos_morto.vinculo_turma, aluno2.vinculo_turma)
+        print("aluno2 , thanos_mrto",aluno2.itens_comprados[-1],thanos_morto.itens_comprados[-1])
+        self.assertEqual(aluno2.itens_comprados[-1],thanos_morto.itens_comprados[0])
+        ovo_falecido=self.facade.pesquisa_aluno_facade("egg")
+        print("egg , morreu?", ovo_falecido)
+
+    def test_create_atores_inativos(self):
+        self._transferir_atores_inativos()
 
     def tearDown(self):
         self.facade.apagartudo()
