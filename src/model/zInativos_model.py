@@ -2,8 +2,10 @@ from walrus import *
 from model.aluno_model import *
 from model.estrutura_model import *
 from model.observador_model import *
-
+from facade.Facade_main import *
 db = Database(host='localhost', port=6379, db=0)
+
+facade=Facade()
 """lista de informaçoes
 tipos :
 0-adm
@@ -82,15 +84,17 @@ class DbCemiterio(Model):
         # print("inativos", atores_id)
         for atores_id in atores_id:
             try:
+                # if self.create( **{k: getattr(atores_id, k) for k in dir(atores_id)})
                 if self.create(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
                                tipo_usuario=atores_id.tipo_aluno, cor=atores_id.cor,
                                rosto=atores_id.rosto, acessorio=atores_id.acessorio, corpo=atores_id.corpo,
                                pontos_j1=atores_id.pontos_j1, cliques_j1=atores_id.cliques_j1,
                                pontos_j2=atores_id.pontos_j2, cliques_j2=atores_id.cliques_j2,
-                               pontos_de_vida=atores_id.pontos_de_vida, pontos_de_moedas=atores_id.pontos_de_moedas,vinculo_escola=atores_id.vinculo_escola,vinculo_turma=atores_id.vinculo_turma):
-                    return True
+                               pontos_de_vida=atores_id.pontos_de_vida, pontos_de_moedas=atores_id.pontos_de_moedas,
+                               vinculo_escola=atores_id.vinculo_escola, vinculo_turma=atores_id.vinculo_turma):
+                    print("oi?")
                 else:
-                    return False
+                    print("deu ruim")
             except AttributeError:
                 observador = DbObservador.load(atores_id.id)
                 if self.create(nome=observador.nome, senha=observador.senha, telefone=observador.telefone,
@@ -98,96 +102,84 @@ class DbCemiterio(Model):
                                email=observador.email, tipo_usuario=observador.tipo,
                                vinculo_rede=observador.vinculo_rede,
                                vinculo_escola=observador.vinculo_escola
-                        , data_ultimo_login=observador.data_ultimo_login, ):
-                        return True
+                        , data_ultimo_login=observador.data_ultimo_login):
+                    print("sucesso")
                 else:
-
-                    return False
+                    print("derrota")
 
     def complemento_create(self, ator, cemiterio_nome):
-        usuario = DbAluno.load(ator.id)
-        inativar = self.pesquisa_inativo(cemiterio_nome)
-        inativado = self.load(inativar.id)
-        if usuario.anotacoes_aluno is not None:
-            for x in range(0, len(usuario.anotacoes_aluno)):
-                inativado.anotacoes_aluno.append(usuario.anotacoes_aluno[x])
-        else:
-            pass
-        if usuario.itens_comprados is not None:
-            for y in range(0, len(usuario.itens_comprados)):
-                inativado.itens_comprados.append(usuario.itens_comprados[y])
-        else:
-            pass
-        try:
-            print("???")
-            """nao esquecer de acrescentar as pontuaçoes dos jogos"""
-            if (inativar.matricula == usuario.matricula and inativar.nome == usuario.nome and inativar.senha == usuario.senha and inativar.tipo_usuario == usuario.tipo_aluno and inativar.cor == usuario.cor and inativar.rosto == usuario.rosto and inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and inativar.pontos_de_vida == usuario.pontos_de_vida and inativar.pontos_de_moedas == usuario.pontos_de_moedas and inativar.vinculo_escola == usuario.vinculo_escola and inativar.vinculo_turma == usuario.vinculo_turma):
-                print("olar",usuario.matricula)
-                inativar.save()
-                usuario.delete(usuario.id)
-                print("apagou?",usuario)
-                print("salvou?",inativar)
-                return
-            else:
-                print("vish , n foi ")
-                return False
-        except AttributeError :
-            print("aqui começa professor ")
+            try:
+                usuario = DbAluno.load(ator.id)
+            except KeyError:
+                usuario = DbObservador.load(ator.id)
+
+            inativar = self.pesquisa_inativo(cemiterio_nome)
+            inativado = self.load(inativar.id)
+            try:
+                if usuario.anotacoes_aluno is not None:
+                    for x in range(0, len(usuario.anotacoes_aluno)):
+                        inativado.anotacoes_aluno.append(usuario.anotacoes_aluno[x])
+                else:
+                    pass
+                if usuario.itens_comprados is not None:
+                    for y in range(0, len(usuario.itens_comprados)):
+                        inativado.itens_comprados.append(usuario.itens_comprados[y])
+                else:
+                    pass
+
+                """nao esquecer de acrescentar as pontuaçoes dos jogos"""
+                if inativar.matricula == usuario.matricula and inativar.nome == usuario.nome and \
+                        inativar.senha == usuario.senha and inativar.tipo_usuario == usuario.tipo_aluno and \
+                        inativar.cor == usuario.cor and inativar.rosto == usuario.rosto and\
+                        inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and \
+                        inativar.pontos_de_vida == usuario.pontos_de_vida and\
+                        inativar.pontos_de_moedas == usuario.pontos_de_moedas and\
+                        inativar.vinculo_escola == usuario.vinculo_escola \
+                        and inativar.vinculo_turma == usuario.vinculo_turma:
+                    inativar.save()
+                    usuario.delete(usuario.id)
+                    return True
+                else:
+                    print("vish , n foi ")
+                    return False
+            except AttributeError:
+                print("aqui começa professor,preencher listas ")
 
     def fazer_os_de_cima(self, lista_inativados):
         self.desativar_atores(lista_inativados)
-        x=len(lista_inativados)
-        print("antes",lista_inativados)
-        while lista_inativados is not None:
+        # x = len(lista_inativados)
+        while lista_inativados :
+            x = 0
+            paradas = lista_inativados[x]
             try:
-                x=0
-                print("????????",lista_inativados)
-                paradas=lista_inativados[x]
-                print("listainativads",lista_inativados)
-                coiso = self.load(paradas.id)
-                nome = coiso.nome
-                print("nome d coiso", nome,paradas)
-                self.complemento_create(paradas, nome)
-                coiso.delete(coiso.id)
-
-                # for x in lista_inativados:
-                #     usuario = self.load(x.id)
-                #     print("apagou? parte2.1",usuario)
-                #     usuario.delete(x.id)
-                lista_inativados.pop(0)
-                print("apagou? parte3", lista_inativados[x])
-                x=x+1
-            except :
-                break
+                coiso = DbAluno.load(paradas.id)
+            except KeyError:
+                coiso = DbObservador.load(paradas.id)
+            nome = coiso.nome
+            self.complemento_create(paradas, nome)
+            lista_inativados.pop(0)
 
         print("lista inativados??", lista_inativados)
-        # while lista_inativados.pop(0):
-        #
-        #     print("lista inativados",lista_inativados)
-        #     coiso1 = self.load(lista_inativados.id)
-        #     print("coiso",coiso1)
-        #     coiso1.delete(lista_inativados)
-
-    #     for x in range(0,len(aluno.anotacoes_aluno)):
-    #         anotacoes=[]
-    #         anotacoes.append(aluno.anotacoes_aluno[x])
-    #         inativos=self.load(self.id)
-    #         self.inativos.anotacoes_aluno.append(anotacoes[x])
 
     def pesquisa_inativo(self, nome_cem):
-        print("teste pesquisa",nome_cem)
+        print("teste pesquisa", nome_cem)
         usuario = []
         for pesquisa in DbCemiterio.query(DbCemiterio.nome == nome_cem):
             print("oi")
             usuario = pesquisa
-        print("achou?",usuario)
+        print("achou?", usuario)
         return usuario
 
+    def ressucitar_ususario(self,user):
+        '''USER SERIA EM FORMATO <Dbcemiterio: x >'''
+        zumbi=user.load(user.id)
+        if user.tipo_usuario==6 or user.tipo_usuario==7:
+           DbAluno.restaurar_aluno()
+        else:
+            pass
 
-    def delete_original(self,):
-        pass
-    def inativos_estrutura(self, estrutura):
-        self.load(estrutura)
+    def inativos_estrutura(self, estruturi):
+        estrutura=self.load(estruturi.id)
         self.create(tipo_estrutura=estrutura.tipo_estrutura, telefone=estrutura.telefone,
                     vinculo_rede=estrutura.vinculo_rede, vinculo_escola=estrutura.vinculo_escola, cep=estrutura.cep,
                     endereco=estrutura.endereco, numero=estrutura.numero, estado=estrutura.estado, uf=estrutura.uf,

@@ -13,7 +13,6 @@ class ZinativosFacade:
         return self.inativos.inativos_estrutura(desativado_estrutura)
 
     def pesquisa_inativos_facade(self,nome):
-        print("hmm,facade",nome)
         return self.inativos.pesquisa_inativo(nome)
 
     # def complemento_create_facade(self,ator,nome_inativo_complementar):
