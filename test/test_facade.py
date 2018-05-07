@@ -551,6 +551,8 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(ovo_morto, None)
         fenix=self.facade.reativar_usuario_facade(ovo_morto)
         self.assertEqual(fenix, True)
+        aluno1=self.facade.pesquisa_aluno_facade("egg")
+        self.assert
 
 
     def test_create_atores_inativos(self):
