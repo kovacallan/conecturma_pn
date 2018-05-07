@@ -1,5 +1,8 @@
-from bottle import route, request, redirect, response, template
+from bottle import route, request, redirect, response, template, get
 from datetime import datetime
+
+from pip._vendor.requests import get
+
 from facade.facade_main import Facade
 
 facade = Facade()
@@ -26,6 +29,21 @@ def controller_login_entrar_observador():
 @route('/esqueci_senha')
 def view_esqueci_senha():
     return template('login/esqueci_senha.tpl')
+
+@route('/view_reformular_senha')
+def view_esqueci_senha():
+    email = request.params['email']
+    pesquisa = facade.search_observador_email_facade(email=email)
+    teste = facade.read_observador_facade()
+    print(teste)
+    return template('login/reformular_senha.tpl', id=pesquisa['id'], email=pesquisa['email'])
+
+@route('/controller_reformular_senha', method="POST")
+def controller_esqueci_senha():
+    id=request.params['id']
+    senha = request.params['senha']
+    facade.redefinir_senha_facade(id=int(id),senha=senha)
+    redirect('/esqueci_senha')
 
 def valida_login_observador(nome, senha):
 

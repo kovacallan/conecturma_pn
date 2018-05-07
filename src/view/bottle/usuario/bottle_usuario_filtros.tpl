@@ -1,16 +1,22 @@
 <%
-if observador_tipo is '0':
+    if observador_tipo is '0':
 %>
+<select id="filtro_rede">
+    <option value="0">---- Selecione rede ----</option>
+    % for r in redes:
+        <option value="{{r['id']}}">{{r['nome']}}</option>
+    % end
+</select>
 <select id="filtro_escola">
     <option value="0">---- Selecione escola ----</option>
     % for e in escolas:
         <option value="{{e['id']}}">{{e['nome']}}</option>
     % end
 </select>
-<select id="filtro_rede">
-    <option value="0">---- Selecione rede ----</option>
-    % for r in redes:
-        <option value="{{r['id']}}">{{r['nome']}}</option>
+<select id="filtro_turma">
+    <option value="0">---- Selecione turma ----</option>
+    % for t in turmas:
+        <option value="{{t['id']}}">{{t['nome']}}</option>
     % end
 </select>
 <select id="filtro_tipo_usuario">
@@ -20,3 +26,4 @@ if observador_tipo is '0':
     <option value="3">Professor</option>
     <option value="6">Aluno</option>
 </select>
+%end

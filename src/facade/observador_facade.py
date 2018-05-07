@@ -9,15 +9,14 @@ class ObservadorFacade:
         self.observador = DbObservador()
 
 
-    def create_observador_facade(self, nome, senha, telefone, cpf, email, tipo,rede,escola):
+    def create_observador_facade(self, nome, senha, telefone, email, tipo,escola, cpf=None, rede=None):
         return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
                                                  tipo=tipo, rede=rede, escola=escola)
-    def create_professor_facade(self,nome, senha, telefone, cpf, email, tipo,escola, rede):
-
-        return self.observador.create_observador(nome=nome,senha=senha,telefone=telefone,cpf=cpf,email=email,tipo=tipo,escola=escola)
-
     def read_observador_facade(self):
         return self.observador.read_observador()
+
+    def redefinir_senha_facade(self, id, senha):
+        self.observador.redefinir_senha(id=id, senha=senha)
 
     def update_observador_facade(self, id, nome, telefone, cpf, email):
         return self.observador.update_observador(id, nome, telefone, cpf, email)
@@ -28,8 +27,8 @@ class ObservadorFacade:
     def search_observador_id_facade(self, id):
         return self.observador.search_observador_id(id=id)
 
-    def search_observador_email(self, email):
-        return self.observador.search_observador_email(email)
+    def search_observador_email_facade(self, email):
+        return self.observador.search_observador_email(email=email)
 
     def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)

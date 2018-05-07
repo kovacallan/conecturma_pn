@@ -1,38 +1,69 @@
 from bottle import route, view, get, request, redirect, template
 from control.classes.validar_cadastros_updates import *
-from facade.observador_facade import ObservadorFacade
-from facade.rede_facade import  RedeFacade
-from facade.escola_facade import EscolaFacade
+from facade.facade_main import Facade
 
-facade = ObservadorFacade()
-escolafacade = EscolaFacade()
-redefacade = RedeFacade()
+facade = Facade()
+
 
 @route('/observador')
 @view('observador/index')
 def view_observador_index():
-    observador=controller_observador_read()
-    return dict(observador = observador)
+    observador = controller_observador_read()
+    return dict(observador=observador)
 
 
 @route('/observador/cadastro')
 def view_observador_cadastro():
     tipo_observador = int(request.params['tipo_observador'])
-    escola = escolafacade.read_escola_facade()
-    rede = redefacade.read_rede_facade()
+    escola = facade.read_escola_facade()
+    rede = facade.read_rede_facade()
 
     if tipo_observador == 0:
-        return template('observador/create_observador_administrador',tipo = tipo_observador)
+        return template('observador/create_observador', tipo=tipo_observador)
     elif tipo_observador == 1:
-        return template('observador/create_observador_gestor',tipo = tipo_observador, rede = rede)
+        return template('observador/create_observador', tipo=tipo_observador, rede=rede)
     elif tipo_observador == 2:
-        return template('observador/create_observador_diretor', tipo = tipo_observador, escola = escola)
+        return template('observador/create_observador', tipo=tipo_observador, escola=escola)
     elif tipo_observador == 3:
-        return template('observador/create_observador_professor',tipo = tipo_observador, escola = escola)
+        return template('observador/create_observador', tipo=tipo_observador, escola=escola)
     elif tipo_observador == 4:
         redirect('/observador')
     else:
         redirect('/observador')
+
+@route('/observador/create_observador', method="POST")
+def controller_observador_cadastro():
+    """
+    Cria um professor com nome , senha , telefone ,email e escola(recebe o id)
+    :return:
+    """
+    tipo = request.params['tipo']
+    nome = request.params['nome']
+    senha = request.params['senha']
+    telefone = request.params['telefone']
+    cpf = request.params['cpf']
+    email = request.params['email']
+    escola = request.params['escola']
+    rede = request.params['rede']
+
+    if escola == 0:
+        pass
+    else:
+        if filtro_cadastro(nome=nome, senha=senha, cpf=cpf,telefone=telefone, email=email, tipo=tipo):
+            facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf,email=email, tipo=tipo,
+                                            escola=escola, rede=rede)
+        else:
+            print("Erro para salvar")
+
+@route('/observador/email_existe', method='POST')
+def controller_checar_se_email_existe():
+    email = request.params['teste_email']
+    verificacao = facade.search_observador_email_facade(email=email)
+    if verificacao is not None:
+        return verificacao['email']
+    else:
+        return None
+
 
 @get('/observador/editar')
 def view_observador_update():
@@ -43,7 +74,7 @@ def view_observador_update():
 
 
 def controller_observador_read():
-    observadores=facade.read_observador_facade()
+    observadores = facade.read_observador_facade()
     return observadores
 
 

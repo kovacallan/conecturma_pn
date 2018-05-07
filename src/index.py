@@ -29,4 +29,4 @@ bottle.TEMPLATE_PATH.insert(0, view_path)
 application = default_app()
 
 if __name__ == '__main__':
-    run(host='localhost', port=8080, reloader=False ,debug=True)
+    run(host='localhost', port=8080, reloader=True ,debug=True)

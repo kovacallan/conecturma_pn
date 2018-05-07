@@ -2,13 +2,14 @@
     <div class="row">
         <div align="center" class="col-md-12">
             <h1>Esqueci senha</h1>
-            <form action="" method="post">
+
                 <br>
-                Email :<input type="text" name="usuario"/>
+
+                Email :<input type="text" id="email" onChange="emailValidador()"/>
+                <div id="mensagem_erro"></div>
                 <br>
                 <br>
-                <button type="submit">Entrar</button>
-            </form>
+                <button onclick="esqueci_senha()">Enviar</button>
             <br>
         </div>
     </div>

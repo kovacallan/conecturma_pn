@@ -12,22 +12,19 @@ def controller_observador_cadastro():
     Cria um professor com nome , senha , telefone ,email e escola(recebe o id)
     :return:
     """
+    tipo = request.params['tipo']
     nome = request.params['nome']
     senha = request.params['senha']
     telefone = request.params['telefone']
-    cpf = '0'
     email = request.params['email']
-    tipo = request.params['tipo_observador']
     escola = request.params['escola']
-    rede = '0'
 
     if escola == 0:
         redirect('/observador/cadastro?tipo_observador=3')
     else:
-        if filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
-            facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
-                                            escola=escola, rede=0)
-            redirect('/usuario')
+        if filtro_cadastro(nome, senha, telefone, email, tipo):
+            facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, email=email, tipo=tipo,
+                                            escola=escola)
         else:
             print("Erro para salvar")
             redirect('/observador/cadastro?tipo_observador=3')
@@ -35,14 +32,14 @@ def controller_observador_cadastro():
 @route('/observador/email_existe', method='POST')
 def controller_checar_se_email_existe():
     email = request.params['teste_email']
-    verificacao = facade.search_observador_email(email)
+    verificacao = facade.search_observador_email_facade(email=email)
     if verificacao is not None:
         return verificacao['email']
     else:
         return None
 
 
-def filtro_cadastro(nome, senha, telefone, email, cpf,tipo):
+def filtro_cadastro(nome, senha, telefone, email, tipo):
     """
     Verifica se nenhum padrao obrigatorio vazio
     :param nome:
@@ -54,4 +51,4 @@ def filtro_cadastro(nome, senha, telefone, email, cpf,tipo):
     :return:
     """
     valida = ValidaNome(ValidaSenha(ValidaTelefone(ValidaCpf(ValidaEmail(ValidaTipo(ValidaOk()))))))
-    return valida.validacao(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo)
+    return valida.validacao(nome=nome, senha=senha, cpf=0,telefone=telefone, email=email, tipo=tipo)
