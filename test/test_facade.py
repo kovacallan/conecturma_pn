@@ -1,6 +1,7 @@
 # coding: utf-8
 import unittest
 import redis
+
 # from unittest.mock import MagicMock
 # from src.model.estrutura_model import DbEstrutura
 """possivel erro de importaçao de DbAluno acima"""
@@ -37,9 +38,12 @@ class FacadeTest(unittest.TestCase):
     def _create_aluno_fail(self):
         aluno = self.facade.create_aluno_facade("Brian", "123")
         self.assertEqual(aluno, TypeError)
-
         aluno = self.facade.create_aluno_facade("egg", "")
         self.assertEqual(aluno, True)
+
+    def _create_aluno_sem_escola(self):
+        aluno = self.facade.create_aluno_facade("Nemo", "", "123")
+        self.assertEqual(aluno, TypeError)
 
     def _pesquisa_aluno(self):
         aluno = self.facade.pesquisa_aluno_facade("Brian")
@@ -78,11 +82,11 @@ class FacadeTest(unittest.TestCase):
 
     def _anotacoes_no_aluno(self):
         self._create_aluno()
-        mensagem2="tetativa..."
+        mensagem2 = "tetativa..."
         mensagem = "Isto é uma mensagem de teste"
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem)
-        self.facade.anotacoes_aluno_facade(aluno1.id,mensagem2)
+        self.facade.anotacoes_aluno_facade(aluno1.id, mensagem2)
         self.assertEqual(aluno1.anotacoes_aluno[0], mensagem.encode('utf-8'))
 
     def _read_anotaçoes_no_aluno(self):
@@ -121,7 +125,6 @@ class FacadeTest(unittest.TestCase):
         iten = self.facade.ver_item_comprado_facade(aluno1.id)
         self.assertEqual([int(aluno1.itens_comprados[0].decode('utf-8'))], iten)
 
-
     def _equipar_item_facade(self):
         self._comprar_item()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
@@ -134,7 +137,7 @@ class FacadeTest(unittest.TestCase):
         self._equipar_item_facade()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         self.facade.avatar_facade(aluno1.id)
-        iten1=self.facade.pesquisa_item_facade_nome("burroquandofoge")
+        iten1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.assertEqual(self.facade.avatar_facade(aluno1.id)['cor'], iten1['id'])
         self._delete_item()
         self._delete_alunos()
@@ -189,6 +192,7 @@ class FacadeTest(unittest.TestCase):
         self._pontos_jogo()
         self._create_aluno_aluno_vazio()
         self._delete_alunos()
+        self._create_aluno_sem_escola()
 
     def _test_create_aluno_fail(self):
         self._create_aluno_fail()
@@ -275,8 +279,6 @@ class FacadeTest(unittest.TestCase):
 
     """FIM TESTE OBSERVADOR"""
 
-
-
     """TESTE REDE"""
 
     def _create_rede(self):
@@ -331,7 +333,8 @@ class FacadeTest(unittest.TestCase):
     def _update_escola(self):
         escola = self.facade.search_escola_facade("Do bairro")
         self.facade.update_escola_facade(escola['id'], nome="Ni", telefone="33355567", vinculo_rede="abelhinha",
-                                         cep="22270 999", endereco="rua do teste ",numero='666', cidade="RIO DE JANEIRO",
+                                         cep="22270 999", endereco="rua do teste ", numero='666',
+                                         cidade="RIO DE JANEIRO",
                                          estado='RJ')
         escola2 = self.facade.search_escola_facade("Ni")
         self.assertEqual(escola2['nome'], "Ni")
@@ -339,7 +342,6 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(escola2['numero'], '666')
         self.assertEqual(escola2['vinculo_rede'], "abelhinha")
         self.assertEqual(escola2['telefone'], "33355567")
-
 
     def _pesquisa_escola(self):
         escola = self.facade.search_escola_facade("Do bairro")
@@ -448,13 +450,13 @@ class FacadeTest(unittest.TestCase):
     """TESTE FACADE MEDALHAS"""
 
     def _create_medalha(self):
-        medalha = self.facade.create_medalha_facade('cheese',tipo="1")
+        medalha = self.facade.create_medalha_facade('cheese', tipo="1")
         self.assertIsNot(medalha, None)
 
     def _read_medalha(self):
-        medalha =self.facade.read_medalha_facade()
-        medalha1=self.facade.pesquisa_medalha_facade('cheese')
-        self.assertIn(medalha1['id'],medalha[-1].values())
+        medalha = self.facade.read_medalha_facade()
+        medalha1 = self.facade.pesquisa_medalha_facade('cheese')
+        self.assertIn(medalha1['id'], medalha[-1].values())
 
     def _delete_medalha(self):
         medalhas = self.facade.read_medalha_facade()
@@ -471,8 +473,6 @@ class FacadeTest(unittest.TestCase):
         self._create_medalha()
         self._read_medalha()
         self._delete_medalha()
-
-
 
     """FIM DE TESTE FACADE MEDALHAS"""
 
@@ -511,25 +511,24 @@ class FacadeTest(unittest.TestCase):
         item2 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.assertEqual(aluno1, True)
         alunoer1 = self.facade.pesquisa_aluno_facade("egg")
-        aluno2=self.facade.pesquisa_aluno_facade("thanos")
+        aluno2 = self.facade.pesquisa_aluno_facade("thanos")
         self.facade.compra_item_facade(aluno2.id, item2['id'])
-        aluno2_pos=self.facade.pesquisa_aluno_facade("thanos")
-        observador1=self.facade.search_observador_inativos_facade("Monty")
+        aluno2_pos = self.facade.pesquisa_aluno_facade("thanos")
+        observador1 = self.facade.search_observador_inativos_facade("Monty")
 
-        inativados = [alunoer1, aluno2_pos,observador1]
+        inativados = [alunoer1, aluno2_pos, observador1]
 
         self.facade.create_zInativos_atores_facade(inativados)
-        ovo_morto=self.facade.pesquisa_inativos_facade("egg")
+        ovo_morto = self.facade.pesquisa_inativos_facade("egg")
         mensagem = "Isto é uma mensagem de teste"
         mensagem2 = "tetativa..."
         ovo_falecido = self.facade.pesquisa_aluno_facade("egg")
-        self.assertEqual(ovo_falecido,[])
-        self.assertEqual(ovo_morto.nome,alunoer1.nome)
-        self.assertEqual(ovo_morto.anotacoes_aluno[0],mensagem.encode('utf-8'))
-        self.assertEqual(ovo_morto.anotacoes_aluno[1],mensagem2.encode('utf-8'))
-        thanos_morto=self.facade.pesquisa_inativos_facade("thanos")
-        print("thanos_morto",thanos_morto)
-        self.assertEqual(thanos_morto.nome,aluno2_pos.nome)
+        self.assertEqual(ovo_falecido, [])
+        self.assertEqual(ovo_morto.nome, alunoer1.nome)
+        self.assertEqual(ovo_morto.anotacoes_aluno[0], mensagem.encode('utf-8'))
+        self.assertEqual(ovo_morto.anotacoes_aluno[1], mensagem2.encode('utf-8'))
+        thanos_morto = self.facade.pesquisa_inativos_facade("thanos")
+        self.assertEqual(thanos_morto.nome, aluno2_pos.nome)
         self.assertEqual(thanos_morto.senha, aluno2_pos.senha)
         self.assertEqual(thanos_morto.tipo_usuario, aluno2_pos.tipo_aluno)
         self.assertEqual(thanos_morto.cor, aluno2.cor)
@@ -540,22 +539,33 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(thanos_morto.pontos_de_moedas, aluno2.pontos_de_moedas)
         self.assertEqual(thanos_morto.vinculo_escola, aluno2.vinculo_escola)
         self.assertEqual(thanos_morto.vinculo_turma, aluno2.vinculo_turma)
-        print("aluno2 , thanos_mrto",aluno2.itens_comprados[-1],thanos_morto.itens_comprados[-1])
-        self.assertEqual(aluno2.itens_comprados[-1],thanos_morto.itens_comprados[0])
-        ovo_falecido=self.facade.pesquisa_aluno_facade("egg")
-        print("egg , morreu?", ovo_falecido)
+        self.assertEqual(aluno2.itens_comprados[-1], thanos_morto.itens_comprados[0])
 
     def _inativar_estruturas(self):
         self._create_escola()
-        self.facade.
+        self.facade.create_zInativos_estrutura_facade()
+
+    def _ressuscitar_usuarios(self):
+        self._transferir_atores_inativos()
+        ovo_morto = self.facade.pesquisa_inativos_facade("egg")
+        self.facade.reativar_usuario_facade(ovo_morto)
+
     def test_create_atores_inativos(self):
         self._transferir_atores_inativos()
-    def test_create_estruturas_inativas(self):
+
+    def _test_create_estruturas_inativas(self):
         self._inativar_estruturas()
+
     def test_search_inativos(self):
         pass
+
+    def test_reativar_usuario(self):
+        self._ressuscitar_usuarios()
+
     def tearDown(self):
+
         self.facade.apagartudo()
+
 
 if __name__ == '__main__':
     unittest.main()

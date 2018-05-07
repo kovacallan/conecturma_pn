@@ -15,8 +15,5 @@ class ZinativosFacade:
     def pesquisa_inativos_facade(self,nome):
         return self.inativos.pesquisa_inativo(nome)
 
-    # def complemento_create_facade(self,ator,nome_inativo_complementar):
-    #     return self.inativos.complemento_create(ator,nome_inativo_complementar)
-
-    # def fzer_dois(self,inativos):
-    #     return self.inativos.fazer_os_de_cima(inativos)
+    def reativar_usuario_facade(self,cem_id):
+        return self.inativos.ressucitar_ususario(cem_id)

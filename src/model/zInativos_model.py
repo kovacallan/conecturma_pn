@@ -2,10 +2,10 @@ from walrus import *
 from model.aluno_model import *
 from model.estrutura_model import *
 from model.observador_model import *
-from facade.Facade_main import *
+# from facade.Facade_main import *
 db = Database(host='localhost', port=6379, db=0)
 
-facade=Facade()
+# facade=Facade()
 """lista de informaçoes
 tipos :
 0-adm
@@ -77,6 +77,8 @@ class DbCemiterio(Model):
     tipo = TextField(fts=True)
     data_ultimo_login = TextField()
     anotacoes_observador = ListField()
+
+
     aluno = DbAluno()
     observador = DbObservador()
 
@@ -84,6 +86,7 @@ class DbCemiterio(Model):
         # print("inativos", atores_id)
         for atores_id in atores_id:
             try:
+                print("atores_id , inativos l87",atores_id)
                 # if self.create( **{k: getattr(atores_id, k) for k in dir(atores_id)})
                 if self.create(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
                                tipo_usuario=atores_id.tipo_aluno, cor=atores_id.cor,
@@ -92,7 +95,7 @@ class DbCemiterio(Model):
                                pontos_j2=atores_id.pontos_j2, cliques_j2=atores_id.cliques_j2,
                                pontos_de_vida=atores_id.pontos_de_vida, pontos_de_moedas=atores_id.pontos_de_moedas,
                                vinculo_escola=atores_id.vinculo_escola, vinculo_turma=atores_id.vinculo_turma):
-                    print("oi?")
+                    print("sucesso em criar inativo L95 , model")
                 else:
                     print("deu ruim")
             except AttributeError:
@@ -103,7 +106,7 @@ class DbCemiterio(Model):
                                vinculo_rede=observador.vinculo_rede,
                                vinculo_escola=observador.vinculo_escola
                         , data_ultimo_login=observador.data_ultimo_login):
-                    print("sucesso")
+                    print("sucesso em criar inativo L106 , model")
                 else:
                     print("derrota")
 
@@ -159,24 +162,23 @@ class DbCemiterio(Model):
             self.complemento_create(paradas, nome)
             lista_inativados.pop(0)
 
-        print("lista inativados??", lista_inativados)
 
     def pesquisa_inativo(self, nome_cem):
-        print("teste pesquisa", nome_cem)
+
         usuario = []
         for pesquisa in DbCemiterio.query(DbCemiterio.nome == nome_cem):
-            print("oi")
             usuario = pesquisa
-        print("achou?", usuario)
         return usuario
 
     def ressucitar_ususario(self,user):
         '''USER SERIA EM FORMATO <Dbcemiterio: x >'''
         zumbi=user.load(user.id)
-        if user.tipo_usuario==6 or user.tipo_usuario==7:
-           DbAluno.restaurar_aluno()
+        if DbAluno.create(**{k: getattr(zumbi, k) for k in dir(zumbi)}):
+
+        # if user.tipo_usuario==6 or user.tipo_usuario==7:
+            return True
         else:
-            pass
+            return False
 
     def inativos_estrutura(self, estruturi):
         estrutura=self.load(estruturi.id)
@@ -188,3 +190,17 @@ class DbCemiterio(Model):
                     descricao_completa=estrutura.descricao_completa, nome_usuario=estrutura.nome_usuario,
                     tipo_usuario=estrutura.tipo_usuario, data_acesso=estrutura.data_acesso,
                     anotacoes_estrutura=estrutura.anotacoes_estrutura)
+
+
+    # def deletar_estrutura(self,estrutura_nome,tipo):
+    #
+    #     morto=self.pesquisa_inativo(estrutura_nome)
+    #     vivo=DbEstrutura.search_estrutura()
+    #     if morto.tipo_estrutura == vivo.tipo_estrutura, morto.telefone == vivo.telefone,
+    #     morto.vinculo_rede == vivo.vinculo_rede, morto.vinculo_escola == vivo.vinculo_escola, morto.cep == vivo.cep,
+    #     morto.endereco == vivo.endereco, morto.numero == vivo.numero, morto.estado == vivo.estado, morto.uf == vivo.uf,
+    #     morto.quem_criou == vivo.quem_criou, morto.serie == estrutura.serie, tipo_item == estrutura.tipo_item,
+    #     preco = estrutura.preco, tipo_medalha = estrutura.tipo_medalha, descriçao = estrutura.descricao,
+    #     descricao_completa = estrutura.descricao_completa, nome_usuario = estrutura.nome_usuario,
+    #     tipo_usuario = estrutura.tipo_usuario, data_acesso = estrutura.data_acesso,
+    #     anotacoes_estrutura = estrutura.anotacoes_estrutura:
