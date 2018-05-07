@@ -169,6 +169,23 @@ class DbCemiterio(Model):
             usuario = pesquisa
         return usuario
 
+    def deletar_cem(self,nome):
+        pessoa = self.pesquisa_inativo(nome)
+        print("pessoa L174",pessoa,nome)
+        isto = DbAluno.pesquisa_usuario(self,nome)
+        antigo_morto = self.load(pessoa.id)
+        fenix = self.aluno.load(isto.id)
+        if fenix.matricula == antigo_morto.matricula and fenix.nome == antigo_morto.nome and \
+                    fenix.senha == antigo_morto.senha and fenix.tipo_aluno == antigo_morto.tipo_usuario and \
+                    fenix.cor == antigo_morto.cor and fenix.rosto == antigo_morto.rosto and \
+                    fenix.acessorio == antigo_morto.acessorio and fenix.corpo == antigo_morto.corpo and \
+                    fenix.pontos_de_vida == antigo_morto.pontos_de_vida and \
+                    fenix.pontos_de_moedas == antigo_morto.pontos_de_moedas and \
+                    fenix.vinculo_escola == antigo_morto.vinculo_escola \
+                    and fenix.vinculo_turma == antigo_morto.vinculo_turma:
+            antigo_morto.delete(antigo_morto.id)
+
+
     def ressucitar_ususario(self, user):
         """USER SERIA EM FORMATO <Dbcemiterio: x >"""
         zumbi = user.load(user.id)
@@ -187,14 +204,17 @@ class DbCemiterio(Model):
                                           desempenho_aluno_j2=atores_id.desempenho_aluno_j2,
                                           vinculo_escola=atores_id.vinculo_escola,
                                           vinculo_turma=atores_id.vinculo_turma):
-
+                self.deletar_cem(atores_id.nome)
                 return True
             else:
-                print("esse falso")
+
                 return False
         else:
-            print("nao , esse")
-            return False
+            if self.observador.recriar_observador(atores_id.nome, atores_id.senha, atores_id.tipo, atores_id.vinculo_escola,
+                           atores_id.data_ultimo_login, atores_id.telefone, cpf="0", email="0", vinculo_rede="0"):
+                print("foi,creio")
+            else:
+                return False
 
     def inativos_estrutura(self, estruturi):
         estrutura = self.load(estruturi.id)
@@ -206,6 +226,9 @@ class DbCemiterio(Model):
                     descricao_completa=estrutura.descricao_completa, nome_usuario=estrutura.nome_usuario,
                     tipo_usuario=estrutura.tipo_usuario, data_acesso=estrutura.data_acesso,
                     anotacoes_estrutura=estrutura.anotacoes_estrutura)
+
+
+
 
     # def deletar_estrutura(self,estrutura_nome,tipo):
     #

@@ -15,9 +15,9 @@ class DbObservador(Model):
     vinculo_rede = TextField(default='0')
     vinculo_escola = TextField(default='0')
     data_ultimo_login = TextField()
-    anotacoes_observador=ListField()
+    anotacoes_observador = ListField()
 
-    def create_observador(self, nome, senha,telefone,email,tipo, escola,rede='0', cpf='0' ):
+    def create_observador(self, nome, senha, telefone, email, tipo, escola, rede='0', cpf='0'):
         """
         cria um observador
         :param nome: nome do observador
@@ -112,12 +112,16 @@ class DbObservador(Model):
 
         return observador
 
-    def search_observador_inativos(self,nome_observador):
+    def search_observador_inativos(self, nome_observador):
         usuario = []
         for pesquisa in DbObservador.query(DbObservador.nome == nome_observador):
             usuario = pesquisa
         return usuario
 
+    def create_inativo_observador(self, nome, senha, email, tipo, vinculo_escola, data_ultimo_login, telefone="0",
+                                  cpf="0", vinculo_rede="0"):
+        self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
+                    vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, data_ultimo_login=data_ultimo_login)
 
     def login_date(self, id, data):
         """
@@ -130,5 +134,10 @@ class DbObservador(Model):
         observador.data_login = data
         observador.save()
 
-    # def darflush(self):
-    #     db.flushdb()
+    def recriar_observador(self, nome, senha, tipo, vinculo_escola,
+                           data_ultimo_login, telefone="0", cpf="0", email="0", vinculo_rede="0"):
+        if self.create(nome=nome,senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=vinculo_rede,
+                    vinculo_escola=vinculo_escola, data_ultimo_login=data_ultimo_login):
+            return True
+        else:
+            return False

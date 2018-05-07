@@ -549,10 +549,15 @@ class FacadeTest(unittest.TestCase):
         self._transferir_atores_inativos()
         ovo_morto = self.facade.pesquisa_inativos_facade("egg")
         self.assertIsNot(ovo_morto, None)
-        fenix=self.facade.reativar_usuario_facade(ovo_morto)
-        self.assertEqual(fenix, True)
+        ovo_vivo=self.facade.reativar_usuario_facade(ovo_morto)
+        self.assertEqual(ovo_vivo, True)
+        fenix=self.facade.pesquisa_aluno_facade("egg")
+        self.assertIsNot(fenix, None)
         aluno1=self.facade.pesquisa_aluno_facade("egg")
-        self.assert
+        self.assertEqual(fenix.senha, aluno1.senha)
+        observador1=self.facade.pesquisa_inativos_facade("Monty")
+        self.assertIsNot(observador1, None)
+        self.facade.reativar_usuario_facade(observador1)
 
 
     def test_create_atores_inativos(self):
