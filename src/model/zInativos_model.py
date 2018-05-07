@@ -176,7 +176,7 @@ class DbCemiterio(Model):
         # if DbAluno.create(**{k: getattr(zumbi, k) for k in dir(zumbi)}):
         if zumbi.tipo_usuario == 6 or zumbi.tipo_usuario == 7:
             if self.aluno.restaurar_aluno(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
-                                          tipo_usuario=atores_id.tipo_aluno, cor=atores_id.cor,
+                                          tipo_aluno=atores_id.tipo_usuario, cor=atores_id.cor,
                                           rosto=atores_id.rosto, acessorio=atores_id.acessorio, corpo=atores_id.corpo,
                                           pontos_j1=atores_id.pontos_j1, cliques_j1=atores_id.cliques_j1,
                                           pontos_j2=atores_id.pontos_j2, cliques_j2=atores_id.cliques_j2,
@@ -184,6 +184,7 @@ class DbCemiterio(Model):
                                           pontos_de_moedas=atores_id.pontos_de_moedas,
                                           vinculo_escola=atores_id.vinculo_escola,
                                           vinculo_turma=atores_id.vinculo_turma):
+
                 return True
             else:
                 return False
