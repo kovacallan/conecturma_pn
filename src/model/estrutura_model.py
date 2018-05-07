@@ -109,6 +109,10 @@ class DbEstrutura(Model):
                          descricao=None,
                          descricao_completa=None, nome_usuario=None, tipo_usuario=None):
         estrutura = self.load(update_id)
+        # if any(s is None for s in self.query(DbEstrutura.update_id)):
+        #     estrutura.nome=nome
+        #     estrutura.telefone = telefone
+
         if nome is not None:
             estrutura.nome = nome
         else:

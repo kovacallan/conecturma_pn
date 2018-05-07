@@ -548,7 +548,10 @@ class FacadeTest(unittest.TestCase):
     def _ressuscitar_usuarios(self):
         self._transferir_atores_inativos()
         ovo_morto = self.facade.pesquisa_inativos_facade("egg")
-        self.facade.reativar_usuario_facade(ovo_morto)
+        self.assertIsNot(ovo_morto, None)
+        fenix=self.facade.reativar_usuario_facade(ovo_morto)
+        self.assertEqual(fenix, True)
+
 
     def test_create_atores_inativos(self):
         self._transferir_atores_inativos()
@@ -561,6 +564,7 @@ class FacadeTest(unittest.TestCase):
 
     def test_reativar_usuario(self):
         self._ressuscitar_usuarios()
+
 
     def tearDown(self):
 

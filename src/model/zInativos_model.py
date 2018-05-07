@@ -2,6 +2,7 @@ from walrus import *
 from model.aluno_model import *
 from model.estrutura_model import *
 from model.observador_model import *
+
 # from facade.Facade_main import *
 db = Database(host='localhost', port=6379, db=0)
 
@@ -78,7 +79,6 @@ class DbCemiterio(Model):
     data_ultimo_login = TextField()
     anotacoes_observador = ListField()
 
-
     aluno = DbAluno()
     observador = DbObservador()
 
@@ -86,7 +86,7 @@ class DbCemiterio(Model):
         # print("inativos", atores_id)
         for atores_id in atores_id:
             try:
-                print("atores_id , inativos l87",atores_id)
+                print("atores_id , inativos l87", atores_id)
                 # if self.create( **{k: getattr(atores_id, k) for k in dir(atores_id)})
                 if self.create(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
                                tipo_usuario=atores_id.tipo_aluno, cor=atores_id.cor,
@@ -111,47 +111,47 @@ class DbCemiterio(Model):
                     print("derrota")
 
     def complemento_create(self, ator, cemiterio_nome):
-            try:
-                usuario = DbAluno.load(ator.id)
-            except KeyError:
-                usuario = DbObservador.load(ator.id)
+        try:
+            usuario = DbAluno.load(ator.id)
+        except KeyError:
+            usuario = DbObservador.load(ator.id)
 
-            inativar = self.pesquisa_inativo(cemiterio_nome)
-            inativado = self.load(inativar.id)
-            try:
-                if usuario.anotacoes_aluno is not None:
-                    for x in range(0, len(usuario.anotacoes_aluno)):
-                        inativado.anotacoes_aluno.append(usuario.anotacoes_aluno[x])
-                else:
-                    pass
-                if usuario.itens_comprados is not None:
-                    for y in range(0, len(usuario.itens_comprados)):
-                        inativado.itens_comprados.append(usuario.itens_comprados[y])
-                else:
-                    pass
+        inativar = self.pesquisa_inativo(cemiterio_nome)
+        inativado = self.load(inativar.id)
+        try:
+            if usuario.anotacoes_aluno is not None:
+                for x in range(0, len(usuario.anotacoes_aluno)):
+                    inativado.anotacoes_aluno.append(usuario.anotacoes_aluno[x])
+            else:
+                pass
+            if usuario.itens_comprados is not None:
+                for y in range(0, len(usuario.itens_comprados)):
+                    inativado.itens_comprados.append(usuario.itens_comprados[y])
+            else:
+                pass
 
-                """nao esquecer de acrescentar as pontuaçoes dos jogos"""
-                if inativar.matricula == usuario.matricula and inativar.nome == usuario.nome and \
-                        inativar.senha == usuario.senha and inativar.tipo_usuario == usuario.tipo_aluno and \
-                        inativar.cor == usuario.cor and inativar.rosto == usuario.rosto and\
-                        inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and \
-                        inativar.pontos_de_vida == usuario.pontos_de_vida and\
-                        inativar.pontos_de_moedas == usuario.pontos_de_moedas and\
-                        inativar.vinculo_escola == usuario.vinculo_escola \
-                        and inativar.vinculo_turma == usuario.vinculo_turma:
-                    inativar.save()
-                    usuario.delete(usuario.id)
-                    return True
-                else:
-                    print("vish , n foi ")
-                    return False
-            except AttributeError:
-                print("aqui começa professor,preencher listas ")
+            """nao esquecer de acrescentar as pontuaçoes dos jogos"""
+            if inativar.matricula == usuario.matricula and inativar.nome == usuario.nome and \
+                    inativar.senha == usuario.senha and inativar.tipo_usuario == usuario.tipo_aluno and \
+                    inativar.cor == usuario.cor and inativar.rosto == usuario.rosto and \
+                    inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and \
+                    inativar.pontos_de_vida == usuario.pontos_de_vida and \
+                    inativar.pontos_de_moedas == usuario.pontos_de_moedas and \
+                    inativar.vinculo_escola == usuario.vinculo_escola \
+                    and inativar.vinculo_turma == usuario.vinculo_turma:
+                inativar.save()
+                usuario.delete(usuario.id)
+                return True
+            else:
+                print("vish , n foi ")
+                return False
+        except AttributeError:
+            print("aqui começa professor,preencher listas ")
 
     def fazer_os_de_cima(self, lista_inativados):
         self.desativar_atores(lista_inativados)
         # x = len(lista_inativados)
-        while lista_inativados :
+        while lista_inativados:
             x = 0
             paradas = lista_inativados[x]
             try:
@@ -162,7 +162,6 @@ class DbCemiterio(Model):
             self.complemento_create(paradas, nome)
             lista_inativados.pop(0)
 
-
     def pesquisa_inativo(self, nome_cem):
 
         usuario = []
@@ -170,18 +169,30 @@ class DbCemiterio(Model):
             usuario = pesquisa
         return usuario
 
-    def ressucitar_ususario(self,user):
-        '''USER SERIA EM FORMATO <Dbcemiterio: x >'''
-        zumbi=user.load(user.id)
-        if DbAluno.create(**{k: getattr(zumbi, k) for k in dir(zumbi)}):
-
-        # if user.tipo_usuario==6 or user.tipo_usuario==7:
-            return True
+    def ressucitar_ususario(self, user):
+        """USER SERIA EM FORMATO <Dbcemiterio: x >"""
+        zumbi = user.load(user.id)
+        atores_id = user.load(user.id)
+        # if DbAluno.create(**{k: getattr(zumbi, k) for k in dir(zumbi)}):
+        if zumbi.tipo_usuario == 6 or zumbi.tipo_usuario == 7:
+            if self.aluno.restaurar_aluno(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
+                                          tipo_usuario=atores_id.tipo_aluno, cor=atores_id.cor,
+                                          rosto=atores_id.rosto, acessorio=atores_id.acessorio, corpo=atores_id.corpo,
+                                          pontos_j1=atores_id.pontos_j1, cliques_j1=atores_id.cliques_j1,
+                                          pontos_j2=atores_id.pontos_j2, cliques_j2=atores_id.cliques_j2,
+                                          pontos_de_vida=atores_id.pontos_de_vida,
+                                          pontos_de_moedas=atores_id.pontos_de_moedas,
+                                          vinculo_escola=atores_id.vinculo_escola,
+                                          vinculo_turma=atores_id.vinculo_turma):
+                return True
+            else:
+                return False
         else:
+
             return False
 
     def inativos_estrutura(self, estruturi):
-        estrutura=self.load(estruturi.id)
+        estrutura = self.load(estruturi.id)
         self.create(tipo_estrutura=estrutura.tipo_estrutura, telefone=estrutura.telefone,
                     vinculo_rede=estrutura.vinculo_rede, vinculo_escola=estrutura.vinculo_escola, cep=estrutura.cep,
                     endereco=estrutura.endereco, numero=estrutura.numero, estado=estrutura.estado, uf=estrutura.uf,
@@ -190,7 +201,6 @@ class DbCemiterio(Model):
                     descricao_completa=estrutura.descricao_completa, nome_usuario=estrutura.nome_usuario,
                     tipo_usuario=estrutura.tipo_usuario, data_acesso=estrutura.data_acesso,
                     anotacoes_estrutura=estrutura.anotacoes_estrutura)
-
 
     # def deletar_estrutura(self,estrutura_nome,tipo):
     #
