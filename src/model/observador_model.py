@@ -14,7 +14,7 @@ class DbObservador(Model):
     tipo = TextField(fts=True)
     vinculo_rede = TextField(default='0')
     vinculo_escola = TextField(default='0')
-    data_ultimo_login = TextField()
+    data_ultimo_login = TextField(default='0')
     anotacoes_observador = ListField()
 
     def create_observador(self, nome, senha, telefone, email, tipo, escola, rede='0', cpf='0'):
@@ -135,7 +135,7 @@ class DbObservador(Model):
         observador.save()
 
     def recriar_observador(self, nome, senha, tipo, vinculo_escola,
-                           data_ultimo_login, telefone="0", cpf="0", email="0", vinculo_rede="0"):
+                           data_ultimo_login, telefone, cpf, email, vinculo_rede):
         if self.create(nome=nome,senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=vinculo_rede,
                     vinculo_escola=vinculo_escola, data_ultimo_login=data_ultimo_login):
             return True

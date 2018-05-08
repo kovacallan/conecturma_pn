@@ -395,11 +395,11 @@ class FacadeTest(unittest.TestCase):
         self.facade.vincular_professor_turma_facade(turma['id'], professor['id'])
 
     def _ver_professor_turma(self):
-        turma = self.turma.search_turma_facade("Knight")
-        professor_vinculado = self.turma.ver_professor_turma_facade(turma['id'])
+        turma = self.facade.search_turma_facade("Knight")
+        professor_vinculado = self.facade.ver_professor_turma_facade(turma['id'])
         for p in professor_vinculado:
             prof = p
-        professor = self.turma.search_observador_id_facade(prof)
+        professor = self.facade.search_observador_id_facade(prof)
 
         self.assertEqual(professor.nome, 'Monty')
         self.assertEqual(professor.email, 'Monty@python.com.br')
@@ -505,21 +505,34 @@ class FacadeTest(unittest.TestCase):
     def _transferir_atores_inativos(self):
         self._anotacoes_no_aluno()
         self._create_observador()
+
         iten1 = self.facade.criar_item_loja_facade(nome="burroquandofoge", tipo='1', preco=0)
         self.assertIsNot(iten1, None)
-        aluno1 = self.facade.create_aluno_facade(nome="thanos", escola="Estalo", senha="mor")
+
+        aluno1 = self.facade.create_aluno_facade(nome="thanos", escola="Estalo", senha="123")
         item2 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.assertEqual(aluno1, True)
+        self.assertIsNot(item2,None)
+
         alunoer1 = self.facade.pesquisa_aluno_facade("egg")
+        self.assertIsNot(alunoer1,None)
+
         aluno2 = self.facade.pesquisa_aluno_facade("thanos")
+        self.assertIsNot(aluno2,None)
+
         self.facade.compra_item_facade(aluno2.id, item2['id'])
         aluno2_pos = self.facade.pesquisa_aluno_facade("thanos")
+        self.assertIsNot(aluno2_pos,None)
+
         observador1 = self.facade.search_observador_inativos_facade("Monty")
+        self.assertIsNot(observador1,None)
 
         inativados = [alunoer1, aluno2_pos, observador1]
 
         self.facade.create_zInativos_atores_facade(inativados)
         ovo_morto = self.facade.pesquisa_inativos_facade("egg")
+        self.assertIsNot(ovo_morto,None)
+
         mensagem = "Isto é uma mensagem de teste"
         mensagem2 = "tetativa..."
         ovo_falecido = self.facade.pesquisa_aluno_facade("egg")
@@ -527,6 +540,7 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(ovo_morto.nome, alunoer1.nome)
         self.assertEqual(ovo_morto.anotacoes_aluno[0], mensagem.encode('utf-8'))
         self.assertEqual(ovo_morto.anotacoes_aluno[1], mensagem2.encode('utf-8'))
+
         thanos_morto = self.facade.pesquisa_inativos_facade("thanos")
         self.assertEqual(thanos_morto.nome, aluno2_pos.nome)
         self.assertEqual(thanos_morto.senha, aluno2_pos.senha)
@@ -540,6 +554,12 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(thanos_morto.vinculo_escola, aluno2.vinculo_escola)
         self.assertEqual(thanos_morto.vinculo_turma, aluno2.vinculo_turma)
         self.assertEqual(aluno2.itens_comprados[-1], thanos_morto.itens_comprados[0])
+
+        observador1_morto=self.facade.pesquisa_inativos_facade("Monty")
+        self.assertIsNot(observador1_morto, None)
+        observador1_inexistente=self.facade.search_observador_inativos_facade("Monty")
+        self.assertEqual(observador1_inexistente, [])
+
 
     def _inativar_estruturas(self):
         self._create_escola()
@@ -555,9 +575,14 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(fenix, None)
         aluno1=self.facade.pesquisa_aluno_facade("egg")
         self.assertEqual(fenix.senha, aluno1.senha)
-        observador1=self.facade.pesquisa_inativos_facade("Monty")
+        cem_observador1=self.facade.pesquisa_inativos_facade("Monty")
+        self.assertIsNot(cem_observador1, None)
+        observador1=self.facade.search_observador_inativos_facade("Monty")
         self.assertIsNot(observador1, None)
-        self.facade.reativar_usuario_facade(observador1)
+        observador=self.facade.reativar_usuario_facade(cem_observador1)
+        self.assertEqual(observador,True)
+        cem_observador_pos=self.facade.pesquisa_inativos_facade("Monty")
+
 
 
     def test_create_atores_inativos(self):
@@ -566,11 +591,11 @@ class FacadeTest(unittest.TestCase):
     def _test_create_estruturas_inativas(self):
         self._inativar_estruturas()
 
-    def test_search_inativos(self):
-        pass
-
     def test_reativar_usuario(self):
         self._ressuscitar_usuarios()
+
+    def test_read_cemiterio(self):
+        self._transferir_atores_inativos()
 
 
     def tearDown(self):
