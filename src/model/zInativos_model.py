@@ -140,24 +140,21 @@ class DbCemiterio(Model):
                     and inativar.vinculo_turma == usuario.vinculo_turma:
                 inativar.save()
                 usuario.delete(usuario.id)
+                print("deletou aluno")
                 return True
             else:
                 print("vish , n foi ")
                 return False
         except AttributeError:
-            print("hm")
-            # inativando = DbCemiterio
-            # for inativando in inativando.all():
-            #     print(inativar.nome,inativar.senha,inativar.telefone)
-            if inativar.nome ==usuario.nome and inativar.senha==usuario.senha and inativar.telefone==usuario.telefone and \
-                inativar.cpf==usuario.cpf and inativar.email==usuario.email and inativar.tipo_usuario==usuario.tipo and \
-                inativar.vinculo_rede==usuario.vinculo_rede and inativar.vinculo_escola==usuario.vinculo_escola and \
-                inativar.data_ultimo_login==usuario.data_ultimo_login:
+            if inativar.nome == usuario.nome and inativar.senha == usuario.senha and inativar.telefone == usuario.telefone and \
+                    inativar.cpf == usuario.cpf and inativar.email == usuario.email and inativar.tipo_usuario == usuario.tipo and \
+                    inativar.vinculo_rede == usuario.vinculo_rede and inativar.vinculo_escola == usuario.vinculo_escola and \
+                    inativar.data_ultimo_login == usuario.data_ultimo_login:
                 usuario.delete(usuario.id)
-                print("sucesso,obs")
+                print("deletou usuario")
                 return True
             else:
-                print("n foi n")
+                print("n deletou usuario")
                 return False
 
     def fazer_os_de_cima(self, lista_inativados):
@@ -185,60 +182,47 @@ class DbCemiterio(Model):
             usuario = pesquisa
         return usuario
 
-    def deletar_cem(self,nome):
+    def deletar_cem(self, nome):
         pessoa = self.pesquisa_inativo(nome)
-        print("pessoa L174",pessoa,nome)
+        print("pessoa L186", nome)
         isto = self.aluno.pesquisa_usuario(nome)
-        if isto==[] :
-            isto=self.observador.search_observador_inativos(nome)
+        if isto == []:
+            isto = self.observador.search_observador_inativos(nome)
             fenix = self.observador.load(isto.id)
         else:
             fenix = self.aluno.load(isto.id)
         antigo_morto = self.load(pessoa.id)
         try:
             if fenix.matricula == antigo_morto.matricula and fenix.nome == antigo_morto.nome and \
-                        fenix.senha == antigo_morto.senha and fenix.tipo_aluno == antigo_morto.tipo_usuario and \
-                        fenix.cor == antigo_morto.cor and fenix.rosto == antigo_morto.rosto and \
-                        fenix.acessorio == antigo_morto.acessorio and fenix.corpo == antigo_morto.corpo and \
-                        fenix.pontos_de_vida == antigo_morto.pontos_de_vida and \
-                        fenix.pontos_de_moedas == antigo_morto.pontos_de_moedas and \
-                        fenix.vinculo_escola == antigo_morto.vinculo_escola \
-                        and fenix.vinculo_turma == antigo_morto.vinculo_turma:
-                print("to aqui")
+                    fenix.senha == antigo_morto.senha and fenix.tipo_aluno == antigo_morto.tipo_usuario and \
+                    fenix.cor == antigo_morto.cor and fenix.rosto == antigo_morto.rosto and \
+                    fenix.acessorio == antigo_morto.acessorio and fenix.corpo == antigo_morto.corpo and \
+                    fenix.pontos_de_vida == antigo_morto.pontos_de_vida and \
+                    fenix.pontos_de_moedas == antigo_morto.pontos_de_moedas and \
+                    fenix.vinculo_escola == antigo_morto.vinculo_escola \
+                    and fenix.vinculo_turma == antigo_morto.vinculo_turma:
+                print("aluno morto deletado L204")
                 antigo_morto.delete(antigo_morto.id)
                 pessoa.delete(pessoa.id)
                 return True
             else:
                 print("algo de errado nao esta certo")
         except AttributeError:
-            fenix = self.pesquisa_inativo(nome)
-            print("pessoa L174", pessoa, nome)
-            isto = self.aluno.pesquisa_usuario(nome)
-            if isto == []:
-                isto = self.observador.search_observador_inativos(nome)
-                fenix = self.observador.load(isto.id)
-            else:
-                fenix = self.aluno.load(isto.id)
-            if fenix.nome ==antigo_morto.nome and fenix.senha==antigo_morto.senha and fenix.telefone==antigo_morto.telefone and \
-                fenix.cpf==antigo_morto.cpf and fenix.email==antigo_morto.email and fenix.tipo==antigo_morto.tipo_usuario and \
-                fenix.vinculo_rede==antigo_morto.vinculo_rede and fenix.vinculo_escola==antigo_morto.vinculo_escola and \
-                fenix.data_ultimo_login==antigo_morto.data_ultimo_login:
+            if fenix.nome == antigo_morto.nome and fenix.senha == antigo_morto.senha and fenix.telefone == antigo_morto.telefone and \
+                    fenix.cpf == antigo_morto.cpf and fenix.email == antigo_morto.email and fenix.tipo == antigo_morto.tipo_usuario and \
+                    fenix.vinculo_rede == antigo_morto.vinculo_rede and fenix.vinculo_escola == antigo_morto.vinculo_escola and \
+                    fenix.data_ultimo_login == antigo_morto.data_ultimo_login:
                 antigo_morto.delete(antigo_morto.id)
                 print("sucesso,obs")
                 return True
             else:
-                print("n foi n")
+                print("nao deletou o antigo morto")
                 return False
 
-
-
-
-
-    def ressucitar_ususario(self, user):
+    def ressucitar_usuario(self, user):
         """USER SERIA EM FORMATO <Dbcemiterio: x >"""
         zumbi = user.load(user.id)
         atores_id = user.load(user.id)
-        print("hmm,falsopq?",zumbi,atores_id)
         # if DbAluno.create(**{k: getattr(zumbi, k) for k in dir(zumbi)}):
         if atores_id.tipo_usuario == "6" or atores_id.tipo_usuario == "7":
             if self.aluno.restaurar_aluno(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
@@ -258,9 +242,10 @@ class DbCemiterio(Model):
 
                 return False
         else:
-            if self.observador.recriar_observador(atores_id.nome, atores_id.senha, atores_id.tipo, atores_id.vinculo_escola,
-                           atores_id.data_ultimo_login, atores_id.telefone, cpf=atores_id.cpf, email=atores_id.email, vinculo_rede=atores_id.vinculo_rede):
-                print("foi,creio")
+            if self.observador.recriar_observador(atores_id.nome, atores_id.senha, atores_id.tipo_usuario,
+                                                  atores_id.vinculo_escola,
+                                                  atores_id.data_ultimo_login, atores_id.telefone, atores_id.cpf,
+                                                  atores_id.email, atores_id.vinculo_rede):
                 self.deletar_cem(zumbi.nome)
                 return True
             else:
@@ -277,12 +262,29 @@ class DbCemiterio(Model):
                     tipo_usuario=estrutura.tipo_usuario, data_acesso=estrutura.data_acesso,
                     anotacoes_estrutura=estrutura.anotacoes_estrutura)
 
+    def read_cemiterio(self):
+        inativos = []
+        for read in DbCemiterio.all():
+            inativos.append(dict(id=read.id, nome=read.nome, senha=read.senha, tipo_usuario=read.tipo_usuario,
+                                 itens_comprados=len(read.itens_comprados), cor=read.cor, rosto=read.rosto,
+                                 acessoio=read.acessorio, corpo=read.corpo, pontos_j1=read.pontos_j1,
+                                 cliques_j1=read.cliques_j1, pontos_j2=read.cliques_j2, cliques_j2=read.cliques_j2,
+                                 pontos_de_vida=read.pontos_de_vida, pontos_de_moedas=read.pontos_de_moedas,
+                                 desempenho_aluno_j1=read.desempenho_aluno_j1,
+                                 desempenho_aluno_j2=read.desempenho_aluno_j2, vinculo_escola=read.vinculo_escola,
+                                 anotaçoes_aluno=len(read.anotacoes_aluno), vinculo_turma=read.vinculo_turma,
+                                 tipo_estrutura=read.tipo_estrutura, telefone=read.telefone,
+                                 vinculo_rede=read.vinculo_rede, cep=read.cep, endereco=read.endereco,
+                                 numero=read.numero, estado=read.estado, uf=read.uf, quem_criou=read.quem_criou,
+                                 serie=read.serie, tipo_item=read.tipo_item, preco=read.preco,
+                                 tipo_medalha=read.tipo_medalha, descricao=read.descricao,
+                                 descricao_completa=read.descricao_completa, nome_usuario=read.nome_usuario,
+                                 data_acesso=read.data_acesso
+                                 , anotacoes_estrutura=len(read.anotacoes_estrutura), cpf=read.cpf, email=read.email,
+                                 tipo=read.tipo, data_ultimo_login=read.data_ultimo_login,
+                                 anotacoes_observador=len(read.anotacoes_observador)))
 
-    # def read_cemiterio(self):
-    #     inativando = DbCemiterio()
-    #     for inativando in inativando.all():
-    #         print(inativando.nome, inativando.senha, inativando.telefone)
-
+        return inativos
     # def deletar_estrutura(self,estrutura_nome,tipo):
     #
     #     morto=self.pesquisa_inativo(estrutura_nome)

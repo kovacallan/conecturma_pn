@@ -16,4 +16,7 @@ class ZinativosFacade:
         return self.inativos.pesquisa_inativo(nome)
 
     def reativar_usuario_facade(self,cem_id):
-        return self.inativos.ressucitar_ususario(cem_id)
+        return self.inativos.ressucitar_usuario(cem_id)
+
+    def read_inativos_facade(self):
+        return self.inativos.read_cemiterio()

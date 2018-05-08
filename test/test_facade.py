@@ -563,39 +563,51 @@ class FacadeTest(unittest.TestCase):
 
     def _inativar_estruturas(self):
         self._create_escola()
+        self.facade.search_escola_facade()
         self.facade.create_zInativos_estrutura_facade()
 
     def _ressuscitar_usuarios(self):
         self._transferir_atores_inativos()
         ovo_morto = self.facade.pesquisa_inativos_facade("egg")
         self.assertIsNot(ovo_morto, None)
+
         ovo_vivo=self.facade.reativar_usuario_facade(ovo_morto)
         self.assertEqual(ovo_vivo, True)
+
         fenix=self.facade.pesquisa_aluno_facade("egg")
         self.assertIsNot(fenix, None)
+
         aluno1=self.facade.pesquisa_aluno_facade("egg")
         self.assertEqual(fenix.senha, aluno1.senha)
+
         cem_observador1=self.facade.pesquisa_inativos_facade("Monty")
         self.assertIsNot(cem_observador1, None)
+
         observador1=self.facade.search_observador_inativos_facade("Monty")
         self.assertIsNot(observador1, None)
+
         observador=self.facade.reativar_usuario_facade(cem_observador1)
         self.assertEqual(observador,True)
+
         cem_observador_pos=self.facade.pesquisa_inativos_facade("Monty")
+        self.assertEqual(cem_observador_pos,[])
 
-
+    def _read_inativados(self):
+        self._transferir_atores_inativos()
+        read_cem=self.facade.read_inativos_facade()
+        self.assertIsNot(read_cem,None)
 
     def test_create_atores_inativos(self):
         self._transferir_atores_inativos()
 
-    def _test_create_estruturas_inativas(self):
+    def test_create_estruturas_inativas(self):
         self._inativar_estruturas()
 
     def test_reativar_usuario(self):
         self._ressuscitar_usuarios()
 
-    def test_read_cemiterio(self):
-        self._transferir_atores_inativos()
+    def test_read_inativos(self):
+        self._read_inativados()
 
 
     def tearDown(self):
