@@ -1,7 +1,6 @@
 % include('header.tpl', title = 'Conecturma')
-<<<<<<< HEAD
     <div class="row">
-        <div align="center" class="col-md-6">
+        <div align="center" class="col-md-8">
             <h1>Bem Vindo Administrador </h1>
             <h2>A Conecturma!</h2>
         <form action="/pesquisar_aluno">
@@ -13,6 +12,8 @@
         <br><br>
         <input type="submit" value="Pesquisar">
         </form>
+         <a href="/gestao_aprendizagem"><button value=0>gestao de aprendizagem</button></a>
+        <button>jogar conecturma</button>
 
 
             <a href="/sair"><button>Sair</button></a>
@@ -20,16 +21,16 @@
         <%
             for x in historico:
         %>
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-1">
+        <div class="col-md-7">
+            <div class="row-">
+                <div class="col-md-7">
                     {{x['nome']}}
                 </div>
-                <div class="col-md-1">
-                    {{x['tipo']}}
+                <div class="col-md-7">
+                    {{x['tipo_usuario']}}
                 </div>
-                <div class="col-md-3">
-                    {{x['data']}}
+                <div class="col-md-7">
+                    {{x['data_acesso']}}
                 </div>
             </div>
             <br>

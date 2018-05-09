@@ -14,6 +14,8 @@ def view_login_index():
         redirect('/jogar_conecturma')
     elif request.get_cookie("login", secret='2525'):
         redirect('/gestao_aprendizagem')
+    elif request.get_cookie("login", secret='2526'):
+        redirect('/pag_administrador')
     else:
         return
 

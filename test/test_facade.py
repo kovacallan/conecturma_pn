@@ -600,7 +600,7 @@ class FacadeTest(unittest.TestCase):
     def test_create_atores_inativos(self):
         self._transferir_atores_inativos()
 
-    def test_create_estruturas_inativas(self):
+    def _test_create_estruturas_inativas(self):
         self._inativar_estruturas()
 
     def test_reativar_usuario(self):
