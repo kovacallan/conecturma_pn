@@ -10,4 +10,4 @@
     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <div align="center" class="container">
+    <div class="container">

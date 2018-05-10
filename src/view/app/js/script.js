@@ -10,9 +10,10 @@ function esqueci_senha(){
 function filtro_usuario(){
     filtro_escola = document.getElementById('filtro_escola').value;
     filtro_rede = document.getElementById('filtro_rede').value;
+    filtro_turma =  document.getElementById('filtro_turma').value;
     filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
 
-   $.post('/usuario/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, tipo_usuario:filtro_tipo_usuario},function(data){
+   $.post('/filtro/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
         $('#usuarios_sistema').html(data);
    });
    return false;
@@ -28,13 +29,14 @@ function cadastro_observador(){
     email = document.getElementById('email');
     escola = document.getElementById('escola');
     rede = document.getElementById('rede');
+    turma = document.getElementById('turma');
 
     if(!validar_campo_vazio(nome)){
         if(!validar_campo_vazio(senha)){
             if(!validar_campo_vazio(telefone)){
                 if(!validar_campo_vazio(email)){
                     if(!validar_se_email_existe(email) && !validar_campo_vazio(cpf) && !validar_campo_vazio(rede) && !validar_campo_vazio(escola)){
-                        $.post('/observador/create_observador', {tipo:tipo.value,nome:nome.value,senha:senha.value,telefone:telefone.value,cpf:cpf.value,email:email.value,escola:escola.value,rede:rede.value},function(){
+                        $.post('/observador/create_observador', {tipo:tipo.value,nome:nome.value,senha:senha.value,telefone:telefone.value,cpf:cpf.value,email:email.value,escola:escola.value,rede:rede.value,turma:turma.value},function(){
                         });
                         window.location="/usuario";
                     }

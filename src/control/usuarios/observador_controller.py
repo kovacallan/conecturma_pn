@@ -17,6 +17,7 @@ def view_observador_cadastro():
     tipo_observador = int(request.params['tipo_observador'])
     escola = facade.read_escola_facade()
     rede = facade.read_rede_facade()
+    turma = facade.read_turma_facade()
 
     if tipo_observador == 0:
         return template('observador/create_observador', tipo=tipo_observador)
@@ -25,7 +26,7 @@ def view_observador_cadastro():
     elif tipo_observador == 2:
         return template('observador/create_observador', tipo=tipo_observador, escola=escola)
     elif tipo_observador == 3:
-        return template('observador/create_observador', tipo=tipo_observador, escola=escola)
+        return template('observador/create_observador', tipo=tipo_observador, escola=escola, turma=turma)
     elif tipo_observador == 4:
         redirect('/observador')
     else:
@@ -45,13 +46,13 @@ def controller_observador_cadastro():
     email = request.params['email']
     escola = request.params['escola']
     rede = request.params['rede']
-
+    turma = request.params['turma']
     if escola == 0:
         pass
     else:
         if filtro_cadastro(nome=nome, senha=senha, cpf=cpf,telefone=telefone, email=email, tipo=tipo):
             facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf,email=email, tipo=tipo,
-                                            escola=escola, rede=rede)
+                                            escola=escola, rede=rede, vinculo_turma=turma)
         else:
             print("Erro para salvar")
 
@@ -84,7 +85,6 @@ def controller_observador_update():
                                     telefone=request.params['telefone'], cpf=request.params['cpf'],
                                     email=request.params['email'])
     redirect('/observador/read_observador')
-
 
 def filtro_cadastro(nome, senha, telefone, cpf, email, tipo):
     valida = ValidaNome(ValidaSenha(ValidaTelefone(ValidaCpf(ValidaEmail(ValidaTipo(ValidaOk()))))))

@@ -43,7 +43,7 @@ class RedeFacade:
         return self.rede.delete_estrutura_test(ids)
 
     def search_rede_id_facade(self, id):
-        return self.rede.search_estrutura_id(id=id)
+        return self.rede.search_estrutura_rede_id(id=id)
 
     def search_rede_facade(self, rede):
         return self.rede.search_estrutura(nome=rede,tipo_estrutura=estrutura)

@@ -1,6 +1,6 @@
 from walrus import *
 from random import randrange
-from model.estrutura_model import *
+from src.model.estrutura_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -12,23 +12,23 @@ class DbAluno(Model):
     matricula = TextField()
     nome = TextField(fts=True, index=True)
     senha = TextField()
-    tipo_aluno = TextField(default=None)
+    tipo_aluno = TextField(default='0')
     itens_comprados = ListField()
-    cor = IntegerField(default=None)
-    rosto = IntegerField(default=None)
-    acessorio = IntegerField(default=None)
-    corpo = IntegerField(default=None)
-    pontos_j1 = IntegerField(default=None)
-    cliques_j1 = IntegerField(default=None)
-    pontos_j2 = IntegerField(default=None)
-    cliques_j2 = IntegerField(default=None)
-    pontos_de_vida = IntegerField(default=None)
-    pontos_de_moedas = IntegerField(default=None)
-    desempenho_aluno_j1 = FloatField(default=None)
-    desempenho_aluno_j2 = FloatField(default=None)
-    vinculo_escola = TextField(fts=True)
+    cor = TextField(default='0')
+    rosto = TextField(default='0')
+    acessorio = TextField(default='0')
+    corpo = TextField(default='0')
+    pontos_j1 = IntegerField(default=0)
+    cliques_j1 = IntegerField(default=0)
+    pontos_j2 = IntegerField(default=0)
+    cliques_j2 = IntegerField(default=0)
+    pontos_de_vida = IntegerField(default=0)
+    pontos_de_moedas = IntegerField(default=0)
+    desempenho_aluno_j1 = FloatField(default=0)
+    desempenho_aluno_j2 = FloatField(default=0)
+    vinculo_escola = TextField(fts=True, default='0')
     anotacoes_aluno =ListField()
-    vinculo_turma  = TextField(fts=True, index=True, default=None)
+    vinculo_turma  = TextField(fts=True, index=True, default='0')
 
     def usuario_logado(self, id_usuario):
         """
@@ -356,5 +356,13 @@ class DbAluno(Model):
             vinculo_escola = escola_estrutura.search_estrutura_id(int(aluno.vinculo_escola))
             alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
                                vinculo_rede=None, vinculo_escola = vinculo_escola['nome'],
+                                   vinculo_turma=aluno.vinculo_turma))
+        return alunos
+
+    def search_aluno_by_turma(self, vinculo_turma):
+        alunos = []
+        for aluno in DbAluno.query(DbAluno.vinculo_turma == vinculo_turma, order_by=DbAluno.nome):
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
+                               vinculo_rede=None, vinculo_escola = aluno.vinculo_escola,
                                vinculo_turma=aluno.vinculo_turma))
         return alunos

@@ -61,13 +61,13 @@ def view_update_turma():
     aluno = facade.search_aluno_escola_facade(turma['escola'])
     alunos = []
     for a in aluno:
-        if a['vinculo_turma'] is None:
+        if a['vinculo_turma'] == '0':
             alunos.append(a)
-
+    print(alunos)
     professor = facade.search_observador_professor_by_escola_facade(turma['escola'])
     professores = []
     for p in professor:
-        if p['vinculo_turma'] is None:
+        if p['vinculo_turma'] is '0':
             professores.append(p)
 
     return template('turma/turma_update', turma=turma, aluno = alunos, professor = professores)

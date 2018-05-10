@@ -117,5 +117,12 @@ class AlunoFacade:
     def read_anotacoes_aluno_facade(self,usuario_id):
         return self.aluno.ver_anotacoes_aluno(usuario_id)
 
+    def search_aluno_by_rede_facade(self,vinculo_rede):
+        return self.aluno.search_aluno_by_rede(vinculo_rede=vinculo_rede)
+
+
+    def search_aluno_by_turma_facade(self,vinculo_turma):
+        return self.aluno.search_aluno_by_turma(vinculo_turma=vinculo_turma)
+
     def pesquisa_aluno_turma_facade(self,aluno_, turma_):
         return self.aluno.pesquisa_aluno_turma(aluno_,turma_)
