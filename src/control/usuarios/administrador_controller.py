@@ -53,10 +53,18 @@ def pesquisar_aluno_turma():
     aluno_ = request.params['nome_do_aluno']
     turma_ = request.params['nome_da_turma']
     aluno_facade.pesquisa_aluno_turma_facade(aluno_, turma_)
-@get('/gestao_aprendizagem')
+
+@route('/gestao_aprendizage')
 @view('gestao_aprendizagem.tpl')
 def view_gestao_aprendizagem():
-    pass
+    adm=observador_facade.search_observador_inativos_facade(request.get_cookie("login",secret='2526'))
+    return dict(usuario=adm.nome, tipo=adm.tipo)
+
+@route('/jogarconecturma')
+@view('jogar_conecturma.tpl')
+def view_jogar_conecturma():
+    adm = observador_facade.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
+    return dict(usuario=adm.nome, tipo=adm.tipo)
 
 
 def filtro_cadastro(nome, senha, telefone, email, cpf, tipo):

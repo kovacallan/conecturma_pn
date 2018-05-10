@@ -15,6 +15,10 @@ class DbObservador(Model):
     vinculo_rede = TextField(default='0')
     vinculo_escola = TextField(default='0')
     data_ultimo_login = TextField(default='0')
+    cor = IntegerField(default=0)
+    rosto = IntegerField(default=0)
+    acessorio = IntegerField(default=0)
+    corpo = IntegerField(default=0)
     anotacoes_observador = ListField()
 
     def create_observador(self, nome, senha, telefone, email, tipo, escola, rede='0', cpf='0'):
@@ -141,3 +145,13 @@ class DbObservador(Model):
             return True
         else:
             return False
+
+    def avatar(self, id):
+        """
+        O avatar no qual os itens são equipados
+
+        :param id: id do usuario dono do avatar , no caso o atual
+        :return: Um dicionario com os atributos do avatar
+        """
+        usuario = self.usuario_logado(id)
+        return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)

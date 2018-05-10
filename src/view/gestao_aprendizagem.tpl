@@ -12,6 +12,9 @@
     <div class="container-fluid">
         <div class="row">
             <div align="right" class="col-md-10">
+            %if tipo =='0':
+                <a href="/"><button>voltar</button></a>
+            %end
                 <a href="/sair"><button>Sair</button></a>
             </div>
         </div>

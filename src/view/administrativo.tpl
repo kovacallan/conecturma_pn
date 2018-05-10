@@ -12,9 +12,9 @@
         <br><br>
         <input type="submit" value="Pesquisar">
         </form>
-         <a href="/gestao_aprendizagem"><button value=0>gestao de aprendizagem</button></a>
-        <button>jogar conecturma</button>
-
+         <a href="/gestao_aprendizage"><button >gestao de aprendizagem</button></a>
+        <a href="jogarconecturma"><button>jogar conecturma</button></a>
+        <button>ver usuarios inativados</button>
 
             <a href="/sair"><button>Sair</button></a>
         </div>

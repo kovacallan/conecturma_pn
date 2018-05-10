@@ -16,18 +16,21 @@ def controller_login_entrar_observador():
     senha = request.params['senha']
     observador = valida_login_observador(nome, senha)
     print("login",observador)
-    if observador and observador['tipo'] is not '0':
-        create_cookie(nome)
-        now = datetime.now()
-        observador_facade.login_date_facade(observador['id'], now)
-        historico_facade.create_historico_facade(observador['nome'], observador['tipo'])
-        redirect('/gestao_aprendizagem')
-    elif observador and observador['tipo']== '0':
-        create_cookie(nome)
-        now = datetime.now()
-        observador_facade.login_date_facade(observador['id'], now)
-        historico_facade.create_historico_facade(observador['nome'], observador['tipo'])
-        redirect('/pag_administrador')
+    if observador:
+        if observador['tipo'] is not '0':
+            # print("aqui1")
+            create_cookie(nome)
+            now = datetime.now()
+            observador_facade.login_date_facade(observador['id'], now)
+            historico_facade.create_historico_facade(observador['nome'], observador['tipo'])
+            redirect('/gestao_aprendizagem')
+        elif observador['tipo']== '0':
+            # print("aqui,quee")
+            create_cookie(nome)
+            now = datetime.now()
+            observador_facade.login_date_facade(observador['id'], now)
+            historico_facade.create_historico_facade(observador['nome'], observador['tipo'])
+            redirect('/pag_administrador')
     else:
         redirect('/')
 

@@ -40,6 +40,6 @@ class ObservadorFacade:
     def login_date_facade(self, id, data):
         self.observador.login_date(id, data)
 
-    def apagartudo(self):
-        return self.observador.darflush()
+    def avatar_facade(self,id):
+        return self.observador.avatar(id)
 
