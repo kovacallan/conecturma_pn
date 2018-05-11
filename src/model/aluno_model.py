@@ -1,11 +1,10 @@
 from walrus import *
 from random import randrange
-from model.estrutura_model import *
+from src.model.estrutura_model import *
 
 db = Database(host='localhost', port=6379, db=0)
 
 """A classe DbAluno será usada como Usuário genérico no spike que é , por enquanto, um aluno onipotente"""
-
 
 class DbAluno(Model):
     __database__ = db
@@ -15,10 +14,10 @@ class DbAluno(Model):
     senha = TextField()
     tipo_aluno = TextField(default='0')
     itens_comprados = ListField()
-    cor = IntegerField(default=0)
-    rosto = IntegerField(default=0)
-    acessorio = IntegerField(default=0)
-    corpo = IntegerField(default=0)
+    cor = TextField(default='0')
+    rosto = TextField(default='0')
+    acessorio = TextField(default='0')
+    corpo = TextField(default='0')
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -27,9 +26,9 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
-    vinculo_escola = TextField(fts=True)
-    anotacoes_aluno = ListField()
-    vinculo_turma = TextField(fts=True, index=True, default="0")
+    vinculo_escola = TextField(fts=True, default='0')
+    anotacoes_aluno =ListField()
+    vinculo_turma  = TextField(fts=True, index=True, default='0')
 
     def usuario_logado(self, id_usuario):
         """
@@ -60,7 +59,7 @@ class DbAluno(Model):
         else:
             return False
 
-    def create_aluno(self, nome, vinculo_escola, senha):
+    def create_aluno(self, nome, senha, vinculo_escola = None):
         """
         Método principal de criação do usuário no banco de dados
 
@@ -225,7 +224,7 @@ class DbAluno(Model):
         """
         usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
 
-    def alunos_in_turma(self, escolha, turma_add):
+    def alunos_in_turma(self, id_aluno, vinculo_turma):
         """
         Percorre uma lista de alunos selecionados para colocar o id da turma a qual pertence em cada aluno
         turma é um atributo de aluno
@@ -233,15 +232,28 @@ class DbAluno(Model):
         :param turma_add: o id da turma escolhida para ser acrescida aos alunos
         :return: None
         """
-        res = DbEstrutura.load(turma_add)
-        escolhas = []
+
+        """res = DbEstrutura.load(turma_add)
+        escolhas= []
+>>>>>>> ace753242fd33f3bb17ee18c47b5ae0dd0fdc065
         for escolha in escolha:
             escolhas.append(escolha.id)
         turma_add = res.nome
         for escolhas in escolhas:
             usuario = self.load(escolhas)
+<<<<<<< HEAD
             usuario.vinculo_turma = turma_add
             usuario.save()
+=======
+            usuario.turma_do_aluno = turma_add
+            usuario.save()"""
+        try :
+            aluno = self.load(id_aluno)
+            aluno.vinculo_turma = vinculo_turma
+            aluno.save()
+        except ValueError:
+            print('Erro!')
+
 
     def comprar_item(self, id_usuario, id_item):
         """
@@ -311,7 +323,6 @@ class DbAluno(Model):
         if senha_antiga == usuario.senha:
             usuario.senha = senha_nova
             usuario.save()
-            print(usuario.senha, usuario)
         else:
             print("senha antiga errada")
 
@@ -359,3 +370,21 @@ class DbAluno(Model):
 
     def apagartudo(self):
         db.flushall()
+
+    def search_aluno_by_escola(self, escola):
+        alunos = []
+        escola_estrutura = DbEstrutura()
+        for aluno in DbAluno.query(DbAluno.vinculo_escola == escola, order_by=DbAluno.nome):
+            vinculo_escola = escola_estrutura.search_estrutura_id(int(aluno.vinculo_escola))
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
+                               vinculo_rede=None, vinculo_escola = vinculo_escola['nome'],
+                                   vinculo_turma=aluno.vinculo_turma))
+        return alunos
+
+    def search_aluno_by_turma(self, vinculo_turma):
+        alunos = []
+        for aluno in DbAluno.query(DbAluno.vinculo_turma == vinculo_turma, order_by=DbAluno.nome):
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
+                               vinculo_rede=None, vinculo_escola = aluno.vinculo_escola,
+                               vinculo_turma=aluno.vinculo_turma))
+        return alunos

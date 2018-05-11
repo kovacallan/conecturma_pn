@@ -1,11 +1,9 @@
 from bottle import *
-from facade.escola_facade import EscolaFacade
-from facade.rede_facade import RedeFacade
-from facade.observador_facade import ObservadorFacade
+from facade.facade_main import Facade
 
-facade = EscolaFacade()
-rede_facade = RedeFacade()
-observador_facade = ObservadorFacade()
+
+
+facade = Facade()
 
 
 @route('/escola')
@@ -21,17 +19,17 @@ def view_escola_index():
 @route('/escola/escola_cadastro')
 @view('escola/create_escola')
 def cadastro_escola():
-    observador1 = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    observador1 = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
     if observador1['tipo'] == '1':
-        rede = rede_facade.search_rede_id_facade(int(observador1['vinculo_rede']))
+        rede = facade.search_rede_id_facade(int(observador1['vinculo_rede']))
         return dict(observador_tipo=observador1['tipo'], rede=rede)
     elif observador1['tipo'] =='0':
-        rede = rede_facade.read_rede_facade()
+        rede = facade.read_rede_facade()
         return dict(observador_tipo=observador1['tipo'], rede=rede)
 
 @route('/escola/criar_escola', method='POST')
 def view_escola_cadastro():
-    observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
     if observador['tipo'] == '1':
         rede = int(observador['vinculo_rede'])
         print("pegou isso em rede",rede)
@@ -44,8 +42,6 @@ def view_escola_cadastro():
         if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
             facade.create_escola_facade(nome=nome, telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
                                         vinculo_rede=rede)
-            print("pegou isso em rede", rede)
-            print("sucesso")
             redirect("/escola")
     elif observador['tipo'] == '0':
         # rede = rede_facade.search_rede_id_facade(int(observador['vinculo_rede']))
@@ -130,7 +126,8 @@ def controller_escola_read():
     else:
         for e in escola:
             if int(e['vinculo_rede']) > 0:
-                rede = rede_facade.search_rede_id_facade(e['vinculo_rede'])
+                print("BB {} ".format(int(e['vinculo_rede'])))
+                rede = facade.search_rede_id_facade(int(e['vinculo_rede']))
                 e['vinculo_rede'] = rede['nome']
             escolas.append(e)
         return escolas
@@ -142,11 +139,9 @@ def controller_escola_update():
     modifica os dados da escola
     :return:
     """
-    facade.update_escola_facade(id=request.params['id'], nome=request.params['nome'], rua=request.params['rua'],
-                                numero=request.params['numero'],
+    facade.update_escola_facade(id=request.params['id'], nome=request.params['nome'], numero=request.params['numero'],
                                 telefone=request.params['telefone'], estado=request.params['estado'],
-                                cidade=request.params['cidade'], rede_pertencente=request.params['rede_pertencente'],
-                                cod_identificacao=request.params['cod_identificacao'])
+                                cidade=request.params['cidade'], vinculo_rede=request.params['rede_pertencente'])
     redirect('/escola/read_escola')
 
 

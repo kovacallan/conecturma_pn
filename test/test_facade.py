@@ -13,7 +13,7 @@ from src.facade.turma_facade import TurmaFacade
 from src.facade.loja_facade import LojaFacade
 from src.facade.medalha_facade import MedalhaFacade
 from src.facade.historico_facade import HistoricoFacade
-from src.facade.Facade_main import Facade
+from src.facade.facade_main import Facade
 
 
 class FacadeTest(unittest.TestCase):
@@ -108,8 +108,9 @@ class FacadeTest(unittest.TestCase):
         self.facade.aluno_in_turma_facade(escolhidos, turma1)
         aluntest2 = self.facade.pesquisa_aluno_facade('Ni')
         aluntest = self.facade.pesquisa_aluno_facade('egg')
-        self.assertEqual(aluntest.vinculo_turma, turma1['nome'])
-        self.assertEqual(aluntest2.vinculo_turma, turma1['nome'])
+        # print("aluntest",aluntest.vinculo_turma)
+        self.assertEqual(aluntest.turma_do_aluno, turma1['nome'])
+        self.assertEqual(aluntest2.turma_do_aluno, turma1['nome'])
 
     def _comprar_item(self):
         self._create_item()

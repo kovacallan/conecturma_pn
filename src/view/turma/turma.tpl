@@ -24,6 +24,7 @@
                     Série
                 </div>
             </div>
+            <br>
             <%
                 if turma == None:
             %>
@@ -34,6 +35,9 @@
             %>
             <div class="row">
                 <div class="col-md-2">
+                    <form action="/turma/turma_update" method="post">
+                        <button name="id_turma" value="{{t['id']}}">Editar</button>
+                    </form>
                 </div>
                 <div class="col-md-2">
                     {{t['nome']}}
@@ -47,6 +51,7 @@
                     {{t['serie']}}
                 </div>
             </div>
+            <br>
             <%
                 end
             %>

@@ -7,21 +7,18 @@ class DbObservador(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     nome = TextField(fts=True, index=True)
-    senha = TextField()
-    telefone = TextField()
-    cpf = TextField()
-    email = TextField()
+    senha = TextField(default='0')
+    telefone = TextField(default='0')
+    cpf = TextField(default='0')
+    email = TextField(fts=True)
     tipo = TextField(fts=True)
-    vinculo_rede = TextField(default='0')
-    vinculo_escola = TextField(default='0')
-    data_ultimo_login = TextField(default='0')
-    cor = IntegerField(default=0)
-    rosto = IntegerField(default=0)
-    acessorio = IntegerField(default=0)
-    corpo = IntegerField(default=0)
     anotacoes_observador = ListField()
+    vinculo_rede = TextField(fts=True, default='0')
+    vinculo_escola = TextField(fts=True, default='0')
+    vinculo_turma = TextField(fts=True, default='0')
+    data_ultimo_login = TextField(default=None)
 
-    def create_observador(self, nome, senha, telefone, email, tipo, escola, rede='0', cpf='0'):
+    def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
         """
         cria um observador
         :param nome: nome do observador
@@ -34,7 +31,7 @@ class DbObservador(Model):
         """
 
         if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
-                       vinculo_escola=escola):
+                       vinculo_escola=escola, vinculo_turma = vinculo_turma):
             return True
         else:
             return False
@@ -69,6 +66,11 @@ class DbObservador(Model):
         observador.email = email
 
         observador.save()
+    def redefinir_senha(self, id, senha):
+        observador = DbObservador.load(id)
+        observador.senha = senha
+
+        observador.save()
 
     def delete_observador(self, deletar_ids):
         """
@@ -82,6 +84,17 @@ class DbObservador(Model):
 
     def search_observador_id(self, id):
         observador = self.load(id)
+
+        return observador
+
+    def search_observador_email(self, email):
+
+        observador = None
+        for search in DbObservador.query(DbObservador.email == email):
+            observador = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                              cpf=search.cpf, email=search.email, tipo=search.tipo,
+                              vinculo_escola=search.vinculo_escola,
+                              vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma)
 
         return observador
 
@@ -101,6 +114,22 @@ class DbObservador(Model):
 
         return observador
 
+    def search_observador_professor_by_escola(self, vinculo_escola):
+        """
+        procura o observador e coloca os dados em uma entrada de dicionario
+        :param nome: nome do observador
+        :return:
+        """
+        observador = []
+        for search in DbObservador.query(DbObservador.vinculo_escola == vinculo_escola and DbObservador.tipo == '3',
+                                         order_by=DbObservador.nome):
+            observador.append(dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                                   cpf=search.cpf, email=search.email, tipo=search.tipo,
+                                   vinculo_escola=search.vinculo_escola,
+                                   vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma))
+
+        return observador
+
     def search_observador_tipo(self, tipo):
         """
         procura o observador e coloca os dados em uma entrada de dicionario
@@ -111,10 +140,11 @@ class DbObservador(Model):
         for search in DbObservador.query(DbObservador.tipo == tipo, order_by=DbObservador.nome):
             observador.append(dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
                                    cpf=search.cpf, email=search.email, tipo=search.tipo,
-                                   vinculo_escola=search.vinculo_escola,
+                                   vinculo_escola=search.vinculo_escola,vinculo_turma=search.vinculo_turma,
                                    vinculo_rede=search.vinculo_rede))
 
         return observador
+
 
     def search_observador_inativos(self, nome_observador):
         usuario = []
@@ -126,6 +156,51 @@ class DbObservador(Model):
                                   cpf="0", vinculo_rede="0"):
         self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
                     vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, data_ultimo_login=data_ultimo_login)
+
+    def search_observador_escola_listagem(self, login, vinculo_escola):
+        observador = []
+        if login is not '0':
+            for read in DbObservador.query(DbObservador.vinculo_escola == vinculo_escola, order_by=DbObservador.nome):
+                observador.append(
+                    dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
+                         email=read.email, tipo=read.tipo,
+                         vinculo_rede=read.vinculo_rede,
+                         vinculo_escola=read.vinculo_escola,
+                         vinculo_turma=read.vinculo_turma))
+        else:
+            for read in DbObservador.all():
+                observador.append(
+                    dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
+                         email=read.email, tipo=read.tipo,
+                         vinculo_rede=read.vinculo_rede,
+                         vinculo_escola=read.vinculo_escola,
+                         vinculo_turma=read.vinculo_turma))
+
+        return observador
+
+    def search_observador_escola_filtro(self, vinculo_escola):
+        observador = []
+        for read in DbObservador.query(DbObservador.vinculo_escola == vinculo_escola, order_by=DbObservador.nome):
+            observador.append(
+                dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
+                     email=read.email, tipo=read.tipo,
+                     vinculo_rede=read.vinculo_rede,
+                     vinculo_escola=read.vinculo_escola,
+                     vinculo_turma=read.vinculo_turma))
+
+        return observador
+
+
+    def search_observador_turma(self, vinculo_turma):
+        observador = []
+        for read in DbObservador.query(DbObservador.vinculo_turma == vinculo_turma, order_by=DbObservador.nome):
+            observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
+                     email=read.email, tipo=read.tipo,
+                     vinculo_rede=read.vinculo_rede,
+                     vinculo_escola=read.vinculo_escola,
+                     vinculo_turma=read.vinculo_turma))
+
+        return observador
 
     def login_date(self, id, data):
         """
