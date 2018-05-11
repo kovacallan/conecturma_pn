@@ -43,7 +43,33 @@ def view_jogar_conecturma():
                         'rosto': rosto,
                         'acessorio': acessorio,
                         'corpo': corpo}
-        return dict(usuario=usuario.nome, avatar = avatar_pecas)
+        return dict(usuario=usuario.nome, avatar = avatar_pecas ,tipo="6")
+    elif request.get_cookie("login", secret='2526'):
+        usuario = facade_observador.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
+        avatar = facade_observador.avatar_facade(usuario.id)
+        if usuario.cor == 0:
+            cor = 'default'
+        else:
+            cor = loja_facade.pesquisa_item_facade(avatar['cor'])['nome']
+
+        if usuario.rosto == 0:
+            rosto = 'default'
+        else:
+            rosto = loja_facade.pesquisa_item_facade(avatar['rosto'])['nome']
+        if usuario.acessorio == 0:
+            acessorio = 'default'
+        else:
+            acessorio = loja_facade.pesquisa_item_facade(avatar['acessorio'])['nome']
+        if usuario.corpo == 0:
+            corpo = 'default'
+        else:
+            corpo = loja_facade.pesquisa_item_facade(avatar['corpo'])['nome']
+
+        avatar_pecas = {'cor': cor,
+                        'rosto': rosto,
+                        'acessorio': acessorio,
+                        'corpo': corpo}
+        return dict(usuario=usuario.nome, avatar=avatar_pecas)
     else:
         redirect('/')
 

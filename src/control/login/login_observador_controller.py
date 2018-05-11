@@ -17,12 +17,22 @@ def controller_login_entrar_observador():
     nome = request.params['usuario']
     senha = request.params['senha']
     observador = valida_login_observador(nome, senha)
+    print("login",observador)
     if observador:
-        create_cookie(nome)
-        now = datetime.now()
-        facade.login_date_facade(observador['id'], now)
-        facade.create_historico_facade(observador['nome'], observador['tipo'])
-        redirect('/gestao_aprendizagem')
+        if observador['tipo'] is not '0':
+            # print("aqui1")
+            create_cookie(nome)
+            now = datetime.now()
+            facade.login_date_facade(observador['id'], now)
+            facade.create_historico_facade(observador['nome'], observador['tipo'])
+            redirect('/gestao_aprendizagem')
+        elif observador['tipo']== '0':
+            # print("aqui,quee")
+            create_cookie(nome)
+            now = datetime.now()
+            facade.login_date_facade(observador['id'], now)
+            facade.create_historico_facade(observador['nome'], observador['tipo'])
+            redirect('/pag_administrador')
     else:
         redirect('/')
 
@@ -56,6 +66,7 @@ def valida_login_observador(nome, senha):
     retorno = facade.search_observador_facade(nome)
     if retorno:
         if retorno['nome'] == nome and retorno['senha'] == senha:
+            print("47",nome)
             return retorno
         else:
             return False
@@ -63,4 +74,7 @@ def valida_login_observador(nome, senha):
         return False
 
 def create_cookie(parametro):
-    response.set_cookie("login", parametro, secret='2525')
+    if 'administrador' in parametro:
+        response.set_cookie("login",parametro,secret='2526')
+    else:
+        response.set_cookie("login", parametro, secret='2525')
