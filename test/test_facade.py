@@ -89,7 +89,7 @@ class FacadeTest(unittest.TestCase):
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem2)
         self.assertEqual(aluno1.anotacoes_aluno[0], mensagem.encode('utf-8'))
 
-    def _read_anotaçoes_no_aluno(self):
+    def _read_anotacoes_no_aluno(self):
         self._anotacoes_no_aluno()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         read = self.facade.read_anotacoes_aluno_facade(aluno1.id)
@@ -109,8 +109,8 @@ class FacadeTest(unittest.TestCase):
         aluntest2 = self.facade.pesquisa_aluno_facade('Ni')
         aluntest = self.facade.pesquisa_aluno_facade('egg')
         # print("aluntest",aluntest.vinculo_turma)
-        self.assertEqual(aluntest.turma_do_aluno, turma1['nome'])
-        self.assertEqual(aluntest2.turma_do_aluno, turma1['nome'])
+        self.assertEqual(aluntest.vinculo_turma, str(turma1['id']))
+        self.assertEqual(aluntest2.vinculo_turma, str(turma1['id']))
 
     def _comprar_item(self):
         self._create_item()
@@ -132,14 +132,14 @@ class FacadeTest(unittest.TestCase):
         iten = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.facade.equipar_item_facade(aluno1.id, iten)
         aluno2 = self.facade.pesquisa_aluno_facade("egg")
-        self.assertEqual(aluno2.cor, iten['id'])
+        self.assertEqual(aluno2.cor, str(iten['id']))
 
     def _mostrar_avatar(self):
         self._equipar_item_facade()
         aluno1 = self.facade.pesquisa_aluno_facade("egg")
         self.facade.avatar_facade(aluno1.id)
         iten1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
-        self.assertEqual(self.facade.avatar_facade(aluno1.id)['cor'], iten1['id'])
+        self.assertEqual(self.facade.avatar_facade(aluno1.id)['cor'], str(iten1['id']))
         self._delete_item()
         self._delete_alunos()
 
@@ -159,7 +159,7 @@ class FacadeTest(unittest.TestCase):
         self._anotacoes_no_aluno()
 
     def test_read_anotacoes_aluno(self):
-        self._read_anotaçoes_no_aluno()
+        self._read_anotacoes_no_aluno()
 
     def test_aluno_in_turma(self):
         self._aluno_in_turma()
@@ -264,6 +264,18 @@ class FacadeTest(unittest.TestCase):
             escolhidos.append(observados['id'])
         self.facade.delete_observador_facade(escolhidos)
 
+    def _anotacoes_estrutura(self):
+        self._create_escola()
+        self._pesquisa_escola()
+        mensagem2 = "Gosto dessa escola"
+        mensagem = "Nossa escola deve melhorar"
+        observador1 = self.facade.pesquisa_aluno_facade("egg")
+        self.facade.anotacoes_estrutura_baixo_facade(observador1.id, mensagem)
+        self.facade.anotacoes_estrutura_cima_facade(gestor.id, mensagem2)
+        self.assertEqual(observador1.anotacoes_estrutura_baixo[0], mensagem.encode('utf-8'))
+        self.assertEqual(gestor.anotacoes_estrutura_cima[0],mensagem2.encode('utf-8'))
+
+
     def test_create_delete_observador(self):
         self._create_observador()
         self._delete_observador()
@@ -278,6 +290,8 @@ class FacadeTest(unittest.TestCase):
         self._update_observador()
         self._delete_observador()
 
+    def test_anotacoes(self):
+        self._anotacoes_estrutura()
     """FIM TESTE OBSERVADOR"""
 
     """TESTE REDE"""
@@ -362,6 +376,7 @@ class FacadeTest(unittest.TestCase):
         self._delete_escola()
 
     def test_pesquisa_escola(self):
+        self._create_escola()
         self._pesquisa_escola()
         self._delete_escola()
 

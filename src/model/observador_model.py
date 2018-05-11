@@ -16,7 +16,7 @@ class DbObservador(Model):
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, default='0')
-    data_ultimo_login = TextField(default=None)
+    data_ultimo_login = TextField(default='')
 
     def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
         """

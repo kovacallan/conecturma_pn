@@ -28,7 +28,8 @@ class DbEstrutura(Model):
     nome_usuario = TextField(default='0')
     tipo_usuario = TextField(default='0')
     data_acesso = DateTimeField(default=datetime.datetime.now)
-    anotacoes_estrutura = ListField()
+    anotacoes_estrutura_baixo = ListField()
+    anotacoes_estrutura_cima = ListField()
 
     def create_estrutura(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',
                          cep='0', endereco='0', numero='0', estado='0', uf='0', quem_criou='0', serie='0',
@@ -191,46 +192,7 @@ class DbEstrutura(Model):
                          descricao=None,
                          descricao_completa=None, nome_usuario=None, tipo_usuario=None):
         estrutura = self.load(update_id)
-        # if any(s is None for s in self.query(DbEstrutura.update_id)):
-        #     estrutura.nome=nome
-        #     estrutura.telefone = telefone
-
-        if nome is not None:
-            estrutura.nome = nome
-        else:
-            pass
-        if telefone is not None:
-            estrutura.telefone = telefone
-        if vinculo_rede is not None:
-            estrutura.vinculo_rede = vinculo_rede
-        if cep is not None:
-            estrutura.cep = cep
-        if endereco is not None:
-            estrutura.endereco = endereco
-        if numero is not None:
-            estrutura.numero = numero
-        if cidade is not None:
-            estrutura.cidade = cidade
-        if estado is not None:
-            estrutura.estado = estado
-        if uf is not None:
-            estrutura.uf = uf
-        if serie is not None:
-            estrutura.serie = serie
-        if tipo_item is not None:
-            estrutura.tipo_item = tipo_item
-        if preco is not None:
-            estrutura.preco = preco
-        if tipo_medalha is not None:
-            estrutura.tipo_medalha = tipo_medalha
-        if descricao is not None:
-            estrutura.descricao = descricao
-        if descricao_completa is not None:
-            estrutura.descricao_completa = descricao_completa
-        if nome_usuario is not None:
-            estrutura.nome_usuario = nome_usuario
-        if tipo_usuario is not None:
-            estrutura.tipo_usuario = tipo_usuario
+        [setattr(estrutura,parametro,valor) for parametro,valor in locals().items() if valor]
         estrutura.save()
 
     def delete_estrutura_test(self, deletar_ids):
@@ -238,3 +200,13 @@ class DbEstrutura(Model):
         for deletar_ids in deletar_ids:
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
+
+    def anotaçoes_estrutura_baixo(self,id_estrutura,mensagem):
+        estrutura = self.load(id_estrutura)
+        estrutura.anotacoes_estrutura_baixo.append(mensagem)
+        estrutura.save()
+
+    def anotacoes_estrutura_cima(self,id_estrutura,mensagem):
+        estrutura=self.load(id_estrutura)
+        estrutura.anotacoes_estrutura_cima.append(mensagem)
+        estrutura.save()

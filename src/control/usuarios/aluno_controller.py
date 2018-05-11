@@ -1,5 +1,6 @@
 from bottle import *
 
+from facade.facade_main import *
 from facade.rede_facade import RedeFacade
 from facade.escola_facade import EscolaFacade
 from facade.turma_facade import  TurmaFacade
@@ -7,6 +8,7 @@ from facade.aluno_facade import AlunoFacade
 from facade.observador_facade import ObservadorFacade
 from facade.loja_facade import LojaFacade
 
+facade=Facade()
 escola_facade = EscolaFacade()
 turma_facade = TurmaFacade()
 aluno_facade = AlunoFacade()
@@ -40,23 +42,23 @@ def aluno_read():
 def aluno():
 
     if request.get_cookie("login", secret='2525'):
-        observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+        observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
         if observador['tipo'] == '0':
-            escolas = escola_facade.read_escola_facade()
+            escolas = facade.read_escola_facade()
             return dict(escolas = escolas,tipo_observador = observador['tipo'])
         elif observador['tipo'] == '1':
-            escola = escola_facade.read_escola_facade()
+            escola = facade.read_escola_facade()
             escolas = []
             for e in escola:
                 if e['vinculo_rede'] is observador['vinculo_rede']:
                     escolas.append(e)
             return dict(escolas=escolas, tipo_observador=observador['tipo'])
         elif observador['tipo'] == '2':
-            escolas = escola_facade.search_escola_id_facade(int(observador['vinculo_escola']))
+            escolas = facade.search_escola_id_facade(int(observador['vinculo_escola']))
             return dict(escolas=escolas, tipo_observador=observador['tipo'])
 
         elif observador['tipo'] == '3':
-            escolas = escola_facade.search_escola_id_facade(int(observador['vinculo_escola']))
+            escolas = facade.search_escola_id_facade(int(observador['vinculo_escola']))
             return dict(escolas=escolas, tipo_observador=observador['tipo'])
     else:
         redirect('/')
@@ -70,7 +72,7 @@ def create_aluno():
     :return:
     """
     escola = request.forms['escola']
-    if aluno_facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola,senha=request.forms['senha']):
+    if facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola,senha=request.forms['senha']):
         redirect('/aluno')
     else:
         print("deu erro na criação do ALuno")
@@ -93,8 +95,8 @@ def read_aluno():
     """ return dict(aluno_pesquisado=pesquisa_aluno)"""
 
     if True or request.get_cookie("login", secret='2525'):
-        usuarios = aluno_facade.read_aluno_facade()
-        turma = turma_facade.read_turma_facade()
+        usuarios = facade.read_aluno_facade()
+        turma = facade.read_turma_facade()
         alunos = [(aluno['id'], aluno['usuario_nome'], aluno['matricula'], aluno['vinculo_turma']) for aluno in usuarios]
         return dict(aluno_id=alunos, turmas=turma)
     else:
@@ -111,7 +113,7 @@ def aluno_in_turma():
     escolhidos = request.query_string
     escolha = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
     turma_add = request.query.get('escolhidos')
-    aluno_facade.aluno_in_turma_facade(escolha, turma_add)
+    facade.aluno_in_turma_facade(escolha, turma_add)
     redirect('/')
 
 
@@ -127,7 +129,7 @@ def deletar_aluno():
     """
     escolhidos = request.query_string
     deletar_ids = [aluno.split('=')[0].split('_')[1] for aluno in escolhidos.split('&') if 'aluno' in aluno]
-    aluno_facade.delete_aluno_facade(deletar_ids)
+    facade.delete_aluno_facade(deletar_ids)
     redirect('/')
 
 
@@ -148,8 +150,8 @@ def ver_itens():
     :return: dicionario de itens
     """
 
-    usuario = aluno_facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
-    itens_comprado = aluno_facade.ver_item_comprado_facade(usuario.id)
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    itens_comprado = facade.ver_item_comprado_facade(usuario.id)
     itens = []
     for y in itens_comprado:
         itens.append(loja_facade.pesquisa_item_facade(y))
@@ -165,12 +167,12 @@ def equipar_item():
     :return:
     """
 
-    usuario = aluno_facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
 
     id_item = request.forms['id']
-    item = loja_facade.pesquisa_item_facade(id_item)
+    item = facade.pesquisa_item_facade(id_item)
 
-    aluno_facade.equipar_item_facade(usuario.id, item)
+    facade.equipar_item_facade(usuario.id, item)
 
     redirect('/aluno/ver_itens_comprados')
 
@@ -185,14 +187,14 @@ def anotacoes_aluno():
 def observacoes_aluno():
     anotacoes=request.params['anotacoes']
     usuario_id=request.params['usuario_id']
-    aluno_facade.anotacoes_aluno_facade(usuario_id, anotacoes)
+    facade.anotacoes_aluno_facade(usuario_id, anotacoes)
     redirect('/usuario')
 
 @route('/aluno/anotacoes_aluno_read', method="GET")
 @view('aluno/read_anotacoes.tpl')
 def ver_anotacoes_aluno():
     aluno_anot = request.params['aluno_anot']
-    alunois =aluno_facade.read_anotacoes_aluno_facade(aluno_anot)
+    alunois =facade.read_anotacoes_aluno_facade(aluno_anot)
 
 
     return dict(alunois=alunois)

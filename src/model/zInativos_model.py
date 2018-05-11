@@ -40,10 +40,10 @@ class DbCemiterio(Model):
     senha = TextField()
     tipo_usuario = TextField(default='0')
     itens_comprados = ListField()
-    cor = IntegerField(default=0)
-    rosto = IntegerField(default=0)
-    acessorio = IntegerField(default=0)
-    corpo = IntegerField(default=0)
+    cor = TextField(default='0')
+    rosto = TextField(default='0')
+    acessorio = TextField(default='0')
+    corpo = TextField(default='0')
     pontos_j1 = IntegerField(default=0)
     cliques_j1 = IntegerField(default=0)
     pontos_j2 = IntegerField(default=0)
@@ -52,31 +52,31 @@ class DbCemiterio(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
-    vinculo_escola = TextField(default=None, fts=True)
+    vinculo_escola = TextField(default='', fts=True)
     anotacoes_aluno = ListField()
     vinculo_turma = TextField(fts=True, index=True, default=None)
     tipo_estrutura = TextField(fts=True, index=True)
-    telefone = TextField(default=None)
-    vinculo_rede = TextField(default=None)
-    cep = TextField(default=None)
-    endereco = TextField(default=None)
-    numero = TextField(default=None)
-    estado = TextField(default=None)
-    uf = TextField(default=None)
-    quem_criou = TextField(default=None)
-    serie = TextField(default=None)
-    tipo_item = TextField(default=None)
+    telefone = TextField(default='')
+    vinculo_rede = TextField(default='')
+    cep = TextField(default='')
+    endereco = TextField(default='')
+    numero = TextField(default='')
+    estado = TextField(default='')
+    uf = TextField(default='')
+    quem_criou = TextField(default='')
+    serie = TextField(default='')
+    tipo_item = TextField(default='')
     preco = IntegerField(default=0)
-    tipo_medalha = TextField(default=None)
-    descricao = TextField(default=None)
-    descricao_completa = TextField(default=None)
-    nome_usuario = TextField(default=None)
+    tipo_medalha = TextField(default='')
+    descricao = TextField(default='')
+    descricao_completa = TextField(default='')
+    nome_usuario = TextField(default='')
     data_acesso = DateTimeField(default=datetime.datetime.now)
     anotacoes_estrutura = ListField()
-    cpf = TextField(default=None)
-    email = TextField(default=None)
+    cpf = TextField(default='')
+    email = TextField(default='')
     tipo = TextField(fts=True)
-    data_ultimo_login = TextField(default='0')
+    data_ultimo_login = TextField(default='')
     anotacoes_observador = ListField()
 
     aluno = DbAluno()
@@ -143,6 +143,12 @@ class DbCemiterio(Model):
                 print("deletou aluno")
                 return True
             else:
+                print("L146 CEMITERIO", inativar.cor,usuario.cor ,inativar.rosto == usuario.rosto and \
+                    inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and \
+                    inativar.pontos_de_vida == usuario.pontos_de_vida and \
+                    inativar.pontos_de_moedas == usuario.pontos_de_moedas and \
+                    inativar.vinculo_escola == usuario.vinculo_escola \
+                    and inativar.vinculo_turma == usuario.vinculo_turma)
                 print("vish , n foi ")
                 return False
         except AttributeError:
@@ -154,7 +160,8 @@ class DbCemiterio(Model):
                 print("deletou usuario")
                 return True
             else:
-                print("n deletou usuario")
+                print("L163 cemiterio",inativar.data_ultimo_login, usuario.data_ultimo_login)
+                print("n deletou usuario L163 cem")
                 return False
 
     def fazer_os_de_cima(self, lista_inativados):

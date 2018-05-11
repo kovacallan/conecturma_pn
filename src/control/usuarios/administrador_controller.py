@@ -1,12 +1,12 @@
 from bottle import route, view, get, request, redirect, template
 from control.classes.validar_cadastros_updates import *
-from facade.observador_facade import ObservadorFacade
+from facade.facade_main import *
 from facade.escola_facade import EscolaFacade
 from facade.aluno_facade import AlunoFacade
 from control.historico_controller import *
 from control.login.login_observador_controller import *
 
-facade = ObservadorFacade()
+facade = Facade()
 escolafacade = EscolaFacade()
 aluno_facade = AlunoFacade()
 
@@ -52,18 +52,18 @@ def pesquisar_aluno_turma():
     """
     aluno_ = request.params['nome_do_aluno']
     turma_ = request.params['nome_da_turma']
-    aluno_facade.pesquisa_aluno_turma_facade(aluno_, turma_)
+    facade.pesquisa_aluno_turma_facade(aluno_, turma_)
 
 @route('/gestao_aprendizage')
 @view('gestao_aprendizagem.tpl')
 def view_gestao_aprendizagem():
-    adm=observador_facade.search_observador_inativos_facade(request.get_cookie("login",secret='2526'))
+    adm=facade.search_observador_inativos_facade(request.get_cookie("login",secret='2526'))
     return dict(usuario=adm.nome, tipo=adm.tipo)
 
 @route('/jogarconecturma')
 @view('jogar_conecturma.tpl')
 def view_jogar_conecturma():
-    adm = observador_facade.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
+    adm = facade.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
     return dict(usuario=adm.nome, tipo=adm.tipo)
 
 

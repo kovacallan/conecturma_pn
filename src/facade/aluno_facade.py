@@ -73,7 +73,6 @@ class AlunoFacade:
         :param turma_add: Id da turma
         :return: None
         """
-
         self.aluno.alunos_in_turma(id_aluno=id_aluno, vinculo_turma=vinculo_turma)
 
     def compra_item_facade(self, id_usuario, id_item):

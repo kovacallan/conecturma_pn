@@ -1,5 +1,6 @@
 from bottle import route, request, redirect, response, template, get
 from datetime import datetime
+from control.usuarios.administrador_controller import *
 
 from pip._vendor.requests import get
 
@@ -27,7 +28,7 @@ def controller_login_entrar_observador():
             facade.create_historico_facade(observador['nome'], observador['tipo'])
             redirect('/gestao_aprendizagem')
         elif observador['tipo']== '0':
-            # print("aqui,quee")
+            print("aqui,quee")
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)

@@ -1,6 +1,9 @@
 from bottle import route,request, redirect, response
 from facade.aluno_facade import AlunoFacade
 from facade.historico_facade import HistoricoFacade
+from facade.facade_main import *
+
+facade=Facade()
 
 aluno_facade = AlunoFacade()
 historico_facade = HistoricoFacade()
@@ -17,7 +20,7 @@ def controller_login_entrar_aluno():
 
     if valida_login_aluno(nome, senha):
         create_cookie(nome)
-        historico_facade.create_historico_facade(nome, '6')
+        facade.create_historico_facade(nome, '6')
         redirect('/jogar_conecturma')
     else:
         redirect('/')
@@ -30,7 +33,7 @@ def valida_login_aluno(nome, senha):
     :param senha: senha do usuario
     :return: true se o aluno existir e se estiver com usuario e a senha certa
     """
-    retorno = aluno_facade.pesquisa_aluno_facade(nome)
+    retorno = facade.pesquisa_aluno_facade(nome)
     if retorno:
         if retorno.nome == nome and retorno.senha == senha:
             return True
