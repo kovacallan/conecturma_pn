@@ -74,7 +74,4 @@ def valida_login_observador(nome, senha):
         return False
 
 def create_cookie(parametro):
-    if 'administrador' in parametro:
-        response.set_cookie("login",parametro,secret='2526')
-    else:
-        response.set_cookie("login", parametro, secret='2525')
+    response.set_cookie("login", parametro, secret='2525')

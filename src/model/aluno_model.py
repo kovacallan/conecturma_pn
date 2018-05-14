@@ -26,6 +26,7 @@ class DbAluno(Model):
     pontos_de_moedas = IntegerField(default=0)
     desempenho_aluno_j1 = FloatField(default=0)
     desempenho_aluno_j2 = FloatField(default=0)
+    vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     anotacoes_aluno =ListField()
     vinculo_turma  = TextField(fts=True, index=True, default='0')
@@ -59,7 +60,7 @@ class DbAluno(Model):
         else:
             return False
 
-    def create_aluno(self, nome, senha, vinculo_escola = None):
+    def create_aluno(self, nome, senha, vinculo_escola = '0', vinculo_rede='0'):
         """
         Método principal de criação do usuário no banco de dados
 
@@ -70,7 +71,7 @@ class DbAluno(Model):
 
         if not self.validar_senha_vazia(senha):
             matricula = self.gerar_matricula()
-            self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha, matricula=matricula)
+            self.create(nome=nome, tipo_aluno='6',vinculo_escola = vinculo_escola,senha=senha, vinculo_rede=vinculo_rede,matricula=matricula)
             return True
         else:
             return TypeError("Não foi possivel salvar o Usuário")
@@ -107,10 +108,10 @@ class DbAluno(Model):
         alunos = []
 
         for aluno in self.query(order_by=self.nome):
-            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
-                               vinculo_rede=None, vinculo_escola=aluno.vinculo_escola,
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno,cpf=None,nome=aluno.nome,vinculo_rede = aluno.vinculo_rede,vinculo_escola = aluno.vinculo_escola,
                                vinculo_turma=aluno.vinculo_turma))
         return alunos
+
 
     def pesquisa_usuario(self, usuario_nome):
 
@@ -124,7 +125,19 @@ class DbAluno(Model):
         usuario = []
         for pesquisa in DbAluno.query(DbAluno.nome == usuario_nome):
             usuario = pesquisa
+
         return usuario
+
+    def aluno_delete(self, deletar_ids):
+        """
+        deleta o(s) aluno(s) percorrendo a lista de ids de usuários selecionados
+
+        :param deletar_ids: Uma lista dos usuários a serem deletados
+        :return: None
+        """
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
 
     def pontos_jogo(self, usuario, jogo, pontos):
         """
@@ -232,19 +245,13 @@ class DbAluno(Model):
         :param turma_add: o id da turma escolhida para ser acrescida aos alunos
         :return: None
         """
-
         """res = DbEstrutura.load(turma_add)
         escolhas= []
->>>>>>> ace753242fd33f3bb17ee18c47b5ae0dd0fdc065
         for escolha in escolha:
             escolhas.append(escolha.id)
         turma_add = res.nome
         for escolhas in escolhas:
             usuario = self.load(escolhas)
-<<<<<<< HEAD
-            usuario.vinculo_turma = turma_add
-            usuario.save()
-=======
             usuario.turma_do_aluno = turma_add
             usuario.save()"""
         try :
@@ -253,7 +260,6 @@ class DbAluno(Model):
             aluno.save()
         except ValueError:
             print('Erro!')
-
 
     def comprar_item(self, id_usuario, id_item):
         """
@@ -331,8 +337,8 @@ class DbAluno(Model):
         usuario.anotacoes_aluno.append(mensagem)
         usuario.save()
 
-    def ver_anotacoes_aluno(self, id_aluno):
-        aluno = self.load(id_aluno)
+    def ver_anotacoes_aluno(self,id_aluno):
+        aluno=self.load(id_aluno)
 
         anotacoes = []
         for x in aluno.anotacoes_aluno:
@@ -340,36 +346,9 @@ class DbAluno(Model):
 
         return anotacoes
 
-    def pesquisa_aluno_turma(self, aluno_, turma_):
+    def pesquisa_aluno_turma(aluno_,turma_):
 
-        DbAluno.pesquisa_usuario(self, aluno_, turma_)
-
-    def aluno_delete(self, deletar_ids):
-        """
-        deleta o(s) aluno(s) percorrendo a lista de ids de usuários selecionados
-
-        :param deletar_ids: Uma lista dos usuários a serem deletados
-        :return: None
-        """
-        for deletar_ids in deletar_ids:
-            usuario = self.load(deletar_ids)
-            usuario.delete(deletar_ids)
-
-    def restaurar_aluno(self, matricula, nome, senha, tipo_aluno, cor, rosto, acessorio, corpo, pontos_j1, cliques_j1,
-                        pontos_j2, cliques_j2, pontos_de_vida, pontos_de_moedas, desempenho_aluno_j1,
-                        desempenho_aluno_j2, vinculo_escola, vinculo_turma):
-        if self.create(matricula=matricula, nome=nome, senha=senha, tipo_aluno=tipo_aluno, cor=cor, rosto=rosto,
-                       acessorio=acessorio, corpo=corpo, ponto_j1=pontos_j1, cliques_j1=cliques_j1,
-                       pontos_j2=pontos_j2, cliques_j2=cliques_j2, pontos_de_vida=pontos_de_vida,
-                       pontos_de_moedas=pontos_de_moedas, desempenho_aluno_j1=desempenho_aluno_j1,
-                       desempenho_aluno_j2=desempenho_aluno_j2
-                , vinculo_escola=vinculo_escola, vinculo_turma=vinculo_turma):
-            return True
-        else:
-            return False
-
-    def apagartudo(self):
-        db.flushall()
+       DbAluno.pesquisa_usuario(aluno_, turma_)
 
     def search_aluno_by_escola(self, escola):
         alunos = []

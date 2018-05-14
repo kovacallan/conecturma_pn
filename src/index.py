@@ -2,6 +2,7 @@ from bottle import default_app
 from control.static_controller import *
 from control.menu_controller import *
 from control.usuarios.usuario_controller import *
+from control.usuarios.administrador_controller import *
 from control.usuarios.aluno_controller import *
 from control.usuarios.observador_controller import *
 from control.jogo_controller import *
