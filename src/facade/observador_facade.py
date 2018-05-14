@@ -9,9 +9,9 @@ class ObservadorFacade:
         self.observador = DbObservador()
 
 
-    def create_observador_facade(self, nome, senha, telefone, email, tipo,escola, cpf=None, rede=None):
+    def create_observador_facade(self, nome, senha, telefone, email, tipo,escola, vinculo_turma=None,cpf=None, rede=None):
         return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
-                                                 tipo=tipo, rede=rede, escola=escola)
+                                                 tipo=tipo, rede=rede, escola=escola,vinculo_turma=vinculo_turma)
     def read_observador_facade(self):
         return self.observador.read_observador()
 
@@ -33,14 +33,27 @@ class ObservadorFacade:
     def search_observador_facade(self, nome):
         return self.observador.search_observador(nome)
 
+    def search_observador_inativos_facade(self,nome):
+        return self.observador.search_observador_inativos(nome)
+
     def search_observador_tipo_facade(self, tipo):
         return self.observador.search_observador_tipo(tipo)
 
     def search_observador_professor_by_escola_facade(self, vinculo_escola):
         return self.observador.search_observador_professor_by_escola(vinculo_escola)
 
+    def search_observador_escola_listagem_facade(self, login, vinculo_escola):
+        return self.observador.search_observador_escola_listagem(login=login, vinculo_escola=vinculo_escola)
+
+    def search_observador_escola_filtro_facade(self, vinculo_escola):
+        return self.observador.search_observador_escola_filtro(vinculo_escola=vinculo_escola)
+
+    def search_observador_turma(self,vinculo_turma):
+        return self.observador.search_observador_turma(vinculo_turma=vinculo_turma)
 
     def login_date_facade(self, id, data):
         self.observador.login_date(id, data)
 
+    def avatar_facade(self,id):
+        return self.observador.avatar(id)
 

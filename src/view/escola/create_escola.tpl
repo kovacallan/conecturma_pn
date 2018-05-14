@@ -2,7 +2,7 @@
 <div class="row">
     <div align="center" class="col-md-12">
         <h1>Cadastro</h1>
-        <form action="create_escola">
+        <form action="/escola/criar_escola" method="post">
          Nome da escola:   <input type="text" name="nome"/><br>
          Telefone:          <input type="text" name="telefone"/><br>
          Cep:          <input type="text" name="cep"/><br>

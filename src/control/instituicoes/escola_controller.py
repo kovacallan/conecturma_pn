@@ -1,11 +1,9 @@
 from bottle import *
-from facade.escola_facade import EscolaFacade
-from facade.rede_facade import RedeFacade
-from facade.observador_facade import ObservadorFacade
+from facade.facade_main import Facade
 
-facade = EscolaFacade()
-rede_facade = RedeFacade()
-observador_facade = ObservadorFacade()
+
+
+facade = Facade()
 
 
 @route('/escola')
@@ -18,19 +16,50 @@ def view_escola_index():
     """
     escola = controller_escola_read()
     return dict(escola=escola)
-
-
-@route('/escola/cadastro')
+@route('/escola/escola_cadastro')
 @view('escola/create_escola')
-def view_escola_cadastro():
+def cadastro_escola():
+    observador1 = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    if observador1['tipo'] == '1':
+        rede = facade.search_rede_id_facade(int(observador1['vinculo_rede']))
+        return dict(observador_tipo=observador1['tipo'], rede=rede)
+    elif observador1['tipo'] =='0':
+        rede = facade.read_rede_facade()
+        return dict(observador_tipo=observador1['tipo'], rede=rede)
 
-    observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+@route('/escola/criar_escola', method='POST')
+def view_escola_cadastro():
+    observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
     if observador['tipo'] == '1':
-        rede = rede_facade.search_rede_id_facade(int(observador['vinculo_rede']))
-        return dict(rede=rede, observador_tipo = observador['tipo'])
+        rede = int(observador['vinculo_rede'])
+        print("pegou isso em rede",rede)
+        nome = request.params['nome']
+        telefone = request.params['telefone']
+        cep = request.params['cep']
+        estado = request.params['estado']
+        uf = request.params['uf']
+        numero = request.params['numero']
+        if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
+            facade.create_escola_facade(nome=nome, telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
+                                        vinculo_rede=rede)
+            redirect("/escola")
     elif observador['tipo'] == '0':
-        rede = rede_facade.read_rede_facade()
-        return dict(rede=rede, observador_tipo=observador['tipo'])
+        # rede = rede_facade.search_rede_id_facade(int(observador['vinculo_rede']))
+        nome = request.params['nome']
+        telefone = request.params['telefone']
+        cep = request.params['cep']
+        estado = request.params['estado']
+        uf = request.params['uf']
+        numero = request.params['numero']
+        rede_pertencente = request.params['rede']
+
+        if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
+            facade.create_escola_facade(nome=nome, telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
+                                        vinculo_rede=rede_pertencente)
+            # rede = rede_facade.read_rede_facade()
+            redirect("/escola")
+        else:
+            print("Erro para salvar escola")
 
 
 @route('/escola/read_escola')
@@ -61,28 +90,28 @@ def view_escola_update():
                     cod_identificacao=escolas['cod_identificacao'])
 
 
-@get('/escola/create_escola')
-def controller_escola_cadastro():
-    """
-    Metodo de cadastrar escola , com os atributos que a escola recebe
-    usa os metodos : filtro_cadastro(do proprio controller) e create_escola_facade
-    :return:
-    """
-    nome = request.params['nome']
-    telefone = request.params['telefone']
-    cep = request.params['cep']
-    estado = request.params['estado']
-    uf = request.params['uf']
-    numero = request.params['numero']
-    rede_pertencente = request.params['rede']
-
-    if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
-        facade.create_escola_facade(nome=nome, cep=cep, numero=numero, telefone=telefone, estado=estado, uf=uf,
-                                    vinculo_rede=rede_pertencente)
-        redirect('/escola/cadastro')
-    else:
-        print("Erro para salvar")
-
+# @get('/escola/create_escola')
+# def controller_escola_cadastro():
+#     """
+#     Metodo de cadastrar escola , com os atributos que a escola recebe
+#     usa os metodos : filtro_cadastro(do proprio controller) e create_escola_facade
+#     :return:
+#     """
+#     nome = request.params['nome']
+#     telefone = request.params['telefone']
+#     cep = request.params['cep']
+#     estado = request.params['estado']
+#     uf = request.params['uf']
+#     numero = request.params['numero']
+#     rede_pertencente = request.params['rede']
+#
+#     if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
+#         facade.create_escola_facade(nome=nome, cep=cep, numero=numero, telefone=telefone, estado=estado, uf=uf,
+#                                     vinculo_rede=rede_pertencente)
+#         redirect('/escola/cadastro')
+#     else:
+#         print("Erro para salvar escola")
+#
 
 def controller_escola_read():
     """
@@ -97,7 +126,8 @@ def controller_escola_read():
     else:
         for e in escola:
             if int(e['vinculo_rede']) > 0:
-                rede = rede_facade.search_rede_id_facade(e['vinculo_rede'])
+                print("BB {} ".format(int(e['vinculo_rede'])))
+                rede = facade.search_rede_id_facade(int(e['vinculo_rede']))
                 e['vinculo_rede'] = rede['nome']
             escolas.append(e)
         return escolas
@@ -109,11 +139,9 @@ def controller_escola_update():
     modifica os dados da escola
     :return:
     """
-    facade.update_escola_facade(id=request.params['id'], nome=request.params['nome'], rua=request.params['rua'],
-                                numero=request.params['numero'],
+    facade.update_escola_facade(id=request.params['id'], nome=request.params['nome'], numero=request.params['numero'],
                                 telefone=request.params['telefone'], estado=request.params['estado'],
-                                cidade=request.params['cidade'], rede_pertencente=request.params['rede_pertencente'],
-                                cod_identificacao=request.params['cod_identificacao'])
+                                cidade=request.params['cidade'], vinculo_rede=request.params['rede_pertencente'])
     redirect('/escola/read_escola')
 
 

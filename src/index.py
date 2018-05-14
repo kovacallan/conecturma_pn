@@ -4,10 +4,6 @@ from control.menu_controller import *
 from control.usuarios.usuario_controller import *
 from control.usuarios.aluno_controller import *
 from control.usuarios.observador_controller import *
-from control.usuarios.diretor_controller import *
-from control.usuarios.professor_controller import *
-from control.usuarios.gestor_controller import *
-from control.usuarios.administrador_controller import *
 from control.jogo_controller import *
 from control.instituicoes.turma_controller import *
 from control.loja_controller import *
@@ -18,6 +14,7 @@ from control.login.login_controller import *
 from control.login.login_observador_controller import *
 from control.login.login_aluno_controller import *
 from control.medalha_controller import *
+from control.filtro_controller import *
 
 import bottle
 import os

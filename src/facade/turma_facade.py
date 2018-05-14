@@ -32,10 +32,14 @@ class TurmaFacade:
         return self.turma.delete_estrutura_test(deletar_ids)
 
     def search_turma_id_facade(self, id):
-        return self.turma.search_estrutura_id(id=id)
+        return self.turma.search_turma_id(id=id)
 
     def search_turma_facade(self, turma_nome):
         return self.turma.search_estrutura(tipo_estrutura=estrutura, nome=turma_nome)
 
     def vincular_professor_turma_facade(self,prof_id , turma_id):
         return self.turma.vincular_prof_turma(prof_id, turma_id, tipo_estrutura=estrutura)
+
+    def search_turma_by_escola(self, vinculo_escola):
+        return self.turma.search_turma_by_escola(vinculo_escola=vinculo_escola)
+

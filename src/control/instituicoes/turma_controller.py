@@ -43,7 +43,7 @@ def view_cadastrar_turma():
             if e['vinculo_rede'] is observador['vinculo_rede']:
                 escola.append(e)
 
-        return dict(escolas=escola, observador_tipo = observador['tipo'])
+        return dict(escolas=escola, observador_tipo=observador['tipo'])
     elif observador['tipo'] == '0':
         escola = facade.read_escola_facade()
         return dict(escolas=escola, observador_tipo=observador['tipo'])
@@ -61,13 +61,13 @@ def view_update_turma():
     aluno = facade.search_aluno_escola_facade(turma['escola'])
     alunos = []
     for a in aluno:
-        if a['vinculo_turma'] is None:
+        if a['vinculo_turma'] == '0':
             alunos.append(a)
-
+    print(alunos)
     professor = facade.search_observador_professor_by_escola_facade(turma['escola'])
     professores = []
     for p in professor:
-        if p['vinculo_turma'] is None:
+        if p['vinculo_turma'] is '0':
             professores.append(p)
 
     return template('turma/turma_update', turma=turma, aluno = alunos, professor = professores)
@@ -95,16 +95,13 @@ def controller_update_turma():
 @route('/turma/cadastro_turma', method='POST')
 def controller_create_turma():
     """
-    Pagina para chamar a funçao create_turma , usando nome , serie e escola
-    metodos usados: create_turma_facade
-    :return: cria uma entrada no banco de dados da turma criada
     """
     turma = request.forms['turma_nome']
     serie = request.forms['serie']
     escola = request.forms['escola']
     facade.create_turma_facade(nome=turma, login=request.get_cookie("login", secret='2524'), serie=serie, escola=escola)
-
     redirect('/turma')
+
 
 def controller_read_turma():
     """

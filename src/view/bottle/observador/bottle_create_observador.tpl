@@ -13,6 +13,7 @@
     cpf*:<input type="text" id="cpf" name="cpf"> <br><br>
     email*:<input type="email" id="email" name="email" onChange="emailValidador()"><div id="erro_email"></div><br><br>
     <input type="hidden" id="escola" name="escola" value="0">
+    <input type="hidden" id="turma" name="turma" value="0">
     rede*:
     <select id="rede" name="rede">
         % for e in rede:
@@ -34,6 +35,7 @@
             <option value="{{e['id']}}">{{e['nome']}}</option>
         % end
     </select>
+    <input type="hidden" id="turma" name="turma" value="0">
     <input type="hidden" id="rede" name="rede" value="0">
 
 % elif tipo is 3:
@@ -49,6 +51,14 @@
         % for e in escola:
             <option value="{{e['id']}}">{{e['nome']}}</option>
         % end
+    </select>
+    <br>
+    <br>
+    Turma*:
+    <select id="turma" name="turma">
+        %for t in turma:
+            <option value="{{t['id']}}">{{t['nome']}}</option>
+        %end
     </select>
     <input type="hidden" id="rede" name="rede" value="0">
     <br>
