@@ -1,5 +1,6 @@
 from bottle import route, view, request, redirect, response
 from facade.facade_main import Facade
+from control.classes.permissao import *
 
 facade = Facade()
 
@@ -12,22 +13,21 @@ def view_login_index():
     Cria um cookie com base no usuario que loga , sendo diferentes os cookies para o aluno e para os observadores
     :return:
     """
-    observador = facade.search_observador_facade(request.get_cookie("login", secret='2526'))
 
-    if request.get_cookie("login", secret='2524'):
-        redirect('/aluno/area_aluno')
-    elif request.get_cookie("login", secret='2525') and observador['tipo']!='0':
-        redirect('/gestao_aprendizagem')
-    elif request.get_cookie("login", secret='2525') and observador['tipo']=='0':
-        redirect('/pag_administrador')
-    else:
-        return
+@route('/login/login_observador', method='POST')
+def login_observador_controller():
+    email = request.params['observador_login_email']
+    senha = request.params['observador_senha']
 
-@route('/sair')
-def controller_login_sair():
-    """
-    Deleta o cookie
-    :return:
-    """
-    response.delete_cookie("login")
-    redirect('/')
+    login = Login(email=email, senha=senha)
+    login.login_observador()
+
+    print('Entrei aqui Observador')
+
+@route('/login/login_aluno', method='POST')
+def login_observador_controller():
+    usuario = request.params['aluno_login_nome']
+    senha = request.params['aluno_senha']
+    print('Entrei aqui Aluno')
+
+
