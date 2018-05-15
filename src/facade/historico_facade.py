@@ -17,5 +17,4 @@ class HistoricoFacade:
     def read_historico_facade(self):
         return self.historico.read_estrutura(tipo_estrutura=estrutura)
 
-    def apagartudo(self):
-        return self.historico.darflush()
+

@@ -8,14 +8,14 @@ class AlunoFacade:
         """
         self.aluno = DbAluno()
 
-    def create_aluno_facade(self, nome, escola,senha):
+    def create_aluno_facade(self, nome, escola,senha,vinculo_rede):
         """
         Cria um aluno no banco de dados
         :param nome: nome do aluno/usuario
         :param senha: senha para logar
         :return:None
         """
-        return self.aluno.create_aluno(nome=nome, vinculo_escola = escola,senha=senha)
+        return self.aluno.create_aluno(nome=nome, vinculo_escola = escola,senha=senha, vinculo_rede=vinculo_rede)
 
     def read_aluno_facade(self):
         """

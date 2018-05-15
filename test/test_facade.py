@@ -5,16 +5,8 @@ import redis
 # from unittest.mock import MagicMock
 # from src.model.estrutura_model import DbEstrutura
 """possivel erro de importaçao de DbAluno acima"""
-from src.facade.aluno_facade import AlunoFacade
-from src.facade.observador_facade import ObservadorFacade
-from src.facade.rede_facade import RedeFacade
-from src.facade.escola_facade import EscolaFacade
-from src.facade.turma_facade import TurmaFacade
-from src.facade.loja_facade import LojaFacade
-from src.facade.medalha_facade import MedalhaFacade
-from src.facade.historico_facade import HistoricoFacade
 from src.facade.facade_main import Facade
-
+facade=Facade()
 
 class FacadeTest(unittest.TestCase):
     def setUp(self):
@@ -24,7 +16,7 @@ class FacadeTest(unittest.TestCase):
 
     def _create_aluno(self):
 
-        aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123")
+        aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123",vinculo_rede="0")
         self.assertEqual(aluno1, True)
 
     def _create_aluno_senha_vazia(self):
@@ -33,7 +25,7 @@ class FacadeTest(unittest.TestCase):
 
     def _create_aluno_aluno_vazio(self):
         aluno = self.facade.create_aluno_facade(" ", " 123")
-        self.asserrTrue(TypeError, True)
+        self.assertTrue(TypeError, True)
 
     def _create_aluno_fail(self):
         aluno = self.facade.create_aluno_facade("Brian", "123")
@@ -231,6 +223,7 @@ class FacadeTest(unittest.TestCase):
                                                                     telefone='(21)9999-9999',
                                                                     cpf='123456789', email='Monty@python.com.br',
                                                                     tipo='3', rede=0, escola=0)
+        observador_diretor = self.facade.create_observador_facade(nome="diretor", senha="123",telefone="21 2569 6969",email="tent@cool.os" , tipo="2",rede=0,escola=0)
 
         self.assertIs(observador1, True)
         self.assertIs(observador_professor, True)
@@ -270,7 +263,7 @@ class FacadeTest(unittest.TestCase):
         mensagem2 = "Gosto dessa escola"
         mensagem = "Nossa escola deve melhorar"
         observador1 = self.facade.search_observador_inativos_facade("egg")
-
+        gestor= self.facade.search_observador_inativos_facade("")
         self.facade.anotacoes_estrutura_baixo_facade(observador1.id, mensagem)
         self.facade.anotacoes_estrutura_cima_facade(gestor.id, mensagem2)
         self.assertEqual(observador1.anotacoes_estrutura_baixo[0], mensagem.encode('utf-8'))
@@ -298,27 +291,29 @@ class FacadeTest(unittest.TestCase):
     """TESTE REDE"""
 
     def _create_rede(self):
-        rede = self.facade.create_rede_facade("egg", "(21)9999-9999")
-        rede2 = self.facade.search_rede_facade("egg")
+        rede = self.facade.create_estrutura_facade("egg", "(21)9999-9999")
+        rede2 = self.facade.search_estrutura_facade("1","egg")
         self.assertIsNot(rede, None)
         self.assertIsNot(rede2, None)
 
     def _update_rede(self):
-        rede = self.facade.create_rede_facade("egg", "(21)9999-9999")
-        rede = self.facade.search_rede_facade("egg")
-        self.facade.update_rede_facade(rede['id'], nome="Ni", telefone="(11)8888-8888")
-        rede = self.facade.search_rede_facade("Ni")
+        rede = self.facade.create_estrutura_facade("egg", "(21)9999-9999")
+        self.assertIsNot(rede,None)
+        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1",nome="egg")
+        self.assertIsNot(rede1,None)
+        self.facade.update_estrutura(rede['id'], nome="Ni", telefone="(11)8888-8888")
+        rede = self.facade.search_estrutura_facade(tipo_estrutura="1",nome="Ni")
         self.assertEqual(rede['nome'], "Ni")
         self.assertEqual(rede['telefone'], "(11)8888-8888")
 
     def _pesquisa_rede(self):
-        rede = self.facade.search_rede_facade("Ni")
+        rede = self.facade.search_estrutura_facade(tipo_estrutura="1",nome="Ni")
         self.assertIs(rede, rede)
-        rede = self.facade.search_rede_facade("Sily walk")
-        self.assertIs(rede, None)
+        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1",nome="Sily walk")
+        self.assertIs(rede1, None)
 
     def _delete_rede(self):
-        rede = self.facade.read_rede_facade()
+        rede = self.facade.read_estrutura_facade(tipo_estrutura="1")
         escolhidos = []
         for redes in rede:
             escolhidos.append(redes['id'])
@@ -342,7 +337,7 @@ class FacadeTest(unittest.TestCase):
     """TESTE FACADE ESCOLA"""
 
     def _create_escola(self):
-        escola = self.facade.create_escola_facade('Do bairro', 'de baixo', '2266 6622', '21 ', 'RJ', 'Pindamonhagaba',
+        escola = self.facade.create_estrutura_facade('Do bairro', 'de baixo', '2266 6622', '21 ', 'RJ', 'Pindamonhagaba',
                                                   'cep 22287111')
         self.assertIsNot(escola, None)
 
@@ -360,10 +355,10 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(escola2['telefone'], "33355567")
 
     def _pesquisa_escola(self):
-        escola = self.facade.search_escola_facade("Do bairro")
+        escola = self.facade.search_estrutura_facade(tipo_estrutura="2",nome="Do bairro")
         self.assertIs(escola, escola)
-        escola = self.facade.search_escola_facade("Sily walk")
-        self.assertIs(escola, None)
+        escola1 = self.facade.search_estrutura_facade(tipo_estrutura="2",nome="Sily walk")
+        self.assertIs(escola1, None)
 
     def _delete_escola(self):
         escola = self.facade.read_escola_facade()
@@ -397,8 +392,8 @@ class FacadeTest(unittest.TestCase):
     """TESTE TURMA"""
 
     def _create_turma(self):
-        turma1 = self.facade.create_turma_facade(nome="Knight", login="Ni", serie=1, escola="1")
-        # print("turma1",turma1)
+        turma1 = self.facade.create_estrutura_facade(nome="Knight", tipo_estrutura="3", serie="1", vinculo_escola="1")
+        print("turma1",turma1)
         self.assertIsNot(turma1, None)
 
     def _search_turma(self):
@@ -526,7 +521,7 @@ class FacadeTest(unittest.TestCase):
         iten1 = self.facade.criar_item_loja_facade(nome="burroquandofoge", tipo='1', preco=0)
         self.assertIsNot(iten1, None)
 
-        aluno1 = self.facade.create_aluno_facade(nome="thanos", escola="Estalo", senha="123")
+        aluno1 = self.facade.create_aluno_facade(nome="thanos", escola="Estalo", senha="123", vinculo_rede="0")
         item2 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.assertEqual(aluno1, True)
         self.assertIsNot(item2,None)
@@ -626,11 +621,11 @@ class FacadeTest(unittest.TestCase):
     def test_read_inativos(self):
         self._read_inativados()
 
-    def test_substituto_de_webtest(self):
-        self._create_observador()
-    # def tearDown(self):
-    #
-    #     self.facade.apagartudo()
+    # def test_substituto_de_webtest(self):
+    #     self._create_observador()
+    def tearDown(self):
+
+        self.facade.apagartudo()
 
 
 if __name__ == '__main__':

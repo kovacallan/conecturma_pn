@@ -1,5 +1,6 @@
 from bottle import route, view, request, redirect, response
-from facade.facade_main import *
+from facade.facade_main import Facade
+
 facade = Facade()
 
 @route('/')
@@ -9,11 +10,13 @@ def view_login_index():
     Cria um cookie com base no usuario que loga , sendo diferentes os cookies para o aluno e para os observadores
     :return:
     """
+    observador = facade.search_observador_facade(request.get_cookie("login", secret='2526'))
+
     if request.get_cookie("login", secret='2524'):
         redirect('/aluno/area_aluno')
     elif request.get_cookie("login", secret='2525'):
         redirect('/gestao_aprendizagem')
-    elif request.get_cookie("login", secret='2526'):
+    elif request.get_cookie("login", secret='2525') and observador['tipo']=='0':
         redirect('/pag_administrador')
     else:
         return

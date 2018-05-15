@@ -5,10 +5,10 @@ from control.menu_controller import *
 
 from control.usuarios.usuario_controller import *
 
-# from control.usuarios.aluno_controller import *
 from control.area_aluno_controller import *
 
 from control.usuarios.observador_controller import *
+# from control.b_observadores_controller import *
 
 from control.jogo_controller import *
 

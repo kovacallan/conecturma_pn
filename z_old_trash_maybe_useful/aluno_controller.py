@@ -1,20 +1,7 @@
 from bottle import *
+from facade.facade_main import Facade
 
-from facade.facade_main import *
-from facade.rede_facade import RedeFacade
-from facade.escola_facade import EscolaFacade
-from facade.turma_facade import  TurmaFacade
-from facade.aluno_facade import AlunoFacade
-from facade.observador_facade import ObservadorFacade
-from facade.loja_facade import LojaFacade
-
-facade=Facade()
-escola_facade = EscolaFacade()
-turma_facade = TurmaFacade()
-aluno_facade = AlunoFacade()
-observador_facade = ObservadorFacade()
-rede_facade = RedeFacade()
-loja_facade = LojaFacade()
+facade = Facade()
 
 
 """ Controle aluno """
@@ -72,7 +59,7 @@ def create_aluno():
     :return:
     """
     escola = request.forms['escola']
-    if facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola,senha=request.forms['senha']):
+    if facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola, senha=request.forms['senha']):
         redirect('/aluno')
     else:
         print("deu erro na criação do ALuno")
@@ -154,7 +141,7 @@ def ver_itens():
     itens_comprado = facade.ver_item_comprado_facade(usuario.id)
     itens = []
     for y in itens_comprado:
-        itens.append(loja_facade.pesquisa_item_facade(y))
+        itens.append(facade.pesquisa_item_facade(y))
 
     return dict(lista_itens=itens)
 

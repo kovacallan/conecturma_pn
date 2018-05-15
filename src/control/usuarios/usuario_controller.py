@@ -16,6 +16,7 @@ def view_usuario_index():
         rede, escola, turma = controller_filtro_opcoes(tipo_logado=observador['tipo'])
         return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
     else:
+
         print(facade.search_observador_facade(request.get_cookie("login",secret='2525')))
         redirect('/')
 
