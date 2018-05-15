@@ -21,6 +21,9 @@ class ObservadorFacade:
     def update_observador_facade(self, id, nome, telefone, cpf, email):
         return self.observador.update_observador(id, nome, telefone, cpf, email)
 
+    def create_hash_login_facade(self,id, hash):
+        self.observador.create_hash_login(id=id, hash=hash)
+
     def delete_observador_facade(self, deletar_ids):
         self.observador.delete_observador(deletar_ids=deletar_ids)
 
