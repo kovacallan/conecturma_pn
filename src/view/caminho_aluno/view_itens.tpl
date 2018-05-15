@@ -17,7 +17,7 @@
             %>
 
         </div>
-        <a href="/aluno"><button>Voltar</button></a>
+        <a href="/aluno/area_aluno"><button>Voltar</button></a>
    </div>
 
 % include('footer.tpl')

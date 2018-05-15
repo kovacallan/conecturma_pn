@@ -10,7 +10,7 @@ def view_login_index():
     :return:
     """
     if request.get_cookie("login", secret='2524'):
-        redirect('/jogar_conecturma')
+        redirect('/aluno/area_aluno')
     elif request.get_cookie("login", secret='2525'):
         redirect('/gestao_aprendizagem')
     elif request.get_cookie("login", secret='2526'):

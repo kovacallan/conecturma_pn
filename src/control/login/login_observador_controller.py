@@ -21,14 +21,12 @@ def controller_login_entrar_observador():
     print("login",observador)
     if observador:
         if observador['tipo'] is not '0':
-            # print("aqui1")
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)
             facade.create_historico_facade(observador['nome'], observador['tipo'])
             redirect('/gestao_aprendizagem')
         elif observador['tipo']== '0':
-            print("aqui,quee")
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)

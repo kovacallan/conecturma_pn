@@ -269,7 +269,8 @@ class FacadeTest(unittest.TestCase):
         self._pesquisa_escola()
         mensagem2 = "Gosto dessa escola"
         mensagem = "Nossa escola deve melhorar"
-        observador1 = self.facade.pesquisa_aluno_facade("egg")
+        observador1 = self.facade.search_observador_inativos_facade("egg")
+
         self.facade.anotacoes_estrutura_baixo_facade(observador1.id, mensagem)
         self.facade.anotacoes_estrutura_cima_facade(gestor.id, mensagem2)
         self.assertEqual(observador1.anotacoes_estrutura_baixo[0], mensagem.encode('utf-8'))
@@ -625,10 +626,11 @@ class FacadeTest(unittest.TestCase):
     def test_read_inativos(self):
         self._read_inativados()
 
-
-    def tearDown(self):
-
-        self.facade.apagartudo()
+    def test_substituto_de_webtest(self):
+        self._create_observador()
+    # def tearDown(self):
+    #
+    #     self.facade.apagartudo()
 
 
 if __name__ == '__main__':

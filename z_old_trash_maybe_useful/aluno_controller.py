@@ -140,7 +140,7 @@ def deletar_aluno():
 
 
 @route('/aluno/ver_itens_comprados')
-@view('aluno/view_itens')
+@view('caminho_aluno/view_itens')
 def ver_itens():
     """
     mostra os itens que o usuario tem posse

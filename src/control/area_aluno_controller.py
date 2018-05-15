@@ -1,24 +1,19 @@
-from bottle import route, view, request, redirect
+from bottle import route,view, request, redirect, response
 from facade.facade_main import *
-from control.login.login_aluno_controller import *
 
-
-""" Controle do index """
 facade=Facade()
 
-@route('/jogar_conecturma')
-@view('jogar_conecturma')
+"""Tipo=6"""
+@route('/aluno/area_aluno')
+@view('caminho_aluno/jogar_conecturma')
 def view_jogar_conecturma():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
     if request.get_cookie("login", secret='2524'):
         usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
         avatar = facade.avatar_facade(usuario.id)
-        print("menu_controller",usuario.cor)
         if usuario.cor == "0":
-            print("aqui?")
             cor = 'default'
         else:
-            print("why??")
             cor =facade.pesquisa_item_facade(avatar['cor'])['nome']
 
         if usuario.rosto == "0":
@@ -69,50 +64,57 @@ def view_jogar_conecturma():
     else:
         redirect('/')
 
-@route('/gestao_aprendizagem')
-@view('gestao_aprendizagem')
-def view_gestao_aprendizagem():
-    if request.get_cookie("login", secret='2525'):
-        observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
-        return dict(usuario = observador['nome'], tipo = observador['tipo'])
+@route('/aluno/loja')
+@view('caminho_aluno/index_loja')
+def index():
+    """
+    Mostra os itens comprados e os itens disponiveis para serem comprados na mesma pagina
+    metodos usados : ja_tem_item_facade, read_item_loja_facade
+    :return: um dicionario com os itens comprados e disponiveis , caso um item nao tenha sido criado previamente
+    retorna um dicionario vazio
+    """
 
-@route('/alterar_senha')
-@view('alterar_senha')
-def view_alterar_senha():
-    return
-
-@route('/new_senha',method='POST')
-def controller_new_senha():
-
-    nome = request.params['usuario']
-    senha = request.params['senha']
-    senha_nova = request.params['senha_nova']
-    senha_conf = request.params['senha_conf']
-    if senha_nova != senha_conf:
-        redirect('/new_senha')
-    retorno = facade.pesquisa_aluno_facade(nome)
-    if valida_login_aluno(nome, senha):
-        facade.aluno.update_aluno(retorno.id, nome, senha_nova)
-        redirect('/user_menu')
+    itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
+    itens = facade.read_item_loja_facade()
+    if itens:
+        return dict(itens=itens, itens_comprados=str(itens_comprados))
     else:
-        print("deu ruim tentando mudar a senha")
-        redirect('/')
+        return dict(itens=False)
 
-@route('/alterar_usuario_nome')
-@view('alterar_usuario_nome')
-def view_alterar_senha():
-    return
-@route('/new_nome_user',method='POST')
-def controller_new_usuario_nome():
+@route('/aluno/ver_itens_comprados')
+@view('caminho_aluno/view_itens')
+def ver_itens():
+    """
+    mostra os itens que o usuario tem posse
+    chama os metodos : pesquisa_aluno_facade, ver_item_comprado_facade e pesquisa_iten_facade
+    cria uma lista com os ids dos itens do aluno
 
-    nome = request.params['usuario']
-    senha = request.params['senha']
-    nome_novo= request.params['nome_novo']
-    retorno = facade.pesquisa_aluno_facade(nome)
-    if valida_login_aluno(nome, senha):
-        facade.aluno.update_aluno(retorno.id, nome_novo, senha)
-        create_cookie(nome_novo)
-        redirect('/')
-    else:
-        print("deu ruim tentando mudar o usuario")
-        redirect('/')
+    :return: dicionario de itens
+    """
+
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    itens_comprado = facade.ver_item_comprado_facade(usuario.id)
+    itens = []
+    for y in itens_comprado:
+        itens.append(facade.pesquisa_item_facade(y))
+
+    return dict(lista_itens=itens)
+
+
+@route('/equipar_item', method='POST')
+def equipar_item():
+    """
+    Equipar o avatar
+    metodos chamados: pesquisa_aluno_facade,pesquisa_item_facade e equipar_item_facade
+    :return:
+    """
+
+    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+
+    id_item = request.forms['id']
+    item = facade.pesquisa_item_facade(id_item)
+
+    facade.equipar_item_facade(usuario.id, item)
+
+    redirect('/aluno/ver_itens_comprados')
+
