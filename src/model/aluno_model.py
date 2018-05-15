@@ -254,10 +254,12 @@ class DbAluno(Model):
             usuario = self.load(escolhas)
             usuario.turma_do_aluno = turma_add
             usuario.save()"""
-        try :
-            aluno = self.load(id_aluno)
-            aluno.vinculo_turma = vinculo_turma
-            aluno.save()
+
+        try:
+            for id_aluno in id_aluno:
+                aluno = self.load(id_aluno.id)
+                aluno.vinculo_turma = str(vinculo_turma['id'])
+                aluno.save()
         except ValueError:
             print('Erro!')
 
@@ -367,3 +369,7 @@ class DbAluno(Model):
                                vinculo_rede=None, vinculo_escola = aluno.vinculo_escola,
                                vinculo_turma=aluno.vinculo_turma))
         return alunos
+
+    def apagartudo(self):
+        db.flushall()
+

@@ -20,9 +20,9 @@ sys.path.append('../')
 class BlackBoxTest(unittest.TestCase):
     def setUp(self):
         # test_app.post('/login_observador',dict(usuario= 'administrator', senha="@onde2929"))
-        test_app.post('/observador/create_observador_professor',
-                      dict(nome='proof', senha="spam", telefone="21 99887342", email="teste@teste.test.te",
-                           tipo_observador="3", escola="2",vinculo_rede="0"))
+        test_app.post('/observador/create_observador',
+                      dict(nome='proof', senha="spam", telefone="21 99887342",cpf="0", email="teste@teste.test.te",
+                           tipo="3", escola="2",rede="0",vinculo_turma="2"))
         test_app.post('/login_observador', dict(usuario='proof', senha='spam'))
 
     def _fixprof(self):

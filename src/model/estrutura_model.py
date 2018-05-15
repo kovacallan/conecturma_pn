@@ -28,6 +28,9 @@ class DbEstrutura(Model):
     nome_usuario = TextField(default='0')
     tipo_usuario = TextField(default='0')
     data_acesso = DateTimeField(default=datetime.datetime.now)
+    anotacoes_estrutura_baixo = ListField()
+    anotacoes_estrutura_cima = ListField()
+
 
     def create_estrutura(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',
                          cep='0', endereco='0', numero='0', estado='0', uf='0', quem_criou='0', serie='0',
@@ -116,6 +119,7 @@ class DbEstrutura(Model):
             estrutura.tipo_usuario=tipo_usuario
         estrutura.save()
 
+
     def delete_estrutura_test(self,deletar_ids):
 
         for deletar_ids in deletar_ids:
@@ -197,4 +201,38 @@ class DbEstrutura(Model):
                      descricao=search.descricao, descricao_completa=search.descricao_completa,
                      nome_usuario=search.nome_usuario, tipo_usuario=search.tipo_usuario)
             )
-        return turma
+            return turma
+
+    # def ja_possui_item(self, usuario_logado):
+    #     """
+    #     Envia se o usuario já comprou o item
+    #     :param usuario_logado: Id do usuario
+    #     :return: Lista de itens que o usuario não tem
+    #     """
+    #     usuario = DbAluno()
+    #     itens_usuario = [x.decode('utf-8') for x in
+    #                      usuario.pesquisa_usuario(usuario_nome=usuario_logado).itens_comprados]
+    #     itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura='4')]
+    #     lista_teste = [z for z in itens if z not in itens_usuario]
+    #
+    #     return lista_teste
+
+    def update_estrutura(self, update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None,
+                         numero=None, cidade=None,
+                         estado=None, uf=None, serie=None, tipo_item=None, preco=None, tipo_medalha=None,
+                         descricao=None,
+                         descricao_completa=None, nome_usuario=None, tipo_usuario=None):
+        estrutura = self.load(update_id)
+        [setattr(estrutura,parametro,valor) for parametro,valor in locals().items() if valor]
+        estrutura.save()
+
+    def func_anotacoes_estrutura_baixo(self,id_estrutura,mensagem):
+        estrutura = self.load(id_estrutura)
+        estrutura.anotacoes_estrutura_baixo.append(mensagem)
+        estrutura.save()
+
+    def func_anotacoes_estrutura_cima(self,id_estrutura,mensagem):
+        estrutura=self.load(id_estrutura)
+        estrutura.anotacoes_estrutura_cima.append(mensagem)
+        estrutura.save()
+

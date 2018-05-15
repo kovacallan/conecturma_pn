@@ -5,6 +5,8 @@ from facade.loja_facade import LojaFacade
 from facade.medalha_facade import MedalhaFacade
 from facade.observador_facade import ObservadorFacade
 from facade.estrutura_facade import EstruturaFacade
+from facade.zInativos_facade import ZinativosFacade
+
 
 class Facade(AlunoFacade, ObservadorFacade, HistoricoFacade, LojaFacade, MedalhaFacade,EstruturaFacade):
     def __init__(self):
@@ -15,3 +17,5 @@ class Facade(AlunoFacade, ObservadorFacade, HistoricoFacade, LojaFacade, Medalha
         LojaFacade.__init__(self)
         HistoricoFacade.__init__(self)
         MedalhaFacade.__init__(self)
+        ZinativosFacade.__init__(self)
+

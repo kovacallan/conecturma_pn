@@ -32,7 +32,7 @@ def view_cadastrar_turma():
     :return:o dicionario com as escolas
     """
 
-    observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
     if observador['tipo'] == '2':
         escola = facade.search_estrutura_id_facade(int(observador['vinculo_escola']))
         return dict(escolas=escola, observador_tipo = observador['tipo'])
