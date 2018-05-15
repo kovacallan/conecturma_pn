@@ -16,6 +16,7 @@ def view_escola_index():
     """
     escola = controller_escola_read()
     return dict(escola=escola)
+
 @route('/escola/escola_cadastro')
 @view('escola/create_escola')
 def cadastro_escola():
@@ -89,30 +90,6 @@ def view_escola_update():
                     telefone=escolas['telefone'], rua=escolas['rua'], rede_pertencente=escolas['rede_pertencente'],
                     cod_identificacao=escolas['cod_identificacao'])
 
-
-# @get('/escola/create_escola')
-# def controller_escola_cadastro():
-#     """
-#     Metodo de cadastrar escola , com os atributos que a escola recebe
-#     usa os metodos : filtro_cadastro(do proprio controller) e create_escola_facade
-#     :return:
-#     """
-#     nome = request.params['nome']
-#     telefone = request.params['telefone']
-#     cep = request.params['cep']
-#     estado = request.params['estado']
-#     uf = request.params['uf']
-#     numero = request.params['numero']
-#     rede_pertencente = request.params['rede']
-#
-#     if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
-#         facade.create_escola_facade(nome=nome, cep=cep, numero=numero, telefone=telefone, estado=estado, uf=uf,
-#                                     vinculo_rede=rede_pertencente)
-#         redirect('/escola/cadastro')
-#     else:
-#         print("Erro para salvar escola")
-#
-
 def controller_escola_read():
     """
     Cria uma lista , coloca as escolas do banco na lista para mostrar na tela
@@ -142,7 +119,7 @@ def controller_escola_update():
     facade.update_escola_facade(id=request.params['id'], nome=request.params['nome'], numero=request.params['numero'],
                                 telefone=request.params['telefone'], estado=request.params['estado'],
                                 cidade=request.params['cidade'], vinculo_rede=request.params['rede_pertencente'])
-    redirect('/escola/read_escola')
+    redirect('/')
 
 
 def filtro_cadastro(nome, cep, numero, telefone, estado, uf):

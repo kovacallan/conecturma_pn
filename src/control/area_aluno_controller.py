@@ -1,4 +1,4 @@
-from bottle import route,view, request, redirect, response
+from bottle import route,view, request, redirect, response,get
 from facade.facade_main import *
 
 facade=Facade()
@@ -118,3 +118,66 @@ def equipar_item():
 
     redirect('/aluno/ver_itens_comprados')
 
+@get('/jogos')
+@view('ojogo')
+def jogo():
+    """
+    jogo que recebe o parâmetro de qual botão foi clicado e armazena a quantidade de acertos
+    :return: nome do jogo
+    """
+    if True or request.get_cookie("login", secret='2524'):
+        jogo = request.params['n1']
+        return dict(nome_jogo=jogo)
+    else:
+        redirect('/')
+
+
+""" Controle do score """
+
+
+@get('/ponto')
+def ponto():
+    """
+    Recebe o nome do botão que o jogador clicou para o jogo o valor de 1 em caso de acerto
+    incrementa nos pontos em cada jogo e manda um clique para ser acrescentado a cliques totais , para fins estatisticos
+
+    :return:ao termino do jogo volta a pagina do menu
+    """
+
+    jogo = request.params['jogo']
+    ponto = int(request.params['ponto'])
+    usuario = request.get_cookie("login", secret="2524")
+
+
+    facade.ponto_jogo_facade(usuario, jogo, ponto)
+    redirect('/')
+
+    """ redirect('/jogos', BaseResponse.add_header(jogo=jogo ,value=jogo))"""
+
+@route('aluno/ver_item')
+@view('loja/ver_item')
+def ver_item():
+    """
+    mostra os itens da loja , os ja criados
+    :return:o dicionario com o read
+    """
+    if request.get_cookie("login", secret='2524'):
+        read = facade.read_item_loja_facade()
+
+        return dict(teste=read)
+    else:
+        redirect('/')
+
+
+@get('/compras_loja')
+def compras():
+    """
+    compra o item que esta na loja
+    metodos usados: pesquisa_aluno_facade,compra_item_facade
+    :return:
+    """
+    id_item = request.params['id']
+    usuario_logado = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    facade.compra_item_facade(id_usuario=usuario_logado.id, id_item=id_item)
+
+    redirect('aluno/loja')

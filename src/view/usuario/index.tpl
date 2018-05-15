@@ -10,7 +10,7 @@
         <h1>Listagem de Usuários</h1>
          <div class="col-md-4">
             <div class="row">
-                <form action="usuario/redirect_cadastro">
+                <form action="/gestao_aprendizagem/usuario/redirect_cadastro">
                     %include('bottle/usuario/bottle_usuario_cadastro.tpl')
                     <button type="submit" >+ Usuário</button>
                 </form>

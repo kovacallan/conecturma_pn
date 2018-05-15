@@ -3,7 +3,7 @@ from facade.facade_main import Facade
 
 facade = Facade()
 
-@route('/usuario')
+@route('gestao_aprendizagem/usuario')
 @view('usuario/index')
 def view_usuario_index():
     """
