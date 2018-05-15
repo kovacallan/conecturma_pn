@@ -15,6 +15,7 @@ def view_login_index():
     """
 
 @route('/login/login_observador', method='POST')
+@observador
 def login_observador_controller():
     email = request.params['observador_login_email']
     senha = request.params['observador_senha']

@@ -1,4 +1,4 @@
-from bottle import redirect,response
+from bottle import redirect,response, request
 from datetime import datetime
 
 from facade.facade_main import Facade
@@ -60,8 +60,9 @@ class Login(object):
         return matricula
 
 
-def observador(self, function):
-    def decorator():
-
-        function()
+def observador(function):
+    def decorator(*args,**kwargs):
+        print(request.get_cookie("KIM", secret=KEY_HASH))
+        print("BB {}".format(request.get_cookie("BUMBA", secret=request.get_cookie("KIM", secret=KEY_HASH))))
+        return function(*args,**kwargs)
     return decorator
