@@ -1,6 +1,7 @@
 from facade.observador_facade import ObservadorFacade
 from facade.loja_facade import LojaFacade
 from facade.medalha_facade import MedalhaFacade
+
 from facade.aluno_facade import AlunoFacade
 
 
@@ -11,6 +12,8 @@ medalha_facade = MedalhaFacade()
 aluno_facade = AlunoFacade()
 
 observador_facade.create_observador_facade(nome="administrador", senha="@onde2929", telefone="21999999999", cpf="0",email="admin", tipo='0',
+                                            rede='0',escola='0')
+observador_facade.create_observador_facade(nome="allan", senha="123", telefone="21999999999", cpf="0",email="allan@conecturma.com.br", tipo='3',
                                             rede='0',escola='0')
 
 """rede_facade.create_rede_facade(nome="Rede Conecturma", telefone="(21)99999999")

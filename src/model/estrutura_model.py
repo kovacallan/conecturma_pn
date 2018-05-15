@@ -77,6 +77,49 @@ class DbEstrutura(Model):
 
         return lista_teste
 
+    def update_estrutura(self,update_id, nome='0', telefone='0', vinculo_rede='0', cep='0', endereco='0', numero='0',cidade='0',
+                         estado='0', uf='0', serie='0', tipo_item='0', preco='0', tipo_medalha='0', descricao='0',
+                         descricao_completa='0', nome_usuario='0', tipo_usuario='0'):
+        estrutura=self.load(update_id)
+        if nome is not None:
+            estrutura.nome=nome
+        else:
+            pass
+        if telefone is not None:
+            estrutura.telefone=telefone
+        if vinculo_rede is not None:
+            estrutura.vinculo_rede=vinculo_rede
+        if cep is not None:
+            estrutura.cep=cep
+        if endereco is not None:
+            estrutura.endereco=endereco
+        if numero is not None:
+            estrutura.numero=numero
+        if cidade is not None:
+            estrutura.cidade=cidade
+        if estado is not None:
+            estrutura.estado=estado
+        if uf is not None:
+            estrutura.uf=uf
+        if serie is not None:
+            estrutura.serie=serie
+        if tipo_item is not None:
+            estrutura.tipo_item=tipo_item
+        if preco is not None:
+            estrutura.preco=preco
+        if tipo_medalha is not None:
+            estrutura.tipo_medalha=tipo_medalha
+        if descricao is not None:
+            estrutura.descricao=descricao
+        if descricao_completa is not None:
+            estrutura.descricao_completa=descricao_completa
+        if nome_usuario is not None:
+            estrutura.nome_usuario=nome_usuario
+        if tipo_usuario is not None:
+            estrutura.tipo_usuario=tipo_usuario
+        estrutura.save()
+
+
     def delete_estrutura_test(self,deletar_ids):
 
         for deletar_ids in deletar_ids:

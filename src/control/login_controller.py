@@ -3,6 +3,8 @@ from facade.facade_main import Facade
 
 facade = Facade()
 
+
+
 @route('/')
 @view('login/index')
 def view_login_index():
@@ -14,7 +16,7 @@ def view_login_index():
 
     if request.get_cookie("login", secret='2524'):
         redirect('/aluno/area_aluno')
-    elif request.get_cookie("login", secret='2525'):
+    elif request.get_cookie("login", secret='2525') and observador['tipo']!='0':
         redirect('/gestao_aprendizagem')
     elif request.get_cookie("login", secret='2525') and observador['tipo']=='0':
         redirect('/pag_administrador')
