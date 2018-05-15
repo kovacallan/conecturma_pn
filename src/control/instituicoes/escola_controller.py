@@ -21,10 +21,10 @@ def view_escola_index():
 def cadastro_escola():
     observador1 = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
     if observador1['tipo'] == '1':
-        rede = facade.search_rede_id_facade(int(observador1['vinculo_rede']))
+        rede = facade.search_estrutura_id_facade(int(observador1['vinculo_rede']))
         return dict(observador_tipo=observador1['tipo'], rede=rede)
     elif observador1['tipo'] =='0':
-        rede = facade.read_rede_facade()
+        rede = facade.read_estrutura_facade(tipo_estrutura='1')
         return dict(observador_tipo=observador1['tipo'], rede=rede)
 
 @route('/escola/criar_escola', method='POST')
@@ -44,7 +44,7 @@ def view_escola_cadastro():
                                         vinculo_rede=rede)
             redirect("/escola")
     elif observador['tipo'] == '0':
-        # rede = rede_facade.search_rede_id_facade(int(observador['vinculo_rede']))
+        # rede = facade.search_rede_id_facade(int(observador['vinculo_rede']))
         nome = request.params['nome']
         telefone = request.params['telefone']
         cep = request.params['cep']
@@ -54,9 +54,9 @@ def view_escola_cadastro():
         rede_pertencente = request.params['rede']
 
         if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
-            facade.create_escola_facade(nome=nome, telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
+            facade.create_estrutura_facade(nome=nome, tipo_estrutura='2', telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
                                         vinculo_rede=rede_pertencente)
-            # rede = rede_facade.read_rede_facade()
+            # rede = facade.read_rede_facade()
             redirect("/escola")
         else:
             print("Erro para salvar escola")
@@ -120,14 +120,14 @@ def controller_escola_read():
     :return: a lista de escolas q serao mostradas
     """
     escolas = []
-    escola = facade.read_escola_facade()
+    escola = facade.read_estrutura_facade(tipo_estrutura='2')
     if escola is None:
         return None
     else:
         for e in escola:
             if int(e['vinculo_rede']) > 0:
                 print("BB {} ".format(int(e['vinculo_rede'])))
-                rede = facade.search_rede_id_facade(int(e['vinculo_rede']))
+                rede = facade.search_estrutura_id_facade(int(e['vinculo_rede']))
                 e['vinculo_rede'] = rede['nome']
             escolas.append(e)
         return escolas

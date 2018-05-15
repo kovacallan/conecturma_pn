@@ -18,7 +18,7 @@ class BlackBoxTest(unittest.TestCase):
         res = test_app.post('/aluno_cadastro', dict(aluno_nome='egg', senha='spam'))
         res1 = test_app.post('/cadastro_item', dict(nome='knight', preco=5, tipo=2))
 
-    """TESTE DA PAGINA INICIAL DE LOJA(index.tpl)"""
+    """TESTE DA PAGINA INICIAL DE LOJA(index_loja.tpl)"""
     def test_loja_inicial(self):
         self._fixloja()
         res = test_app.get('/loja')

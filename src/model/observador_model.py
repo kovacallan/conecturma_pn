@@ -12,11 +12,10 @@ class DbObservador(Model):
     cpf = TextField(default='0')
     email = TextField(fts=True)
     tipo = TextField(fts=True)
-    anotacoes_observador = ListField()
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, default='0')
-    data_ultimo_login = TextField(default=None)
+    data_ultimo_login = TextField(default='')
 
     def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
         """
@@ -66,6 +65,7 @@ class DbObservador(Model):
         observador.email = email
 
         observador.save()
+
     def redefinir_senha(self, id, senha):
         observador = DbObservador.load(id)
         observador.senha = senha
@@ -145,18 +145,6 @@ class DbObservador(Model):
 
         return observador
 
-
-    def search_observador_inativos(self, nome_observador):
-        usuario = []
-        for pesquisa in DbObservador.query(DbObservador.nome == nome_observador):
-            usuario = pesquisa
-        return usuario
-
-    def create_inativo_observador(self, nome, senha, email, tipo, vinculo_escola, data_ultimo_login, telefone="0",
-                                  cpf="0", vinculo_rede="0"):
-        self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
-                    vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, data_ultimo_login=data_ultimo_login)
-
     def search_observador_escola_listagem(self, login, vinculo_escola):
         observador = []
         if login is not '0':
@@ -202,6 +190,13 @@ class DbObservador(Model):
 
         return observador
 
+    def search_observador_inativos(self, nome_observador):
+        usuario = []
+        for pesquisa in DbObservador.query(DbObservador.nome == nome_observador):
+            usuario = pesquisa
+
+        return usuario
+
     def login_date(self, id, data):
         """
         Armazena o historico de login
@@ -212,21 +207,3 @@ class DbObservador(Model):
         observador = self.load(id)
         observador.data_login = data
         observador.save()
-
-    def recriar_observador(self, nome, senha, tipo, vinculo_escola,
-                           data_ultimo_login, telefone, cpf, email, vinculo_rede):
-        if self.create(nome=nome,senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=vinculo_rede,
-                    vinculo_escola=vinculo_escola, data_ultimo_login=data_ultimo_login):
-            return True
-        else:
-            return False
-
-    def avatar(self, id):
-        """
-        O avatar no qual os itens são equipados
-
-        :param id: id do usuario dono do avatar , no caso o atual
-        :return: Um dicionario com os atributos do avatar
-        """
-        usuario = self.usuario_logado(id)
-        return dict(cor=usuario.cor, rosto=usuario.rosto, acessorio=usuario.acessorio, corpo=usuario.corpo)

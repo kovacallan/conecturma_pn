@@ -1,14 +1,13 @@
 from bottle import route, view, get, request, redirect, template
 from control.classes.validar_cadastros_updates import *
-from facade.observador_facade import ObservadorFacade
-from facade.escola_facade import EscolaFacade
-from facade.aluno_facade import AlunoFacade
+from facade.facade_main import Facade
 from control.historico_controller import *
 from control.login.login_observador_controller import *
 
-facade = ObservadorFacade()
-escolafacade = EscolaFacade()
-aluno_facade = AlunoFacade()
+
+
+facade = Facade()
+
 
 """Tipo = 0"""
 
@@ -44,7 +43,7 @@ def view_adm():
     return dict(historico=historico)
 
 
-@get('/pesquisa_aluno_in_turma')
+@route('/pesquisa_aluno_in_turma')
 def pesquisar_aluno_turma():
     """
     Pesquisa o aluno dentro da turma
@@ -52,19 +51,29 @@ def pesquisar_aluno_turma():
     """
     aluno_ = request.params['nome_do_aluno']
     turma_ = request.params['nome_da_turma']
-    aluno_facade.pesquisa_aluno_turma_facade(aluno_, turma_)
+    facade.pesquisa_aluno_turma_facade(aluno_, turma_)
 
 @route('/gestao_aprendizage')
 @view('gestao_aprendizagem.tpl')
 def view_gestao_aprendizagem():
-    adm=observador_facade.search_observador_inativos_facade(request.get_cookie("login",secret='2526'))
-    return dict(usuario=adm.nome, tipo=adm.tipo)
+# <<<<<<< HEAD
+#     adm=facade.search_observador_inativos_facade(request.get_cookie("login",secret='2526'))
+#     return dict(usuario=adm.nome, tipo=adm.tipo)
+# =======
+    adm= facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    return dict(usuario=adm['nome'], tipo=adm['tipo'])
+# >>>>>>> f7a53178f5b4261ed22e2fe1b99b2ed8a345ad48
 
 @route('/jogarconecturma')
 @view('jogar_conecturma.tpl')
 def view_jogar_conecturma():
-    adm = observador_facade.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
-    return dict(usuario=adm.nome, tipo=adm.tipo)
+# <<<<<<< HEAD
+#     adm = facade.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
+#     return dict(usuario=adm.nome, tipo=adm.tipo)
+# =======
+    adm = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    return dict(usuario=adm['nome'], tipo=adm['tipo'])
+# >>>>>>> f7a53178f5b4261ed22e2fe1b99b2ed8a345ad48
 
 
 def filtro_cadastro(nome, senha, telefone, email, cpf, tipo):

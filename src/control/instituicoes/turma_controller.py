@@ -32,20 +32,20 @@ def view_cadastrar_turma():
     :return:o dicionario com as escolas
     """
 
-    observador = observador_facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
     if observador['tipo'] == '2':
-        escola = facade.search_escola_id_facade(int(observador['vinculo_escola']))
+        escola = facade.search_estrutura_id_facade(int(observador['vinculo_escola']))
         return dict(escolas=escola, observador_tipo = observador['tipo'])
     elif observador['tipo'] == '1':
         escola = []
-        escolas = facade.read_escola_facade()
+        escolas = facade.read_estrutura_facade(tipo_estrutura='2')
         for e in escolas:
             if e['vinculo_rede'] is observador['vinculo_rede']:
                 escola.append(e)
 
         return dict(escolas=escola, observador_tipo=observador['tipo'])
     elif observador['tipo'] == '0':
-        escola = facade.read_escola_facade()
+        escola = facade.read_estrutura_facade(tipo_estrutura='2')
         return dict(escolas=escola, observador_tipo=observador['tipo'])
 
 @route('/turma/turma_update', method='POST')
@@ -99,7 +99,7 @@ def controller_create_turma():
     turma = request.forms['turma_nome']
     serie = request.forms['serie']
     escola = request.forms['escola']
-    facade.create_turma_facade(nome=turma, login=request.get_cookie("login", secret='2524'), serie=serie, escola=escola)
+    facade.create_estrutura_facade(nome=turma, tipo_estrutura='3',quem_criou=request.get_cookie("login", secret='2524'), serie=serie, vinculo_escola=escola)
     redirect('/turma')
 
 
@@ -109,14 +109,14 @@ def controller_read_turma():
     metodos usados: read_turma_facade
     :return: a entrada de dicionario que contem o id e o turma_nome
     """
-    turmas = facade.read_turma_facade()
+    turmas = facade.read_estrutura_facade(tipo_estrutura='3')
     if turmas == None:
         return None
     else:
 
         turma = []
         for t in turmas:
-            escola = facade.search_escola_id_facade(int(t['escola']))
+            escola = facade.search_estrutura_id_facade(int(t['escola']))
             t['escola'] = escola['nome']
             t['serie'] = serie(t['serie'])
             turma.append(t)

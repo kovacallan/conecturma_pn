@@ -1,9 +1,17 @@
-from bottle import *
-from facade.facade_main import Facade
+from bottle import route,view, request, redirect, response
+from facade.facade_main import *
 
-facade = Facade()
+facade=Facade()
 
-@route('/usuario')
+@route('/gestao_aprendizagem')
+@view('gestao_aprendizagem')
+def view_gestao_aprendizagem():
+    if request.get_cookie("login", secret='2525'):
+        observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+        return dict(usuario = observador['nome'], tipo = observador['tipo'])
+
+
+@route('/gestao_aprendizagem/usuario')
 @view('usuario/index')
 def view_usuario_index():
     """
@@ -16,11 +24,10 @@ def view_usuario_index():
         rede, escola, turma = controller_filtro_opcoes(tipo_logado=observador['tipo'])
         return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
     else:
-
         print(facade.search_observador_facade(request.get_cookie("login",secret='2525')))
         redirect('/')
 
-@route('/usuario/redirect_cadastro')
+@route('/gestao_aprendizagem/usuario/redirect_cadastro')
 def controller_redirect_cadastro():
     tipo_usuario = request.params['tipo_usuario']
     if tipo_usuario is '1':
@@ -106,3 +113,21 @@ def tipo_usuario(id_tipo):
         return "PROFESSOR"
     elif id_tipo is '6':
         return "ALUNO"
+
+@route('/medalha_cadastro')
+@view('observador/medalha_cadastro.tpl')
+def cadastrar_medalha():
+    """
+    pagina de cadastro de medalha
+    :return:
+    """
+    return
+
+
+@route('/create_medalha', method='POST')
+def controller_medalha_cadastro():
+
+    nome = request.params['nome']
+    tipo = request.params['tipos']
+    facade.create_medalha_facade(nome=nome, tipo=tipo)
+    redirect('/gestao_aprendizagem')

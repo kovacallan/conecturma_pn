@@ -1,7 +1,6 @@
 from bottle import view, get, request, redirect, route, BaseResponse, post
-from facade.historico_facade import HistoricoFacade
-
-facade = HistoricoFacade()
+from facade.facade_main import *
+facade = Facade()
 
 """Controle do jogo """
 

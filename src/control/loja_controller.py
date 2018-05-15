@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from bottle import route, redirect, request, view, get, post
-from facade.loja_facade import LojaFacade
-from facade.aluno_facade import AlunoFacade
+from facade.facade_main import *
 
-loja_facade = LojaFacade()
-aluno_facade = AlunoFacade()
+facade=Facade()
 
 @route('/loja')
 @view('loja/index')
@@ -16,8 +14,8 @@ def index():
     retorna um dicionario vazio
     """
 
-    itens_comprados = loja_facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
-    itens = loja_facade.read_item_loja_facade()
+    itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
+    itens = facade.read_item_loja_facade()
     if itens:
         return dict(itens=itens, itens_comprados=str(itens_comprados))
     else:
@@ -42,7 +40,7 @@ def cadastro_item():
     :return:
     """
 
-    loja_facade.criar_item_loja_facade(nome=request.forms.nome, tipo=request.forms.tipo, preco=request.forms.preco)
+    facade.criar_item_loja_facade(nome=request.forms.nome, tipo=request.forms.tipo, preco=request.forms.preco)
     redirect('cadastrar_item')
 
 
@@ -54,7 +52,7 @@ def ver_item():
     :return:o dicionario com o read
     """
     if request.get_cookie("login", secret='2524'):
-        read = loja_facade.read_item_loja_facade()
+        read = facade.read_item_loja_facade()
 
         return dict(teste=read)
     else:
@@ -69,7 +67,7 @@ def compras():
     :return:
     """
     id_item = request.params['id']
-    usuario_logado = aluno_facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
-    aluno_facade.compra_item_facade(id_usuario=usuario_logado.id, id_item=id_item)
+    usuario_logado = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    facade.compra_item_facade(id_usuario=usuario_logado.id, id_item=id_item)
 
     redirect('/loja')
