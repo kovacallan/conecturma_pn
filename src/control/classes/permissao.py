@@ -1,4 +1,4 @@
-from bottle import redirect,response, request
+from bottle import redirect, response, request, error
 from datetime import datetime
 
 from facade.facade_main import Facade
@@ -7,9 +7,21 @@ from facade.facade_main import Facade
 
 KEY_HASH = 'gu3 j0st0çur4'
 
+TIPO_USUARIOS = dict(
+    administrador='0',
+    gestor='1',
+    diretor='2',
+    professor='3',
+    responsavel='4',
+    responsavel_varejo='5',
+    aluno='6',
+    aluno_varejo='7'
+)
+
+
 class Login(object):
 
-    def __init__(self, email,senha):
+    def __init__(self, email, senha):
         self.email = email
         self.senha = senha
 
@@ -17,33 +29,28 @@ class Login(object):
         facade = Facade()
 
         hash = self.gerar_hash()
-        response.set_cookie("KIM", hash, secret=KEY_HASH)
-
-        observador_logado = facade.search_observador_email_facade(email=self.email)
-        facade.create_hash_login_facade(int(observador_logado['id']), hash=hash)
+        response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
 
         observador_logado = facade.search_observador_email_facade(email=self.email)
 
         if observador_logado['email'] == self.email:
             if observador_logado['senha'] == self.senha:
                 if observador_logado['tipo'] == '0':
-
-                    response.set_cookie("BUMBA", observador_logado, secret=observador_logado['hash_login'])
+                    response.set_cookie("BUMBA", observador_logado, path='/',secret=hash)
                     now = datetime.now()
                     facade.login_date_facade(observador_logado['id'], now)
                     facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
-                    print('estou logado {}'.format(observador_logado))
+                    return '/aluno/loja'
                 else:
-
-                    response.set_cookie("BUMBA", observador_logado, secret=observador_logado['hash_login'])
+                    response.set_cookie("BUMBA", observador_logado, path='/',secret=hash)
                     now = datetime.now()
                     facade.login_date_facade(observador_logado['id'], now)
                     facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
-                    print('estou logado {}'.format(observador_logado))
+                    return '/aluno/loja'
             else:
-                redirect('/')
+                return '/'
         else:
-            redirect('/')
+            return '/'
 
     def gerar_hash(self):
         """
@@ -60,9 +67,16 @@ class Login(object):
         return matricula
 
 
-def observador(function):
-    def decorator(*args,**kwargs):
-        print(request.get_cookie("KIM", secret=KEY_HASH))
-        print("BB {}".format(request.get_cookie("BUMBA", secret=request.get_cookie("KIM", secret=KEY_HASH))))
-        return function(*args,**kwargs)
-    return decorator
+def permissao(quem_tem_permissao):
+    def observador(function):
+        def decorator(*args, **kwargs):
+            banana = request.get_cookie("KIM", secret=KEY_HASH)
+            que = request.get_cookie("BUMBA", secret=banana)
+            print('{}, {}'.format(int(TIPO_USUARIOS[quem_tem_permissao]), int(que['tipo'])))
+            if int(TIPO_USUARIOS[quem_tem_permissao]) >= int(que['tipo']):
+                return function(*args, **kwargs)
+            else:
+                redirect('/error403')
+        return decorator
+
+    return observador
