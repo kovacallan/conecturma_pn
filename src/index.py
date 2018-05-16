@@ -1,4 +1,5 @@
 from bottle import default_app,run
+
 from control.static_controller import *
 
 from control.area_aluno_controller import *

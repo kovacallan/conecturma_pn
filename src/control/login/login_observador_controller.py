@@ -1,6 +1,6 @@
 from bottle import route, request, redirect, response, template, get
 from datetime import datetime
-from control.usuarios.administrador_controller import *
+from control.c_administrador_controller import *
 
 from pip._vendor.requests import get
 

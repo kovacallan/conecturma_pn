@@ -60,7 +60,7 @@ class DbEstrutura(Model):
                                nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
                                data_acesso=lista.data_acesso
                                ))
-
+        print("listas EM",listas)
         return listas
 
     def ja_possui_item(self, usuario_logado):

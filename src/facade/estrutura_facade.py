@@ -11,7 +11,7 @@ class EstruturaFacade:
                                 tipo_item='0', preco='0', tipo_medalha='0',
                                 descricao='0', descricao_completa='0', nome_usuario='0', tipo_usuario='0'):
 
-        self.estrutura.create_estrutura(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone,
+        return self.estrutura.create_estrutura(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone,
                                         vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, cep=cep,
                                         endereco=endereco, numero=numero, estado=estado, uf=uf, quem_criou=quem_criou,
                                         serie=serie, tipo_item=tipo_item, preco=preco, tipo_medalha=tipo_medalha,
@@ -19,6 +19,7 @@ class EstruturaFacade:
                                         nome_usuario=nome_usuario, tipo_usuario=tipo_usuario)
 
     def read_estrutura_facade(self, tipo_estrutura):
+        print("L22 EF",tipo_estrutura )
         return self.estrutura.read_estrutura(tipo_estrutura=tipo_estrutura)
 
     def update_estrutura(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',
@@ -26,7 +27,7 @@ class EstruturaFacade:
                                 tipo_item='0', preco='0', tipo_medalha='0',
                                 descricao='0', descricao_completa='0', nome_usuario='0', tipo_usuario='0'):
 
-        self.estrutura.update_estrutura(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone,
+        return self.estrutura.update_estrutura(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone,
                                         vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, cep=cep,
                                         endereco=endereco, numero=numero, estado=estado, uf=uf, quem_criou=quem_criou,
                                         serie=serie, tipo_item=tipo_item, preco=preco, tipo_medalha=tipo_medalha,

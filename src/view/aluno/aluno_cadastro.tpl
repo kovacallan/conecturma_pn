@@ -16,7 +16,7 @@
             </select><br>
             <button type="submit">Enviar</button>
         </form>
-        <a href="/usuario"><button>Voltar</button></a>
+        <a href="/gestao_aprendizagem/usuario"><button>Voltar</button></a>
     </div>
 </div>
 %include('footer.tpl')

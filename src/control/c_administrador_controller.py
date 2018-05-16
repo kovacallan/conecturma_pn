@@ -3,7 +3,7 @@ from control.classes.validar_cadastros_updates import *
 from facade.facade_main import Facade
 # from control.historico_controller import *
 from control.login.login_observador_controller import *
-from control import *
+from control.b_observadores_controller import *
 
 
 

@@ -3,7 +3,7 @@
     <div align="center" class="col-md-12">
         <h1>Cadastro</h1>
         <br>
-        <form action="/observador/create_observador_professor" method="post"> <br>
+        <form action="create_observador_professor" method="post"> <br>
             <input type="hidden" name="tipo_observador" value="{{tipo}}">
             nome*: <input type="text" name="nome"> <br>
             senha*: <input type="password" name="senha"> <br>
@@ -18,7 +18,7 @@
             <br>
             <button type="submit">Enviar</button>
         </form>
-        <a href="/usuario"><button>Voltar</button></a>
+        <a href="/gestao_aprendizagem/usuario"><button>Voltar</button></a>
     </div>
 </div>
 % include('./footer.tpl')
