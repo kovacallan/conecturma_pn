@@ -8,7 +8,6 @@ class DbObservador(Model):
     id = AutoIncrementField(primary_key=True)
     nome = TextField(fts=True, index=True)
     senha = TextField(default='0')
-    hash_login = TextField(default='0')
     telefone = TextField(default='0')
     cpf = TextField(default='0')
     email = TextField(fts=True)
@@ -101,7 +100,7 @@ class DbObservador(Model):
             observador = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
                               cpf=search.cpf, email=search.email, tipo=search.tipo,
                               vinculo_escola=search.vinculo_escola,
-                              vinculo_rede=search.vinculo_rede, hash_login=search.hash_login,vinculo_turma=search.vinculo_turma)
+                              vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma)
 
         return observador
 

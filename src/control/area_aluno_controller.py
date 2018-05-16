@@ -1,9 +1,10 @@
 from bottle import route,view, request, redirect, response
 from facade.facade_main import *
-
+from control.classes.permissao import permissao
 facade=Facade()
 
 """Tipo=6"""
+
 @route('/aluno/area_aluno')
 @view('caminho_aluno/jogar_conecturma')
 def view_jogar_conecturma():
@@ -65,16 +66,17 @@ def view_jogar_conecturma():
         redirect('/')
 
 @route('/aluno/loja')
+@permissao('diretor')
 @view('caminho_aluno/index_loja')
 def index():
     """
     Mostra os itens comprados e os itens disponiveis para serem comprados na mesma pagina
     metodos usados : ja_tem_item_facade, read_item_loja_facade
     :return: um dicionario com os itens comprados e disponiveis , caso um item nao tenha sido criado previamente
-    retorna um dicionario vazio
-    """
+    retorna um dicionario vazio"""
 
-    itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
+    #itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
+    itens_comprados = []
     itens = facade.read_item_loja_facade()
     if itens:
         return dict(itens=itens, itens_comprados=str(itens_comprados))
