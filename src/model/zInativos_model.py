@@ -192,7 +192,7 @@ class DbCemiterio(Model):
     def deletar_cem(self, nome):
         pessoa = self.pesquisa_inativo(nome)
         print("pessoa L186", nome)
-        isto = self.aluno.pesquisa_usuario(nome)
+        isto = self.aluno.pesquisa_aluno(nome)
         if isto == []:
             isto = self.observador.search_observador_inativos(nome)
             fenix = self.observador.load(isto.id)

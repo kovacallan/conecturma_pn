@@ -8,7 +8,7 @@ from facade.estrutura_facade import EstruturaFacade
 from facade.zInativos_facade import ZinativosFacade
 
 
-class Facade(AlunoFacade, ObservadorFacade, HistoricoFacade, LojaFacade, MedalhaFacade,EstruturaFacade):
+class Facade(AlunoFacade, ObservadorFacade, HistoricoFacade, LojaFacade, MedalhaFacade, EstruturaFacade, ZinativosFacade):
     def __init__(self):
         super(Facade, self).__init__()
         # # super(ObservadorFacade, self).__init__()

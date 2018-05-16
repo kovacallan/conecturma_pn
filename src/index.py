@@ -1,6 +1,17 @@
 from bottle import default_app,run
+
 from control.static_controller import *
+
+from control.area_aluno_controller import *
+
+from control.b_observadores_controller import *
+
+from control.c_administrador_controller import *
+
 from control.login_controller import *
+
+from control.login.login_observador_controller import *
+
 
 
 

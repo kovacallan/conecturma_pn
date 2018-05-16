@@ -131,13 +131,13 @@ def deletar_aluno():
 def ver_itens():
     """
     mostra os itens que o usuario tem posse
-    chama os metodos : pesquisa_aluno_facade, ver_item_comprado_facade e pesquisa_iten_facade
+    chama os metodos : pesquisa_aluno_nome_facade, ver_item_comprado_facade e pesquisa_iten_facade
     cria uma lista com os ids dos itens do aluno
 
     :return: dicionario de itens
     """
 
-    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    usuario = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
     itens_comprado = facade.ver_item_comprado_facade(usuario.id)
     itens = []
     for y in itens_comprado:
@@ -150,11 +150,11 @@ def ver_itens():
 def equipar_item():
     """
     Equipar o avatar
-    metodos chamados: pesquisa_aluno_facade,pesquisa_item_facade e equipar_item_facade
+    metodos chamados: pesquisa_aluno_nome_facade,pesquisa_item_facade e equipar_item_facade
     :return:
     """
 
-    usuario = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    usuario = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
 
     id_item = request.forms['id']
     item = facade.pesquisa_item_facade(id_item)
