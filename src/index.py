@@ -1,4 +1,5 @@
 from bottle import default_app,run
+<<<<<<< HEAD
 
 from control.static_controller import *
 

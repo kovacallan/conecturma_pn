@@ -125,6 +125,3 @@ class AlunoFacade:
 
     def pesquisa_aluno_turma_facade(self,aluno_, turma_):
         return self.aluno.pesquisa_aluno_turma(aluno_,turma_)
-
-    def apagartudo(self):
-        return self.aluno.apagartudo()

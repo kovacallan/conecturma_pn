@@ -372,3 +372,4 @@ class DbAluno(Model):
 
     def apagartudo(self):
         db.flushall()
+
