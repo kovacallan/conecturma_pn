@@ -38,9 +38,9 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(aluno, TypeError)
 
     def _pesquisa_aluno(self):
-        aluno = self.facade.pesquisa_aluno_facade("Brian")
+        aluno = self.facade.pesquisa_aluno_nome_facade("Brian")
         self.assertIs(aluno, aluno)
-        aluno = self.facade.pesquisa_aluno_facade("Sily walk")
+        aluno = self.facade.pesquisa_aluno_nome_facade("Sily walk")
         self.assertIs(aluno, None)
 
     def _pontos_jogo(self):
@@ -58,17 +58,17 @@ class FacadeTest(unittest.TestCase):
 
     def _update_aluno(self):
         self._create_aluno()
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         x = aluno1.id
         self.facade.update_aluno_facade(aluno1.id, "knight", "321")
-        aluno2 = self.facade.pesquisa_aluno_facade("knight")
+        aluno2 = self.facade.pesquisa_aluno_nome_facade("knight")
         y = aluno2.id
         self.assertEqual(x, y)
         self._delete_alunos()
 
     def _read_aluno(self):
         self._create_aluno()
-        aluno4 = self.facade.pesquisa_aluno_facade("egg")
+        aluno4 = self.facade.pesquisa_aluno_nome_facade("egg")
         self.assertIn(aluno4.id, self.facade.read_aluno_facade()[-1].values())
         # self.assertIn(aluno4.id,self.facade.read_aluno_facade()[0].values())
 
@@ -76,30 +76,30 @@ class FacadeTest(unittest.TestCase):
         self._create_aluno()
         mensagem2 = "tetativa..."
         mensagem = "Isto é uma mensagem de teste"
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem)
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem2)
         self.assertEqual(aluno1.anotacoes_aluno[0], mensagem.encode('utf-8'))
 
     def _read_anotacoes_no_aluno(self):
         self._anotacoes_no_aluno()
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         read = self.facade.read_anotacoes_aluno_facade(aluno1.id)
         self.assertIn("Isto é uma mensagem de teste", read)
         self._delete_alunos()
 
     def _aluno_in_turma(self):
         self._create_turma()
-        aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123")
+        aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123","0")
         self.assertEqual(aluno1, True)
-        alunoer1 = self.facade.pesquisa_aluno_facade("egg")
-        self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma")
-        aluno2 = self.facade.pesquisa_aluno_facade("Ni")
+        alunoer1 = self.facade.pesquisa_aluno_nome_facade("egg")
+        self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma","0")
+        aluno2 = self.facade.pesquisa_aluno_nome_facade("Ni")
         escolhidos = [alunoer1, aluno2]
-        turma1 = self.facade.search_turma_facade("Knight")
+        turma1 = self.facade.search_estrutura_facade("3","Knight")
         self.facade.aluno_in_turma_facade(escolhidos, turma1)
-        aluntest2 = self.facade.pesquisa_aluno_facade('Ni')
-        aluntest = self.facade.pesquisa_aluno_facade('egg')
+        aluntest2 = self.facade.pesquisa_aluno_nome_facade('Ni')
+        aluntest = self.facade.pesquisa_aluno_nome_facade('egg')
         # print("aluntest",aluntest.vinculo_turma)
         self.assertEqual(aluntest.vinculo_turma, str(turma1['id']))
         self.assertEqual(aluntest2.vinculo_turma, str(turma1['id']))
@@ -107,28 +107,28 @@ class FacadeTest(unittest.TestCase):
     def _comprar_item(self):
         self._create_item()
         self._create_aluno()
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         item1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.facade.compra_item_facade(aluno1.id, item1['id'])
         self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
 
     def _ver_iten_comprado(self):
         self._comprar_item()
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         iten = self.facade.ver_item_comprado_facade(aluno1.id)
         self.assertEqual([int(aluno1.itens_comprados[0].decode('utf-8'))], iten)
 
     def _equipar_item_facade(self):
         self._comprar_item()
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         iten = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.facade.equipar_item_facade(aluno1.id, iten)
-        aluno2 = self.facade.pesquisa_aluno_facade("egg")
+        aluno2 = self.facade.pesquisa_aluno_nome_facade("egg")
         self.assertEqual(aluno2.cor, str(iten['id']))
 
     def _mostrar_avatar(self):
         self._equipar_item_facade()
-        aluno1 = self.facade.pesquisa_aluno_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         self.facade.avatar_facade(aluno1.id)
         iten1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.assertEqual(self.facade.avatar_facade(aluno1.id)['cor'], str(iten1['id']))
@@ -417,11 +417,11 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(professor.email, 'Monty@python.com.br')
 
     def _delete_turma(self):
-        turmas = self.facade.read_turma_facade()
+        turmas = self.facade.read_estrutura_facade("3")
         escolhidos = []
         for turmas in turmas:
             escolhidos.append(turmas['id'])
-        self.facade.delete_turma_facade_test(escolhidos)
+        # self.facade.delete_turma_facade_test(escolhidos)
 
     def test_create_delete_turma(self):
         self._create_turma()
@@ -526,14 +526,14 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(aluno1, True)
         self.assertIsNot(item2,None)
 
-        alunoer1 = self.facade.pesquisa_aluno_facade("egg")
+        alunoer1 = self.facade.pesquisa_aluno_nome_facade("egg")
         self.assertIsNot(alunoer1,None)
 
-        aluno2 = self.facade.pesquisa_aluno_facade("thanos")
+        aluno2 = self.facade.pesquisa_aluno_nome_facade("thanos")
         self.assertIsNot(aluno2,None)
 
         self.facade.compra_item_facade(aluno2.id, item2['id'])
-        aluno2_pos = self.facade.pesquisa_aluno_facade("thanos")
+        aluno2_pos = self.facade.pesquisa_aluno_nome_facade("thanos")
         self.assertIsNot(aluno2_pos,None)
 
         observador1 = self.facade.search_observador_inativos_facade("Monty")
@@ -542,12 +542,13 @@ class FacadeTest(unittest.TestCase):
         inativados = [alunoer1, aluno2_pos, observador1]
 
         self.facade.create_zInativos_atores_facade(inativados)
+
         ovo_morto = self.facade.pesquisa_inativos_facade("egg")
         self.assertIsNot(ovo_morto,None)
 
         mensagem = "Isto é uma mensagem de teste"
         mensagem2 = "tetativa..."
-        ovo_falecido = self.facade.pesquisa_aluno_facade("egg")
+        ovo_falecido = self.facade.pesquisa_aluno_nome_facade("egg")
         self.assertEqual(ovo_falecido, [])
         self.assertEqual(ovo_morto.nome, alunoer1.nome)
         self.assertEqual(ovo_morto.anotacoes_aluno[0], mensagem.encode('utf-8'))
@@ -586,10 +587,10 @@ class FacadeTest(unittest.TestCase):
         ovo_vivo=self.facade.reativar_usuario_facade(ovo_morto)
         self.assertEqual(ovo_vivo, True)
 
-        fenix=self.facade.pesquisa_aluno_facade("egg")
+        fenix=self.facade.pesquisa_aluno_nome_facade("egg")
         self.assertIsNot(fenix, None)
 
-        aluno1=self.facade.pesquisa_aluno_facade("egg")
+        aluno1=self.facade.pesquisa_aluno_nome_facade("egg")
         self.assertEqual(fenix.senha, aluno1.senha)
 
         cem_observador1=self.facade.pesquisa_inativos_facade("Monty")

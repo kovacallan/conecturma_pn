@@ -46,14 +46,17 @@ class AlunoFacade:
 
         return self.aluno.search_aluno_by_escola(escola = id_escola)
 
-    def pesquisa_aluno_facade(self, nome):
+    def pesquisa_aluno_nome_facade(self, nome):
         """
         Pesquisa pelo aluno através do nome , apenas usado na tela de login e como auxiliar para modificar atributos do
          aluno
         :param nome: Nome dado do aluno
         :return:retorna o usuario aluno (objeto)
         """
-        return self.aluno.pesquisa_usuario(nome)
+        return self.aluno.pesquisa_aluno_nome(nome)
+
+    def pesquisa_aluno_nome_objeto_facade(self,nome):
+        return self.aluno.pesquisa_aluno_objeto(nome)
 
     def ponto_jogo_facade(self, usuario, jogo, ponto):
         """
@@ -125,3 +128,6 @@ class AlunoFacade:
 
     def pesquisa_aluno_turma_facade(self,aluno_, turma_):
         return self.aluno.pesquisa_aluno_turma(aluno_,turma_)
+
+    def apagartudo(self):
+        return self.aluno.apagartudo()

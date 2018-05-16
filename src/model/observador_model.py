@@ -18,16 +18,6 @@ class DbObservador(Model):
     data_ultimo_login = TextField(default='')
 
     def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
-        """
-        cria um observador
-        :param nome: nome do observador
-        :param senha: senha
-        :param telefone: telefone do usuario(opcional)
-        :param cpf: cpf(opcional)
-        :param email: email
-        :param tipo: o tipo de observador , professor , responsave, diretor , gestor ou administrador
-        :return: true se criou certinho e false se n deu certo
-        """
 
         if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
                        vinculo_escola=escola, vinculo_turma = vinculo_turma):
@@ -36,10 +26,7 @@ class DbObservador(Model):
             return False
 
     def read_observador(self):
-        """
-        coloca os dados do observador em um dicionario
-        :return: o dicionario com os dados
-        """
+
         observador = []
         for read in DbObservador.all():
             observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
@@ -48,22 +35,10 @@ class DbObservador(Model):
 
         return observador
 
-    def update_observador(self, id, nome, telefone, cpf, email):
-        """
-        edita o observador
-        :param id: id do observador a ser editado
-        :param nome: novo nome
-        :param telefone: novo telefone
-        :param cpf: nvo cpf
-        :param email: novo email
-        :return:
-        """
-        observador = DbObservador.load(id)
-        observador.nome = nome
-        observador.telefone = telefone
-        observador.cpf = cpf
-        observador.email = email
+    def update_observador(self, update_id, nome, telefone, cpf, email):
 
+        observador = self.load(update_id)
+        [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.parametro]
         observador.save()
 
     def redefinir_senha(self, id, senha):
@@ -73,22 +48,13 @@ class DbObservador(Model):
         observador.save()
 
     def create_hash_login(self, id, hash):
+
         observador = DbObservador.load(id)
         observador.hash_login = hash
-
         observador.save()
 
-    def delete_observador(self, deletar_ids):
-        """
-        delteta os observadores
-        :param deletar_ids: lista de ids de observadores a serem deletados
-        :return:
-        """
-        for deletar_ids in deletar_ids:
-            usuario = self.load(deletar_ids)
-            usuario.delete(deletar_ids)
-
     def search_observador_id(self, id):
+
         observador = self.load(id)
 
         return observador
@@ -101,6 +67,7 @@ class DbObservador(Model):
                               cpf=search.cpf, email=search.email, tipo=search.tipo,
                               vinculo_escola=search.vinculo_escola,
                               vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma)
+
 
         return observador
 
@@ -115,8 +82,7 @@ class DbObservador(Model):
         for search in DbObservador.query(DbObservador.nome == nome):
             observador = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
                               cpf=search.cpf, email=search.email, tipo=search.tipo,
-                              vinculo_escola=search.vinculo_escola,
-                              vinculo_rede=search.vinculo_rede)
+                              vinculo_escola=search.vinculo_escola,vinculo_rede=search.vinculo_rede)
 
         return observador
 
@@ -213,3 +179,9 @@ class DbObservador(Model):
         observador = self.load(id)
         observador.data_login = data
         observador.save()
+
+
+    def delete_observador(self, deletar_ids):
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
