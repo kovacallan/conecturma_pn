@@ -1,5 +1,4 @@
 from bottle import default_app,run
-<<<<<<< HEAD
 
 from control.static_controller import *
 
@@ -9,13 +8,11 @@ from control.b_observadores_controller import *
 
 from control.c_administrador_controller import *
 
-from control.login.login_controller import *
+from control.login_controller import *
 
 from control.login.login_observador_controller import *
 
-from control.login.login_aluno_controller import *
 
-from control.filtro_controller import *
 
 
 import bottle

@@ -54,7 +54,7 @@ Mostra a pontuação do jogador, a quantidade de vidas ,a quantidade de moedas e
 :return: O numero de acertos , vidas , moedas e o desempenho do jogador em cada jogo (porcentagem de acertos)
 """
 
-    ponto = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    ponto = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
     return dict(ponto_j_um=ponto.pontos_j1, ponto_j_dois=ponto.pontos_j2, pontos_de_vida=ponto.pontos_de_vida,
                 pontos_moedas=ponto.pontos_de_moedas, desempenho_j1=ponto.desempenho_aluno_j1,
                 desempenho_j2=ponto.desempenho_aluno_j2)

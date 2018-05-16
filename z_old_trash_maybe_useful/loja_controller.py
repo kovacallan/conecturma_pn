@@ -63,11 +63,11 @@ def ver_item():
 def compras():
     """
     compra o item que esta na loja
-    metodos usados: pesquisa_aluno_facade,compra_item_facade
+    metodos usados: pesquisa_aluno_nome_facade,compra_item_facade
     :return:
     """
     id_item = request.params['id']
-    usuario_logado = facade.pesquisa_aluno_facade(request.get_cookie("login", secret='2524'))
+    usuario_logado = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
     facade.compra_item_facade(id_usuario=usuario_logado.id, id_item=id_item)
 
     redirect('/loja')

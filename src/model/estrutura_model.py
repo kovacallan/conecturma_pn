@@ -71,60 +71,14 @@ class DbEstrutura(Model):
         """
         usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
-                         usuario.pesquisa_usuario(usuario_nome=usuario_logado).itens_comprados]
+                         usuario.pesquisa_aluno_objeto(nome_aluno=usuario_logado).itens_comprados]
         itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura='4')]
         lista_teste = [z for z in itens if z not in itens_usuario]
 
         return lista_teste
 
-    def update_estrutura(self,update_id, nome='0', telefone='0', vinculo_rede='0', cep='0', endereco='0', numero='0',cidade='0',
-                         estado='0', uf='0', serie='0', tipo_item='0', preco='0', tipo_medalha='0', descricao='0',
-                         descricao_completa='0', nome_usuario='0', tipo_usuario='0'):
-        estrutura=self.load(update_id)
-        if nome is not None:
-            estrutura.nome=nome
-        else:
-            pass
-        if telefone is not None:
-            estrutura.telefone=telefone
-        if vinculo_rede is not None:
-            estrutura.vinculo_rede=vinculo_rede
-        if cep is not None:
-            estrutura.cep=cep
-        if endereco is not None:
-            estrutura.endereco=endereco
-        if numero is not None:
-            estrutura.numero=numero
-        if cidade is not None:
-            estrutura.cidade=cidade
-        if estado is not None:
-            estrutura.estado=estado
-        if uf is not None:
-            estrutura.uf=uf
-        if serie is not None:
-            estrutura.serie=serie
-        if tipo_item is not None:
-            estrutura.tipo_item=tipo_item
-        if preco is not None:
-            estrutura.preco=preco
-        if tipo_medalha is not None:
-            estrutura.tipo_medalha=tipo_medalha
-        if descricao is not None:
-            estrutura.descricao=descricao
-        if descricao_completa is not None:
-            estrutura.descricao_completa=descricao_completa
-        if nome_usuario is not None:
-            estrutura.nome_usuario=nome_usuario
-        if tipo_usuario is not None:
-            estrutura.tipo_usuario=tipo_usuario
-        estrutura.save()
 
 
-    def delete_estrutura_test(self,deletar_ids):
-
-        for deletar_ids in deletar_ids:
-            usuario = self.load(deletar_ids)
-            usuario.delete(deletar_ids)
 
     def search_estrutura(self, tipo_estrutura, nome):
         lista_dic = None
@@ -140,7 +94,7 @@ class DbEstrutura(Model):
         return lista_dic
 
     def search_estrutura_id(self, id):
-        print("{} {}".format(id, type(id)))
+        print("{} {} EM L101".format(id, type(id)))
         if id != 0:
             lista = DbEstrutura.load(id)
             lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
@@ -203,20 +157,6 @@ class DbEstrutura(Model):
             )
             return turma
 
-    # def ja_possui_item(self, usuario_logado):
-    #     """
-    #     Envia se o usuario já comprou o item
-    #     :param usuario_logado: Id do usuario
-    #     :return: Lista de itens que o usuario não tem
-    #     """
-    #     usuario = DbAluno()
-    #     itens_usuario = [x.decode('utf-8') for x in
-    #                      usuario.pesquisa_usuario(usuario_nome=usuario_logado).itens_comprados]
-    #     itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura='4')]
-    #     lista_teste = [z for z in itens if z not in itens_usuario]
-    #
-    #     return lista_teste
-
     def update_estrutura(self, update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None,
                          numero=None, cidade=None,
                          estado=None, uf=None, serie=None, tipo_item=None, preco=None, tipo_medalha=None,
@@ -236,3 +176,8 @@ class DbEstrutura(Model):
         estrutura.anotacoes_estrutura_cima.append(mensagem)
         estrutura.save()
 
+    def delete_estrutura_test(self, deletar_ids):
+
+        for deletar_ids in deletar_ids:
+            usuario = self.load(deletar_ids)
+            usuario.delete(deletar_ids)
