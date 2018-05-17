@@ -1,8 +1,0 @@
-from facade.facade_main import *
-
-
-def dentro_escola(login):
-    def ator(*args,*kwargs):
-        ator = self.pesquisa_aluno(email)
-        return ator.vinculo_escola
-    return ator

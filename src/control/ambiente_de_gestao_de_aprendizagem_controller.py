@@ -1,21 +1,19 @@
 from bottle import route, view, request, redirect, response, get, template
 from facade.facade_main import *
-from control.c_administrador_controller import *
-from control.classes import validar_cadastros_updates
+from control.ambiente_administrativo_controller import *
+from control.classes.permissao import permissao, usuario_logado
 
 facade=Facade()
 
 @route('/gestao_aprendizagem')
+@permissao('responsavel_varejo')
 @view('caminho_observador/gestao_aprendizagem')
 def view_gestao_aprendizagem():
-
-    if request.get_cookie("login", secret='2525'):
-        observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
-        return dict(usuario = observador['nome'], tipo = observador['tipo'])
+    observador = usuario_logado()
+    return dict(usuario = observador['nome'], tipo = observador['tipo'])
 
 
 #                                            """BOTAO USUARIO"""
-
 
 @route('/gestao_aprendizagem/usuario')
 @view('usuario/index')
@@ -24,14 +22,11 @@ def view_usuario_index():
     mostra todos os usuarios , escolas e redes cadastradas
     :return:
     """
-    if request.get_cookie("login", secret='2525'):
-        observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
-        usuario = controller_index_usuario(observador['tipo'],observador['vinculo_escola'])
-        rede, escola, turma = controller_filtro_opcoes(tipo_logado=observador['tipo'])
-        return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
-    else:
-        print(facade.search_observador_facade(request.get_cookie("login",secret='2525')))
-        redirect('/')
+    observador = usuario_logado()
+    usuario = controller_index_usuario(observador['tipo'],observador['vinculo_escola'])
+    rede, escola, turma = controller_filtro_opcoes(tipo_logado=observador['tipo'])
+    return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
+
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
 def controller_redirect_cadastro():
@@ -74,7 +69,7 @@ def controller_index_usuario(tipo_observador,vinculo_escola):
     return usuario
 
 def controller_filtro_opcoes(tipo_logado):
-    observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    observador = usuario_logado()
     if tipo_logado is '0':
         rede = facade.read_estrutura_facade(tipo_estrutura='1')
         escola = facade.read_estrutura_facade(tipo_estrutura='2')
