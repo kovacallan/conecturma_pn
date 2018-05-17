@@ -1,4 +1,4 @@
-from bottle import route, view, request, redirect
+from bottle import route, view, request, redirect,response
 from control.classes.permissao import Login_Observador, Login_Aluno,algum_usuario_logado
 
 @route('/')
@@ -26,3 +26,13 @@ def login_observador_controller():
 
     login = Login_Aluno(nome=nome, senha=senha)
     login.login()
+
+@route('/sair')
+def controller_login_sair():
+    """
+    Deleta o cookie
+    :return:
+    """
+    response.delete_cookie("KIM")
+    response.delete_cookie("BUMBA")
+    redirect('/')

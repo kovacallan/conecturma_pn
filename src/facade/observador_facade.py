@@ -45,6 +45,9 @@ class ObservadorFacade:
     def search_observador_professor_by_escola_facade(self, vinculo_escola):
         return self.observador.search_observador_professor_by_escola(vinculo_escola)
 
+    def search_observador_by_rede_facade(self, vinculo_rede):
+        return self.observador.search_observador_rede(vinculo_rede)
+
     def search_observador_escola_listagem_facade(self, login, vinculo_escola):
         return self.observador.search_observador_escola_listagem(login=login, vinculo_escola=vinculo_escola)
 

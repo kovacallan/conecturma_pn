@@ -1,34 +1,11 @@
-from bottle import redirect, response, request, error
+from bottle import redirect, response, request
 from datetime import datetime
-
+from control.dicionarios import *
 from src.facade.facade_main import Facade
 
 """Constante para a key de hash temporariamente"""
 
 KEY_HASH = 'gu3 j0st0çur4'
-
-TIPO_USUARIOS = dict(
-    administrador='0',
-    gestor='1',
-    diretor='2',
-    professor='3',
-    responsavel='4',
-    responsavel_varejo='5',
-    aluno='6',
-    aluno_varejo='7'
-)
-
-PAGINA_INICIAL = dict(
-    administrador='/administrador/pag_administrador',
-    gestor='/gestao_aprendizagem',
-    diretor='/gestao_aprendizagem',
-    professor='/gestao_aprendizagem',
-    responsavel='/gestao_aprendizagem',
-    responsavel_varejo='/gestao_aprendizagem',
-    aluno='/aluno/area_aluno',
-    aluno_varejo='/aluno/area_aluno'
-)
-
 
 class Login_Observador(object):
 
@@ -43,22 +20,14 @@ class Login_Observador(object):
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
 
         observador_logado = facade.search_observador_email_facade(email=self.email)
-        print("permissao L46",observador_logado,observador_logado['email'],self.email)
 
         if observador_logado['email'] == self.email:
             if observador_logado['senha'] == self.senha:
-                if observador_logado['tipo'] == '0':
-                    response.set_cookie("BUMBA", observador_logado, path='/',secret=hash)
-                    now = datetime.now()
-                    facade.login_date_facade(observador_logado['id'], now)
-                    facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
-                    return '/administrador/pag_administrador'
-                else:
-                    response.set_cookie("BUMBA", observador_logado, path='/',secret=hash)
-                    now = datetime.now()
-                    facade.login_date_facade(observador_logado['id'], now)
-                    facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
-                    return '/aluno/loja'
+                response.set_cookie("BUMBA", observador_logado, path='/', secret=hash)
+                now = datetime.now()
+                facade.login_date_facade(observador_logado['id'], now)
+                facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
+                return PAGINA_INICIAL[tipo_observador(observador_logado['tipo'])]
             else:
                 return '/'
         else:
@@ -158,3 +127,5 @@ def tipo_observador(tipo):
         return 'diretor'
     elif tipo == '1':
         return 'gestor'
+
+
