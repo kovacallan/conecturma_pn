@@ -76,10 +76,11 @@ class FacadeTest(unittest.TestCase):
         self._create_aluno()
         mensagem2 = "tetativa..."
         mensagem = "Isto é uma mensagem de teste"
-        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem)
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem2)
         self.assertEqual(aluno1.anotacoes_aluno[0], mensagem.encode('utf-8'))
+        self.assertEqual(aluno1.anotacoes_aluno[1],mensagem2.encode('utf-8'))
 
     def _read_anotacoes_no_aluno(self):
         self._anotacoes_no_aluno()
@@ -92,29 +93,29 @@ class FacadeTest(unittest.TestCase):
         self._create_turma()
         aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123","0")
         self.assertEqual(aluno1, True)
-        alunoer1 = self.facade.pesquisa_aluno_nome_facade("egg")
+        alunoer1 = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
         self.facade.create_aluno_facade("Ni", "123", "Escola Conecturma","0")
-        aluno2 = self.facade.pesquisa_aluno_nome_facade("Ni")
+        aluno2 = self.facade.pesquisa_aluno_nome_objeto_facade("Ni")
         escolhidos = [alunoer1, aluno2]
         turma1 = self.facade.search_estrutura_facade("3","Knight")
         self.facade.aluno_in_turma_facade(escolhidos, turma1)
         aluntest2 = self.facade.pesquisa_aluno_nome_facade('Ni')
         aluntest = self.facade.pesquisa_aluno_nome_facade('egg')
         # print("aluntest",aluntest.vinculo_turma)
-        self.assertEqual(aluntest.vinculo_turma, str(turma1['id']))
-        self.assertEqual(aluntest2.vinculo_turma, str(turma1['id']))
+        self.assertEqual(aluntest['vinculo_turma'], str(turma1['id']))
+        self.assertEqual(aluntest2['vinculo_turma'], str(turma1['id']))
 
     def _comprar_item(self):
         self._create_item()
         self._create_aluno()
-        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
         item1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
         self.facade.compra_item_facade(aluno1.id, item1['id'])
         self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
 
     def _ver_iten_comprado(self):
         self._comprar_item()
-        aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
+        aluno1 = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
         iten = self.facade.ver_item_comprado_facade(aluno1.id)
         self.assertEqual([int(aluno1.itens_comprados[0].decode('utf-8'))], iten)
 
@@ -222,22 +223,24 @@ class FacadeTest(unittest.TestCase):
         observador_professor = self.facade.create_observador_facade(nome='Monty', senha='python',
                                                                     telefone='(21)9999-9999',
                                                                     cpf='123456789', email='Monty@python.com.br',
-                                                                    tipo='3', rede=0, escola=0)
+                                                                    tipo='3', rede="0", escola="1",vinculo_turma="1")
         observador_diretor = self.facade.create_observador_facade(nome="diretor", senha="123",telefone="21 2569 6969",email="tent@cool.os" , tipo="2",rede=0,escola=0)
 
         self.assertIs(observador1, True)
         self.assertIs(observador_professor, True)
 
     def _update_observador(self):
-        observador1 = self.facade.search_observador_facade('Egg')
+        observador1 = self.facade.search_observador_facade('Monty')
         observador_update = self.facade.update_observador_facade(id=observador1['id'], nome='Knight',
                                                                  telefone='(11)8888-8888', cpf='999999999',
-                                                                 email='knight@ni.com')
-        observador2 = self.facade.search_observador_facade('Knight')
+                                                                 email='knight@ni.com',vinculo_turma="2",vinculo_escola="2")
+        observador2 = self.facade.search_observador_tipo_nome_facade('3','Knight')
         self.assertEqual(observador2['nome'], 'Knight')
         self.assertEqual(observador2['telefone'], '(11)8888-8888')
         self.assertEqual(observador2['cpf'], '999999999')
         self.assertEqual(observador2['email'], 'knight@ni.com')
+        self.assertEqual(observador2['vinculo_turma'],"2")
+        self.assertEqual(observador2['vinculo_escola'],"2")
 
     def _search_observador(self):
         observador1 = self.facade.search_observador_facade('Egg')
@@ -301,8 +304,10 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(rede,None)
         rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1",nome="egg")
         self.assertIsNot(rede1,None)
-        self.facade.update_estrutura(rede['id'], nome="Ni", telefone="(11)8888-8888")
+
+        rede_up=self.facade.update_estrutura(rede.id, telefone="(11)8888-8888")
         rede = self.facade.search_estrutura_facade(tipo_estrutura="1",nome="Ni")
+        print("L310",rede_up)
         self.assertEqual(rede['nome'], "Ni")
         self.assertEqual(rede['telefone'], "(11)8888-8888")
 
@@ -361,13 +366,13 @@ class FacadeTest(unittest.TestCase):
         self.assertIs(escola1, None)
 
     def _delete_escola(self):
-        escola = self.facade.read_escola_facade()
+        escola = self.facade.read_estrutura_facade("2")
         escolhidos = []
         for escola in escola:
             escolhidos.append(escola['id'])
-        self.facade.delete_escola_facade(escolhidos)
+        self.facade.delete_estrutura_facade("2",escolhidos)
 
-    def test_create_delete_escola(self):
+    def _test_create_delete_escola(self):
         self._create_escola()
         self._delete_escola()
 
@@ -392,12 +397,12 @@ class FacadeTest(unittest.TestCase):
     """TESTE TURMA"""
 
     def _create_turma(self):
-        turma1 = self.facade.create_estrutura_facade(nome="Knight", tipo_estrutura="3", serie="1", vinculo_escola="1")
+        turma1 = self.facade.create_estrutura_facade(nome="Knight", tipo_estrutura="3", serie="1", vinculo_escola="1",quem_criou="Ni")
         print("turma1",turma1)
         self.assertIsNot(turma1, None)
 
     def _search_turma(self):
-        turma1 = self.facade.search_turma_facade("Knight")
+        turma1 = self.facade.search_estrutura_facade(tipo_estrutura="3",nome="Knight")
         self.assertIn(turma1['nome'], "Knight")
         self.assertIn(turma1['criador'], "Ni")
 
@@ -526,21 +531,22 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(aluno1, True)
         self.assertIsNot(item2,None)
 
-        alunoer1 = self.facade.pesquisa_aluno_nome_facade("egg")
+        alunoer1 = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
         self.assertIsNot(alunoer1,None)
 
-        aluno2 = self.facade.pesquisa_aluno_nome_facade("thanos")
+        aluno2 = self.facade.pesquisa_aluno_nome_objeto_facade("thanos")
         self.assertIsNot(aluno2,None)
 
         self.facade.compra_item_facade(aluno2.id, item2['id'])
-        aluno2_pos = self.facade.pesquisa_aluno_nome_facade("thanos")
+        aluno2_pos = self.facade.pesquisa_aluno_nome_objeto_facade("thanos")
+        print("L538 test",aluno2_pos)
         self.assertIsNot(aluno2_pos,None)
 
         observador1 = self.facade.search_observador_inativos_facade("Monty")
         self.assertIsNot(observador1,None)
 
         inativados = [alunoer1, aluno2_pos, observador1]
-
+        print("inativados L544 test",alunoer1,aluno2_pos,observador1)
         self.facade.create_zInativos_atores_facade(inativados)
 
         ovo_morto = self.facade.pesquisa_inativos_facade("egg")
@@ -548,7 +554,7 @@ class FacadeTest(unittest.TestCase):
 
         mensagem = "Isto é uma mensagem de teste"
         mensagem2 = "tetativa..."
-        ovo_falecido = self.facade.pesquisa_aluno_nome_facade("egg")
+        ovo_falecido = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
         self.assertEqual(ovo_falecido, [])
         self.assertEqual(ovo_morto.nome, alunoer1.nome)
         self.assertEqual(ovo_morto.anotacoes_aluno[0], mensagem.encode('utf-8'))

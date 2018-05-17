@@ -35,10 +35,10 @@ class DbObservador(Model):
 
         return observador
 
-    def update_observador(self, update_id, nome, telefone, cpf, email):
+    def update_observador(self, update_id, nome, telefone, cpf, email,vinculo_turma,vinculo_escola):
 
         observador = self.load(update_id)
-        [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.parametro]
+        [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.all()]
         observador.save()
 
     def redefinir_senha(self, id, senha):
@@ -116,6 +116,14 @@ class DbObservador(Model):
                                    vinculo_rede=search.vinculo_rede))
 
         return observador
+    def search_observador_tipo_nome(self,tipo,nome):
+        lista_dic = None
+        for search in DbObservador.query(DbObservador.tipo == tipo and DbObservador.nome == nome):
+            lista_dic = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
+                                   cpf=search.cpf, email=search.email, tipo=search.tipo,
+                                   vinculo_escola=search.vinculo_escola,vinculo_turma=search.vinculo_turma,
+                                   vinculo_rede=search.vinculo_rede)
+        return lista_dic
 
     def search_observador_escola_listagem(self, login, vinculo_escola):
         observador = []

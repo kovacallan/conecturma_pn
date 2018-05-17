@@ -3,8 +3,8 @@ from control.classes.validar_cadastros_updates import *
 from facade.facade_main import Facade
 # from control.historico_controller import *
 from control.login.login_observador_controller import *
-from control.b_observadores_controller import *
-
+from control.ambiente_de_gestao_de_aprendizagem_controller import *
+from control.classes.permissao import permissao, usuario_logado
 
 
 facade = Facade()
@@ -14,6 +14,7 @@ facade = Facade()
 
 
 @route('/observador/create_observador_administrador', method="POST")
+@permissao('administrador')
 def controller_observador_cadastro():
     """
     Cria o administradores , com nome , senha e telefone (tipo==0)
@@ -37,7 +38,8 @@ def controller_observador_cadastro():
         redirect('/observador')
 
 
-@route('/pag_administrador')
+@route('/administrador/pag_administrador')
+@permissao('administrador')
 @view('administrativo.tpl')
 def view_adm():
     historico = controller_historico_login()
@@ -61,7 +63,8 @@ def view_gestao_aprendizagem():
 #     adm=facade.search_observador_inativos_facade(request.get_cookie("login",secret='2526'))
 #     return dict(usuario=adm.nome, tipo=adm.tipo)
 # =======
-    adm= facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    adm= usuario_logado()
+    print("AC , ADM",adm)
     return dict(usuario=adm['nome'], tipo=adm['tipo'])
 # >>>>>>> f7a53178f5b4261ed22e2fe1b99b2ed8a345ad48
 
@@ -72,7 +75,7 @@ def view_jogar_conecturma():
 #     adm = facade.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
 #     return dict(usuario=adm.nome, tipo=adm.tipo)
 # =======
-    adm = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
+    adm = usuario_logado()
     return dict(usuario=adm['nome'], tipo=adm['tipo'])
 # >>>>>>> f7a53178f5b4261ed22e2fe1b99b2ed8a345ad48
 

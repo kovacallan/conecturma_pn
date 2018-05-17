@@ -1,4 +1,4 @@
-from model.aluno_model import DbAluno
+from src.model.aluno_model import DbAluno
 
 class AlunoFacade:
 
