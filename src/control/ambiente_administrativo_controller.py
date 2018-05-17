@@ -3,7 +3,7 @@ from control.classes.validar_cadastros_updates import *
 from facade.facade_main import Facade
 # from control.historico_controller import *
 from control.login.login_observador_controller import *
-from control.b_observadores_controller import *
+from control.ambiente_de_gestao_de_aprendizagem_controller import *
 
 
 
@@ -37,7 +37,7 @@ def controller_observador_cadastro():
         redirect('/observador')
 
 
-@route('/pag_administrador')
+@route('/administrador/pag_administrador')
 @view('administrativo.tpl')
 def view_adm():
     historico = controller_historico_login()
