@@ -24,13 +24,13 @@ def controller_login_entrar_observador():
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)
-            facade.create_historico_facade(observador['nome'], observador['tipo'])
+            facade.create_estrutura_facade(observador['nome'], observador['tipo'])
             redirect('/gestao_aprendizagem')
         elif observador['tipo']== '0':
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)
-            facade.create_historico_facade(observador['nome'], observador['tipo'])
+            facade.create_estrutura_facade(observador['nome'], observador['tipo'])
             redirect('/pag_administrador')
     else:
         redirect('/')

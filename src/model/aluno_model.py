@@ -1,8 +1,18 @@
 from walrus import *
 from random import randrange
-# from src.model.estrutura_model import *
-# from src.control.classes.permissao import usuario_logado
-from model.estrutura_model import DbEstrutura
+# import sys
+# sys.path.insert(0, '/home/carlos/PycharmProjects/conecturma_pn/src/model')
+# # from src.model.estrutura_model import *
+# # from src.control.classes.permissao import usuario_logado
+# # import sys
+# # sys.path.insert(0, '/home/carlos/PycharmProjects/conecturma_pn/src/model')
+#
+# import model.estrutura_model
+
+
+
+
+
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -31,6 +41,10 @@ class DbAluno(Model):
     vinculo_escola = TextField(fts=True, default='0')
     anotacoes_aluno = ListField()
     vinculo_turma = TextField(fts=True, index=True, default='0')
+
+    def __init__(self):
+        from model.estrutura_model import DbEstrutura
+        estrutura_main = DbEstrutura()
 
     def aluno_logado(self, id_usuario):
 
@@ -167,7 +181,7 @@ class DbAluno(Model):
 
     def comprar_item(self, id_usuario, id_item):
 
-        item = DbEstrutura()
+        item = self.estrutura_main
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
 
@@ -231,7 +245,7 @@ class DbAluno(Model):
 
     def search_aluno_by_escola(self, escola):
         alunos = []
-        escola_estrutura = DbEstrutura()
+        escola_estrutura = self.estrutura_main()
         for aluno in DbAluno.query(DbAluno.vinculo_escola == escola, order_by=DbAluno.nome):
             vinculo_escola = escola_estrutura.search_estrutura_id(int(aluno.vinculo_escola))
             alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,

@@ -9,7 +9,7 @@ class LojaFacade:
         """
         self.loja = DbEstrutura()
 
-    def criar_item_loja_facade(self, nome, estrutura,tipo, preco):
+    def create_estrutura_facade(self, nome, estrutura, tipo, preco):
         """
         Cria o item no banco de dados
         :param nome:nome do item
@@ -20,17 +20,17 @@ class LojaFacade:
 
         return self.loja.create_estrutura(nome=nome,tipo_estrutura=estrutura, tipo_item=tipo, preco = preco)
 
-    def read_item_loja_facade(self):
+    def read_estrutura_facade(self):
         """
         cria uma lista com os itens armazenados na base de dados , com seus valores de id , nome ,tipo e preço
         :return:Lista dos itens criados
         """
         return self.loja.read_estrutura(tipo_estrutura="4")
 
-    def pesquisa_item_facade_nome(self,nome):
+    def search_estrutura_facade(self, nome):
         return self.loja.search_estrutura(tipo_estrutura=estrutura, nome=nome)
 
-    def pesquisa_item_facade(self, id):
+    def search_estrutura_by_id(self, id):
         """
         pesquisa itens por id (ainda nao implementado)
         :param id: id do item

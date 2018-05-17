@@ -109,7 +109,7 @@ class FacadeTest(unittest.TestCase):
         self._create_item()
         self._create_aluno()
         aluno1 = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
-        item1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
+        item1 = self.facade.search_estrutura_facade("burroquandofoge")
         self.facade.compra_item_facade(aluno1.id, item1['id'])
         self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
 
@@ -122,7 +122,7 @@ class FacadeTest(unittest.TestCase):
     def _equipar_item_facade(self):
         self._comprar_item()
         aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
-        iten = self.facade.pesquisa_item_facade_nome("burroquandofoge")
+        iten = self.facade.search_estrutura_facade("burroquandofoge")
         self.facade.equipar_item_facade(aluno1.id, iten)
         aluno2 = self.facade.pesquisa_aluno_nome_facade("egg")
         self.assertEqual(aluno2.cor, str(iten['id']))
@@ -131,7 +131,7 @@ class FacadeTest(unittest.TestCase):
         self._equipar_item_facade()
         aluno1 = self.facade.pesquisa_aluno_nome_facade("egg")
         self.facade.avatar_facade(aluno1.id)
-        iten1 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
+        iten1 = self.facade.search_estrutura_facade("burroquandofoge")
         self.assertEqual(self.facade.avatar_facade(aluno1.id)['cor'], str(iten1['id']))
         self._delete_item()
         self._delete_alunos()
@@ -450,7 +450,7 @@ class FacadeTest(unittest.TestCase):
     """TESTE FACADE HISTORICO"""
 
     def _create_historico(self):
-        self.facade.create_historico_facade("Egg", "ADMINISTRADOR")
+        self.facade.create_estrutura_facade("Egg", "ADMINISTRADOR")
 
     def _read_historico(self):
         historico = self.facade.read_historico_facade()
@@ -496,15 +496,15 @@ class FacadeTest(unittest.TestCase):
     """INICIO DE TESTE FACADE DE LOJA"""
 
     def _create_item(self):
-        iten1 = self.facade.criar_item_loja_facade(nome="burroquandofoge", tipo='1', preco=0)
+        iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo='1', preco=0)
         self.assertIsNot(iten1, None)
 
     def _read_item(self):
         self._create_item()
-        item1 = self.facade.read_item_loja_facade()
+        item1 = self.facade.read_estrutura_facade()
 
     def _delete_item(self):
-        itens = self.facade.read_item_loja_facade()
+        itens = self.facade.read_estrutura_facade()
         escolhidos = []
         for itens in itens:
             escolhidos.append(itens['id'])
@@ -523,11 +523,11 @@ class FacadeTest(unittest.TestCase):
         self._anotacoes_no_aluno()
         self._create_observador()
 
-        iten1 = self.facade.criar_item_loja_facade(nome="burroquandofoge", tipo='1', preco=0)
+        iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo='1', preco=0)
         self.assertIsNot(iten1, None)
 
         aluno1 = self.facade.create_aluno_facade(nome="thanos", escola="Estalo", senha="123", vinculo_rede="0")
-        item2 = self.facade.pesquisa_item_facade_nome("burroquandofoge")
+        item2 = self.facade.search_estrutura_facade("burroquandofoge")
         self.assertEqual(aluno1, True)
         self.assertIsNot(item2,None)
 

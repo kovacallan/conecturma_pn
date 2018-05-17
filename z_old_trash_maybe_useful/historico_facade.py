@@ -11,7 +11,7 @@ class HistoricoFacade:
         self.historico = DbEstrutura()
 
 
-    def create_historico_facade(self, nome, tipo):
+    def create_estrutura_facade(self, nome, tipo):
         self.historico.create_estrutura(nome=nome, tipo_estrutura=estrutura, tipo_usuario=tipo)
 
     def read_historico_facade(self):

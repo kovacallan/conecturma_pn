@@ -20,19 +20,19 @@ def view_jogar_conecturma():
             cor = 'default'
         else:
             print("why??")
-            cor =facade.pesquisa_item_facade(avatar['cor'])['nome']
+            cor =facade.search_estrutura_by_id(avatar['cor'])['nome']
         if usuario.rosto == "0":
             rosto = 'default'
         else:
-            rosto = facade.pesquisa_item_facade(avatar['rosto'])['nome']
+            rosto = facade.search_estrutura_by_id(avatar['rosto'])['nome']
         if usuario.acessorio == "0":
             acessorio = 'default'
         else:
-            acessorio = facade.pesquisa_item_facade(avatar['acessorio'])['nome']
+            acessorio = facade.search_estrutura_by_id(avatar['acessorio'])['nome']
         if usuario.corpo == "0":
             corpo = 'default'
         else:
-            corpo = facade.pesquisa_item_facade(avatar['corpo'])['nome']
+            corpo = facade.search_estrutura_by_id(avatar['corpo'])['nome']
 
         avatar_pecas = {'cor': cor,
                         'rosto': rosto,
@@ -46,20 +46,20 @@ def view_jogar_conecturma():
         # if usuario.cor == 0:
         #     cor = 'default'
         # else:
-        #     cor = facade.pesquisa_item_facade(avatar['cor'])['nome']
+        #     cor = facade.search_estrutura_by_id(avatar['cor'])['nome']
         #
         # if usuario.rosto == 0:
         #     rosto = 'default'
         # else:
-        #     rosto = facade.pesquisa_item_facade(avatar['rosto'])['nome']
+        #     rosto = facade.search_estrutura_by_id(avatar['rosto'])['nome']
         # if usuario.acessorio == 0:
         #     acessorio = 'default'
         # else:
-        #     acessorio = facade.pesquisa_item_facade(avatar['acessorio'])['nome']
+        #     acessorio = facade.search_estrutura_by_id(avatar['acessorio'])['nome']
         # if usuario.corpo == 0:
         #     corpo = 'default'
         # else:
-        #     corpo = facade.pesquisa_item_facade(avatar['corpo'])['nome']
+        #     corpo = facade.search_estrutura_by_id(avatar['corpo'])['nome']
         #
         # avatar_pecas = {'cor': cor,
         #                 'rosto': rosto,

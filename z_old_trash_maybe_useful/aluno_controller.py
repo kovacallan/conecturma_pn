@@ -141,7 +141,7 @@ def ver_itens():
     itens_comprado = facade.ver_item_comprado_facade(usuario.id)
     itens = []
     for y in itens_comprado:
-        itens.append(facade.pesquisa_item_facade(y))
+        itens.append(facade.search_estrutura_by_id(y))
 
     return dict(lista_itens=itens)
 
@@ -150,14 +150,14 @@ def ver_itens():
 def equipar_item():
     """
     Equipar o avatar
-    metodos chamados: pesquisa_aluno_nome_facade,pesquisa_item_facade e equipar_item_facade
+    metodos chamados: pesquisa_aluno_nome_facade,search_estrutura_by_id e equipar_item_facade
     :return:
     """
 
     usuario = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
 
     id_item = request.forms['id']
-    item = facade.pesquisa_item_facade(id_item)
+    item = facade.search_estrutura_by_id(id_item)
 
     facade.equipar_item_facade(usuario.id, item)
 

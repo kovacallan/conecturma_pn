@@ -32,22 +32,22 @@ escola_facade.create_escola_facade(nome="conecturma", rua="Largo do Machado", nu
 turma_facade.create_turma_facade(nome="KND", login="Numero um", serie=1, escola=1)
 
 
-loja_facade.criar_item_loja_facade(nome="Cores", preco="0", tipo="1")
-loja_facade.criar_item_loja_facade(nome="Cores2", preco="5", tipo="1")
-loja_facade.criar_item_loja_facade(nome="Cores3", preco="10", tipo="1")
+loja_facade.create_estrutura_facade(nome="Cores", preco="0", tipo="1")
+loja_facade.create_estrutura_facade(nome="Cores2", preco="5", tipo="1")
+loja_facade.create_estrutura_facade(nome="Cores3", preco="10", tipo="1")
 
 
-loja_facade.criar_item_loja_facade(nome="Rosto", preco="0", tipo="2")
-loja_facade.criar_item_loja_facade(nome="Rosto2", preco="5", tipo="2")
-loja_facade.criar_item_loja_facade(nome="Rosto3", preco="10", tipo="2")
+loja_facade.create_estrutura_facade(nome="Rosto", preco="0", tipo="2")
+loja_facade.create_estrutura_facade(nome="Rosto2", preco="5", tipo="2")
+loja_facade.create_estrutura_facade(nome="Rosto3", preco="10", tipo="2")
 
-loja_facade.criar_item_loja_facade(nome="Cabeça", preco="0", tipo="3")
-loja_facade.criar_item_loja_facade(nome="Cabeça2", preco="5", tipo="3")
-loja_facade.criar_item_loja_facade(nome="Cabeça3", preco="10", tipo="3")
+loja_facade.create_estrutura_facade(nome="Cabeça", preco="0", tipo="3")
+loja_facade.create_estrutura_facade(nome="Cabeça2", preco="5", tipo="3")
+loja_facade.create_estrutura_facade(nome="Cabeça3", preco="10", tipo="3")
 
-loja_facade.criar_item_loja_facade(nome="Corpo", preco="0", tipo="4")
-loja_facade.criar_item_loja_facade(nome="Corpo2", preco="5", tipo="4")
-loja_facade.criar_item_loja_facade(nome="Corpo3", preco="10", tipo="4")
+loja_facade.create_estrutura_facade(nome="Corpo", preco="0", tipo="4")
+loja_facade.create_estrutura_facade(nome="Corpo2", preco="5", tipo="4")
+loja_facade.create_estrutura_facade(nome="Corpo3", preco="10", tipo="4")
 
 medalaha_facade.create_medalha_facade(nome="Medalha1", tipo='1')
 medalaha_facade.create_medalha_facade(nome="Medalha2", tipo='2')

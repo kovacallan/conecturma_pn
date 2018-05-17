@@ -42,7 +42,7 @@ def controller_redirect_cadastro():
     elif tipo_usuario is '6':
         redirect('/aluno/cadastro_aluno')
     else:
-        print("aqui?")
+        print("aqui? AGC L45")
         redirect('/gestao_aprendizagem/usuario')
 
 def controller_index_usuario(tipo_observador,vinculo_escola):
@@ -60,6 +60,7 @@ def controller_index_usuario(tipo_observador,vinculo_escola):
         usuario.append(a)
     if observador['tipo']=="0":
        usuario =facade.read_observador_facade()
+       print("AGC L63",usuario)
     else:
         for o in observador:
             print("AGC",o,observador)
@@ -217,10 +218,6 @@ def view_observador_cadastro():
 
 @route('/create_observador', method="POST")
 def controller_observador_cadastro():
-    """
-    Cria um professor com nome , senha , telefone ,email e escola(recebe o id)
-    :return:
-    """
     tipo = request.params['tipo']
     nome = request.params['nome']
     senha = request.params['senha']
@@ -231,11 +228,13 @@ def controller_observador_cadastro():
     rede = request.params['rede']
     turma = request.params['turma']
     if escola == 0:
+        print("oh no AGA L231")
         pass
     else:
         if filtro_cadastro(nome=nome, senha=senha, cpf=cpf,telefone=telefone, email=email, tipo=tipo):
             facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf,email=email, tipo=tipo,
                                             escola=escola, rede=rede, vinculo_turma=turma)
+            print("salvando...")
         else:
             print("Erro para salvar")
 

@@ -51,13 +51,13 @@ class Login_Observador(object):
                     response.set_cookie("BUMBA", observador_logado, path='/',secret=hash)
                     now = datetime.now()
                     facade.login_date_facade(observador_logado['id'], now)
-                    facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
+                    facade.create_estrutura_facade(observador_logado['nome'], observador_logado['tipo'])
                     return '/administrador/pag_administrador'
                 else:
                     response.set_cookie("BUMBA", observador_logado, path='/',secret=hash)
                     now = datetime.now()
                     facade.login_date_facade(observador_logado['id'], now)
-                    facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
+                    facade.create_estrutura_facade(observador_logado['nome'], observador_logado['tipo'])
                     return '/aluno/loja'
             else:
                 return '/'
