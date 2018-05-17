@@ -71,7 +71,8 @@ class DbEstrutura(Model):
         """
         usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
-                         usuario.pesquisa_aluno_objeto(nome_aluno=usuario_logado).itens_comprados]
+                         usuario.
+                             _objeto(nome_aluno=usuario_logado).itens_comprados]
         itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura='4')]
         lista_teste = [z for z in itens if z not in itens_usuario]
 
