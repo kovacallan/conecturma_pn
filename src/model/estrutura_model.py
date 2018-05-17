@@ -1,5 +1,5 @@
 from walrus import *
-from model.aluno_model import *
+# from model.aluno_model import DbAluno
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -71,7 +71,8 @@ class DbEstrutura(Model):
         """
         usuario = DbAluno()
         itens_usuario = [x.decode('utf-8') for x in
-                         usuario.pesquisa_aluno_objeto(nome_aluno=usuario_logado).itens_comprados]
+                         usuario.
+                             _objeto(nome_aluno=usuario_logado).itens_comprados]
         itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura='4')]
         lista_teste = [z for z in itens if z not in itens_usuario]
 
@@ -161,7 +162,7 @@ class DbEstrutura(Model):
                          numero=None, cidade=None,
                          estado=None, uf=None, serie=None, tipo_item=None, preco=None, tipo_medalha=None,
                          descricao=None,
-                         descricao_completa=None, nome_usuario=None, tipo_usuario=None):
+                         descricao_completa=None, nome_usuario=None, tipo_usuario=None,vinculo_escola=None):
         estrutura = self.load(update_id)
         [setattr(estrutura,parametro,valor) for parametro,valor in locals().items() if valor]
         estrutura.save()

@@ -1,6 +1,8 @@
 from walrus import *
 from random import randrange
-from src.model.estrutura_model import *
+# from src.model.estrutura_model import *
+# from src.control.classes.permissao import usuario_logado
+from model.estrutura_model import DbEstrutura
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -62,14 +64,9 @@ class DbAluno(Model):
 
     def update_aluno(self, update_id, nome, senha, turma, escola, rede):
 
-        # pode ser aprimorado , no formato(exemplo de estrutura model(parte de update))
-        #         aluno = self.load(update_id)
-        #         [setattr(aluno,parametro,valor) for parametro,valor in locals().items() if valor]
-        #         aluno.save()
-        # testar depois , para otimizaçao do codigo
         aluno_up = self.load(update_id)
         [setattr(aluno_up, parametro, valor) for parametro, valor in locals().items() if
-         valor != aluno_up.parametro]
+         valor != aluno_up.all()]
         aluno_up.save()
 
     def read_aluno(self):
@@ -181,8 +178,9 @@ class DbAluno(Model):
             usuario.itens_comprados.append(id_item)
             usuario.save()
 
-    def ver_itens_comprados(self, id_usuario):
-
+    def ver_itens_comprados(self,id_usuario):
+        #         id_usuario
+        # id_usuario=usuario_logado()
         usuario = self.load(id_usuario)
         itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.itens_comprados]
         return itens
