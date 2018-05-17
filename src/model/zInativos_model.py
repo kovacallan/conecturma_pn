@@ -1,11 +1,13 @@
 from walrus import *
-from model.aluno_model import *
 from model.estrutura_model import *
+# from src.model.aluno_model import DbAluno
 from model.observador_model import *
+
 
 # from facade.Facade_main import *
 db = Database(host='localhost', port=6379, db=0)
-
+# aluno = DbAluno()
+# observador = DbObservador()
 # facade=Facade()
 """lista de informaçoes
 tipos :
@@ -79,8 +81,7 @@ class DbCemiterio(Model):
     data_ultimo_login = TextField(default='')
     anotacoes_observador = ListField()
 
-    aluno = DbAluno()
-    observador = DbObservador()
+
 
     def desativar_atores(self, atores_id):
         # print("inativos", atores_id)

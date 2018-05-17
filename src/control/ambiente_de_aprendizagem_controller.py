@@ -1,6 +1,6 @@
 from bottle import route,view, request, redirect, response,get
-from facade.facade_main import *
-from control.classes.permissao import permissao
+from facade.facade_main import Facade
+from control.classes.permissao import permissao,usuario_logado
 facade=Facade()
 
 """Tipo=6"""
@@ -67,8 +67,9 @@ def ver_itens():
     :return: dicionario de itens
     """
 
-    usuario = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
-    itens_comprado = facade.ver_item_comprado_facade(usuario.id)
+    usuario = usuario_logado()
+    print("APC L71",usuario['id'])
+    itens_comprado = facade.ver_item_comprado_facade(usuario['id'])
     itens = []
     for y in itens_comprado:
         itens.append(facade.pesquisa_item_facade(y))

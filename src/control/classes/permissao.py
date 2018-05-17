@@ -1,7 +1,7 @@
 from bottle import redirect, response, request, error
 from datetime import datetime
 
-from facade.facade_main import Facade
+from src.facade.facade_main import Facade
 
 """Constante para a key de hash temporariamente"""
 
@@ -43,6 +43,7 @@ class Login_Observador(object):
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
 
         observador_logado = facade.search_observador_email_facade(email=self.email)
+        print("permissao L46",observador_logado,observador_logado['email'],self.email)
 
         if observador_logado['email'] == self.email:
             if observador_logado['senha'] == self.senha:
@@ -51,7 +52,7 @@ class Login_Observador(object):
                     now = datetime.now()
                     facade.login_date_facade(observador_logado['id'], now)
                     facade.create_historico_facade(observador_logado['nome'], observador_logado['tipo'])
-                    return '/aluno/loja'
+                    return '/administrador/pag_administrador'
                 else:
                     response.set_cookie("BUMBA", observador_logado, path='/',secret=hash)
                     now = datetime.now()
