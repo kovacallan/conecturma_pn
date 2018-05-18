@@ -42,9 +42,9 @@ class DbAluno(Model):
     anotacoes_aluno = ListField()
     vinculo_turma = TextField(fts=True, index=True, default='0')
 
-    def __init__(self):
-        from model.estrutura_model import DbEstrutura
-        estrutura_main = DbEstrutura()
+    # def __init__(self):
+    #     # from model.estrutura_model import DbEstrutura
+    #     # estrutura_main = DbEstrutura()
 
     def aluno_logado(self, id_usuario):
 
@@ -180,8 +180,9 @@ class DbAluno(Model):
             print('Erro!')
 
     def comprar_item(self, id_usuario, id_item):
+        from model.estrutura_model import DbEstrutura
 
-        item = self.estrutura_main
+        item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
 
