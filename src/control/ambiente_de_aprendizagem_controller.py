@@ -10,7 +10,7 @@ facade=Facade()
 def view_jogar_conecturma():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
     if request.get_cookie("login", secret='2524'):
-        usuario = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
+        usuario = usuario_logado()
         avatar = facade.avatar_facade(usuario['id'])
         if usuario['cor'] == "0":
             cor = 'default'
@@ -85,7 +85,7 @@ def equipar_item():
     :return:
     """
 
-    usuario = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
+    usuario = usuario_logado()
 
     id_item = request.forms['id']
     item = facade.search_estrutura_by_id(id_item)
@@ -95,18 +95,16 @@ def equipar_item():
     redirect('/aluno/ver_itens_comprados')
 
 @get('/jogos')
+@permissao('aluno_varejo')
 @view('ojogo')
 def jogo():
     """
     jogo que recebe o parâmetro de qual botão foi clicado e armazena a quantidade de acertos
     :return: nome do jogo
     """
-    if True or request.get_cookie("login", secret='2524'):
-        jogo = request.params['n1']
-        return dict(nome_jogo=jogo)
-    else:
-        redirect('/')
 
+    jogo = request.params['n1']
+    return dict(nome_jogo=jogo)
 
 """ Controle do score """
 
@@ -122,7 +120,7 @@ def ponto():
 
     jogo = request.params['jogo']
     ponto = int(request.params['ponto'])
-    usuario = request.get_cookie("login", secret="2524")
+    usuario = usuario_logado()
 
 
     facade.ponto_jogo_facade(usuario, jogo, ponto)
@@ -131,18 +129,17 @@ def ponto():
     """ redirect('/jogos', BaseResponse.add_header(jogo=jogo ,value=jogo))"""
 
 @route('aluno/ver_item')
+@permissao('aluno_varejo')
 @view('loja/ver_item')
 def ver_item():
     """
     mostra os itens da loja , os ja criados
     :return:o dicionario com o read
     """
-    if request.get_cookie("login", secret='2524'):
-        read = facade.read_estrutura_facade('4')
 
-        return dict(teste=read)
-    else:
-        redirect('/')
+    read = facade.read_estrutura_facade('4')
+
+    return dict(teste=read)
 
 
 @get('/compras_loja')
@@ -152,8 +149,9 @@ def compras():
     metodos usados: pesquisa_aluno_nome_facade,compra_item_facade
     :return:
     """
+
     id_item = request.params['id']
-    usuario_logado = facade.pesquisa_aluno_nome_facade(request.get_cookie("login", secret='2524'))
-    facade.compra_item_facade(id_usuario=usuario_logado['id'], id_item=id_item)
+    usuario_logad = usuario_logado()
+    facade.compra_item_facade(id_usuario=usuario_logad['id'], id_item=id_item)
 
     redirect('aluno/loja')

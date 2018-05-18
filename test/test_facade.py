@@ -467,7 +467,7 @@ class FacadeTest(unittest.TestCase):
     """TESTE FACADE MEDALHAS"""
 
     def _create_medalha(self):
-        medalha = self.facade.create_medalha_facade('cheese', tipo="1")
+        medalha = self.facade.create_estrutura_facade('cheese', tipo="1")
         self.assertIsNot(medalha, None)
 
     def _read_medalha(self):

@@ -15,7 +15,7 @@ def index():
     """
 
     itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
-    itens = facade.read_estrutura_facade()
+    itens = facade.read_estrutura_facade('4')
     if itens:
         return dict(itens=itens, itens_comprados=str(itens_comprados))
     else:
@@ -23,6 +23,7 @@ def index():
 
 
 @route('/loja/cadastrar_item')
+@permissao('administrador')
 @view('loja/cadastrar_item')
 def cadastrar_item():
     """
