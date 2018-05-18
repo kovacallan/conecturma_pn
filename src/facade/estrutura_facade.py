@@ -19,7 +19,6 @@ class EstruturaFacade:
                                         nome_usuario=nome_usuario, tipo_usuario=tipo_usuario)
 
     def read_estrutura_facade(self, tipo_estrutura):
-        print("L22 EF",tipo_estrutura )
         return self.estrutura.read_estrutura(tipo_estrutura=tipo_estrutura)
 
     def update_estrutura(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',

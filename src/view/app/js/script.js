@@ -36,7 +36,7 @@ function cadastro_observador(){
             if(!validar_campo_vazio(telefone)){
                 if(!validar_campo_vazio(email)){
                     if(!validar_se_email_existe(email) && !validar_campo_vazio(cpf) && !validar_campo_vazio(rede) && !validar_campo_vazio(escola)){
-                        $.post('/observador/create_observador', {tipo:tipo.value,nome:nome.value,senha:senha.value,telefone:telefone.value,cpf:cpf.value,email:email.value,escola:escola.value,rede:rede.value,turma:turma.value},function(){
+                        $.post('/create_observador', {tipo:tipo.value,nome:nome.value,senha:senha.value,telefone:telefone.value,cpf:cpf.value,email:email.value,escola:escola.value,rede:rede.value,turma:turma.value},function(){
                         });
                         window.location="/gestao_aprendizagem/usuario";
                     }

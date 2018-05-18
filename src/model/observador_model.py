@@ -47,12 +47,6 @@ class DbObservador(Model):
 
         observador.save()
 
-    def create_hash_login(self, id, hash):
-
-        observador = DbObservador.load(id)
-        observador.hash_login = hash
-        observador.save()
-
     def search_observador_id(self, id):
 
         observador = self.load(id)
@@ -116,6 +110,7 @@ class DbObservador(Model):
                                    vinculo_rede=search.vinculo_rede))
 
         return observador
+
     def search_observador_tipo_nome(self,tipo,nome):
         lista_dic = None
         for search in DbObservador.query(DbObservador.tipo == tipo and DbObservador.nome == nome):
@@ -146,11 +141,11 @@ class DbObservador(Model):
 
         return observador
 
-    def search_observador_escola_filtro(self, vinculo_escola):
+
+    def search_observador_turma(self, vinculo_turma):
         observador = []
-        for read in DbObservador.query(DbObservador.vinculo_escola == vinculo_escola, order_by=DbObservador.nome):
-            observador.append(
-                dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
+        for read in DbObservador.query(DbObservador.vinculo_turma == vinculo_turma, order_by=DbObservador.nome):
+            observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
                      email=read.email, tipo=read.tipo,
                      vinculo_rede=read.vinculo_rede,
                      vinculo_escola=read.vinculo_escola,
@@ -158,10 +153,9 @@ class DbObservador(Model):
 
         return observador
 
-
-    def search_observador_turma(self, vinculo_turma):
+    def search_observador_rede(self, vinculo_rede):
         observador = []
-        for read in DbObservador.query(DbObservador.vinculo_turma == vinculo_turma, order_by=DbObservador.nome):
+        for read in DbObservador.query(DbObservador.vinculo_rede == vinculo_rede, order_by=DbObservador.nome):
             observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
                      email=read.email, tipo=read.tipo,
                      vinculo_rede=read.vinculo_rede,

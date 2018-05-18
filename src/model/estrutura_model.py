@@ -97,7 +97,6 @@ class DbEstrutura(Model):
         return lista_dic
 
     def search_estrutura_id(self, id):
-        print("{} {} EM L101".format(id, type(id)))
         if id != 0:
             lista = DbEstrutura.load(id)
             lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
