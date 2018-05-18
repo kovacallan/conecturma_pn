@@ -1,16 +1,13 @@
-    <input type="hidden" name="">
+
     <script>
-$(document).on(change,function(){
-    $("select").on(change, function(){
-    window.alert("?")
-        $.ajax({url: "demo_ajax_script.js", dataType: "script"});
-    });
-});
-</script>
+    function potaquepariu(){
+    window.alert("foi?",rede)
+    }
+    </script>
 
 
 
-    <select id="filtro_rede" onChange='filtro_usuario(this)''>
+    <select onChange='potaquepariu >
         %if observador_tipo is '0':
             <option value="0">---- Selecione rede ----</option>
             % for r in redes:
