@@ -93,5 +93,27 @@ def controller_historico_login():
     metodo para pegar o historico
     :return: o metodo de read_historico_facade() armazenado em historico
     """
-    historico = facade.read_historico_facade()
+    historico = facade.read_estrutura_facade(TIPO_ESTRUTURA['historico'])
     return historico
+
+@route('/loja/cadastrar_item')
+@permissao('administrador')
+@view('loja/cadastrar_item')
+def cadastrar_item():
+    """
+    verifica se existe o cookie
+    :return:
+    """
+    return
+
+
+@route('/cadastro_item', method='post')
+def cadastro_item():
+    """
+    cadastra o item , com nome , preço e tipo
+    metodos usados: create_estrutura_facade
+    :return:
+    """
+
+    facade.create_estrutura_facade(nome=request.forms.nome, tipo_item=request.forms.tipo, preco=request.forms.preco,tipo_estrutura='4')
+    redirect('cadastrar_item')

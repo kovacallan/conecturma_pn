@@ -1,5 +1,5 @@
     <input type="hidden" name="">
-    <select id="filtro_rede">
+    <select id="filtro_rede" onChange=filtro_usuario()>
         %if observador_tipo is '0':
             <option value="0">---- Selecione rede ----</option>
             % for r in redes:
@@ -11,7 +11,7 @@
             <option value="{{redes['id']}}">{{redes['nome']}}</option>
         %end
     </select>
-    <select id="filtro_escola">
+    <select id="filtro_escola" onChange=filtro_usuario()>
         %if observador_tipo is '0':
             <option value="0">---- Selecione escola ----</option>
             % for e in escolas:
@@ -23,11 +23,13 @@
             <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
         %end
     </select>
-    <select id="filtro_turma">
+    <select id="filtro_turma" onChange=filtro_usuario()>
         <option value="0">---- Selecione turma ----</option>
+        <div id=usuarios_sistema>
         % for t in turmas:
             <option value="{{t['id']}}">{{t['nome']}}</option>
         % end
+        </div>
     </select>
     <select id="filtro_tipo_usuario">
         <option value="0">---- Selecione Tipo do usuário ----</option>

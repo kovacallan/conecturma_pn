@@ -47,8 +47,6 @@ def controller_redirect_cadastro():
 @permissao('professor')
 def controller_index_usuario(observador):
     usuario = []
-
-
     if observador['tipo'] == '0':
         aluno = facade.read_aluno_facade()
         observador=facade.read_observador_facade()
@@ -126,7 +124,6 @@ def controller_filtro_opcoes(observador):
 @permissao('professor')
 @view('aluno/aluno_cadastro')
 def aluno():
-
     observador = usuario_logado()
     if observador['tipo'] == '0':
         escolas = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
@@ -172,12 +169,34 @@ def tipo_usuario(id_tipo):
 #     BOTAO CADASTRO OPÇAO OBSERVADORES
 
 @route('/observador/cadastro')
-@permissao('professor')
+@permissao('diretor')
 def view_observador_cadastro():
     tipo_observador = int(request.params['tipo_observador'])
-    escola = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
-    rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
-    turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+    escola = facade.read_estrutura_facade(tipo_estrutura="2")
+    rede = facade.read_estrutura_facade(tipo_estrutura="1")
+    turma = facade.read_estrutura_facade(tipo_estrutura="3")
+
+    if tipo_observador == 0:
+        return template('observador/create_observador', tipo=tipo_observador)
+    elif tipo_observador == 1:
+        return template('observador/create_observador', tipo=tipo_observador, rede=rede)
+    elif tipo_observador == 2:
+        print("aqui ?L177")
+        return template('observador/create_observador', tipo=tipo_observador, escola=escola)
+    elif tipo_observador == 3:
+        return template('observador/create_observador', tipo=tipo_observador, escola=escola, turma=turma)
+    elif tipo_observador == 4:
+        redirect('/observador')
+    else:
+        redirect('/observador')
+
+@route('/observador/cadastro')
+@permissao('diretor')
+def view_observador_cadastro():
+    tipo_observador = int(request.params['tipo_observador'])
+    escola = facade.read_estrutura_facade("2")
+    rede = facade.read_estrutura_facade("1")
+    turma = facade.read_estrutura_facade("3")
 
     if tipo_observador == 0:
         return template('observador/create_observador', tipo=tipo_observador)
@@ -193,7 +212,7 @@ def view_observador_cadastro():
         redirect('/observador')
 
 @route('/create_observador', method="POST")
-@permissao('professor')
+@permissao('diretor')
 def controller_observador_cadastro():
     tipo = request.params['tipo']
     nome = request.params['nome']
@@ -204,6 +223,16 @@ def controller_observador_cadastro():
     escola = request.params['escola']
     rede = request.params['rede']
     turma = request.params['turma']
+    if escola == 0:
+        print("oh no AGA L231")
+        pass
+    else:
+        if filtro_cadastro(nome=nome, senha=senha, cpf=cpf,telefone=telefone, email=email, tipo=tipo):
+            facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf,email=email, tipo=tipo,
+                                            escola=escola, rede=rede, vinculo_turma=turma)
+            print("salvando...")
+        else:
+            print("Erro para salvar")
 
     if tipo != '1':
         vinculo_rede = facade.search_estrutura_id_facade(int(escola))
@@ -243,6 +272,7 @@ def controller_checar_se_email_existe():
 
 
 @route('/medalha_cadastro')
+@permissao('professor')
 @view('observador/medalha_cadastro.tpl')
 def cadastrar_medalha():
     """
@@ -257,7 +287,7 @@ def controller_medalha_cadastro():
 
     nome = request.params['nome']
     tipo = request.params['tipos']
-    facade.create_medalha_facade(nome=nome, tipo=tipo)
+    facade.create_estrutura_facade(nome=nome, tipo=tipo)
     redirect('/gestao_aprendizagem')
 
 @route('/ler_medalha')
@@ -266,7 +296,7 @@ def controller_medalha_cadastro():
 def read_de_medalha():
     medalhas = []
 
-    for medalha in facade.read_medalha_facade():
+    for medalha in facade.read_estrutura_facade(tipo_estrutura='5'):
         medalhas.append(medalha)
 
     return dict(medalhas=medalhas)
@@ -480,7 +510,8 @@ def view_cadastrar_turma():
         return dict(escolas=escola, observador_tipo=observador['tipo'])
     elif observador['tipo'] == '0':
         escola = facade.read_estrutura_facade(tipo_estrutura='2')
-        return dict(escolas=escola, observador_tipo=observador['tipo'])
+        rede = facade.read_estrutura_facade(tipo_estrutura='1')
+        return dict(escolas=escola, observador_tipo=observador['tipo'],redes=rede)
 
 @route('/turma/turma_update', method='POST')
 @permissao('diretor')
@@ -534,7 +565,8 @@ def controller_create_turma():
     turma = request.forms['turma_nome']
     serie = request.forms['serie']
     escola = request.forms['escola']
-    facade.create_estrutura_facade(nome=turma, tipo_estrutura='3',quem_criou=request.get_cookie("login", secret='2524'), serie=serie, vinculo_escola=escola)
+    rede = facade.search_estrutura_id_facade(int(escola))
+    facade.create_estrutura_facade(nome=turma, tipo_estrutura=TIPO_ESTRUTURA['turma'],quem_criou=usuario_logado()['id'], serie=serie, vinculo_escola=escola,vinculo_rede=rede['vinculo_rede'])
     redirect('/turma')
 
 @permissao('professor')
@@ -585,3 +617,14 @@ def serie(id_serie):
         return "4ª Ano"
     elif id_serie == '5':
         return "5ª Ano"
+
+@route('/filtro_usuario', method='POST')
+def filtro_usuario():
+    rede = request.params['filtro_rede']
+    escola= request.params['filtro_escola']
+    turma=request.params['filtro_turma']
+    usuario=request.params['filtro_tipo_usuario']
+
+    if rede is not "0":
+        escolas_rede= facade.search_estrutura_escola_by_rede_facade(rede)
+        

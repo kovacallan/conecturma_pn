@@ -16,7 +16,7 @@ class FacadeTest(unittest.TestCase):
 
     def _create_aluno(self):
 
-        aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123",vinculo_rede="0")
+        aluno1 = self.facade.create_aluno_facade(nome="egg",escola= "Escola Conecturma", senha="123",vinculo_rede="0")
         self.assertEqual(aluno1, True)
 
     def _create_aluno_senha_vazia(self):
@@ -467,7 +467,7 @@ class FacadeTest(unittest.TestCase):
     """TESTE FACADE MEDALHAS"""
 
     def _create_medalha(self):
-        medalha = self.facade.create_medalha_facade('cheese', tipo="1")
+        medalha = self.facade.create_estrutura_facade('cheese', tipo="1")
         self.assertIsNot(medalha, None)
 
     def _read_medalha(self):

@@ -47,3 +47,6 @@ class EstruturaFacade:
 
     def search_estrutura_turma_by_escola_facade(self,vinculo_escola):
         return self.estrutura.search_turma_by_escola(vinculo_escola=vinculo_escola)
+
+    def ja_tem_item_facade(self, usuario_logado):
+        return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)

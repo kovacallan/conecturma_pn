@@ -27,6 +27,23 @@
                         %   end
                      </select><br>
                  % end
+                 </select>
+                 Rede*
+                 % if observador_tipo is '2':
+                    <select name="rede">
+                        <option value="{{redes['id']}}">{{redes['nome']}}</option>
+                     </select><br>
+                 % else:
+                    <select name="redes">
+                        %   if redes == None:
+                                <option value="0">Sem rede Cadastrada</option>
+                            %else:
+                        %       for e in redes:
+                                <option value="{{e['id']}}">{{e['nome']}}</option>
+                        %       end
+                        %   end
+                     </select><br>
+                 % end
                  <button type="submit">Enviar</button>
             </form>
             <a href="/turma"><button>Voltar</button></a>
