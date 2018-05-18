@@ -56,6 +56,7 @@
     <br>
     Turma*:
     <select id="turma" name="turma">
+        <option value="0"> </option>
         %for t in turma:
             <option value="{{t['id']}}">{{t['nome']}}</option>
         %end

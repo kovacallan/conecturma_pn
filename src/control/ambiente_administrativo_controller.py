@@ -55,17 +55,8 @@ def pesquisar_aluno_turma():
     turma_ = request.params['nome_da_turma']
     facade.pesquisa_aluno_turma_facade(aluno_, turma_)
 
-@route('/administrador/gestao_aprendizage')
-@view('caminho_observador/gestao_aprendizagem.tpl')
-def view_gestao_aprendizagem():
-# <<<<<<< HEAD
-#     adm=facade.search_observador_inativos_facade(request.get_cookie("login",secret='2526'))
-#     return dict(usuario=adm.nome, tipo=adm.tipo)
-# =======
-    adm= usuario_logado()
-    print("AC , ADM",adm)
-    return dict(usuario=adm['nome'], tipo=adm['tipo'])
-# >>>>>>> f7a53178f5b4261ed22e2fe1b99b2ed8a345ad48
+# @route('/gestao_aprendizagem')
+
 
 @route('/jogarconecturma')
 @view('caminho_aluno/jogar_conecturma.tpl')

@@ -19,7 +19,7 @@
         <br><br>
         <input type="submit" value="Pesquisar">
         </form>
-         <a href="/administrador/gestao_aprendizage"><button >gestao de aprendizagem</button></a>
+         <a href="/gestao_aprendizagem"><button >gestao de aprendizagem</button></a>
 
         <a href="/jogarconecturma"><button>jogar conecturma</button></a>
 

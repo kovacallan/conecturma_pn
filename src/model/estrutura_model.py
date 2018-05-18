@@ -1,5 +1,7 @@
 from walrus import *
-# from model.aluno_model import DbAluno
+from model.aluno_model import DbAluno
+
+
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -69,7 +71,7 @@ class DbEstrutura(Model):
         :param usuario_logado: Id do usuario
         :return: Lista de itens que o usuario não tem
         """
-        usuario = DbAluno()
+        usuario = DbAluno
         itens_usuario = [x.decode('utf-8') for x in
                          usuario.
                              _objeto(nome_aluno=usuario_logado).itens_comprados]

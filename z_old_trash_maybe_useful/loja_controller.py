@@ -9,13 +9,13 @@ facade=Facade()
 def index():
     """
     Mostra os itens comprados e os itens disponiveis para serem comprados na mesma pagina
-    metodos usados : ja_tem_item_facade, read_item_loja_facade
+    metodos usados : ja_tem_item_facade, read_estrutura_facade
     :return: um dicionario com os itens comprados e disponiveis , caso um item nao tenha sido criado previamente
     retorna um dicionario vazio
     """
 
     itens_comprados = facade.ja_tem_item_facade(request.get_cookie("login", secret='2524'))
-    itens = facade.read_item_loja_facade()
+    itens = facade.read_estrutura_facade()
     if itens:
         return dict(itens=itens, itens_comprados=str(itens_comprados))
     else:
@@ -36,11 +36,11 @@ def cadastrar_item():
 def cadastro_item():
     """
     cadastra o item , com nome , preço e tipo
-    metodos usados: criar_item_loja_facade
+    metodos usados: create_estrutura_facade
     :return:
     """
 
-    facade.criar_item_loja_facade(nome=request.forms.nome, tipo=request.forms.tipo, preco=request.forms.preco)
+    facade.create_estrutura_facade(nome=request.forms.nome, tipo=request.forms.tipo, preco=request.forms.preco)
     redirect('cadastrar_item')
 
 
@@ -52,7 +52,7 @@ def ver_item():
     :return:o dicionario com o read
     """
     if request.get_cookie("login", secret='2524'):
-        read = facade.read_item_loja_facade()
+        read = facade.read_estrutura_facade()
 
         return dict(teste=read)
     else:

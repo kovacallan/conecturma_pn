@@ -48,11 +48,13 @@ def controller_redirect_cadastro():
 def controller_index_usuario(observador):
     usuario = []
 
+
     if observador['tipo'] == '0':
         aluno = facade.read_aluno_facade()
         observador=facade.read_observador_facade()
         for a in aluno:
             usuario.append(a)
+
         for o in observador:
             if o['tipo'] != '0':
                 usuario.append(o)
@@ -193,10 +195,6 @@ def view_observador_cadastro():
 @route('/create_observador', method="POST")
 @permissao('professor')
 def controller_observador_cadastro():
-    """
-    Cria um professor com nome , senha , telefone ,email e escola(recebe o id)
-    :return:
-    """
     tipo = request.params['tipo']
     nome = request.params['nome']
     senha = request.params['senha']
@@ -426,6 +424,7 @@ def controller_escola_update():
     redirect('/')
 
 @get('/escola/editar')
+@permissao('gestor')
 def view_escola_update():
     """
     Edita os atributos de escola , recebendo o parametro de nome da escola
@@ -484,6 +483,7 @@ def view_cadastrar_turma():
         return dict(escolas=escola, observador_tipo=observador['tipo'])
 
 @route('/turma/turma_update', method='POST')
+@permissao('diretor')
 def view_update_turma():
     """
     Pagina de cadastro de turma , mostra as escolas ja cadastradas no banco de dados
@@ -499,6 +499,7 @@ def view_update_turma():
         if a['vinculo_turma'] == '0':
             alunos.append(a)
     professor = facade.search_observador_professor_by_escola_facade(turma['escola'])
+    print(professor)
     professores = []
     for p in professor:
         if p['vinculo_turma'] is '0':
@@ -507,6 +508,7 @@ def view_update_turma():
     return template('turma/turma_update', turma=turma, aluno = alunos, professor = professores)
 
 @route('/turma/turma_update_controller', method='POST')
+@permissao('diretor')
 def controller_update_turma():
 
     teste = request.forms
@@ -517,15 +519,15 @@ def controller_update_turma():
 
     if alunos is not '' or alunos is not []:
         for a in alunos:
-            facade.aluno_in_turma_facade(id_aluno=int(a),vinculo_turma=turma)
+            facade.aluno_in_turma_facade(id_aluno=a, vinculo_turma=turma)
     if professores is not '' or professores is not []:
         for p in professores:
-            facade.obser(id_aluno=int(a),vinculo_turma=turma)
-
+            facade.observador_(id_aluno=int(a),vinculo_turma=turma)
 
     redirect('/turma')
 
 @route('/turma/cadastro_turma', method='POST')
+@permissao('diretor')
 def controller_create_turma():
     """
     """
@@ -535,7 +537,7 @@ def controller_create_turma():
     facade.create_estrutura_facade(nome=turma, tipo_estrutura='3',quem_criou=request.get_cookie("login", secret='2524'), serie=serie, vinculo_escola=escola)
     redirect('/turma')
 
-
+@permissao('professor')
 def controller_read_turma():
     """
     Direciona para a pagina que mostra a turma e nomeia as series
@@ -561,6 +563,7 @@ def controller_read_turma():
 
 
 @get('/deletar_turma')
+@permissao('diretor')
 def deletar_turma():
     """
     nao implementado
