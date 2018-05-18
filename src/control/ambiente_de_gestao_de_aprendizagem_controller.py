@@ -508,7 +508,8 @@ def view_cadastrar_turma():
         return dict(escolas=escola, observador_tipo=observador['tipo'])
     elif observador['tipo'] == '0':
         escola = facade.read_estrutura_facade(tipo_estrutura='2')
-        return dict(escolas=escola, observador_tipo=observador['tipo'])
+        rede = facade.read_estrutura_facade(tipo_estrutura='1')
+        return dict(escolas=escola, observador_tipo=observador['tipo'],redes=rede)
 
 @route('/turma/turma_update', method='POST')
 def view_update_turma():
@@ -559,7 +560,8 @@ def controller_create_turma():
     turma = request.forms['turma_nome']
     serie = request.forms['serie']
     escola = request.forms['escola']
-    facade.create_estrutura_facade(nome=turma, tipo_estrutura='3',quem_criou=request.get_cookie("login", secret='2524'), serie=serie, vinculo_escola=escola)
+    rede = facade.search_estrutura_id_facade(int(escola))
+    facade.create_estrutura_facade(nome=turma, tipo_estrutura=TIPO_ESTRUTURA['turma'],quem_criou=usuario_logado()['id'], serie=serie, vinculo_escola=escola,vinculo_rede=rede['vinculo_rede'])
     redirect('/turma')
 
 
@@ -609,3 +611,13 @@ def serie(id_serie):
         return "4ª Ano"
     elif id_serie == '5':
         return "5ª Ano"
+
+@route('/filtro_usuario', method='POST')
+def filtro_usuario():
+    rede = request.params['filtro_rede']
+    escola= request.params['filtro_escola']
+    turma=request.params['filtro_turma']
+    usuario=request.params['filtro_tipo_usuario']
+
+    if rede == "0":
+        pass

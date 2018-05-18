@@ -15,20 +15,20 @@ def view_jogar_conecturma():
         if usuario['cor'] == "0":
             cor = 'default'
         else:
-            cor =facade.search_estrutura_by_id(avatar['cor'])['nome']
+            cor =facade.search_estrutura_id_facade(avatar['cor'])['nome']
 
         if usuario['rosto'] == "0":
             rosto = 'default'
         else:
-            rosto = facade.search_estrutura_by_id(avatar['rosto'])['nome']
+            rosto = facade.search_estrutura_id_facade(avatar['rosto'])['nome']
         if usuario['acessorio'] == "0":
             acessorio = 'default'
         else:
-            acessorio = facade.search_estrutura_by_id(avatar['acessorio'])['nome']
+            acessorio = facade.search_estrutura_id_facade(avatar['acessorio'])['nome']
         if usuario['acessorio'] == "0":
             corpo = 'default'
         else:
-            corpo = facade.search_estrutura_by_id(avatar['corpo'])['nome']
+            corpo = facade.search_estrutura_id_facade(avatar['corpo'])['nome']
 
         avatar_pecas = {'cor': cor,
                         'rosto': rosto,
@@ -72,7 +72,7 @@ def ver_itens():
     itens_comprado = facade.ver_item_comprado_facade(usuario['id'])
     itens = []
     for y in itens_comprado:
-        itens.append(facade.search_estrutura_by_id(y))
+        itens.append(facade.search_estrutura_id_facade(y))
 
     return dict(lista_itens=itens)
 

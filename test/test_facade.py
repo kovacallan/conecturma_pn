@@ -16,7 +16,7 @@ class FacadeTest(unittest.TestCase):
 
     def _create_aluno(self):
 
-        aluno1 = self.facade.create_aluno_facade("egg", "Escola Conecturma", "123",vinculo_rede="0")
+        aluno1 = self.facade.create_aluno_facade(nome="egg",escola= "Escola Conecturma", senha="123",vinculo_rede="0")
         self.assertEqual(aluno1, True)
 
     def _create_aluno_senha_vazia(self):

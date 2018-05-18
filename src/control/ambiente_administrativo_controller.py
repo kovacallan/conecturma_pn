@@ -93,7 +93,7 @@ def controller_historico_login():
     metodo para pegar o historico
     :return: o metodo de read_historico_facade() armazenado em historico
     """
-    historico = facade.read_historico_facade()
+    historico = facade.read_estrutura_facade(TIPO_ESTRUTURA['historico'])
     return historico
 
 @route('/loja/cadastrar_item')
