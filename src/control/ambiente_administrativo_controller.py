@@ -117,3 +117,7 @@ def cadastro_item():
 
     facade.create_estrutura_facade(nome=request.forms.nome, tipo_item=request.forms.tipo, preco=request.forms.preco,tipo_estrutura='4')
     redirect('cadastrar_item')
+
+@route('/teste')
+def fazendo_teste():
+    print("to aqui")

@@ -624,7 +624,8 @@ def filtro_usuario():
     escola= request.params['filtro_escola']
     turma=request.params['filtro_turma']
     usuario=request.params['filtro_tipo_usuario']
-
+    print("oi")
     if rede is not "0":
         escolas_rede= facade.search_estrutura_escola_by_rede_facade(rede)
+        return dict(escolas=escolas_rede)
         

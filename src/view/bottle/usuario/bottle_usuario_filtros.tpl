@@ -1,5 +1,16 @@
     <input type="hidden" name="">
-    <select id="filtro_rede" onChange="filtro_usuario()">
+    <script>
+$(document).on(change,function(){
+    $("select").on(change, function(){
+    window.alert("?")
+        $.ajax({url: "demo_ajax_script.js", dataType: "script"});
+    });
+});
+</script>
+
+
+
+    <select id="filtro_rede" onChange='filtro_usuario(this)''>
         %if observador_tipo is '0':
             <option value="0">---- Selecione rede ----</option>
             % for r in redes:
