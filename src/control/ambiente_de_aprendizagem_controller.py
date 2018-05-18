@@ -1,45 +1,42 @@
 from bottle import route,view, request, redirect, response,get
 from facade.facade_main import Facade
-from control.classes.permissao import permissao,usuario_logado
+from control.classes.permissao import permissao, usuario_logado
+
 facade=Facade()
 
-"""Tipo=6"""
-
 @route('/aluno/area_aluno')
+@permissao('aluno_varejo')
 @view('caminho_aluno/jogar_conecturma')
 def view_jogar_conecturma():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
-    if request.get_cookie("login", secret='2524'):
-        usuario = usuario_logado()
-        avatar = facade.avatar_facade(usuario['id'])
-        if usuario['cor'] == "0":
-            cor = 'default'
-        else:
-            cor =facade.search_estrutura_id_facade(avatar['cor'])['nome']
-
-        if usuario['rosto'] == "0":
-            rosto = 'default'
-        else:
-            rosto = facade.search_estrutura_id_facade(avatar['rosto'])['nome']
-        if usuario['acessorio'] == "0":
-            acessorio = 'default'
-        else:
-            acessorio = facade.search_estrutura_id_facade(avatar['acessorio'])['nome']
-        if usuario['acessorio'] == "0":
-            corpo = 'default'
-        else:
-            corpo = facade.search_estrutura_id_facade(avatar['corpo'])['nome']
-
-        avatar_pecas = {'cor': cor,
-                        'rosto': rosto,
-                        'acessorio': acessorio,
-                        'corpo': corpo}
-        return dict(usuario=usuario.nome, avatar = avatar_pecas ,tipo="6")
+    usuario = facade.pesquisa_aluno_nome_facade(usuario_logado()['nome'])
+    avatar = facade.avatar_facade(usuario['id'])
+    if usuario['cor'] == "0":
+        cor = 'default'
     else:
-        redirect('/')
+        cor =facade.pesquisa_item_facade(avatar['cor'])['nome']
+
+    if usuario['rosto'] == "0":
+        rosto = 'default'
+    else:
+        rosto = facade.pesquisa_item_facade(avatar['rosto'])['nome']
+    if usuario['acessorio'] == "0":
+        acessorio = 'default'
+    else:
+        acessorio = facade.pesquisa_item_facade(avatar['acessorio'])['nome']
+    if usuario['acessorio'] == "0":
+        corpo = 'default'
+    else:
+        corpo = facade.pesquisa_item_facade(avatar['corpo'])['nome']
+
+    avatar_pecas = {'cor': cor,
+                    'rosto': rosto,
+                    'acessorio': acessorio,
+                    'corpo': corpo}
+    return dict(usuario=usuario['nome'], avatar = avatar_pecas,tipo=usuario_logado()['tipo'])
 
 @route('/aluno/loja')
-@permissao('diretor')
+@permissao('aluno_varejo')
 @view('caminho_aluno/index_loja')
 def index():
     """
@@ -57,6 +54,7 @@ def index():
         return dict(itens=False)
 
 @route('/aluno/ver_itens_comprados')
+@permissao('aluno_varejo')
 @view('caminho_aluno/view_itens')
 def ver_itens():
     """
@@ -73,11 +71,11 @@ def ver_itens():
     itens = []
     for y in itens_comprado:
         itens.append(facade.search_estrutura_id_facade(y))
-
     return dict(lista_itens=itens)
 
 
 @route('/equipar_item', method='POST')
+@permissao('aluno_varejo')
 def equipar_item():
     """
     Equipar o avatar
@@ -108,26 +106,6 @@ def jogo():
 
 """ Controle do score """
 
-
-@get('/ponto')
-def ponto():
-    """
-    Recebe o nome do botão que o jogador clicou para o jogo o valor de 1 em caso de acerto
-    incrementa nos pontos em cada jogo e manda um clique para ser acrescentado a cliques totais , para fins estatisticos
-
-    :return:ao termino do jogo volta a pagina do menu
-    """
-
-    jogo = request.params['jogo']
-    ponto = int(request.params['ponto'])
-    usuario = usuario_logado()
-
-
-    facade.ponto_jogo_facade(usuario, jogo, ponto)
-    redirect('/')
-
-    """ redirect('/jogos', BaseResponse.add_header(jogo=jogo ,value=jogo))"""
-
 @route('aluno/ver_item')
 @permissao('aluno_varejo')
 @view('loja/ver_item')
@@ -143,6 +121,7 @@ def ver_item():
 
 
 @get('/compras_loja')
+@permissao('aluno_varejo')
 def compras():
     """
     compra o item que esta na loja

@@ -42,10 +42,6 @@ class DbAluno(Model):
     anotacoes_aluno = ListField()
     vinculo_turma = TextField(fts=True, index=True, default='0')
 
-    # def __init__(self):
-    #     # from model.estrutura_model import DbEstrutura
-    #     # estrutura_main = DbEstrutura()
-
     def aluno_logado(self, id_usuario):
 
         usuario = self.load(id_usuario)
@@ -88,7 +84,7 @@ class DbAluno(Model):
         alunos = []
         for aluno in self.query(order_by=self.nome):
             alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
-                               vinculo_rede=aluno.vinculo_rede, vinculo_escola=aluno.vinculo_escola,
+                               vinculo_rede=aluno.vinculo_rede, vinculo_escola=aluno.vinculo_escola,email = '',
                                vinculo_turma=aluno.vinculo_turma))
         return alunos
 
@@ -97,7 +93,7 @@ class DbAluno(Model):
         alun_pes = None
         for search in DbAluno.query(DbAluno.nome == nome):
             alun_pes = dict(id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                              tipo_aluno=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                              tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
                               rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                               pontos_j1=search.pontos_j1, cliques_j1=search.cliques_j1, pontos_j2=search.pontos_j2,
                               cliques_j2=search.cliques_j2, pontos_de_vida=search.pontos_de_vida,
@@ -171,18 +167,17 @@ class DbAluno(Model):
         usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
 
     def alunos_in_turma(self, id_aluno, vinculo_turma):
-        try:
-            for id_aluno in id_aluno:
-                aluno = self.load(id_aluno.id)
-                aluno.vinculo_turma = str(vinculo_turma['id'])
-                aluno.save()
-        except ValueError:
-            print('Erro!')
+
+        for id_aluno in id_aluno:
+            aluno = self.load(id_aluno.id)
+            aluno.vinculo_turma = str(vinculo_turma['id'])
+            aluno.save()
+
 
     def comprar_item(self, id_usuario, id_item):
         from model.estrutura_model import DbEstrutura
 
-        item = DbEstrutura()
+        item = self.estrutura_main
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
 

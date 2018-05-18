@@ -25,7 +25,7 @@ def login_observador_controller():
     senha = request.params['aluno_senha']
 
     login = Login_Aluno(nome=nome, senha=senha)
-    login.login()
+    redirect(login.login())
 
 @route('/sair')
 def controller_login_sair():

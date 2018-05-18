@@ -25,6 +25,9 @@
         <br>
         <div class="row">
             <div class="col-md-2">
+                <strong>Email</strong>
+            </div>
+            <div class="col-md-2">
                 <strong>Nome</strong>
             </div>
             <div class="col-md-2">

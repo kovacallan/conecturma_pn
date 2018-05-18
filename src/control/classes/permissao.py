@@ -55,14 +55,20 @@ class Login_Aluno(object):
     def login(self):
         facade = Facade()
         hash = self.gerar_hash()
-        aluno_logado = facade.pesquisa_aluno_nome_facade(nome = self.nome)
+        aluno = facade.pesquisa_aluno_nome_facade(nome=self.nome)
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
-        if aluno_logado['nome'] == self.nome:
-            if aluno_logado['senha'] == self.senha:
+        if aluno['nome'] == self.nome:
+            if aluno['senha'] == self.senha:
+                aluno_logado = dict(
+                    id=aluno['id'],
+                    nome=aluno['nome'],
+                    tipo=aluno['tipo']
+                )
+                print(aluno_logado)
                 response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
-                redirect('/aluno/area_aluno')
+                return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
         else:
-            redirect('/')
+            return '/'
 
     def gerar_hash(self):
         """
@@ -81,7 +87,7 @@ class Login_Aluno(object):
 def usuario_logado():
     banana = request.get_cookie("KIM", secret=KEY_HASH)
     que = request.get_cookie("BUMBA", secret=banana)
-
+    print(que)
     return que
 
 def algum_usuario_logado(function):

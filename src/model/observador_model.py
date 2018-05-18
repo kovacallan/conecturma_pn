@@ -87,7 +87,7 @@ class DbObservador(Model):
         :return:
         """
         observador = []
-        for search in DbObservador.query(DbObservador.vinculo_escola == vinculo_escola and DbObservador.tipo == '3',
+        for search in DbObservador.query(DbObservador.vinculo_escola == vinculo_escola,
                                          order_by=DbObservador.nome):
             observador.append(dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
                                    cpf=search.cpf, email=search.email, tipo=search.tipo,
