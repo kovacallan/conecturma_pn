@@ -39,7 +39,7 @@ def controller_observador_cadastro():
 
 @route('/administrador/pag_administrador')
 @permissao('administrador')
-@view('administrativo.tpl')
+@view('areas_administrativo.tpl')
 def view_adm():
     historico = controller_historico_login()
     return dict(historico=historico)

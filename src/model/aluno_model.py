@@ -42,10 +42,6 @@ class DbAluno(Model):
     anotacoes_aluno = ListField()
     vinculo_turma = TextField(fts=True, index=True, default='0')
 
-    def __init__(self):
-        from model.estrutura_model import DbEstrutura
-        estrutura_main = DbEstrutura()
-
     def aluno_logado(self, id_usuario):
 
         usuario = self.load(id_usuario)
@@ -179,8 +175,8 @@ class DbAluno(Model):
 
 
     def comprar_item(self, id_usuario, id_item):
-
-        item = self.estrutura_main
+        from model.estrutura_model import DbEstrutura
+        item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
 

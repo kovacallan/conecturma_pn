@@ -8,7 +8,7 @@
                 <%
                     if itens:
                         for x in itens:
-                            if str(x['id']) in itens_comprados:
+                            if str(x['id']) not in itens_comprados:
                 %>
 
                                 <div class="col-md-3">

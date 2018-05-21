@@ -47,3 +47,11 @@ class EstruturaFacade:
 
     def search_estrutura_turma_by_escola_facade(self,vinculo_escola):
         return self.estrutura.search_turma_by_escola(vinculo_escola=vinculo_escola)
+
+    def ja_tem_item_facade(self, usuario_logado):
+        """
+        Mostra se o usuario ja comprou o item
+        :param usuario_logado:autoexplicativo
+        :return:lista de itens q ele nao tem
+        """
+        return self.loja.ja_possui_item(usuario_logado=usuario_logado)

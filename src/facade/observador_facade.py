@@ -9,7 +9,7 @@ class ObservadorFacade:
         self.observador = DbObservador()
 
 
-    def create_observador_facade(self, nome, senha, telefone, email, tipo,escola, vinculo_turma=None,cpf=None, rede=None):
+    def create_observador_facade(self, nome, senha, telefone, email, tipo,escola, vinculo_turma='0',cpf='0', rede='0'):
         return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
                                                  tipo=tipo, rede=str(rede), escola=str(escola),vinculo_turma=str(vinculo_turma))
     def read_observador_facade(self):
