@@ -1,17 +1,10 @@
 
-    <script>
-    function potaquepariu(){
-    window.alert("foi?",rede)
-    }
-    </script>
 
-
-
-    <select onChange='potaquepariu >
+    <select id="filtro_rede" onchange='potaquepariu()' >
         %if observador_tipo is '0':
             <option value="0">---- Selecione rede ----</option>
             % for r in redes:
-                <option value="{{r['id']}}">{{r['nome']}}</option>
+                <option value="{{r['id']}}" >{{r['nome']}}</option>
             % end
         %elif redes == None or redes == '':
             <option value="0">---- Selecione rede ----</option>
@@ -19,9 +12,23 @@
             <option value="{{redes['id']}}">{{redes['nome']}}</option>
         %end
     </select>
-    <select id="filtro_escola">
+    <script>
+    function potaquepariu(){
+    window.alert("foi?,rede");
+    filtro_escola = document.getElementById('filtro_escola').value;
+    filtro_rede = document.getElementById('filtro_rede').value;
+    filtro_turma =  document.getElementById('filtro_turma').value;
+    filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
+
+   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
+        $('#usuarios_sistema').html(data);
+});
+    }
+    </script>
+
+    <select class="teste" id="filtro_escola">
         %if observador_tipo is '0':
-            <option value="0">---- Selecione escola ----</option>
+            <option value="0" >---- Selecione escola ----</option>
             % for e in escolas:
                 <option value="{{e['id']}}" onChange="filtro_usuario()">{{e['nome']}}</option>
             % end

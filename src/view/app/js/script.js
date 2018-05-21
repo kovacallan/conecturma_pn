@@ -7,29 +7,31 @@ function esqueci_senha(){
         document.getElementById('mensagem_erro').innerHTML='Email digitado não existe =('
     }
 }
-function filtro_usuario(rede){
-    $("select").on(change,function(){
-    window.alert("foi?",rede)
-    }
-    }
-    window.alert("foi?",rede)
-    filtro_escola = document.getElementById('filtro_escola').value;
-    filtro_rede = document.getElementById('filtro_rede').value;
-    filtro_turma =  document.getElementById('filtro_turma').value;
-    filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
-    window.alert("?????");
-    document.write("entrei");
-    console.log(5 + 6);
-    $("#usuarios_sistema").on("change", function() {
-            $.post ('/filtro_usuario',data: { escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario }
 
-            });
-//   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
-//        $('#usuarios_sistema').html(data);
-//   });
-//   return false;
 
-}
+
+//function filtro_usuario(rede){
+//    $("select").on(change,function(){
+//    window.alert("foi?",rede);
+//    });
+//    window.alert("foi?",rede);
+//    filtro_escola = document.getElementById('filtro_escola').value;
+//    filtro_rede = document.getElementById('filtro_rede').value;
+//    filtro_turma =  document.getElementById('filtro_turma').value;
+//    filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
+//    window.alert("?????");
+//    document.write("entrei");
+//    console.log(5 + 6);
+////    $("#usuarios_sistema").on("change", function() {
+////            $.post ('/filtro_usuario',data: { escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario })
+//
+////            });
+////   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
+////        $('#usuarios_sistema').html(data);
+////   });
+////   return false;
+//
+//}
 
 
 

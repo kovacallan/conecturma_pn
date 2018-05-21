@@ -620,6 +620,7 @@ def serie(id_serie):
 
 @route('/filtro_usuario', method='POST')
 def filtro_usuario():
+    print("entrei")
     rede = request.params['filtro_rede']
     escola= request.params['filtro_escola']
     turma=request.params['filtro_turma']
