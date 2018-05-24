@@ -41,7 +41,7 @@ def controller_observador_cadastro():
 @permissao('administrador')
 @view('areas_administrativo.tpl')
 def view_adm():
-    historico = controller_historico_login()
+    historico = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'])
     return dict(historico=historico)
 
 
@@ -57,41 +57,7 @@ def pesquisar_aluno_turma():
 
 # @route('/gestao_aprendizagem')
 
-
-@route('/jogarconecturma')
-@view('caminho_aluno/jogar_conecturma.tpl')
-def view_jogar_conecturma():
-# <<<<<<< HEAD
-#     adm = facade.search_observador_inativos_facade(request.get_cookie("login", secret='2526'))
-#     return dict(usuario=adm.nome, tipo=adm.tipo)
-# =======
-    adm = usuario_logado()
-    return dict(usuario=adm['nome'], tipo=adm['tipo'])
-# >>>>>>> f7a53178f5b4261ed22e2fe1b99b2ed8a345ad48
-
-
 def filtro_cadastro(nome, senha, telefone, email, cpf, tipo):
     valida = ValidaNome(ValidaSenha(ValidaTelefone(ValidaCpf(ValidaEmail(ValidaTipo(ValidaOk()))))))
     return valida.validacao(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo)
 
-
-
-
-@route('/historico')
-@view('historico_login')
-def view_historico_login():
-    """
-    pagina vista pelo usuario com o historico de loguin , ainda nao discriminado
-    usa metodo : controller_historico_login()
-    :return:o dicionario contendo o historico dos usuarios
-    """
-    historico = controller_historico_login()
-    return dict(historico = historico)
-
-def controller_historico_login():
-    """
-    metodo para pegar o historico
-    :return: o metodo de read_historico_facade() armazenado em historico
-    """
-    historico = facade.read_historico_facade()
-    return historico

@@ -9,6 +9,26 @@ TIPO_USUARIOS = dict(
     aluno_varejo='7'
 )
 
+TIPO_USUARIOS_ID = {
+    '7':'ALUNO VAREJO',
+    '6':'ALUNO',
+    '5':'RESPONSAVEL VAREJO',
+    '4':'RESPONSAVEL',
+    '3':'PROFESSOR',
+    '2':'DIRETOR',
+    '1':'GESTOR',
+    '0':'ADMINISTRADOR'
+}
+
+SERIE = {
+    '0':'Pré-escola',
+    '1':'1ª Ano',
+    '2':'2ª Ano',
+    '3':'3ª Ano',
+    '4':'4ª Ano',
+    '5':'5ª Ano'
+}
+
 PAGINA_INICIAL = dict(
     administrador='/administrador/pag_administrador',
     gestor='/gestao_aprendizagem',
@@ -28,3 +48,5 @@ TIPO_ESTRUTURA = dict(
     medalha='5',
     historico='6'
 )
+
+

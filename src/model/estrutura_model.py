@@ -1,8 +1,5 @@
 from walrus import *
-from model.aluno_model import DbAluno
-
-
-
+from control.dicionarios import TIPO_ESTRUTURA
 db = Database(host='localhost', port=6379, db=0)
 
 
@@ -12,26 +9,34 @@ class DbEstrutura(Model):
     nome = TextField(index=True)
     tipo_estrutura = TextField(fts=True, index=True)
     telefone = TextField(default='0')
+
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_professor_turma = TextField(fts=True, default='0')
+
     cep = TextField(default='0')
     endereco = TextField(default='0')
     numero = TextField(default='0')
     estado = TextField(default='0')
     uf = TextField(default='0')
+
     quem_criou = TextField(default='0')
     serie = TextField(default='0')
+
     tipo_item = TextField(default='0')
     preco = IntegerField(default=0)
+
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='0')
     descricao_completa = TextField(default='0')
+
     nome_usuario = TextField(default='0')
     tipo_usuario = TextField(default='0')
     data_acesso = DateTimeField(default=datetime.datetime.now)
-    anotacoes_estrutura_baixo = ListField()
-    anotacoes_estrutura_cima = ListField()
+
+    anotacoes_observador_turma = ListField()
+    anotacoes_observador_escola = ListField()
+    anotacoes_observador_rede = ListField()
 
 
     def create_estrutura(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',
@@ -52,17 +57,20 @@ class DbEstrutura(Model):
         listas = []
 
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura, order_by=self.id):
-            listas.append(dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                               serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                               vinculo_rede=lista.vinculo_rede,
-                               cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                               estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                               preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                               descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                               nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
-                               data_acesso=lista.data_acesso
-                               ))
-        print("listas EM",listas)
+            listas.append(
+                dict(
+                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
+                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
+                    vinculo_rede=lista.vinculo_rede,
+                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
+                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
+                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
+                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
+                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                    data_acesso=lista.data_acesso
+                )
+            )
+        
         return listas
 
     def ja_possui_item(self, usuario_logado):
@@ -71,13 +79,12 @@ class DbEstrutura(Model):
         :param usuario_logado: Id do usuario
         :return: Lista de itens que o usuario não tem
         """
-        usuario = DbAluno
-        itens_usuario = [x.decode('utf-8') for x in
-                         usuario.
-                             _objeto(nome_aluno=usuario_logado).itens_comprados]
-        itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura='4')]
+        from model.aluno_model import DbAluno
+        usuario = DbAluno()
+        #[x.decode('utf-8') for x in usuario.i]
+        itens_usuario = usuario.ver_itens_comprados(id_usuario=int(usuario_logado))
+        itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura=TIPO_ESTRUTURA['item'])]
         lista_teste = [z for z in itens if z not in itens_usuario]
-
         return lista_teste
 
 
@@ -85,77 +92,94 @@ class DbEstrutura(Model):
 
     def search_estrutura(self, tipo_estrutura, nome):
         lista_dic = None
-        for search in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
-            lista_dic = dict(id=search.id, nome=search.nome, criador=search.quem_criou, escola=search.vinculo_escola,
-                             serie=search.serie, tipo_estrutura=search.tipo_estrutura, telefone=search.telefone,
-                             vinculo_rede=search.vinculo_rede,
-                             cep=search.cep, numero=search.numero,
-                             estado=search.estado, uf=search.uf, tipo_item=search.tipo_item,
-                             preco=search.preco, tipo_medalha=search.tipo_medalha,
-                             descricao=search.descricao, descricao_completa=search.descricao_completa,
-                             nome_usuario=search.nome_usuario, tipo_usuario=search.tipo_usuario)
+        for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
+            lista_dic = dict(
+                id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
+                serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
+                vinculo_rede=lista.vinculo_rede,
+                cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
+                estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
+                preco=lista.preco, tipo_medalha=lista.tipo_medalha,
+                descricao=lista.descricao, descricao_completa=lista.descricao_completa,
+                nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                data_acesso=lista.data_acesso
+            )
         return lista_dic
 
     def search_estrutura_id(self, id):
-        if id != 0:
-            lista = DbEstrutura.load(id)
-            lista_dic = dict(id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                             serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                             vinculo_rede=lista.vinculo_rede,
-                             cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                             estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                             preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                             descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                             nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario
+        if id != '0':
+            lista = DbEstrutura.load(int(id))
+            lista_dic = dict(
+                            id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
+                            serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
+                            vinculo_rede=lista.vinculo_rede,
+                            cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
+                            estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
+                            preco=lista.preco, tipo_medalha=lista.tipo_medalha,
+                            descricao=lista.descricao, descricao_completa=lista.descricao_completa,
+                            nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                            data_acesso=lista.data_acesso
                              )
-            return lista_dic
         else:
-            return dict(nome=' ', vinculo_rede=' ')
+            lista_dic = dict(
+                nome=""
+            )
+
+        return lista_dic
 
     def search_escola_by_rede(self, vinculo_rede):
         escola = []
-        for search in DbEstrutura.query(DbEstrutura.vinculo_rede == vinculo_rede and DbEstrutura.tipo_estrutura == '2'):
+        for lista in DbEstrutura.query(DbEstrutura.vinculo_rede == vinculo_rede and DbEstrutura.tipo_estrutura == '2'):
             escola.append(
-                dict(id=search.id, nome=search.nome, criador=search.quem_criou, escola=search.vinculo_escola,
-                     serie=search.serie, tipo_estrutura=search.tipo_estrutura, telefone=search.telefone,
-                     vinculo_rede=search.vinculo_rede,
-                     cep=search.cep, endereco=search.endereco, numero=search.numero,
-                     estado=search.estado, uf=search.uf, tipo_item=search.tipo_item,
-                     preco=search.preco, tipo_medalha=search.tipo_medalha,
-                     descricao=search.descricao, descricao_completa=search.descricao_completa,
-                     nome_usuario=search.nome_usuario, tipo_usuario=search.tipo_usuario)
+                dict(
+                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
+                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
+                    vinculo_rede=lista.vinculo_rede,
+                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
+                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
+                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
+                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
+                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                    data_acesso=lista.data_acesso
+                )
             )
 
         return escola
 
     def search_turma_by_rede(self, vinculo_rede):
         turma = []
-        for search in DbEstrutura.query(DbEstrutura.vinculo_rede == vinculo_rede and DbEstrutura.tipo_estrutura == '3'):
+        for lista in DbEstrutura.query(DbEstrutura.vinculo_rede == vinculo_rede and DbEstrutura.tipo_estrutura == '3'):
             turma.append(
-                dict(id=search.id, nome=search.nome, criador=search.quem_criou, escola=search.vinculo_escola,
-                     serie=search.serie, tipo_estrutura=search.tipo_estrutura, telefone=search.telefone,
-                     vinculo_rede=search.vinculo_rede,
-                     cep=search.cep, endereco=search.endereco, numero=search.numero,
-                     estado=search.estado, uf=search.uf, tipo_item=search.tipo_item,
-                     preco=search.preco, tipo_medalha=search.tipo_medalha,
-                     descricao=search.descricao, descricao_completa=search.descricao_completa,
-                     nome_usuario=search.nome_usuario, tipo_usuario=search.tipo_usuario)
+                dict(
+                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
+                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
+                    vinculo_rede=lista.vinculo_rede,
+                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
+                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
+                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
+                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
+                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                    data_acesso=lista.data_acesso
+                )
             )
         return turma
 
     def search_turma_by_escola(self, vinculo_escola):
         turma = []
-        for search in DbEstrutura.query(
+        for lista in DbEstrutura.query(
                 DbEstrutura.vinculo_escola == vinculo_escola and DbEstrutura.tipo_estrutura == '3'):
             turma.append(
-                dict(id=search.id, nome=search.nome, criador=search.quem_criou, escola=search.vinculo_escola,
-                     serie=search.serie, tipo_estrutura=search.tipo_estrutura, telefone=search.telefone,
-                     vinculo_rede=search.vinculo_rede,
-                     cep=search.cep, endereco=search.endereco, numero=search.numero,
-                     estado=search.estado, uf=search.uf, tipo_item=search.tipo_item,
-                     preco=search.preco, tipo_medalha=search.tipo_medalha,
-                     descricao=search.descricao, descricao_completa=search.descricao_completa,
-                     nome_usuario=search.nome_usuario, tipo_usuario=search.tipo_usuario)
+                dict(
+                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
+                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
+                    vinculo_rede=lista.vinculo_rede,
+                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
+                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
+                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
+                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
+                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
+                    data_acesso=lista.data_acesso
+                )
             )
             return turma
 

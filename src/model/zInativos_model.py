@@ -1,6 +1,6 @@
 from walrus import *
 from model.estrutura_model import *
-# from src.model.aluno_model import DbAluno
+from model.aluno_model import DbAluno
 from model.observador_model import *
 
 
@@ -46,14 +46,6 @@ class DbCemiterio(Model):
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
-    pontos_j1 = IntegerField(default=0)
-    cliques_j1 = IntegerField(default=0)
-    pontos_j2 = IntegerField(default=0)
-    cliques_j2 = IntegerField(default=0)
-    pontos_de_vida = IntegerField(default=0)
-    pontos_de_moedas = IntegerField(default=0)
-    desempenho_aluno_j1 = FloatField(default=0)
-    desempenho_aluno_j2 = FloatField(default=0)
     vinculo_escola = TextField(default='', fts=True)
     anotacoes_aluno = ListField()
     vinculo_turma = TextField(fts=True, index=True, default=None)
@@ -91,8 +83,6 @@ class DbCemiterio(Model):
                 if self.create(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
                                tipo_usuario=atores_id.tipo_aluno, cor=atores_id.cor,
                                rosto=atores_id.rosto, acessorio=atores_id.acessorio, corpo=atores_id.corpo,
-                               pontos_j1=atores_id.pontos_j1, cliques_j1=atores_id.cliques_j1,
-                               pontos_j2=atores_id.pontos_j2, cliques_j2=atores_id.cliques_j2,
                                pontos_de_vida=atores_id.pontos_de_vida, pontos_de_moedas=atores_id.pontos_de_moedas,
                                vinculo_escola=atores_id.vinculo_escola, vinculo_turma=atores_id.vinculo_turma):
                     pass

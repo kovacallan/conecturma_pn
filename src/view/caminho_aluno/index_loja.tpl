@@ -14,7 +14,7 @@
                                 <div class="col-md-3">
                                     {{x['nome']}}<br>
                                     R${{x['preco']}},00<br>
-                                    <button type="submit" name="id" value='{{x['id']}}'>Comprar</button>
+                                    <button type="submit" name="id" value="{{x['id']}}">Comprar</button>
                                 </div>
                                 <br>
 

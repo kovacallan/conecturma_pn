@@ -21,7 +21,7 @@
         </form>
          <a href="/gestao_aprendizagem"><button >gestao de aprendizagem</button></a>
 
-        <a href="/jogarconecturma"><button>jogar conecturma</button></a>
+        <a href="/aluno/area_aluno"><button>Ambiente de Aprendizagem</button></a>
 
         <button>ver usuarios inativados</button>
 

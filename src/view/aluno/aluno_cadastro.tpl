@@ -5,6 +5,7 @@
         <form action="/aluno_cadastro" method="post">
              Nome do aluno:   <input type="text" name="aluno_nome"/><br>
              Senha :          <input type="password" name="senha"/><br>
+             Matricula:       <input type="text" name="matricula"><br>
              Escola: <select name="escola">
                 % if tipo_observador is '2' or tipo_observador is '3':
                     <option value="{{escolas['id']}}">{{escolas['nome']}}</option>

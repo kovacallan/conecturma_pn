@@ -1,7 +1,5 @@
 % include('header.tpl', title = 'Conecturma')
     <div class="row">
-    %if tipo:
-     %if not tipo=='0':
         <div align="center" class="col-md-3">
             <h1>Avatar </h1>
             Cor:{{avatar['cor']}}<br/>
@@ -9,7 +7,6 @@
             Acessorio:{{avatar['acessorio']}}<br/>
             Corpo:{{avatar['corpo']}}<br/>
         </div>
-     %end
         <div align="center" class="col-md-6">
             <h1>Bem Vindo {{usuario}} </h1>
             <h2>A Conecturma!</h2>

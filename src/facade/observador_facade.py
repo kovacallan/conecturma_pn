@@ -42,14 +42,11 @@ class ObservadorFacade:
     def search_observador_tipo_nome_facade(self,tipo,nome):
         return self.observador.search_observador_tipo_nome(tipo,nome)
 
-    def search_observador_professor_by_escola_facade(self, vinculo_escola):
-        return self.observador.search_observador_professor_by_escola(vinculo_escola)
-
     def search_observador_by_rede_facade(self, vinculo_rede):
         return self.observador.search_observador_rede(vinculo_rede)
 
-    def search_observador_escola_listagem_facade(self, login, vinculo_escola):
-        return self.observador.search_observador_escola_listagem(login=login, vinculo_escola=vinculo_escola)
+    def search_observador_escola(self,vinculo_escola):
+        return self.observador.search_observador_escola(vinculo_escola=vinculo_escola)
 
     def search_observador_escola_filtro_facade(self, vinculo_escola):
         return self.observador.search_observador_escola_filtro(vinculo_escola=vinculo_escola)
@@ -60,7 +57,19 @@ class ObservadorFacade:
     def search_observador_inativos_facade(self, nome):
         return self.observador.search_observador_inativos(nome)
 
+    def observador_in_turma_facade(self, id_observador, vinculo_turma):
+        self.observador.observador_in_turma(id_observador=id_observador,vinculo_turma=vinculo_turma)
+
     def login_date_facade(self, id, data):
         self.observador.login_date(id, data)
+
+    def equipar_item_facade(self, id, itens):
+        """
+        Equipa o item no avatar do usuario
+        :param id: id do usuario que vai equipar os itens
+        :param itens: id do item a ser equipado no avatar
+        :return: None
+        """
+        self.observador.equipar_item(id_usuario=id, itens=itens)
 
 

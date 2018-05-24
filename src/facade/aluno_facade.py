@@ -1,4 +1,4 @@
-from src.model.aluno_model import DbAluno
+from model.aluno_model import DbAluno
 
 class AlunoFacade:
 
@@ -8,14 +8,14 @@ class AlunoFacade:
         """
         self.aluno = DbAluno()
 
-    def create_aluno_facade(self, nome, escola,senha,vinculo_rede):
+    def create_aluno_facade(self, nome, matricula,escola,senha,vinculo_rede):
         """
         Cria um aluno no banco de dados
         :param nome: nome do aluno/usuario
         :param senha: senha para logar
         :return:None
         """
-        return self.aluno.create_aluno(nome=nome, vinculo_escola = escola,senha=senha, vinculo_rede=vinculo_rede)
+        return self.aluno.create_aluno(nome=nome, matricula=matricula,vinculo_escola = escola,senha=senha, vinculo_rede=vinculo_rede)
 
     def read_aluno_facade(self):
         """
@@ -42,18 +42,18 @@ class AlunoFacade:
         """
         self.aluno.aluno_delete(deletar_ids)
 
-    def search_aluno_escola_facade(self, id_escola):
+    def search_aluno_escola_facade(self, vinculo_escola):
 
-        return self.aluno.search_aluno_by_escola(escola = id_escola)
+        return self.aluno.search_aluno_by_escola(escola = vinculo_escola)
 
-    def pesquisa_aluno_nome_facade(self, nome):
+    def search_aluno_nome_facade(self, nome):
         """
         Pesquisa pelo aluno através do nome , apenas usado na tela de login e como auxiliar para modificar atributos do
          aluno
         :param nome: Nome dado do aluno
         :return:retorna o usuario aluno (objeto)
         """
-        return self.aluno.pesquisa_aluno_nome(nome)
+        return self.aluno.search_aluno_nome(nome)
 
     def pesquisa_aluno_nome_objeto_facade(self,nome):
         return self.aluno.pesquisa_aluno_objeto(nome)
