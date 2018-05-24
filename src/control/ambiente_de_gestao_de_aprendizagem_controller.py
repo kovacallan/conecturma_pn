@@ -1,7 +1,7 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado, permissao
-from control.dicionarios import *
+from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIPO_USUARIOS,TIPO_ESTRUTURA
 from random import randrange
 
 facade=Facade()
@@ -12,21 +12,6 @@ facade=Facade()
 def view_gestao_aprendizagem():
     observador = usuario_logado()
     return dict(usuario = observador['nome'], tipo=observador['tipo'])
-
-@route('/gestao_aprendizagem/usuario/redirect_cadastro')
-@permissao('professor')
-def controller_redirect_cadastro():
-    tipo_usuario = request.params['tipo_usuario']
-    if tipo_usuario is '1':
-        redirect('/observador/cadastro?tipo_observador=1')
-    elif tipo_usuario is '2':
-        redirect('/observador/cadastro?tipo_observador=2')
-    elif tipo_usuario is '3':
-        redirect('/observador/cadastro?tipo_observador=3')
-    elif tipo_usuario is '6':
-        redirect('/aluno/cadastro_aluno')
-    else:
-        redirect('/gestao_aprendizagem/usuario')
 
 @route('/gestao_aprendizagem/usuario')
 @permissao('professor')
@@ -41,6 +26,12 @@ def view_usuario_index():
     rede, escola, turma = controller_filtro_opcoes(observador=observador)
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
 
+@route('/gestao_aprendizagem/usuario/redirect_cadastro')
+@permissao('professor')
+def controller_redirect_cadastro():
+    tipo_usuario = request.params['tipo_usuario']
+    redirect(PAGINA_DE_CADASTRO_POR_TIPO[tipo_usuario])
+
 @permissao('professor')
 def controller_index_usuario(observador):
     if observador['tipo'] == TIPO_USUARIOS['administrador']:
@@ -52,6 +43,7 @@ def controller_index_usuario(observador):
     elif observador['tipo'] == TIPO_USUARIOS['gestor']:
         return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
 
+@permissao('administrador')
 def lista_de_usuarios_caso_observador_for_administrador():
     usuario = []
     aluno = facade.read_aluno_facade()
@@ -73,6 +65,7 @@ def lista_de_usuarios_caso_observador_for_administrador():
             usuario.append(o)
     return usuario
 
+@permissao('gestor')
 def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede):
     usuario = []
 
@@ -95,6 +88,7 @@ def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede):
             usuario.append(o)
     return usuario
 
+@permissao('diretor')
 def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola):
     usuario = []
     aluno = facade.search_aluno_escola_facade(vinculo_escola=vinculo_escola)
@@ -116,6 +110,7 @@ def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola):
             usuario.append(o)
     return usuario
 
+@permissao('professor')
 def lista_de_usuarios_caso_observador_for_professor(vinculo_turma):
     usuario = []
     aluno = facade.search_aluno_by_turma_facade(vinculo_turma=vinculo_turma)
@@ -130,16 +125,19 @@ def lista_de_usuarios_caso_observador_for_professor(vinculo_turma):
 
     return usuario
 
+@permissao('professor')
 def get_nome_rede(vinculo_rede):
     rede_nome = facade.search_estrutura_id_facade(vinculo_rede)['nome']
 
     return rede_nome
 
+@permissao('professor')
 def get_nome_escola(vinculo_escola):
     escola_nome = facade.search_estrutura_id_facade(vinculo_escola)['nome']
 
     return escola_nome
 
+@permissao('professor')
 def get_nome_turma(vinculo_turma):
     turma_nome = facade.search_estrutura_id_facade(vinculo_turma)['nome']
 
@@ -181,8 +179,6 @@ def controller_filtro_opcoes(observador):
 
 
         return rede, escola, turma
-
-#      BOTAO CADASTRO , OPÇAO ALUNO
 
 @route('/aluno/cadastro_aluno')
 @permissao('professor')
@@ -628,8 +624,3 @@ def deletar_turma():
     """
     facade.delete_turma_facade(request.params['id'])
     redirect('/turma')
-
-
-
-
-    return usuario
