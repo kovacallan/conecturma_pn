@@ -13,7 +13,7 @@ function filtro_usuario(){
     filtro_turma =  document.getElementById('filtro_turma').value;
     filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
 
-   $.post('/filtro/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
+   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
         $('#usuarios_sistema').html(data);
    });
    return false;
