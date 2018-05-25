@@ -7,7 +7,7 @@
              Senha :          <input type="password" name="senha"/><br>
              Matricula:       <input type="text" name="matricula"><br>
              Escola: <select name="escola">
-                % if tipo_observador is '2' or tipo_observador is '3':
+                % if isinstance(escolas, dict):
                     <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
                 % else:
                     % for i in escolas:
