@@ -122,7 +122,7 @@ class DbEstrutura(Model):
                              )
         else:
             lista_dic = dict(
-                nome=""
+                nome=" "
             )
 
         return lista_dic
