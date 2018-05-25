@@ -2,7 +2,6 @@ from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado, permissao
 from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIPO_USUARIOS,TIPO_ESTRUTURA,SERIE
-from random import randrange
 
 facade=Facade()
 
@@ -443,11 +442,6 @@ def controller_update_turma():
             facade.observador_in_turma_facade(id_observador=p,vinculo_turma=turma)
 
     redirect('/turma')
-
-
-
-"""Turma Delete"""
-
 
 @get('/deletar_turma')
 @permissao('diretor')
