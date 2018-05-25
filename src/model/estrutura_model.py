@@ -62,7 +62,7 @@ class DbEstrutura(Model):
                                nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
                                data_acesso=lista.data_acesso
                                ))
-        print("listas EM",listas)
+        pass
         return listas
 
     def ja_possui_item(self, usuario_logado):
@@ -114,7 +114,7 @@ class DbEstrutura(Model):
 
     def search_escola_by_rede(self, vinculo_rede):
         escola = []
-        for search in DbEstrutura.query(DbEstrutura.vinculo_rede == vinculo_rede and DbEstrutura.tipo_estrutura == '2'):
+        for search in DbEstrutura.query((DbEstrutura.vinculo_rede == vinculo_rede) and (DbEstrutura.tipo_estrutura == '2')):
             escola.append(
                 dict(id=search.id, nome=search.nome, criador=search.quem_criou, escola=search.vinculo_escola,
                      serie=search.serie, tipo_estrutura=search.tipo_estrutura, telefone=search.telefone,

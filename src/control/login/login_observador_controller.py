@@ -44,7 +44,7 @@ def view_esqueci_senha():
     email = request.params['email']
     pesquisa = facade.search_observador_email_facade(email=email)
     teste = facade.read_observador_facade()
-    print(teste)
+    print("reformular senhaL47",teste)
     return template('login/reformular_senha.tpl', id=pesquisa['id'], email=pesquisa['email'])
 
 @route('/controller_reformular_senha', method="POST")

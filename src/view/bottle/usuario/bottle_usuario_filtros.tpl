@@ -1,6 +1,6 @@
 
 
-    <select id="filtro_rede" onchange='potaquepariu()' >
+    <select id="filtro_rede" onChange='pqp()'>
         %if observador_tipo is '0':
             <option value="0">---- Selecione rede ----</option>
             % for r in redes:
@@ -12,25 +12,11 @@
             <option value="{{redes['id']}}">{{redes['nome']}}</option>
         %end
     </select>
-    <script>
-    function potaquepariu(){
-    window.alert("foi?,rede");
-    filtro_escola = document.getElementById('filtro_escola').value;
-    filtro_rede = document.getElementById('filtro_rede').value;
-    filtro_turma =  document.getElementById('filtro_turma').value;
-    filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
-
-   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
-        $('#usuarios_sistema').html(data);
-});
-    }
-    </script>
-
-    <select class="teste" id="filtro_escola">
+    <select id="filtro_escola" >
         %if observador_tipo is '0':
             <option value="0" >---- Selecione escola ----</option>
             % for e in escolas:
-                <option value="{{e['id']}}" onChange="filtro_usuario()">{{e['nome']}}</option>
+                <option value="{{e['id']}}">{{e['nome']}}</option>
             % end
         %elif escolas == None or escolas == '':
             <option value="0">---- Selecione escola ----</option>
@@ -38,9 +24,9 @@
             <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
         %end
     </select>
-    <select id="filtro_turma" onChange="filtro_usuario()">
+
+    <select id="filtro_turma">
         <option value="0">---- Selecione turma ----</option>
-        <div id=usuarios_sistema>
         % for t in turmas:
             <option value="{{t['id']}}">{{t['nome']}}</option>
         % end
@@ -54,3 +40,23 @@
         <option value="6">Aluno</option>
     </select>
 
+<script>
+
+function pqp(){
+
+    window.alert("foi?,rede");
+    filtro_rede = document.getElementById("filtro_rede").value;
+    console.log(filtro_rede)
+
+    $.post('/filtro_usuario_rede',{
+               rede:filtro_rede },(function(data){
+     // $('#usuario_sitema').empty();
+     $.getJSON('#usuario_sistema'),function(data);
+      document.getElementById(data).value;
+             console.log(data);
+       return false;
+    }));
+    }
+
+
+</script>

@@ -10,42 +10,26 @@ function esqueci_senha(){
 
 
 
-//function filtro_usuario(rede){
-//    $("select").on(change,function(){
-//    window.alert("foi?",rede);
-//    });
-//    window.alert("foi?",rede);
-//    filtro_escola = document.getElementById('filtro_escola').value;
-//    filtro_rede = document.getElementById('filtro_rede').value;
-//    filtro_turma =  document.getElementById('filtro_turma').value;
-//    filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
-//    window.alert("?????");
-//    document.write("entrei");
-//    console.log(5 + 6);
-////    $("#usuarios_sistema").on("change", function() {
-////            $.post ('/filtro_usuario',data: { escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario })
+
 //
-////            });
-////   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
-////        $('#usuarios_sistema').html(data);
-////   });
-////   return false;
+//function pqp(){
+//    window.alert("foi?,rede");
+//    filtro_rede = document.getElementById("filtro_rede").value;
+//    console.log(filtro_rede)
 //
+//
+//    $.post('/filtro_usuario_rede',{
+//                   rede:filtro_rede },(function(data){
+//            $getJSON('#usuarios_sistema').html(usuarios=data);
+//        console.log(data['usuarios'][0][0]);}));
 //}
 
 
 
 
-$(document).ready(function(){
-    $("#btn").on("change", function() {
-        var val = "Hi";
-        $.ajax ({
-            url: "1.php?id",
-            data: { id : val }
 
-        });
-    });
-});
+
+
 
 
 

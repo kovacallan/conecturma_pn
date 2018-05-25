@@ -2,6 +2,9 @@ from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado
 from control.dicionarios import *
+import brython
+
+
 
 facade=Facade()
 
@@ -149,6 +152,7 @@ def create_aluno():
     """
     escola = request.forms['escola']
     vinculo_rede=facade.search_estrutura_id_facade(int(escola))
+    print("AGA ",vinculo_rede, vinculo_rede['vinculo_rede'])
     if facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola, senha=request.forms['senha'],vinculo_rede=vinculo_rede['vinculo_rede']):
         redirect('/')
     else:
@@ -530,7 +534,6 @@ def view_update_turma():
         if a['vinculo_turma'] == '0':
             alunos.append(a)
     professor = facade.search_observador_professor_by_escola_facade(turma['escola'])
-    print(professor)
     professores = []
     for p in professor:
         if p['vinculo_turma'] is '0':
@@ -618,15 +621,68 @@ def serie(id_serie):
     elif id_serie == '5':
         return "5ª Ano"
 
-@route('/filtro_usuario', method='POST')
-def filtro_usuario():
-    print("entrei")
-    rede = request.params['filtro_rede']
-    escola= request.params['filtro_escola']
-    turma=request.params['filtro_turma']
-    usuario=request.params['filtro_tipo_usuario']
-    print("oi")
-    if rede is not "0":
-        escolas_rede= facade.search_estrutura_escola_by_rede_facade(rede)
-        return dict(escolas=escolas_rede)
-        
+@route('/filtro_usuario_rede', method='POST')
+def filtro_usuarios():
+    rede = request.params['rede']
+    observador = usuario_logado()
+    redes ,escola, turma = controller_filtro_opcoes(observador=observador)
+    print("AGA L625", rede)
+    usuarioss=[]
+    observador_na_rede = facade.search_observador_by_rede_facade(rede)
+    if observador_na_rede== []:
+        pass
+    else:
+        usuarioss.append(facade.search_observador_by_rede_facade(rede))
+    usuarioss.append(facade.search_aluno_by_rede_facade(rede))
+    print("aluno na rede", facade.search_aluno_by_rede_facade(rede))
+
+    print("numero de itens em escola,turma e usuarios", usuarioss, rede, escola, turma, observador['tipo'])
+    return dict(usuarios=usuarioss)
+
+
+
+
+
+# ,escolas=escola,turma=turma
+# function getState(val) {
+#     $.ajax({
+#     type:
+#     url: "get_state.php",
+#     data:'country_id='+val,
+#     success: function(data){
+#         $("#state-list").val(data);
+#     }
+#     });
+# }
+
+
+# (function(data){
+#         $('#usuarios_sistema').html(data);
+#         }));
+
+
+# $.getJSON("ajax/test.json", function(data)
+# {
+#     var
+# items = [];
+# $.each(data, function(key, val)
+# {
+#     items.push("<li id='" + key + "'>" + val + "</li>");
+# });
+#
+# $("<ul/>", {
+#     "class": "my-new-list",
+#     html: items.join("")
+# }).appendTo("body");
+# });
+
+
+
+
+
+
+
+
+
+
+
