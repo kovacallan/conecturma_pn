@@ -129,7 +129,8 @@ class DbEstrutura(Model):
 
     def search_escola_by_rede(self, vinculo_rede):
         escola = []
-        for lista in DbEstrutura.query(DbEstrutura.vinculo_rede == vinculo_rede and DbEstrutura.tipo_estrutura == '2'):
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '2') and (DbEstrutura.vinculo_rede == vinculo_rede),
+                                       order_by=self.nome):
             escola.append(
                 dict(
                     id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
@@ -148,26 +149,25 @@ class DbEstrutura(Model):
 
     def search_turma_by_rede(self, vinculo_rede):
         turma = []
-        for lista in DbEstrutura.query(DbEstrutura.vinculo_rede == vinculo_rede and DbEstrutura.tipo_estrutura == '3'):
+        for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_rede == vinculo_rede),
+                                order_by=DbEstrutura.nome):
             turma.append(
                 dict(
                     id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                     serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                    vinculo_rede=lista.vinculo_rede,
-                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
-                    data_acesso=lista.data_acesso
+                    vinculo_rede=lista.vinculo_rede, cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
+                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item, preco=lista.preco,
+                    tipo_medalha=lista.tipo_medalha, descricao=lista.descricao,
+                    descricao_completa=lista.descricao_completa, nome_usuario=lista.nome_usuario,
+                    tipo_usuario=lista.tipo_usuario, data_acesso=lista.data_acesso
                 )
             )
         return turma
 
     def search_turma_by_escola(self, vinculo_escola):
         turma = []
-        for lista in DbEstrutura.query(
-                DbEstrutura.vinculo_escola == vinculo_escola and DbEstrutura.tipo_estrutura == '3'):
+        for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_escola == vinculo_escola),
+                                order_by=DbEstrutura.nome):
             turma.append(
                 dict(
                     id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,

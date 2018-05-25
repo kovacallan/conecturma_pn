@@ -1,7 +1,7 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado, permissao
-from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIPO_USUARIOS,TIPO_ESTRUTURA
+from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIPO_USUARIOS,TIPO_ESTRUTURA,SERIE
 from random import randrange
 
 facade=Facade()
@@ -70,7 +70,7 @@ def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede):
     usuario = []
 
     aluno = facade.search_aluno_by_rede_facade(vinculo_rede)
-    observador = facade.search_observador_by_rede_facade(vinculo_escola=vinculo_rede)
+    observador = facade.search_observador_by_rede_facade(vinculo_rede=vinculo_rede)
 
     for a in aluno:
         a['email'] = ""
@@ -176,15 +176,12 @@ def controller_filtro_opcoes(observador):
         rede = facade.search_estrutura_id_facade(id=int(escola['vinculo_rede']))
         turma = []
 
-
-
         return rede, escola, turma
 
 @route('/aluno/cadastro_aluno')
 @permissao('professor')
 @view('aluno/aluno_cadastro')
 def aluno():
-
     observador = usuario_logado()
     if observador['tipo'] == '0':
         escolas = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
@@ -200,7 +197,6 @@ def aluno():
         escolas = facade.search_estrutura_id_facade(int(observador['vinculo_escola']))
         return dict(escolas=escolas, tipo_observador=observador['tipo'])
 
-
 @route('/aluno_cadastro', method='POST')
 def create_aluno():
     """
@@ -213,37 +209,50 @@ def create_aluno():
     facade.create_aluno_facade(nome=request.forms['aluno_nome'], matricula=request.forms['matricula'],escola=escola, senha=request.forms['senha'],vinculo_rede=vinculo_rede['vinculo_rede'])
     redirect('/')
 
-#     BOTAO CADASTRO OPÇAO OBSERVADORES
-
-
-def gerar_matricula(self):
-
-    matricula = []
-    for i in range(0, 5):
-        matricula.append(randrange(1, 9))
-    matricula = ''.join(str(x) for x in matricula)
-    return matricula
-
 @route('/observador/cadastro')
 @permissao('professor')
 def view_observador_cadastro():
-    tipo_observador = int(request.params['tipo_observador'])
-    escola = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
-    rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
-    turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+    tipo_observador = request.params['tipo_observador']
 
-    if tipo_observador == 0:
+    if tipo_observador == TIPO_USUARIOS['administrador']:
         return template('observador/create_observador', tipo=tipo_observador)
-    elif tipo_observador == 1:
-        return template('observador/create_observador', tipo=tipo_observador, rede=rede)
-    elif tipo_observador == 2:
-        return template('observador/create_observador', tipo=tipo_observador, escola=escola)
-    elif tipo_observador == 3:
-        return template('observador/create_observador', tipo=tipo_observador, escola=escola, turma=turma)
-    elif tipo_observador == 4:
+    elif tipo_observador == TIPO_USUARIOS['gestor']:
+        return template('observador/create_observador', tipo=tipo_observador, rede=filtro_vinculo_cadastro_rede())
+    elif tipo_observador == TIPO_USUARIOS['diretor']:
+        return template('observador/create_observador', tipo=tipo_observador, escola=filtro_vinculo_cadastro_escola())
+    elif tipo_observador == TIPO_USUARIOS['professor']:
+        return template('observador/create_observador',  observador_logado = usuario_logado()['tipo'], tipo=tipo_observador, escola=filtro_vinculo_cadastro_escola(),
+                        turma=filtro_vinculo_cadastro_turma())
+    elif tipo_observador == TIPO_USUARIOS['responsavel']:
         redirect('/observador')
     else:
         redirect('/observador')
+
+def filtro_vinculo_cadastro_rede():
+    observador_logado = usuario_logado()
+    if observador_logado['tipo'] == TIPO_USUARIOS['administrador']:
+        return facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
+    elif observador_logado['tipo'] == TIPO_USUARIOS['gestor']:
+        return facade.search_estrutura_id_facade(observador_logado['vinculo_rede'])
+
+def filtro_vinculo_cadastro_escola():
+    observador_logado = usuario_logado()
+    if observador_logado['tipo'] == TIPO_USUARIOS['administrador']:
+        return facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+    elif observador_logado['tipo'] == TIPO_USUARIOS['gestor']:
+        return facade.search_estrutura_escola_by_rede_facade(observador_logado['vinculo_rede'])
+    elif observador_logado['tipo'] == TIPO_USUARIOS['diretor']:
+        return facade.search_estrutura_id_facade(observador_logado['vinculo_escola'])
+
+def filtro_vinculo_cadastro_turma():
+    observador_logado = usuario_logado()
+    if observador_logado['tipo'] == TIPO_USUARIOS['administrador']:
+        return facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+    elif observador_logado['tipo'] == TIPO_USUARIOS['gestor']:
+        return facade.search_estrutura_turma_by_rede_facade(observador_logado['vinculo_rede'])
+    elif observador_logado['tipo'] == TIPO_USUARIOS['diretor']:
+        return facade.search_estrutura_turma_by_escola_facade(observador_logado['vinculo_escola'])
+
 
 @route('/create_observador', method="POST")
 @permissao('professor')
@@ -409,7 +418,7 @@ def view_escola_cadastro():
         uf = request.params['uf']
         numero = request.params['numero']
         if filtro_cadastro(nome, cep, numero, telefone, estado, uf):
-            facade.create_escola_facade(nome=nome, telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
+            facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['escola'], telefone=telefone, cep=cep, estado=estado, uf=uf, numero=numero,
                                         vinculo_rede=rede)
             redirect("/escola")
     elif observador['tipo'] == '0':
