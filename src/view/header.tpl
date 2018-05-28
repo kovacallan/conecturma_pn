@@ -8,8 +8,6 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="../static/bootstrap.min.css">
     <link rel="stylesheet" href="../static/style.css">
-    <script type="text/javascript"
-    src="https://cdn.rawgit.com/brython-dev/brython/3.5.1/www/src/brython.js">
 </head>
 <body>
     <div class="container">

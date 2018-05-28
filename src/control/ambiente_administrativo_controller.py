@@ -35,6 +35,9 @@ def view_adm():
     historico = []
     for h in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico']):
         h['tipo_usuario'] = TIPO_USUARIOS_ID[h['tipo_usuario']]
+        h['data_acesso'] = '{}/{}/{} - {}:{}:{}'.format(h['data_acesso'].day, h['data_acesso'].month,
+                                                      h['data_acesso'].year, h['data_acesso'].hour, 
+                                                      h['data_acesso'].minute, h['data_acesso'].second)
         historico.append(h)
     return dict(historico=historico)
 
