@@ -40,20 +40,17 @@
             </select><br>
          Numero:    <input type="text" name="numero"/><br>
          Rede:
-            %if observador_tipo == '1':
-                <select name = "rede">
+            <select name = "rede">
+                <option value="0"></option>
+                %if isinstance(rede, dict):
                     <option value="{{rede['id']}}">{{rede['nome']}}</option>
-                </select><br>
-            % else:
-                <select name = "rede">
-                    %if observador_tipo == '0':
-                        <option value="0"></option>
-                        % for e in rede:
-                            <option value="{{e['id']}}">{{e['nome']}}</option>
-                        % end
+                % else:
+                    % for e in rede:
+                        <option value="{{e['id']}}">{{e['nome']}}</option>
+                    % end
                     %end
-                </select><br>
-            % end
+                % end
+            </select><br>
          <button type="submit">Enviar</button>
         </form>
         <a href="/escola"><button>Voltar</button></a>

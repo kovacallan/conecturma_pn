@@ -1,18 +1,5 @@
 from walrus import *
 from random import randrange
-# import sys
-# sys.path.insert(0, '/home/carlos/PycharmProjects/conecturma_pn/src/model')
-# # from src.model.estrutura_model import *
-# # from src.control.classes.permissao import usuario_logado
-# # import sys
-# # sys.path.insert(0, '/home/carlos/PycharmProjects/conecturma_pn/src/model')
-#
-# import model.estrutura_model
-
-
-
-
-
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -23,55 +10,29 @@ class DbAluno(Model):
     matricula = TextField()
     nome = TextField(fts=True, index=True)
     senha = TextField()
+    email = TextField(default='0')
     tipo_aluno = TextField(default='0')
+
     itens_comprados = ListField()
     cor = TextField(default='0')
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
-    pontos_j1 = IntegerField(default=0)
-    cliques_j1 = IntegerField(default=0)
-    pontos_j2 = IntegerField(default=0)
-    cliques_j2 = IntegerField(default=0)
+
     pontos_de_vida = IntegerField(default=0)
     pontos_de_moedas = IntegerField(default=0)
-    desempenho_aluno_j1 = FloatField(default=0)
-    desempenho_aluno_j2 = FloatField(default=0)
+
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
+    vinculo_turma = TextField(fts=True, default='0')
+
     anotacoes_aluno = ListField()
-    vinculo_turma = TextField(fts=True, index=True, default='0')
 
-    def aluno_logado(self, id_usuario):
+    def create_aluno(self, nome, senha, matricula ,vinculo_escola='0', vinculo_rede='0'):
 
-        usuario = self.load(id_usuario)
-        return usuario
+        self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
+                    vinculo_rede=vinculo_rede, matricula=matricula)
 
-    def gerar_matricula(self):
-
-        matricula = []
-        for i in range(0, 5):
-            matricula.append(randrange(1, 9))
-        matricula = ''.join(str(x) for x in matricula)
-        return matricula
-
-    def validar_senha_vazia(self, senha):
-
-        if senha == "" or senha == None:
-            return True
-        else:
-            return False
-
-    def create_aluno(self, nome, senha, vinculo_escola='0', vinculo_rede='0'):
-
-        if not self.validar_senha_vazia(senha):
-            matricula = self.gerar_matricula()
-
-            self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
-                        vinculo_rede=vinculo_rede, matricula=matricula)
-            return True
-        else:
-            return TypeError("Não foi possivel salvar o Usuário")
 
     def update_aluno(self, update_id, nome, senha, turma, escola, rede):
 
@@ -83,27 +44,78 @@ class DbAluno(Model):
     def read_aluno(self):
         # O administrador deveria ver tambem a senha do aluno , lembrete de modificar esse metodo
         alunos = []
-        for aluno in self.query(order_by=self.nome):
-            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
-                               vinculo_rede=aluno.vinculo_rede, vinculo_escola=aluno.vinculo_escola,email = '',
-                               vinculo_turma=aluno.vinculo_turma))
+        for search in self.query(order_by=self.nome):
+            alunos.append(
+                dict(
+                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                    vinculo_turma=search.vinculo_turma,email= search.email, cpf=''
+                )
+            )
         return alunos
 
-    def pesquisa_aluno_nome(self, nome):
+    def search_aluno_nome(self, nome):
 
         alun_pes = None
         for search in DbAluno.query(DbAluno.nome == nome):
-            alun_pes = dict(id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                              tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                              rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                              pontos_j1=search.pontos_j1, cliques_j1=search.cliques_j1, pontos_j2=search.pontos_j2,
-                              cliques_j2=search.cliques_j2, pontos_de_vida=search.pontos_de_vida,
-                              pontos_de_moedas=search.pontos_de_moedas, desempenho_aluno_j1=search.desempenho_aluno_j1,
-                              desempenho_aluno_j2=search.desempenho_aluno_j2,
-                              vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                              vinculo_turma=search.vinculo_turma)
+            alun_pes = dict(
+                id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+                tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+                pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+                vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+            )
 
         return alun_pes
+
+    def search_aluno_by_rede(self, vinculo_rede):
+        alunos = []
+        for search in DbAluno.query((DbAluno.vinculo_rede == vinculo_rede), order_by=DbAluno.nome):
+            alunos.append(
+                dict(
+                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+                 )
+            )
+        return alunos
+
+    def search_aluno_by_escola(self, escola):
+        alunos = []
+        for search in DbAluno.query(DbAluno.vinculo_escola == escola, order_by=DbAluno.nome):
+            alunos.append(
+                dict(
+                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+                 )
+            )
+        return alunos
+
+    def search_aluno_by_turma(self, vinculo_turma):
+        alunos = []
+        for search in DbAluno.query(DbAluno.vinculo_turma == vinculo_turma, order_by=DbAluno.nome):
+            alunos.append(
+                dict(
+                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+                )
+            )
+        return alunos
 
     def pesquisa_aluno_objeto(self, nome_aluno):
 
@@ -115,69 +127,16 @@ class DbAluno(Model):
 
         return aluno_pes
 
-    def pontos_jogo(self, usuario, jogo, pontos):
-
-        retorno = self.pesquisa_aluno_nome(usuario)
-
-        if pontos == None:
-            return False
-        elif jogo == 'j1':
-            if self.jogo_j1(retorno['id'], pontos):
-                return True
-            else:
-                return False
-        elif jogo == 'j2':
-            if self.jogo_j2(retorno['id'], pontos):
-                return True
-            else:
-                return False
-
-    def jogo_j1(self, id, pontos):
-
-        usuario = self.load(id)
-        usuario.pontos_j1 += pontos
-        usuario.cliques_j1 += 1
-        self.desempenho_jogoj1(usuario)
-        if usuario.pontos_j1 % 3 == 0 and pontos == 1:
-            self.mais_vidas(usuario)
-        if usuario.pontos_j1 % 5 == 0 and pontos == 1:
-            self.mais_dinheiro(usuario)
-        usuario.save()
-        return True
-
-    def jogo_j2(self, id, pontos):
-
-        usuario = self.load(id)
-        usuario.pontos_j2 += pontos
-        usuario.cliques_j2 += 1
-        self.desempenho_jogoj2(usuario)
-        if usuario.pontos_j2 % 3 == 0 and pontos == 1:
-            usuario.mais_vidas(usuario)
-
-        if usuario.pontos_j2 % 5 == 0 and pontos == 1:
-            usuario.mais_dinheiro(usuario)
-        usuario.save()
-        return True
-
-    def desempenho_jogoj1(self, usuario):
-
-        usuario.desempenho_aluno_j1 = (usuario.pontos_j1 / usuario.cliques_j1) * 100
-
-    def desempenho_jogoj2(self, usuario):
-
-        usuario.desempenho_aluno_j2 = (usuario.pontos_j2 / usuario.cliques_j2) * 100
-
     def alunos_in_turma(self, id_aluno, vinculo_turma):
 
         for id_aluno in id_aluno:
-            aluno = self.load(id_aluno.id)
-            aluno.vinculo_turma = str(vinculo_turma['id'])
+            aluno = self.load(int(id_aluno))
+            aluno.vinculo_turma = str(vinculo_turma)
             aluno.save()
 
 
     def comprar_item(self, id_usuario, id_item):
         from model.estrutura_model import DbEstrutura
-
         item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
@@ -192,8 +151,8 @@ class DbAluno(Model):
     def ver_itens_comprados(self,id_usuario):
         #         id_usuario
         # id_usuario=usuario_logado()
-        usuario = self.load(id_usuario)
-        itens = [int(''.join(str(x.decode('utf-8')))) for x in usuario.itens_comprados]
+        usuario = DbAluno.load(id_usuario)
+        itens = [''.join(str(x.decode('utf-8'))) for x in usuario.itens_comprados]
         return itens
 
     def equipar_item(self, id_usuario, itens):
@@ -214,17 +173,8 @@ class DbAluno(Model):
 
     def avatar(self, id):
 
-        aluno_av = self.aluno_logado(id)
+        aluno_av = self.load(id)
         return dict(cor=aluno_av.cor, rosto=aluno_av.rosto, acessorio=aluno_av.acessorio, corpo=aluno_av.corpo)
-
-    def definir_nova_senha(self, usuario_id, senha_antiga, senha_nova):
-
-        Aluno_sen = self.load(usuario_id)
-        if senha_antiga == Aluno_sen.senha:
-            Aluno_sen.senha = senha_nova
-            Aluno_sen.save()
-        else:
-            print("senha antiga errada")
 
     def anotacoes_do_aluno(self, id_usuario, mensagem):
         aluno_anot = self.load(id_usuario)
@@ -271,8 +221,6 @@ class DbAluno(Model):
                      vinculo_turma=aluno.vinculo_turma))
 
         return alunos
-
-
 
     def aluno_delete(self, deletar_ids):
 

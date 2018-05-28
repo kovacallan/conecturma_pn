@@ -8,13 +8,13 @@
                 <%
                     if itens:
                         for x in itens:
-                            if str(x['id']) in itens_comprados:
+                            if str(x['id']) not in itens_comprados:
                 %>
 
                                 <div class="col-md-3">
                                     {{x['nome']}}<br>
                                     R${{x['preco']}},00<br>
-                                    <button type="submit" name="id" value='{{x['id']}}'>Comprar</button>
+                                    <button type="submit" name="id" value="{{x['id']}}">Comprar</button>
                                 </div>
                                 <br>
 

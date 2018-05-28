@@ -6,7 +6,7 @@ class EstruturaFacade:
     def __init__(self):
         self.estrutura = DbEstrutura()
 
-    def create_estrutura_facade(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',
+    def create_estrutura_facade(self, tipo_estrutura, nome='0', telefone='0', vinculo_rede='0', vinculo_escola='0',
                                 cep='0', endereco='0', numero='0', estado='0', uf='0', quem_criou='0', serie='0',
                                 tipo_item='0', preco='0', tipo_medalha='0',
                                 descricao='0', descricao_completa='0', nome_usuario='0', tipo_usuario='0'):
@@ -49,4 +49,9 @@ class EstruturaFacade:
         return self.estrutura.search_turma_by_escola(vinculo_escola=vinculo_escola)
 
     def ja_tem_item_facade(self, usuario_logado):
+        """
+        Mostra se o usuario ja comprou o item
+        :param usuario_logado:autoexplicativo
+        :return:lista de itens q ele nao tem
+        """
         return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)

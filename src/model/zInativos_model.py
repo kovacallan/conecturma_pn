@@ -1,6 +1,6 @@
 from walrus import *
 from model.estrutura_model import *
-# from src.model.aluno_model import DbAluno
+from model.aluno_model import DbAluno
 from model.observador_model import *
 
 # from facade.Facade_main import *
@@ -50,10 +50,12 @@ class DbCemiterio(Model):
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
+
     tipo_item = TextField(fts=True,default='0')
 
     pontos_de_vida = IntegerField(default='0')
     pontos_de_moedas = IntegerField(default='0')
+
 
     anotacoes_aluno = ListField()
 

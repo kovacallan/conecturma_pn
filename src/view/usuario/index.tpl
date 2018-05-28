@@ -18,20 +18,20 @@
         </div>
          <div align="center" class="col-md-12">
             <div class="row">
-                %include('bottle/usuario/bottle_usuario_filtros.tpl')
+                <!-- %include('bottle/usuario/bottle_usuario_filtros.tpl') -->
                <!-- <button id="botao-filtro" onclick="filtro_usuario()">Filtrar</button> -->
             </div>
          </div>
         <br>
         <div class="row">
             <div class="col-md-2">
-                <strong>Email</strong>
-            </div>
-            <div class="col-md-2">
                 <strong>Nome</strong>
             </div>
             <div class="col-md-2">
-                <strong>CPF</strong>
+                <strong>Email</strong>
+            </div>
+            <div class="col-md-2">
+                <strong>Turma</strong>
             </div>
             <div class="col-md-2">
                 <strong>Escola</strong>

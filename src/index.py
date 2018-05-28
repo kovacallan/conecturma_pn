@@ -25,4 +25,4 @@ def error403():
     return template('error403.tpl')
 
 if __name__ == '__main__':
-    run(host='localhost', port=8080, reloader=True ,debug=True)
+    run(host='localhost', port=8080, reloader=False ,debug=True)
