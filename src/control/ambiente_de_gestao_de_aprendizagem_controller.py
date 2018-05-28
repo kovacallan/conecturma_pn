@@ -3,6 +3,7 @@ from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado, permissao
 from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIPO_USUARIOS,TIPO_ESTRUTURA,SERIE
 
+
 facade=Facade()
 
 @route('/gestao_aprendizagem')
@@ -158,8 +159,6 @@ def create_aluno():
     """
     escola = request.forms['escola']
     vinculo_rede=facade.search_estrutura_id_facade(int(escola))
-    facade.create_aluno_facade(nome=request.forms['aluno_nome'], matricula=request.forms['matricula'],escola=escola, senha=request.forms['senha'],vinculo_rede=vinculo_rede['vinculo_rede'])
-    redirect('/')
 
 @route('/observador/cadastro')
 @permissao('professor')
@@ -413,9 +412,11 @@ def alunos_na_escola_sem_turma(vinculo_escola):
     for a in facade.search_aluno_escola_facade(vinculo_escola):
         if a['vinculo_turma'] == '0':
             alunos.append(a)
+            
     return alunos
 
 def professor_na_escola_sem_turma(vinculo_escola):
+
     professores = []
     for p in facade.search_observador_escola(vinculo_escola=vinculo_escola):
         if p['vinculo_turma'] == '0' and p['tipo']==TIPO_USUARIOS['professor']:
@@ -451,4 +452,6 @@ def deletar_turma():
     :return:
     """
     facade.delete_turma_facade(request.params['id'])
+    
     redirect('/turma')
+

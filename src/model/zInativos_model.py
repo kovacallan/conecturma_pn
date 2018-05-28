@@ -3,7 +3,6 @@ from model.estrutura_model import *
 from model.aluno_model import DbAluno
 from model.observador_model import *
 
-
 # from facade.Facade_main import *
 db = Database(host='localhost', port=6379, db=0)
 # aluno = DbAluno()
@@ -38,67 +37,66 @@ class DbCemiterio(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
     matricula = TextField()
+
     nome = TextField(fts=True, index=True)
     senha = TextField()
+
     tipo_usuario = TextField(default='0')
+    tipo_aluno = TextField(default='0')
+
     itens_comprados = ListField()
+
     cor = TextField(default='0')
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
-    vinculo_escola = TextField(default='', fts=True)
+
+    tipo_item = TextField(fts=True,default='0')
+
+    pontos_de_vida = IntegerField(default='0')
+    pontos_de_moedas = IntegerField(default='0')
+
+
     anotacoes_aluno = ListField()
-    vinculo_turma = TextField(fts=True, index=True, default=None)
+
+    vinculo_rede = TextField(default='0')
+    vinculo_escola = TextField(default='0', fts=True)
+    vinculo_turma = TextField(fts=True, index=True, default='0')
     tipo_estrutura = TextField(fts=True, index=True)
-    telefone = TextField(default='')
-    vinculo_rede = TextField(default='')
-    cep = TextField(default='')
-    endereco = TextField(default='')
-    numero = TextField(default='')
-    estado = TextField(default='')
-    uf = TextField(default='')
-    quem_criou = TextField(default='')
-    serie = TextField(default='')
-    tipo_item = TextField(default='')
-    preco = IntegerField(default=0)
-    tipo_medalha = TextField(default='')
+
+
+    telefone = TextField(default='0')
+    cep = TextField(default='0')
+    endereco = TextField(default='0')
+    numero = TextField(default='0')
+    estado = TextField(default='0')
+    uf = TextField(default='0')
+
+
+    quem_criou = TextField(default='0')
+    serie = TextField(default='0')
+    tipo_item = TextField(default='0')
+    preco = TextField(default='0')
+    tipo_medalha = TextField(default='0')
     descricao = TextField(default='')
-    descricao_completa = TextField(default='')
-    nome_usuario = TextField(default='')
+    descricao_completa = TextField(default='0')
+    nome_usuario = TextField(default='0')
+
     data_acesso = DateTimeField(default=datetime.datetime.now)
     anotacoes_estrutura = ListField()
-    cpf = TextField(default='')
-    email = TextField(default='')
-    tipo = TextField(fts=True)
+
+
+    cpf = TextField(default='0')
+    email = TextField(default='0')
+
+
     data_ultimo_login = TextField(default='')
     anotacoes_observador = ListField()
 
-
-
     def desativar_atores(self, atores_id):
-        # print("inativos", atores_id)
         for atores_id in atores_id:
-            try:
-                # if self.create( **{k: getattr(atores_id, k) for k in dir(atores_id)})
-                if self.create(matricula=atores_id.matricula, nome=atores_id.nome, senha=atores_id.senha,
-                               tipo_usuario=atores_id.tipo_aluno, cor=atores_id.cor,
-                               rosto=atores_id.rosto, acessorio=atores_id.acessorio, corpo=atores_id.corpo,
-                               pontos_de_vida=atores_id.pontos_de_vida, pontos_de_moedas=atores_id.pontos_de_moedas,
-                               vinculo_escola=atores_id.vinculo_escola, vinculo_turma=atores_id.vinculo_turma):
-                    pass
-                else:
-                    print("deu ruim")
-            except AttributeError:
-                observador = DbObservador.load(atores_id.id)
-                if self.create(nome=observador.nome, senha=observador.senha, telefone=observador.telefone,
-                               cpf=observador.cpf,
-                               email=observador.email, tipo_usuario=observador.tipo,
-                               vinculo_rede=observador.vinculo_rede,
-                               vinculo_escola=observador.vinculo_escola
-                        , data_ultimo_login=observador.data_ultimo_login):
-                    print("")
-                else:
-                    print("derrota")
+            print(len(vars(atores_id)['_data']))
+            self.desativar_um_objeto(vars(atores_id)['_data'])
 
     def complemento_create(self, ator, cemiterio_nome):
         try:
@@ -106,7 +104,9 @@ class DbCemiterio(Model):
         except KeyError:
             usuario = DbObservador.load(ator.id)
 
+        print("CM L 134",usuario,usuario.nome)
         inativar = self.pesquisa_inativo(cemiterio_nome)
+        print("L135 cm",inativar)
         inativado = self.load(inativar.id)
         try:
             if usuario.anotacoes_aluno is not None:
@@ -122,10 +122,10 @@ class DbCemiterio(Model):
 
             """nao esquecer de acrescentar as pontuaçoes dos jogos"""
             if inativar.matricula == usuario.matricula and inativar.nome == usuario.nome and \
-                    inativar.senha == usuario.senha and inativar.tipo_usuario == usuario.tipo_aluno and \
+                    inativar.senha == usuario.senha and inativar.tipo_aluno == usuario.tipo_aluno and inativar.tipo_aluno==usuario.tipo_aluno and \
                     inativar.cor == usuario.cor and inativar.rosto == usuario.rosto and \
                     inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and \
-                    inativar.pontos_de_vida == usuario.pontos_de_vida and \
+                    inativar.pontos_de_vida == (usuario.pontos_de_vida) and \
                     inativar.pontos_de_moedas == usuario.pontos_de_moedas and \
                     inativar.vinculo_escola == usuario.vinculo_escola \
                     and inativar.vinculo_turma == usuario.vinculo_turma:
@@ -134,10 +134,7 @@ class DbCemiterio(Model):
                 print("deletou aluno")
                 return True
             else:
-                print("L146 CEMITERIO", inativar.cor,usuario.cor ,inativar.rosto == usuario.rosto and \
-                    inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and \
-                    inativar.pontos_de_vida == usuario.pontos_de_vida and \
-                    inativar.pontos_de_moedas == usuario.pontos_de_moedas and \
+                print("L161 CEMITERIO",inativar.pontos_de_moedas == usuario.pontos_de_moedas and \
                     inativar.vinculo_escola == usuario.vinculo_escola \
                     and inativar.vinculo_turma == usuario.vinculo_turma)
                 print("vish , n foi ")
@@ -151,7 +148,7 @@ class DbCemiterio(Model):
                 print("deletou usuario")
                 return True
             else:
-                print("L163 cemiterio",inativar.data_ultimo_login, usuario.data_ultimo_login)
+                print("L163 cemiterio", inativar.data_ultimo_login, usuario.data_ultimo_login)
                 print("n deletou usuario L163 cem")
                 return False
 
@@ -159,6 +156,7 @@ class DbCemiterio(Model):
         self.desativar_atores(lista_inativados)
         # x = len(lista_inativados)
         while lista_inativados:
+            print("L157",lista_inativados)
             x = 0
             paradas = lista_inativados[x]
             try:
@@ -283,15 +281,38 @@ class DbCemiterio(Model):
                                  anotacoes_observador=len(read.anotacoes_observador)))
 
         return inativos
-    # def deletar_estrutura(self,estrutura_nome,tipo):
-    #
-    #     morto=self.pesquisa_inativo(estrutura_nome)
-    #     vivo=DbEstrutura.search_estrutura()
-    #     if morto.tipo_estrutura == vivo.tipo_estrutura, morto.telefone == vivo.telefone,
-    #     morto.vinculo_rede == vivo.vinculo_rede, morto.vinculo_escola == vivo.vinculo_escola, morto.cep == vivo.cep,
-    #     morto.endereco == vivo.endereco, morto.numero == vivo.numero, morto.estado == vivo.estado, morto.uf == vivo.uf,
-    #     morto.quem_criou == vivo.quem_criou, morto.serie == estrutura.serie, tipo_item == estrutura.tipo_item,
-    #     preco = estrutura.preco, tipo_medalha = estrutura.tipo_medalha, descriçao = estrutura.descricao,
-    #     descricao_completa = estrutura.descricao_completa, nome_usuario = estrutura.nome_usuario,
-    #     tipo_usuario = estrutura.tipo_usuario, data_acesso = estrutura.data_acesso,
-    #     anotacoes_estrutura = estrutura.anotacoes_estrutura:
+
+    def desativar_ator(self, nome, matricula='0', senha='0', tipo_usuario='0', cor='0', rosto='0', acessorio='0', corpo='0',
+                       pontos_de_vida='0', pontos_de_moedas='0', vinculo_escola='0', vinculo_turma='0',
+                       tipo_estrutura='0', telefone='0', vinculo_rede='0', cep='0', endereco='0', numero='0',
+                       estado='0', uf='0', quem_criou='0', serie='0', tipo_item='0', preco='0', tipo_medalha='0',
+                       descricao='0', descricao_completa='0', nome_usuario='0', data_acesso=datetime.datetime.now,
+                       cpf='0', email='0', tipo='0', data_ultimo_login='0'):
+        if [setattr(self.create(), parametro, valor) for parametro, valor in locals().items()]:
+            print("quee")
+            pass
+
+    def desativar_um_objeto(self,objetoo):
+        print('CMl311', objetoo)
+        #
+        # [setattr(new_morto, parametro, valor) for parametro, valor in locals().items()]
+        # print("CM L314",new_morto)
+
+        if self.create(**objetoo):
+            print("sucesso")
+        else:
+            print('nao foi')
+            return False
+
+# def deletar_estrutura(self,estrutura_nome,tipo):
+#
+#     morto=self.pesquisa_inativo(estrutura_nome)
+#     vivo=DbEstrutura.search_estrutura()
+#     if morto.tipo_estrutura == vivo.tipo_estrutura, morto.telefone == vivo.telefone,
+#     morto.vinculo_rede == vivo.vinculo_rede, morto.vinculo_escola == vivo.vinculo_escola, morto.cep == vivo.cep,
+#     morto.endereco == vivo.endereco, morto.numero == vivo.numero, morto.estado == vivo.estado, morto.uf == vivo.uf,
+#     morto.quem_criou == vivo.quem_criou, morto.serie == estrutura.serie, tipo_item == estrutura.tipo_item,
+#     preco = estrutura.preco, tipo_medalha = estrutura.tipo_medalha, descriçao = estrutura.descricao,
+#     descricao_completa = estrutura.descricao_completa, nome_usuario = estrutura.nome_usuario,
+#     tipo_usuario = estrutura.tipo_usuario, data_acesso = estrutura.data_acesso,
+#     anotacoes_estrutura = estrutura.anotacoes_estrutura:

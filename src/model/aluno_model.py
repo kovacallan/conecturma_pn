@@ -33,6 +33,7 @@ class DbAluno(Model):
         self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
                     vinculo_rede=vinculo_rede, matricula=matricula)
 
+
     def update_aluno(self, update_id, nome, senha, turma, escola, rede):
 
         aluno_up = self.load(update_id)
@@ -188,6 +189,38 @@ class DbAluno(Model):
             anotacoes.append(x.decode('utf-8'))
 
         return anotacoes
+
+    def search_aluno_by_escola(self, escola):
+        from model.estrutura_model import DbEstrutura
+
+        alunos = []
+        escola_estrutura = DbEstrutura()
+        for aluno in DbAluno.query(DbAluno.vinculo_escola == escola, order_by=DbAluno.nome):
+            vinculo_escola = escola_estrutura.search_estrutura_id(int(aluno.vinculo_escola))
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf=None, nome=aluno.nome,
+                               vinculo_rede="", vinculo_escola=vinculo_escola['nome'],
+                               vinculo_turma=aluno.vinculo_turma))
+        return alunos
+
+    def search_aluno_by_turma(self, vinculo_turma):
+
+        alunos = []
+        for aluno in DbAluno.query(DbAluno.vinculo_turma == vinculo_turma, order_by=DbAluno.nome):
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf="", nome=aluno.nome,
+                               vinculo_rede="", vinculo_escola=aluno.vinculo_escola,
+                               vinculo_turma=aluno.vinculo_turma))
+        return alunos
+
+    def search_aluno_by_rede(self, vinculo_rede):
+        from model.estrutura_model import DbEstrutura
+
+        alunos = []
+        for aluno in DbAluno.query(DbAluno.vinculo_rede == vinculo_rede, order_by= DbAluno.nome):
+            alunos.append(dict(id=aluno.id, matricula=aluno.matricula, tipo=aluno.tipo_aluno, cpf="", nome=aluno.nome,
+                     vinculo_rede=vinculo_rede, vinculo_escola=aluno.vinculo_escola,
+                     vinculo_turma=aluno.vinculo_turma))
+
+        return alunos
 
     def aluno_delete(self, deletar_ids):
 

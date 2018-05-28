@@ -63,7 +63,7 @@ def view_update_turma():
     for a in aluno:
         if a['vinculo_turma'] == '0':
             alunos.append(a)
-    print(alunos)
+
     professor = facade.search_observador_professor_by_escola_facade(turma['escola'])
     professores = []
     for p in professor:
@@ -84,11 +84,11 @@ def controller_update_turma():
     if alunos is not '' or alunos is not []:
         for a in alunos:
             facade.aluno_in_turma_facade(id_aluno=int(a),vinculo_turma=turma)
-        print(alunos)
+
     if professores is not '' or professores is not []:
         for p in professores:
             facade.obser(id_aluno=int(a),vinculo_turma=turma)
-        print(alunos)
+
 
     redirect('/turma')
 

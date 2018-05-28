@@ -4,7 +4,7 @@
     <input type="radio" name="tipo_usuario" value="1">Gestor
     <input type="radio" name="tipo_usuario" value="2">Diretor
     <input type="radio" name="tipo_usuario" value="3">Professor
-    <input type="radio" name="tipo_usuario" value="6">Aluno
+    <input type="radio" name="tipo_usuario" value="6" checked=true>Aluno
 
 
 <%
