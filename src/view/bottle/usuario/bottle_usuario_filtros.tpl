@@ -1,6 +1,6 @@
 
 
-    <select id="filtro_rede" onChange='pqp()'>
+    <select id="filtro_rede" onChange="filtro_usuario()">
         %if observador_tipo is '0':
             <option value="0">---- Selecione rede ----</option>
             % for r in redes:
@@ -39,24 +39,3 @@
         <option value="3">Professor</option>
         <option value="6">Aluno</option>
     </select>
-
-<script>
-
-function pqp(){
-
-    window.alert("foi?,rede");
-    filtro_rede = document.getElementById("filtro_rede").value;
-    console.log(filtro_rede)
-
-    $.post('/filtro_usuario_rede',{
-               rede:filtro_rede },(function(data){
-     // $('#usuario_sitema').empty();
-     $.getJSON('#usuario_sistema'),function(data);
-      document.getElementById(data).value;
-             console.log(data);
-       return false;
-    }));
-    }
-
-
-</script>

@@ -227,11 +227,12 @@ def controller_observador_cadastro():
     escola = request.params['escola']
     rede = request.params['rede']
     turma = request.params['turma']
+
     if escola == 0:
         print("oh no AGA L231")
         pass
     else:
-        if filtro_cadastro(nome=nome, senha=senha, cpf=cpf,telefone=telefone, email=email, tipo=tipo):
+        if filtro_cadastro(nome=nome, senha=senha, cpf=cpf,telefone=telefone, email=email):
             facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf,email=email, tipo=tipo,
                                             escola=escola, rede=rede, vinculo_turma=turma)
             print("salvando...")
@@ -412,7 +413,7 @@ def view_escola_cadastro():
         else:
             print("Erro para salvar escola")
 
-def filtro_cadastro(nome, cep, numero, telefone, estado, uf):
+def filtro_cadastro(nome,senha, cep, numero, telefone, estado, uf,cpf,email):
     """
     impede que os parametros do cadastro sejam postados vazios
     :param nome: nome da escola
@@ -621,7 +622,7 @@ def serie(id_serie):
     elif id_serie == '5':
         return "5ª Ano"
 
-@route('/filtro_usuario_rede', method='POST')
+@route('/filtro_usuario', method='POST')
 def filtro_usuarios():
     rede = request.params['rede']
     observador = usuario_logado()
@@ -629,14 +630,18 @@ def filtro_usuarios():
     print("AGA L625", rede)
     usuarioss=[]
     observador_na_rede = facade.search_observador_by_rede_facade(rede)
+    aluno_na_rede= facade.search_aluno_by_rede_facade(rede)
     if observador_na_rede== []:
         pass
     else:
         usuarioss.append(facade.search_observador_by_rede_facade(rede))
-    usuarioss.append(facade.search_aluno_by_rede_facade(rede))
+    if aluno_na_rede==[]:
+        pass
+    else:
+        usuarioss.append(facade.search_aluno_by_rede_facade(rede))
     print("aluno na rede", facade.search_aluno_by_rede_facade(rede))
 
-    print("numero de itens em escola,turma e usuarios", usuarioss, rede, escola, turma, observador['tipo'])
+    print("numero de itens em escola,turma e usuarios AGA L625", usuarioss, rede, escola, turma, observador['tipo'])
     return dict(usuarios=usuarioss)
 
 

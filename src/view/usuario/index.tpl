@@ -48,4 +48,26 @@
          </div>
      </div>
 </div>
+
+<script>
+
+function filtro_usuario(){
+   filtro_escola = document.getElementById('filtro_escola').value;
+
+   filtro_rede = document.getElementById('filtro_rede').value;
+
+   filtro_turma =  document.getElementById('filtro_turma').value;
+
+   filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
+
+
+     $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
+       $('#usuarios_sistema').html(data['usuario']);
+       console.log(data);
+       //usuarios = data['usuarios'];
+       console.log("aqui,usuarios",data['usuarios'].values(data['usuarios']));
+  });
+  return false;
+  }
+</script>
 %include('footer.tpl')

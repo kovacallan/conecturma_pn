@@ -1,6 +1,8 @@
-<div id='usuarios_sistema'>
+
 <%
+
     for i in usuarios:
+
 %>
     <div class="row">
         <div class="col-md-2">
@@ -25,4 +27,4 @@
 <%
     end
 %>
-</div>
+
