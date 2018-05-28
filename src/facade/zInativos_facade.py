@@ -1,4 +1,4 @@
-from src.model.zInativos_model import DbCemiterio
+from model.zInativos_model import DbCemiterio
 
 class ZinativosFacade:
 

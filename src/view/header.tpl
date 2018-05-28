@@ -11,3 +11,8 @@
 </head>
 <body>
     <div class="container">
+         <div align="right" class="col-md-12">
+            <a href="/gestao_aprendizagem"><button>gestao de aprendizagem</button></a>
+            <a href="/aluno/area_aluno"><button>Ambiente de Aprendizagem</button></a>
+            <a href="/sair"><button>Sair</button></a>
+        </div>

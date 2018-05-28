@@ -1,6 +1,6 @@
 from walrus import *
 from model.estrutura_model import *
-# from src.model.aluno_model import DbAluno
+from model.aluno_model import DbAluno
 from model.observador_model import *
 
 # from facade.Facade_main import *
@@ -51,9 +51,11 @@ class DbCemiterio(Model):
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
     tipo_item = TextField(fts=True,default='0')
+    preco = TextField(default='0')
 
     pontos_de_vida = IntegerField(default='0')
     pontos_de_moedas = IntegerField(default='0')
+
 
     anotacoes_aluno = ListField()
 
@@ -73,8 +75,7 @@ class DbCemiterio(Model):
 
     quem_criou = TextField(default='0')
     serie = TextField(default='0')
-    tipo_item = TextField(default='0')
-    preco = TextField(default='0')
+
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='')
     descricao_completa = TextField(default='0')
@@ -93,6 +94,7 @@ class DbCemiterio(Model):
 
     def desativar_atores(self, atores_id):
         for atores_id in atores_id:
+
             print(len(vars(atores_id)['_data']))
             self.desativar_um_objeto(vars(atores_id)['_data'])
 

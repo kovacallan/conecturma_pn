@@ -1,7 +1,7 @@
 from bottle import redirect, response, request
 from datetime import datetime
 from control.dicionarios import *
-from src.facade.facade_main import Facade
+from facade.facade_main import Facade
 
 """Constante para a key de hash temporariamente"""
 
@@ -26,7 +26,7 @@ class Login_Observador(object):
                 response.set_cookie("BUMBA", observador_logado, path='/', secret=hash)
                 now = datetime.now()
                 facade.login_date_facade(observador_logado['id'], now)
-                facade.create_estrutura_facade(observador_logado['nome'], observador_logado['tipo'])
+                facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'], nome_usuario=observador_logado['nome'], tipo_usuario=observador_logado['tipo'])
                 return PAGINA_INICIAL[tipo_observador(observador_logado['tipo'])]
             else:
                 return '/'
@@ -55,7 +55,7 @@ class Login_Aluno(object):
     def login(self):
         facade = Facade()
         hash = self.gerar_hash()
-        aluno = facade.pesquisa_aluno_nome_facade(nome=self.nome)
+        aluno = facade.search_aluno_nome_facade(nome=self.nome)
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
         if aluno['nome'] == self.nome:
             if aluno['senha'] == self.senha:
