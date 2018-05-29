@@ -27,7 +27,7 @@ def view_usuario_index():
     rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
     escola = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
     turma=facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
-    print("AGA",usuario,rede,escola,turma)
+
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
@@ -453,26 +453,26 @@ def filtro_usuarios():
     rede = request.params['rede']
     escola = request.params['escola']
     turma = request.params['turma']
-    observador = usuario_logado()
-    print("observador é AGA L625",observador)
-    # rede = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
-    # escola = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
-    # turma = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
-    # print("AGA L625 , len rede escola turma", len(rede),len(escola,len(turma)))
-    usuarioss=[]
-    observador_na_rede = facade.search_observador_by_rede_facade(rede)
-    aluno_na_rede= facade.search_aluno_by_rede_facade(rede)
-    if observador_na_rede== []:
-        pass
-    else:
-        usuarioss.append(facade.search_observador_by_rede_facade(rede))
-    if aluno_na_rede==[]:
-        pass
-    else:
-        usuarioss.append(facade.search_aluno_by_rede_facade(rede))
-    print("aluno na rede", facade.search_aluno_by_rede_facade(rede))
-    print("numero de itens em escola,turma e usuarios AGA L625",len(usuarioss), len(rede),len(escola),   turma, observador['tipo'])
-    return template('bottle/usuario/bottle_usuario_read_usuarios.tpl',usuarios=usuarioss)
+    usuarios = []
+    if turma == '0' and escola == '0' and rede != '0':
+        aluno = facade.search_aluno_by_rede_facade(vinculo_rede=rede)
+        for a in aluno:
+            a['email'] = ''
+            a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
+            a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
+            a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
+            a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
+            usuarios.append(a)
+
+        observador = facade.search_observador_by_rede_facade(vinculo_rede=rede)
+        for o in observador:
+            o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
+            o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
+            o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
+            o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
+            usuarios.append(o)
+
+    return template('bottle/usuario/bottle_usuario_read_usuarios.tpl',usuarios=usuarios)
 
 @get('/deletar_turma')
 @permissao('diretor')
