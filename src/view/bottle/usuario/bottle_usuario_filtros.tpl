@@ -1,5 +1,4 @@
-    %if int(observador_tipo) <=3:
-        %if int(observador_tipo) <=1:
+
     <select id="filtro_rede" onChange="filtro_usuario()">
             %if observador_tipo is '0':
                 <option value="0">---- Selecione rede ----</option>
@@ -12,8 +11,7 @@
                 <option value="{{redes['id']}}">{{redes['nome']}}</option>
             %end
     </select>
-            %if int(observador_tipo) is not 3:
-    <select id="filtro_escola" >
+    <select id="filtro_escola" onChange="filtro_usuario()">
                 %if observador_tipo is '0':
                     <option value="0" >---- Selecione escola ----</option>
                     % for e in escolas:
@@ -25,11 +23,8 @@
                     <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
                 %end
     </select>
-            %end
-        %end
-    %end
 
-    <select id="filtro_turma">
+    <select id="filtro_turma" onChange="filtro_usuario()">
         <option value="0">---- Selecione turma ----</option>
         % for t in turmas:
             <option value="{{t['id']}}">{{t['nome']}}</option>
