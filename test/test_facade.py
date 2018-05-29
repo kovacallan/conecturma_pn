@@ -108,7 +108,8 @@ class FacadeTest(unittest.TestCase):
         self._create_item()
         self._create_aluno()
         aluno1 = self.facade.pesquisa_aluno_nome_objeto_facade("egg")
-        item1 = self.facade.search_estrutura_facade(nome="burroquandofoge", tipo_estrutura=TIPO_ESTRUTURA['item'])
+        item1 = self.facade.search_estrutura_facade(nome="burroquandofoge",tipo_estrutura="4")
+
         self.facade.compra_item_facade(aluno1.id, item1['id'])
         self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
 
@@ -502,7 +503,9 @@ class FacadeTest(unittest.TestCase):
         item1 = self.facade.read_estrutura_facade()
 
     def _delete_item(self):
+
         itens = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'])
+
         escolhidos = []
         for itens in itens:
             escolhidos.append(itens['id'])
@@ -541,7 +544,8 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(aluno2_pos,None)
 
         observador1 = self.facade.search_observador_inativos_facade("Monty")
-        self.assertIsNot(observador1,None)
+        self.assertIsNot(observador1,None)>>>>>> master
+
 
         inativados = [alunoer1, aluno2_pos, observador1]
         print("inativados L544 test",alunoer1,aluno2_pos,observador1)
@@ -628,10 +632,6 @@ class FacadeTest(unittest.TestCase):
 
     # def test_substituto_de_webtest(self):
     #     self._create_observador()
-
-    def tearDown(self):
-        self.facade.apagartudo()
-
 
 if __name__ == '__main__':
     unittest.main()

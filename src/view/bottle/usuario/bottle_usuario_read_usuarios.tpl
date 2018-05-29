@@ -1,4 +1,4 @@
-{{usuarios}}
+
 <%
 
     for i in usuarios:
@@ -27,4 +27,3 @@
 <%
     end
 %>
-

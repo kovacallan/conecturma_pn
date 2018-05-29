@@ -163,8 +163,6 @@ def create_aluno():
     """
     escola = request.forms['escola']
     vinculo_rede=facade.search_estrutura_id_facade(int(escola))
-    facade.create_aluno_facade(nome=request.forms['aluno_nome'], matricula=request.forms['matricula'],escola=escola, senha=request.forms['senha'],vinculo_rede=vinculo_rede['vinculo_rede'])
-    redirect('/')
 
 
 @route('/observador/cadastro')
@@ -418,9 +416,11 @@ def alunos_na_escola_sem_turma(vinculo_escola):
     for a in facade.search_aluno_escola_facade(vinculo_escola):
         if a['vinculo_turma'] == '0':
             alunos.append(a)
+            
     return alunos
 
 def professor_na_escola_sem_turma(vinculo_escola):
+
     professores = []
     for p in facade.search_observador_escola(vinculo_escola=vinculo_escola):
         if p['vinculo_turma'] == '0' and p['tipo']==TIPO_USUARIOS['professor']:
@@ -447,8 +447,7 @@ def controller_update_turma():
             facade.observador_in_turma_facade(id_observador=p,vinculo_turma=turma)
 
     redirect('/turma')
-
-
+    
 @route('/filtro_usuario', method='POST')
 def filtro_usuarios():
     rede = request.params['rede']
@@ -475,39 +474,13 @@ def filtro_usuarios():
     print("numero de itens em escola,turma e usuarios AGA L625",len(usuarioss), len(rede),len(escola),   turma, observador['tipo'])
     return template('bottle/usuario/bottle_usuario_read_usuarios.tpl',usuarios=usuarioss)
 
-
-
-
-
-# ,escolas=escola,turma=turma
-# function getState(val) {
-#     $.ajax({
-#     type:
-#     url: "get_state.php",
-#     data:'country_id='+val,
-#     success: function(data){
-#         $("#state-list").val(data);
-#     }
-#     });
-# }
-
-
-# (function(data){
-#         $('#usuarios_sistema').html(data);
-#         }));
-
-
-# $.getJSON("ajax/test.json", function(data)
-# {
-#     var
-# items = [];
-# $.each(data, function(key, val)
-# {
-#     items.push("<li id='" + key + "'>" + val + "</li>");
-# });
-#
-# $("<ul/>", {
-#     "class": "my-new-list",
-#     html: items.join("")
-# }).appendTo("body");
-# });
+@get('/deletar_turma')
+@permissao('diretor')
+def deletar_turma():
+    """
+    nao implementado
+    :return:
+    """
+    facade.delete_turma_facade(request.params['id'])
+    
+    redirect('/turma')

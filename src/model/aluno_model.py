@@ -33,6 +33,7 @@ class DbAluno(Model):
         self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
                     vinculo_rede=vinculo_rede, matricula=matricula)
 
+
     def update_aluno(self, update_id, nome, senha, turma, escola, rede):
 
         aluno_up = self.load(update_id)
@@ -221,7 +222,6 @@ class DbAluno(Model):
                      vinculo_turma=aluno.vinculo_turma))
 
         return alunos
-
 
     def aluno_delete(self, deletar_ids):
 

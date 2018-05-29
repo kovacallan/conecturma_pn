@@ -50,6 +50,7 @@ class DbCemiterio(Model):
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
+
     tipo_item = TextField(fts=True,default='0')
     preco = TextField(default='0')
 
@@ -75,7 +76,7 @@ class DbCemiterio(Model):
 
     quem_criou = TextField(default='0')
     serie = TextField(default='0')
-
+    
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='')
     descricao_completa = TextField(default='0')
@@ -94,7 +95,6 @@ class DbCemiterio(Model):
 
     def desativar_atores(self, atores_id):
         for atores_id in atores_id:
-
             print(len(vars(atores_id)['_data']))
             self.desativar_um_objeto(vars(atores_id)['_data'])
 
