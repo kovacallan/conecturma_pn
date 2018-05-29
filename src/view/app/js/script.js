@@ -8,31 +8,6 @@ function esqueci_senha(){
     }
 }
 
-
-
-
-//
-//function pqp(){
-//    window.alert("foi?,rede");
-//    filtro_rede = document.getElementById("filtro_rede").value;
-//    console.log(filtro_rede)
-//
-//
-//    $.post('/filtro_usuario_rede',{
-//                   rede:filtro_rede },(function(data){
-//            $getJSON('#usuarios_sistema').html(usuarios=data);
-//        console.log(data['usuarios'][0][0]);}));
-//}
-
-
-
-
-
-
-
-
-
-
 function cadastro_observador(){
     tipo = document.getElementById('tipo');
     nome = document.getElementById('nome');

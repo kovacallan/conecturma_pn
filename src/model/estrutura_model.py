@@ -70,7 +70,7 @@ class DbEstrutura(Model):
                     data_acesso=lista.data_acesso
                 )
             )
-        
+
         return listas
 
     def ja_possui_item(self, usuario_logado):

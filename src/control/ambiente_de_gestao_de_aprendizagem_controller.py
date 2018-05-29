@@ -1,5 +1,6 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
+
 from control.classes.permissao import permissao, usuario_logado, permissao
 from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIPO_USUARIOS,TIPO_ESTRUTURA,SERIE
 
@@ -23,7 +24,10 @@ def view_usuario_index():
     """
     observador = usuario_logado()
     usuario = controller_index_usuario(observador)
-    rede, escola, turma = [], [], []
+    rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
+    escola = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+    turma=facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+    print("AGA",usuario,rede,escola,turma)
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
@@ -159,6 +163,7 @@ def create_aluno():
     """
     escola = request.forms['escola']
     vinculo_rede=facade.search_estrutura_id_facade(int(escola))
+
 
 @route('/observador/cadastro')
 @permissao('professor')
@@ -325,7 +330,6 @@ def controller_escola_cadastro():
                                    estado=request.params['estado'], uf=request.params['uf'],
                                    numero=request.params['numero'], vinculo_rede=request.params['rede']
                                    )
-
     redirect("/escola")
 
 @route('/turma')
@@ -443,6 +447,32 @@ def controller_update_turma():
             facade.observador_in_turma_facade(id_observador=p,vinculo_turma=turma)
 
     redirect('/turma')
+    
+@route('/filtro_usuario', method='POST')
+def filtro_usuarios():
+    rede = request.params['rede']
+    escola = request.params['escola']
+    turma = request.params['turma']
+    observador = usuario_logado()
+    print("observador é AGA L625",observador)
+    # rede = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
+    # escola = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+    # turma = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+    # print("AGA L625 , len rede escola turma", len(rede),len(escola,len(turma)))
+    usuarioss=[]
+    observador_na_rede = facade.search_observador_by_rede_facade(rede)
+    aluno_na_rede= facade.search_aluno_by_rede_facade(rede)
+    if observador_na_rede== []:
+        pass
+    else:
+        usuarioss.append(facade.search_observador_by_rede_facade(rede))
+    if aluno_na_rede==[]:
+        pass
+    else:
+        usuarioss.append(facade.search_aluno_by_rede_facade(rede))
+    print("aluno na rede", facade.search_aluno_by_rede_facade(rede))
+    print("numero de itens em escola,turma e usuarios AGA L625",len(usuarioss), len(rede),len(escola),   turma, observador['tipo'])
+    return template('bottle/usuario/bottle_usuario_read_usuarios.tpl',usuarios=usuarioss)
 
 @get('/deletar_turma')
 @permissao('diretor')
@@ -454,4 +484,3 @@ def deletar_turma():
     facade.delete_turma_facade(request.params['id'])
     
     redirect('/turma')
-

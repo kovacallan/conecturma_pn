@@ -77,3 +77,4 @@ def cadastro_item():
 @route('/teste')
 def fazendo_teste():
     print("to aqui")
+

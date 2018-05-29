@@ -52,6 +52,7 @@ class DbCemiterio(Model):
     corpo = TextField(default='0')
 
     tipo_item = TextField(fts=True,default='0')
+    preco = TextField(default='0')
 
     pontos_de_vida = IntegerField(default='0')
     pontos_de_moedas = IntegerField(default='0')
@@ -75,8 +76,7 @@ class DbCemiterio(Model):
 
     quem_criou = TextField(default='0')
     serie = TextField(default='0')
-    tipo_item = TextField(default='0')
-    preco = TextField(default='0')
+    
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='')
     descricao_completa = TextField(default='0')

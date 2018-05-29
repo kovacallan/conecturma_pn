@@ -633,9 +633,5 @@ class FacadeTest(unittest.TestCase):
     # def test_substituto_de_webtest(self):
     #     self._create_observador()
 
-    # def tearDown(self):
-    #     self.facade.apagartudo()
-
-
 if __name__ == '__main__':
     unittest.main()

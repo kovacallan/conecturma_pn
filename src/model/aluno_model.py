@@ -137,6 +137,7 @@ class DbAluno(Model):
 
     def comprar_item(self, id_usuario, id_item):
         from model.estrutura_model import DbEstrutura
+
         item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
