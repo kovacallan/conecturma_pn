@@ -24,7 +24,10 @@ def view_usuario_index():
     """
     observador = usuario_logado()
     usuario = controller_index_usuario(observador)
-    rede, escola, turma = [], [], []
+    rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
+    escola = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+    turma=facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+    print("AGA",usuario,rede,escola,turma)
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
@@ -449,9 +452,14 @@ def controller_update_turma():
 @route('/filtro_usuario', method='POST')
 def filtro_usuarios():
     rede = request.params['rede']
+    escola = request.params['escola']
+    turma = request.params['turma']
     observador = usuario_logado()
-    redes ,escola, turma = controller_index_usuario(observador=observador)
-    print("AGA L625", rede)
+    print("observador é AGA L625",observador)
+    # rede = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
+    # escola = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+    # turma = facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+    # print("AGA L625 , len rede escola turma", len(rede),len(escola,len(turma)))
     usuarioss=[]
     observador_na_rede = facade.search_observador_by_rede_facade(rede)
     aluno_na_rede= facade.search_aluno_by_rede_facade(rede)
@@ -464,8 +472,8 @@ def filtro_usuarios():
     else:
         usuarioss.append(facade.search_aluno_by_rede_facade(rede))
     print("aluno na rede", facade.search_aluno_by_rede_facade(rede))
-    print("numero de itens em escola,turma e usuarios AGA L625", usuarioss, rede, escola, turma, observador['tipo'])
-    return dict(usuarios=usuarioss)
+    print("numero de itens em escola,turma e usuarios AGA L625",len(usuarioss), len(rede),len(escola),   turma, observador['tipo'])
+    return template('bottle/usuario/bottle_usuario_read_usuarios.tpl',usuarios=usuarioss)
 
 
 

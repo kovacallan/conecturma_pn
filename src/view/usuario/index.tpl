@@ -18,7 +18,7 @@
         </div>
          <div align="center" class="col-md-12">
             <div class="row">
-                <!-- %include('bottle/usuario/bottle_usuario_filtros.tpl') -->
+                %include('bottle/usuario/bottle_usuario_filtros.tpl')
                <!-- <button id="botao-filtro" onclick="filtro_usuario()">Filtrar</button> -->
             </div>
          </div>
@@ -43,9 +43,9 @@
                 <strong>Tipo</strong>
             </div>
        </div>
-       <div id="usuarios_sistema">
+        <div id="usuarios_sistema">
           %include('bottle/usuario/bottle_usuario_read_usuarios')
-         </div>
+        </div>
      </div>
 </div>
 
@@ -62,12 +62,57 @@ function filtro_usuario(){
 
 
      $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
-       $('#usuarios_sistema').html(data['usuario']);
-       console.log(data);
+     //console.log("hmmm",JSON.stringify(data));
+           $('#usuarios_sistema').html(data);
+        });
+   return false;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+     //for(x=0 ;x<=data['usuarios'][0].length;x++);
+       // console.log("tamanho do array",data['usuarios'][0].length)
+       // console.log("dentro do for")
+       // $.each( data['usuarios'][0][0], function(key , val) {
+        //    console.log("dentro do each");
+        //    console.log("teste",key ,val)
+                //if (key == 'nome');
+                  //  $('#nome').html(val);
+                    //console.log("nanii",val);
+                    //usuarios = data['usuarios'];
+                    //console.log("aqui,usuarios",val);
+                //else if (key == 'email');
+                //   $('#email').html(val);
+                //    console.log(val);
+                //    usuarios = data['usuarios'];
+                 //   console.log("aqui,usuarios",val);
+
+            //});
+           //items.push( '<div class="col-md-2">' + val + '</div>');
+           //console.log("cabo o for?")
+           //});
+
+     //JSON.parse(data)
+     //.parse('{"name": "", "skills": "", "jobtitel": "Entwickler", "res_linkedin": "GwebSearch"}');
+     //var items = [];
+       //  $.each( data, function(val) {
+         //   items.push( '<div class="col-md-2">' + val + '</div>');
+           // });
+       //$('#usuarios_sistema').html(data);
+      // console.log(data);
        //usuarios = data['usuarios'];
-       console.log("aqui,usuarios",data['usuarios'].values(data['usuarios']));
-  });
-  return false;
-  }
+       //console.log("aqui,usuarios",data['usuarios'][0]);
+//  });
+//  return false;
+ // }
 </script>
 %include('footer.tpl')
