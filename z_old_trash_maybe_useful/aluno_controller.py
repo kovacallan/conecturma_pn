@@ -53,11 +53,6 @@ def aluno():
 
 @route('/aluno_cadastro', method='POST')
 def create_aluno():
-    """
-    Direcionamento a pagina para criar aluno buscando , na tpl os parâmetros usuário , senha e matricula
-    Chama a funçao create_aluno_facade
-    :return:
-    """
     escola = request.forms['escola']
     if facade.create_aluno_facade(nome=request.forms['aluno_nome'], escola=escola, senha=request.forms['senha']):
         redirect('/aluno')

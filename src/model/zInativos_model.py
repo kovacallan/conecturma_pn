@@ -288,9 +288,9 @@ class DbCemiterio(Model):
                        estado='0', uf='0', quem_criou='0', serie='0', tipo_item='0', preco='0', tipo_medalha='0',
                        descricao='0', descricao_completa='0', nome_usuario='0', data_acesso=datetime.datetime.now,
                        cpf='0', email='0', tipo='0', data_ultimo_login='0'):
-        if [setattr(self.create(), parametro, valor) for parametro, valor in locals().items()]:
-            print("quee")
-            pass
+        [setattr(self.create(), parametro, valor) for parametro, valor in locals().items()]
+        print("quee")
+
 
     def desativar_um_objeto(self,objetoo):
         print('CMl311', objetoo)

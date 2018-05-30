@@ -72,50 +72,50 @@ class DbAluno(Model):
 
         return alun_pes
 
-    def search_aluno_by_rede(self, vinculo_rede):
-        alunos = []
-        for search in DbAluno.query((DbAluno.vinculo_rede == vinculo_rede), order_by=DbAluno.nome):
-            alunos.append(
-                dict(
-                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
-                 )
-            )
-        return alunos
+    # def search_aluno_by_rede(self, vinculo_rede):
+    #     alunos = []
+    #     for search in DbAluno.query((DbAluno.vinculo_rede == vinculo_rede), order_by=DbAluno.nome):
+    #         alunos.append(
+    #             dict(
+    #                 id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+    #                 tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+    #                 rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+    #                 pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+    #                 vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+    #                 vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+    #              )
+    #         )
+    #     return alunos
 
-    def search_aluno_by_escola(self, escola):
-        alunos = []
-        for search in DbAluno.query((DbAluno.vinculo_escola == escola), order_by=DbAluno.nome):
-            alunos.append(
-                dict(
-                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
-                 )
-            )
-        return alunos
+    # def search_aluno_by_escola(self, escola):
+    #     alunos = []
+    #     for search in DbAluno.query((DbAluno.vinculo_escola == escola), order_by=DbAluno.nome):
+    #         alunos.append(
+    #             dict(
+    #                 id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+    #                 tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+    #                 rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+    #                 pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+    #                 vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+    #                 vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+    #              )
+    #         )
+    #     return alunos
 
-    def search_aluno_by_turma(self, vinculo_turma):
-        alunos = []
-        for search in DbAluno.query(DbAluno.vinculo_turma == vinculo_turma, order_by=DbAluno.nome):
-            alunos.append(
-                dict(
-                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
-                )
-            )
-        return alunos
+    # def search_aluno_by_turma(self, vinculo_turma):
+    #     alunos = []
+    #     for search in DbAluno.query(DbAluno.vinculo_turma == vinculo_turma, order_by=DbAluno.nome):
+    #         alunos.append(
+    #             dict(
+    #                 id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+    #                 tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+    #                 rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+    #                 pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+    #                 vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+    #                 vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+    #             )
+    #         )
+    #     return alunos
 
     def pesquisa_aluno_objeto(self, nome_aluno):
 
