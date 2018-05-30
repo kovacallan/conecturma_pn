@@ -1,14 +1,5 @@
 %include('header.tpl', title="Conecturma")
         <div class="row">
-            <div align="right" class="col-md-10">
-            %if tipo =='0':
-                <a href="/pag_administrador"><button>voltar</button></a>
-            %end
-                <a href="/sair"><button>Sair</button></a>
-            </div>
-        </div>
-
-        <div class="row">
             <div align="center" class="col-md-2" style="margin-top:50px;">
                 <h2>Menu</h2>
                 % if tipo == '3':
