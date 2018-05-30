@@ -89,7 +89,7 @@ class DbAluno(Model):
 
     def search_aluno_by_escola(self, escola):
         alunos = []
-        for search in DbAluno.query(DbAluno.vinculo_escola == escola, order_by=DbAluno.nome):
+        for search in DbAluno.query((DbAluno.vinculo_escola == escola), order_by=DbAluno.nome):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,

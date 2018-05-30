@@ -64,7 +64,6 @@ class Login_Aluno(object):
                     nome=aluno['nome'],
                     tipo=aluno['tipo']
                 )
-                print(aluno_logado)
                 response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
                 return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
         else:
@@ -87,7 +86,7 @@ class Login_Aluno(object):
 def usuario_logado():
     banana = request.get_cookie("KIM", secret=KEY_HASH)
     que = request.get_cookie("BUMBA", secret=banana)
-    print(que)
+    print("premissaoL89",que)
     return que
 
 def algum_usuario_logado(function):
