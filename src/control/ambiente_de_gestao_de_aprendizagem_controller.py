@@ -494,14 +494,18 @@ def filtro_com_selecao_de_escola(escola):
     usuarios = []
     print('escola AGA L497',escola)
     aluno = facade.search_aluno_escola_facade(vinculo_escola=escola)
+    print("AGA L497",aluno)
+    aluno = facade.search_aluno_nome_facade(nome=aluno['nome'])
+    print('bb ', aluno)
     for a in aluno:
+        print("AGA L498",a['vinculo_rede'])
         a['email'] = ''
-        if a['vinculo_rede'] == '':
-            print("to aqui")
-            a['vinculo_rede'] = '0'
-        else:
-            print("to aqui , dpois do else")
-            a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
+        # a['vinculo_rede'] ==
+        #     print("to aqui",a['vinculo_rede'])
+        #     a['vinculo_rede'] = '0'
+        # else:
+        #     print("to aqui , dpois do else")
+        a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
 
         # a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
         a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
@@ -538,6 +542,39 @@ def filtro_com_selecao_de_turma(turma):
         usuarios.append(o)
 
     return usuarios
+def filtro_com_selecao_usuario(tipo_usuario):
+    usuarios=[]
+    if tipo_usuario=='1':
+        observador=facade.search_observador_tipo_facade(tipo='1')
+        for o in observador:
+            o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
+            o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
+            o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
+            o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
+            usuarios.append(o)
+    elif tipo_usuario=='2':
+        observador=facade.search_observador_tipo_facade(tipo='2')
+        for o in observador:
+            o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
+            o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
+            o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
+            o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
+            usuarios.append(o)
+    elif tipo_usuario=='3':
+        observador=facade.search_observador_tipo_facade(tipo='3')
+        for o in observador:
+            o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
+            o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
+            o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
+            o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
+            usuarios.append(o)
+    elif tipo_usuario =='6':
+        professor=usuario_logado()
+
+
+
+
+
 
 def filtro_default():
     observador = usuario_logado()

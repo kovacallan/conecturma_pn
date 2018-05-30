@@ -124,7 +124,7 @@ class DbObservador(Model):
 
     def search_observador_tipo_nome(self,tipo,nome):
         lista_dic = None
-        for search in DbObservador.query(DbObservador.tipo == tipo and DbObservador.nome == nome):
+        for search in DbObservador.query((DbObservador.tipo == tipo and DbObservador.nome == nome)):
             lista_dic = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
                                    cpf=search.cpf, email=search.email, tipo=search.tipo,
                                    vinculo_escola=search.vinculo_escola,vinculo_turma=search.vinculo_turma,
