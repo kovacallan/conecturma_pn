@@ -7,6 +7,8 @@ from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIP
 
 facade=Facade()
 
+print("BB {}". format(facade.read_estrutura_facade(TIPO_ESTRUTURA['escola'])))
+
 @route('/gestao_aprendizagem')
 @permissao('responsavel_varejo')
 @view('caminho_observador/gestao_aprendizagem')

@@ -56,4 +56,14 @@ TIPO_ESTRUTURA = dict(
     historico='6'
 )
 
+UNIDADES = {
+    '1': 'Unidade 1',
+    '2': 'Unidade 2',
+    '3': 'Unidade 3',
+    '4': 'Unidade 4',
+    '5': 'Unidade 5',
+    '6': 'Unidade 6',
+    '7': 'Unidade 7',
+    '8': 'Unidade 8'
+}
 
