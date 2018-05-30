@@ -7,8 +7,6 @@ from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO,TIPO_USUARIOS_ID,TIP
 
 facade=Facade()
 
-print("BB {}". format(facade.read_estrutura_facade(TIPO_ESTRUTURA['escola'])))
-
 @route('/gestao_aprendizagem')
 @permissao('responsavel_varejo')
 @view('caminho_observador/gestao_aprendizagem')
@@ -111,7 +109,7 @@ def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola):
         if o['tipo'] != '0':
             o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
             o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
-            o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
+            o['valuno_facadeinculo_turma'] = get_nome_turma(o['vinculo_turma'])
             o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
             usuario.append(o)
     return usuario
@@ -165,6 +163,10 @@ def create_aluno():
     escola = request.forms['escola']
     vinculo_rede=facade.search_estrutura_id_facade(int(escola))
 
+    facade.create_aluno_facade(nome=request.forms['aluno_nome'], matricula=request.forms['matricula'], escola=escola,
+                               vinculo_rede=vinculo_rede['vinculo_rede'],senha=request.forms['senha'])
+
+    redirect('/gestao_aprendizagem/usuario')
 
 @route('/observador/cadastro')
 @permissao('professor')
@@ -414,7 +416,7 @@ def view_update_turma():
 
 def alunos_na_escola_sem_turma(vinculo_escola):
     alunos = []
-    for a in facade.search_aluno_escola_facade(vinculo_escola):
+    for a in facade.search_aluno_escola_facade2(vinculo_escola):
         if a['vinculo_turma'] == '0':
             alunos.append(a)
             
@@ -494,28 +496,20 @@ def filtro_com_selecao_de_rede(rede):
 
 def filtro_com_selecao_de_escola(escola):
     usuarios = []
-    print('escola AGA L497',escola)
-    aluno = facade.search_aluno_escola_facade(vinculo_escola=escola)
-    print("AGA L497",aluno)
-    aluno = facade.search_aluno_nome_facade(nome=aluno['nome'])
-    print('bb ', aluno)
-    for a in aluno:
-        print("AGA L498",a['vinculo_rede'])
-        a['email'] = ''
-        # a['vinculo_rede'] ==
-        #     print("to aqui",a['vinculo_rede'])
-        #     a['vinculo_rede'] = '0'
-        # else:
-        #     print("to aqui , dpois do else")
-        a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
 
-        # a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
+    aluno = facade.search_aluno_escola_facade(vinculo_escola=escola)
+
+    for a in aluno:
+        a['email'] = ''
+        a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
+        a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
         a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
         a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
         usuarios.append(a)
 
-    observador = facade.search_observador_escola(escola)
+    observador = facade.search_observador_escola(vinculo_escola=escola)
     for o in observador:
+        o['email'] = ''
         o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
         o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
         o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])

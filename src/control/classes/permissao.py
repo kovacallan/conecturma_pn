@@ -86,7 +86,6 @@ class Login_Aluno(object):
 def usuario_logado():
     banana = request.get_cookie("KIM", secret=KEY_HASH)
     que = request.get_cookie("BUMBA", secret=banana)
-    print("premissaoL89",que)
     return que
 
 def algum_usuario_logado(function):

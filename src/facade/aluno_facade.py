@@ -42,6 +42,10 @@ class AlunoFacade:
         """
         self.aluno.aluno_delete(deletar_ids)
 
+    def search_aluno_escola_facade2(self, vinculo_escola):
+
+        return self.aluno.search_aluno_by_escola2(escola = vinculo_escola)
+
     def search_aluno_escola_facade(self, vinculo_escola):
 
         return self.aluno.search_aluno_by_escola(escola = vinculo_escola)
