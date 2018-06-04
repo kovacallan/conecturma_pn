@@ -104,9 +104,8 @@ class DbCemiterio(Model):
         except KeyError:
             usuario = DbObservador.load(ator.id)
 
-        print("CM L 134",usuario,usuario.nome)
         inativar = self.pesquisa_inativo(cemiterio_nome)
-        print("L135 cm",inativar)
+
         inativado = self.load(inativar.id)
         try:
             if usuario.anotacoes_aluno is not None:
@@ -145,18 +144,18 @@ class DbCemiterio(Model):
                     inativar.vinculo_rede == usuario.vinculo_rede and inativar.vinculo_escola == usuario.vinculo_escola and \
                     inativar.data_ultimo_login == usuario.data_ultimo_login:
                 usuario.delete(usuario.id)
-                print("deletou usuario")
+                # print("deletou usuario")
                 return True
             else:
-                print("L163 cemiterio", inativar.data_ultimo_login, usuario.data_ultimo_login)
-                print("n deletou usuario L163 cem")
+                # print("L163 cemiterio", inativar.data_ultimo_login, usuario.data_ultimo_login)
+                # print("n deletou usuario L163 cem")
                 return False
 
     def fazer_os_de_cima(self, lista_inativados):
         self.desativar_atores(lista_inativados)
         # x = len(lista_inativados)
         while lista_inativados:
-            print("L157",lista_inativados)
+            # print("L157",lista_inativados)
             x = 0
             paradas = lista_inativados[x]
             try:
@@ -180,7 +179,7 @@ class DbCemiterio(Model):
 
     def deletar_cem(self, nome):
         pessoa = self.pesquisa_inativo(nome)
-        print("pessoa L186", nome)
+        # print("pessoa L186", nome)
         isto = self.aluno.pesquisa_aluno(nome)
         if isto == []:
             isto = self.observador.search_observador_inativos(nome)

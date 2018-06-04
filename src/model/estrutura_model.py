@@ -97,7 +97,7 @@ class DbEstrutura(Model):
 
     def search_estrutura(self, tipo_estrutura, nome):
         lista_dic = None
-        for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == tipo_estrutura) and (DbEstrutura.nome == nome)):
             lista_dic = dict(
                 id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
                 serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
@@ -197,18 +197,23 @@ class DbEstrutura(Model):
         [setattr(estrutura,parametro,valor) for parametro,valor in locals().items() if valor]
         estrutura.save()
 
-    def func_anotacoes_estrutura_baixo(self,id_estrutura,mensagem):
+    def func_anotacoes_estrutura_turma(self,id_estrutura,mensagem):
         estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_baixo.append(mensagem)
+        estrutura.anotacoes_estrutura_turma.append(mensagem)
         estrutura.save()
 
-    def func_anotacoes_estrutura_cima(self,id_estrutura,mensagem):
+    def func_anotacoes_estrutura_escola(self,id_estrutura,mensagem):
         estrutura=self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_cima.append(mensagem)
+        estrutura.anotacoes_estrutura_escola.append(mensagem)
         estrutura.save()
 
-    def delete_estrutura_test(self, deletar_ids):
+    def func_anotacoes_estrutura_rede(self,id_estrutura,mensagem):
+        estrutura=self.load(id_estrutura)
+        estrutura.anotacoes_estrutura_rede.append(mensagem)
+        estrutura.save()
 
-        for deletar_ids in deletar_ids:
-            usuario = self.load(deletar_ids)
-            usuario.delete(deletar_ids)
+    # def delete_estrutura_test(self, deletar_ids):
+    #
+    #     for deletar_ids in deletar_ids:
+    #         usuario = self.load(deletar_ids)
+    #         usuario.delete(deletar_ids)

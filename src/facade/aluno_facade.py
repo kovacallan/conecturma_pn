@@ -15,7 +15,7 @@ class AlunoFacade:
 
     def update_aluno_facade(self, id, nome, senha):
 
-        return self.aluno.update_aluno(id=id, nome=nome, senha=senha)
+        return self.aluno.update_aluno(update_id=id, nome=nome, senha=senha)
 
     def delete_aluno_facade(self, deletar_ids):
 

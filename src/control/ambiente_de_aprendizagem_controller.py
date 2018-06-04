@@ -11,9 +11,9 @@ facade=Facade()
 def view_ambiente_de_aprendizagem():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
     if int(usuario_logado()['tipo'])>=6:
-        print('hi...L14')
+
         usuario = facade.search_aluno_nome_facade(usuario_logado()['nome'])
-        print('hi...L14',usuario)
+
     else:
         print("oi... APC L16")
         usuario = facade.search_observador_facade(usuario_logado()['nome'])

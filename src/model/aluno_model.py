@@ -30,11 +30,15 @@ class DbAluno(Model):
 
     def create_aluno(self, nome, senha, matricula ,vinculo_escola='0', vinculo_rede='0'):
 
-        self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
-                    vinculo_rede=vinculo_rede, matricula=matricula)
+        if self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
+                    vinculo_rede=vinculo_rede, matricula=matricula):
+            return True
+        else:
+            return False
 
 
-    def update_aluno(self, update_id, nome, senha, turma, escola, rede):
+
+    def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
 
         aluno_up = self.load(update_id)
         [setattr(aluno_up, parametro, valor) for parametro, valor in locals().items() if
