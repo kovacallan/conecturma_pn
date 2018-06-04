@@ -1,7 +1,7 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 
-from control.classes.permissao import permissao, usuario_logado, permissao
+from control.classes.permissao import usuario_logado, permissao
 from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO, TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE
 
 facade = Facade()
@@ -172,21 +172,22 @@ def create_aluno():
     Chama a funçao create_aluno_facade
     :return:
     """
-    nome=request.forms['aluno_nome']
-    senha=request.forms['senha']
-    matricula=request.forms['matricula']
+    nome = request.forms['aluno_nome']
+    senha = request.forms['senha']
+    matricula = request.forms['matricula']
     escola = request.forms['escola']
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
-    if facade.create_aluno_facade(nome=nome,matricula=matricula, senha=senha, escola=escola, vinculo_rede=vinculo_rede):
+    if facade.create_aluno_facade(nome=nome, matricula=matricula, senha=senha, escola=escola,
+                                  vinculo_rede=vinculo_rede):
         redirect('/gestao_aprendizagem/usuario')
     else:
         print("deu ruim na criaçao do aluno")
 
-
     facade.create_aluno_facade(nome=request.forms['aluno_nome'], matricula=request.forms['matricula'], escola=escola,
-                               vinculo_rede=vinculo_rede['vinculo_rede'],senha=request.forms['senha'])
+                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=request.forms['senha'])
 
     redirect('/gestao_aprendizagem/usuario')
+
 
 @route('/observador/cadastro')
 @permissao('professor')
@@ -498,27 +499,69 @@ def filtro_usuarios():
     rede = request.params['rede']
     escola = request.params['escola']
     turma = request.params['turma']
-    tipo_usuario=request.params['tipo_usuario']
-    print('tipo_usuario',tipo_usuario)
-    # usuarios = []
-    print("rede , escola , turma", rede, escola, turma)
-    if turma == '0' and escola == '0' and rede != '0' and tipo_usuario=='0':
-        usuarios = filtro_com_selecao_de_rede(rede)
-    elif turma == '0' and escola != '0' and rede == '0' and tipo_usuario=='0':
-        usuarios = filtro_com_selecao_de_escola(escola)
-    elif turma != '0' and escola == '0' and rede == '0' and tipo_usuario=='0':
-        usuarios = filtro_com_selecao_de_turma(turma)
-    elif turma=='0'and escola=='0' and rede=='0' and tipo_usuario != '0':
-        usuarios= filtro_com_selecao_usuario(tipo_usuario)
-        print('AGA L501',tipo_usuario)
-    else:
-        usuarios = filtro_default()
+    tipo_usuario = request.params['tipo_usuario']
+    usuario_tipo = usuario_logado()
+    print('AGA L 504', usuario_tipo['vinculo_rede'], usuario_tipo)
 
-    # print("AGA",usuarios)
-    # if turma=='0' and escola != '0' and rede=='0':
-    #     usuarios=filtro_com_selecao_de_escola(escola)
+    if turma == '0' and escola == '0' and rede != '0' and tipo_usuario == '0':
+        usuarios = filtro_com_selecao_de_rede(rede)
+        print('aqui1')
+    elif turma == '0' and escola != '0' and rede == '0' and tipo_usuario == '0':
+        usuarios = filtro_com_selecao_de_escola(escola)
+        print('aqui2')
+    elif turma != '0' and escola == '0' and rede == '0' and tipo_usuario == '0':
+        usuarios = filtro_com_selecao_de_turma(turma)
+        print('aqui3')
+    elif turma == '0' and escola == '0' and rede == '0' and tipo_usuario != '0':
+        usuarios = filtro_com_selecao_usuario(tipo_usuario)
+        print('aqui4')
+    else:
+        print('ultimo else')
+        usuarios = filtro_default_usuarios()
 
     return template('bottle/usuario/bottle_usuario_read_usuarios.tpl', usuarios=usuarios)
+
+
+@route('/filtro_pesquisa', method='POST')
+def filtro_pesquisa():
+    rede = request.params['rede']
+    escola = request.params['escola']
+    turma = request.params['turma']
+    tipo_usuario = request.params['tipo_usuario']
+    usuario_tipo = usuario_logado()
+    if usuario_tipo['vinculo_rede'] != '0':
+        redes = usuario_tipo['vinculo_rede']
+    else:
+        redes = facade.read_estrutura_facade(TIPO_ESTRUTURA['rede'])
+
+    if turma == '0' and escola == '0' and rede != '0' and tipo_usuario == '0':
+        escolas = filtro_escolas_de_acordo_com_rede(rede=rede)
+        turmas = filtro_turmas_de_acordo_com_rede(rede=rede)
+        print('o1 if aqui2.1')
+    elif turma == '0' and escola != '0' and rede == '0' and tipo_usuario == '0':
+        escolas = filtro_default_escolas()
+        turmas = filtro_turma_de_acordo_com_escola(escola)
+        if turmas == None or "":
+            turmas = []
+        print('2o if ', len(escolas), turmas)
+    elif turma != '0' and escola == '0' and rede == '0' and tipo_usuario == '0':
+        turmas = filtro_default_turmas()
+        escolas = filtro_default_escolas()
+        print('3o if ', len(escolas), len(turmas))
+    elif turma == '0' and escola == '0' and rede == '0' and tipo_usuario != '0':
+        escolas = filtro_default_escolas()
+        turmas = filtro_default_turmas()
+        print('4o if ', len(escolas), len(turmas))
+        print('AGA L501', tipo_usuario)
+    else:
+        print('ultimo else')
+        escolas = filtro_default_escolas()
+        turmas = filtro_default_turmas()
+
+    print('len,escolas', len(escolas))
+
+    return template('bottle/usuario/bottle_usuario_filtros.tpl', escolas=escolas, turmas=turmas,
+                    observador_tipo=usuario_tipo['tipo'], redes=redes)
 
 
 def filtro_com_selecao_de_rede(rede):
@@ -591,11 +634,11 @@ def filtro_com_selecao_de_turma(turma):
 
 def filtro_com_selecao_usuario(tipo_usuario):
     usuarios = []
-    print("inside filtro usuario",tipo_usuario)
+    print("inside filtro usuario", tipo_usuario)
     if tipo_usuario == '1':
         print("to aqui")
         observador = facade.search_observador_tipo_facade(tipo=tipo_usuario)
-        print('observador inside filtro usuario tipo',observador)
+        print('observador inside filtro usuario tipo', observador)
         for o in observador:
             o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
             o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
@@ -627,11 +670,37 @@ def filtro_com_selecao_usuario(tipo_usuario):
             # o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
             usuarios.append(o)
 
-
     return usuarios
 
-def filtro_default():
+
+def filtro_default_usuarios():
     observador = usuario_logado()
     usuarios = controller_index_usuario(observador)
 
     return usuarios
+
+
+def filtro_default_escolas():
+    escolas = facade.read_estrutura_facade(TIPO_ESTRUTURA['escola'])
+    return escolas
+
+
+def filtro_default_turmas():
+    turmas = facade.read_estrutura_facade(TIPO_ESTRUTURA['turma'])
+    return turmas
+
+
+def filtro_escolas_de_acordo_com_rede(rede):
+    escolas = facade.search_estrutura_escola_by_rede_facade(rede)
+    print('L643 AGA',len(escolas))
+    return escolas
+
+
+def filtro_turmas_de_acordo_com_rede(rede):
+    turmas = facade.search_estrutura_turma_by_rede_facade(rede)
+    return turmas
+
+
+def filtro_turma_de_acordo_com_escola(escola):
+    turmas = facade.search_estrutura_turma_by_escola_facade(escola)
+    return turmas

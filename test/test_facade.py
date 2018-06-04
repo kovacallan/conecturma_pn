@@ -500,7 +500,7 @@ class FacadeTest(unittest.TestCase):
 
     def _read_item(self):
         self._create_item()
-        item1 = self.facade.read_estrutura_facade(tipo_estrutura='4'    )
+        item1 = self.facade.read_estrutura_facade(tipo_estrutura='4')
 
     def _delete_item(self):
 
@@ -628,6 +628,9 @@ class FacadeTest(unittest.TestCase):
 
     def test_read_inativos(self):
         self._read_inativados()
+
+    def tearDown(self):
+        self.facade.apagartudo()
 
     # def test_substituto_de_webtest(self):
     #     self._create_observador()
