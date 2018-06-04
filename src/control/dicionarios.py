@@ -53,7 +53,9 @@ TIPO_ESTRUTURA = dict(
     turma='3',
     item='4',
     medalha='5',
-    historico='6'
+    historico='6',
+    descritores='7',
+    objeto_de_aprendizagem='8'
 )
 
 UNIDADES = {
