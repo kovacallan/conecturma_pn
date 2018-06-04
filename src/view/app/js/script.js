@@ -14,14 +14,24 @@ function filtro_usuario(){
    filtro_turma =  document.getElementById('filtro_turma').value;
    filtro_tipo_usuario =  document.getElementById('filtro_tipo_usuario').value;
 
+   teste();
+
   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
-       console.log(data);
+       console.log("log",data);
        $('#usuarios_sistema').html(data);
+
+
   });
 
   return false;
-
 }
+function teste(){
+ $.post('/filtro_pesquisa', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
+       console.log("log",data);
+       $('#dropdown_filtros').html(data);
+  });
+}
+
 
 function cadastro_observador(){
     tipo = document.getElementById('tipo');
