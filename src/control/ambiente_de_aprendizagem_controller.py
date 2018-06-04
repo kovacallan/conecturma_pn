@@ -11,21 +11,17 @@ facade=Facade()
 def view_ambiente_de_aprendizagem():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
     if int(usuario_logado()['tipo'])>=6:
-        print('hi...L14')
         usuario = facade.search_aluno_nome_facade(usuario_logado()['nome'])
-        print('hi...L14',usuario)
     else:
-        print("oi... APC L16")
         usuario = facade.search_observador_facade(usuario_logado()['nome'])
-        print("oi... APC L18",usuario)
+
     avatar = facade.avatar_facade(usuario['id'])
-    print("oi... APC L120",avatar)
 
     avatar_pecas = {
-        'cor': facade.search_estrutura_id_facade(int(avatar['cor']))['nome'],
-        'rosto': facade.search_estrutura_id_facade(int(avatar['rosto']))['nome'],
-        'acessorio': facade.search_estrutura_id_facade(int(avatar['acessorio']))['nome'],
-        'corpo': facade.search_estrutura_id_facade(int(avatar['corpo']))['nome']
+        'cor': facade.search_estrutura_id_facade(avatar['cor'])['nome'],
+        'rosto': facade.search_estrutura_id_facade(avatar['rosto'])['nome'],
+        'acessorio': facade.search_estrutura_id_facade(avatar['acessorio'])['nome'],
+        'corpo': facade.search_estrutura_id_facade(avatar['corpo'])['nome']
     }
 
     return dict(usuario=usuario['nome'], avatar = avatar_pecas,tipo=usuario_logado()['tipo'])

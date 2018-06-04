@@ -17,7 +17,6 @@ function filtro_usuario(){
    teste();
 
   $.post('/filtro_usuario', {escola:filtro_escola, rede:filtro_rede, turma:filtro_turma,tipo_usuario:filtro_tipo_usuario},function(data){
-       console.log("log",data);
        $('#usuarios_sistema').html(data);
 
 

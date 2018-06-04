@@ -20,10 +20,12 @@ class DbEstrutura(Model):
     estado = TextField(default='0')
     uf = TextField(default='0')
 
-    unidade=TextField(default='0')
-    objetivo=TextField(default='0')
-    codigo=TextField(default='0')
-    descritor=TextField(default='0')
+    unidade=TextField(fts=True, default='0')
+    disciplina=TextField(fts=True, default='0')
+    sigla=TextField(fts=True, default='0')
+    objetivo=TextField(fts=True, default='0')
+    descritor=TextField(fts=True, default='0')
+
 
     quem_criou = TextField(default='0')
     serie = TextField(default='0')
@@ -47,6 +49,7 @@ class DbEstrutura(Model):
     def create_estrutura(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',
                          cep='0', endereco='0', numero='0', estado='0', uf='0', quem_criou='0', serie='0',
                          tipo_item='0', preco='0', tipo_medalha='0',unidade='0',objeto_aprendizagem='0',
+                         sigla='0',disciplina='0',
                          objetivo='0', codigo='0', descritor='0', descricao='0', descricao_completa='0',
                          nome_usuario='0', tipo_usuario='0'):
 
