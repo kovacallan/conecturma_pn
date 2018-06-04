@@ -630,8 +630,6 @@ def filtro_com_selecao_de_turma(turma):
         usuarios.append(o)
 
     return usuarios
-
-
 def filtro_com_selecao_usuario(tipo_usuario):
     usuarios = []
     print("inside filtro usuario", tipo_usuario)
