@@ -2,7 +2,7 @@
     <div class="row">
         <div align="center" class="col-md-12">
             <h1>Escola</h1>
-            <a href="/escola/cadastro">
+            <a href="/escola/escola_cadastro">
                 <button>criar escola</button>
             </a>
             <a href="/">

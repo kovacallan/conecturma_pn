@@ -5,8 +5,9 @@
         <form action="/aluno_cadastro" method="post">
              Nome do aluno:   <input type="text" name="aluno_nome"/><br>
              Senha :          <input type="password" name="senha"/><br>
+             Matricula:       <input type="text" name="matricula"><br>
              Escola: <select name="escola">
-                % if tipo_observador is '2' or tipo_observador is '3':
+                % if isinstance(escolas, dict):
                     <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
                 % else:
                     % for i in escolas:
@@ -16,7 +17,7 @@
             </select><br>
             <button type="submit">Enviar</button>
         </form>
-        <a href="/usuario"><button>Voltar</button></a>
+        <a href="/gestao_aprendizagem/usuario"><button>Voltar</button></a>
     </div>
 </div>
 %include('footer.tpl')

@@ -1,23 +1,10 @@
-from bottle import default_app
+from bottle import default_app,run,template
 from control.static_controller import *
-from control.menu_controller import *
-from control.usuarios.usuario_controller import *
-from control.usuarios.aluno_controller import *
-from control.usuarios.observador_controller import *
-from control.usuarios.diretor_controller import *
-from control.usuarios.professor_controller import *
-from control.usuarios.gestor_controller import *
-from control.usuarios.administrador_controller import *
-from control.jogo_controller import *
-from control.instituicoes.turma_controller import *
-from control.loja_controller import *
-from control.instituicoes.escola_controller import *
-from control.instituicoes.rede_controller import *
-from control.historico_controller import *
-from control.login.login_controller import *
-from control.login.login_observador_controller import *
-from control.login.login_aluno_controller import *
-from control.medalha_controller import *
+from control.ambiente_de_aprendizagem_controller import *
+from control.ambiente_de_gestao_de_aprendizagem_controller import *
+from control.ambiente_administrativo_controller import *
+from control.filtro_usuario_controller import *
+from control.login_controller import *
 
 import bottle
 import os
@@ -27,6 +14,11 @@ bottle.TEMPLATE_PATH.insert(0, view_path)
 
 
 application = default_app()
+
+
+@route('/error403')
+def error403():
+    return template('error403.tpl')
 
 if __name__ == '__main__':
     run(host='localhost', port=8080, reloader=False ,debug=True)
