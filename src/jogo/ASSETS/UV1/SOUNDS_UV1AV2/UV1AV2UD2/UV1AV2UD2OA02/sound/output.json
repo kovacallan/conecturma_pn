@@ -1,0 +1,165 @@
+{
+  "resources": [
+    "output.ogg",
+    "output.m4a",
+    "output.mp3",
+    "output.ac3"
+  ],
+  "spritemap": {
+    "UV1AV2UD2OA2_P2_OU": {
+      "start": 0,
+      "end": 0.7314285714285714,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_OURO": {
+      "start": 2,
+      "end": 3.0710204081632653,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_RO": {
+      "start": 5,
+      "end": 5.783673469387755,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1": {
+      "start": 7,
+      "end": 12.799183673469388,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_TE": {
+      "start": 14,
+      "end": 14.444081632653061,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_BAO": {
+      "start": 16,
+      "end": 16.600816326530612,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_XA": {
+      "start": 18,
+      "end": 18.626938775510204,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_HE": {
+      "start": 20,
+      "end": 20.626938775510204,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3": {
+      "start": 22,
+      "end": 32.370612244897956,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_HEROI": {
+      "start": 34,
+      "end": 34.966530612244895,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_DA": {
+      "start": 36,
+      "end": 36.54857142857143,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_PA": {
+      "start": 38,
+      "end": 38.54857142857143,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_DE": {
+      "start": 40,
+      "end": 40.44408163265306,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_PAPEIS": {
+      "start": 42,
+      "end": 43.17551020408163,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_RAI": {
+      "start": 45,
+      "end": 45.67918367346939,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_PEIS": {
+      "start": 47,
+      "end": 47.9404081632653,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_RAIVOSO": {
+      "start": 49,
+      "end": 50.22775510204082,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_ROI": {
+      "start": 52,
+      "end": 52.80979591836735,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_SAU": {
+      "start": 54,
+      "end": 54.83591836734694,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_SA": {
+      "start": 56,
+      "end": 56.67918367346939,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_SAUDADE": {
+      "start": 58,
+      "end": 59.22775510204082,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P1_SABAO": {
+      "start": 61,
+      "end": 61.83591836734694,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_SO": {
+      "start": 63,
+      "end": 63.54857142857143,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2": {
+      "start": 65,
+      "end": 71.4,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_VAI": {
+      "start": 73,
+      "end": 73.6269387755102,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_CAI": {
+      "start": 75,
+      "end": 75.73142857142857,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_VAIDADE": {
+      "start": 77,
+      "end": 78.09714285714286,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_CAIXA": {
+      "start": 80,
+      "end": 80.88816326530612,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P3_VO": {
+      "start": 82,
+      "end": 82.52244897959184,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_NOI": {
+      "start": 84,
+      "end": 84.75755102040816,
+      "loop": false
+    },
+    "UV1AV2UD2OA2_P2_NOITE": {
+      "start": 86,
+      "end": 86.9404081632653,
+      "loop": false
+    }
+  }
+}
