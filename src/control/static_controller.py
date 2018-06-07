@@ -17,3 +17,39 @@ def js(filename):
     :return:
     """
     return static_file(filename, root='././view/app/js')
+
+@route('/GLOBAL/<path:path>')
+def teste(path):
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(path, root='././jogo/GLOBAL')
+
+@route('/GLOBAL/player')
+def teste():
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(root='././jogo/GLOBAL/player')
+
+@route('/ASSETS/<path:path>')
+def teste2(path):
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(path, root='././jogo/ASSETS')
+
+@route('/UV1/<path:path>')
+def teste2(path):
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(path, root='././jogo/UV1')

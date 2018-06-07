@@ -10,10 +10,8 @@
         <div align="center" class="col-md-6">
             <h1>Bem Vindo {{usuario}} </h1>
             <h2>A Conecturma!</h2>
-            <form action="/jogos" method="get">
-                <button type="submit" name="n1" value="j1">Jogo 1</button>
-                <button type="submit" name="n1" value="j2">Jogo 2</button>
-            </form>
+            <a><button>Jogo</button></a>
+            <iframe src="/jogo" width="1024px" height="1000px"></iframe>
             <br>
             <a href="/aluno/loja"><button>Loja</button></a>
             <a href="/aluno/ver_itens_comprados"><button>Ver Itens</button></a>

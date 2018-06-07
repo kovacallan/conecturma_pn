@@ -1,4 +1,4 @@
-from bottle import route,view, request, redirect, response,get
+from bottle import route,view, request, redirect, response,get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado
 from control.dicionarios import *
@@ -104,3 +104,7 @@ def compras():
     facade.compra_item_facade(id_usuario=usuario_logado()['id'], id_item=id_item)
 
     redirect('aluno/loja')
+
+@route('/jogo')
+def jogo():
+    return template('jogo/index')

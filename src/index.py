@@ -4,6 +4,7 @@ from control.ambiente_de_aprendizagem_controller import *
 from control.ambiente_de_gestao_de_aprendizagem_controller import *
 from control.ambiente_administrativo_controller import *
 from control.filtro_usuario_controller import *
+from control.rotas import *
 from control.login_controller import *
 
 import bottle
