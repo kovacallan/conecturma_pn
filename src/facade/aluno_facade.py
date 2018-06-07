@@ -29,12 +29,8 @@ class AlunoFacade:
 
         return self.aluno.search_aluno_nome(nome)
 
-    def pesquisa_aluno_nome_objeto_facade(self,nome):
+    def search_aluno_nome_objeto_facade(self, nome):
         return self.aluno.pesquisa_aluno_objeto(nome)
-
-    def ponto_jogo_facade(self, usuario, jogo, ponto):
-
-        return self.aluno.pontos_jogo(usuario, jogo, ponto)
 
     def aluno_in_turma_facade(self, id_aluno, vinculo_turma):
 
@@ -68,9 +64,6 @@ class AlunoFacade:
 
     def search_aluno_by_turma_facade(self,vinculo_turma):
         return self.aluno.search_aluno_by_turma(vinculo_turma=vinculo_turma)
-
-    def pesquisa_aluno_turma_facade(self,aluno_, turma_):
-        return self.aluno.pesquisa_aluno_turma(aluno_,turma_)
 
     def apagartudo(self):
         return self.aluno.apagartudo()

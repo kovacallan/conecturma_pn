@@ -190,7 +190,6 @@ class DbAluno(Model):
 
     def ver_anotacoes_aluno(self, id_aluno):
         aluno_re_anot = self.load(id_aluno)
-
         anotacoes = []
         for x in aluno_re_anot.anotacoes_aluno:
             anotacoes.append(x.decode('utf-8'))
