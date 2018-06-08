@@ -30,7 +30,7 @@ def view_usuario_index():
     turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
 
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
-
+template
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
 @permissao('professor')
@@ -446,7 +446,7 @@ def view_update_turma():
     """
     id = request.forms['id_turma']
     turma = facade.search_estrutura_id_facade(int(id))
-    return template('turma/turma_update', turma=turma,
+    return x('turma/turma_update', turma=turma,
                     aluno=alunos_na_escola_sem_turma(turma['escola']),
                     professor=professor_na_escola_sem_turma(turma['escola']))
 

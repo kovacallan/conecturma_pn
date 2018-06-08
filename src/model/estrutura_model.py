@@ -57,6 +57,7 @@ class DbEstrutura(Model):
                            vinculo_escola=vinculo_escola, cep=cep, endereco=endereco, numero=numero, estado=estado,
                            uf=uf, quem_criou=quem_criou, serie=serie, tipo_item=tipo_item, preco=preco,
                            tipo_medalha=tipo_medalha,unidade=unidade,objeto_aprendizagem=objeto_aprendizagem,
+                           sigla=sigla, disciplina=disciplina,
                            objetivo=objetivo, codigo=codigo,descritor=descritor,descricao=descricao,
                            descricao_completa=descricao_completa,nome_usuario=nome_usuario, tipo_usuario=tipo_usuario)
 
