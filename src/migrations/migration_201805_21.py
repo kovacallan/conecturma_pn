@@ -1,5 +1,5 @@
-from facade.facade_main import *
-from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS
+from src.facade.facade_main import *
+from src.control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS
 
 facade=Facade()
 
