@@ -21,7 +21,7 @@
 <body>
 <script type="text/javascript">
 
-	BasicGame.isOnline = BasicGame.OfflineAPI.isOnlineMode();
+	BasicGame.isOnline = true;
 
 	if(!BasicGame.isOnline) {
 
@@ -32,9 +32,9 @@
 		BasicGame.OnlineAPI.initialize(true);
 
 		BasicGame.OnlineAPI.obterUltimaConclusao (
-	        function(resposta) {
-	        	//console.log(resposta);
-
+	        function(resposta){
+				console.log(resposta);
+				
 	        	var url = "UV1/UV1MAPA";
 	        	if(resposta.unidade) {
 	        		url = resposta.universo + "/" + resposta.aventura + "/" + resposta.unidade + "/" + resposta.unidade + "MAPA";

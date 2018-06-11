@@ -23,7 +23,7 @@ def login_observador_controller():
     redirect(login.login())
 
 @route('/login/login_aluno', method='POST')
-def login_observador_controller():
+def login_aluno_controller():
     nome = request.params['aluno_login_nome']
     senha = request.params['aluno_senha']
 

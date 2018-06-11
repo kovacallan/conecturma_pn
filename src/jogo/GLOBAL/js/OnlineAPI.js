@@ -6,7 +6,7 @@ BasicGame.OnlineAPI = {
 
     //HOST_PLATAFORMA: 'http://conecturma-env-prod.elasticbeanstalk.com/',
 	//HOST_PLATAFORMA: 'http://conecturma-env-teste.elasticbeanstalk.com/',
-	HOST_PLATAFORMA: 'http://localhost:8080/jogo',
+	HOST_PLATAFORMA: 'http://localhost:8080/',
 
     mapaChamadasFuncoes: [],
 
@@ -28,7 +28,7 @@ BasicGame.OnlineAPI = {
         window.addEventListener("message", function (event) {
 
             var resposta = (event.data);
-            console.log('Aqui BB ' + event.data)
+
             var parametrosOriginais = _this.mapaChamadasFuncoes[resposta.uuid];
             console.log(resposta);
             console.log(parametrosOriginais);

@@ -18,4 +18,10 @@
             <a href="/sair"><button>Sair</button></a>
         </div>
     </div>
+    <script>
+        window.addEventListener("message", function(event){
+            teste = JSON.parse(event.data);
+            console.log("aqui BB " + teste.operacao);
+        });
+    </script>
 % include('footer.tpl')
