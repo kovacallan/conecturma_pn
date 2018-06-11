@@ -1,4 +1,3 @@
-
     <select id="filtro_rede" onChange="filtro_usuario()">
             %if observador_tipo is '0':
                 <option value="0">---- Selecione rede ----</option>

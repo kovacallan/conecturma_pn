@@ -1,0 +1,49 @@
+ 		//CORES
+ 		//NUMERO CLICADO
+ 		0X887A08
+ 		//NUMERO SORTEADO
+ 		0XFF9900
+
+
+		//NUMERO SORTEADO
+		//NUM >= 10 
+ 		this.group = this.add.group();
+        this.addText("13", 0XFF9900, 1.2, 485, 200, this.group); 	
+        //NUM < 10
+        this.group = this.add.group();
+        this.addText("1", 0XFF9900, 1.2, 520, 200, this.group); 
+
+
+        //COLAR
+        // this.colar = this.addSpriteMeu('colar',290,421, 0);
+        this.colar = this.add.sprite(290,421, 'colar');
+        this.colar.scale.set(0.8, 0.8);
+
+
+        //PEROLAS
+        //ALTERNATIVAS DE RESPOSTA
+        // this.op_1 = this.addSpriteMeu("alternativas", 389,291, 0);
+        this.op_1 = this.add.sprite(389,1000, "alternativas", 3);
+        //this.op_1.tint  = 0X887A08;
+        this.op_1.scale.set(0.7, 0.7);
+
+        // this.op_2 = this.addSpriteMeu("alternativas", 514,340, 1); //DO MEIO
+        this.op_2 = this.add.sprite(514,1000, "alternativas", 20);
+        this.op_2.scale.set(0.7, 0.7);
+
+        // this.op_3 = this.addSpriteMeu("alternativas", 644,291, 2);
+        this.op_3 = this.add.sprite(644,1000, "alternativas", 40);
+        this.op_3.scale.set(0.7, 0.7);
+
+
+        //PEROLA DO ACERTO
+        // this.perola = this.addSpriteMeu("alternativas", 489,503, 0);
+        this.perola = this.add.sprite(489,503, "alternativas", 0);
+        this.perola.scale.set(0.9,0.9);
+
+		//ANIM. ALTERNATIVAS
+        this.animBoomerang(this.op_2, 514,319, 514,340);
+        this.createDelayTime(1000, function() {
+            this.animBoomerang(this.op_1, 389, 270, 389, 291);
+            this.animBoomerang(this.op_3, 644,270, 644,291);
+        }, this);

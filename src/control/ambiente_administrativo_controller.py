@@ -74,7 +74,14 @@ def cadastro_item():
     facade.create_estrutura_facade(nome=request.forms.nome, tipo_item=request.forms.tipo, preco=request.forms.preco,tipo_estrutura='4')
     redirect('cadastrar_item')
 
+@route('/administrador/cadastro_descritor_view')
+def cadastro_descritor_view():
+    return template('descritor/index')
+
+@route('administrativo/cadastro_descritor_controller', method='post')
+def cadastro_descritor_controller():
+    pass
+
 @route('/teste')
 def fazendo_teste():
     print("to aqui")
-

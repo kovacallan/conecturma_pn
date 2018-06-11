@@ -1,0 +1,159 @@
+checkGame:function(elem){
+        console.log("***checkGame***");
+        console.log("silaba -> "+this.temp_silabas);
+        limiteX = 0;
+
+        if(this.num_arbustos==3){
+            limiteX = 750;
+        }else{
+            limiteX = 850;
+        }
+        // se está fora da area de drag and drop
+        if(elem.x<300 || elem.x>limiteX){ 
+            //reposicionar pois está fora da zona permitida drop
+            console.log("***REPOSICIONA OUTRO LUGAR X***");
+            this.sound.play("hitErro");
+            elem.x = this.comeco[0];
+            elem.y = this.comeco[1]; 
+            // se comeco for igual ao x,y original entao ocupara posicao na palavra
+            if((this.comeco[0] == elem.originalX)&&(this.comeco[1] == elem.originalY)){
+                this.ocupaPalavra[elem.pos] = true;
+                console.log("ocup: "+this.ocupaPalavra);
+                this.temp_silabas[elem.posOriginalAUX] = elem.name;
+            }else{elem.pos=null;this.temp_silabas[elem.posOriginalAUX] = "#";}
+        }else if(elem.y<400 || elem.y>510){
+            //reposicionar pois está fora da zona permitida drop
+            console.log("***REPOSICIONA OUTRO LUGAR Y***");
+            this.sound.play("hitErro");
+            elem.x = this.comeco[0];
+            elem.y = this.comeco[1];
+            // se comeco for igual ao x,y original entao ocupara posicao na palavra
+            if((this.comeco[0] == elem.originalX)&&(this.comeco[1] == elem.originalY)){
+                this.ocupaPalavra[elem.pos] = true;
+                console.log("ocup: "+this.ocupaPalavra);
+                this.temp_silabas[elem.posOriginalAUX] = elem.name;
+            }else{elem.pos=null;this.temp_silabas[elem.posOriginalAUX] = "#";}
+        }else{
+            //check colisao com as marcas
+            this.marcaOverlap = false;
+            this.localOcupado = null;
+            this.numlocalOcupado = null;
+
+
+            
+            for(i=0; i<this.num_arbustos;i++){
+                var teste_check = this.checkOverlap(elem,this.marcas[i]);
+                if(teste_check==true){
+                    this.marcaOverlap = this.marcas[i];
+                    this.numlocalOcupado = i;
+                    break;
+                }
+            }
+
+            if(this.marcaOverlap!=false){
+                this.localOcupado = this.ocupaPalavra[this.numlocalOcupado];
+                console.log("logica: "+elem.name+" ==  "+this.marcaOverlap.name+" =>  "+this.localOcupado+" =>  "+this.numlocalOcupado)
+                    if(!this.localOcupado){
+                        if(elem.name==this.marcaOverlap.name){
+                           this.answerRight(elem);
+                        }else{
+                           this.aswerWrong(elem);
+                        }
+                    }else{
+                        console.log("***LOCAL OCUPADO***");
+                        this.sound.play("hitErro"); 
+                        elem.x = this.comeco[0];
+                        elem.y = this.comeco[1];
+                    }
+            
+            }else{
+                elem.pos=null;
+            }
+        }
+
+        console.log("ocup final: "+this.ocupaPalavra);
+    
+    },
+
+
+
+
+
+console.log("CORRETO");
+       this.sound.play("hitAcerto");
+
+       this.ocupaPalavra[this.numlocalOcupado]=true; 
+       this.groupIncial.add(elem);
+
+        console.log("CORRETO NUM "+ this.numAcertos);
+        console.log("CORRETO ELEM POS  "+ elem.pos);
+        elem.x = this.posicao[elem.posOriginalAUX]; // coloca na posicao do arbusto 
+        elem.y = this.posicaoArbustosY;
+        elem.drop = false; // desabilita a posibilidade de fazer teste em caso de falha na logica 
+        this.numAcertos++;
+        console.log("CORRETO NUM "+ this.numAcertos);
+
+       this.disableDragDrop(elem); // desabilita o movimento 
+       elem.pos = this.numlocalOcupado; // atualiza a posicao de ocupado ou não 
+       //this.palavraFormada = 
+       
+       this.temp_silabas[elem.posOriginalAUX] = elem.name;
+       for(i=0; i<this.num_arbustos;i++){
+            if(i==0){
+                this.palavraFormada=this.temp_silabas[i];
+            }else{
+                this.palavraFormada+=this.temp_silabas[i];
+            }
+            
+       }
+       console.log("PALAVRA -> "+ this.palavraCerta +" ==  "+this.palavraFormada );
+       
+       if(this.palavraCerta==this.palavraFormada){ // testa se a palavra está completa 
+            console.log("CORRETO FINAL");
+            this.createAnimal(); 
+            for(i=0; i<this.num_arbustos;i++){
+                this.addLevelGroup(this.buttons[i]);
+                this.disableDragDrop(this.buttons[i]);
+            }
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

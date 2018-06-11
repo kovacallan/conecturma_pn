@@ -1,7 +1,7 @@
 from bottle import redirect, response, request
 from datetime import datetime
-from control.dicionarios import *
-from facade.facade_main import Facade
+from src.control.dicionarios import *
+from src.facade.facade_main import Facade
 
 """Constante para a key de hash temporariamente"""
 

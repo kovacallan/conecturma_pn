@@ -10,7 +10,7 @@
                     <a href="/escola">ESCOLA</a><br>
                     <a href="/turma">TURMA</a><br>
                     <a href="/gestao_aprendizagem/usuario">USUÁRIOS</a><br>
-                    <a href="/gestao_aprendizagem/usuario">DESCRITOR</a><br>
+                    <a href="cadastro_descritor_view">DESCRITOR</a><br>
                     <a href="/gestao_aprendizagem/usuario">ITENS DE AVATAR</a><br>
                     <a href="/gestao_aprendizagem/usuario">MEDALHAS</a><br>
                 </div>

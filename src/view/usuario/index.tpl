@@ -16,13 +16,15 @@
                 </form>
             </div>
         </div>
-         <!--<div align="center" class="col-md-12">
+         <div align="center" class="col-md-12">
             <div class="row">
-                %include('bottle/usuario/bottle_usuario_filtros.tpl')
-               <button id="botao-filtro" onclick="filtro_usuario()">Filtrar</button>
+                <div id="dropdown_filtros">
+                    %include('bottle/usuario/bottle_usuario_filtros.tpl')
+                    <!--<button id="botao-filtro" onclick="filtro_usuario()">Filtrar</button>-->
+                </div>
             </div>
          </div>
-        <br>-->
+        <br>
         <div class="row">
             <div class="col-md-2">
                 <strong>Nome</strong>
