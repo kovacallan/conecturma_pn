@@ -42,7 +42,17 @@ def teste2(path):
     print('assets')
     return static_file(path, root='././jogo/ASSETS')
 
-@route('/UV1/UV1MAPA/<path:path>')
+
+@route('/ASSETS_2/<path:path>')
+def ASSETS_2(path):
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(path, root='././jogo/ASSETS_2')
+
+@route('/UV1/<path:path>')
 def teste2(path):
     print('aqui')
     return static_file(path, root='././jogo/UV1/UV1MAPA')
