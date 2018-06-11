@@ -85,4 +85,3 @@ def cadastro_descritor_controller():
 @route('/teste')
 def fazendo_teste():
     print("to aqui")
-
