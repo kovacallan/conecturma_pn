@@ -30,7 +30,8 @@ def view_usuario_index():
     turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
 
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
-template
+
+
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
 @permissao('professor')
@@ -270,7 +271,7 @@ def cadastrar_medalha():
 def controller_medalha_cadastro():
     nome = request.params['nome']
     tipo = request.params['tipos']
-    facade.create_medalha_facade(nome=nome, tipo=tipo)
+    facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'],nome=nome, tipo_item=tipo)
     redirect('/gestao_aprendizagem')
 
 
@@ -280,7 +281,7 @@ def controller_medalha_cadastro():
 def read_de_medalha():
     medalhas = []
 
-    for medalha in facade.read_medalha_facade():
+    for medalha in facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha']):
         medalhas.append(medalha)
 
     return dict(medalhas=medalhas)
@@ -355,11 +356,14 @@ def cadastro_escola():
 @route('/escola/criar_escola', method='POST')
 @permissao('gestor')
 def controller_escola_cadastro():
-    facade.create_estrutura_facade(nome=request.params['nome'], tipo_estrutura=TIPO_ESTRUTURA['escola'],
-                                   telefone=request.params['telefone'], cep=request.params['cep'],
+    facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=request.params['nome'],
+                                   telefone=request.params['telefone'], cnpj=request.params['cnpj'],
+                                   cep=request.params['cep'],
                                    estado=request.params['estado'], uf=request.params['uf'],
-                                   numero=request.params['numero'], vinculo_rede=request.params['rede']
-                                   )
+                                   logradouro=request.params['logradouro'],
+                                   numero=request.params['numero'], vinculo_rede=request.params['rede'],
+                                   bairro=request.params['bairro'], complemento=request.params['complemento']
+                                   , municipio=request.params['municipio'])
     redirect("/escola")
 
 

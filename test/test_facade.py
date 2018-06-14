@@ -1,6 +1,7 @@
 # coding: utf-8
 import unittest
 import redis
+from datetime import date, datetime
 
 # from unittest.mock import MagicMock
 # from src.model.estrutura_model import DbEstrutura
@@ -12,13 +13,26 @@ from control.dicionarios import TIPO_ESTRUTURA, TIPO_USUARIOS, TIPO_ITEM
 class FacadeTest(unittest.TestCase):
     def setUp(self):
         self.facade = Facade()
+        # self._create_rede()
+        # self._create_escola()
+        # self._create_turma()
+        #self._create_aluno()
+        # self._create_turma()
+        self._create_all_estruturas()
+        self._create_all()
+
+
+    """TESTE ALUNO FACADE"""
+
+    def _create_all(self):
         self._create_rede()
         self._create_escola()
         self._create_turma()
         self._create_aluno()
         self._create_turma()
 
-    """TESTE ALUNO FACADE"""
+    def test_create_all(self):
+        self._create_all()
 
     def _create_aluno(self):
         rede = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="ACNE")
@@ -29,25 +43,25 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(esco_spo, None)
 
         aluno1 = self.facade.create_aluno_facade(nome='egg', matricula='2345', escola=str(escola['id']), senha='123',
-                                                 vinculo_rede=str(rede['id']))
+                                                 vinculo_rede=str(rede['id']), data_nascimento=date(1994, 5, 2),sexo='masculino')
         self.assertEqual(aluno1, True)
         aluno2 = self.facade.create_aluno_facade(nome="hilter", matricula="0", escola=str(escola['id']), senha="123",
-                                                 vinculo_rede='0')
+                                                 vinculo_rede='0',data_nascimento=date(1994,2,5),sexo='feminino')
         self.assertEqual(aluno2, True)
         aluno3 = self.facade.create_aluno_facade(nome="Ni", matricula="42069", escola=str(escola['id']), senha='123',
-                                                 vinculo_rede='0')
+                                                 vinculo_rede='0',data_nascimento=date(1500,5,21),sexo='feminino')
         self.assertEqual(aluno3, True)
         aluno4 = self.facade.create_aluno_facade(nome="thanos", matricula='2929', escola=str(esco_spo['id']),
                                                  senha="123",
-                                                 vinculo_rede="0")
+                                                 vinculo_rede="0",data_nascimento=date(2018,5,9),sexo='masculino')
         self.assertEqual(aluno4, True)
 
-    def test_create_delete_aluno(self):
+    def _test_create_delete_aluno(self):
         self._create_aluno()
 
     def _read_aluno(self):
         # self._create_aluno()
-        aluno4 = self.facade.search_aluno_nome_facade("egg")
+        aluno4 = self.facade.search_aluno_nome_facade(nome="Ni")
         self.assertIn(aluno4['id'], self.facade.read_aluno_facade()[-1].values())
 
     def test_read_aluno(self):
@@ -106,7 +120,7 @@ class FacadeTest(unittest.TestCase):
 
     def _comprar_item(self):
         self._create_item()
-        aluno1 = self.facade.search_aluno_nome_objeto_facade("egg")
+        aluno1 = self.facade.search_aluno_nome_objeto_facade(nome="egg")
         self.assertIsNot(aluno1, None)
         item1 = self.facade.search_estrutura_facade(nome="burroquandofoge", tipo_estrutura=TIPO_ESTRUTURA['item'])
         self.assertIsNot(item1, None)
@@ -114,7 +128,7 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(item2, None)
         item3 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'], nome='cauda de furry')
         self.assertIsNot(item3, None)
-        itens = [str(item1['id']).encode('utf-8'), str(item2['id']).encode('utf-8'), str(item3['id']).encode('utf-8')]
+        # itens = [str(item1['id']).encode('utf-8'), str(item2['id']).encode('utf-8'), str(item3['id']).encode('utf-8')]
         self.facade.compra_item_facade(aluno1.id, item1['id'])
         self.assertIn(str(item1['id']).encode('utf-8'), aluno1.itens_comprados[0])
         self.facade.compra_item_facade(aluno1.id, item2['id'])
@@ -162,12 +176,13 @@ class FacadeTest(unittest.TestCase):
         mensagem2 = "tetativa..."
         mensagem = "Isto é uma mensagem de teste"
         aluno1 = self.facade.search_aluno_nome_objeto_facade(nome="egg")
+        self.assertIsNot(aluno1, None)
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem)
         self.facade.anotacoes_aluno_facade(aluno1.id, mensagem2)
         self.assertEqual(aluno1.anotacoes_aluno[0], mensagem.encode('utf-8'))
         self.assertEqual(aluno1.anotacoes_aluno[1], mensagem2.encode('utf-8'))
 
-    def test_anotacoes_no_aluno(self):
+    def _test_anotacoes_no_aluno(self):
         self._anotacoes_no_aluno()
 
     def _read_anotacoes_no_aluno(self):
@@ -196,7 +211,6 @@ class FacadeTest(unittest.TestCase):
         turma = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'], nome='Knight')
         self.assertIsNot(turma, None)
         alunos_in_turma = self.facade.search_aluno_by_turma_facade(turma['id'])
-        print('teste', alunos_in_turma)
         self.assertEqual(alunos_in_turma[1]['vinculo_turma'], aluno['vinculo_turma'])
 
     def test_pesquisa_alunos_by_turma(self):
@@ -262,17 +276,19 @@ class FacadeTest(unittest.TestCase):
                                                              telefone='2569 4200', cep='22134 000',
                                                              estado='Rio de Janeiro', uf='RJ', numero='67')
         self.assertIsNot(escola_spoiler, None)
-        rede=self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'],nome='Espinha')
-        self.assertIsNot(rede,None)
+        rede = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome='Espinha')
+        self.assertIsNot(rede, None)
         escola_rede = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='esc rede',
                                                           telefone='2211 4567', cep='22993 455', estado='SOLIDO',
                                                           uf='RJ', numero='28', vinculo_rede=str(rede['id']))
-        self.assertIsNot(escola_rede,None)
+        self.assertIsNot(escola_rede, None)
+
     def _create_rede(self):
         rede = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="ACNE",
                                                    telefone="(21)9999-9999")
-        rede2 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="Espinha")
         self.assertIsNot(rede, None)
+        rede2 = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="Espinha")
+
         self.assertIsNot(rede2, None)
 
     def _update_rede(self):

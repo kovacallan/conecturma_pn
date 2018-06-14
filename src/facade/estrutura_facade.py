@@ -6,7 +6,7 @@ class EstruturaFacade:
     def __init__(self):
         self.estrutura = DbEstrutura()
 
-    def create_estrutura_facade(self, tipo_estrutura, nome, telefone='0', vinculo_rede='0', vinculo_escola='0',
+    def create_estrutura_facade(self, tipo_estrutura, nome='0', telefone='0', vinculo_rede='0', vinculo_escola='0',
                                 cep='0', endereco='0', numero='0', estado='0', uf='0', quem_criou='0', serie='0',
                                 tipo_item='0', preco='0', tipo_medalha='0',
                                 descricao='0', descricao_completa='0', nome_usuario='0', tipo_usuario='0'):
