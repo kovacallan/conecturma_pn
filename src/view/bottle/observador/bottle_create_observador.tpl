@@ -36,11 +36,15 @@
         % end
     </select>
     <h3>Endereço</h3>
-    Logradouro: <input type="text" name="logradouro"/>
-    Numero: <input type="text" name="numero"/>
-    Complemento : <input type="text" name="complemento"/><br>
-    Bairro: <input type="text" name="bairro"/><br>
-    CEP: <input type="text" name="cep"/>
+    Logradouro: <input type="text" name="logradouro"/>&ensp;
+    Bairro:  <input type="text" name="bairro"/>
+    Numero: <input type="text" name="numero" size="3"/><br>
+
+    Complemento : <input type="text" name="complemento" size="15"/> &ensp;
+
+
+
+    CEP: <input type="text" name="cep"/><br>
     Uf:
             <select name="uf">
                 <option value="">-- Selecione --</option>
@@ -71,8 +75,10 @@
                 <option value="SP">São Paulo</option>
                 <option value="SE">Sergipe</option>
                 <option value="TO">Tocantins</option>
-            </select><br>
+            </select> &ensp;
     Municipio: <input type="text" name="municipio" id="municipio"/><br>
+    <input type="hidden" id="rede" name="rede" value="0">
+    <br>
     <input type="hidden" id="turma" name="turma" value="0">
     <input type="hidden" id="rede" name="rede" value="0">
 
@@ -94,8 +100,7 @@
             % end
         %end
     </select>
-    <br>
-    <br>
+     &ensp;
     Turma*:
     <select id="turma" name="turma">
         <option value="0"> </option>
@@ -104,11 +109,15 @@
         %end
     </select>
     <h3>Endereço</h3>
-    Logradouro: <input type="text" name="logradouro"/>
-    Numero: <input type="text" name="numero"/>
-    Complemento : <input type="text" name="complemento"/><br>
-    Bairro: <input type="text" name="bairro"/><br>
-    CEP: <input type="text" name="cep"/>
+    Logradouro: <input type="text" name="logradouro"/>&ensp;
+    Bairro:  <input type="text" name="bairro"/>
+    Numero: <input type="text" name="numero" size="3"/><br>
+
+    Complemento : <input type="text" name="complemento" size="15"/> &ensp;
+
+
+
+    CEP: <input type="text" name="cep"/><br>
     Uf:
             <select name="uf">
                 <option value="">-- Selecione --</option>
@@ -139,7 +148,7 @@
                 <option value="SP">São Paulo</option>
                 <option value="SE">Sergipe</option>
                 <option value="TO">Tocantins</option>
-            </select><br>
+            </select> &ensp;
     Municipio: <input type="text" name="municipio" id="municipio"/><br>
     <input type="hidden" id="rede" name="rede" value="0">
     <br>

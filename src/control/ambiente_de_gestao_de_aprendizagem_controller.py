@@ -168,19 +168,18 @@ def aluno():
 @route('/aluno_cadastro', method='POST')
 @permissao('professor')
 def create_aluno():
-    """
-    Direcionamento a pagina para criar aluno buscando , na tpl os parâmetros usuário , senha e matricula
-    Chama a funçao create_aluno_facade
-    :return:
-    """
+
     nome = request.forms['aluno_nome']
     senha = request.forms['senha']
     matricula = request.forms['matricula']
     escola = request.forms['escola']
+    data_nascimento=request.params['data_nascimento']
+    sexo=request.params['sexo']
+
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
 
-    facade.create_aluno_facade(nome=request.forms['aluno_nome'], matricula=request.forms['matricula'], escola=escola,
-                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=request.forms['senha'])
+    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola,
+                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha,data_nascimento=data_nascimento,sexo=sexo)
 
     redirect('/gestao_aprendizagem/usuario')
 
@@ -217,12 +216,17 @@ def controller_observador_cadastro():
     email = request.params['email']
     escola = request.params['escola']
     rede = request.params['rede']
+    logradouro = request.params['logradouro']
+    numero = request.params['numero']
+    complemento = request.params['complemento']
+    bairro = request.params['bairro']
+    cep = request.params['cep']
+    Uf=request.params['uf']
     turma = request.params['turma']
-
     if tipo != '1':
         vinculo_rede = facade.search_estrutura_id_facade(int(escola))
         facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
-                                        escola=escola, rede=vinculo_rede['vinculo_rede'], vinculo_turma=turma)
+                                        escola=escola, rede=vinculo_rede['vinculo_rede'], vinculo_turma=turma,logradouro=logradouro,)
     else:
         facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
                                         escola=escola, rede=rede, vinculo_turma=turma)

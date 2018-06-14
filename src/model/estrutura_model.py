@@ -14,12 +14,17 @@ class DbEstrutura(Model):
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_professor_turma = TextField(fts=True, default='0')
+    cnpj=TextField(default='0')
 
+    logradouro=TextField(default='0')
+    bairro=TextField(default='0')
+    municipio=TextField(default='0')
     cep = TextField(default='0')
     endereco = TextField(default='0')
     numero = TextField(default='0')
     estado = TextField(default='0')
     uf = TextField(default='0')
+    complemento =TextField(default='0')
 
     unidade=TextField(fts=True, default='0')
     disciplina=TextField(fts=True, default='0')
@@ -52,15 +57,15 @@ class DbEstrutura(Model):
                          tipo_item='0', preco='0', tipo_medalha='0',unidade='0',objeto_aprendizagem='0',
                          sigla='0',disciplina='0',
                          objetivo='0', codigo='0', descritor='0', descricao='0', descricao_completa='0',
-                         nome_usuario='0', tipo_usuario='0'):
+                         nome_usuario='0', tipo_usuario='0', cnpj='0',logradouro='0',bairro='0',complemento='0',municipio='0',ano_letivo='0',):
 
         return self.create(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone, vinculo_rede=vinculo_rede,
                            vinculo_escola=vinculo_escola, cep=cep, endereco=endereco, numero=numero, estado=estado,
                            uf=uf, quem_criou=quem_criou, serie=serie, tipo_item=tipo_item, preco=preco,
                            tipo_medalha=tipo_medalha,unidade=unidade,objeto_aprendizagem=objeto_aprendizagem,
-                           sigla=sigla, disciplina=disciplina,
+                           sigla=sigla, disciplina=disciplina,cnpj=cnpj,logradouro=logradouro,bairro=bairro,complemento=complemento,municipio=municipio,
                            objetivo=objetivo, codigo=codigo,descritor=descritor,descricao=descricao,
-                           descricao_completa=descricao_completa,nome_usuario=nome_usuario, tipo_usuario=tipo_usuario)
+                           descricao_completa=descricao_completa,nome_usuario=nome_usuario, tipo_usuario=tipo_usuario,ano_letivo=ano_letivo)
 
     def read_estrutura(self, tipo_estrutura):
 
