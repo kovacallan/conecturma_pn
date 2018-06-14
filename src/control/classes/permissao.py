@@ -62,8 +62,9 @@ class Login_Aluno(object):
                 aluno_logado = dict(
                     id=aluno['id'],
                     nome=aluno['nome'],
-                    tipo=aluno['tipo']
+                    tipo=aluno['tipo'],
                 )
+                print(aluno_logado)
                 response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
                 return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
         else:

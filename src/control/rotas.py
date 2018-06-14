@@ -777,4 +777,3 @@ def oa5_ud8_aventura3():
 @route("/UV1/UV1AV3/UV1AV3UD8/UV1AV3UD8OA06/")
 def oa6_ud8_aventura3():
 	return template("jogo/UV1/UV1AV3/UV1AV3UD8/UV1AV3UD8OA06/index.html")
-

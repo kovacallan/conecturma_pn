@@ -107,3 +107,67 @@ def compras():
 @route('/jogo')
 def jogo():
     return template('jogo/index')
+
+@route('/api/plataforma/obterUltimaConclusao', method='POST')
+def obterUltimaConclusao():
+    aluno=facade.search_aluno_nome_facade(usuario_logado()['nome'])
+    retorno={
+        'objetoAprendizagem':'UV1AV1UD1OA1',
+        'unidade':'UV1AV1UD1',
+        'aventura':'UV1AV1',
+        'universo':'UV1'
+             }
+    return retorno
+
+@route('/api/plataforma/verificarAcessoObjetoAprendizagem', method='POST')
+def verificarAcessoObjetoAprendizagem():
+    retorno={
+        'objetosAprendizagemAcessiveis':["UV1AV1UD1OA01"]
+     }
+
+    return retorno
+
+@route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
+def verificarConclusoesObjetosAprendizagem():
+    retorno={
+        'objetosConcluidos':["UV1AV1UD1OA01","UV1AV1UD1OA02","UV1AV1UD1OA03","UV1AV1UD1OA04","UV1AV1UD1OA05","UV1AV1UD1OA06","UV1AV1UD1CN01","UV1AV1UD1CN02","UV1AV1UD1VC01"]
+     }
+
+    return retorno
+
+@route('/api/plataforma/registrarConclusao', method='POST')
+def registrarConclusao():
+    retorno = {
+        'medalhas':[],
+        'moedas': 7,
+        'xp': 2
+    }
+    return retorno
+
+@route('/api/plataforma/obterPremiacao', method='POST')
+def obterPremiacao():
+    teste = dict(request.params)
+    print('Aqui BB2 ', teste)
+    retorno={
+        'moedas':0,
+        'xp':0
+    }
+    return retorno
+
+@route('/api/plataforma/verificarAcessoUnidade', method='POST')
+def verificarAcessoUnidade():
+    teste = dict(request.params)
+    print('Aqui BB2 ', teste)
+    retorno={
+        'unidadesAcessiveis':["UV1AV1UD1", "UV1AV1UD2"]
+    }
+    return retorno
+
+@route('/api/plataforma/verificarAcessoAventura', method='POST')
+def verificarAcessoAventura():
+    teste = dict(request.params)
+    print('Aqui BB2 ', teste)
+    retorno={
+        'aventurasAcessiveis':["UV1AV1", "UV1AV2", "UV1AV3"]
+    }
+    return retorno

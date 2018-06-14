@@ -25,6 +25,10 @@ class DbAluno(Model):
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, default='0')
+    
+    ultima_aventura = TextField(fts=True, default='0')
+    ultima_unidade = TextField(fts=True, default='0')
+    ultima_objeto_aprendizagem = TextField(fts=True, default='0')
 
     anotacoes_aluno = ListField()
 
@@ -67,7 +71,8 @@ class DbAluno(Model):
                 rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                 pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                 vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+                vinculo_turma=search.vinculo_turma, email=search.email, cpf='',
+                ultima_aventura=search.ultima_aventura, ultima_unidade=search.ultima_unidade,  ultima_objeto_aprendizagem=search.ultima_objeto_aprendizagem
             )
 
         return alun_pes
