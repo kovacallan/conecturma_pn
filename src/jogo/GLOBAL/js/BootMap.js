@@ -63,8 +63,12 @@ BasicGame.Boot.prototype = {
         BasicGame.OnlineAPI.verificarAcessoObjetoAprendizagem (
             function(resposta) {
 
-                console.log(resposta);
+                console.log('----------');
                 
+                console.log(resposta);
+
+                console.log('----------');
+
                 for(var i = 0; i < resposta.objetosAprendizagemAcessiveis.length; i++) {
                     var curr = resposta.objetosAprendizagemAcessiveis[i];
                     if(BasicGame.OnlineAPI.isVideo( curr )) {

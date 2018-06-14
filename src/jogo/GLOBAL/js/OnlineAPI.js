@@ -6,7 +6,7 @@ BasicGame.OnlineAPI = {
 
     //HOST_PLATAFORMA: 'http://conecturma-env-prod.elasticbeanstalk.com/',
 	//HOST_PLATAFORMA: 'http://conecturma-env-teste.elasticbeanstalk.com/',
-	HOST_PLATAFORMA: 'http://localhost:8080/',
+	HOST_PLATAFORMA: 'http://localhost:8080/aluno/area_aluno',
 
     mapaChamadasFuncoes: [],
 
@@ -16,7 +16,6 @@ BasicGame.OnlineAPI = {
     * @method setCookieVictory
     */
     initialize: function(isOnline) {
-
         this.isOnline = isOnline;
 
         console.log("BasicGame.OnlineAPI.initialize-", parent);
@@ -28,6 +27,8 @@ BasicGame.OnlineAPI = {
         window.addEventListener("message", function (event) {
 
             var resposta = (event.data);
+
+            console.log(event.data);
 
             var parametrosOriginais = _this.mapaChamadasFuncoes[resposta.uuid];
             console.log(resposta);
@@ -423,11 +424,4 @@ BasicGame.OnlineAPI = {
         this.enviarMensagemParaPlataforma("obterUltimaConclusao", param);
     }
     /********************************** FINAL ***********************************************/
-
-    
-
-
-
-
-
 };
