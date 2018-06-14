@@ -52,7 +52,6 @@ def ver_itens():
     mostra os itens que o usuario tem posse
     chama os metodos : search_aluno_nome_facade, ver_item_comprado_facade e pesquisa_iten_facade
     cria uma lista com os ids dos itens do aluno
-
     :return: dicionario de itens
     """
 
