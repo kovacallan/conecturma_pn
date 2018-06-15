@@ -12,6 +12,7 @@ class DbObservador(Model):
     telefone = TextField(default='0')
     cpf = TextField(default='0')
     email = TextField(fts=True,default='0')
+    data_nascimento=DateField(default=datetime.datetime.now)
     tipo = TextField(fts=True)
 
     itens_comprados = ListField()
@@ -30,10 +31,11 @@ class DbObservador(Model):
     data_ultimo_login = TextField(default='')
 
 
-    def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
+    def create_observador(self, nome, senha, telefone, email, tipo, escola,data_nascimento, vinculo_turma='0',rede='0', cpf='0'):
 
-        if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
-                       vinculo_escola=escola, vinculo_turma = vinculo_turma):
+        if nome.isalpha() and cpf.isdigit() and tipo.isdigit():
+            self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
+                       vinculo_escola=escola, vinculo_turma = vinculo_turma,data_nascimento=data_nascimento)
             return True
         else:
             return False

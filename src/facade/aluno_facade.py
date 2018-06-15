@@ -5,9 +5,9 @@ class AlunoFacade:
     def __init__(self):
         self.aluno = DbAluno()
 
-    def create_aluno_facade(self, nome, matricula,escola,senha,vinculo_rede,data_nascimento,sexo):
+    def create_aluno_facade(self, nome, matricula,escola,senha,vinculo_rede,data_nascimento,sexo,cpf_responsavel='0'):
 
-        return self.aluno.create_aluno(nome=nome, matricula=matricula,vinculo_escola = escola,senha=senha, vinculo_rede=vinculo_rede,data_nascimento=data_nascimento,sexo=sexo)
+        return self.aluno.create_aluno(nome=nome, matricula=matricula,vinculo_escola = escola,senha=senha, vinculo_rede=vinculo_rede,data_nascimento=data_nascimento,sexo=sexo,cpf_responsavel=cpf_responsavel)
 
     def read_aluno_facade(self):
 

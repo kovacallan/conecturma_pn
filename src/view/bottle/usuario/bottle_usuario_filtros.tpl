@@ -13,7 +13,6 @@
     <select id="filtro_escola" onChange="filtro_usuario()" class='dropdown_filtros' >
                 %if observador_tipo is '0':
                     <option value="0" >---- Selecione escola ----</option>
-                    %print('enquanto isso , no tpl...',len(escolas))
                     % for e in escolas:
                         <option value="{{e['id']}}">{{e['nome']}}</option>
                     % end

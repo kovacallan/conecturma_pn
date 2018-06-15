@@ -12,6 +12,7 @@ class DbAluno(Model):
     senha = TextField()
     email = TextField(default='0')
     tipo_aluno = TextField(default='0')
+    cpf_responsavel = TextField(default='0')
 
     itens_comprados = ListField()
     cor = TextField(default='0')
@@ -25,18 +26,20 @@ class DbAluno(Model):
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, default='0')
+    vinculo_serie = TextField(fts=True, default='0')
 
     anotacoes_aluno = ListField()
 
-    def create_aluno(self, nome, senha, matricula ,vinculo_escola='0', vinculo_rede='0'):
+    def create_aluno(self, nome, senha, matricula, data_nascimento, sexo, vinculo_escola='0', vinculo_rede='0',
+                     cpf_responsavel='0'):
 
-        if self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
-                    vinculo_rede=vinculo_rede, matricula=matricula):
+        if nome.isalpha() and vinculo_escola.isdigit() and vinculo_rede.isdigit() and sexo is 'masculino' or sexo is 'feminino':
+            self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
+                        vinculo_rede=vinculo_rede, matricula=matricula, data_nascimento=data_nascimento, sexo=sexo,
+                        cpf_responsavel=cpf_responsavel)
             return True
         else:
             return False
-
-
 
     def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
 
@@ -56,7 +59,7 @@ class DbAluno(Model):
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma,email= search.email, cpf=''
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
                 )
             )
         return alunos
@@ -68,11 +71,10 @@ class DbAluno(Model):
             alun_pes = dict(
                 id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
                 tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+                rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo, vinculo_serie=search.vinculo_serie,
                 pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                 vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
-            )
+                vinculo_turma=search.vinculo_turma, email=search.email, cpf='')
 
         return alun_pes
 
@@ -87,7 +89,7 @@ class DbAluno(Model):
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
                     vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
-                 )
+                )
             )
         return alunos
 
@@ -103,7 +105,7 @@ class DbAluno(Model):
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
                     vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
-                 )
+                )
             )
 
         return alunos
@@ -123,9 +125,24 @@ class DbAluno(Model):
             )
         return alunos
 
+    def search_aluno_by_serie(self,vinculo_serie):
+        alunos = []
+        for search in DbAluno.query(DbAluno.vinculo_serie== vinculo_serie,order_by=DbAluno.nome):
+            alunos.append(
+                dict(
+                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
+                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
+                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
+                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+                )
+            )
+            return alunos
+
     def pesquisa_aluno_objeto(self, nome_aluno):
 
-        # pesquisa aluno esta retornando o objeto em sua totalidade , NAO DELETAR ESSE METODO  , pois uso em Dbcemiterio
+    # pesquisa aluno esta retornando o objeto em sua totalidade , NAO DELETAR ESSE METODO  , pois é usado em Dbcemiterio
 
         aluno_pes = []
         for pesquisa in DbAluno.query(DbAluno.nome == nome_aluno):
@@ -134,12 +151,15 @@ class DbAluno(Model):
         return aluno_pes
 
     def alunos_in_turma(self, id_aluno, vinculo_turma):
+        from facade.estrutura_facade import EstruturaFacade
+        facade = EstruturaFacade()
+        turmi = facade.search_estrutura_id_facade(vinculo_turma)
 
         for id_aluno in id_aluno:
             aluno = self.load(int(id_aluno))
             aluno.vinculo_turma = str(vinculo_turma)
+            aluno.vinculo_serie = turmi['serie']
             aluno.save()
-
 
     def comprar_item(self, id_usuario, id_item):
         from model.estrutura_model import DbEstrutura
@@ -155,7 +175,7 @@ class DbAluno(Model):
             usuario.itens_comprados.append(id_item)
             usuario.save()
 
-    def ver_itens_comprados(self,id_usuario):
+    def ver_itens_comprados(self, id_usuario):
         #         id_usuario
         # id_usuario=usuario_logado()
         usuario = DbAluno.load(id_usuario)

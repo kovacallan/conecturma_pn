@@ -12,6 +12,7 @@
     telefone*:<input type="text" id="telefone" name="telefone"> <br><br>
     cpf*:<input type="text" id="cpf" name="cpf"> <br><br>
     email*:<input type="email" id="email" name="email" onChange="emailValidador()"><div id="erro_email"></div><br><br>
+    Data de Nascimento: <input type="date" name="data_nascimento" id="data_nascimento"/>
     <input type="hidden" id="escola" name="escola" value="0">
     <input type="hidden" id="turma" name="turma" value="0">
     rede*:
@@ -27,6 +28,7 @@
     telefone*:<input type="text" id="telefone" name="telefone"> <br><br>
     cpf*:<input type="text" id="cpf" name="cpf"> <br><br>
     email*:<input type="email" id="email" name="email" onChange="emailValidador()"><div id="erro_email"></div>
+Data de Nascimento: <input type="date" name="data_nascimento" id="data_nascimento"/>
     <br><br>
 
     escola*:
@@ -89,7 +91,7 @@
     <input type="hidden" id="cpf" name="cpf" value="0">
     email*:<input type="email" id="email" name="email" onChange="emailValidador()"><div id="erro_email"></div>
     <br><br>
-
+Data de Nascimento: <input type="date" name="data_nascimento" id="data_nascimento"/>
     escola*:
     <select id="escola" name="escola">
         %if isinstance(escola,dict):
