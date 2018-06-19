@@ -2,7 +2,7 @@
 
 file = open("rotas.py", "w")
 
-file.write("from bottle import route, template \n \n")
+file.write("from bottle import route, template "\n \n)
 file.write('@route("/GLOBAL/player/")\n')
 file.write('def av1_mapa4(): \n')
 file.write('    return template("jogo/GLOBAL/player/index.html") \n\n\n')

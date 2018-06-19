@@ -1,3 +1,5 @@
+import json
+
 from bottle import route,view, request, redirect, response,get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado
@@ -110,7 +112,9 @@ def jogo():
 
 @route('/api/plataforma/obterUltimaConclusao', method='POST')
 def obterUltimaConclusao():
-    aluno=facade.search_aluno_nome_facade(usuario_logado()['nome'])
+    parametros = parametros_json_jogos(request.params.items())
+    print('1: ', parametros)
+
     retorno={
         'objetoAprendizagem':'UV1AV1UD1OA1',
         'unidade':'UV1AV1UD1',
@@ -121,6 +125,9 @@ def obterUltimaConclusao():
 
 @route('/api/plataforma/verificarAcessoObjetoAprendizagem', method='POST')
 def verificarAcessoObjetoAprendizagem():
+    parametros = parametros_json_jogos(request.params.items())
+    print('2: ', parametros)
+
     retorno={
         'objetosAprendizagemAcessiveis':["UV1AV1UD1OA01"]
      }
@@ -129,14 +136,20 @@ def verificarAcessoObjetoAprendizagem():
 
 @route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
 def verificarConclusoesObjetosAprendizagem():
+    parametros = parametros_json_jogos(request.params.items())
+    print('3: ', parametros)
+
     retorno={
-        'objetosConcluidos':["UV1AV1UD1OA01","UV1AV1UD1OA02","UV1AV1UD1OA03","UV1AV1UD1OA04","UV1AV1UD1OA05","UV1AV1UD1OA06","UV1AV1UD1CN01","UV1AV1UD1CN02","UV1AV1UD1VC01"]
+        'objetosConcluidos':["UV1AV1UD1OA01"]
      }
 
     return retorno
 
 @route('/api/plataforma/registrarConclusao', method='POST')
 def registrarConclusao():
+    parametros = parametros_json_jogos(request.params.items())
+    print('4: ', parametros)
+
     retorno = {
         'medalhas':[],
         'moedas': 7,
@@ -146,8 +159,9 @@ def registrarConclusao():
 
 @route('/api/plataforma/obterPremiacao', method='POST')
 def obterPremiacao():
-    teste = dict(request.params)
-    print('Aqui BB2 ', teste)
+    parametros = parametros_json_jogos(request.params.items())
+    print('5: ', parametros)
+
     retorno={
         'moedas':0,
         'xp':0
@@ -156,18 +170,27 @@ def obterPremiacao():
 
 @route('/api/plataforma/verificarAcessoUnidade', method='POST')
 def verificarAcessoUnidade():
-    teste = dict(request.params)
-    print('Aqui BB2 ', teste)
+    parametros = parametros_json_jogos(request.params.items())
+    print('6: ', parametros)
+
     retorno={
-        'unidadesAcessiveis':["UV1AV1UD1", "UV1AV1UD2"]
+        'unidadesAcessiveis':["UV1AV1UD1"]
     }
     return retorno
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
 def verificarAcessoAventura():
-    teste = dict(request.params)
-    print('Aqui BB2 ', teste)
+    parametros = parametros_json_jogos(request.params.items())
+    print('7: ', parametros)
+
     retorno={
-        'aventurasAcessiveis':["UV1AV1", "UV1AV2", "UV1AV3"]
+        'aventurasAcessiveis':["UV1AV1"]
     }
     return retorno
+
+def parametros_json_jogos(parametro):
+    for p in parametro:
+        parametros = list(p)[0]
+    parametros = json.loads(parametros)
+
+    return parametros
