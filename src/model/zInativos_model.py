@@ -39,7 +39,7 @@ class DbCemiterio(Model):
     matricula = TextField()
 
     nome = TextField(fts=True, index=True)
-    senha = TextField()
+    senha = TextField(fts=True)
 
     tipo_usuario = TextField(default='0')
     tipo_aluno = TextField(default='0')
@@ -51,12 +51,11 @@ class DbCemiterio(Model):
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
 
-    tipo_item = TextField(fts=True,default='0')
+    tipo_item = TextField(fts=True, default='0')
     preco = TextField(default='0')
 
     pontos_de_vida = IntegerField(default='0')
     pontos_de_moedas = IntegerField(default='0')
-
 
     anotacoes_aluno = ListField()
 
@@ -65,7 +64,6 @@ class DbCemiterio(Model):
     vinculo_turma = TextField(fts=True, index=True, default='0')
     tipo_estrutura = TextField(fts=True, index=True)
 
-
     telefone = TextField(default='0')
     cep = TextField(default='0')
     endereco = TextField(default='0')
@@ -73,10 +71,9 @@ class DbCemiterio(Model):
     estado = TextField(default='0')
     uf = TextField(default='0')
 
-
     quem_criou = TextField(default='0')
     serie = TextField(default='0')
-    
+
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='')
     descricao_completa = TextField(default='0')
@@ -85,27 +82,20 @@ class DbCemiterio(Model):
     data_acesso = DateTimeField(default=datetime.datetime.now)
     anotacoes_estrutura = ListField()
 
-
     cpf = TextField(default='0')
     email = TextField(default='0')
-
 
     data_ultimo_login = TextField(default='')
     anotacoes_observador = ListField()
 
     def desativar_atores(self, atores_id):
         for atores_id in atores_id:
-            print(len(vars(atores_id)['_data']))
             self.desativar_um_objeto(vars(atores_id)['_data'])
 
     def complemento_create(self, ator, cemiterio_nome):
-        try:
-            usuario = DbAluno.load(ator.id)
-        except KeyError:
-            usuario = DbObservador.load(ator.id)
+        usuario = ator
 
         inativar = self.pesquisa_inativo(cemiterio_nome)
-
         inativado = self.load(inativar.id)
         try:
             if usuario.anotacoes_aluno is not None:
@@ -121,54 +111,46 @@ class DbCemiterio(Model):
 
             """nao esquecer de acrescentar as pontuaçoes dos jogos"""
             if inativar.matricula == usuario.matricula and inativar.nome == usuario.nome and \
-                    inativar.senha == usuario.senha and inativar.tipo_aluno == usuario.tipo_aluno and inativar.tipo_aluno==usuario.tipo_aluno and \
+                    inativar.senha == usuario.senha and inativar.tipo_aluno == usuario.tipo_aluno and inativar.tipo_aluno == usuario.tipo_aluno and \
                     inativar.cor == usuario.cor and inativar.rosto == usuario.rosto and \
                     inativar.acessorio == usuario.acessorio and inativar.corpo == usuario.corpo and \
-                    inativar.pontos_de_vida == (usuario.pontos_de_vida) and \
+                    inativar.pontos_de_vida == usuario.pontos_de_vida and \
                     inativar.pontos_de_moedas == usuario.pontos_de_moedas and \
                     inativar.vinculo_escola == usuario.vinculo_escola \
                     and inativar.vinculo_turma == usuario.vinculo_turma:
+                print('no if', inativar.tipo_aluno, usuario.tipo_aluno,inativar.tipo_aluno == usuario.tipo_aluno)
                 inativar.save()
                 usuario.delete(usuario.id)
                 print("deletou aluno")
-                return True
             else:
-                print("L161 CEMITERIO",inativar.pontos_de_moedas == usuario.pontos_de_moedas and \
-                    inativar.vinculo_escola == usuario.vinculo_escola \
-                    and inativar.vinculo_turma == usuario.vinculo_turma)
+                print("L134-161 CEMITERIO", inativar.nome, usuario.nome,
+                      inativar.vinculo_turma, usuario.vinculo_turma, usuario.tipo_aluno)
                 print("vish , n foi ")
                 return False
         except AttributeError:
+            print('inativar', inativar, usuario)
             if inativar.nome == usuario.nome and inativar.senha == usuario.senha and inativar.telefone == usuario.telefone and \
-                    inativar.cpf == usuario.cpf and inativar.email == usuario.email and inativar.tipo_usuario == usuario.tipo and \
+                    inativar.cpf == usuario.cpf and inativar.email == usuario.email and inativar.tipo_usuario == usuario.tipo_usuario and \
                     inativar.vinculo_rede == usuario.vinculo_rede and inativar.vinculo_escola == usuario.vinculo_escola and \
                     inativar.data_ultimo_login == usuario.data_ultimo_login:
                 usuario.delete(usuario.id)
-                # print("deletou usuario")
+                print("deletou usuario")
                 return True
             else:
                 # print("L163 cemiterio", inativar.data_ultimo_login, usuario.data_ultimo_login)
-                # print("n deletou usuario L163 cem")
+                print("n deletou usuario L163 cem",inativar.tipo_usuario == usuario.tipo ,
+                      inativar.vinculo_rede == usuario.vinculo_rede and inativar.vinculo_escola == usuario.vinculo_escola ,
+                      inativar.data_ultimo_login == usuario.data_ultimo_login)
                 return False
 
     def fazer_os_de_cima(self, lista_inativados):
         self.desativar_atores(lista_inativados)
         # x = len(lista_inativados)
         while lista_inativados:
-            # print("L157",lista_inativados)
             x = 0
             paradas = lista_inativados[x]
-            try:
-                coiso = DbAluno.load(paradas.id)
-            except KeyError:
-                coiso = DbObservador.load(paradas.id)
-            nome = coiso.nome
-            self.complemento_create(paradas, nome)
+            self.complemento_create(paradas, paradas.nome)
             lista_inativados.pop(0)
-
-        # inativando = DbCemiterio()
-        # for inativando in inativando.all():
-        #     print(inativando.nome, inativando.senha, inativando.telefone)
 
     def pesquisa_inativo(self, nome_cem):
 
@@ -179,7 +161,6 @@ class DbCemiterio(Model):
 
     def deletar_cem(self, nome):
         pessoa = self.pesquisa_inativo(nome)
-        # print("pessoa L186", nome)
         isto = self.aluno.pesquisa_aluno(nome)
         if isto == []:
             isto = self.observador.search_observador_inativos(nome)
@@ -281,7 +262,8 @@ class DbCemiterio(Model):
 
         return inativos
 
-    def desativar_ator(self, nome, matricula='0', senha='0', tipo_usuario='0', cor='0', rosto='0', acessorio='0', corpo='0',
+    def desativar_ator(self, nome, matricula='0', senha='0', tipo_usuario='0', cor='0', rosto='0', acessorio='0',
+                       corpo='0',
                        pontos_de_vida='0', pontos_de_moedas='0', vinculo_escola='0', vinculo_turma='0',
                        tipo_estrutura='0', telefone='0', vinculo_rede='0', cep='0', endereco='0', numero='0',
                        estado='0', uf='0', quem_criou='0', serie='0', tipo_item='0', preco='0', tipo_medalha='0',
@@ -290,8 +272,7 @@ class DbCemiterio(Model):
         [setattr(self.create(), parametro, valor) for parametro, valor in locals().items()]
         print("quee")
 
-
-    def desativar_um_objeto(self,objetoo):
+    def desativar_um_objeto(self, objetoo):
         print('CMl311', objetoo)
         #
         # [setattr(new_morto, parametro, valor) for parametro, valor in locals().items()]

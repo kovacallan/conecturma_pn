@@ -8,6 +8,7 @@ from control.dicionarios import TIPO_USUARIOS_ID
 
 facade = Facade()
 
+
 @route('/observador/create_observador_administrador', method="POST")
 @permissao('administrador')
 def controller_observador_cadastro():
@@ -28,6 +29,7 @@ def controller_observador_cadastro():
                                     rede=rede, escola=escola)
     redirect('/observador')
 
+
 @route('/administrador/pag_administrador')
 @permissao('administrador')
 @view('areas_administrativo.tpl')
@@ -36,8 +38,8 @@ def view_adm():
     for h in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico']):
         h['tipo_usuario'] = TIPO_USUARIOS_ID[h['tipo_usuario']]
         h['data_acesso'] = '{}/{}/{} - {}:{}:{}'.format(h['data_acesso'].day, h['data_acesso'].month,
-                                                      h['data_acesso'].year, h['data_acesso'].hour, 
-                                                      h['data_acesso'].minute, h['data_acesso'].second)
+                                                        h['data_acesso'].year, h['data_acesso'].hour,
+                                                        h['data_acesso'].minute, h['data_acesso'].second)
         historico.append(h)
     return dict(historico=historico)
 
@@ -52,36 +54,44 @@ def pesquisar_aluno_turma():
     turma_ = request.params['nome_da_turma']
     facade.pesquisa_aluno_turma_facade(aluno_, turma_)
 
+
 @route('/loja/cadastrar_item')
 @permissao('administrador')
-@view('loja/cadastrar_item')
+@view('loja/cadastrar_item.tpl')
 def cadastrar_item():
-    """
-    verifica se existe o cookie
-    :return:
-    """
     return
 
 
 @route('/cadastro_item', method='post')
 def cadastro_item():
-    """
-    cadastra o item , com nome , preço e tipo
-    metodos usados: create_estrutura_facade
-    :return:
-    """
 
-    facade.create_estrutura_facade(nome=request.forms.nome, tipo_item=request.forms.tipo, preco=request.forms.preco,tipo_estrutura='4')
+    facade.create_estrutura_facade(nome=request.forms.nome, tipo_item=request.forms.tipo, preco=request.forms.preco,
+                                   tipo_estrutura='4')
     redirect('cadastrar_item')
+
 
 @route('/administrador/cadastro_descritor_view')
 def cadastro_descritor_view():
     return template('descritor/index')
 
+
 @route('administrativo/cadastro_descritor_controller', method='post')
 def cadastro_descritor_controller():
     pass
 
-@route('/teste')
-def fazendo_teste():
-    print("to aqui")
+
+@route('/usuarios_inativados')
+@view('inativados/inativados.tpl')
+def index_desativados():
+    return
+
+
+@route('/usuarios_deletados')
+@view('inativados/usuarios_inativados')
+def desativados():
+    usuarios = []
+    for h in facade.read_inativos_facade():
+        h['tipo_usuario'] = TIPO_USUARIOS_ID[h['tipo_usuario']]
+        h['tipo_aluno'] = TIPO_USUARIOS_ID[h['tipo_aluno']]
+        usuarios.append(h)
+    return dict(usuarios=usuarios)

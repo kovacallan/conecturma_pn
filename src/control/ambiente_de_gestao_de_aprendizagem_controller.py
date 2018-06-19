@@ -281,7 +281,7 @@ def controller_medalha_cadastro():
 
 @route('/ler_medalha')
 @permissao('professor')
-@view('observador/read_medalhas.tpl')
+@view('observador/medalha_index.tpl')
 def read_de_medalha():
     medalhas = []
 
@@ -454,7 +454,7 @@ def view_update_turma():
     """
     id = request.forms['id_turma']
     turma = facade.search_estrutura_id_facade(int(id))
-    return x('turma/turma_update', turma=turma,
+    return template('turma/turma_update', turma=turma,
                     aluno=alunos_na_escola_sem_turma(turma['escola']),
                     professor=professor_na_escola_sem_turma(turma['escola']))
 
@@ -497,3 +497,7 @@ def controller_update_turma():
     redirect('/turma')
 
 
+@route('/cadastro_descritor_view')
+@view('descritor/index.tpl')
+def descritores():
+    return

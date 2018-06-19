@@ -21,6 +21,7 @@ class FacadeTest(unittest.TestCase):
         self._create_all_estruturas()
         self._create_all()
 
+
     """TESTE ALUNO FACADE"""
 
     def _create_all(self):
@@ -29,6 +30,7 @@ class FacadeTest(unittest.TestCase):
         self._create_turma()
         self._create_aluno()
         self._create_turma()
+        self._create_observador()
 
     def test_create_all(self):
         self._create_all()
@@ -45,8 +47,8 @@ class FacadeTest(unittest.TestCase):
                                                  vinculo_rede=str(rede['id']), data_nascimento=date(1994, 5, 2),
                                                  sexo='masculino')
         self.assertEqual(aluno1, True)
-        aluno2 = self.facade.create_aluno_facade(nome="hilter", matricula="0", escola=str(escola['id']), senha="123",
-                                                 vinculo_rede='0', data_nascimento=date(1994, 2, 5), sexo='feminino')
+        aluno2 = self.facade.create_aluno_facade(nome="hilter", matricula="234", escola=str(escola['id']), senha="123",
+                                                 vinculo_rede='0', data_nascimento=date(1994, 2, 5), sexo='feminino',)
         self.assertEqual(aluno2, True)
         aluno3 = self.facade.create_aluno_facade(nome="Ni", matricula="42069", escola=str(escola['id']), senha='123',
                                                  vinculo_rede='0', data_nascimento=date(1500, 5, 21), sexo='feminino')
@@ -296,10 +298,8 @@ class FacadeTest(unittest.TestCase):
     def _update_rede(self):
         rede = self.facade.create_estrutura_facade(nome="egg", tipo_estrutura=TIPO_ESTRUTURA['rede'],
                                                    telefone="(21)9999-9999")
-        print('L281', rede)
         self.assertIsNot(rede, None)
         rede1 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="egg")
-        print('L284', rede1)
         self.assertIsNot(rede1, None)
 
         rede_up = self.facade.update_estrutura_facade(rede1['id'], nome='Ni', telefone="(11)8888-8888")
@@ -617,24 +617,24 @@ class FacadeTest(unittest.TestCase):
 
     def _transferir_atores_inativos(self):
         self._anotacoes_no_aluno()
-        self._create_observador()
-        self._create_aluno()
+        # self._create_observador()
+        # self._create_aluno()
 
-        self.assertEqual(aluno1, True)
-
-        alunoer1 = self.facade.search_aluno_nome_objeto_facade("egg")
+        alunoer1 = self.facade.search_aluno_nome_objeto_facade(nome="egg")
         self.assertIsNot(alunoer1, None)
 
-        aluno2 = self.facade.search_aluno_nome_objeto_facade("thanos")
+        aluno2 = self.facade.search_aluno_nome_objeto_facade(nome="thanos")
         self.assertIsNot(aluno2, None)
 
-        aluno2_pos = self.facade.search_aluno_nome_objeto_facade("thanos")
-        self.assertIsNot(aluno2_pos, None)
+        # aluno3 = self.facade.search_aluno_nome_objeto_facade(nome="hilter")
+        # self.assertIsNot(aluno3, None)
 
-        observador1 = self.facade.search_observador_inativos_facade("Monty")
+        observador1 = self.facade.search_observador_inativos_facade(nome="Monty")
+        print('?',observador1.nome)
         self.assertIsNot(observador1, None)
 
-        inativados = [alunoer1, aluno2_pos, observador1]
+        inativados = [alunoer1, aluno2, observador1]
+        print('inativados',inativados)
         self.facade.create_zInativos_atores_facade(inativados)
 
         ovo_morto = self.facade.pesquisa_inativos_facade("egg")
@@ -649,9 +649,9 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(ovo_morto.anotacoes_aluno[1], mensagem2.encode('utf-8'))
 
         thanos_morto = self.facade.pesquisa_inativos_facade("thanos")
-        self.assertEqual(thanos_morto.nome, aluno2_pos.nome)
-        self.assertEqual(thanos_morto.senha, aluno2_pos.senha)
-        self.assertEqual(thanos_morto.tipo_usuario, aluno2_pos.tipo_aluno)
+        self.assertEqual(thanos_morto.nome, aluno2.nome)
+        self.assertEqual(thanos_morto.senha, aluno2.senha)
+        self.assertEqual(thanos_morto.tipo_aluno, aluno2.tipo_aluno)
         self.assertEqual(thanos_morto.cor, aluno2.cor)
         self.assertEqual(thanos_morto.rosto, aluno2.rosto)
         self.assertEqual(thanos_morto.acessorio, aluno2.acessorio)
@@ -703,16 +703,16 @@ class FacadeTest(unittest.TestCase):
         read_cem = self.facade.read_inativos_facade()
         self.assertIsNot(read_cem, None)
 
-    def _test_create_atores_inativos(self):
+    def test_create_atores_inativos(self):
         self._transferir_atores_inativos()
 
     def _test_create_estruturas_inativas(self):
         self._inativar_estruturas()
 
-    def _test_reativar_usuario(self):
+    def test_reativar_usuario(self):
         self._ressuscitar_usuarios()
 
-    def _test_read_inativos(self):
+    def test_read_inativos(self):
         self._read_inativados()
 
     """Teste do filtro cadastro"""
