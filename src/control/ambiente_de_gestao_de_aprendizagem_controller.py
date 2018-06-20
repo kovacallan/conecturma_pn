@@ -30,7 +30,10 @@ def view_usuario_index():
     turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
 
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
+
+
 template
+
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
 @permissao('professor')
@@ -375,7 +378,7 @@ def view_turma():
     turma = []
     for t in facade.read_estrutura_facade(TIPO_ESTRUTURA['turma']):
         t['serie'] = SERIE[t['serie']]
-        t['escola'] = get_nome_escola(t['escola'])
+        t['vinculo_escola'] = get_nome_escola(t['vinculo_escola'])
         turma.append(t)
     return dict(turma=turma)
 
@@ -446,10 +449,8 @@ def view_update_turma():
     """
     id = request.forms['id_turma']
     turma = facade.search_estrutura_id_facade(int(id))
-    return x('turma/turma_update', turma=turma,
-                    aluno=alunos_na_escola_sem_turma(turma['escola']),
-                    professor=professor_na_escola_sem_turma(turma['escola']))
-
+    return template('turma/turma_update', turma=turma, aluno=alunos_na_escola_sem_turma(turma['vinculo_escola']), professor=professor_na_escola_sem_turma(
+        turma['vinculo_escola']))
 
 def alunos_na_escola_sem_turma(vinculo_escola):
     alunos = []
@@ -459,7 +460,6 @@ def alunos_na_escola_sem_turma(vinculo_escola):
 
     return alunos
 
-
 def professor_na_escola_sem_turma(vinculo_escola):
     professores = []
     for p in facade.search_observador_escola(vinculo_escola=vinculo_escola):
@@ -467,7 +467,6 @@ def professor_na_escola_sem_turma(vinculo_escola):
             professores.append(p)
 
     return professores
-
 
 @route('/turma/turma_update_controller', method='POST')
 @permissao('diretor')
@@ -487,5 +486,3 @@ def controller_update_turma():
             facade.observador_in_turma_facade(id_observador=p, vinculo_turma=turma)
 
     redirect('/turma')
-
-

@@ -112,9 +112,6 @@ def jogo():
 
 @route('/api/plataforma/obterUltimaConclusao', method='POST')
 def obterUltimaConclusao():
-    parametros = parametros_json_jogos(request.params.items())
-    print('1: ', parametros)
-
     retorno={
         'objetoAprendizagem':'UV1AV1UD1OA1',
         'unidade':'UV1AV1UD1',
@@ -180,13 +177,13 @@ def verificarAcessoUnidade():
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
 def verificarAcessoAventura():
-    parametros = parametros_json_jogos(request.params.items())
-    print('7: ', parametros)
-
-    retorno={
-        'aventurasAcessiveis':["UV1AV1"]
-    }
-    return retorno
+    usuario = usuario_logado()
+    if int(usuario['tipo'])< 6:
+        return {'aventurasAcessiveis': ["UV1AV1", "UV1AV2", "UV1AV3"]}
+    else:
+        from control.dicionarios import AVENTURAS_CONECTURMA
+        serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
+        return AVENTURAS_CONECTURMA[serie_turma['serie']]
 
 def parametros_json_jogos(parametro):
     for p in parametro:

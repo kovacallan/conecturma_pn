@@ -55,6 +55,10 @@ def controller_login_sair():
     Deleta o cookie
     :return:
     """
-    response.delete_cookie("KIM")
-    response.delete_cookie("BUMBA")
+    cookies = ['ONLINE_MODE','UV1AV1UDundefined',
+            'UV1AVundefinedUDundefined','VIDEO.UV1AV1UD1',
+            'VIDEO.UV1AV1UDundefined','VIDEO.UV1AVundefinedUDundefined',
+            'UV1AV1UD1', 'BUMBA', 'KIM']
+    for i in cookies:
+        response.delete_cookie(i)
     redirect('/')

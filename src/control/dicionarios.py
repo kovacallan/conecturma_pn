@@ -84,3 +84,12 @@ UNIDADES = {
     '8': 'Unidade 8'
 }
 
+AVENTURAS_CONECTURMA = {
+    '0':'****', #Ainda não tem na plataforma
+    '1':{'aventurasAcessiveis': ["UV1AV1"]},
+    '2':{'aventurasAcessiveis': ["UV1AV1", "UV1AV2"]},
+    '3':{'aventurasAcessiveis': ["UV1AV1", "UV1AV2", "UV1AV3"]}
+}
+
+
+

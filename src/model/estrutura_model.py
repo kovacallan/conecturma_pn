@@ -58,19 +58,7 @@ class DbEstrutura(Model):
         listas = []
 
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura, order_by=self.id):
-            listas.append(
-                dict(
-                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                    vinculo_rede=lista.vinculo_rede,
-                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
-                    data_acesso=lista.data_acesso
-                )
-            )
+            listas.append(vars(lista)["_data"])
 
         return listas
 
@@ -94,33 +82,14 @@ class DbEstrutura(Model):
     def search_estrutura(self, tipo_estrutura, nome):
         lista_dic = None
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
-            lista_dic = dict(
-                id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                vinculo_rede=lista.vinculo_rede,
-                cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
-                data_acesso=lista.data_acesso
-            )
+            lista_dic.append(vars(lista)["_data"])
+
         return lista_dic
 
     def search_estrutura_id(self, id):
         if id != '0':
             lista = DbEstrutura.load(int(id))
-            lista_dic = dict(
-                            id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                            serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                            vinculo_rede=lista.vinculo_rede,
-                            cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                            estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                            preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                            descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                            nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
-                            data_acesso=lista.data_acesso
-                             )
+            lista_dic = vars(lista)["_data"]
         else:
             lista_dic = dict(
                 nome=" "
@@ -132,19 +101,7 @@ class DbEstrutura(Model):
         escola = []
         for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '2') and (DbEstrutura.vinculo_rede == vinculo_rede),
                                        order_by=self.nome):
-            escola.append(
-                dict(
-                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                    vinculo_rede=lista.vinculo_rede,
-                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
-                    data_acesso=lista.data_acesso
-                )
-            )
+            escola.append(vars(lista)["_data"])
 
         return escola
 
@@ -152,36 +109,16 @@ class DbEstrutura(Model):
         turma = []
         for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_rede == vinculo_rede),
                                 order_by=DbEstrutura.nome):
-            turma.append(
-                dict(
-                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                    vinculo_rede=lista.vinculo_rede, cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item, preco=lista.preco,
-                    tipo_medalha=lista.tipo_medalha, descricao=lista.descricao,
-                    descricao_completa=lista.descricao_completa, nome_usuario=lista.nome_usuario,
-                    tipo_usuario=lista.tipo_usuario, data_acesso=lista.data_acesso
-                )
-            )
+            turma.append(vars(lista)["_data"])
+
         return turma
 
     def search_turma_by_escola(self, vinculo_escola):
         turma = []
         for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_escola == vinculo_escola),
                                 order_by=DbEstrutura.nome):
-            turma.append(
-                dict(
-                    id=lista.id, nome=lista.nome, criador=lista.quem_criou, escola=lista.vinculo_escola,
-                    serie=lista.serie, tipo_estrutura=lista.tipo_estrutura, telefone=lista.telefone,
-                    vinculo_rede=lista.vinculo_rede,
-                    cep=lista.cep, endereco=lista.endereco, numero=lista.numero,
-                    estado=lista.estado, uf=lista.uf, tipo_item=lista.tipo_item,
-                    preco=lista.preco, tipo_medalha=lista.tipo_medalha,
-                    descricao=lista.descricao, descricao_completa=lista.descricao_completa,
-                    nome_usuario=lista.nome_usuario, tipo_usuario=lista.tipo_usuario,
-                    data_acesso=lista.data_acesso
-                )
-            )
+            turma.append(vars(lista)["_data"])
+
             return turma
 
     def update_estrutura(self, update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None,
