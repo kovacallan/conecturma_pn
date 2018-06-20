@@ -57,7 +57,10 @@ def ver_itens():
 
     usuario = usuario_logado()
     itens_comprado = facade.ver_item_comprado_facade(usuario['id'])
-    itens = []
+
+    itens=[]
+    # itens = [y for y in itens_comprado
+    #     itens.append(facade.search_estrutura_id_facade(int(y)))]
     for y in itens_comprado:
         itens.append(facade.search_estrutura_id_facade(int(y)))
 

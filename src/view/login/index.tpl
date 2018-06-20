@@ -23,8 +23,13 @@
             <form action="login/login_aluno" method="post">
                 <h2>Aluno</h2>
                 Nome  :<input type="text" name="aluno_login_nome"/>
-                Senha :<input type="password" name="aluno_senha"/>
-                <button type="submit">Entrar</button>
+                <pre>
+                Senha : <input type="checkbox" name="aluno_senha" value="a" >a  <input type="checkbox" name="aluno_senha" value="b">b <input type="checkbox" name="aluno_senha" value="c">c<br>
+                        <input type="checkbox" name="d" value="d" >d  <input type="checkbox" name="aluno_senha" value="e">e <input type="checkbox" name="aluno_senha" value="f">f<br>
+                        <input type="checkbox" name="g" value="g" >g  <input type="checkbox" name="aluno_senha" value="h">h <input type="checkbox" name="aluno_senha" value="i">i<br>
+                        <input type="checkbox" name="j" value="j" >j  <input type="checkbox" name="aluno_senha" value="l">l <input type="checkbox" name="aluno_senha" value="m">m<br>
+                </pre>
+                    <button type="submit">Entrar</button>
             </form>
             <a href="/formulario_cadastro"><button>Cadastrar</button></a>
         </div>

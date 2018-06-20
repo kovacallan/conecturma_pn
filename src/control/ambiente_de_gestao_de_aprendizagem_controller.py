@@ -226,7 +226,7 @@ def controller_observador_cadastro():
     if tipo != '1':
         vinculo_rede = facade.search_estrutura_id_facade(int(escola))
         facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
-                                        escola=escola, rede=vinculo_rede['vinculo_rede'], vinculo_turma=turma,logradouro=logradouro,)
+                                        escola=escola, rede=vinculo_rede['vinculo_rede'], vinculo_turma=turma)
     else:
         facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
                                         escola=escola, rede=rede, vinculo_turma=turma)

@@ -8,6 +8,7 @@ from facade.facade_main import Facade
 
 facade = Facade()
 
+
 @route('/login_observador', method='POST')
 def controller_login_entrar_observador():
     """
@@ -18,7 +19,7 @@ def controller_login_entrar_observador():
     nome = request.params['usuario']
     senha = request.params['senha']
     observador = valida_login_observador(nome, senha)
-    print("login",observador)
+    print("login", observador)
     if observador:
         if observador['tipo'] is not '0':
             create_cookie(nome)
@@ -26,7 +27,7 @@ def controller_login_entrar_observador():
             facade.login_date_facade(observador['id'], now)
             facade.create_estrutura_facade(observador['nome'], observador['tipo'])
             redirect('/gestao_aprendizagem')
-        elif observador['tipo']== '0':
+        elif observador['tipo'] == '0':
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)
@@ -35,27 +36,30 @@ def controller_login_entrar_observador():
     else:
         redirect('/')
 
+
 @route('/esqueci_senha')
 def view_esqueci_senha():
     return template('login/esqueci_senha.tpl')
+
 
 @route('/view_reformular_senha')
 def view_esqueci_senha():
     email = request.params['email']
     pesquisa = facade.search_observador_email_facade(email=email)
     teste = facade.read_observador_facade()
-    print("reformular senhaL47",teste)
+    print("reformular senhaL47", teste)
     return template('login/reformular_senha.tpl', id=pesquisa['id'], email=pesquisa['email'])
+
 
 @route('/controller_reformular_senha', method="POST")
 def controller_esqueci_senha():
-    id=request.params['id']
+    id = request.params['id']
     senha = request.params['senha']
-    facade.redefinir_senha_facade(id=int(id),senha=senha)
+    facade.redefinir_senha_facade(id=int(id), senha=senha)
     redirect('/esqueci_senha')
 
-def valida_login_observador(nome, senha):
 
+def valida_login_observador(nome, senha):
     """
     Valida o login do aluno ,
     :param nome: nome de login
@@ -65,12 +69,13 @@ def valida_login_observador(nome, senha):
     retorno = facade.search_observador_facade(nome)
     if retorno:
         if retorno['nome'] == nome and retorno['senha'] == senha:
-            print("47",nome)
+            print("47", nome)
             return retorno
         else:
             return False
     else:
         return False
+
 
 def create_cookie(parametro):
     response.set_cookie("login", parametro, secret='2525')

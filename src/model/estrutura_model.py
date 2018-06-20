@@ -195,9 +195,9 @@ class DbEstrutura(Model):
             )
             return turma
 
-    def update_estrutura(self, update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None,
-                         numero=None, cidade=None,
-                         estado=None, uf=None, serie=None, tipo_item=None, preco=None, tipo_medalha=None,
+    def update_estrutura(self, update_id, nome='0', telefone='0', vinculo_rede='0', cep='0', endereco='0',
+                         numero='0', cidade='0',
+                         estado='0', uf='0', serie='0', tipo_item='0', preco=None, tipo_medalha=None,
                          descricao=None,
                          descricao_completa=None, nome_usuario=None, tipo_usuario=None, vinculo_escola=None,
                          vinculo_professor_turma="0"):

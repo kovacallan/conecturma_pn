@@ -17,7 +17,7 @@
                     {{usuarios['telefone']}}
                 </td>
                 <td>
-                    {{usuarios['rua']}}
+                    {{usuarios['senha']}}
                 <td>
                     {{usuarios['numero']}}
                 </td>
@@ -25,7 +25,13 @@
                     {{usuarios['estado']}}
                 </td>
                 <td>
-                    {{usuarios['cidade']}}
+                    {{usuarios['vinculo_escola']}}
+                </td>
+                <td>
+                    {{usuarios['tipo_aluno']}}
+                </td>
+                <td>
+                    {{usuarios['tipo_usuario']}}
                 </td>
                 <td>
                     <form action="/escola/editar">

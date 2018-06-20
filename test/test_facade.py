@@ -63,7 +63,7 @@ class FacadeTest(unittest.TestCase):
 
     def _read_aluno(self):
         # self._create_aluno()
-        aluno4 = self.facade.search_aluno_nome_facade(nome="egg")
+        aluno4 = self.facade.search_aluno_nome_facade(nome="thanos")
         self.assertIn(aluno4['nome'], self.facade.read_aluno_facade()[-1]['nome'])
 
     def test_read_aluno(self):

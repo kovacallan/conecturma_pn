@@ -25,8 +25,9 @@ def login_observador_controller():
 @route('/login/login_aluno', method='POST')
 def login_observador_controller():
     nome = request.params['aluno_login_nome']
-    senha = request.params['aluno_senha']
-
+    presenha = request.forms.getall('aluno_senha')
+    senha=''.join(presenha)
+    print(senha)
     login = Login_Aluno(nome=nome, senha=senha)
     redirect(login.login())
 
@@ -39,7 +40,6 @@ def view_esqueci_senha():
     email = request.params['email']
     pesquisa = facade.search_observador_email_facade(email=email)
     teste = facade.read_observador_facade()
-    print(teste)
     return template('login/reformular_senha.tpl', id=pesquisa['id'], email=pesquisa['email'])
 
 @route('/controller_reformular_senha', method="POST")

@@ -33,10 +33,10 @@ class DbAluno(Model):
     def create_aluno(self, nome, senha, matricula, data_nascimento, sexo, vinculo_escola='0', vinculo_rede='0',
                      cpf_responsavel='0'):
 
-        if nome.isalpha() and vinculo_escola.isdigit() and vinculo_rede.isdigit() and sexo is 'masculino' or sexo is 'feminino':
-            self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
+        # if nome.isalpha() and vinculo_escola.isdigit() and vinculo_rede.isdigit() and sexo is 'masculino' or sexo is 'feminino':
+        if self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
                         vinculo_rede=vinculo_rede, matricula=matricula, data_nascimento=data_nascimento, sexo=sexo,
-                        cpf_responsavel=cpf_responsavel)
+                        cpf_responsavel=cpf_responsavel):
             return True
         else:
             return False
