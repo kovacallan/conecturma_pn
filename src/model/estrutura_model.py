@@ -80,9 +80,9 @@ class DbEstrutura(Model):
 
 
     def search_estrutura(self, tipo_estrutura, nome):
-        lista_dic = None
+
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
-            lista_dic.append(vars(lista)["_data"])
+            lista_dic=vars(lista)["_data"]
 
         return lista_dic
 

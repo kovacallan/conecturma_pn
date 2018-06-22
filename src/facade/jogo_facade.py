@@ -1,8 +1,8 @@
-from model.jogo_model import OaConcluido
+from model.jogo_model import DesempenhoJogo
 
 class OaConcluidoFacade:
     def __init__(self):
-        self.oaconcluido = OaConcluido()
+        self.oaconcluido = DesempenhoJogo()
 
     def create_oa_concluido_facade(self, **kwargs):
         self.oaconcluido.create_oa_concluido(**kwargs)

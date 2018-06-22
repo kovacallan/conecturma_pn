@@ -134,26 +134,34 @@ def verificarAcessoObjetoAprendizagem():
 
 @route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
 def verificarConclusoesObjetosAprendizagem():
+    usuario=usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
     print('3: ', parametros)
-
-    retorno={
-        'objetosConcluidos':["UV1AV1UD1OA01"]
-     }
-
+    if int(usuario['tipo'])<6:
+        retorno={'objetosConcluidos':parametros['objetosAprendizagem']}
+    else:
+        desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
+        if desempenho_oa == None:
+            retorno = {'objetosConcluidos': [parametros['objetosAprendizagem'][0]]}
+        else:
+            proxima_oa = desempenho_oa['objeto_aprendizagem']
+            retorno = {'objetosConcluidos':'{}{}{}'.format(desempenho_oa['aventura'],desempenho_oa['unidade'],desempenho_oa['objeto_aprendizagem'])}
     return retorno
 
 @route('/api/plataforma/registrarConclusao', method='POST')
 def registrarConclusao():
+    from control.dicionarios import PREMIO_JOGOS
     parametros = parametros_json_jogos(request.params.items())
     print('4: ', parametros)
-
-    retorno = {
-        'medalhas':[],
-        'moedas': 7,
-        'xp': 2
-    }
-    return retorno
+    flag = 0
+    oa = parametros['objetoAprendizagem']
+    for i in parametros['niveis']:
+        if i['termino'] == True:
+            flag+=1
+    if flag > 1:
+        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),aventura=oa[3:6],unidade=oa[6:9],
+                                          objeto_aprendizagem=oa[9:12],nivel_concluido=parametros['niveis'])
+    return PREMIO_JOGOS[str(flag)]
 
 @route('/api/plataforma/obterPremiacao', method='POST')
 def obterPremiacao():
@@ -168,19 +176,22 @@ def obterPremiacao():
 
 @route('/api/plataforma/verificarAcessoUnidade', method='POST')
 def verificarAcessoUnidade():
+    usuario=usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
-    print('6: ', parametros)
-    retorno={
-        'unidadesAcessiveis':["UV1AV1UD1"]
-    }
+    if int(usuario['tipo'])<6:
+        retorno={'unidadesAcessiveis':parametros['unidades']}
+    else:
+        desempenho_unidade = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
 
+        retorno ={'unidadesAcessiveis':[parametros['unidades'][0]] if desempenho_unidade==None else parametros['unidades']}
     return retorno
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
 def verificarAcessoAventura():
     usuario = usuario_logado()
     if int(usuario['tipo'])< 6:
-        return {'aventurasAcessiveis': ["UV1AV1", "UV1AV2", "UV1AV3"]}
+        parametros = parametros_json_jogos(request.params.items())
+        return {'aventurasAcessiveis': parametros['aventuras']}
     else:
         from control.dicionarios import AVENTURAS_CONECTURMA
         serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))

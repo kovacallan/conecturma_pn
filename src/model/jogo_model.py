@@ -1,9 +1,11 @@
 from walrus import *
 
-class OaConcluido():
+class DesempenhoJogo():
     id = AutoIncrementField(primary_key=True)
-    id_aluno = TextField(fts=True, default='0')
-    id_oa = TextField(fts=True, default='0')
+    id_aluno=TextField(fts=True, default='0')
+    aventura=TextField(fts=True, default='0')
+    unidade=TextField(fts=True, default='0')
+    objeto_aprendizagem=TextField(fts=True, default='0')
     nivel_concluido = ListField(default=['0'])
 
     def create_oa_concluido(self, **kwargs):
@@ -11,8 +13,10 @@ class OaConcluido():
 
     def search_oa_concluido_id_aluno(self, id_aluno):
         conclucoes = []
-
-        for i in OaConcluido.query((OaConcluido.id_aluno==id_aluno), order_by=OaConcluido.id_oa):
-            conclucoes.append(vars(i)["_data"])
+        try:
+            for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno), order_by=DesempenhoJogo.objeto_aprendizagem):
+                conclucoes.append(vars(i)["_data"])
+        except:
+            conclucoes = None
 
         return conclucoes
