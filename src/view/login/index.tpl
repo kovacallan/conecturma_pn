@@ -24,10 +24,10 @@
                 <h2>Aluno</h2>
                 Nome  :<input type="text" name="aluno_login_nome"/>
                 <pre>
-                Senha : <input type="checkbox" name="aluno_senha" value="a" >a  <input type="checkbox" name="aluno_senha" value="b">b <input type="checkbox" name="aluno_senha" value="c">c<br>
-                        <input type="checkbox" name="d" value="d" >d  <input type="checkbox" name="aluno_senha" value="e">e <input type="checkbox" name="aluno_senha" value="f">f<br>
-                        <input type="checkbox" name="g" value="g" >g  <input type="checkbox" name="aluno_senha" value="h">h <input type="checkbox" name="aluno_senha" value="i">i<br>
-                        <input type="checkbox" name="j" value="j" >j  <input type="checkbox" name="aluno_senha" value="l">l <input type="checkbox" name="aluno_senha" value="m">m<br>
+                Senha :
+                        <input type="checkbox" name="aluno_senha" value="a">a <input type="checkbox" name="aluno_senha" value="b">b <input type="checkbox" name="aluno_senha" value="c">c <input type="checkbox" name="aluno_senha" value="d">d <br>
+                        <input type="checkbox" name="aluno_senha" value="e">e <input type="checkbox" name="aluno_senha" value="f">f <input type="checkbox" name="aluno_senha" value="g">g <input type="checkbox" name="aluno_senha" value="h">h <br>
+                        <input type="checkbox" name="aluno_senha" value="i">i <input type="checkbox" name="aluno_senha" value="j">j <input type="checkbox" name="aluno_senha" value="l">l <input type="checkbox" name="aluno_senha" value="m">m <br>
                 </pre>
                     <button type="submit">Entrar</button>
             </form>

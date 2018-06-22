@@ -5,9 +5,9 @@ class AlunoFacade:
     def __init__(self):
         self.aluno = DbAluno()
 
-    def create_aluno_facade(self, nome, matricula,escola,senha,vinculo_rede,data_nascimento,sexo,cpf_responsavel='0'):
+    def create_aluno_facade(self, nome,nome_login, matricula,escola,senha,vinculo_rede,data_nascimento,sexo,cpf_responsavel='0'):
 
-        return self.aluno.create_aluno(nome=nome, matricula=matricula,vinculo_escola = escola,senha=senha, vinculo_rede=vinculo_rede,data_nascimento=data_nascimento,sexo=sexo,cpf_responsavel=cpf_responsavel)
+        return self.aluno.create_aluno(nome=nome,nome_login=nome_login,matricula=matricula,vinculo_escola = escola,senha=senha, vinculo_rede=vinculo_rede,data_nascimento=data_nascimento,sexo=sexo,cpf_responsavel=cpf_responsavel)
 
     def read_aluno_facade(self):
 
@@ -28,6 +28,9 @@ class AlunoFacade:
     def search_aluno_nome_facade(self, nome):
 
         return self.aluno.search_aluno_nome(nome)
+
+    def search_aluno_nome_login_facade(self,nome_login):
+        return self.aluno.search_aluno_nome_login(nome_login)
 
     def search_aluno_nome_objeto_facade(self, nome):
         return self.aluno.pesquisa_aluno_objeto(nome)

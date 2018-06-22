@@ -19,7 +19,7 @@ def controller_login_entrar_observador():
     nome = request.params['usuario']
     senha = request.params['senha']
     observador = valida_login_observador(nome, senha)
-    print("login", observador)
+    print("login L22", observador)
     if observador:
         if observador['tipo'] is not '0':
             create_cookie(nome)

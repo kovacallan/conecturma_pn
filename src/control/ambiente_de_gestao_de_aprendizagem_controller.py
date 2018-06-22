@@ -170,6 +170,9 @@ def aluno():
 def create_aluno():
 
     nome = request.forms['aluno_nome']
+    nome_separado=nome.split()
+    usuario=nome_separado[0]
+    print(f'testando {usuario}')
     senha = request.forms['senha']
     matricula = request.forms['matricula']
     escola = request.forms['escola']
@@ -178,7 +181,7 @@ def create_aluno():
 
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
 
-    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola,
+    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola, nome_login=usuario,
                                vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha,data_nascimento=data_nascimento,sexo=sexo)
 
     redirect('/gestao_aprendizagem/usuario')

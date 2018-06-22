@@ -61,14 +61,14 @@ class Login_Aluno(object):
         hash = self.gerar_hash()
         aluno = facade.search_aluno_nome_facade(nome=self.nome)
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
-        if aluno['nome'] == self.nome:
+        if aluno['nome_login'] == self.nome:
             if aluno['senha'] == self.senha:
                 aluno_logado = dict(
                     id=aluno['id'],
                     nome=aluno['nome'],
                     tipo=aluno['tipo'],
                 )
-                print(aluno_logado)
+                print('aluno_logado per l 71',aluno_logado)
                 response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
                 return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
         else:

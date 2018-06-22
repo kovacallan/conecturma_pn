@@ -43,22 +43,45 @@ class FacadeTest(unittest.TestCase):
         esco_spo = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='estalo')
         self.assertIsNot(esco_spo, None)
 
-        aluno1 = self.facade.create_aluno_facade(nome='egg', matricula='2345', escola=str(escola['id']), senha='123',
+        aluno1 = self.facade.create_aluno_facade(nome='egg', matricula='2345',nome_login='egg', escola=str(escola['id']), senha='123',
                                                  vinculo_rede=str(rede['id']), data_nascimento=date(1994, 5, 2),
                                                  sexo='masculino')
         self.assertEqual(aluno1, True)
-        aluno2 = self.facade.create_aluno_facade(nome="hilter", matricula="234", escola=str(escola['id']), senha="123",
+        aluno_egg0 = self.facade.create_aluno_facade(nome='egg', matricula='2345', nome_login='egg',
+                                                 escola=str(escola['id']), senha='123',
+                                                 vinculo_rede=str(rede['id']), data_nascimento=date(1994, 5, 2),
+                                                 sexo='masculino')
+        self.assertEqual(aluno_egg0, True)
+        aluno_egg1 = self.facade.create_aluno_facade(nome='egg', matricula='2345', nome_login='egg1',
+                                                     escola=str(escola['id']), senha='123',
+                                                     vinculo_rede=str(rede['id']), data_nascimento=date(1994, 5, 2),
+                                                     sexo='masculino')
+        self.assertEqual(aluno_egg1, True)
+        aluno_egg2 = self.facade.create_aluno_facade(nome='egg', matricula='2345', nome_login='egg1',
+                                                     escola=str(escola['id']), senha='123',
+                                                     vinculo_rede=str(rede['id']), data_nascimento=date(1994, 5, 2),
+                                                     sexo='masculino')
+        self.assertEqual(aluno_egg2, True)
+        outro_login=self.facade.search_aluno_nome_login_facade(nome_login='egg1')
+        self.assertIsNot(outro_login,None)
+        mais_un_q=self.facade.search_aluno_nome_login_facade(nome_login='egg2')
+        self.assertIsNot(mais_un_q,None)
+        # mais_un_q2 = self.facade.search_aluno_nome_login_facade(nome_login='egg3')
+        # self.assertIsNot(mais_un_q2,None)
+
+        aluno2 = self.facade.create_aluno_facade(nome="hilter", matricula="234",nome_login='hilter', escola=str(escola['id']), senha="123",
                                                  vinculo_rede='0', data_nascimento=date(1994, 2, 5), sexo='feminino',)
         self.assertEqual(aluno2, True)
-        aluno3 = self.facade.create_aluno_facade(nome="Ni", matricula="42069", escola=str(escola['id']), senha='123',
+        aluno3 = self.facade.create_aluno_facade(nome="Ni",nome_login='Ni', matricula="42069", escola=str(escola['id']), senha='123',
                                                  vinculo_rede='0', data_nascimento=date(1500, 5, 21), sexo='feminino')
         self.assertEqual(aluno3, True)
-        aluno4 = self.facade.create_aluno_facade(nome="thanos", matricula='2929', escola=str(esco_spo['id']),
+        aluno4 = self.facade.create_aluno_facade(nome="thanos",nome_login='thanos', matricula='2929', escola=str(esco_spo['id']),
                                                  senha="123",
                                                  vinculo_rede="0", data_nascimento=date(2018, 5, 9), sexo='masculino')
         self.assertEqual(aluno4, True)
 
-    def _test_create_delete_aluno(self):
+    def test_create_delete_aluno(self):
+        self._create_all_estruturas()
         self._create_aluno()
 
     def _read_aluno(self):
@@ -66,7 +89,7 @@ class FacadeTest(unittest.TestCase):
         aluno4 = self.facade.search_aluno_nome_facade(nome="thanos")
         self.assertIn(aluno4['nome'], self.facade.read_aluno_facade()[-1]['nome'])
 
-    def test_read_aluno(self):
+    def _test_read_aluno(self):
         self._read_aluno()
 
     def _update_aluno(self):
@@ -86,7 +109,7 @@ class FacadeTest(unittest.TestCase):
         alunos_conecturma = self.facade.search_aluno_escola_facade(str(escola['id']))
         self.assertEqual(3, len(alunos_conecturma))
 
-    def test_pesquisa_alunos_de_uma_escola(self):
+    def _test_pesquisa_alunos_de_uma_escola(self):
         self._search_aluno_escola()
 
     def _search_aluno_nome(self):
