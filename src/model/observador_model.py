@@ -1,4 +1,5 @@
 from walrus import *
+from datetime import date
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -31,11 +32,11 @@ class DbObservador(Model):
     data_ultimo_login = TextField(default='')
 
 
-    def create_observador(self, nome, senha, telefone, email, tipo, escola,data_nascimento, vinculo_turma='0',rede='0', cpf='0'):
+    def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
 
-        if nome.isalpha() and cpf.isdigit() and tipo.isdigit():
+        if True or nome.isalpha() and cpf.isdigit() and tipo.isdigit():
             self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
-                       vinculo_escola=escola, vinculo_turma = vinculo_turma,data_nascimento=data_nascimento)
+                       vinculo_escola=escola, vinculo_turma = vinculo_turma)
             return True
         else:
             return False

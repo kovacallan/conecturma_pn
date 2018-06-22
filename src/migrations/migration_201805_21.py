@@ -1,12 +1,14 @@
 from datetime import date
 from src.facade.facade_main import *
 from src.control.dicionarios import TIPO_ESTRUTURA, TIPO_USUARIOS
+from passlib.hash import sha512_crypt
 
 facade = Facade()
+senha_adm= sha512_crypt.hash("@onde2929")
 
-facade.create_observador_facade(nome="administrador", senha="@onde2929", telefone="21999999999", cpf="0", email="admin",
+facade.create_observador_facade(nome="administrador", senha=senha_adm, telefone="21999999999", cpf="0", email="admin",
                                 tipo='0',
-                                rede='0', escola='0', data_nascimento=date(1994, 2, 21))
+                                rede='0', escola='0')
 
 
 facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="Rede Conecturma", telefone="(21)99999999")
@@ -20,15 +22,15 @@ facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'], nome="KND
 
 facade.create_observador_facade(nome="gestor", senha="123", telefone="21999999999", cpf="0",
                                 email="gestor@conecturma.com.br", tipo=TIPO_USUARIOS['gestor'],
-                                escola='0', rede='1', data_nascimento=date(1993, 2, 22))
+                                escola='0', rede='1')
 
 facade.create_observador_facade(nome="diretor", senha="123", telefone="21999999999", cpf="0",
                                 email="diretor@conecturma.com.br", tipo=TIPO_USUARIOS['diretor'],
-                                rede='1', escola='2', data_nascimento=date(1970, 2, 20))
+                                rede='1', escola='2')
 
 facade.create_observador_facade(nome="professor", senha="123", telefone="21999999999", cpf="0",
                                 email="professor@conecturma.com.br", tipo=TIPO_USUARIOS['professor'],
-                                rede='1', escola='2', vinculo_turma='3', data_nascimento=date(1960, 11, 11))
+                                rede='1', escola='2', vinculo_turma='3')
 
 
 facade.create_aluno_facade(nome="aluno", senha="abcd",nome_login='aluno', matricula='123', data_nascimento=date(1994, 10, 20),

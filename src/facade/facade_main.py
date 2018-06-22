@@ -13,6 +13,7 @@ class Facade(AlunoFacade, OaConcluidoFacade,ObservadorFacade, EstruturaFacade, Z
         ObservadorFacade.__init__(self)
         OaConcluidoFacade.__init__(self)
         EstruturaFacade.__init__(self)
+        AlunoFacade.__init__(self)
         # HistoricoFacade.__init__(self)
         ZinativosFacade.__init__(self)
 

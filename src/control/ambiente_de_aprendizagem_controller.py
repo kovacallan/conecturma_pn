@@ -183,8 +183,10 @@ def verificarAcessoUnidade():
 def verificarAcessoAventura():
     usuario = usuario_logado()
     if int(usuario['tipo'])< 6:
+        print(f'ue')
         return {'aventurasAcessiveis': ["UV1AV1", "UV1AV2", "UV1AV3"]}
     else:
+        print('else AACL189')
         from control.dicionarios import AVENTURAS_CONECTURMA
         serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
         return AVENTURAS_CONECTURMA[serie_turma['serie']]

@@ -78,9 +78,11 @@ class DbEstrutura(Model):
         return lista_teste
 
     def search_estrutura(self, tipo_estrutura, nome):
-        lista_dic = None
+
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
-            lista_dic.append(vars(lista)["_data"])
+
+            lista_dic= vars(lista)["_data"]
+
         return lista_dic
 
     def search_estrutura_id(self, id):

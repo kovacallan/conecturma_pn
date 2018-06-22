@@ -38,7 +38,8 @@ class DbAluno(Model):
     #                  cpf_responsavel='0'):
 
     def create_aluno(self, **kwargs):
-        self.create(**kwargs)
+        if self.create(**kwargs):
+            return True
 
     def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
 

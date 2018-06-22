@@ -91,7 +91,7 @@ Data de Nascimento: <input type="date" name="data_nascimento" id="data_nasciment
     <input type="hidden" id="cpf" name="cpf" value="0">
     email*:<input type="email" id="email" name="email" onChange="emailValidador()"><div id="erro_email"></div>
     <br><br>
-Data de Nascimento: <input type="date" name="data_nascimento" id="data_nascimento"/>
+<!--Data de Nascimento: <input type="text" name="data_nascimento"/>-->
     escola*:
     <select id="escola" name="escola">
         %if isinstance(escola,dict):
@@ -111,47 +111,47 @@ Data de Nascimento: <input type="date" name="data_nascimento" id="data_nasciment
         %end
     </select>
     <h3>Endereço</h3>
-    Logradouro: <input type="text" name="logradouro"/>&ensp;
-    Bairro:  <input type="text" name="bairro"/>
-    Numero: <input type="text" name="numero" size="3"/><br>
+    <!--Logradouro: <input type="text" name="logradouro"/>&ensp;-->
+    <!--Bairro:  <input type="text" name="bairro"/>-->
+    <!--Numero: <input type="text" name="numero" size="3"/><br>-->
 
-    Complemento : <input type="text" name="complemento" size="15"/> &ensp;
+    <!--Complemento : <input type="text" name="complemento" size="15"/> &ensp;-->
 
 
 
-    CEP: <input type="text" name="cep"/><br>
-    Uf:
-            <select name="uf">
-                <option value="">-- Selecione --</option>
-                <option value="AC">Acre</option>
-                <option value="AL">Alagoas</option>
-                <option value="AP">Amapá</option>
-                <option value="AM">Amazonas</option>
-                <option value="BA">Bahia</option>
-                <option value="CE">Ceará</option>
-                <option value="DF">Distrito Federal</option>
-                <option value="ES">Espírito Santo</option>
-                <option value="GO">Goiás</option>
-                <option value="MA">Maranhão</option>
-                <option value="MT">Mato Grosso</option>
-                <option value="MS">Mato Grosso do Sul</option>
-                <option value="MG">Minas Gerais</option>
-                <option value="PA">Pará</option>
-                <option value="PB">Paraíba</option>
-                <option value="PR">Paraná</option>
-                <option value="PE">Pernambuco</option>
-                <option value="PI">Piauí</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="RN">Rio Grande do Norte</option>
-                <option value="RS">Rio Grande do Sul</option>
-                <option value="RO">Rondônia</option>
-                <option value="RR">Rorâima</option>
-                <option value="SC">Santa Catarina</option>
-                <option value="SP">São Paulo</option>
-                <option value="SE">Sergipe</option>
-                <option value="TO">Tocantins</option>
-            </select> &ensp;
-    Municipio: <input type="text" name="municipio" id="municipio"/><br>
+    <!--CEP: <input type="text" name="cep"/><br>-->
+    <!--Uf:-->
+            <!--<select name="uf">-->
+                <!--<option value="">&#45;&#45; Selecione &#45;&#45;</option>-->
+                <!--<option value="AC">Acre</option>-->
+                <!--<option value="AL">Alagoas</option>-->
+                <!--<option value="AP">Amapá</option>-->
+                <!--<option value="AM">Amazonas</option>-->
+                <!--<option value="BA">Bahia</option>-->
+                <!--<option value="CE">Ceará</option>-->
+                <!--<option value="DF">Distrito Federal</option>-->
+                <!--<option value="ES">Espírito Santo</option>-->
+                <!--<option value="GO">Goiás</option>-->
+                <!--<option value="MA">Maranhão</option>-->
+                <!--<option value="MT">Mato Grosso</option>-->
+                <!--<option value="MS">Mato Grosso do Sul</option>-->
+                <!--<option value="MG">Minas Gerais</option>-->
+                <!--<option value="PA">Pará</option>-->
+                <!--<option value="PB">Paraíba</option>-->
+                <!--<option value="PR">Paraná</option>-->
+                <!--<option value="PE">Pernambuco</option>-->
+                <!--<option value="PI">Piauí</option>-->
+                <!--<option value="RJ">Rio de Janeiro</option>-->
+                <!--<option value="RN">Rio Grande do Norte</option>-->
+                <!--<option value="RS">Rio Grande do Sul</option>-->
+                <!--<option value="RO">Rondônia</option>-->
+                <!--<option value="RR">Rorâima</option>-->
+                <!--<option value="SC">Santa Catarina</option>-->
+                <!--<option value="SP">São Paulo</option>-->
+                <!--<option value="SE">Sergipe</option>-->
+                <!--<option value="TO">Tocantins</option>-->
+            <!--</select> &ensp;-->
+    <!--Municipio: <input type="text" name="municipio" id="municipio"/><br>-->
     <input type="hidden" id="rede" name="rede" value="0">
     <br>
 % end

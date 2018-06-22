@@ -68,7 +68,8 @@ def valida_login_observador(nome, senha):
     """
     retorno = facade.search_observador_facade(nome)
     if retorno:
-        if retorno['nome'] == nome and retorno['senha'] == senha:
+
+        if retorno['nome'] == nome and sha512_crypt.verify(senha,retorno['senha']):
             print("47", nome)
             return retorno
         else:

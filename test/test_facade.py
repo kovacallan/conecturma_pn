@@ -37,14 +37,20 @@ class FacadeTest(unittest.TestCase):
 
     def _create_aluno(self):
         rede = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="ACNE")
+        print(f'rede{rede}')
         self.assertIsNot(rede, None)
         escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='Escola conecturma')
         self.assertIsNot(escola, None)
         esco_spo = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='estalo')
         self.assertIsNot(esco_spo, None)
 
-        aluno1 = self.facade.create_aluno_facade(nome='egg', matricula='2345',nome_login='egg', escola=str(escola['id']), senha='123',
-                                                 vinculo_rede=str(rede['id']), data_nascimento=date(1994, 5, 2),
+        aluno1 = self.facade.create_aluno_facade(nome='egg',
+                                                 matricula='2345'
+                                                 ,nome_login='egg',
+                                                 escola=(escola['id']),
+                                                 senha='123',
+                                                 vinculo_rede=str(rede['id']),
+                                                 data_nascimento=date(1994, 5, 2),
                                                  sexo='masculino')
         self.assertEqual(aluno1, True)
         aluno_egg0 = self.facade.create_aluno_facade(nome='egg', matricula='2345', nome_login='egg',
@@ -64,8 +70,8 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(aluno_egg2, True)
         outro_login=self.facade.search_aluno_nome_login_facade(nome_login='egg1')
         self.assertIsNot(outro_login,None)
-        mais_un_q=self.facade.search_aluno_nome_login_facade(nome_login='egg2')
-        self.assertIsNot(mais_un_q,None)
+        # mais_un_q=self.facade.search_aluno_nome_login_facade(nome_login='egg2')
+        # self.assertIsNot(mais_un_q,None)
         # mais_un_q2 = self.facade.search_aluno_nome_login_facade(nome_login='egg3')
         # self.assertIsNot(mais_un_q2,None)
 

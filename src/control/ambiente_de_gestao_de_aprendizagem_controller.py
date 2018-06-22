@@ -1,5 +1,7 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
+from passlib.hash import sha512_crypt
+
 
 from control.classes.permissao import usuario_logado, permissao
 from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO, TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE
@@ -186,14 +188,14 @@ def create_aluno():
 
 def verificar_nome_login(nome_login):
 
-    existe_usuario = facade.search_aluno_nome_login(nome_login)
+    existe_usuario = facade.search_aluno_nome_login_facade(nome_login)
     if existe_usuario != None:
 
         if existe_usuario['nome_login'] == nome_login and existe_usuario['nome_login'].isalpha():
             nome_login = nome_login + '1'
         else:
             x = '2'
-            mesmo_login = facade.search_aluno_nome_login(nome_login)
+            mesmo_login = facade.search_aluno_nome_login_facade(nome_login)
             while mesmo_login != None and nome_login == mesmo_login['nome_login']:
                 nome_login = [letter for letter in nome_login]
                 y = len(nome_login)
@@ -231,19 +233,24 @@ def view_observador_cadastro():
 def controller_observador_cadastro():
     tipo = request.params['tipo']
     nome = request.params['nome']
-    senha = request.params['senha']
+    senha1 = request.params['senha']
     telefone = request.params['telefone']
     cpf = request.params['cpf']
     email = request.params['email']
     escola = request.params['escola']
     rede = request.params['rede']
-    logradouro = request.params['logradouro']
-    numero = request.params['numero']
-    complemento = request.params['complemento']
-    bairro = request.params['bairro']
-    cep = request.params['cep']
-    Uf=request.params['uf']
+    # logradouro = request.params['logradouro']
+    # numero = request.params['numero']
+    # complemento = request.params['complemento']
+    # bairro = request.params['bairro']
+    # cep = request.params['cep']
+    # Uf=request.params['uf']
     turma = request.params['turma']
+    # data = request.params['data_nascimento']
+
+
+    senha = sha512_crypt.hash(senha1)
+
     if tipo != '1':
         vinculo_rede = facade.search_estrutura_id_facade(int(escola))
         facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
