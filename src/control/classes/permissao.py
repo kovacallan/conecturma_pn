@@ -62,7 +62,7 @@ class Login_Aluno(object):
                 aluno_logado = dict(
                     id=aluno['id'],
                     nome=aluno['nome'],
-                    tipo=aluno['tipo'],
+                    tipo=aluno['tipo_aluno'],
                     vinculo_rede=aluno['vinculo_rede'],
                     vinculo_escola=aluno['vinculo_escola'],
                     vinculo_turma=aluno['vinculo_turma'],

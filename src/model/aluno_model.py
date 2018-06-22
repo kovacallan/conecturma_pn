@@ -26,16 +26,14 @@ class DbAluno(Model):
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, default='0')
     
-    ultima_aventura = TextField(fts=True, default='0')
-    ultima_unidade = TextField(fts=True, default='0')
-    ultima_objeto_aprendizagem = TextField(fts=True, default='0')
+    ultima_aventura = TextField(fts=True, default='')
+    ultima_unidade = TextField(fts=True, default='')
+    ultima_objeto_aprendizagem = TextField(fts=True, default='')
 
     anotacoes_aluno = ListField()
 
-    def create_aluno(self, nome, senha, matricula ,vinculo_escola='0', vinculo_rede='0'):
-
-        self.create(nome=nome, tipo_aluno='6', vinculo_escola=vinculo_escola, senha=senha,
-                    vinculo_rede=vinculo_rede, matricula=matricula)
+    def create_aluno(self, **kwargs):
+        self.create(**kwargs)
 
 
     def update_aluno(self, update_id, nome, senha, turma, escola, rede):
@@ -65,15 +63,7 @@ class DbAluno(Model):
 
         alun_pes = None
         for search in DbAluno.query(DbAluno.nome == nome):
-            alun_pes = dict(
-                id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                vinculo_turma=search.vinculo_turma, email=search.email, cpf='',
-                ultima_aventura=search.ultima_aventura, ultima_unidade=search.ultima_unidade,  ultima_objeto_aprendizagem=search.ultima_objeto_aprendizagem
-            )
+            alun_pes = vars(search)["_data"]
 
         return alun_pes
 

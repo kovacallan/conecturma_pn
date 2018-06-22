@@ -16,8 +16,6 @@ import os
 view_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'view')
 bottle.TEMPLATE_PATH.insert(0, view_path)
 
-print(facade.read_estrutura_facade(tipo_estrutura='5'))
-
 application = default_app()
 @route('/error403')
 def error403():

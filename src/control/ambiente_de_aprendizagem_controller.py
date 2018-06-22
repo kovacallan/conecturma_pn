@@ -112,10 +112,11 @@ def jogo():
 
 @route('/api/plataforma/obterUltimaConclusao', method='POST')
 def obterUltimaConclusao():
+    usuario = usuario_logado()
     retorno={
-        'objetoAprendizagem':'UV1AV1UD1OA1',
-        'unidade':'UV1AV1UD1',
-        'aventura':'UV1AV1',
+        'objetoAprendizagem':'',
+        'unidade':'',
+        'aventura':'',
         'universo':'UV1'
              }
     return retorno
@@ -169,10 +170,10 @@ def obterPremiacao():
 def verificarAcessoUnidade():
     parametros = parametros_json_jogos(request.params.items())
     print('6: ', parametros)
-
     retorno={
         'unidadesAcessiveis':["UV1AV1UD1"]
     }
+
     return retorno
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
@@ -184,6 +185,7 @@ def verificarAcessoAventura():
         from control.dicionarios import AVENTURAS_CONECTURMA
         serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
         return AVENTURAS_CONECTURMA[serie_turma['serie']]
+
 
 def parametros_json_jogos(parametro):
     for p in parametro:
