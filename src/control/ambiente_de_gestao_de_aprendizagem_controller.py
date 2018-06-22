@@ -32,7 +32,6 @@ def view_usuario_index():
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
 
 
-
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
 @permissao('professor')
 def controller_redirect_cadastro():
@@ -171,21 +170,40 @@ def create_aluno():
 
     nome = request.forms['aluno_nome']
     nome_separado=nome.split()
-    usuario=nome_separado[0]
-    print(f'testando {usuario}')
+    nome_login1=nome_separado[0]
+    print(f'testando {nome_login1}')
     senha = request.forms['senha']
     matricula = request.forms['matricula']
     escola = request.forms['escola']
     data_nascimento=request.params['data_nascimento']
     sexo=request.params['sexo']
-
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
-
-    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola, nome_login=usuario,
+    nome_login=verificar_nome_login(nome_login1)
+    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola, nome_login=nome_login,
                                vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha,data_nascimento=data_nascimento,sexo=sexo)
 
     redirect('/gestao_aprendizagem/usuario')
 
+def verificar_nome_login(nome_login):
+
+    existe_usuario = facade.search_aluno_nome_login(nome_login)
+    if existe_usuario != None:
+
+        if existe_usuario['nome_login'] == nome_login and existe_usuario['nome_login'].isalpha():
+            nome_login = nome_login + '1'
+        else:
+            x = '2'
+            mesmo_login = facade.search_aluno_nome_login(nome_login)
+            while mesmo_login != None and nome_login == mesmo_login['nome_login']:
+                nome_login = [letter for letter in nome_login]
+                y = len(nome_login)
+                nome_login[y - 1] = x
+                x = str(int(x) + 1)
+                nome_login = ''.join(nome_login)
+    else:
+        return nome_login
+
+    return nome_login
 
 @route('/observador/cadastro')
 @permissao('professor')
@@ -386,7 +404,7 @@ def view_turma():
     turma = []
     for t in facade.read_estrutura_facade(TIPO_ESTRUTURA['turma']):
         t['serie'] = SERIE[t['serie']]
-        t['escola'] = get_nome_escola(t['escola'])
+        t['vinculo_escola'] = get_nome_escola(t['vinculo_escola'])
         turma.append(t)
     return dict(turma=turma)
 
@@ -457,10 +475,8 @@ def view_update_turma():
     """
     id = request.forms['id_turma']
     turma = facade.search_estrutura_id_facade(int(id))
-    return template('turma/turma_update', turma=turma,
-                    aluno=alunos_na_escola_sem_turma(turma['escola']),
-                    professor=professor_na_escola_sem_turma(turma['escola']))
-
+    return template('turma/turma_update', turma=turma, aluno=alunos_na_escola_sem_turma(turma['vinculo_escola']), professor=professor_na_escola_sem_turma(
+        turma['vinculo_escola']))
 
 def alunos_na_escola_sem_turma(vinculo_escola):
     alunos = []
@@ -470,7 +486,6 @@ def alunos_na_escola_sem_turma(vinculo_escola):
 
     return alunos
 
-
 def professor_na_escola_sem_turma(vinculo_escola):
     professores = []
     for p in facade.search_observador_escola(vinculo_escola=vinculo_escola):
@@ -478,7 +493,6 @@ def professor_na_escola_sem_turma(vinculo_escola):
             professores.append(p)
 
     return professores
-
 
 @route('/turma/turma_update_controller', method='POST')
 @permissao('diretor')
@@ -504,3 +518,4 @@ def controller_update_turma():
 @view('descritor/index.tpl')
 def descritores():
     return
+

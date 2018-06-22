@@ -66,9 +66,14 @@ class Login_Aluno(object):
                 aluno_logado = dict(
                     id=aluno['id'],
                     nome=aluno['nome'],
-                    tipo=aluno['tipo'],
+                    tipo=aluno['tipo_aluno'],
+                    vinculo_rede=aluno['vinculo_rede'],
+                    vinculo_escola=aluno['vinculo_escola'],
+                    vinculo_turma=aluno['vinculo_turma'],
+                    ultimo_oa = aluno['ultima_objeto_aprendizagem'],
+                    ultima_unidade= aluno['ultima_unidade'],
+                    ultima_aventura= aluno['ultima_aventura'],
                 )
-                print('aluno_logado per l 71',aluno_logado)
                 response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
                 return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
         else:

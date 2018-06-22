@@ -45,7 +45,7 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-2">
-                    {{t['escola']}}
+                    {{t['vinculo_escola']}}
                 </div>
                 <div class="col-md-2">
                     {{t['serie']}}

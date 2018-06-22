@@ -27,39 +27,18 @@ class DbAluno(Model):
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, default='0')
-
     vinculo_serie = TextField(fts=True, default='0')
-    ultima_aventura = TextField(fts=True, default='0')
-    ultima_unidade = TextField(fts=True, default='0')
-    ultima_objeto_aprendizagem = TextField(fts=True, default='0')
-
-
+    
+    ultima_aventura = TextField(fts=True, default='')
+    ultima_unidade = TextField(fts=True, default='')
+    ultima_objeto_aprendizagem = TextField(fts=True, default='')
     anotacoes_aluno = ListField()
 
-    def create_aluno(self, nome,nome_login, senha, matricula, data_nascimento, sexo, vinculo_escola='0', vinculo_rede='0',
-                     cpf_responsavel='0'):
+    # def create_aluno(self, nome,nome_login, senha, matricula, data_nascimento, sexo, vinculo_escola='0', vinculo_rede='0',
+    #                  cpf_responsavel='0'):
 
-        existe_usuario=self.search_aluno_nome_login(nome_login)
-        if existe_usuario != None:
-            if existe_usuario['nome_login']==nome_login and existe_usuario['nome_login'].isalpha():
-                nome_login=nome_login+'1'
-            else:
-                x='2'
-                mesmo_login=self.search_aluno_nome_login(nome_login)
-                while mesmo_login !=None and nome_login== mesmo_login['nome_login']:
-                    nome_login=[letter for letter in nome_login]
-                    y=len(nome_login)
-                    nome_login[y-1]=x
-                    x=str(int(x)+1)
-                    nome_login=''.join(nome_login)
-
-        # if nome.isalpha() and vinculo_escola.isdigit() and vinculo_rede.isdigit() and sexo is 'masculino' or sexo is 'feminino':
-        if self.create(nome=nome, tipo_aluno='6',nome_login=nome_login, vinculo_escola=vinculo_escola, senha=senha,
-                        vinculo_rede=vinculo_rede, matricula=matricula, data_nascimento=data_nascimento, sexo=sexo,
-                        cpf_responsavel=cpf_responsavel):
-            return True
-        else:
-            return False
+    def create_aluno(self, **kwargs):
+        self.create(**kwargs)
 
     def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
 
@@ -105,15 +84,7 @@ class DbAluno(Model):
 
         alun_pes = None
         for search in DbAluno.query(DbAluno.nome == nome):
-            alun_pes = dict(
-                id=search.id, matricula=search.matricula, nome=search.nome,nome_login=search.nome_login, senha=search.senha,
-                tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo, vinculo_serie=search.vinculo_serie,
-                pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                vinculo_turma=search.vinculo_turma, email=search.email, cpf='',
-                ultima_aventura=search.ultima_aventura, ultima_unidade=search.ultima_unidade,  ultima_objeto_aprendizagem=search.ultima_objeto_aprendizagem
-            )
+            alun_pes = vars(search)["_data"]
 
         return alun_pes
 

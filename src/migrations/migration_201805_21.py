@@ -30,8 +30,10 @@ facade.create_observador_facade(nome="professor", senha="123", telefone="2199999
                                 email="professor@conecturma.com.br", tipo=TIPO_USUARIOS['professor'],
                                 rede='1', escola='2', vinculo_turma='3', data_nascimento=date(1960, 11, 11))
 
+
 facade.create_aluno_facade(nome="aluno", senha="abcd",nome_login='aluno', matricula='123', data_nascimento=date(1994, 10, 20),
                            sexo="masculino", vinculo_rede='1', escola='2', cpf_responsavel="19443329563")
+
 
 facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'], nome="Cores", preco="0", tipo_item="1")
 facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'], nome="Cores2", preco="5", tipo_item="1")
