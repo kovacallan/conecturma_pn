@@ -1,3 +1,5 @@
+import json
+
 from bottle import route,view, request, redirect, response,get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado
@@ -110,3 +112,88 @@ def compras():
 @route('/jogo')
 def jogo():
     return template('jogo/index')
+
+@route('/api/plataforma/obterUltimaConclusao', method='POST')
+def obterUltimaConclusao():
+    parametros = parametros_json_jogos(request.params.items())
+    print('1: ', parametros)
+
+    retorno={
+        'objetoAprendizagem':'UV1AV1UD1OA1',
+        'unidade':'UV1AV1UD1',
+        'aventura':'UV1AV1',
+        'universo':'UV1'
+             }
+    return retorno
+
+@route('/api/plataforma/verificarAcessoObjetoAprendizagem', method='POST')
+def verificarAcessoObjetoAprendizagem():
+    parametros = parametros_json_jogos(request.params.items())
+    print('2: ', parametros)
+
+    retorno={
+        'objetosAprendizagemAcessiveis':["UV1AV1UD1OA01"]
+     }
+
+    return retorno
+
+@route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
+def verificarConclusoesObjetosAprendizagem():
+    parametros = parametros_json_jogos(request.params.items())
+    print('3: ', parametros)
+
+    retorno={
+        'objetosConcluidos':["UV1AV1UD1OA01"]
+     }
+
+    return retorno
+
+@route('/api/plataforma/registrarConclusao', method='POST')
+def registrarConclusao():
+    parametros = parametros_json_jogos(request.params.items())
+    print('4: ', parametros)
+
+    retorno = {
+        'medalhas':[],
+        'moedas': 7,
+        'xp': 2
+    }
+    return retorno
+
+@route('/api/plataforma/obterPremiacao', method='POST')
+def obterPremiacao():
+    parametros = parametros_json_jogos(request.params.items())
+    print('5: ', parametros)
+
+    retorno={
+        'moedas':0,
+        'xp':0
+    }
+    return retorno
+
+@route('/api/plataforma/verificarAcessoUnidade', method='POST')
+def verificarAcessoUnidade():
+    parametros = parametros_json_jogos(request.params.items())
+    print('6: ', parametros)
+
+    retorno={
+        'unidadesAcessiveis':["UV1AV1UD1"]
+    }
+    return retorno
+
+@route('/api/plataforma/verificarAcessoAventura', method='POST')
+def verificarAcessoAventura():
+    parametros = parametros_json_jogos(request.params.items())
+    print('7: ', parametros)
+
+    retorno={
+        'aventurasAcessiveis':["UV1AV1"]
+    }
+    return retorno
+
+def parametros_json_jogos(parametro):
+    for p in parametro:
+        parametros = list(p)[0]
+    parametros = json.loads(parametros)
+
+    return parametros

@@ -61,9 +61,24 @@ TIPO_ESTRUTURA = dict(
     item='4',
     medalha='5',
     historico='6',
-    descritores='7',
-    objeto_de_aprendizagem='8'
+    objeto_de_aprendizagem='7'
 )
+DICIPLINA = {
+    '1' : 'Lingua Portuguesa',
+    '2' : 'Matemática'
+}
+
+TIPO_OAS = {
+    '1': 'MINI_GAME',
+    '2': 'VIDEO',
+    '3': 'CINEMATIC'
+}
+
+TIPO_OAS_ID = {
+    'MINI_GAME': '1',
+    'VIDEO': '2',
+    'CINEMATIC': '3'
+}
 
 UNIDADES = {
     '1': 'Unidade 1',
