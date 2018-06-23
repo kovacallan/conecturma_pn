@@ -85,9 +85,9 @@ UNIDADES = {
 }
 
 PREMIO_JOGOS={
-    '1':{'moedas':'2', 'xp':'0'},
-    '2':{'moedas':'3', 'xp':'1'},
-    '3':{'moedas':'4', 'xp':'3'}
+    '1':{'medalhas':[], 'moedas':'2', 'xp':'0'},
+    '2':{'medalhas':[], 'moedas':'3', 'xp':'1'},
+    '3':{'medalhas':[], 'moedas':'4', 'xp':'3'}
 }
 
 AVENTURAS_CONECTURMA = {

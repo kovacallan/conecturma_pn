@@ -141,11 +141,12 @@ def verificarConclusoesObjetosAprendizagem():
         retorno={'objetosConcluidos':parametros['objetosAprendizagem']}
     else:
         desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        if desempenho_oa == None:
+        if desempenho_oa == []:
             retorno = {'objetosConcluidos': [parametros['objetosAprendizagem'][0]]}
         else:
-            proxima_oa = desempenho_oa['objeto_aprendizagem']
-            retorno = {'objetosConcluidos':'{}{}{}'.format(desempenho_oa['aventura'],desempenho_oa['unidade'],desempenho_oa['objeto_aprendizagem'])}
+            proxima_oa = len(desempenho_oa)+1
+            print('BB: ', [''.join(parametros['objetosAprendizagem'][i]) for i in range(0, proxima_oa)])
+            retorno = {'objetosConcluidos':[''.join(parametros['objetosAprendizagem'][i]) for i in range(0, proxima_oa)]}
     return retorno
 
 @route('/api/plataforma/registrarConclusao', method='POST')
@@ -160,7 +161,7 @@ def registrarConclusao():
             flag+=1
     if flag > 1:
         facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),aventura=oa[3:6],unidade=oa[6:9],
-                                          objeto_aprendizagem=oa[9:12],nivel_concluido=parametros['niveis'])
+                                          objeto_aprendizagem=oa[9:13])
     return PREMIO_JOGOS[str(flag)]
 
 @route('/api/plataforma/obterPremiacao', method='POST')
@@ -182,8 +183,8 @@ def verificarAcessoUnidade():
         retorno={'unidadesAcessiveis':parametros['unidades']}
     else:
         desempenho_unidade = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-
-        retorno ={'unidadesAcessiveis':[parametros['unidades'][0]] if desempenho_unidade==None else parametros['unidades']}
+        print(desempenho_unidade)
+        retorno ={'unidadesAcessiveis':[parametros['unidades'][0]] if desempenho_unidade==[] else parametros['unidades']}
     return retorno
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
