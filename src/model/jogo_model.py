@@ -21,3 +21,11 @@ class DesempenhoJogo(Model):
             conclucoes.append(vars(i)["_data"])
 
         return conclucoes
+
+    def unidade_concluida(self, id_aluno, unidade):
+        teste = []
+        for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno) and
+                                      (DesempenhoJogo.unidade == unidade), order_by=DesempenhoJogo.unidade):
+            teste.append(vars(i)['_data'])
+
+        return teste

@@ -182,9 +182,13 @@ def verificarAcessoUnidade():
     if int(usuario['tipo'])<6:
         retorno={'unidadesAcessiveis':parametros['unidades']}
     else:
-        desempenho_unidade = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        print(desempenho_unidade)
-        retorno ={'unidadesAcessiveis':[parametros['unidades'][0]] if desempenho_unidade==[] else parametros['unidades']}
+        desempenho_aluno = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
+        if desempenho_aluno == []:
+            retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
+        else:
+            desempenho_unidade = facade.unidade_concluida_facade(id_aluno=desempenho_aluno['id_aluno'], unidade=desempenho_aluno['unidade'])
+            print("bb aqui meu jovem: ", desempenho_unidade)
+            retorno ={'unidadesAcessiveis':[parametros['unidades'][0]] if desempenho_unidade==[] else parametros['unidades']}
     return retorno
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
