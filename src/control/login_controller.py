@@ -8,10 +8,7 @@ facade = Facade()
 @algum_usuario_logado
 @view('login/index')
 def view_login_index():
-    """
-    Cria um cookie com base no usuario que loga , sendo diferentes os cookies para o aluno e para os observadores
-    :return:
-    """
+
     return
 
 @route('/login/login_observador', method='POST')
@@ -25,8 +22,8 @@ def login_observador_controller():
 @route('/login/login_aluno', method='POST')
 def login_aluno_controller():
     nome = request.params['aluno_login_nome']
-    senha = request.params['aluno_senha']
-
+    presenha = request.params.getall('aluno_senha')
+    senha = ''.join(presenha)
     login = Login_Aluno(nome=nome, senha=senha)
     redirect(login.login())
 
@@ -39,7 +36,6 @@ def view_esqueci_senha():
     email = request.params['email']
     pesquisa = facade.search_observador_email_facade(email=email)
     teste = facade.read_observador_facade()
-    print(teste)
     return template('login/reformular_senha.tpl', id=pesquisa['id'], email=pesquisa['email'])
 
 @route('/controller_reformular_senha', method="POST")

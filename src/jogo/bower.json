@@ -1,0 +1,22 @@
+{
+  "name": "conecturma-av123",
+  "description": "Conecturma com Aventura 1, Aventura 2 e Aventura 3",
+  "main": "main.js",
+  "authors": [
+    "Aonde Educacional <contato@conecturma.com.br>"
+  ],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/frankhale/electron-with-express",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.1"
+  }
+}

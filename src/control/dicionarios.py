@@ -19,6 +19,13 @@ TIPO_USUARIOS_ID = {
     '1':'GESTOR',
     '0':'ADMINISTRADOR'
 }
+TIPO_ITEM =dict(
+    cor='1',
+    rosto='2',
+    acessorio='3',
+    corpo='4'
+)
+
 
 SERIE = {
     '0':'Pré-escola',

@@ -27,18 +27,23 @@ def aluno_read():
 @route('/aluno/cadastro_aluno')
 @view('aluno/aluno_cadastro')
 def aluno():
+    # def dispatch_dict(observador_tipo):
+    #     return {
+    #         '0': escolas = facade.read_escola_facade();
+    #         return dict(escolas = escolas,tipo_observador = observador['tipo']);,
+    #         'sub': lambda: x - y,
+    #         'mul': lambda: x * y,
+    #         'div': lambda: x / y,
+    #     }.get(operator, lambda: None)()
 
     if request.get_cookie("login", secret='2525'):
         observador = facade.search_observador_facade(request.get_cookie("login", secret='2525'))
-        if observador['tipo'] == '0':
-            escolas = facade.read_escola_facade()
-            return dict(escolas = escolas,tipo_observador = observador['tipo'])
-        elif observador['tipo'] == '1':
+        if observador['tipo'] == '0' or observador['tipo'] =='1':
             escola = facade.read_escola_facade()
-            escolas = []
-            for e in escola:
-                if e['vinculo_rede'] is observador['vinculo_rede']:
-                    escolas.append(e)
+            escolas = [e['vinculo_rede'] for e in escola if ['vinculo_rede'] is observador['vinculo_rede']]
+            # for e in escola:
+            #     if e['vinculo_rede'] is observador['vinculo_rede']:
+            #         escolas.append(e)
             return dict(escolas=escolas, tipo_observador=observador['tipo'])
         elif observador['tipo'] == '2':
             escolas = facade.search_escola_id_facade(int(observador['vinculo_escola']))
@@ -50,6 +55,9 @@ def aluno():
     else:
         redirect('/')
 
+# def casos_aluno_cadastro_gestor(observador):
+#     escolas = facade.read_escola_facade()
+#     return dict(escolas=escolas, tipo_observador=observador['tipo'])
 
 @route('/aluno_cadastro', method='POST')
 def create_aluno():

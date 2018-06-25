@@ -6,20 +6,21 @@ class EstruturaFacade:
     def __init__(self):
         self.estrutura = DbEstrutura()
 
+
     def create_estrutura_facade(self, **kwargs):
         return self.estrutura.create_estrutura(**kwargs)
 
     def read_estrutura_facade(self, tipo_estrutura):
         return self.estrutura.read_estrutura(tipo_estrutura=tipo_estrutura)
 
-    def update_estrutura(self, nome, tipo_estrutura, telefone='0', vinculo_rede='0', vinculo_escola='0',
-                                cep='0', endereco='0', numero='0', estado='0', uf='0', quem_criou='0', serie='0',
+    def update_estrutura_facade(self,update_id, nome, telefone='0', vinculo_rede='0', vinculo_escola='0',
+                                cep='0', endereco='0', numero='0', estado='0', uf='0', serie='0',
                                 tipo_item='0', preco='0', tipo_medalha='0',
                                 descricao='0', descricao_completa='0', nome_usuario='0', tipo_usuario='0'):
 
-        return self.estrutura.update_estrutura(nome=nome, tipo_estrutura=tipo_estrutura, telefone=telefone,
+        return self.estrutura.update_estrutura(update_id=update_id,nome=nome, telefone=telefone,
                                         vinculo_rede=vinculo_rede, vinculo_escola=vinculo_escola, cep=cep,
-                                        endereco=endereco, numero=numero, estado=estado, uf=uf, quem_criou=quem_criou,
+                                        endereco=endereco, numero=numero, estado=estado, uf=uf,
                                         serie=serie, tipo_item=tipo_item, preco=preco, tipo_medalha=tipo_medalha,
                                         descricao=descricao, descricao_completa=descricao_completa,
                                         nome_usuario=nome_usuario, tipo_usuario=tipo_usuario)
@@ -40,9 +41,15 @@ class EstruturaFacade:
         return self.estrutura.search_turma_by_escola(vinculo_escola=vinculo_escola)
 
     def ja_tem_item_facade(self, usuario_logado):
-        """
-        Mostra se o usuario ja comprou o item
-        :param usuario_logado:autoexplicativo
-        :return:lista de itens q ele nao tem
-        """
+
         return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)
+
+    def anotacoes_observador_turma_facade(self, id_estrutura,mensagem):
+        return self.estrutura.func_anotacoes_estrutura_turma(id_estrutura,mensagem)
+
+    def anotacoes_observador_escola_facade(self, id_estrutura,mensagem):
+        return self.estrutura.func_anotacoes_estrutura_escola(id_estrutura,mensagem)
+
+    def anotacoes_observador_rede_facade(self,id_estrutura,mensagem):
+        return self.estrutura.func_anotacoes_estrutura_rede(id_estrutura,mensagem)
+

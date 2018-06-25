@@ -7,6 +7,7 @@ from facade.facade_main import Facade
 
 KEY_HASH = 'gu3 j0st0çur4'
 
+
 class Login_Observador(object):
 
     def __init__(self, email, senha):
@@ -26,7 +27,9 @@ class Login_Observador(object):
                 response.set_cookie("BUMBA", observador_logado, path='/', secret=hash)
                 now = datetime.now()
                 facade.login_date_facade(observador_logado['id'], now)
-                facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'], nome_usuario=observador_logado['nome'], tipo_usuario=observador_logado['tipo'])
+                facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'],
+                                               nome_usuario=observador_logado['nome'],
+                                               tipo_usuario=observador_logado['tipo'])
                 return PAGINA_INICIAL[tipo_observador(observador_logado['tipo'])]
             else:
                 return '/'
@@ -47,6 +50,7 @@ class Login_Observador(object):
         matricula = ''.join(str(x) for x in hash)
         return matricula
 
+
 class Login_Aluno(object):
     def __init__(self, nome, senha):
         self.nome = nome
@@ -57,7 +61,7 @@ class Login_Aluno(object):
         hash = self.gerar_hash()
         aluno = facade.search_aluno_nome_facade(nome=self.nome)
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
-        if aluno['nome'] == self.nome:
+        if aluno['nome_login'] == self.nome:
             if aluno['senha'] == self.senha:
                 aluno_logado = dict(
                     id=aluno['id'],
@@ -89,20 +93,24 @@ class Login_Aluno(object):
         matricula = ''.join(str(x) for x in hash)
         return matricula
 
+
 def usuario_logado():
     banana = request.get_cookie("KIM", secret=KEY_HASH)
     que = request.get_cookie("BUMBA", secret=banana)
     return que
 
+
 def algum_usuario_logado(function):
-    def decorator(*args,**kwargs):
+    def decorator(*args, **kwargs):
         banana = request.get_cookie("KIM", secret=KEY_HASH)
         que = request.get_cookie("BUMBA", secret=banana)
         if que and banana:
             redirect(PAGINA_INICIAL[tipo_observador(que['tipo'])])
         else:
             return function(*args, **kwargs)
+
     return decorator
+
 
 def permissao(quem_tem_permissao):
     def observador(function):
@@ -116,11 +124,23 @@ def permissao(quem_tem_permissao):
                     redirect('/error403')
             else:
                 redirect('/')
+
         return decorator
 
     return observador
 
+
 def tipo_observador(tipo):
+    # return {
+    #     '0': 'administrador',
+    #     '1': 'gestor',
+    #     '2': 'diretor',
+    #     '3': 'professor',
+    #     '4': 'responsavel',
+    #     '5': 'responsavel_varejo',
+    #     '6': 'aluno',
+    #     '7': 'aluno_varejo',
+    # }
     if tipo == '0':
         return 'administrador'
     elif tipo == '6':

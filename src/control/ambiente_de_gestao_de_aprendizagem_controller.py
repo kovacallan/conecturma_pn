@@ -1,5 +1,7 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
+from passlib.hash import sha512_crypt
+
 
 from control.classes.permissao import usuario_logado, permissao
 from control.dicionarios import PAGINA_DE_CADASTRO_POR_TIPO, TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE
@@ -30,9 +32,6 @@ def view_usuario_index():
     turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
 
     return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
-
-
-template
 
 
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
@@ -170,22 +169,43 @@ def aluno():
 @route('/aluno_cadastro', method='POST')
 @permissao('professor')
 def create_aluno():
-    """
-    Direcionamento a pagina para criar aluno buscando , na tpl os parâmetros usuário , senha e matricula
-    Chama a funçao create_aluno_facade
-    :return:
-    """
+
     nome = request.forms['aluno_nome']
+    nome_separado=nome.split()
+    nome_login1=nome_separado[0]
+    print(f'testando {nome_login1}')
     senha = request.forms['senha']
     matricula = request.forms['matricula']
     escola = request.forms['escola']
+    data_nascimento=request.params['data_nascimento']
+    sexo=request.params['sexo']
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
-
-    facade.create_aluno_facade(nome=request.forms['aluno_nome'], tipo_aluno=TIPO_USUARIOS['aluno'], matricula=request.forms['matricula'], vinculo_escola=escola,
-                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=request.forms['senha'])
+    nome_login=verificar_nome_login(nome_login1)
+    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola, nome_login=nome_login,
+                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha,data_nascimento=data_nascimento,sexo=sexo)
 
     redirect('/gestao_aprendizagem/usuario')
 
+def verificar_nome_login(nome_login):
+
+    existe_usuario = facade.search_aluno_nome_login_facade(nome_login)
+    if existe_usuario != None:
+
+        if existe_usuario['nome_login'] == nome_login and existe_usuario['nome_login'].isalpha():
+            nome_login = nome_login + '1'
+        else:
+            x = '2'
+            mesmo_login = facade.search_aluno_nome_login_facade(nome_login)
+            while mesmo_login != None and nome_login == mesmo_login['nome_login']:
+                nome_login = [letter for letter in nome_login]
+                y = len(nome_login)
+                nome_login[y - 1] = x
+                x = str(int(x) + 1)
+                nome_login = ''.join(nome_login)
+    else:
+        return nome_login
+
+    return nome_login
 
 @route('/observador/cadastro')
 @permissao('professor')
@@ -213,13 +233,23 @@ def view_observador_cadastro():
 def controller_observador_cadastro():
     tipo = request.params['tipo']
     nome = request.params['nome']
-    senha = request.params['senha']
+    senha1 = request.params['senha']
     telefone = request.params['telefone']
     cpf = request.params['cpf']
     email = request.params['email']
     escola = request.params['escola']
     rede = request.params['rede']
+    # logradouro = request.params['logradouro']
+    # numero = request.params['numero']
+    # complemento = request.params['complemento']
+    # bairro = request.params['bairro']
+    # cep = request.params['cep']
+    # Uf=request.params['uf']
     turma = request.params['turma']
+    # data = request.params['data_nascimento']
+
+
+    senha = sha512_crypt.hash(senha1)
 
     if tipo != '1':
         vinculo_rede = facade.search_estrutura_id_facade(int(escola))
@@ -273,17 +303,17 @@ def cadastrar_medalha():
 def controller_medalha_cadastro():
     nome = request.params['nome']
     tipo = request.params['tipos']
-    facade.create_medalha_facade(nome=nome, tipo=tipo)
+    facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'],nome=nome, tipo_item=tipo)
     redirect('/gestao_aprendizagem')
 
 
 @route('/ler_medalha')
 @permissao('professor')
-@view('observador/read_medalhas.tpl')
+@view('observador/medalha_index.tpl')
 def read_de_medalha():
     medalhas = []
 
-    for medalha in facade.read_medalha_facade():
+    for medalha in facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha']):
         medalhas.append(medalha)
 
     return dict(medalhas=medalhas)
@@ -358,11 +388,14 @@ def cadastro_escola():
 @route('/escola/criar_escola', method='POST')
 @permissao('gestor')
 def controller_escola_cadastro():
-    facade.create_estrutura_facade(nome=request.params['nome'], tipo_estrutura=TIPO_ESTRUTURA['escola'],
-                                   telefone=request.params['telefone'], cep=request.params['cep'],
+    facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=request.params['nome'],
+                                   telefone=request.params['telefone'], cnpj=request.params['cnpj'],
+                                   cep=request.params['cep'],
                                    estado=request.params['estado'], uf=request.params['uf'],
-                                   numero=request.params['numero'], vinculo_rede=request.params['rede']
-                                   )
+                                   logradouro=request.params['logradouro'],
+                                   numero=request.params['numero'], vinculo_rede=request.params['rede'],
+                                   bairro=request.params['bairro'], complemento=request.params['complemento']
+                                   , municipio=request.params['municipio'])
     redirect("/escola")
 
 
@@ -486,3 +519,10 @@ def controller_update_turma():
             facade.observador_in_turma_facade(id_observador=p, vinculo_turma=turma)
 
     redirect('/turma')
+
+
+@route('/cadastro_descritor_view')
+@view('descritor/index.tpl')
+def descritores():
+    return
+

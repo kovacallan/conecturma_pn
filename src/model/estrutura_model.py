@@ -1,5 +1,6 @@
 from walrus import *
 from control.dicionarios import TIPO_ESTRUTURA
+
 db = Database(host='localhost', port=6379, db=0)
 
 
@@ -13,12 +14,17 @@ class DbEstrutura(Model):
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_professor_turma = TextField(fts=True, default='0')
+    cnpj = TextField(default='0')
 
+    logradouro = TextField(default='0')
+    bairro = TextField(default='0')
+    municipio = TextField(default='0')
     cep = TextField(default='0')
     endereco = TextField(default='0')
     numero = TextField(default='0')
     estado = TextField(default='0')
     uf = TextField(default='0')
+    complemento = TextField(default='0')
 
     sigla_oa = TextField(fts=True, default='0')
     unidade=TextField(fts=True, default='0')
@@ -54,7 +60,6 @@ class DbEstrutura(Model):
         return self.create(**kwargs)
 
     def read_estrutura(self, tipo_estrutura):
-
         listas = []
 
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura, order_by=self.id):
@@ -63,21 +68,14 @@ class DbEstrutura(Model):
         return listas
 
     def ja_possui_item(self, usuario_logado):
-        """
-        Envia se o usuario já comprou o item
-        :param usuario_logado: Id do usuario
-        :return: Lista de itens que o usuario não tem
-        """
         from model.aluno_model import DbAluno
+
         usuario = DbAluno()
-        #[x.decode('utf-8') for x in usuario.i]
+        # [x.decode('utf-8') for x in usuario.i]
         itens_usuario = usuario.ver_itens_comprados(id_usuario=int(usuario_logado))
         itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura=TIPO_ESTRUTURA['item'])]
         lista_teste = [z for z in itens if z not in itens_usuario]
         return lista_teste
-
-
-
 
     def search_estrutura(self, tipo_estrutura, nome):
 
@@ -121,27 +119,33 @@ class DbEstrutura(Model):
 
             return turma
 
-    def update_estrutura(self, update_id, nome=None, telefone=None, vinculo_rede=None, cep=None, endereco=None,
-                         numero=None, cidade=None,
-                         estado=None, uf=None, serie=None, tipo_item=None, preco=None, tipo_medalha=None,
+    def update_estrutura(self, update_id, nome='0', telefone='0', vinculo_rede='0', cep='0', endereco='0',
+                         numero='0', cidade='0',
+                         estado='0', uf='0', serie='0', tipo_item='0', preco=None, tipo_medalha=None,
                          descricao=None,
-                         descricao_completa=None, nome_usuario=None, tipo_usuario=None,vinculo_escola=None):
+                         descricao_completa=None, nome_usuario=None, tipo_usuario=None, vinculo_escola=None,
+                         vinculo_professor_turma="0"):
         estrutura = self.load(update_id)
-        [setattr(estrutura,parametro,valor) for parametro,valor in locals().items() if valor]
+        [setattr(estrutura, parametro, valor) for parametro, valor in locals().items() if valor]
         estrutura.save()
 
-    def func_anotacoes_estrutura_baixo(self,id_estrutura,mensagem):
+    def func_anotacoes_estrutura_turma(self, id_estrutura, mensagem):
         estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_baixo.append(mensagem)
+        estrutura.anotacoes_estrutura_turma.append(mensagem)
         estrutura.save()
 
-    def func_anotacoes_estrutura_cima(self,id_estrutura,mensagem):
-        estrutura=self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_cima.append(mensagem)
+    def func_anotacoes_estrutura_escola(self, id_estrutura, mensagem):
+        estrutura = self.load(id_estrutura)
+        estrutura.anotacoes_estrutura_escola.append(mensagem)
         estrutura.save()
 
-    def delete_estrutura_test(self, deletar_ids):
+    def func_anotacoes_estrutura_rede(self, id_estrutura, mensagem):
+        estrutura = self.load(id_estrutura)
+        estrutura.anotacoes_estrutura_rede.append(mensagem)
+        estrutura.save()
 
-        for deletar_ids in deletar_ids:
-            usuario = self.load(deletar_ids)
-            usuario.delete(deletar_ids)
+    # def delete_estrutura_test(self, deletar_ids):
+    #
+    #     for deletar_ids in deletar_ids:
+    #         usuario = self.load(deletar_ids)
+    #         usuario.delete(deletar_ids)

@@ -1,4 +1,4 @@
-% include('./header.tpl', title = 'Conecturma')
+<!--% include('./header.tpl', title = 'Conecturma')-->
 <div class="row">
     <div align="center" class="col-md-12">
         <h1>Ver medalhas</h1>
@@ -23,4 +23,4 @@
         </a>
     </div>
 </div>
-% include('./footer.tpl')
+<!--% include('./footer.tpl')-->
