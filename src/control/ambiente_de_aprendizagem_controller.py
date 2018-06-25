@@ -166,19 +166,23 @@ def verificarConclusoesObjetosAprendizagem():
     return retorno
 
 @route('/api/plataforma/registrarConclusao', method='POST')
-def registrarConclusao():
+def registrarConclusao(count=[0]):
     from control.dicionarios import PREMIO_JOGOS
     parametros = parametros_json_jogos(request.params.items())
     print('4: ', parametros)
     print('4.1',parametros['niveis'])
     flag = 0
+    contador=0
     oa = parametros['objetoAprendizagem']
     for i in parametros['niveis']:
+        contador+=1
+        print(contador,i['termino'])
         if i['termino'] == True:
             flag+=1
-    if flag > 1:
-        """facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),aventura=oa[3:6],unidade=oa[6:9],
-                                          objeto_aprendizagem=oa[9:13])"""
+    if parametros['objetoAprendizagem'] != 'UV1AV1UD1VC01' and parametros['objetoAprendizagem'] != 'UV1AV1UD1VC02':
+        print('gravei')
+        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),aventura=oa[3:6],unidade=oa[6:9],
+                                          objeto_aprendizagem=oa[9:13])
     print('flag',flag,type(flag))
     return PREMIO_JOGOS[str(flag)]
 

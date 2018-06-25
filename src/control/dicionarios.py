@@ -92,6 +92,7 @@ UNIDADES = {
 }
 
 PREMIO_JOGOS={
+    '0':{'medalhas':[], 'moedas':'1', 'xp':'0'},
     '1':{'medalhas':[], 'moedas':'2', 'xp':'0'},
     '2':{'medalhas':[], 'moedas':'3', 'xp':'1'},
     '3':{'medalhas':[], 'moedas':'4', 'xp':'3'}
