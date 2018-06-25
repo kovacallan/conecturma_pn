@@ -97,7 +97,6 @@ def desativados():
             h['tipo_aluno'] ='0'
             print('controler desativado', h['tipo_usuario'], h['tipo_aluno'])
         else:
-            print(f'controler{h["tipo_aluno"]}')
             h['tipo_aluno'] = TIPO_USUARIOS_ID[h['tipo_aluno']]
             h['tipo_usuario'] = '0'
             print('controler desativado2', h['tipo_usuario'], h['tipo_aluno'])

@@ -173,7 +173,6 @@ def create_aluno():
     nome = request.forms['aluno_nome']
     nome_separado=nome.split()
     nome_login1=nome_separado[0]
-    print(f'testando {nome_login1}')
     senha = request.forms['senha']
     matricula = request.forms['matricula']
     escola = request.forms['escola']
@@ -181,8 +180,8 @@ def create_aluno():
     sexo=request.params['sexo']
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
     nome_login=verificar_nome_login(nome_login1)
-    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola, nome_login=nome_login,
-                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha,data_nascimento=data_nascimento,sexo=sexo)
+    facade.create_aluno_facade(nome=nome, tipo_aluno='6',matricula=matricula, vinculo_escola=escola, nome_login=nome_login,
+                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha, data_nascimento=data_nascimento,sexo=sexo)
 
     redirect('/gestao_aprendizagem/usuario')
 
@@ -525,4 +524,3 @@ def controller_update_turma():
 @view('descritor/index.tpl')
 def descritores():
     return
-
