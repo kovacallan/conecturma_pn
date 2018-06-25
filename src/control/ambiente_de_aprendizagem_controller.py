@@ -133,12 +133,12 @@ def verificarAcessoObjetoAprendizagem():
     else:
         desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
         if desempenho_oa == []:
-            retorno={'objetosAprendizagemAcessiveis':parametros['objetosAprendizagem']}
+            retorno={'objetosAprendizagemAcessiveis':[]}
         else:
             proxima_oa = []
             for i in desempenho_oa:
                 if 'OA' in i['objeto_aprendizagem']:
-                    proxima_oa.append('UV1{}{}{}'.format(i['aventura'],i['unidade'],i['objeto_aprendizagem']))
+                    proxima_oa.append(i['objeto_aprendizagem'])
 
             teste = []
             for i in range(0,len(proxima_oa)+1):
@@ -150,8 +150,8 @@ def verificarAcessoObjetoAprendizagem():
 @route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
 def verificarConclusoesObjetosAprendizagem():
     usuario=usuario_logado()
+    parametros = parametros_json_jogos(request.params.items())
     if int(usuario['tipo'])<6:
-        parametros = parametros_json_jogos(request.params.items())
         retorno={'objetosConcluidos':parametros['objetosAprendizagem']}
     else:
         desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
@@ -160,7 +160,7 @@ def verificarConclusoesObjetosAprendizagem():
         else:
             proxima_oa = []
             for i in desempenho_oa:
-                proxima_oa.append('UV1{}{}{}'.format(i['aventura'],i['unidade'],i['objeto_aprendizagem']))
+                proxima_oa.append(i['objeto_aprendizagem'])
             retorno = {'objetosConcluidos':proxima_oa}
     return retorno
 
@@ -175,8 +175,8 @@ def registrarConclusao():
         if i['termino'] == True:
             flag+=1
     if flag > 1:
-        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),aventura=oa[3:6],unidade=oa[6:9],
-                                          objeto_aprendizagem=oa[9:13])
+        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), objeto_aprendizagem=oa)
+
     return PREMIO_JOGOS[str(flag)]
 
 @route('/api/plataforma/obterPremiacao', method='POST')
@@ -201,7 +201,11 @@ def verificarAcessoUnidade():
         if desempenho_aluno == []:
             retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
         else:
-            retorno ={'unidadesAcessiveis':[parametros['unidades'][0]] if desempenho_aluno==[] else parametros['unidades']}
+            for i in desempenho_aluno:
+                if 'OA' in i['objeto_aprendizagem']:
+                    if i['objeto_aprendizagem'][12] == '6':
+
+            retorno ={'unidadesAcessiveis':[parametros['unidades'][0]]}
     return retorno
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
