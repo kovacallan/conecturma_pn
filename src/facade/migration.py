@@ -1,5 +1,5 @@
-from facade.facade_main import *
-from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID
+from facade_main import *
+from dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID
 
 facade=Facade()
 facade.create_observador_facade(nome="administrador", senha="@onde2929", telefone="21999999999", cpf="0",email="admin", tipo='0',
