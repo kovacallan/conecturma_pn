@@ -182,16 +182,11 @@ def create_aluno():
     sexo=request.params['sexo']
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
     nome_login=verificar_nome_login(nome_login1)
-    tipo_aluno = '6'
-    print('antes',presenha)
     presenha.sort()
-    print('dpois',presenha)
     senha = ''.join(presenha)
-    print('senha',senha)
 
-
-    facade.create_aluno_facade(nome=nome, matricula=matricula, escola=escola, nome_login=nome_login,
-                               vinculo_rede=vinculo_rede['vinculo_rede'], tipo_aluno=tipo_aluno,senha=senha,data_nascimento=data_nascimento,sexo=sexo)
+    facade.create_aluno_facade(nome=nome, tipo_aluno='6',matricula=matricula, vinculo_escola=escola, nome_login=nome_login,
+                               vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha, data_nascimento=data_nascimento,sexo=sexo)
 
     redirect('/gestao_aprendizagem/usuario')
 
@@ -534,4 +529,3 @@ def controller_update_turma():
 @view('descritor/index.tpl')
 def descritores():
     return
-
