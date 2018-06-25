@@ -8,7 +8,7 @@
                     <option value="masculino">Masculino</option>
                     <option value="feminino">Feminino</option>
                     </select><br>
-             Senha :          <input type="password" name="senha"/><br>
+             <!--Senha :          <input type="password" name="senha"/><br>-->
              Data de nascimento: <input type="date" name="data_nascimento"/><br>
              Matricula:       <input type="text" name="matricula"><br>
              Escola: <select name="escola">
