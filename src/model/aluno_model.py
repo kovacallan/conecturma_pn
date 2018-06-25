@@ -165,6 +165,7 @@ class DbAluno(Model):
         from facade.estrutura_facade import EstruturaFacade
         facade = EstruturaFacade()
         turmi = facade.search_estrutura_id_facade(vinculo_turma)
+        print(id_aluno)
 
         for id_aluno in id_aluno:
             aluno = self.load(int(id_aluno))

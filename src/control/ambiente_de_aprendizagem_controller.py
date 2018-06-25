@@ -154,6 +154,7 @@ def verificarConclusoesObjetosAprendizagem():
         parametros = parametros_json_jogos(request.params.items())
         retorno={'objetosConcluidos':parametros['objetosAprendizagem']}
     else:
+        parametros = parametros_json_jogos(request.params.items())
         desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
         if desempenho_oa == []:
             retorno = {'objetosConcluidos': [parametros['objetosAprendizagem'][0]]}
@@ -169,14 +170,16 @@ def registrarConclusao():
     from control.dicionarios import PREMIO_JOGOS
     parametros = parametros_json_jogos(request.params.items())
     print('4: ', parametros)
+    print('4.1',parametros['niveis'])
     flag = 0
     oa = parametros['objetoAprendizagem']
     for i in parametros['niveis']:
         if i['termino'] == True:
             flag+=1
     if flag > 1:
-        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),aventura=oa[3:6],unidade=oa[6:9],
-                                          objeto_aprendizagem=oa[9:13])
+        """facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),aventura=oa[3:6],unidade=oa[6:9],
+                                          objeto_aprendizagem=oa[9:13])"""
+    print('flag',flag,type(flag))
     return PREMIO_JOGOS[str(flag)]
 
 @route('/api/plataforma/obterPremiacao', method='POST')
