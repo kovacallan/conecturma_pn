@@ -75,11 +75,14 @@ class Login_Aluno(object):
                     ultimo_oa = aluno['ultima_objeto_aprendizagem'],
                     ultima_unidade= aluno['ultima_unidade'],
                     ultima_aventura= aluno['ultima_aventura'],
+                    moeda=aluno['pontos_de_moedas'],
+                    xp=aluno['pontos_de_vida']
                 )
                 response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
                 return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
         else:
             return '/'
+
 
     def gerar_hash(self):
         """
@@ -95,6 +98,13 @@ class Login_Aluno(object):
         matricula = ''.join(str(x) for x in hash)
         return matricula
 
+def update_cookie(premio):
+    banana = request.get_cookie("KIM", secret=KEY_HASH)
+    que = request.get_cookie("BUMBA", secret=banana)
+
+    que['moeda'] = premio['moedas']
+    que['xp'] = premio['xp']
+    return PAGINA_INICIAL[tipo_observador(que['tipo'])]
 
 def usuario_logado():
     banana = request.get_cookie("KIM", secret=KEY_HASH)
