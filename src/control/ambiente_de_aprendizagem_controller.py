@@ -131,20 +131,16 @@ def verificarAcessoObjetoAprendizagem():
     if int(usuario['tipo'])<6:
         retorno={'objetosAprendizagemAcessiveis':parametros['objetosAprendizagem']}
     else:
-        desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        if desempenho_oa == []:
-            retorno={'objetosAprendizagemAcessiveis':[]}
-        else:
-            proxima_oa = []
-            for i in desempenho_oa:
-                if 'OA' in i['objeto_aprendizagem']:
-                    proxima_oa.append(i['objeto_aprendizagem'])
+        teste = []
+        for i in parametros['objetosAprendizagem']:
+            desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
+            if desempenho_oa == []:
+                teste.append(i)
+                break
+            else:
+                teste.append(i)
 
-            teste = []
-            for i in range(0,len(proxima_oa)+1):
-                teste.append(parametros['objetosAprendizagem'][i])
-            print('--------:',teste)
-            retorno = {'objetosAprendizagemAcessiveis':teste}
+        retorno = {'objetosAprendizagemAcessiveis': teste}
     return retorno
 
 @route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
@@ -154,14 +150,17 @@ def verificarConclusoesObjetosAprendizagem():
     if int(usuario['tipo'])<6:
         retorno={'objetosConcluidos':parametros['objetosAprendizagem']}
     else:
-        desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        if desempenho_oa == []:
-            retorno = {'objetosConcluidos': [parametros['objetosAprendizagem'][0]]}
-        else:
-            proxima_oa = []
-            for i in desempenho_oa:
-                proxima_oa.append(i['objeto_aprendizagem'])
-            retorno = {'objetosConcluidos':proxima_oa}
+        print(parametros['objetosAprendizagem'])
+        teste = []
+        for i in parametros['objetosAprendizagem']:
+            desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
+            if desempenho_oa == []:
+                teste.append(i)
+                break
+            else:
+                teste.append(i)
+
+        retorno = {'objetosConcluidos': teste}
     return retorno
 
 @route('/api/plataforma/registrarConclusao', method='POST')
@@ -175,7 +174,7 @@ def registrarConclusao():
         if i['termino'] == True:
             flag+=1
     if flag > 1:
-        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), objeto_aprendizagem=oa)
+        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), unidade=oa[0:9],objeto_aprendizagem=oa)
 
     return PREMIO_JOGOS[str(flag)]
 
@@ -197,15 +196,25 @@ def verificarAcessoUnidade():
     if int(usuario['tipo'])<6:
         retorno={'unidadesAcessiveis':parametros['unidades']}
     else:
-        desempenho_aluno = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
+        desempenho_aluno = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
         if desempenho_aluno == []:
             retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
         else:
-            for i in desempenho_aluno:
-                if 'OA' in i['objeto_aprendizagem']:
-                    if i['objeto_aprendizagem'][12] == '6':
-
-            retorno ={'unidadesAcessiveis':[parametros['unidades'][0]]}
+            acesso_unidade = []
+            for i in parametros['unidades']:
+                desempenho_unidade = facade.unidade_teste_facade(id_aluno=str(usuario['id']), unidade=i)
+                if desempenho_unidade == []:
+                    acesso_unidade.append(i)
+                    break
+                else:
+                    desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
+                    if desempenho_oa == []:
+                        acesso_unidade.append(i)
+                        print(desempenho_oa)
+                        break
+                    else:
+                        acesso_unidade.append(i)
+        retorno = {'unidadesAcessiveis': acesso_unidade}
     return retorno
 
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
