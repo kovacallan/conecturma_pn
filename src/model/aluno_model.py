@@ -21,8 +21,8 @@ class DbAluno(Model):
     acessorio = TextField(default='0')
     corpo = TextField(default='0')
 
-    pontos_de_vida = IntegerField(default=0)
-    pontos_de_moedas = IntegerField(default=0)
+    pontos_de_vida = TextField(fts=True,default='0')
+    pontos_de_moedas = TextField(fts=True,default='0')
 
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
@@ -83,7 +83,7 @@ class DbAluno(Model):
 
     def search_aluno_nome(self, nome):
 
-        alun_pes = None
+        alun_pes = []
         for search in DbAluno.query(DbAluno.nome == nome):
             alun_pes = vars(search)["_data"]
 
@@ -161,10 +161,18 @@ class DbAluno(Model):
 
         return aluno_pes
 
+    def search_aluno_id(self,id_aluno):
+
+        alun_pes = []
+        for search in DbAluno.query(DbAluno.id_aluno == id_aluno):
+            alun_pes = vars(search)["_data"]
+        return alun_pes
+
     def alunos_in_turma(self, id_aluno, vinculo_turma):
         from facade.estrutura_facade import EstruturaFacade
         facade = EstruturaFacade()
         turmi = facade.search_estrutura_id_facade(vinculo_turma)
+        print(id_aluno)
 
         for id_aluno in id_aluno:
             aluno = self.load(int(id_aluno))
@@ -179,10 +187,12 @@ class DbAluno(Model):
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
 
-        if usuario.pontos_de_moedas < preco:
+        if int(usuario.pontos_de_moedas) < preco:
             print("você não tem moeda")
         else:
-            usuario.pontos_de_moedas -= preco
+            dinheiros= int(usuario.pontos_de_moedas)
+            dinheiros -= preco
+            usuario.pontos_de_moedas = str(dinheiros)
             usuario.itens_comprados.append(id_item)
             usuario.save()
 
@@ -232,6 +242,17 @@ class DbAluno(Model):
         for deletar_ids in deletar_ids:
             usuario = self.load(deletar_ids)
             usuario.delete(deletar_ids)
+
+    def gravar_premiacao(self,user_id,premio):
+
+        aluno =self.load(user_id)
+        moedas=int(aluno.pontos_de_moedas)
+        vidas=int(aluno.pontos_de_vida)
+        moedas+= int(premio['moedas'])
+        vidas +=int(premio['xp'])
+        aluno.pontos_de_moedas=str(moedas)
+        aluno.pontos_de_vida=str(vidas)
+        aluno.save()
 
     def apagartudo(self):
         db.flushall()

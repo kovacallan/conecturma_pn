@@ -1,6 +1,7 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
+import random
 
 
 from control.classes.permissao import usuario_logado, permissao
@@ -169,17 +170,21 @@ def aluno():
 @route('/aluno_cadastro', method='POST')
 @permissao('professor')
 def create_aluno():
-
+    let = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j','l','m']
     nome = request.forms['aluno_nome']
     nome_separado=nome.split()
     nome_login1=nome_separado[0]
-    senha = request.forms['senha']
-    matricula = request.forms['matricula']
+    print(f'testando {nome_login1}')
+    presenha = random.sample(let, 4)
     escola = request.forms['escola']
     data_nascimento=request.params['data_nascimento']
+    matricula=request.params['matricula']
     sexo=request.params['sexo']
     vinculo_rede = facade.search_estrutura_id_facade(int(escola))
     nome_login=verificar_nome_login(nome_login1)
+    presenha.sort()
+    senha = ''.join(presenha)
+    print('senha',senha)
     facade.create_aluno_facade(nome=nome, tipo_aluno='6',matricula=matricula, vinculo_escola=escola, nome_login=nome_login,
                                vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha, data_nascimento=data_nascimento,sexo=sexo)
 
@@ -222,7 +227,7 @@ def view_observador_cadastro():
                         tipo=tipo_observador, escola=filtro_vinculo_cadastro_escola(),
                         turma=filtro_vinculo_cadastro_turma())
     elif tipo_observador == TIPO_USUARIOS['responsavel']:
-        redirect('/observador')
+        return template('observador/create_observador' ,tipo=tipo_observador)
     else:
         redirect('/observador')
 

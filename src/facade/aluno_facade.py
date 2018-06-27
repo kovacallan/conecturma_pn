@@ -74,6 +74,9 @@ class AlunoFacade:
     def search_aluno_by_turma_facade(self, vinculo_turma):
         return self.aluno.search_aluno_by_turma(vinculo_turma=vinculo_turma)
 
+    def gravar_premiacao(self,user_id,premiacao):
+        return self.aluno.gravar_premiacao(user_id,premiacao)
+
 
     def apagartudo(self):
         return self.aluno.apagartudo()

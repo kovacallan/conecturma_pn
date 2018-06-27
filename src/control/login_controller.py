@@ -22,7 +22,7 @@ def login_observador_controller():
 @route('/login/login_aluno', method='POST')
 def login_aluno_controller():
     nome = request.params['aluno_login_nome']
-    presenha = request.params.getall('aluno_senha')
+    presenha = request.params.getlist('aluno_senha')
     senha = ''.join(presenha)
     login = Login_Aluno(nome=nome, senha=senha)
     redirect(login.login())

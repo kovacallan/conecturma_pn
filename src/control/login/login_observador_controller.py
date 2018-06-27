@@ -18,6 +18,7 @@ def controller_login_entrar_observador():
     """
     nome = request.params['usuario']
     senha = request.params['senha']
+    print('nepo',nome,senha)
     observador = valida_login_observador(nome, senha)
     print("login L22", observador)
     if observador:
@@ -66,10 +67,13 @@ def valida_login_observador(nome, senha):
     :param senha: senha do usuario
     :return: true se o observador existir e se estiver com usuario e a senha certa
     """
+    print('??')
     retorno = facade.search_observador_facade(nome)
-    if retorno:
 
-        if retorno['nome'] == nome and sha512_crypt.verify(senha,retorno['senha']):
+    if retorno:
+        print('naniii',sha512_crypt.verify(senha, retorno['senha']))
+        if retorno['nome'] == nome and sha512_crypt.verify(senha, retorno['senha']):
+        # if retorno['nome'] == nome and senha ==retorno['senha']:
             print("47", nome)
             return retorno
         else:

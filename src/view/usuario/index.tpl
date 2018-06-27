@@ -8,7 +8,7 @@
             </a>
         </div>
         <h1>Listagem de Usuários</h1>
-         <div class="col-md-4">
+         <div class="col-md-5">
             <div class="row">
                 <form action="/gestao_aprendizagem/usuario/redirect_cadastro">
                     %include('bottle/usuario/bottle_usuario_cadastro.tpl')
@@ -20,7 +20,7 @@
             <div class="row">
                 <div id="dropdown_filtros">
                     %include('bottle/usuario/bottle_usuario_filtros.tpl')
-                    <!--<button id="botao-filtro" onclick="filtro_usuario()">Filtrar</button>-->
+
                 </div>
             </div>
          </div>

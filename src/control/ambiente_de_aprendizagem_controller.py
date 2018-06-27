@@ -1,18 +1,19 @@
 import json
 
-from bottle import route,view, request, redirect, response,get, template
+from bottle import route, view, request, redirect, response, get, template
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado
 from control.dicionarios import *
 
-facade=Facade()
+facade = Facade()
+
 
 @route('/aluno/area_aluno')
 @permissao('aluno_varejo')
 @view('caminho_aluno/jogar_conecturma')
 def view_ambiente_de_aprendizagem():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
-    if int(usuario_logado()['tipo'])>=6:
+    if int(usuario_logado()['tipo']) >= 6:
         usuario = facade.search_aluno_nome_facade(usuario_logado()['nome'])
     else:
         usuario = facade.search_observador_facade(usuario_logado()['nome'])
@@ -25,8 +26,12 @@ def view_ambiente_de_aprendizagem():
         'acessorio': facade.search_estrutura_id_facade(avatar['acessorio'])['nome'],
         'corpo': facade.search_estrutura_id_facade(avatar['corpo'])['nome']
     }
+    moedas = usuario['pontos_de_moedas']
+    vidas = usuario['pontos_de_vida']
+    print('que',vidas,moedas)
+    return dict(usuario=usuario['nome'], avatar=avatar_pecas, tipo=usuario_logado()['tipo'],
+                moedas=usuario['pontos_de_moedas'], vidas=usuario['pontos_de_vida'])
 
-    return dict(usuario=usuario['nome'], avatar = avatar_pecas,tipo=usuario_logado()['tipo'])
 
 @route('/aluno/loja')
 @permissao('aluno_varejo')
@@ -40,11 +45,14 @@ def view_ambiente_de_aprendizagem_loja():
 
     itens_comprados = facade.ver_item_comprado_facade(id_usuario=usuario_logado()['id'])
     itens = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'])
+    alun = usuario_logado()
+    aluno = facade.search_aluno_nome_facade(alun['nome'])
 
     if itens:
         return dict(itens=itens, itens_comprados=itens_comprados)
     else:
         return dict(itens=False)
+
 
 @route('/aluno/ver_itens_comprados')
 @permissao('aluno_varejo')
@@ -60,7 +68,7 @@ def ver_itens():
     usuario = usuario_logado()
     itens_comprado = facade.ver_item_comprado_facade(usuario['id'])
 
-    itens=[]
+    itens = []
     # itens = [y for y in itens_comprado
     #     itens.append(facade.search_estrutura_id_facade(int(y)))]
     for y in itens_comprado:
@@ -84,6 +92,7 @@ def equipar_item():
 
     redirect('/aluno/ver_itens_comprados')
 
+
 @route('aluno/ver_item')
 @permissao('aluno_varejo')
 @view('loja/ver_item')
@@ -95,6 +104,7 @@ def ver_item():
     item = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'])
 
     return dict(teste=item)
+
 
 @get('/compras_loja')
 @permissao('aluno_varejo')
@@ -109,27 +119,31 @@ def compras():
 
     redirect('aluno/loja')
 
+
 @route('/jogo')
 def jogo():
     return template('jogo/index')
 
+
 @route('/api/plataforma/obterUltimaConclusao', method='POST')
 def obterUltimaConclusao():
     usuario = usuario_logado()
-    retorno={
-        'objetoAprendizagem':'',
-        'unidade':'',
-        'aventura':'',
-        'universo':'UV1'
-             }
+    retorno = {
+        'objetoAprendizagem': '',
+        'unidade': '',
+        'aventura': '',
+        'universo': 'UV1'
+    }
     return retorno
+
 
 @route('/api/plataforma/verificarAcessoObjetoAprendizagem', method='POST')
 def verificarAcessoObjetoAprendizagem():
-    usuario=usuario_logado()
+    usuario = usuario_logado()
+    print('usuario', usuario)
     parametros = parametros_json_jogos(request.params.items())
-    if int(usuario['tipo'])<6:
-        retorno={'objetosAprendizagemAcessiveis':parametros['objetosAprendizagem']}
+    if int(usuario['tipo']) < 6:
+        retorno = {'objetosAprendizagemAcessiveis': parametros['objetosAprendizagem']}
     else:
         teste = []
         for i in parametros['objetosAprendizagem']:
@@ -142,6 +156,7 @@ def verificarAcessoObjetoAprendizagem():
 
         retorno = {'objetosAprendizagemAcessiveis': teste}
     return retorno
+
 
 @route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
 def verificarConclusoesObjetosAprendizagem():
@@ -163,38 +178,59 @@ def verificarConclusoesObjetosAprendizagem():
         retorno = {'objetosConcluidos': teste}
     return retorno
 
+
 @route('/api/plataforma/registrarConclusao', method='POST')
 def registrarConclusao():
     from control.dicionarios import PREMIO_JOGOS
+    from control.classes.permissao import update_cookie
     parametros = parametros_json_jogos(request.params.items())
     print('4: ', parametros)
+    print('4.1', parametros['niveis'])
     flag = 0
+    contador = 0
     oa = parametros['objetoAprendizagem']
+    objetoaprendizagem=[letter for letter in parametros['objetoAprendizagem']]
+    x=len(objetoaprendizagem)
+    print('op',x,objetoaprendizagem[x-4],objetoaprendizagem[x-3])
+    lista_checar_se_e_VC=[objetoaprendizagem[x-4],objetoaprendizagem[x-3]]
+    y=''.join(lista_checar_se_e_VC)
+    print(y)
     for i in parametros['niveis']:
+        contador += 1
+        print(contador, i['termino'])
         if i['termino'] == True:
-            flag+=1
-    if flag > 1:
+            flag += 1
+    if y != 'VC':
+        print('gravei')
         facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), unidade=oa[0:9],objeto_aprendizagem=oa)
-
+        aluno = usuario_logado()
+        facade.gravar_premiacao(aluno['id'], PREMIO_JOGOS[str(flag)])
+        update_cookie(PREMIO_JOGOS[str(flag)])
+        
     return PREMIO_JOGOS[str(flag)]
+
 
 @route('/api/plataforma/obterPremiacao', method='POST')
 def obterPremiacao():
     parametros = parametros_json_jogos(request.params.items())
     print('5: ', parametros)
-
-    retorno={
-        'moedas':0,
-        'xp':0
+    # serve para mostrar o numero de cristais e xp dentro de um jogo
+    aluno1 = usuario_logado()
+    aluno = facade.search_aluno_nome_facade(nome=aluno1['nome'])
+    retorno = {
+        'moedas': int(aluno['pontos_de_moedas']),
+        'xp': int(aluno['pontos_de_vida'])
     }
+    print('retorno', retorno)
     return retorno
+
 
 @route('/api/plataforma/verificarAcessoUnidade', method='POST')
 def verificarAcessoUnidade():
-    usuario=usuario_logado()
+    usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
-    if int(usuario['tipo'])<6:
-        retorno={'unidadesAcessiveis':parametros['unidades']}
+    if int(usuario['tipo']) < 6:
+        retorno = {'unidadesAcessiveis': parametros['unidades']}
     else:
         desempenho_aluno = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
         if desempenho_aluno == []:
@@ -217,16 +253,18 @@ def verificarAcessoUnidade():
         retorno = {'unidadesAcessiveis': acesso_unidade}
     return retorno
 
+
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
 def verificarAcessoAventura():
     usuario = usuario_logado()
-    if int(usuario['tipo'])< 6:
+    if int(usuario['tipo']) < 6:
         parametros = parametros_json_jogos(request.params.items())
         return {'aventurasAcessiveis': parametros['aventuras']}
     else:
         from control.dicionarios import AVENTURAS_CONECTURMA
         serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
         return AVENTURAS_CONECTURMA[serie_turma['serie']]
+
 
 def parametros_json_jogos(parametro):
     for p in parametro:
