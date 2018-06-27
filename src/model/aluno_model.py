@@ -33,6 +33,7 @@ class DbAluno(Model):
     ultima_unidade = TextField(fts=True, default='')
     ultima_objeto_aprendizagem = TextField(fts=True, default='')
     anotacoes_aluno = ListField()
+    dados_aventura_1 = HashField()
 
     # def create_aluno(self, nome,nome_login, senha, matricula, data_nascimento, sexo, vinculo_escola='0', vinculo_rede='0',
     #                  cpf_responsavel='0'):
@@ -253,6 +254,36 @@ class DbAluno(Model):
         aluno.pontos_de_moedas=str(moedas)
         aluno.pontos_de_vida=str(vidas)
         aluno.save()
+
+    def pegar_dados_jogo(self,parada,OA,aluno_id):
+        indices=[letter for letter in OA]
+        x=0
+        indice_ex=[indices[x-4],indices[x-3],indices[x-2],indices[x-1]]
+        indice_in=[indices[x-7],indices[x-6],indices[x-5]]
+        z=''.join(indice_in)
+        y=''.join(indice_ex)
+        print('y,z,parada[0]',y,z,parada[0],aluno_id)
+        aluno=self.load(aluno_id)
+        # print('teste',aluno)
+        # exec(f'{y} = [] \n'
+        #      f'print({y})\n'
+        #      f'aluno.dados_aventura_1[z]={{{y}.append(parada)}}')
+        aluno.dados_aventura_1[z]={y :parada}
+        print('x',x,y)
+        # aluno.dados_aventura_1[z]={exec(f'{y}').append(parada)}
+        # if aluno.dados_aventura_1[z.encode]=={y:parada[0]}:
+        #     pass
+        aluno.save()
+        print('aluno_tudo',aluno.dados_aventura_1)
+        print('aluno_1',aluno.dados_aventura_1[y.encode('utf-8')])
+        print('teste',parada,
+              parada[0],
+              parada[1],
+              parada[2],
+              parada[0]['nivel'],
+              parada[0]['percentualConcluido'],
+              parada[0]['termino'],OA)
+
 
     def apagartudo(self):
         db.flushall()

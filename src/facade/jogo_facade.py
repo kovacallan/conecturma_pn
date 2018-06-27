@@ -12,3 +12,4 @@ class OaConcluidoFacade:
 
     def unidade_concluida_facade(self, id_aluno, unidade):
         return self.oaconcluido.unidade_concluida(id_aluno=id_aluno, unidade=unidade)
+

@@ -10,6 +10,8 @@ class DesempenhoJogo(Model):
     unidade=TextField(fts=True, default='0')
     objeto_aprendizagem=TextField(fts=True, default='0')
     nivel_concluido = ListField()
+    hmm={}
+
 
     def create_desempenho_jogo(self, **kwargs):
         self.create(**kwargs)
@@ -29,3 +31,4 @@ class DesempenhoJogo(Model):
             teste.append(vars(i)['_data'])
 
         return teste
+

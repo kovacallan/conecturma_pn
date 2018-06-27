@@ -188,16 +188,16 @@ def registrarConclusao():
     from control.classes.permissao import update_cookie
     parametros = parametros_json_jogos(request.params.items())
     print('4: ', parametros)
-    print('4.1', parametros['niveis'])
+    # print('4.1', parametros['niveis'])
     flag = 0
     contador = 0
     oa = parametros['objetoAprendizagem']
     objetoaprendizagem=[letter for letter in parametros['objetoAprendizagem']]
     x=len(objetoaprendizagem)
-    print('op',x,objetoaprendizagem[x-4],objetoaprendizagem[x-3])
+    # print('OA?',x,objetoaprendizagem[x-4],objetoaprendizagem[x-3])
     lista_checar_se_e_VC=[objetoaprendizagem[x-4],objetoaprendizagem[x-3]]
     y=''.join(lista_checar_se_e_VC)
-    print(y)
+    # print(y)
     for i in parametros['niveis']:
         contador += 1
         print(contador, i['termino'])
@@ -207,6 +207,9 @@ def registrarConclusao():
         print('gravei')
         facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), aventura=oa[3:6], unidade=oa[6:9],
                                           objeto_aprendizagem=oa[9:13])
+        facade.pegar_dados_de_jogo_facade(parametros['niveis'], parametros['objetoAprendizagem'],
+                                          str(usuario_logado()['id']))
+        # facade.create_desempenho_aluno_oa(parametros['niveis'])
         aluno = usuario_logado()
         facade.gravar_premiacao(aluno['id'], PREMIO_JOGOS[str(flag)])
         update_cookie(PREMIO_JOGOS[str(flag)])

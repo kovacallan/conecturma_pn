@@ -80,3 +80,6 @@ class AlunoFacade:
 
     def apagartudo(self):
         return self.aluno.apagartudo()
+
+    def pegar_dados_de_jogo_facade(self,lista_de_dados,OA,aluno_id):
+        return self.aluno.pegar_dados_jogo(lista_de_dados,OA,aluno_id)
