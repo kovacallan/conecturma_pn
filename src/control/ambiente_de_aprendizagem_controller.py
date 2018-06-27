@@ -145,40 +145,37 @@ def verificarAcessoObjetoAprendizagem():
     if int(usuario['tipo']) < 6:
         retorno = {'objetosAprendizagemAcessiveis': parametros['objetosAprendizagem']}
     else:
-        desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        if desempenho_oa == []:
-            retorno = {'objetosAprendizagemAcessiveis': parametros['objetosAprendizagem']}
-        else:
-            proxima_oa = []
-            for i in desempenho_oa:
-                if 'OA' in i['objeto_aprendizagem']:
-                    proxima_oa.append('UV1{}{}{}'.format(i['aventura'], i['unidade'], i['objeto_aprendizagem']))
+        teste = []
+        for i in parametros['objetosAprendizagem']:
+            desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
+            if desempenho_oa == []:
+                teste.append(i)
+                break
+            else:
+                teste.append(i)
 
-            teste = []
-            for i in range(0, len(proxima_oa) + 1):
-                teste.append(parametros['objetosAprendizagem'][i])
-            print('-------- verificar_acesso_plataforma:', teste)
-            retorno = {'objetosAprendizagemAcessiveis': teste}
+        retorno = {'objetosAprendizagemAcessiveis': teste}
     return retorno
 
 
 @route('/api/plataforma/verificarConclusoesObjetosAprendizagem', method='POST')
 def verificarConclusoesObjetosAprendizagem():
-    usuario = usuario_logado()
-    if int(usuario['tipo']) < 6:
-        parametros = parametros_json_jogos(request.params.items())
-        retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
+    usuario=usuario_logado()
+    parametros = parametros_json_jogos(request.params.items())
+    if int(usuario['tipo'])<6:
+        retorno={'objetosConcluidos':parametros['objetosAprendizagem']}
     else:
-        parametros = parametros_json_jogos(request.params.items())
-        desempenho_oa = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        if desempenho_oa == []:
-            retorno = {'objetosConcluidos': [parametros['objetosAprendizagem'][0]]}
-        else:
-            proxima_oa = []
-            for i in desempenho_oa:
-                proxima_oa.append('UV1{}{}{}'.format(i['aventura'], i['unidade'], i['objeto_aprendizagem']))
-            retorno = {'objetosConcluidos': proxima_oa}
+        print(parametros['objetosAprendizagem'])
+        teste = []
+        for i in parametros['objetosAprendizagem']:
+            desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
+            if desempenho_oa == []:
+                teste.append(i)
+                break
+            else:
+                teste.append(i)
 
+        retorno = {'objetosConcluidos': teste}
     return retorno
 
 
@@ -205,12 +202,11 @@ def registrarConclusao():
             flag += 1
     if y != 'VC':
         print('gravei')
-        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), aventura=oa[3:6], unidade=oa[6:9],
-                                          objeto_aprendizagem=oa[9:13])
+        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), unidade=oa[0:9],objeto_aprendizagem=oa)
         aluno = usuario_logado()
         facade.gravar_premiacao(aluno['id'], PREMIO_JOGOS[str(flag)])
         update_cookie(PREMIO_JOGOS[str(flag)])
-
+        
     return PREMIO_JOGOS[str(flag)]
 
 
@@ -236,12 +232,25 @@ def verificarAcessoUnidade():
     if int(usuario['tipo']) < 6:
         retorno = {'unidadesAcessiveis': parametros['unidades']}
     else:
-        desempenho_aluno = facade.search_oa_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
+        desempenho_aluno = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
         if desempenho_aluno == []:
             retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
         else:
-            retorno = {
-                'unidadesAcessiveis': [parametros['unidades'][0]] if desempenho_aluno == [] else parametros['unidades']}
+            acesso_unidade = []
+            for i in parametros['unidades']:
+                desempenho_unidade = facade.unidade_teste_facade(id_aluno=str(usuario['id']), unidade=i)
+                if desempenho_unidade == []:
+                    acesso_unidade.append(i)
+                    break
+                else:
+                    desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
+                    if desempenho_oa == []:
+                        acesso_unidade.append(i)
+                        print(desempenho_oa)
+                        break
+                    else:
+                        acesso_unidade.append(i)
+        retorno = {'unidadesAcessiveis': acesso_unidade}
     return retorno
 
 
