@@ -46,6 +46,16 @@ class DesempenhoJogo(Model):
 
         return conclucoes
 
+    def search_unidade_oa(self,id_aluno,unidade,oa):
+        oa_buscado= []
+
+        for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno==id_aluno) and
+                (DesempenhoJogo.unidade == unidade) and (DesempenhoJogo.objeto_aprendizagem == oa),
+                order_by=DesempenhoJogo.id):
+            oa_buscado.append(vars(i)["_data"])
+
+        return oa_buscado
+
     def search_desempenho_concluido_id_aluno_obj_aprendizagerm(self, id_aluno,objeto_aprendizagem):
         conclucoes = []
 
@@ -59,7 +69,7 @@ class DesempenhoJogo(Model):
 
         jogo=self.search_desempenho_id(id_obj)
         print('alun',jogo)
-        print('jgo mdel ,ddos',lista_dados_jogo)
+        print('lista de dados jogo',lista_dados_jogo)
         desempenho=self.load(jogo['id'])
         desempenho.jogo_jogado.append(lista_dados_jogo)
         desempenho.save()

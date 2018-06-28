@@ -13,8 +13,12 @@ class OaConcluidoFacade:
     def unidade_concluida_facade(self, id_aluno, unidade):
         return self.oaconcluido.unidade_concluida(id_aluno=id_aluno, unidade=unidade)
 
-    def objeto_concluido_facade(self,id_aluno,objeto_aprendizagem):
+    def search_oa_facade(self,id_aluno,objeto_aprendizagem):
         return self.oaconcluido.search_desempenho_concluido_id_aluno_obj_aprendizagerm(id_aluno,objeto_aprendizagem)
+
+    def objeto_concluido_facade(self,id_aluno,unidade,objeto_aprendizagem):
+        return self.oaconcluido.search_unidade_oa(id_aluno,unidade,objeto_aprendizagem)
+
 
     def unidade_teste_facade(self, id_aluno, unidade):
         return self.oaconcluido.unidade_teste(id_aluno=id_aluno, unidade=unidade)

@@ -202,11 +202,11 @@ def registrarConclusao():
         print(contador, i['termino'])
         if i['termino'] == True:
             flag += 1
-    if y != 'VC' and y!= 'CN':
+    if y != 'VC':
         print('gravei')
-        cumprida=facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),objeto_aprendizagem=oa[9:13])
+        cumprida=facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],objeto_aprendizagem=oa[9:13])
         print('cumprida',cumprida)
-        if facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),objeto_aprendizagem=oa[9:13]) == []:
+        if cumprida == []:
             facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],
                                           objeto_aprendizagem=oa[9:13],dados_jogabilidade=parametros['niveis'])
         else:
