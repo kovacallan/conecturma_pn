@@ -195,6 +195,8 @@ def registrarConclusao():
     lista_checar_se_e_VC=[objetoaprendizagem[x-4],objetoaprendizagem[x-3]]
     y=''.join(lista_checar_se_e_VC)
     # print(y)
+    facade.pegar_dados_de_jogo_facade(parametros['niveis'], parametros['objetoAprendizagem'],
+                                      str(usuario_logado()['id']))
     for i in parametros['niveis']:
         contador += 1
         print(contador, i['termino'])
@@ -250,11 +252,11 @@ def verificarAcessoUnidade():
                     desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
                     if desempenho_oa == []:
                         acesso_unidade.append(i)
-                        print(desempenho_oa)
+                        print('desepenho',desempenho_oa)
                         break
                     else:
                         acesso_unidade.append(i)
-        retorno = {'unidadesAcessiveis': acesso_unidade}
+            retorno = {'unidadesAcessiveis': acesso_unidade}
     return retorno
 
 
