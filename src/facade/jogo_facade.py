@@ -13,6 +13,8 @@ class OaConcluidoFacade:
     def unidade_concluida_facade(self, id_aluno, unidade):
         return self.oaconcluido.unidade_concluida(id_aluno=id_aluno, unidade=unidade)
 
+    def objeto_concluido_facade(self,id_aluno,objeto_aprendizagem):
+        return self.oaconcluido.search_desempenho_concluido_id_aluno_obj_aprendizagerm(id_aluno,objeto_aprendizagem)
 
     def unidade_teste_facade(self, id_aluno, unidade):
         return self.oaconcluido.unidade_teste(id_aluno=id_aluno, unidade=unidade)
@@ -20,3 +22,6 @@ class OaConcluidoFacade:
     def oa_teste_facade(self, id_aluno, oa):
         print('id_aluno',id_aluno)
         return self.oaconcluido.oa_teste(id_aluno=id_aluno, oa=oa)
+
+    def armazenar_dados_jogos_facade(self,id_obj,dados):
+        return self.oaconcluido.armazenando_dados_jogo(id_obj,dados)

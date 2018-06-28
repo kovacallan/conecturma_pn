@@ -202,13 +202,15 @@ def registrarConclusao():
         print(contador, i['termino'])
         if i['termino'] == True:
             flag += 1
-    if y != 'VC':
+    if y != 'VC' and y!= 'CN':
         print('gravei')
-        facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']), aventura=oa[3:6], unidade=oa[6:9],
-                                          objeto_aprendizagem=oa[9:13])
-        facade.pegar_dados_de_jogo_facade(parametros['niveis'], parametros['objetoAprendizagem'],
-                                          str(usuario_logado()['id']))
-        # facade.create_desempenho_aluno_oa(parametros['niveis'])
+        cumprida=facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),objeto_aprendizagem=oa[9:13])
+        print('cumprida',cumprida)
+        if facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),objeto_aprendizagem=oa[9:13]) == []:
+            facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],
+                                          objeto_aprendizagem=oa[9:13],dados_jogabilidade=parametros['niveis'])
+        else:
+            facade.armazenar_dados_jogos_facade(cumprida[0]['id'],parametros['niveis'])
         aluno = usuario_logado()
         facade.gravar_premiacao(aluno['id'], PREMIO_JOGOS[str(flag)])
         update_cookie(PREMIO_JOGOS[str(flag)])
