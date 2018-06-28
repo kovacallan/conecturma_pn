@@ -9,7 +9,7 @@
             {{i['nome']}}
         </div>
         <div  class="col-md-2">
-            {{i['email']}}
+            {{i['senha']}}
         </div>
         <div  class="col-md-2">
             {{i['vinculo_turma']}}

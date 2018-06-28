@@ -165,13 +165,13 @@ def verificarConclusoesObjetosAprendizagem():
     if int(usuario['tipo'])<6:
         retorno={'objetosConcluidos':parametros['objetosAprendizagem']}
     else:
-        print(parametros['objetosAprendizagem'])
         teste = []
         for i in parametros['objetosAprendizagem']:
+            print('usuario: ', usuario)
             desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
+            print('------ ', desempenho_oa)
             if desempenho_oa == []:
-                teste.append(i)
-                break
+                pass
             else:
                 teste.append(i)
 

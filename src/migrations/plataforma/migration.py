@@ -1,8 +1,9 @@
 from facade.facade_main import *
 from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID
+from passlib.hash import sha512_crypt
 
 facade=Facade()
-facade.create_observador_facade(nome="administrador", senha="@onde2929", telefone="21999999999", cpf="0",email="admin", tipo='0',
+facade.create_observador_facade(nome="administrador", senha=sha512_crypt.hash("@onde2929"), telefone="21999999999", cpf="0",email="admin", tipo='0',
                                             rede='0',escola='0')
 
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01", descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01", nome_descritor="Estante de Leitura", descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)", serie="1", disciplina="2")

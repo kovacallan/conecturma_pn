@@ -41,7 +41,7 @@ BasicGame.OnlineAPI = {
                     parametrosOriginais.erro(resposta);
                 }
             } else {
-                
+
                 if (parametrosOriginais == null || !parametrosOriginais.sucesso) {
                     console.error("A operacao retornou com sucesso, mas nenhum callback de sucesso foi informado.");
                 } else {
@@ -96,7 +96,7 @@ BasicGame.OnlineAPI = {
     },
 
     /********************************** AUXILIARES ***********************************************/
-    
+
     /**
     * chamar ao final do jogo para abrir nivel seguinte no mapa
     *
@@ -151,13 +151,14 @@ BasicGame.OnlineAPI = {
     getVideoByName: function(name) {
         return name.split("UD" + BasicGame.UD)[1];
     },
-    
+
     /**
     * chamar ao final do jogo para abrir nivel seguinte no mapa
     *
     * @method setCookieVictory
     */
     isVideo: function(name) {
+      console.log('aqui allan ', name.match(/(CN|VC)/gi));
         return name.match(/(CN|VC)/gi);
     },
 
@@ -170,7 +171,7 @@ BasicGame.OnlineAPI = {
     * @method setCookieVictory
     */
     obterNomeUsuario: function (onSuccess) { // OK
-        
+
         var param = {
             sucesso: onSuccess
         };
@@ -209,17 +210,17 @@ BasicGame.OnlineAPI = {
             return;
         }
 
-        var _fac = { 
+        var _fac = {
             nivel: "facil",
             percentualConcluido: corrects[0],
             termino: completed[0]
         };
-        var _med = { 
+        var _med = {
             nivel: "medio",
             percentualConcluido: corrects[1],
             termino: completed[1]
         };
-        var _dif = { 
+        var _dif = {
             nivel: "dificil",
             percentualConcluido: corrects[2],
             termino: completed[2]

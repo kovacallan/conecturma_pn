@@ -5,7 +5,7 @@ db = Database(host='localhost', port=6379, db=0)
 class DesempenhoJogo(Model):
     __database__ = db
     id = AutoIncrementField(primary_key=True)
-    id_aluno=TextField(fts=True, default='0')
+    id_aluno=TextField(fts=True)
     unidade=TextField(fts=True, default='0')
     objeto_aprendizagem=TextField(fts=True, default='0')
     nivel_concluido = ListField()
@@ -34,8 +34,8 @@ class DesempenhoJogo(Model):
 
     def oa_teste(self, id_aluno, oa):
         conclucoes = []
-        for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno) and (DesempenhoJogo.objeto_aprendizagem == oa),
-                                      order_by=DesempenhoJogo.objeto_aprendizagem):
+        for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno) & (DesempenhoJogo.objeto_aprendizagem == oa),
+                                      order_by=DesempenhoJogo.id):
             conclucoes.append(vars(i)["_data"])
 
         return conclucoes

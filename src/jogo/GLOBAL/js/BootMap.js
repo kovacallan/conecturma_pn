@@ -13,8 +13,8 @@ BasicGame.Boot.prototype = {
         this.caminho = getPathFile(GLOBAL);
 
         console.log("GLOBAL "+this.caminho);
-        
-        
+
+
         this.load.atlas('preloader', this.caminho+'preloader.png', this.caminho+'preloader.json');
 
     },
@@ -31,12 +31,12 @@ BasicGame.Boot.prototype = {
         this.scale.setMinMax( 250, 150, 1000, 600);
 
         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-        
+
         this.scale.refresh();
 
         console.log("execute Boot");
 
-        
+
         BasicGame.isOnline = BasicGame.OfflineAPI.isOnlineMode();
 
         BasicGame.OnlineAPI.initialize(BasicGame.isOnline);
@@ -46,12 +46,12 @@ BasicGame.Boot.prototype = {
             BasicGame.OfflineAPI.cleanCookie();
             BasicGame.OfflineAPI.cleanVideos();
             BasicGame.OfflineAPI.setInitialLevel();
-        
+
             this.verificaAcessos();
         }
-        
 
-        if(!BasicGame.isOnline) {       
+
+        if(!BasicGame.isOnline) {
             this.initPreloader();
         }
     },
@@ -64,15 +64,18 @@ BasicGame.Boot.prototype = {
             function(resposta) {
 
                 console.log('----------');
-                
+
                 console.log(resposta);
 
                 console.log('----------');
 
                 for(var i = 0; i < resposta.objetosAprendizagemAcessiveis.length; i++) {
                     var curr = resposta.objetosAprendizagemAcessiveis[i];
+                    console.log('------ ', curr)
                     if(BasicGame.OnlineAPI.isVideo( curr )) {
+                        console.log('------ é video');
                         var _vid = BasicGame.OnlineAPI.getVideoByName( curr );
+                        console.log('------ é video ', _vid);
                         console.log("video", _vid);
                         BasicGame.OfflineAPI.saveVideo( _vid );
                     } else {
@@ -97,9 +100,9 @@ BasicGame.Boot.prototype = {
             function(resposta) {
 
                 console.log(resposta);
-                
+
                 for(var i = 0; i < resposta.objetosConcluidos.length; i++) {
-                    
+
                     var curr = resposta.objetosConcluidos[i];
 
                     if(BasicGame.OnlineAPI.isVideo( curr )) {

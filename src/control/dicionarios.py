@@ -105,5 +105,9 @@ AVENTURAS_CONECTURMA = {
     '3':{'aventurasAcessiveis': ["UV1AV1", "UV1AV2", "UV1AV3"]}
 }
 
+ORDEM_OS ={
+    '0': 'CN01',
+    '1': 'OA01'
+}
 
 
