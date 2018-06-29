@@ -29,7 +29,6 @@ class DbAluno(Model):
     vinculo_turma = TextField(fts=True, default='0')
     vinculo_serie = TextField(fts=True, default='0')
 
-    ultimo_oa_jogado=TextField(fts=True,default='0')
     ultima_aventura = TextField(fts=True, default='0')
     ultima_unidade = TextField(fts=True, default='0')
     ultima_objeto_aprendizagem = TextField(fts=True, default='0')
@@ -90,6 +89,8 @@ class DbAluno(Model):
         alun_pes = []
         for search in DbAluno.query(DbAluno.nome == nome):
             alun_pes = vars(search)["_data"]
+
+        print(alun_pes)
 
         return alun_pes
 
@@ -295,15 +296,20 @@ class DbAluno(Model):
         # ud=
         # av=
     def armazenar_ultimo_jogo_jogado(self, id_aluno, jogo):
-
-        aluno=self.load(id_aluno)
-        aluno.ultimo_oa_jogado=jogo
+        print('id',id_aluno)
+        aluni=self.search_aluno_id(id_aluno)
+        aluno=self.load(aluni['id'])
+        print('alun',aluno,jogo)
+        aluno.ultimo_oa_jogado = jogo
+        print('aluno_modelL302  ',type(jogo),jogo)
         aluno.save()
+
 
     def ultimo_oa_jogado(self,id_aluno):
 
         aluno=self.search_aluno_id(id_aluno)
+        print('alun',aluno)
 
-        return aluno['ultimo_oa_jogado']
+        return aluno['ultima_objeto_aprendizagem']
     def apagartudo(self):
         db.flushall()

@@ -62,6 +62,7 @@ class Login_Aluno(object):
         hash = self.gerar_hash()
         aluno = facade.search_aluno_nome_facade(nome=self.nome)
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
+        print('afsa',aluno)
         if aluno['nome_login'] == self.nome:
             if aluno['senha'] == self.senha:
                 aluno_logado = dict(
@@ -71,7 +72,7 @@ class Login_Aluno(object):
                     vinculo_rede=aluno['vinculo_rede'],
                     vinculo_escola=aluno['vinculo_escola'],
                     vinculo_turma=aluno['vinculo_turma'],
-                    # ultimo_oa = aluno['ultimo_objeto_aprendizagem'],
+                    ultimo_oa = aluno['ultimo_objeto_aprendizagem'],
                     ultima_unidade= aluno['ultima_unidade'],
                     ultima_aventura= aluno['ultima_aventura'],
                     moeda=aluno['pontos_de_moedas'],
@@ -97,12 +98,13 @@ class Login_Aluno(object):
         matricula = ''.join(str(x) for x in hash)
         return matricula
 
-def update_cookie(premio):
+def update_cookie(premio,ultimaoa):
     banana = request.get_cookie("KIM", secret=KEY_HASH)
     que = request.get_cookie("BUMBA", secret=banana)
 
     que['moeda'] = premio['moedas']
     que['xp'] = premio['xp']
+    que['ultimo_oa'] = ultimaoa
     return PAGINA_INICIAL[tipo_observador(que['tipo'])]
 
 def usuario_logado():

@@ -128,13 +128,15 @@ def jogo():
 @route('/api/plataforma/obterUltimaConclusao', method='POST')
 def obterUltimaConclusao():
     usuario = usuario_logado()
-    # ultimo_oa_jogado=facade.ultimo_oa_jogado_facade(usuario_logado()['id'])
-    # print('aqui, ultimo oa jogado',ultimo_oa_jogado)
+    aluno=facade.search_aluno_id_facade(usuario['id'])
+    print(aluno)
+    ultimo_oa_jogado=facade.ultimo_oa_jogado_facade(aluno['id'])
+    print('aqui, ultimo oa jogado',ultimo_oa_jogado)
     retorno = {
         'objetoAprendizagem': '',
         'unidade': '',
-        'aventura': '',
-        'universo': ''
+        'aventura': 'UV1AV1',
+        'universo': 'UV1'
     }
     return retorno
 
@@ -200,6 +202,7 @@ def registrarConclusao():
     # print(y)
     # facade.pegar_dados_de_jogo_facade(parametros['niveis'], parametros['objetoAprendizagem'],
     #                                   str(usuario_logado()['id']))
+    print('obj aprendizage',usuario_logado()['id'], parametros['objetoAprendizagem'])
     facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'], parametros['objetoAprendizagem'])
     for i in parametros['niveis']:
         contador += 1
@@ -214,12 +217,13 @@ def registrarConclusao():
         if cumprida == []:
             facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],
                                           objeto_aprendizagem=oa[9:13],dados_jogabilidade=parametros['niveis'])
-            facade.armazenar_dados_jogos_facade(cumprida[0]['id'], parametros['niveis'])
+            teste=facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'],parametros['objetoAprendizagem'])
+            facade.armazenar_dados_jogos_facade(teste[0]['id'], parametros['niveis'])
         else:
             facade.armazenar_dados_jogos_facade(cumprida[0]['id'], parametros['niveis'])
         aluno = usuario_logado()
         facade.gravar_premiacao(aluno['id'], PREMIO_JOGOS[str(flag)])
-        update_cookie(PREMIO_JOGOS[str(flag)])
+        update_cookie(PREMIO_JOGOS[str(flag)],parametros['objetoAprendizagem'])
         
     return PREMIO_JOGOS[str(flag)]
 

@@ -69,10 +69,11 @@ class DesempenhoJogo(Model):
     def armazenando_dados_jogo(self,id_obj, lista_dados_jogo):
 
         jogo=self.search_desempenho_id(id_obj)
-        print('alun',jogo)
+        print('aluno',jogo)
         print('lista de dados jogo',lista_dados_jogo)
         desempenho=self.load(jogo['id'])
         desempenho.jogo_jogado.append(lista_dados_jogo)
+
         desempenho.save()
         print(desempenho.jogo_jogado[0])
 
