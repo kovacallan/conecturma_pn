@@ -17,15 +17,18 @@ def login_observador_controller():
     senha = request.params['observador_senha']
 
     login = Login_Observador(email=email, senha=senha)
-    redirect(login.login())
+    login.login()
+
+    return
 
 @route('/login/login_aluno', method='POST')
 def login_aluno_controller():
     nome = request.params['aluno_login_nome']
-    presenha = request.params.getlist('aluno_senha')
-    senha = ''.join(presenha)
+    senha = request.params['aluno_senha']
+
     login = Login_Aluno(nome=nome, senha=senha)
-    redirect(login.login())
+
+    return login.login()
 
 @route('/esqueci_senha')
 def view_esqueci_senha():

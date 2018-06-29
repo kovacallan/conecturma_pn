@@ -18,6 +18,15 @@ def js(filename):
     """
     return static_file(filename, root='././view/app/js')
 
+@route('/static/img/<filename>')
+def img(filename):
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(filename, root='././view/app/img')
+
 @route('/GLOBAL/<path:path>')
 def global_path(path):
     """
