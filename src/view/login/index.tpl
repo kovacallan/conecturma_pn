@@ -17,7 +17,6 @@
 				<div class="bg_login">
                     <main>
                         <div id="Login-div">
-			                <form>
                                 <img src="/static/img/login-img.png" id="login-img">
                                 <section class="content-professor">
                                     <div class="professor">
@@ -27,11 +26,10 @@
                                         <input type="email" id="inputEmail" class="form-control class_email " placeholder="Email" required="">
                                         <label for="inputPassword" class="sr-only">Senha</label>
                                         <input type="password" id="inputPassword" class="form-control class_senha" placeholder="Senha" required="">
-                                        <button type="submit" id="btn-professor" style="cursor:pointer"></button>
+                                        <button onclick="login_professor()" id="btn-professor" style="cursor:pointer"></button>
                                         <a href="#" onclick="" class="lost-pass">Esqueci minha senha</a>
                                     </div>
                                 </section>
-                            </form>
                                 <section class="content-login">
                                     <div class="student">
                                        <img src="/static/img/aluno-seta.png" id="aluno-seta">
@@ -111,7 +109,7 @@
                                                 </div>
 		                        	        </div>
                                             <div>
-                                                <button type="submit" onclick="login_aluno()" style="cursor:pointer">
+                                                <button id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
                                                 </button>
                                             </div>
                                         </div>
@@ -154,4 +152,7 @@
             <a href="/formulario_cadastro"><button>Cadastrar</button></a>
         </div>
     </div>-->
-% include('footer.tpl')
+    <script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
+    <script type="text/javascript" src="../static/js/script.js"></script>
+</body>
+</html>

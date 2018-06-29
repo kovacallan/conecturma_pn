@@ -125,7 +125,7 @@
 }
 
 /* Botoes */
-#Login-div form button {
+#botao_aluno {
 
 
     width: 110px;
@@ -133,17 +133,18 @@
     border: 0;
     margin-left: 0px;
     background: url('img/btn-aluno.png') 0 0 no-repeat;
-	margin-left:0;
-	padding: 0;
-	border:0;
-	position: relative;
-	top: 280px;
-	left: 260px;
+		margin-left:0;
+		padding: 0;
+		border:0;
+		position: relative;
+		top: 280px;
+		left: 260px;
 
 }
 
-#Login-div .professor  button{
+#btn-professor{
 	background: url('img/btn-prof.png') 0 0 no-repeat;
+	border: 0;
 	width: 105px;
     height: 50px;
     position: relative;
@@ -200,7 +201,6 @@
 	right: 250px;
 }
 
-
 cartoons-pass figure:hover img,figure.hover img {
 
    	width: 70px;
@@ -218,20 +218,12 @@ cartoons-pass figure:hover img,figure.hover img {
   background-color: rgba(229, 255, 84, 0.5);
 }
 
-
-
 .on {
   -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
   -moz-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
   -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
   -ms-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
   transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-
-.cartoons-pass .box-selected{
-    background-color: rgba(229, 255, 84, 0.5);
-
 }
 
 .logo{

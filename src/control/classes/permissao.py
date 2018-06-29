@@ -1,7 +1,7 @@
 from bottle import redirect, response, request
 from datetime import datetime
-from src.control.dicionarios import *
-from src.facade.facade_main import Facade
+from control.dicionarios import *
+from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
 
 """Constante para a key de hash temporariamente"""
@@ -24,7 +24,6 @@ class Login_Observador(object):
         observador_logado = facade.search_observador_email_facade(email=self.email)
 
         if observador_logado['email'] == self.email:
-            print('l27 per',sha512_crypt.verify(self.senha, observador_logado['senha']))
             if sha512_crypt.verify(self.senha, observador_logado['senha']):
                 response.set_cookie("BUMBA", observador_logado, path='/', secret=hash)
                 now = datetime.now()
