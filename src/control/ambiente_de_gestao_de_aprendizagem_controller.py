@@ -174,7 +174,6 @@ def create_aluno():
     nome = request.forms['aluno_nome']
     nome_separado=nome.split()
     nome_login1=nome_separado[0]
-    print(f'testando {nome_login1}')
     presenha = random.sample(let, 4)
     escola = request.forms['escola']
     data_nascimento=request.params['data_nascimento']

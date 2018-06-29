@@ -104,3 +104,38 @@ function validar_se_email_existe(email){
     }
 }
 
+function login_aluno(){
+  nome = getElementById('Login').value
+  console.log(nome);
+}
+
+var letras_senha = {'a':false, 'b':false, 'c':false, 'd':false, 'e':false, 'f':false, 'g':false, 'h':false, 'i':false, 'k':false, 'l':false}
+ function mudaEstado(letra){
+ 	var imagem = document.getElementById(letra)
+ 	var num = 3;
+ 	var selecionada = false;
+  var senha = []
+
+ 	if (!letras_senha[letra]){
+ 		imagem.style.background= 'rgba(229, 255, 84, 0.5)';
+ 		letras_senha[letra] = true
+ 	}else{
+ 		imagem.style.background = ' rgba(113, 194, 117, 0.5)';
+ 		letras_senha[letra] = false
+ 	}
+
+ }
+
+ function mouse_in(letra){
+ 	var imagem = document.getElementById(letra)
+  if (!letras_senha[letra]){
+ 	  imagem.style.background= 'rgba(229, 255, 84, 0.5)';
+  }
+ }
+
+ function mouse_out(letra){
+ 	var imagem = document.getElementById(letra)
+  if (!letras_senha[letra]){
+ 	  imagem.style.background= 'rgba(113, 194, 117, 0.5)';
+  }
+ }

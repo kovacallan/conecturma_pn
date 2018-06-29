@@ -184,6 +184,7 @@ def registrarConclusao():
     from control.dicionarios import PREMIO_JOGOS
     from control.classes.permissao import update_cookie
     parametros = parametros_json_jogos(request.params.items())
+    print(parametros)
     print('4: ', parametros)
     print('4.1', parametros['niveis'])
     flag = 0
