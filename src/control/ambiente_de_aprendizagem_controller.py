@@ -128,11 +128,13 @@ def jogo():
 @route('/api/plataforma/obterUltimaConclusao', method='POST')
 def obterUltimaConclusao():
     usuario = usuario_logado()
+    # ultimo_oa_jogado=facade.ultimo_oa_jogado_facade(usuario_logado()['id'])
+    # print('aqui, ultimo oa jogado',ultimo_oa_jogado)
     retorno = {
         'objetoAprendizagem': '',
         'unidade': '',
         'aventura': '',
-        'universo': 'UV1'
+        'universo': ''
     }
     return retorno
 
@@ -195,8 +197,9 @@ def registrarConclusao():
     lista_checar_se_e_VC=[objetoaprendizagem[x-4],objetoaprendizagem[x-3]]
     y=''.join(lista_checar_se_e_VC)
     # print(y)
-    facade.pegar_dados_de_jogo_facade(parametros['niveis'], parametros['objetoAprendizagem'],
-                                      str(usuario_logado()['id']))
+    # facade.pegar_dados_de_jogo_facade(parametros['niveis'], parametros['objetoAprendizagem'],
+    #                                   str(usuario_logado()['id']))
+    facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'], parametros['objetoAprendizagem'])
     for i in parametros['niveis']:
         contador += 1
         print(contador, i['termino'])
@@ -206,11 +209,13 @@ def registrarConclusao():
         print('gravei')
         cumprida=facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],objeto_aprendizagem=oa[9:13])
         print('cumprida',cumprida)
+        facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'],parametros['objetoAprendizagem'])
         if cumprida == []:
             facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],
                                           objeto_aprendizagem=oa[9:13],dados_jogabilidade=parametros['niveis'])
+            facade.armazenar_dados_jogos_facade(cumprida[0]['id'], parametros['niveis'])
         else:
-            facade.armazenar_dados_jogos_facade(cumprida[0]['id'],parametros['niveis'])
+            facade.armazenar_dados_jogos_facade(cumprida[0]['id'], parametros['niveis'])
         aluno = usuario_logado()
         facade.gravar_premiacao(aluno['id'], PREMIO_JOGOS[str(flag)])
         update_cookie(PREMIO_JOGOS[str(flag)])

@@ -77,9 +77,15 @@ class AlunoFacade:
     def gravar_premiacao(self,user_id,premiacao):
         return self.aluno.gravar_premiacao(user_id,premiacao)
 
+    def pegar_dados_de_jogo_facade(self, lista_de_dados, OA, aluno_id):
+        return self.aluno.pegar_dados_jogo(lista_de_dados, OA, aluno_id)
+
+    def armazenar_ultimo_jogo_jogado(self, id_aluno, jogo):
+        return self.aluno.armazenar_ultimo_jogo_jogado(id_aluno, jogo)
+
+    def ultimo_oa_jogado_facade(self, id_aluno):
+        return self.aluno.ultimo_oa_jogado(id_aluno)
 
     def apagartudo(self):
         return self.aluno.apagartudo()
 
-    def pegar_dados_de_jogo_facade(self,lista_de_dados,OA,aluno_id):
-        return self.aluno.pegar_dados_jogo(lista_de_dados,OA,aluno_id)

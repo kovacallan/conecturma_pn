@@ -72,7 +72,7 @@ class Login_Aluno(object):
                     vinculo_rede=aluno['vinculo_rede'],
                     vinculo_escola=aluno['vinculo_escola'],
                     vinculo_turma=aluno['vinculo_turma'],
-                    ultimo_oa = aluno['ultima_objeto_aprendizagem'],
+                    # ultimo_oa = aluno['ultimo_objeto_aprendizagem'],
                     ultima_unidade= aluno['ultima_unidade'],
                     ultima_aventura= aluno['ultima_aventura'],
                     moeda=aluno['pontos_de_moedas'],
