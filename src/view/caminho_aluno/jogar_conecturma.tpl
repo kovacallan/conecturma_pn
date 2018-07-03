@@ -9,10 +9,6 @@
         </div>
         <div align="left" class="col-md-3">
             moedas:{{moedas}} &ensp; &ensp; vidas : {{vidas}}
-
-
-
-
         </div>
         <div align="center" class="col-md-6">
             <h1>Bem Vindo {{usuario}} </h1>

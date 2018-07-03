@@ -60,7 +60,7 @@ class Login_Aluno(object):
     def login(self):
         facade = Facade()
         hash = self.gerar_hash()
-        aluno = facade.search_aluno_nome_facade(nome=self.nome)
+        aluno = facade.search_aluno_nome_login_facade(nome_login=self.nome)
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
         print('afsa',aluno)
         if aluno['nome_login'] == self.nome:
@@ -75,7 +75,7 @@ class Login_Aluno(object):
                     ultimo_oa = aluno['ultimo_objeto_aprendizagem'],
                     ultima_unidade= aluno['ultima_unidade'],
                     ultima_aventura= aluno['ultima_aventura'],
-                    moeda=aluno['pontos_de_moedas'],
+                    moedas=aluno['pontos_de_moedas'],
                     xp=aluno['pontos_de_vida']
                 )
                 response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)

@@ -170,7 +170,7 @@ def aluno():
 @route('/aluno_cadastro', method='POST')
 @permissao('professor')
 def create_aluno():
-    let = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j','l','m']
+    let = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j','k','l']
     nome = request.forms['aluno_nome']
     nome_separado=nome.split()
     nome_login1=nome_separado[0]

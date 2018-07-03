@@ -27,7 +27,6 @@ def login_aluno_controller():
     senha = request.params['aluno_senha']
 
     login = Login_Aluno(nome=nome, senha=senha)
-
     return login.login()
 
 @route('/esqueci_senha')

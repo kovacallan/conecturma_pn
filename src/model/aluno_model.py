@@ -31,7 +31,7 @@ class DbAluno(Model):
 
     ultima_aventura = TextField(fts=True, default='0')
     ultima_unidade = TextField(fts=True, default='0')
-    ultima_objeto_aprendizagem = TextField(fts=True, default='0')
+    ultimo_objeto_aprendizagem = TextField(index=True,fts=True, default='0')
     anotacoes_aluno = ListField()
     dados_aventura_1 = HashField()
     dados_aventura_2 = HashField()
@@ -73,13 +73,13 @@ class DbAluno(Model):
         for search in DbAluno.query(DbAluno.nome_login == nome_login):
             alun_pes = dict(
                 id=search.id, matricula=search.matricula, nome=search.nome,nome_login=search.nome_login, senha=search.senha,
-                tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                tipo_aluno=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
                 rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo, vinculo_serie=search.vinculo_serie,
                 pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                 vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
                 vinculo_turma=search.vinculo_turma, email=search.email, cpf='',
                 ultima_aventura=search.ultima_aventura, ultima_unidade=search.ultima_unidade,
-                ultima_objeto_aprendizagem=search.ultima_objeto_aprendizagem
+                ultimo_objeto_aprendizagem=search.ultimo_objeto_aprendizagem
             )
 
         return alun_pes
@@ -297,19 +297,18 @@ class DbAluno(Model):
         # av=
     def armazenar_ultimo_jogo_jogado(self, id_aluno, jogo):
         print('id',id_aluno)
-        aluni=self.search_aluno_id(id_aluno)
-        aluno=self.load(aluni['id'])
-        print('alun',aluno,jogo)
+        aluno=self.load(int(id_aluno))
+        print('alun_ar',aluno,jogo)
         aluno.ultimo_oa_jogado = jogo
         print('aluno_modelL302  ',type(jogo),jogo)
         aluno.save()
-
+        print('ultimo OA',aluno.ultimo_oa_jogado)
 
     def ultimo_oa_jogado(self,id_aluno):
 
-        aluno=self.search_aluno_id(id_aluno)
-        print('alun',aluno)
+        aluno=self.load(id_aluno)
+        print('alun',aluno.ultimo_objeto_aprendizagem)
 
-        return aluno['ultima_objeto_aprendizagem']
+        return aluno.ultimo_objeto_aprendizagem
     def apagartudo(self):
         db.flushall()

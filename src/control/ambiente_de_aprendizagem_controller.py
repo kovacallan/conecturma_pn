@@ -13,11 +13,14 @@ facade = Facade()
 @view('caminho_aluno/jogar_conecturma')
 def view_ambiente_de_aprendizagem():
     """ pagina inicial apos login , que mostra os itens equipados no avatar"""
+    print('tipo_user_logado',usuario_logado()['tipo'])
     if int(usuario_logado()['tipo']) >= 6:
         usuario = facade.search_aluno_nome_facade(usuario_logado()['nome'])
+        print('hm')
     else:
-        usuario = facade.search_observador_facade(usuario_logado()['nome'])
-
+        print('mh else')
+        usuario =facade.search_observador_facade(usuario_logado()['nome'])
+    #linha abaixo puxa o avatar do aluno q tenha o mesmo id do observador
     avatar = facade.avatar_facade(usuario['id'])
 
     avatar_pecas = {
@@ -26,6 +29,7 @@ def view_ambiente_de_aprendizagem():
         'acessorio': facade.search_estrutura_id_facade(avatar['acessorio'])['nome'],
         'corpo': facade.search_estrutura_id_facade(avatar['corpo'])['nome']
     }
+    print('usuario,dados',usuario)
     moedas = usuario['pontos_de_moedas']
     vidas = usuario['pontos_de_vida']
     print('que',vidas,moedas)
@@ -131,7 +135,7 @@ def obterUltimaConclusao():
     aluno=facade.search_aluno_id_facade(usuario['id'])
     print(aluno)
     ultimo_oa_jogado=facade.ultimo_oa_jogado_facade(aluno['id'])
-    print('aqui, ultimo oa jogado',ultimo_oa_jogado)
+    print('aqui, ultimo oa jogado',ultimo_oa_jogado,'<<')
     retorno = {
         'objetoAprendizagem': '',
         'unidade': '',
@@ -209,16 +213,15 @@ def registrarConclusao():
         print(contador, i['termino'])
         if i['termino'] == True:
             flag += 1
-    if y != 'VC':
-        print('gravei')
+    if y != 'VC' or y!='CN':
         cumprida=facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],objeto_aprendizagem=oa[9:13])
         print('cumprida',cumprida)
         facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'],parametros['objetoAprendizagem'])
         if cumprida == []:
             facade.create_oa_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],
                                           objeto_aprendizagem=oa[9:13],dados_jogabilidade=parametros['niveis'])
-            teste=facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'],parametros['objetoAprendizagem'])
-            facade.armazenar_dados_jogos_facade(teste[0]['id'], parametros['niveis'])
+            facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'],parametros['objetoAprendizagem'])
+            # facade.armazenar_dados_jogos_facade(teste[0]['id'], parametros['niveis'])
         else:
             facade.armazenar_dados_jogos_facade(cumprida[0]['id'], parametros['niveis'])
         aluno = usuario_logado()
