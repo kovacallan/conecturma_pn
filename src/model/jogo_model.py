@@ -81,8 +81,8 @@ class DesempenhoJogo(Model):
         indices=[letter for letter in OA]
         x=0
         print('indices',indices)
-        indice_oa = [indices[9:13]]
-        indice_ud = [indices[0:9]]
+        indice_oa = [OA[9:13]]
+        indice_ud = [OA[0:9]]
         # aventura = [indices[x-10]]
         oa=''.join(indice_oa)
         UD=''.join(indice_ud)
