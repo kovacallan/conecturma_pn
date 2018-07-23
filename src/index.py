@@ -21,4 +21,4 @@ def error403():
     return template('error403.tpl')
 
 if __name__ == '__main__':
-    run(host='localhost', port=8080, reloader=False ,debug=True)
+    run(host='http://ec2-34-219-137-245.us-west-2.compute.amazonaws.com', reloader=False ,debug=True)
