@@ -1,4 +1,4 @@
-from bottle import default_app,run,template,httpserver
+from bottle import default_app,run,template
 from control.static_controller import *
 from control.ambiente_de_aprendizagem_controller import *
 from control.ambiente_de_gestao_de_aprendizagem_controller import *
@@ -21,5 +21,5 @@ def error403():
     return template('error403.tpl')
 
 if __name__ == '__main__':
-    serve(application, host='0.0.0.0', port=80)
+    run(application, host='0.0.0.0', port=80)
 
