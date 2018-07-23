@@ -20,7 +20,8 @@ application = default_app()
 def error403():
     return template('error403.tpl')
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
+    run(server='paste')
     from paste import httpserver
     httpserver.serve(application, host='34.219.137.245', port=80)
 
