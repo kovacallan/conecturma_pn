@@ -5,6 +5,7 @@ from control.ambiente_de_gestao_de_aprendizagem_controller import *
 from control.ambiente_administrativo_controller import *
 from control.filtro_usuario_controller import *
 from control.login_controller import *
+from paste import httpserver
 
 import bottle
 import os
@@ -22,6 +23,5 @@ def error403():
 
 if __name__ == '__main__':
     run(server='paste')
-    from paste import httpserver
     httpserver.serve(application, host='0.0.0.0', port=80)
 
