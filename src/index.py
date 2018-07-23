@@ -21,4 +21,5 @@ def error403():
     return template('error403.tpl')
 
 if __name__ == '__main__':
-    run(host='http://ec2-34-219-137-245.us-west-2.compute.amazonaws.com', reloader=False ,debug=True)
+    httpserver.serve(application, host='0.0.0.0', port=80)
+
