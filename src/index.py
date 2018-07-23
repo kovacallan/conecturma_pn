@@ -23,5 +23,5 @@ def error403():
 if __name__ == '__main__':
     run(server='paste')
     from paste import httpserver
-    httpserver.serve(application, host='34.219.137.245', port=80)
+    httpserver.serve(application, host='0.0.0.0', port=80)
 
