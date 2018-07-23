@@ -21,5 +21,5 @@ def error403():
     return template('error403.tpl')
 
 if __name__ == '__main__':
-    run(application, host="0.0.0.0",port=8080)
+    run(application, host="34.219.137.245",port=8080)
 
