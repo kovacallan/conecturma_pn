@@ -1,14 +1,21 @@
 %include('./header.tpl', title="Conecturma")
 <div class="row">
-    <div align="center" class="col-md-12">
+    <div align="left" class="col-md-12">
         <h1>Cadastro</h1>
         <form action="/escola/criar_escola" method="post">
-         Nome da escola:   <input type="text" name="nome"/><br>
-         Telefone:          <input type="text" name="telefone"/><br>
-         Cep:          <input type="text" name="cep"/><br>
-         Estado     <input type="text" name="estado" /><br>
+         Nome da escola:   <input type="text" name="nome"/> &ensp;
+
+         Telefone:         <input type="text" name="telefone"/>
+            CNPJ:             <input type="text" name="cnpj" size="15"/><br><br>
+         Logradouro:    <input type="text" name="logradouro"/> &ensp;
+         Bairro:    <input type="text" name="bairro" size="13"/>
+         Numero: <input type="text" name="numero" size="3"/><br><br>
+         Comlemento :<input type="text" name="complemento"/> &ensp;
+         Cep:              <input type="text" name="cep" size="10"/><br><br>
+
+         Estado:            <input type="text" name="estado" size="12" /> &ensp;
          Uf:
-            <select name="uf">
+              <select name="uf">
                 <option value="">-- Selecione --</option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
@@ -37,8 +44,9 @@
                 <option value="SP">São Paulo</option>
                 <option value="SE">Sergipe</option>
                 <option value="TO">Tocantins</option>
-            </select><br>
-         Numero:    <input type="text" name="numero"/><br>
+            </select> &ensp;
+         Municipio : <input type="text" name="municipio"/><br><br>
+
          Rede:
             <select name = "rede">
                 <option value="0"></option>
@@ -50,7 +58,7 @@
                     % end
                     %end
                 % end
-            </select><br>
+            </select><br><br>
          <button type="submit">Enviar</button>
         </form>
         <a href="/escola"><button>Voltar</button></a>

@@ -1,4 +1,5 @@
 from walrus import *
+from datetime import date
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -12,6 +13,7 @@ class DbObservador(Model):
     telefone = TextField(default='0')
     cpf = TextField(default='0')
     email = TextField(fts=True,default='0')
+    data_nascimento=DateField(default=datetime.datetime.now)
     tipo = TextField(fts=True)
 
     itens_comprados = ListField()
@@ -32,8 +34,9 @@ class DbObservador(Model):
 
     def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
 
-        if self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
-                       vinculo_escola=escola, vinculo_turma = vinculo_turma):
+        if True or nome.isalpha() and cpf.isdigit() and tipo.isdigit():
+            self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
+                       vinculo_escola=escola, vinculo_turma = vinculo_turma)
             return True
         else:
             return False
@@ -73,15 +76,14 @@ class DbObservador(Model):
         return observador
 
     def search_observador_email(self, email):
-
         observador = None
-        for search in DbObservador.query(DbObservador.email == email):
+        for search in DbObservador.query((DbObservador.email == email)):
             observador = dict(id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
                               cpf=search.cpf, email=search.email, tipo=search.tipo,
                               vinculo_escola=search.vinculo_escola,
                               vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma)
 
-
+        print(observador)
         return observador
 
     def search_observador(self, nome):

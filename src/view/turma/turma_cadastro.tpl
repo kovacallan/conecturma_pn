@@ -4,6 +4,7 @@
             <h1>Cadastro de Turmas</h1>
              <form action="/turma/cadastro_turma" method="post">
                  Turma:*  <input type="text" name="turma_nome"/>
+                 Ano Letivo : <input type="text" name="ano_letivo" size="4"/><br>
                  Ano*:
                  <select name="serie">
                      <option value="0">pré-escola</option>
@@ -22,8 +23,8 @@
                             <option value="{{e['id']}}">{{e['nome']}}</option>
                         %end
                     %end
-                 </select>
-                 <button type="submit">Enviar</button>
+                 </select><br>
+                 <button type="submit">Enviar</button><br><br>
             </form>
             <a href="/turma"><button>Voltar</button></a>
         </div>

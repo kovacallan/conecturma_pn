@@ -4,6 +4,7 @@ from control.classes.permissao import usuario_logado, permissao
 from control.dicionarios import TIPO_USUARIOS_ID, TIPO_ESTRUTURA
 
 facade = Facade()
+
 @route('/filtro_usuario', method='POST')
 def filtro_usuarios():
     rede = request.params['rede']

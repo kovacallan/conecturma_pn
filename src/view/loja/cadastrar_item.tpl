@@ -1,7 +1,7 @@
 %include('./header.tpl', title="Conecturma")
 <div class="row">
     <div align="center" class="col-md-12">
-        <h1>Cadastro</h1>
+        <h1>Cadastro de item </h1>
         <form action="/cadastro_item" method="post">
          Nome do item:   <input type="text" name="nome"/><br>
          Preço :         <input type="text" name="preco"/><br>

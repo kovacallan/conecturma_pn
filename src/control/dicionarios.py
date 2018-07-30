@@ -19,6 +19,23 @@ TIPO_USUARIOS_ID = {
     '1':'GESTOR',
     '0':'ADMINISTRADOR'
 }
+TIPO_ITEM =dict(
+    cor='1',
+    rosto='2',
+    acessorio='3',
+    corpo='4'
+)
+
+TIPO_MEDALHA_NOME = {
+    'SocioEmocional': '1',
+    'Jogo':'2'
+}
+
+TIPO_MEDALHA_ID = {
+    '1':'SocioEmocional',
+    '2':'Jogo'
+}
+
 
 SERIE = {
     '0':'Pré-escola',
@@ -54,9 +71,29 @@ TIPO_ESTRUTURA = dict(
     item='4',
     medalha='5',
     historico='6',
-    descritores='7',
-    objeto_de_aprendizagem='8'
+    objeto_de_aprendizagem='7'
 )
+DICIPLINA = {
+    '1' : 'Lingua Portuguesa',
+    '2' : 'Matemática'
+}
+
+DICIPLINA_NOME = {
+     'lingua Portuguesa' : '1',
+     'matematica' : '2'
+}
+
+TIPO_OAS = {
+    '1': 'MINI_GAME',
+    '2': 'VIDEO',
+    '3': 'CINEMATIC'
+}
+
+TIPO_OAS_ID = {
+    'MINI_GAME': '1',
+    'VIDEO': '2',
+    'CINEMATIC': '3'
+}
 
 UNIDADES = {
     '1': 'Unidade 1',
@@ -68,4 +105,19 @@ UNIDADES = {
     '7': 'Unidade 7',
     '8': 'Unidade 8'
 }
+
+PREMIO_JOGOS={
+    '0':{'moedas':'1', 'xp':'0'},
+    'facil':{'moedas':'2', 'xp':'0'},
+    'medio':{'moedas':'3', 'xp':'1'},
+    'dificil':{'moedas':'4', 'xp':'3'}
+}
+
+AVENTURAS_CONECTURMA = {
+    '0':'****', #Ainda não tem na plataforma
+    '1':{'aventurasAcessiveis': ["UV1AV1"]},
+    '2':{'aventurasAcessiveis': ["UV1AV1", "UV1AV2"]},
+    '3':{'aventurasAcessiveis': ["UV1AV1", "UV1AV2", "UV1AV3"]}
+}
+
 

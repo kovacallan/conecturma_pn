@@ -2,6 +2,9 @@
         <div class="row">
             <div align="center" class="col-md-2" style="margin-top:50px;">
                 <h2>Menu</h2>
+                <h3>Relatórios</h3>
+
+                <h3>Cadastros</h3>
                 % if tipo == '3':
                     <a href="/gestao_aprendizagem/usuario">USUÁRIOS</a><br>
                     <a href="/medalha_cadastro">Criar medalha</a><br>

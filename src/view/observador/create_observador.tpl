@@ -1,6 +1,6 @@
 % include('./header.tpl', title = 'Professor')
 <div class="row">
-    <div align="center" class="col-md-12">
+    <div align="left" class="col-md-12">
         <h1>Cadastro</h1>
         <br>
         <input type="hidden" id="tipo"name="tipo_observador" value="{{tipo}}">

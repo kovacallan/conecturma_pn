@@ -7,20 +7,23 @@
             %elif redes == None or redes == '':
                 <option value="0">---- Selecione rede ----</option>
             %else:
-                <option value="{{redes['id']}}">{{redes['nome']}}</option>
+                %for i in redes:
+                    <option value="{{i['id']}}">{{i['nome']}}</option>
+                %end
             %end
     </select>
     <select id="filtro_escola" onChange="filtro_usuario()" class='dropdown_filtros' >
                 %if observador_tipo is '0':
                     <option value="0" >---- Selecione escola ----</option>
-                    %print('enquanto isso , no tpl...',len(escolas))
                     % for e in escolas:
                         <option value="{{e['id']}}">{{e['nome']}}</option>
                     % end
                 %elif escolas == None or escolas == '':
                     <option value="0">---- Selecione escola ----</option>
                 %else:
-                    <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
+                    %for i in escolas:
+                        <option value="{{i['id']}}">{{i['nome']}}</option>
+                    %end
                 %end
     </select>
 
