@@ -135,7 +135,6 @@ def filtro_com_selecao_usuario(tipo_usuario):
 
     if int(tipo_usuario) < 6:
         observador = facade.search_observador_tipo_facade(tipo=tipo_usuario)
-        print('observador inside filtro usuario tipo', observador)
         for o in observador:
             o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
             o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])

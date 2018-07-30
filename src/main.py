@@ -12,7 +12,7 @@ def main():
 
     application = default_app()
 
-    run(host='0.0.0.0', port=80, server='gunicorn', workers=4)
+    run(host='localhost', port=8080, server='gunicorn', workers=4)
 
 @route('/error403')
 def error403():

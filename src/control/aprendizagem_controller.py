@@ -45,7 +45,7 @@ def itens_usuario_tem():
 def obterUltimaConclusao():
     usuario = usuario_logado()
     # ultimo_oa_jogado=facade.ultimo_oa_jogado_facade(usuario_logado()['id'])
-    # print('aqui, ultimo oa jogado',ultimo_oa_jogado)
+
     retorno = {
         'objetoAprendizagem': '',
         'unidade': '',
@@ -122,7 +122,7 @@ def obterPremiacao():
         'moedas': int(aluno['pontos_de_moedas']),
         'xp': int(aluno['pontos_de_vida'])
     }
-    print('retorno', retorno)
+
     return retorno
 
 def verificarAcessoUnidade():
@@ -145,7 +145,7 @@ def verificarAcessoUnidade():
                     desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
                     if desempenho_oa == []:
                         acesso_unidade.append(i)
-                        print('desepenho', desempenho_oa)
+
                         break
                     else:
                         acesso_unidade.append(i)
@@ -172,7 +172,7 @@ def verificarAcessoUnidade():
                     desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
                     if desempenho_oa == []:
                         acesso_unidade.append(i)
-                        print('desepenho', desempenho_oa)
+
                         break
                     else:
                         acesso_unidade.append(i)
@@ -181,9 +181,9 @@ def verificarAcessoUnidade():
 
 def verificarAcessoAventura():
     usuario = usuario_logado()
-    print(usuario)
+
     for i in facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id'])):
-        print(i)
+
     if int(usuario['tipo']) < 6:
         parametros = parametros_json_jogos(request.params.items())
         return {'aventurasAcessiveis': parametros['aventuras']}
@@ -195,7 +195,7 @@ def verificarAcessoAventura():
 def is_oa(aluno, parametros, oa):
     from control.classes.permissao import update_cookie
     gamificacao = gamificacao_moeda_xp(parametros)
-    print('é oa')
+
     premios = {
         'medalhas': gamificacao_medalha(aluno, oa=oa),
         'moedas': gamificacao['moedas'],
@@ -214,7 +214,6 @@ def is_vc_or_cn(aluno, parametros, oa):
     create_or_update_oa(id_aluno=aluno, unidade=oa[0:9], objeto_aprendizagem=oa,
                         parametros=parametros['niveis'])
 
-    print('nao é oa')
     premios = {
         'medalhas': [],
         'moedas': [],
@@ -237,7 +236,6 @@ def gamificacao_medalha(usuario_id, oa):
 
     medalhas = []
     oa_concluidos = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario_id))
-    print(len(oa_concluidos))
     medalhas.append(primeiro_jogo(facade.oa_teste_facade(id_aluno=str(usuario_id),oa='UV1AV1UD1OA01')))
     if len(oa_concluidos) >= 10:
         medalhas.append(dose_dupla(oa_concluidos))
@@ -277,7 +275,6 @@ def dose_dupla(oa_concluido):
 
     for i in oa_concluido:
         if len(i['jogo_jogado']) > 1:
-            print(len(i['jogo_jogado']))
             medalha += 1
     if medalha == 10:
         return '12'
@@ -323,7 +320,7 @@ def musical(id_aluno,oa):
 def de_novo(id_aluno,oa):
     aluno = facade.oa_teste_facade(id_aluno=id_aluno,oa='{}VC01'.format(oa[0:9]))
     for i in aluno:
-        print(len(i['jogo_jogado']))
+
         if len(i['jogo_jogado']) >= 3:
             return '17'
         else:
