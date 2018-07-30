@@ -83,7 +83,6 @@ class DbObservador(Model):
                               vinculo_escola=search.vinculo_escola,
                               vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma)
 
-        print(observador)
         return observador
 
     def search_observador(self, nome):

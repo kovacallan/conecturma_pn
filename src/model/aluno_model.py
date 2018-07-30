@@ -176,7 +176,7 @@ class DbAluno(Model):
         from facade.estrutura_facade import EstruturaFacade
         facade = EstruturaFacade()
         turmi = facade.search_estrutura_id_facade(vinculo_turma)
-        # print(id_aluno)
+
 
         for id_aluno in id_aluno:
             aluno = self.load(int(id_aluno))
@@ -254,7 +254,6 @@ class DbAluno(Model):
         vidas=int(aluno.pontos_de_vida)
         moedas+= int(premio['moedas'])
         vidas +=int(premio['xp'])
-        print(premio)
         if premio['medalhas'] != [] or premio['medalhas'] != None or premio['medalhas'] != False:
             for i in premio['medalhas']:
                 aluno.medalhas.append(i)

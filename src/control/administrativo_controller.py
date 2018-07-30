@@ -66,11 +66,9 @@ def desativados():
         if h['tipo_usuario'] != '0':
             h['tipo_usuario'] = TIPO_USUARIOS_ID[h['tipo_usuario']]
             h['tipo_aluno'] ='0'
-            print('controler desativado', h['tipo_usuario'], h['tipo_aluno'])
         else:
             h['tipo_aluno'] = TIPO_USUARIOS_ID[h['tipo_aluno']]
             h['tipo_usuario'] = '0'
-            print('controler desativado2', h['tipo_usuario'], h['tipo_aluno'])
         usuarios.append(h)
 
     return dict(usuarios=usuarios)

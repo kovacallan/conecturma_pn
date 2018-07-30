@@ -190,7 +190,6 @@ def create_aluno():
     nome_login=verificar_nome_login(nome_login1)
     presenha.sort()
     senha = ''.join(presenha)
-    print('senha',senha)
     facade.create_aluno_facade(nome=nome, tipo_aluno='6',matricula=matricula, vinculo_escola=escola, nome_login=nome_login,
                                vinculo_rede=vinculo_rede['vinculo_rede'], senha=senha, data_nascimento=data_nascimento,sexo=sexo)
 
