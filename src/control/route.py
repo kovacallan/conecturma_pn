@@ -230,7 +230,7 @@ def view_modificar_rede():
 
 
 @route('/escola')
-@view('escola/index')
+@view('gestao_aprendizagem/escola/escola')
 def view_escola_index():
     from control.gestao_aprendizagem_controller import view_escola_index
     return view_escola_index()

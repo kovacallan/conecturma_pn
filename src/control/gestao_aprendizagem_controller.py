@@ -315,7 +315,7 @@ def view_escola_index():
     for e in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola']):
         e['vinculo_rede'] = get_nome_rede(e['vinculo_rede'])
         escola.append(e)
-    return dict(escola=escola)
+    return dict(escola=escola, tipo = usuario_logado()['tipo'])
 
 
 

@@ -1,84 +1,82 @@
-%include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css")
-%include('gestao_aprendizagem/menu/menu.tpl')
-
-<div class="col-md-9 order-md-3 botao-tabela">
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-3">
-                <p class="top-escolas-tabela">Escolas</p>
-                <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
-                    <i class="fas fa-plus"></i>
-                    &nbsp;nova escola
-                </button>
-            </div>
-            <div class="col-md-4 offset-md-5" >
-                <form class="form" >
-                    <div class="input-group pesquisa">
-                        <input class="form-control pesquisa-input" type="text" placeholder="Pesquisar" aria-label="Search" style="padding-left: 20px; border-radius: 40px;background-color: #dedede;height: 30px;z-index: -1" id="mysearch">
-                        <div class="input-group-addon" style="margin-left: -26px;border-radius: 40px; background-color: #f3f3f3; border:none;">
-                            <button type="submit" style="border-radius: 20px;border:1px transparent;height: 30px;" id="search-btn"><i class="fa fa-search"></i></button>
+<div class="row">
+            <div class="tab-pane fade show active container active" role="tabpanel" aria-labelledby="home-tab" id="dados-da-escola">
+                <div class="row distanciamneto" style="margin-top: 30px">
+                    <div class="offset-md-1 col-md-">
+                        <img src="/static/img/editar-foto.png">
+                    </div>
+                    <div class="offset-md-1 col-md-7">
+                        <div class="row distanciamneto">
+                            <div class=" col-md-">
+                                <label for="nome"  style="background-color: inherit;">Nome:<span style="color:#ff0000">*</span></label>
+                                <input type="text" class="form-control" size="30" name="" id="nome">
+                            </div>
+                        <div class="col-md-" style="padding-left: 10px">
+                            <label for="CNPJ" >CNPJ</label><br>
+                            <input type="text" size="25" class="form-control" name="" id="CNPJ">
                         </div>
                     </div>
-                </form>
+                    <div class="row distanciamento">
+                        <div class="col-md-">
+                            <label for="telefone">Telefone:<span style="color:#ff0000">*</span></label>
+                            <input type="text" class="form-control" size="26" name="" id="telefone">
+                        </div>
+                        <div class="col-md-" style="padding-left: 10px ;">
+                            <label for="diretor">Diretor</label><br>
+                            <input type="text" size="29" class="form-control" name="" id="diretor">
+                        </div>
+                    </div>
+                    <div class="row distanciamneto">
+                        <div class="col-md-">
+                            <label for="rede">Rede de Ensino:<span style="color:#ff0000">*</span></label>
+                            <input type="text" size="59" class="form-control" name="" id="rede">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offset-md-1 row distanciamento" style="" >
+                    <div class="col-md-" >
+                        <label for="endereco">Endereço</label>
+                        <input type="text" class="form-control" size="50" name="endereco" id="rede">
+                    </div>
+                    <div class="col-md-" style="padding-left: 10px ;">
+                        <label for="numero">Numero</label>
+                        <input type="text" class="form-control" size="5" name="numero" id="numero">
+                    </div>
+                    <div class="col-md-" style="padding-left: 9px ;">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" class="form-control" size="24" name="bairro" id="bairro">
+                    </div>
+                </div>
+                <div class="offset-md-1 row distanciamento">
+                    <div class="col-md-" >
+                        <label for="complemento">Complemento</label>
+                        <input type="text" class="form-control" size="50" name="endereço" id="complemento">
+                    </div>
+                    <div class="col-md-" style="padding-left: 10px ;">
+                        <label for="cep">CEP</label>
+                        <input type="text" class="form-control" size="32" name="cep" id="cep">
+                    </div>
+                </div>
+                <div class="offset-md-1 row distanciamento">
+                    <div class="col-md-" >
+                        <label for="estado">Estado</label>
+                        <input type="text" class="form-control" size="50" name="estado" id="estado">
+                    </div>
+                    <div class="col-md-" style="padding-left: 10px ;">
+                        <label for="municipio">Municipio</label>
+                        <input type="text" class="form-control" size="32" name="municipio" id="municipio">
+                    </div>
+                </div>
             </div>
         </div>
-        <br/>
-        <br/>
-        <div id="new_school" style="display:none;">
-            <div class="row row-impar">
-                <div class="col-md-11 item-tabela-h" style="color:black">
-                    nova escola
-                </div>
-                <div class="col-md-1 item-tabela" align="center">
-                    <button id="dads" class="normalizar-botao" onclick="test(this.id);" >
-                         <i class='fas fa-angle-up'></i>
-                    </button>
-                </div>
-            </div>
-            <div class="row row-impar" id="nova-escola" style="display: block">
-                <div class="container">
-                    <div id="teste" class="row new-scola">
-                        <div class="col-md-12">
-                            <ul class="nav nav-tabs abas" role="tablist">
-                                <li class="nav-item ">
-                                    <a class="nav-link active " data-toggle="tab" href="#dados-da-escola" role="tab" aria-controls="dados-da-escola" aria-selected="true">Dados da Gerais</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-content row-impar" id="nav-tabContent">
+        <br>
+    </div>
+    <div class="container" style="margin-top:20px;margin-bottom: 20px">
+        <div class="row">
+            <div class="offset-md-9 distanciamento">
+                <button type="submit" class="botao-salvar" style="margin-left: 10px;">salvar</button>
+                <button class="botao-salvar" style="background-color:#ff0000" onclick='document.getElementById("new_school").style.display = "none"'>cancelar</button>
             </div>
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-  function test(ide){
-  console.log(ide);
-  y=document.getElementById(ide).innerHTML;
-  x=document.getElementById("nova-escola").style.display;
-  console.log(x,y)
-  if(x=="none"){
-  document.getElementById("nova-escola").style.display='block';
-  document.getElementById(ide).innerHTML='<i class="fas fa-angle-up"></i>';
- }
- else{
-  document.getElementById("nova-escola").style.display='none';
-  document.getElementById(ide).innerHTML='<i class="fas fa-angle-down"></i>';
-    // document.getElementById(drop).style.display='block':
- }
-  }
-
- function seta(ide){
-  setinha = document.getElementById(ide).querySelectorAll("#setinha");
-  if (setinha[0].className == 'fas fa-angle-down'){
-    document.getElementById(ide).innerHTML='<i id="setinha" class="fas fa-angle-up"></i>';
-  }else{
-    document.getElementById(ide).innerHTML='<i id="setinha" class="fas fa-angle-down"></i>';
-  }
-};
-</script>
-%include('gestao_aprendizagem/footer/footer.tpl')
