@@ -34,7 +34,6 @@
     <div id="new_school" style="display:none;">
       %include('gestao_aprendizagem/escola/formulario_cadastro_nova_escola.tpl')
     </div>
-
     <div id="accordion">
       <!-- inicio da tabela -->
 
@@ -48,25 +47,32 @@
         </div>
 
         <div class="col-md-2 item-tabela topo-tab">
-          Status
+          Diretor
         </div>
 
         <div class="col-md-2 item-tabela topo-tab">
-          CNPJ
+          Telefone
         </div>
+        
         <div class="col-md-1 item-tabela topo-tab">
         </div>
       </div>
       <!-- bloco de cabeçalho da lista -->
-
-      <div class="row row-par">
-        %include('gestao_aprendizagem/escola/escola_edicao_par.tpl')
-      </div> 
-      <!-- aqui termina o acordeon -->
-      <div class="row row-impar">
-        %include('gestao_aprendizagem/escola/escola_edicao_impar.tpl')
-      </div>
-      <!--fim do acordeon , dropdowns que nao permitem 2 guias abertas ao mesmo tempo-->
+      <%
+        for index,i in enumerate(escola):
+      %> 
+        % if index % 2 ==0:
+          <div class="row row-par">
+            %include('gestao_aprendizagem/escola/escola_edicao_par.tpl')
+          </div> 
+        % else:
+          <div class="row row-impar">
+            %include('gestao_aprendizagem/escola/escola_edicao_impar.tpl')
+          </div>
+        % end
+      <%
+        end
+      %>
     </div>
   </div>
 </div>

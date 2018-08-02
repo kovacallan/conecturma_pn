@@ -249,7 +249,7 @@ def cadastro_escola():
 @permissao('gestor')
 def controller_escola_cadastro():
     from control.gestao_aprendizagem_controller import controller_escola_cadastro
-    return controller_escola_cadastro()
+    return controller_escola_cadastro() 
 
 
 @route('/turma')

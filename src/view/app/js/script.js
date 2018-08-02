@@ -159,7 +159,6 @@ function login_professor(){
   }
 }
 
-
 function filtro_relatorio_aluno_detalhe(teste){
     portugues = document.getElementById('portugues');
     matematica = document.getElementById('matematica');
@@ -177,4 +176,35 @@ function filtro_relatorio_aluno_detalhe(teste){
         $('#teste').html(data);
    });
 
+}
+
+function cadastro_escola(){
+    nome = document.getElementById('nome').value;
+    cnpj = document.getElementById('cnpj').value;
+    telefone = document.getElementById('telefone').value;
+    diretor = document.getElementById('diretor').value;
+    rede = document.getElementById('rede').value;
+    endereco = document.getElementById('endereco').value;
+    numero = document.getElementById('numero').value;
+    bairro = document.getElementById('bairro').value;
+    complemento = document.getElementById('complemento').value;
+    cep = document.getElementById('cep').value;
+    estado = document.getElementById('estado').value;
+    municipio = document.getElementById('municipio').value;
+
+    if (nome != '' && nome != null){
+        if (telefone != '' && telefone != null){
+            $.post('/escola/criar_escola', {nome:nome, cnpj:cnpj, telefone:telefone, diretor:diretor, rede:rede,
+            endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
+            });
+            location.reload();
+        }
+        else{
+            alert('O campo telefone é obrigatório.');
+            document.getElementById("telefone").style.boxShadow = "0px 0px 12px #fe1313";
+        }
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+    }
 }

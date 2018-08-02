@@ -1,19 +1,19 @@
 <!--informaçoes-->
 <div class="col-md-5 item-tabela ">
-    Escola do Rock
+    {{i['nome']}}
 </div>
 <div class="col-md-2 item-tabela ">
-    Solid , rock solid
+    {{i['vinculo_rede']}}
 </div>
 <div class="col-md-2 item-tabela">
-    nunca soube
+    {{i['vinculo_diretor_escola']}}
 </div>
 <div class="col-md-2 item-tabela">
-    um numero ae
+    {{i['telefone']}}
 </div>
 <div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" data-parent="#accordion" aria-controls="collapseOne" class=""
-        id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
+    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
+        class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
 </div>
@@ -23,42 +23,42 @@
 <!-- aqui começa os dados internos do acordeon -->
 
 <div class="row row-par">
-    <div id="collapseOne" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
 
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs abas" role="tablist">
                         <li class="nav-item ">
-                            <a class="nav-link active " data-toggle="tab" href="#escola-do-rock" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
+                            <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" data-toggle="tab" href="#escola-do-rock-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>
+                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>
                         </li>
                     </ul>
                 </div>
             </div>
             <!-- aqui começa o conteudo das guias  -->
             <div class="tab-content row-par">
-                <div class="tab-pane container active" id="escola-do-rock">
+                <div class="tab-pane container active" id="{{i['id']}}">
                     <form>
                         <div class="row distanciamento" style="margin-top: 30px">
-                            <div class="offset-md-1 col-md-">
-                                <img src="img/editar-foto.png" style="border:2px black;z-index: 0;">
+                            <div class="offset-md-1 col-md-3">
+                                <img src="/static/img/editar-foto.png" style="border:2px black;z-index: 0;">
                             </div>
-                            <div class="offset-md-1 col-md-7">
+                            <div class=" col-md-8">
                                 <div class="row distanciamento">
                                     <div class=" col-md-">
                                         <label for="nome" style="background-color: inherit;">Nome:
                                             <span style="color:red">*
                                                 <span>
                                         </label>
-                                        <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome">
+                                        <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome" value="{{i['nome']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
                                         <label for="CNPJ">CNPJ</label>
                                         <br>
-                                        <input type="text" size="24" class="form-control" name="" id="CNPJ">
+                                        <input type="text" size="24" class="form-control" name="" id="CNPJ" value="{{i['cnpj']}}">
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
@@ -66,63 +66,63 @@
                                         <label for="telefone">telefone:
                                             <span style="color:#ff0000">*</span>
                                         </label>
-                                        <input type="text" class="form-control" size="21" name="" id="telefone">
+                                        <input type="text" class="form-control" size="21" name="" id="telefone" value="{{i['telefone']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px ;">
                                         <label for="diretor">diretor</label>
                                         <br>
-                                        <input type="text" size="33" class="form-control" name="" id="diretor">
+                                        <input type="text" size="33" class="form-control" name="" id="diretor" {{i[ 'vinculo_diretor_escola']}}>
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
                                     <div class="col-md-">
                                         <label for="rede">Rede de Ensino:
-                                            <span style="color:#ff0000">*</span>
+                                            
                                         </label>
-                                        <input type="text" placeholder="Solid , rock solid " size="59" class="form-control" name="" id="rede">
+                                        <input type="text" size="59" class="form-control" name="" id="rede" value="{{i['vinculo_rede']}}">
                                     </div>
                                 </div>
                                 <!--fim da div dos dados ao lado da imagem-->
                             </div>
                             <div class="offset-md-1 distanciamento row" style="">
-                                <div class="col-md-">
+                                <div class="col-md-6">
                                     <label for="endereco">Endereço</label>
-                                    <input type="text" class="form-control" size="49" name="endereco" id="rede">
+                                    <input type="text" class="form-control" size="49" name="endereco" id="rede" value="{{i['endereco']}}">
                                 </div>
-                                <div class="col-md-" style="padding-left: 10px ;">
+                                <div class="col-md-2" style="padding-left: 10px ;">
                                     <label for="numero">Numero</label>
-                                    <input type="text" class="form-control" size="5" name="numero" id="numero">
+                                    <input type="text" class="form-control" size="5" name="numero" id="numero" value="{{i['numero']}}">
                                 </div>
-                                <div class="col-md-" style="padding-left: 10px ;">
+                                <div class="col-md-4" style="padding-left: 10px ;">
                                     <label for="bairro">Bairro</label>
-                                    <input type="text" class="form-control" size="24" name="bairro" id="bairro">
+                                    <input type="text" class="form-control" size="24" name="bairro" id="bairro" value="{{i['bairro']}}">
                                 </div>
                             </div>
                             <div class="offset-md-1  row">
-                                <div class="col-md-">
+                                <div class="col-md-6">
                                     <label for="complemento">Complemento</label>
-                                    <input type="text" class="form-control" size="50" name="endereço" id="complemento">
+                                    <input type="text" class="form-control" size="50" name="endereço" id="complemento" value="{{i['complemento']}}">
                                 </div>
-                                <div class="col-md-" style="padding-left: 10px ;">
+                                <div class="col-md-6" style="padding-left: 10px ;">
                                     <label for="cep">CEP</label>
-                                    <input type="text" class="form-control" size="32" name="cep" id="cep">
+                                    <input type="text" class="form-control" size="32" name="cep" id="cep" value="{{i['cep']}}">
                                 </div>
 
                             </div>
                             <div class="offset-md-1 row distanciamento">
-                                <div class="col-md-">
+                                <div class="col-md-6">
                                     <label for="estado">Estado</label>
-                                    <input type="text" class="form-control" size="50" name="estado" id="estado">
+                                    <input type="text" class="form-control" size="50" name="estado" id="estado" value="{{i['estado']}}">
                                 </div>
-                                <div class="col-md-" style="padding-left: 10px ;">
+                                <div class="col-md-6" style="padding-left: 10px ;">
                                     <label for="municipio">Municipio</label>
-                                    <input type="text" class="form-control" size="32" name="municipio" id="municipio">
+                                    <input type="text" class="form-control" size="32" name="municipio" id="municipio" value="{{i['municipio']}}">
                                 </div>
                             </div>
                         </div>
                 </div>
                 <!-- aqui termina o conteudo da guia do dados de escola  -->
-                <div class="tab-pane fade aba-prof" id="escola-do-rock-prof" role="tabpanel" aria-labelledby="escola-do-rock-prof">
+                <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel" aria-labelledby="{{i['nome']}}-prof">
                     <div class="row">
                         <div class="container">
                             <div class="offset-md-1 distanciamento col-md-" style="margin-top: 20px">

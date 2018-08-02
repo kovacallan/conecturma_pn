@@ -13,18 +13,17 @@ class DbEstrutura(Model):
 
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
+    vinculo_diretor_escola = TextField(fts=True, default='0')
     vinculo_professor_turma = TextField(fts=True, default='0')
     cnpj = TextField(default='0')
 
-    logradouro = TextField(default='0')
-    bairro = TextField(default='0')
-    municipio = TextField(default='0')
-    cep = TextField(default='0')
     endereco = TextField(default='0')
     numero = TextField(default='0')
-    estado = TextField(default='0')
-    uf = TextField(default='0')
+    bairro = TextField(default='0')
     complemento = TextField(default='0')
+    cep = TextField(default='0')
+    estado = TextField(default='0')
+    municipio = TextField(default='0')   
 
     sigla_oa = TextField(fts=True, default='0')
     unidade=TextField(fts=True, default='0')
@@ -56,6 +55,7 @@ class DbEstrutura(Model):
     anotacoes_observador_escola = ListField()
     anotacoes_observador_rede = ListField()
 
+    ativo = TextField(fts = True,default = '1')
 
     def create_estrutura(self, **kwargs):
         return self.create(**kwargs)
@@ -87,6 +87,7 @@ class DbEstrutura(Model):
 
     def search_estrutura_id(self, id):
         if id != '0':
+            print('Teste: ',id)
             lista = DbEstrutura.load(int(id))
             lista_dic = vars(lista)["_data"]
         else:

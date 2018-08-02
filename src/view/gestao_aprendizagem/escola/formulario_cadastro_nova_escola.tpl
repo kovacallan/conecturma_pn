@@ -1,28 +1,28 @@
 <!--div da nova escola-->
-<div class="row row-impar">
-    <div class="col-md-11 item-tabela-h" style="color:black">
-        nova escola
+    <div class="row row-impar">
+        <div class="col-md-11 item-tabela-h" style="color:black">
+            nova escola
+        </div>
+        <div class="col-md-1 item-tabela">
+            <button id="dads" class="normalizar-botao" onclick="test(this.id);">
+                <i class='fas fa-angle-up'></i>
+            </button>
+        </div>
     </div>
-    <div class="col-md-1 item-tabela">
-        <button id="dads" class="normalizar-botao" onclick="test(this.id);">
-            <i class='fas fa-angle-up'></i>
-        </button>
-    </div>
-</div>
-<div class="row row-impar" id="nova-escola" style="display: block">
-    <div class="container">
-        <div id="teste" class="row new-scola">
-            <!--conteudo interno do botao a partir daqui-->
-            <div class="col-md-12">
-                <ul class="nav nav-tabs abas" role="tablist">
-                    <li class="nav-item ">
-                        <a class="nav-link active " data-toggle="tab" href="#dados-da-escola" role="tab" aria-controls="dados-da-escola" aria-selected="true">Dados da Gerais</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="row row-impar" id="nova-escola" style="display: block">
+        <div class="container">
+            <div id="teste" class="row new-scola">
+                <!--conteudo interno do botao a partir daqui-->
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs abas" role="tablist">
+                        <li class="nav-item ">
+                            <a class="nav-link active " data-toggle="tab" href="#dados-da-escola" role="tab" aria-controls="dados-da-escola" aria-selected="true">Dados da Gerais</a>
+                        </li>
+                    </ul>
+                </div>
 
-            <!-- aqui começa o conteudo das guias(navlink)  -->
-            <div class="tab-content row-impar" id="nav-tabContent">
+                <!-- aqui começa o conteudo das guias(navlink)  -->
+                <div class="tab-content row-impar" id="nav-tabContent">
                     <div class="row">
                         <div class="tab-pane fade show active container active" role="tabpanel" aria-labelledby="home-tab" id="dados-da-escola">
                             <div class="row distanciamneto" style="margin-top: 30px">
@@ -35,12 +35,12 @@
                                             <label for="nome" style="background-color: inherit;">Nome:
                                                 <span style="color:#ff0000">*</span>
                                             </label>
-                                            <input type="text" class="form-control" size="30" name="" id="nome">
+                                            <input type="text" class="form-control" size="30" name="" id="nome" onchange="document.getElementById('nome').style.boxShadow = 'none'" value="">
                                         </div>
                                         <div class="col-md-6" style="padding-left: 10px">
                                             <label for="CNPJ">CNPJ</label>
                                             <br>
-                                            <input type="text" size="25" class="form-control" name="" id="CNPJ">
+                                            <input type="text" size="25" class="form-control" name="" id="cnpj">
                                         </div>
                                     </div>
                                     <div class="row distanciamento">
@@ -48,7 +48,7 @@
                                             <label for="telefone">Telefone:
                                                 <span style="color:#ff0000">*</span>
                                             </label>
-                                            <input type="text" class="form-control" size="26" name="" id="telefone">
+                                            <input type="text" class="form-control" size="26" name="" id="telefone" onchange="document.getElementById('telefone').style.boxShadow = 'none'" value="">
                                         </div>
                                         <div class="col-md-6" style="padding-left: 10px ;">
                                             <label for="diretor">Diretor</label>
@@ -58,10 +58,12 @@
                                     </div>
                                     <div class="row distanciamneto">
                                         <div class="col-md-12">
-                                            <label for="rede">Rede de Ensino:
-                                                <span style="color:#ff0000">*</span>
-                                            </label>
-                                            <input type="text" size="59" class="form-control" name="" id="rede">
+                                            <select class="custom-select" name="rede" id="rede" aria-label="Example select with button addon">
+                                                <option value="0" selected>Rede de Ensino.</option>
+                                                % for z in rede:
+                                                    <option value="{{z['id']}}">{{z['nome']}}</option>
+                                                % end
+                                            </select>
                                         </div>
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
@@ -69,7 +71,7 @@
                                 <div class="offset-md-1 row distanciamento">
                                     <div class="col-md-6">
                                         <label for="endereco">Endereço</label>
-                                        <input type="text" class="form-control" size="50" name="endereco" id="rede">
+                                        <input type="text" class="form-control" size="50" name="endereco" id="endereco">
                                     </div>
                                     <div class="col-md-1" style="padding-left: 10px ;">
                                         <label for="numero">Numero</label>
@@ -108,14 +110,14 @@
                     <div class="container" style="margin-top:20px;margin-bottom: 20px">
                         <div class="row">
                             <div class="offset-md-9 distanciamento">
-                                <button type="submit" class="botao-salvar" style="margin-left: 10px;">salvar</button>
+                                <button type="submit" class="botao-salvar" onclick="cadastro_escola()" style="margin-left: 10px;">salvar</button>
                                 <button class="botao-salvar" style="background-color:#ff0000" onclick='document.getElementById("new_school").style.display = "none"'>cancelar</button>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
+            <!--fim do nova escola-->
+            <!-- acordeon -->
         </div>
-        <!--fim do nova escola-->
-        <!-- acordeon -->
     </div>
-</div>

@@ -311,11 +311,23 @@ def view_escola_index():
     usa o metodo: controller_escola_read :interno:
     :return:dicionario com os valores da escola a serem mostrados
     """
-    escola = []
-    for e in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola']):
-        e['vinculo_rede'] = get_nome_rede(e['vinculo_rede'])
-        escola.append(e)
-    return dict(escola=escola, tipo = usuario_logado()['tipo'])
+    escolas_no_sistema, rede_no_sistema = get_escolas_e_rede_permissao()
+    get_nome_escola(vinculo_escola=escolas_no_sistema)
+    return dict(tipo = usuario_logado()['tipo'], escola = escolas_no_sistema, rede = rede_no_sistema)
+
+def get_escolas_e_rede_permissao():
+    usuario = usuario_logado()
+    if usuario['tipo'] == TIPO_USUARIOS['administrador']:
+        rede = facade.read_estrutura_facade(tipo_estrutura = TIPO_ESTRUTURA['rede'])
+        escola = []
+        for i in facade.read_estrutura_facade(tipo_estrutura = TIPO_ESTRUTURA['escola']):
+            i['vinculo_rede'] = get_nome_rede(vinculo_rede = i['vinculo_rede'])
+            escola.append(i)
+        return escola, rede
+    elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
+        return facade.search_estrutura_escola_by_rede_facade(vinculo_rede = usuario['vinculo_rede'])
+    else:
+        return facade.search_estrutura_id_facade(id = usuario['vinculo_escoal'])
 
 
 
@@ -324,15 +336,19 @@ def cadastro_escola():
 
 
 def controller_escola_cadastro():
-    facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=request.params['nome'],
-                                   telefone=request.params['telefone'], cnpj=request.params['cnpj'],
-                                   cep=request.params['cep'],
-                                   estado=request.params['estado'], uf=request.params['uf'],
-                                   logradouro=request.params['logradouro'],
-                                   numero=request.params['numero'], vinculo_rede=request.params['rede'],
-                                   bairro=request.params['bairro'], complemento=request.params['complemento']
-                                   , municipio=request.params['municipio'])
-    redirect("/escola")
+    nome=request.params['nome'] 
+    telefone=request.params['telefone']
+    
+    if nome != '' and  nome != None and telefone != '' and telefone != None: 
+        facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=nome,
+                                    cnpj=request.params['cnpj'], telefone=request.params['telefone'],
+                                    vinculo_diretor_escola=request.params['diretor'], vinculo_rede=request.params['rede'],
+                                    endereco = request.params['endereco'], numero = request.params['numero'],
+                                    bairro = request.params['bairro'], complemento = request.params['complemento'],
+                                    cep = request.params['cep'], estado = request.params['estado'],
+                                    municipio = request.params['municipio']
+                                    )
+        redirect("/escola")
 
 
 def view_turma():
