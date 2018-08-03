@@ -58,8 +58,9 @@
                                     </div>
                                     <div class="row distanciamneto">
                                         <div class="col-md-12">
+                                            <label for="rede">Rede de Ensino:</label>
                                             <select class="custom-select" name="rede" id="rede" aria-label="Example select with button addon">
-                                                <option value="0" selected>Rede de Ensino.</option>
+                                                <option value="0" selected></option>
                                                 % for z in rede:
                                                     <option value="{{z['id']}}">{{z['nome']}}</option>
                                                 % end

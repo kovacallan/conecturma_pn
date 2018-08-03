@@ -178,6 +178,20 @@ function filtro_relatorio_aluno_detalhe(teste){
 
 }
 
+function inputHandler(masks, max, event) {
+    var c = event.target;
+    var v = c.value.replace(/\D/g, '');
+    var m = c.value.length > max ? 1 : 0;
+    VMasker(c).unMask();
+    VMasker(c).maskPattern(masks[m]);
+    c.value = VMasker.toPattern(v, masks[m]);
+}
+
+var telMask = ['(99) 9999-99999', '(99) 99999-9999'];
+var tel = document.querySelector('#telefone');
+VMasker(tel).maskPattern(telMask[0]);
+tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);
+
 function cadastro_escola(){
     nome = document.getElementById('nome').value;
     cnpj = document.getElementById('cnpj').value;
@@ -193,7 +207,7 @@ function cadastro_escola(){
     municipio = document.getElementById('municipio').value;
 
     if (nome != '' && nome != null){
-        if (telefone != '' && telefone != null){
+        if (telefone != '' && telefone != null && telefone.length == 14){
             $.post('/escola/criar_escola', {nome:nome, cnpj:cnpj, telefone:telefone, diretor:diretor, rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
             });

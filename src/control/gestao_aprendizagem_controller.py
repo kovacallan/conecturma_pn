@@ -312,7 +312,6 @@ def view_escola_index():
     :return:dicionario com os valores da escola a serem mostrados
     """
     escolas_no_sistema, rede_no_sistema = get_escolas_e_rede_permissao()
-    get_nome_escola(vinculo_escola=escolas_no_sistema)
     return dict(tipo = usuario_logado()['tipo'], escola = escolas_no_sistema, rede = rede_no_sistema)
 
 def get_escolas_e_rede_permissao():
