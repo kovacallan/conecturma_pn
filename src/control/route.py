@@ -52,13 +52,7 @@ Rotas da Tela de do Ambiente de aprendizagem
 @permissao('aluno_varejo')
 @view('caminho_aluno/jogar_conecturma')
 def view_ambiente_de_aprendizagem():
-    from control.aprendizagem_controller import qual_tipo_usuario_logado, pecas_avatar
-
-    usuario, avatar = qual_tipo_usuario_logado()
-    avatar_pecas = pecas_avatar(avatar=avatar)
-
-    return dict(usuario=usuario['nome'], avatar=avatar_pecas, moedas=usuario['pontos_de_moedas'],
-                vidas=usuario['pontos_de_vida'])
+    return
 
 @route('/jogo')
 def jogo():
