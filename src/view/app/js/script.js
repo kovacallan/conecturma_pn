@@ -189,7 +189,7 @@ function inputHandler(masks, max, event) {
 
 var telMask = ['(99) 9999-99999', '(99) 99999-9999'];
 var tel = document.querySelector('#telefone');
-VMasker(tel).maskPattern(telMask[0]);
+Masker(tel).maskPattern(telMask[0]);
 tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);
 
 function cadastro_escola(){

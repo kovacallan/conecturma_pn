@@ -36,15 +36,15 @@
           <div class="tab-pane container active" id="nossa-escola">
             <form>
               <div class="row" style="margin-top: 30px">
-                <div class="offset-md-1 col-md-">
+                <div class="col-md-3">
                   <img src="/static/img/editar-foto.png" style="border:2px black;z-index: 0;">
                 </div>
-                <div class="offset-md-1 col-md-7">
+                <div class="col-md-9">
                   <div class="row distanciamneto">
                     <div class=" col-md-">
                       <label for="nome" style="background-color: inherit;">Nome:
                         <span style="color:#ff0000">*
-                          <span>
+                        <span>
                       </label>
                       <input type="text" class="form-control" size="30" name="" id="nome" value="{{i['nome']}}">
                     </div>
@@ -78,35 +78,35 @@
                   <!--fim da div dos dados ao lado da imagem-->
                 </div>
                 <div class="offset-md-1 row distanciamento" style="">
-                  <div class="col-md-">
+                  <div class="col-md-6">
                     <label for="endereco">Endereço</label>
                     <input type="text" class="form-control" size="49" name="endereco" id="rede" value="{{i['endereco']}}">
                   </div>
-                  <div class="col-md-" style="padding-left: 10px ;">
+                  <div class="col-md-2" style="padding-left: 10px ;">
                     <label for="numero">Numero</label>
                     <input type="text" class="form-control" size="5" name="numero" id="numero" value="{{i['numero']}}">
                   </div>
-                  <div class="col-md-" style="padding-left: 10px ;">
+                  <div class="col-md-4" style="padding-left: 10px ;">
                     <label for="bairro">Bairro</label>
                     <input type="text" class="form-control" size="24" name="bairro" id="bairro" value="{{i['bairro']}}">
                   </div>
                 </div>
                 <div class="offset-md-1 row distanciamento">
-                  <div class="col-md-">
+                  <div class="col-md-6">
                     <label for="complemento">complemento</label>
                     <input type="text" class="form-control" size="50" name="endereço" id="complemento" value="{{i['complemento']}}">
                   </div>
-                  <div class="col-md-" style="padding-left: 10px ;">
+                  <div class="col-md-6" style="padding-left: 10px ;">
                     <label for="cep">CEP</label>
                     <input type="text" class="form-control" size="32" name="cep" id="cep" value="{{i['cep']}}">
                   </div>
                 </div>
                 <div class="offset-md-1 row distanciamento">
-                  <div class="col-md-">
+                  <div class="col-md-6">
                     <label for="estado">Estado</label>
                     <input type="text" class="form-control" size="50" name="estado" id="estado" value="{{i['estado']}}">
                   </div>
-                  <div class="col-md-" style="padding-left: 10px ;">
+                  <div class="col-md-6" style="padding-left: 10px ;">
                     <label for="municipio">Municipio</label>
                     <input type="text" class="form-control" size="32" name="municipio" id="municipio" value="{{i['municipio']}}">
                   </div>

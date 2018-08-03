@@ -1,7 +1,7 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css") 
 %include('gestao_aprendizagem/menu/menu.tpl')
 
-<div class="col-md-9 order-md-3 botao-tabela">
+<div class="col-md-9 order-md-3 botao-tabela" style="margin-top: 6px;">
   <div class="container">
     <div class="row">
       <div class=" col-md-3">
@@ -53,18 +53,18 @@
         <div class="col-md-2 item-tabela topo-tab">
           Telefone
         </div>
-        
+
         <div class="col-md-1 item-tabela topo-tab">
         </div>
       </div>
       <!-- bloco de cabeçalho da lista -->
       <%
         for index,i in enumerate(escola):
-      %> 
+      %>
         % if index % 2 ==0:
           <div class="row row-par">
             %include('gestao_aprendizagem/escola/escola_edicao_par.tpl')
-          </div> 
+          </div>
         % else:
           <div class="row row-impar">
             %include('gestao_aprendizagem/escola/escola_edicao_impar.tpl')
@@ -103,5 +103,5 @@
       document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
     }
   };
-</script> 
+</script>
 %include('gestao_aprendizagem/footer/footer.tpl')

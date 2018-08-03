@@ -17,12 +17,12 @@
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
 </div>
-</div>
+
 <!--fim das informaçoes da tabela-->
 
 <!-- aqui começa os dados internos do acordeon -->
-
-<div class="row row-par">
+<div class="container">
+    <div class="row row-par">
     <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
 
@@ -43,10 +43,10 @@
                 <div class="tab-pane container active" id="{{i['id']}}">
                     <form>
                         <div class="row distanciamento" style="margin-top: 30px">
-                            <div class="offset-md-1 col-md-3">
+                            <div class="col-md-3">
                                 <img src="/static/img/editar-foto.png" style="border:2px black;z-index: 0;">
                             </div>
-                            <div class=" col-md-8">
+                            <div class="col-md-9">
                                 <div class="row distanciamento">
                                     <div class=" col-md-">
                                         <label for="nome" style="background-color: inherit;">Nome:
@@ -77,7 +77,7 @@
                                 <div class="row distanciamento">
                                     <div class="col-md-">
                                         <label for="rede">Rede de Ensino:
-                                            
+
                                         </label>
                                         <input type="text" size="59" class="form-control" name="" id="rede" value="{{i['vinculo_rede']}}">
                                     </div>
@@ -181,4 +181,5 @@
         </div>
     </div>
     </form>
+</div>
 </div>
