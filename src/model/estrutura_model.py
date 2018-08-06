@@ -87,7 +87,6 @@ class DbEstrutura(Model):
 
     def search_estrutura_id(self, id):
         if id != '0':
-            print('Teste: ',id)
             lista = DbEstrutura.load(int(id))
             lista_dic = vars(lista)["_data"]
         else:

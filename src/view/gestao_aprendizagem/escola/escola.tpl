@@ -1,6 +1,5 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css") 
 %include('gestao_aprendizagem/menu/menu.tpl')
-
 <div class="col-md-9 order-md-3 botao-tabela" style="margin-top: 6px;">
   <div class="container">
     <div class="row">
@@ -15,8 +14,7 @@
         <form class="form">
           <div class="input-group pesquisa">
             <!--pesquisa-->
-            <input class="form-control pesquisa-input" type="text" placeholder="Pesquisar" aria-label="Search" style="padding-left: 20px; border-radius: 40px;background-color: #dedede;height: 30px;z-index: -1"
-              id="mysearch">
+            <input class="form-control pesquisa-input" type="text" placeholder="Pesquisar" aria-label="Search" style="padding-left: 20px; border-radius: 40px;background-color: #dedede;height: 30px;z-index: -1" id="mysearch">
             <div class="input-group-addon" style="margin-left: -26px;border-radius: 40px; background-color: #f3f3f3; border:none;">
               <button type="submit" style="border-radius: 20px;border:1px transparent;height: 30px;" id="search-btn">
                 <i class="fa fa-search"></i>

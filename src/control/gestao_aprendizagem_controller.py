@@ -240,6 +240,7 @@ def controller_observador_cadastro():
         vinculo_rede = facade.search_estrutura_id_facade(int(escola))
         facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
                                         escola=escola, rede=vinculo_rede['vinculo_rede'], vinculo_turma=turma)
+
     else:
         facade.create_observador_facade(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo,
                                         escola=escola, rede=rede, vinculo_turma=turma)
@@ -311,7 +312,20 @@ def view_escola_index():
     usa o metodo: controller_escola_read :interno:
     :return:dicionario com os valores da escola a serem mostrados
     """
+    escola = []
     escolas_no_sistema, rede_no_sistema = get_escolas_e_rede_permissao()
+    for i in escolas_no_sistema:
+        professor = []
+        diretor = []
+        for z in facade.search_observador_escola(vinculo_escola = i['id']):
+            if z['tipo'] != '2':
+                professor.append(z)
+            else:
+                i.update({'diretor': z})
+        i.update({'professor':professor})
+        escola.append(i)
+        print(escola)
+
     return dict(tipo = usuario_logado()['tipo'], escola = escolas_no_sistema, rede = rede_no_sistema)
 
 def get_escolas_e_rede_permissao():
@@ -321,13 +335,22 @@ def get_escolas_e_rede_permissao():
         escola = []
         for i in facade.read_estrutura_facade(tipo_estrutura = TIPO_ESTRUTURA['escola']):
             i['vinculo_rede'] = get_nome_rede(vinculo_rede = i['vinculo_rede'])
+            if i['vinculo_diretor_escola'] != '0':
+                i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
+
         return escola, rede
     elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
         return facade.search_estrutura_escola_by_rede_facade(vinculo_rede = usuario['vinculo_rede'])
     else:
         return facade.search_estrutura_id_facade(id = usuario['vinculo_escoal'])
 
+def get_nome_diretor_da_escola(vinculo_escola):
+    diretor = facade.search_diretor_vinculo_escola_facade(vinculo_escola = vinculo_escola)
+    if diretor == None:
+        return ' '
+    else:
+        return diretor['nome']
 
 
 def cadastro_escola():

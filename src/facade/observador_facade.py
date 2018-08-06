@@ -54,6 +54,10 @@ class ObservadorFacade:
     def search_observador_inativos_facade(self, nome):
         return self.observador.search_observador_inativos(nome)
 
+    def search_diretor_vinculo_escola_facade(self, vinculo_escola):
+        return self.observador.search_diretor_vinculo_escola(vinculo_escola = vinculo_escola)
+
+
     def observador_in_turma_facade(self, id_observador, vinculo_turma):
         self.observador.observador_in_turma(id_observador=id_observador,vinculo_turma=vinculo_turma)
 
@@ -70,3 +74,5 @@ class ObservadorFacade:
         self.observador.equipar_item(id_usuario=id, itens=itens)
 
 
+    def pesquisa_email_facade(self, letras):
+        return self.observador.pesquisa_email(letras=letras)

@@ -71,7 +71,8 @@
                                     <div class="col-md-" style="padding-left: 10px ;">
                                         <label for="diretor">diretor</label>
                                         <br>
-                                        <input type="text" size="33" class="form-control" name="" id="diretor" {{i[ 'vinculo_diretor_escola']}}>
+
+                                        <input type="text" size="33" class="form-control" name="" id="diretor" value="{{i['diretor']['nome']}}">
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
@@ -130,34 +131,22 @@
                                     <i class="far fa-question-circle"></i>
                                 </p>
                             </div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="offset-md-1 nome-prof row row-impar">
-                                        <div class="col-md-11">
-                                            MARIA DA SILVA FIGUEIREDO
-                                        </div>
-                                        <div class="col-md-1 item-tabela">
-                                            <a href="">
-                                                <i class="fas fa-edit edit-ico"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="offset-md-1 nome-prof row row-impar">
-                                        <div class="col-md-11">
-                                            TIAGO MATEUS BRUNO DA SILVA SILVEIRA
-                                        </div>
-                                        <div class="col-md-1 item-tabela">
-                                            <a href="">
-                                                <i class="fas fa-edit edit-ico"></i>
-                                            </a>
+                            % for z in i['professor']:
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <div class="offset-md-1 nome-prof row row-impar">
+                                            <div class="col-md-11">
+                                                {{z['nome']}}
+                                            </div>
+                                            <div class="col-md-1 item-tabela">
+                                                <a href="">
+                                                    <i class="fas fa-edit edit-ico"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            %end
 
                         </div>
                     </div>
