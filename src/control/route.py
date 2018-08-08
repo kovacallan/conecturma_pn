@@ -197,17 +197,10 @@ def read_de_medalha():
 
 @route('/rede')
 @permissao('gestor')
-@view("rede/rede")
+@view("gestao_aprendizagem/rede/rede")
 def view_index_rede():
     from control.gestao_aprendizagem_controller import view_index_rede
     return view_index_rede()
-
-
-@route('/rede/create_rede')
-@permissao('gestor')
-@view('rede/create_rede')
-def view_rede_cadastro():
-    return
 
 
 @route('/rede/criar_rede', method='POST')
@@ -216,12 +209,11 @@ def controller_create_rede():
     from control.gestao_aprendizagem_controller import controller_create_rede
     return controller_create_rede()
 
-
-@route('/rede/update_rede')
+@route('/rede/editar_rede', method='POST')
 @permissao('gestor')
-@view('modificar_rede')
-def view_modificar_rede():
-    pass
+def controller_editar_rede():
+    from control.gestao_aprendizagem_controller import controller_editar_rede
+    return controller_editar_rede()
 
 
 @route('/escola')
@@ -245,11 +237,11 @@ def controller_escola_editar():
     return controller_escola_update()
 
 
-@route('/escola/deletar_escola', method='POST')
-@permissao('gestor')
-def controller_escola_editar():
-    from control.gestao_aprendizagem_controller import controller_escola_delete
-    return controller_escola_delete()
+@route('/deletar_estrutura', method='POST')
+@permissao('diretor')
+def controller_estrutura_deletar():
+    from control.gestao_aprendizagem_controller import controller_estrutura_delete
+    return controller_estrutura_delete()
 
 
 

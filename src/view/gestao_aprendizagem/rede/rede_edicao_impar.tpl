@@ -1,14 +1,13 @@
 <div class="col-md-5 item-tabela ">
-  {{i['nome']}}
+    {{i['nome']}}
 </div>
 <div class="col-md-2 item-tabela ">
-  {{i['vinculo_rede']}}
+    {{i['vinculo_gestor_rede']}}
 </div>
 <div class="col-md-2 item-tabela">
-  {{i['vinculo_diretor_escola']}}
+    {{i['telefone']}}
 </div>
 <div class="col-md-2 item-tabela">
-  {{i['telefone']}}
 </div>
 <div class="col-md-1 item-tabela card">
   <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
@@ -26,7 +25,7 @@
                 <a class="nav-link active " data-toggle="tab" href="#nossa-escola" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
               </li>
               <li class="nav-item">
-                <button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Professores</button>
+                <button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Escolas</button>
               </li>
             </ul>
           </div>
@@ -63,18 +62,9 @@
                       <input type="text" class="form-control" size="21" name="" id="telefone{{i['id']}}" value="{{i['telefone']}}">
                     </div>
                     <div class="col-md-" style="padding-left: 10px ;">
-                      <label for="diretor">diretor</label>
+                      <label for="gestor">gestor</label>
                       <br>
-                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['vinculo_diretor_escola']}}">
-                    </div>
-                  </div>
-                  <div class="row distanciamento">
-                    <div class="col-md-">
-                      <label for="rede">Rede de Ensino:
-                        <span style="color:#ff0000">*</span>
-                      </label>
-                      <input type="hidden" size="59" class="form-control" name="" id="rede{{i['id']}}" value="{{i['vinculo_rede_id']}}">
-                      <input type="text" size="59" class="form-control" name="" id="rede{{i['id']}}" value="{{i['vinculo_rede']}}">
+                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['vinculo_gestor_rede']}}">
                     </div>
                   </div>
                   <!--fim da div dos dados ao lado da imagem-->
@@ -122,16 +112,16 @@
                 <div class="row">
                   <div class="container" style="margin-top: 20px">
                     <div class="offset-md-1 col-md-">
-                      <p>Professor
+                      <p>Escolas
                         <i class="far fa-question-circle"></i>
                       </p>
                     </div>
-                    % for z in i['professor']:
+
                       <div class="row">
                         <div class="col-md-11">
                           <div class="offset-md-1 nome-prof row row-par">
                             <div class="col-md-11">
-                                {{z['nome']}}
+
                             </div>
                             <div class="col-md-1 item-tabela">
                               <a href="">
@@ -141,7 +131,7 @@
                           </div>
                         </div>
                       </div>
-                    %end
+
                   </div>
                 </div>
               </div>
@@ -151,14 +141,14 @@
         </div>
         <div class="row" style="margin-bottom: 10px">
           % if tipo != '2':
-            <span class="col-md-1">
-              <span onclick="delete_escola({{i['id']}})" style="cursor:pointer;">
+            <div class="col-md-1">
+              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                 <i class="far fa-trash-alt" style="color:#969696;"></i>
-              </a>
-            </span>
+              </span>
+            </div>
           % end
           <div class="offset-md-10 col-md-1">
-            <span onclick="update_escola({{i['id']}})" style="cursor:pointer;">
+            <span onclick="update_rede({{i['id']}})" style="cursor:pointer;">
               <i class="fas fa-edit edit-ico"></i>
             </span>
           </div>

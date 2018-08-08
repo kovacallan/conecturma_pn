@@ -158,7 +158,7 @@
                 <div class="row" style="margin-bottom: 10px">
                     % if tipo != '2':
                         <div class="col-md-1">
-                            <span onclick="delete_escola({{i['id']}})" style="cursor:pointer;">
+                            <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                                 <i class="far fa-trash-alt" style="color:#969696;"></i>
                             </span>
                         </div>

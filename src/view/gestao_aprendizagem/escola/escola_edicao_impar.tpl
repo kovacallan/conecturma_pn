@@ -151,11 +151,11 @@
         </div>
         <div class="row" style="margin-bottom: 10px">
           % if tipo != '2':
-            <span class="col-md-1">
-              <span onclick="delete_escola({{i['id']}})" style="cursor:pointer;">
+            <div class="col-md-1">
+              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                 <i class="far fa-trash-alt" style="color:#969696;"></i>
-              </a>
-            </span>
+              </span>
+            </div>
           % end
           <div class="offset-md-10 col-md-1">
             <span onclick="update_escola({{i['id']}})" style="cursor:pointer;">

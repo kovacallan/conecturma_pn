@@ -291,8 +291,57 @@ def view_index_rede():
     metodos usados: controller_read_rede :interno:
     :return: Dicionario de redes
     """
-    return dict(redes=facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede']))
+    redes = []
+    redes_sistema = redes_no_sistema()
+    if isinstance(redes_sistema, list):
+        for i in redes_sistema:
+            escolas = []
+            for z in facade.search_estrutura_escola_by_rede_facade(vinculo_rede=str(i['id'])):
+                escolas.append(z)
 
+            i.update({'escola': escolas})
+            redes.append(i)
+    else:
+        rede_no_sistema_lista = []
+        rede_no_sistema_lista.append(redes_sistema)
+        for i in rede_no_sistema_lista:
+            escola = []
+            for z in facade.search_estrutura_escola_by_rede_facade(vinculo_rede = i['id']):
+                escola.append(z)
+
+                i.update({'escola': escola})
+            redes.append(i)
+
+
+    return dict(tipo=usuario_logado()['tipo'] ,rede=redes)
+
+
+def redes_no_sistema():
+    usuario=usuario_logado()
+    if usuario['tipo'] == TIPO_USUARIOS['administrador']:
+        rede = []
+        for i in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede']):
+            observador = facade.search_observador_by_rede_facade(vinculo_rede=str(i['id']))
+            if observador != []:
+                for z in observador:
+                    if z['tipo'] == '1':
+                        i['vinculo_gestor_rede'] = z['nome']
+                    else:
+                        i['vinculo_gestor_rede'] = ''
+            else:
+                i['vinculo_gestor_rede'] = ''
+
+            escola = facade.search_estrutura_escola_by_rede_facade(vinculo_rede=str(i['id']))
+            rede.append(i)
+
+        return rede
+
+    elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
+        rede=[]
+        rede.append(facade.search_estrutura_id_facade(id=usuario['vinculo_rede']))
+        rede[0]['vinculo_gestor_rede'] = usuario['nome']
+
+        return rede
 
 def controller_create_rede():
     """
@@ -300,11 +349,19 @@ def controller_create_rede():
     metodos usados:create rede facade
     :return:
     """
-    nome = request.params['nome_rede']
+    nome = request.params['nome']
     telefone = request.params['telefone']
-    facade.create_estrutura_facade(nome=nome, telefone=telefone, tipo_estrutura="1")
-    redirect('/rede')
+    if nome != '' and nome != None and telefone != '' and telefone != None:
+        facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
+                                       cnpj=request.params['cnpj'], telefone=request.params['telefone'],
+                                       endereco=request.params['endereco'], numero=request.params['numero'],
+                                       bairro=request.params['bairro'], complemento=request.params['complemento'],
+                                       cep=request.params['cep'], estado=request.params['estado'],
+                                       municipio=request.params['municipio']
+                                       )
 
+def controller_editar_rede():
+    facade.update_estrutura_facade(estrutura=request.params)
 
 def view_escola_index():
     """
@@ -345,6 +402,7 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede'] = get_nome_rede(vinculo_rede = i['vinculo_rede'])
             else:
+                i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede']=''
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
@@ -401,7 +459,7 @@ def controller_escola_update():
     facade.update_estrutura_facade(estrutura = request.params)
 
 
-def controller_escola_delete():
+def controller_estrutura_delete():
     facade.delete_estrutura_facade(id = request.params['id'])
 
 

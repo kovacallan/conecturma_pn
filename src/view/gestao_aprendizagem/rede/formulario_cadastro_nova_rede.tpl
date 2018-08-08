@@ -1,7 +1,7 @@
 <!--div da nova escola-->
     <div class="row row-impar">
         <div class="col-md-11 item-tabela-h" style="color:black">
-            nova escola
+            nova rede
         </div>
         <div class="col-md-1 item-tabela">
             <button id="dads" class="normalizar-botao" onclick="test(this.id);">
@@ -50,26 +50,6 @@
                                             </label>
                                             <input type="text" class="form-control" size="26" name="" id="telefone" onchange="document.getElementById('telefone').style.boxShadow = 'none'" value="">
                                         </div>
-                                        <div class="col-md-6" style="padding-left: 10px ;">
-                                            <label for="diretor">Diretor</label>
-                                            <br>
-                                            <input type="text" size="29" class="form-control" name="" id="diretor">
-                                        </div>
-                                    </div>
-                                    <div class="row distanciamneto">
-                                        <div class="col-md-12">
-                                            <label for="rede">Rede de Ensino:</label>
-                                            <select class="custom-select" name="rede" id="rede" aria-label="Example select with button addon">
-                                                % if isinstance(rede, list):
-                                                    <option value="0" selected></option>
-                                                    % for z in rede:
-                                                        <option value="{{z['id']}}">{{z['nome']}}</option>
-                                                    % end
-                                                %else:
-                                                    <option value="{{rede['id']}}">{{rede['nome']}}</option>
-                                                %end
-                                            </select>
-                                        </div>
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div>
@@ -115,7 +95,7 @@
                     <div class="container" style="margin-top:20px;margin-bottom: 20px">
                         <div class="row">
                             <div class="offset-md-9 distanciamento">
-                                <button type="submit" class="botao-salvar" onclick="cadastro_escola()" style="margin-left: 10px;">salvar</button>
+                                <button type="submit" class="botao-salvar" onclick="cadastro_rede()" style="margin-left: 10px;">salvar</button>
                                 <button class="botao-salvar" style="background-color:#ff0000" onclick='document.getElementById("new_school").style.display = "none"'>cancelar</button>
                             </div>
                         </div>
