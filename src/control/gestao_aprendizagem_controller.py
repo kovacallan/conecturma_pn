@@ -341,7 +341,11 @@ def get_escolas_e_rede_permissao():
         rede = facade.read_estrutura_facade(tipo_estrutura = TIPO_ESTRUTURA['rede'])
         escola = []
         for i in facade.read_estrutura_facade(tipo_estrutura = TIPO_ESTRUTURA['escola']):
-            i['vinculo_rede'] = get_nome_rede(vinculo_rede = i['vinculo_rede'])
+            if i['vinculo_rede'] != '0':
+                i['vinculo_rede_id'] = i['vinculo_rede']
+                i['vinculo_rede'] = get_nome_rede(vinculo_rede = i['vinculo_rede'])
+            else:
+                i['vinculo_rede']=''
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
@@ -352,12 +356,16 @@ def get_escolas_e_rede_permissao():
         escola = []
         rede = facade.search_estrutura_id_facade(id=usuario['vinculo_rede'])
         for i in facade.search_estrutura_escola_by_rede_facade(vinculo_rede=usuario['vinculo_rede']):
+            i['vinculo_rede_id'] = i['vinculo_rede']
             i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
+            if i['vinculo_diretor_escola'] != '0':
+                i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
         return escola, rede
 
     else:
         escola = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
+        escola['vinculo_rede_id'] = escola['vinculo_rede']
         escola['vinculo_rede'] = get_nome_rede(vinculo_rede=escola['vinculo_rede'])
         escola['vinculo_diretor_escola'] = usuario['nome']
         rede = facade.search_estrutura_id_facade(id=usuario['vinculo_rede'])
@@ -378,7 +386,7 @@ def controller_escola_cadastro():
     nome=request.params['nome'] 
     telefone=request.params['telefone']
     
-    if nome != '' and  nome != None and telefone != '' and telefone != None: 
+    if nome != '' and  nome != None and telefone != '' and telefone != None:
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=nome,
                                     cnpj=request.params['cnpj'], telefone=request.params['telefone'],
                                     vinculo_diretor_escola=request.params['diretor'], vinculo_rede=request.params['rede'],
@@ -387,11 +395,10 @@ def controller_escola_cadastro():
                                     cep = request.params['cep'], estado = request.params['estado'],
                                     municipio = request.params['municipio']
                                     )
-        redirect("/escola")
 
 
 def controller_escola_update():
-    facade.update_estrutura_facade(escola = request.params)
+    facade.update_estrutura_facade(estrutura = request.params)
 
 
 def controller_escola_delete():

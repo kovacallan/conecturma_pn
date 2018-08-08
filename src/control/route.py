@@ -239,7 +239,7 @@ def controller_escola_cadastro():
 
 
 @route('/escola/editar_escola', method='POST')
-@permissao('gestor')
+@permissao('diretor')
 def controller_escola_editar():
     from control.gestao_aprendizagem_controller import controller_escola_update
     return controller_escola_update()

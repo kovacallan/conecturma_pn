@@ -98,7 +98,7 @@ class DbEstrutura(Model):
 
     def search_escola_by_rede(self, vinculo_rede):
         escola = []
-        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '2') and (DbEstrutura.vinculo_rede == vinculo_rede) &
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '2') & (DbEstrutura.vinculo_rede == vinculo_rede) &
                                        (DbEstrutura.ativo == '1'),order_by=self.nome):
             escola.append(vars(lista)["_data"])
 
@@ -129,12 +129,15 @@ class DbEstrutura(Model):
         return oas
 
     def update_estrutura(self, **kwargs):
-        new_data_escola = kwargs['escola']
+        new_data_escola = kwargs['estrutura']
         estrutura = self.load(int(new_data_escola['id']))
         for i in new_data_escola:
             if new_data_escola[i] and new_data_escola[i] != ' ':
                 setattr(estrutura, i, new_data_escola[i])
-        estrutura.save()
+        if estrutura.save():
+            return True
+        else:
+            return False
 
     def delete_estrutura(self, id):
         estrutura = self.load(int(id))
