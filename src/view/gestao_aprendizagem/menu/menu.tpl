@@ -73,6 +73,7 @@
 
         </div>
         <div align="left">
+                <a href="/escola" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Escola</span></a>
                 <a href="/turma" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Turma</span></a>
                 <a href="/gestao_aprendizagem/usuario" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Usuário</span></a>
         </div>

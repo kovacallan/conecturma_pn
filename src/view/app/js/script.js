@@ -207,7 +207,7 @@ function cadastro_escola(){
     municipio = document.getElementById('municipio').value;
 
     if (nome != '' && nome != null){
-        if (telefone != '' && telefone != null && telefone.length == 14){
+        if (telefone != '' && telefone != null && telefone.length >= 10){
             $.post('/escola/criar_escola', {nome:nome, cnpj:cnpj, telefone:telefone, diretor:diretor, rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
             });
@@ -220,5 +220,44 @@ function cadastro_escola(){
     }else{
         alert('O campo nome é obrigatório.');
         document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+    }
+}
+
+function update_escola(id){
+    id = document.getElementById('id_escola'+id).value;
+    nome = document.getElementById('nome'+id).value;
+    cnpj = document.getElementById('cnpj'+id).value;
+    telefone = document.getElementById('telefone'+id).value;
+    rede = document.getElementById('rede'+id).value;
+    endereco = document.getElementById('endereco'+id).value;
+    numero = document.getElementById('numero'+id).value;
+    bairro = document.getElementById('bairro'+id).value;
+    complemento = document.getElementById('complemento'+id).value;
+    cep = document.getElementById('cep'+id).value;
+    estado = document.getElementById('estado'+id).value;
+    municipio = document.getElementById('municipio'+id).value;
+
+
+    if (nome != '' && nome != null){
+        if (telefone != '' && telefone != null && telefone.length >= 10){
+            $.post('/escola/editar_escola', {id:id, nome:nome, cnpj:cnpj, telefone:telefone, vinculo_rede:rede,
+            endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
+            });
+            location.reload();
+        }
+        else{
+            alert('O campo telefone é obrigatório.');
+            document.getElementById("telefone").style.boxShadow = "0px 0px 12px #fe1313";
+        }
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+    }
+}
+function delete_escola(id){
+    if(window.confirm("Tem certeza que deseja apagar essa escola ?")){
+        $.post('/escola/deletar_escola', {id:id},function(data){
+        });
+        location.reload();
     }
 }

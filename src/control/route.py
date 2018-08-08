@@ -231,19 +231,26 @@ def view_escola_index():
     return view_escola_index()
 
 
-@route('/escola/escola_cadastro')
-@permissao('gestor')
-@view('escola/create_escola')
-def cadastro_escola():
-    from control.gestao_aprendizagem_controller import cadastro_escola
-    return cadastro_escola()
-
-
 @route('/escola/criar_escola', method='POST')
 @permissao('gestor')
 def controller_escola_cadastro():
     from control.gestao_aprendizagem_controller import controller_escola_cadastro
     return controller_escola_cadastro() 
+
+
+@route('/escola/editar_escola', method='POST')
+@permissao('gestor')
+def controller_escola_editar():
+    from control.gestao_aprendizagem_controller import controller_escola_update
+    return controller_escola_update()
+
+
+@route('/escola/deletar_escola', method='POST')
+@permissao('gestor')
+def controller_escola_editar():
+    from control.gestao_aprendizagem_controller import controller_escola_delete
+    return controller_escola_delete()
+
 
 
 @route('/turma')
