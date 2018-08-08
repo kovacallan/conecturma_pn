@@ -171,6 +171,7 @@ class DbObservador(Model):
                      vinculo_escola=read.vinculo_escola,
                      vinculo_turma=read.vinculo_turma))
 
+
         return observador
 
     def search_observador_inativos(self, nome_observador):
@@ -179,6 +180,15 @@ class DbObservador(Model):
             usuario = pesquisa
 
         return usuario
+
+    def search_diretor_vinculo_escola(self, vinculo_escola):
+        from control.dicionarios import TIPO_USUARIOS
+        observador = None
+        for search in DbObservador.query((DbObservador.tipo == TIPO_USUARIOS['diretor']) & (DbObservador.vinculo_escola == vinculo_escola)):
+            observador = vars(search)["_data"]
+
+        return observador
+
 
     def login_date(self, id, data):
         """
@@ -219,3 +229,11 @@ class DbObservador(Model):
                     if itens['tipo_item'] == '4':
                         usuario.corpo = itens['id']
         usuario.save()
+
+    def pesquisa_email(self, letras):
+        observador = []
+        for i in DbObservador.all():
+            if letras in i.email:
+                observador.append(vars(i)["_data"])
+
+        return observador

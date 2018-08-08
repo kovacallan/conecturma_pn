@@ -7,28 +7,6 @@ from control.dicionarios import *
 facade = Facade()
 
 
-def qual_tipo_usuario_logado():
-    from control.dicionarios import TIPO_USUARIOS
-
-    usuario = usuario_logado()
-    if int(usuario['tipo']) >= int(TIPO_USUARIOS['aluno']):
-        usuario = facade.search_aluno_nome_facade(usuario['nome'])
-        avatar = facade.avatar_facade(usuario['id'])
-    else:
-        usuario = facade.search_observador_facade(usuario['nome'])
-
-    return usuario, avatar
-
-def pecas_avatar(avatar):
-
-    avatar_pecas = {
-        'cor': facade.search_estrutura_id_facade(avatar['cor'])['nome'],
-        'rosto': facade.search_estrutura_id_facade(avatar['rosto'])['nome'],
-        'acessorio': facade.search_estrutura_id_facade(avatar['acessorio'])['nome'],
-        'corpo': facade.search_estrutura_id_facade(avatar['corpo'])['nome']
-    }
-
-    return avatar_pecas
 
 
 
@@ -184,13 +162,13 @@ def verificarAcessoAventura():
 
     for i in facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id'])):
 
-    if int(usuario['tipo']) < 6:
-        parametros = parametros_json_jogos(request.params.items())
-        return {'aventurasAcessiveis': parametros['aventuras']}
-    else:
-        from control.dicionarios import AVENTURAS_CONECTURMA
-        serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
-        return AVENTURAS_CONECTURMA[serie_turma['serie']]
+        if int(usuario['tipo']) < 6:
+            parametros = parametros_json_jogos(request.params.items())
+            return {'aventurasAcessiveis': parametros['aventuras']}
+        else:
+            from control.dicionarios import AVENTURAS_CONECTURMA
+            serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
+            return AVENTURAS_CONECTURMA[serie_turma['serie']]
 
 def is_oa(aluno, parametros, oa):
     from control.classes.permissao import update_cookie

@@ -1,0 +1,107 @@
+body{
+     overflow:hidden;
+}
+ .portal_bg{
+     background:url("/static/img/tela_ambiente-do-aluno.png") no-repeat center center ;
+     height: 100vh;
+     background-size: 100% 100%;
+}
+ #crystal{
+     display: block;
+     color: white;
+     position: relative;
+     font-size: 1.15rem;
+     font-weight: bold;
+     bottom:110px;
+     right: -3px;
+}
+ #HP{
+     position: relative;
+     right: 61px;
+     bottom: -82px;
+     color: #fff;
+     font-size: 1.15rem;
+     font-weight: bold;
+}
+ #default-avatar{
+     position: relative;
+     margin-left: 47px;
+     z-index: 2;
+}
+ #avatar-base{
+     position: relative;
+     top: -35px;
+     z-index:0;
+}
+ #box-nome{
+     position: relative;
+     right: -33px;
+    bottom: 37px;
+}
+ #portal-sun{
+}
+ .aluno-avatar{
+     left: 17vh;
+     bottom: 6vw;
+     width: 50%;
+}
+ .personagens{
+     position: relative;
+     bottom:279px;
+     right: 2vw;
+     z-index: 1;
+}
+ .bg-blue{
+     top: 30px;
+}
+ #C-icon{
+     bottom: 75px;
+     left: 53px;
+}
+ .ambiente{
+     bottom: 50px;
+     left: 15px;
+}
+ .facebook{
+     bottom: 50px;
+}
+ .youtube{
+     bottom: 50px;
+}
+ .sair-icon{
+     bottom: 37px;
+     right: 61px;
+}
+ .container-mid{
+     position: relative;
+     bottom: 70px;
+}
+ .medalhas{
+     right: 8vw;
+     bottom: 11vh;
+}
+ #space-ship{
+     position: relative;
+     bottom: 65px;
+     box-sizing: border-box;
+     z-index: 0;
+     animation-name: space01;
+     animation-duration:5s;
+     animation-iteration-count: infinite;
+}
+
+
+ @keyframes space01 {
+    /* line 163, ../scss/main.scss */
+     0% {
+         bottom: 65px
+    }
+    /* line 166, ../scss/main.scss */
+     50% {
+         bottom: 96px
+    }
+    /* line 169, ../scss/main.scss */
+     100% {
+         bottom: 65px
+    }
+}
