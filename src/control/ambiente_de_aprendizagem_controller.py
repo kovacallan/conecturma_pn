@@ -198,14 +198,6 @@ def registrarConclusao():
     flag = 0
     contador = 0
     oa = parametros['objetoAprendizagem']
-    objetoaprendizagem=[letter for letter in parametros['objetoAprendizagem']]
-    x=len(objetoaprendizagem)
-    # print('OA?',x,objetoaprendizagem[x-4],objetoaprendizagem[x-3])
-    lista_checar_se_e_VC=[objetoaprendizagem[x-4],objetoaprendizagem[x-3]]
-    y=''.join(lista_checar_se_e_VC)
-    # print(y)
-    # facade.pegar_dados_de_jogo_facade(parametros['niveis'], parametros['objetoAprendizagem'],
-    #                                   str(usuario_logado()['id']))
     print('obj aprendizage',usuario_logado()['id'], parametros['objetoAprendizagem'])
     facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'], parametros['objetoAprendizagem'])
     for i in parametros['niveis']:
@@ -213,7 +205,7 @@ def registrarConclusao():
         print(contador, i['termino'])
         if i['termino'] == True:
             flag += 1
-    if y != 'VC' or y!='CN':
+    if 'VC' not in oa or 'CN' not in oa:
         cumprida=facade.objeto_concluido_facade(id_aluno=str(usuario_logado()['id']),unidade=oa[0:9],objeto_aprendizagem=oa[9:13])
         print('cumprida',cumprida)
         facade.armazenar_ultimo_jogo_jogado(usuario_logado()['id'],parametros['objetoAprendizagem'])

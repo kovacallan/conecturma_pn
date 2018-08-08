@@ -270,6 +270,9 @@ class DbCemiterio(Model):
         [setattr(self.create(), parametro, valor) for parametro, valor in locals().items()]
         print("quee")
 
+    # def apagar_uma_anotaçao_aluno(self,id_aluno):
+    #     DbAluno.load(id_aluno)
+
     def desativar_um_objeto(self, objetoo):
         print('CMl311', objetoo)
         if self.create(**objetoo):

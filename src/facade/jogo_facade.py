@@ -21,11 +21,11 @@ class OaConcluidoFacade:
 
 
     def unidade_teste_facade(self, id_aluno, unidade):
-        return self.oaconcluido.unidade_teste(id_aluno=id_aluno, unidade=unidade)
+        return self.oaconcluido.desempenho_aluno_unidade(id_aluno=id_aluno, unidade=unidade)
 
     def oa_teste_facade(self, id_aluno, oa):
         # print('id_aluno',id_aluno)
-        return self.oaconcluido.oa_teste(id_aluno=id_aluno, oa=oa)
+        return self.oaconcluido.desempenho_aluno_oa(id_aluno=id_aluno, oa=oa)
 
     def armazenar_dados_jogos_facade(self,id_obj,dados):
         return self.oaconcluido.armazenando_dados_jogo(id_obj,dados)

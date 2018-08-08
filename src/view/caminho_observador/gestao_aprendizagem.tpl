@@ -1,7 +1,7 @@
 %include('header.tpl', title="Conecturma")
         <div class="row">
             <div align="center" class="col-md-2" style="margin-top:50px;">
-                <h2>Menu</h2>
+                <ul>Menu</h2>
                 % if tipo == '3':
                     <a href="/gestao_aprendizagem/usuario">USUÁRIOS</a><br>
                     <a href="/medalha_cadastro">Criar medalha</a><br>
@@ -19,6 +19,7 @@
                     <a href="/turma">TURMA</a><br>
                     <a href="/gestao_aprendizagem/usuario">USUÁRIOS</a><br>
                 % end
+                    </ul>
             </div>
             <div class="col-md-10">
                 <div align="center">

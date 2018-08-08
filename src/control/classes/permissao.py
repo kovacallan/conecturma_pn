@@ -119,7 +119,7 @@ def algum_usuario_logado(function):
         banana = request.get_cookie("KIM", secret=KEY_HASH)
         que = request.get_cookie("BUMBA", secret=banana)
         if que and banana:
-            redirect(PAGINA_INICIAL[tipo_observador(que['tipo'])])
+            redirect(PAGINA_INICIAL[(tipo_observador(que['tipo']))])
         else:
             return function(*args, **kwargs)
 
@@ -146,7 +146,7 @@ def permissao(quem_tem_permissao):
 
 def tipo_observador(tipo):
     # return {
-    #     '0': 'administrador',
+    #     '0' : 'administrador',
     #     '1': 'gestor',
     #     '2': 'diretor',
     #     '3': 'professor',

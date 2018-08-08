@@ -1,5 +1,6 @@
 from walrus import *
 from datetime import date
+from control.dicionarios import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -206,15 +207,15 @@ class DbObservador(Model):
     def equipar_item(self, id_usuario, itens):
 
         usuario = self.load(id_usuario)
-        if itens['tipo_item'] == '1':
+        if itens['tipo_item'] == TIPO_ITEM['cor']:
             usuario.cor = itens['id']
         else:
-            if itens['tipo_item'] == '2':
+            if itens['tipo_item'] == TIPO_ITEM['rosto']:
                 usuario.rosto = itens['id']
             else:
-                if itens['tipo_item'] == '3':
+                if itens['tipo_item'] == TIPO_ITEM['acessorio']:
                     usuario.acessorio = itens['id']
                 else:
-                    if itens['tipo_item'] == '4':
+                    if itens['tipo_item'] == TIPO_ITEM['corpo']:
                         usuario.corpo = itens['id']
         usuario.save()

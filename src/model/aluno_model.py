@@ -1,5 +1,6 @@
 from walrus import *
 from random import randrange
+from control.dicionarios import *
 
 db = Database(host='localhost', port=6379, db=0)
 
@@ -37,9 +38,6 @@ class DbAluno(Model):
     dados_aventura_2 = HashField()
     dados_aventura_3 = HashField()
 
-    # def create_aluno(self, nome,nome_login, senha, matricula, data_nascimento, sexo, vinculo_escola='0', vinculo_rede='0',
-    #                  cpf_responsavel='0'):
-
     def create_aluno(self, **kwargs):
         if self.create(**kwargs):
             return True
@@ -69,7 +67,7 @@ class DbAluno(Model):
 
     def search_aluno_nome_login(self, nome_login):
 
-        alun_pes = None
+        alun_pes = []
         for search in DbAluno.query(DbAluno.nome_login == nome_login):
             alun_pes = dict(
                 id=search.id, matricula=search.matricula, nome=search.nome,nome_login=search.nome_login, senha=search.senha,
@@ -81,7 +79,6 @@ class DbAluno(Model):
                 ultima_aventura=search.ultima_aventura, ultima_unidade=search.ultima_unidade,
                 ultimo_objeto_aprendizagem=search.ultimo_objeto_aprendizagem
             )
-
         return alun_pes
 
     def search_aluno_nome(self, nome):
@@ -211,16 +208,16 @@ class DbAluno(Model):
     def equipar_item(self, id_usuario, itens):
 
         usuario = self.load(id_usuario)
-        if itens['tipo_item'] == '1':
+        if itens['tipo_item'] == TIPO_ITEM['cor']:
             usuario.cor = itens['id']
         else:
-            if itens['tipo_item'] == '2':
+            if itens['tipo_item'] == TIPO_ITEM['rosto']:
                 usuario.rosto = itens['id']
             else:
-                if itens['tipo_item'] == '3':
+                if itens['tipo_item'] == TIPO_ITEM['acessorio']:
                     usuario.acessorio = itens['id']
                 else:
-                    if itens['tipo_item'] == '4':
+                    if itens['tipo_item'] == TIPO_ITEM['corpo']:
                         usuario.corpo = itens['id']
         usuario.save()
 

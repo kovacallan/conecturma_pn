@@ -22,13 +22,13 @@ def controller_login_entrar_observador():
     observador = valida_login_observador(nome, senha)
     print("login L22", observador)
     if observador:
-        if observador['tipo'] is not '0':
+        if TIPO_USUARIOS['administrador']!=observador['tipo']:
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)
             facade.create_estrutura_facade(observador['nome'], observador['tipo'])
             redirect('/gestao_aprendizagem')
-        elif observador['tipo'] == '0':
+        elif observador==TIPO_USUARIOS['administrador']:
             create_cookie(nome)
             now = datetime.now()
             facade.login_date_facade(observador['id'], now)
@@ -48,7 +48,7 @@ def view_esqueci_senha():
     email = request.params['email']
     pesquisa = facade.search_observador_email_facade(email=email)
     teste = facade.read_observador_facade()
-    print("reformular senhaL47", teste)
+    print("reformular senhaL51", teste)
     return template('login/reformular_senha.tpl', id=pesquisa['id'], email=pesquisa['email'])
 
 
@@ -67,13 +67,10 @@ def valida_login_observador(nome, senha):
     :param senha: senha do usuario
     :return: true se o observador existir e se estiver com usuario e a senha certa
     """
-    print('??')
     retorno = facade.search_observador_facade(nome)
 
     if retorno:
-        print('naniii',sha512_crypt.verify(senha, retorno['senha']))
         if retorno['nome'] == nome and sha512_crypt.verify(senha, retorno['senha']):
-        # if retorno['nome'] == nome and senha ==retorno['senha']:
             print("47", nome)
             return retorno
         else:

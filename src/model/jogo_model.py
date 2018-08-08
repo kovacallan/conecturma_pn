@@ -30,7 +30,7 @@ class DesempenhoJogo(Model):
 
         return conclucoes
 
-    def unidade_teste(self, id_aluno, unidade):
+    def desempenho_aluno_unidade(self, id_aluno, unidade):
         conclucoes = []
         for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno) and (DesempenhoJogo.unidade == unidade),
                                       order_by=DesempenhoJogo.objeto_aprendizagem):
@@ -39,7 +39,7 @@ class DesempenhoJogo(Model):
 
         return conclucoes
 
-    def oa_teste(self, id_aluno, oa):
+    def desempenho_aluno_oa(self, id_aluno, oa):
         conclucoes = []
         for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno) & (DesempenhoJogo.objeto_aprendizagem == oa),
                                       order_by=DesempenhoJogo.id):

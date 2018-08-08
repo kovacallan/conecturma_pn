@@ -18,8 +18,8 @@ class FacadeTest(unittest.TestCase):
         # self._create_turma()
         # self._create_aluno()
         # self._create_turma()
-        self._create_all_estruturas()
-        self._create_all()
+        # self._create_all_estruturas()
+        # self._create_all()
 
 
     """TESTE ALUNO FACADE"""
@@ -36,9 +36,8 @@ class FacadeTest(unittest.TestCase):
         self._create_all()
 
     def _create_aluno(self):
-        rede = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="ACNE")
-        print(f'rede{rede}')
-        self.assertIsNot(rede, None)
+        # rede = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome="ACNE")
+        # self.assertIsNot(rede, None)
         escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='Escola conecturma')
         self.assertIsNot(escola, None)
         esco_spo = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='estalo')
@@ -50,8 +49,8 @@ class FacadeTest(unittest.TestCase):
                                                  escola=(escola['id']),
                                                  senha='123',
                                                  vinculo_rede=str(rede['id']),
-                                                 data_nascimento=date(1994, 5, 2),
                                                  sexo='masculino')
+        print('hm?',aluno1)
         self.assertEqual(aluno1, True)
         aluno_egg0 = self.facade.create_aluno_facade(nome='egg', matricula='2345', nome_login='egg',
                                                  escola=str(escola['id']), senha='123',
@@ -153,9 +152,13 @@ class FacadeTest(unittest.TestCase):
 
     def _comprar_item(self):
         self._create_item()
-        aluno1 = self.facade.search_aluno_nome_objeto_facade(nome="egg")
-        self.assertIsNot(aluno1, None)
+        self._create_aluno()
+        aluno1 = self.facade.search_aluno_nome_facade(nome="egg")
+        # self.assertIsNot(aluno1, None)
+        self.assertIsNot(aluno1,[])
+        print('aluno1',aluno1)
         item1 = self.facade.search_estrutura_facade(nome="burroquandofoge", tipo_estrutura=TIPO_ESTRUTURA['item'])
+        print('item1',item1)
         self.assertIsNot(item1, None)
         item2 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'], nome='cara de pau')
         self.assertIsNot(item2, None)
@@ -215,7 +218,7 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(aluno1.anotacoes_aluno[0], mensagem.encode('utf-8'))
         self.assertEqual(aluno1.anotacoes_aluno[1], mensagem2.encode('utf-8'))
 
-    def test_anotacoes_no_aluno(self):
+    def _test_anotacoes_no_aluno(self):
         self._anotacoes_no_aluno()
 
     def _read_anotacoes_no_aluno(self):
@@ -225,7 +228,7 @@ class FacadeTest(unittest.TestCase):
         read = self.facade.read_anotacoes_aluno_facade(aluno1['id'])
         self.assertIn("Isto é uma mensagem de teste", read)
 
-    def test_read_anotacoes_aluno(self):
+    def _test_read_anotacoes_aluno(self):
         self._read_anotacoes_no_aluno()
 
     def _pesquisa_alunos_na_rede(self):
@@ -556,8 +559,8 @@ class FacadeTest(unittest.TestCase):
         observadorADM = self.facade.create_observador_facade(nome='ADMdeus', senha='span', telefone='(21)9999-9999',
                                                              cpf='123456789', email='egg@span.com.br', rede='0',
                                                              escola='0',
-                                                             tipo=TIPO_USUARIOS['administrador'],
-                                                             data_nascimento=date(1930, 2, 11))
+                                                             tipo=TIPO_USUARIOS['administrador'])
+                                                             #, data_nascimento=date(1930, 2, 11))
         escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='Escola conecturma')
         self.assertIsNot(escola, None)
         turma = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'], nome='Knight')
@@ -567,10 +570,12 @@ class FacadeTest(unittest.TestCase):
                                                                telefone='(21)9999-9999',
                                                                cpf='123456789', email='Monty@python.com.br',
                                                                tipo='3', rede="0", escola=escola['id'],
-                                                               vinculo_turma=turma['id'],data_nascimento=date(1992,10,1))
+                                                               vinculo_turma=turma['id'])
+                                                               # ,data_nascimento=date(1992,10,1))
         observador_dire = self.facade.create_observador_facade(nome="diretor", senha="123", telefone="21 2569 6969",
                                                                email="tent@cool.os", tipo="2", rede='0',
-                                                               escola=escola['id'],data_nascimento=date(1899,2,1))
+                                                               escola=escola['id'])
+                                                               # ,data_nascimento=date(1899,2,1))
         # observador_gestor=self.facade.create_observador_facade()
         self.assertIs(observadorADM, True)
         self.assertIs(observador_prof, True)

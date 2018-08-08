@@ -1,7 +1,3 @@
-from bottle import route, view, get, request, redirect, template
-from control.classes.validar_cadastros_updates import *
-from facade.facade_main import Facade
-# from control.historico_controller import *
 from control.ambiente_de_gestao_de_aprendizagem_controller import *
 from control.classes.permissao import permissao, usuario_logado
 from control.dicionarios import TIPO_USUARIOS_ID
