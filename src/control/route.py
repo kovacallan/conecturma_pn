@@ -244,21 +244,13 @@ def controller_estrutura_deletar():
     return controller_estrutura_delete()
 
 
-
 @route('/turma')
 @permissao('professor')
-@view('turma/turma')
+@view('gestao_aprendizagem/turma/turma')
 def view_turma():
     from control.gestao_aprendizagem_controller import view_turma
     return view_turma()
 
-
-@route('/turma/turma_cadastro')
-@permissao('diretor')
-@view('turma/turma_cadastro')
-def view_cadastrar_turma():
-    from control.gestao_aprendizagem_controller import view_cadastrar_turma
-    return view_cadastrar_turma()
 
 @route('/turma/cadastro_turma', method='POST')
 @permissao('diretor')

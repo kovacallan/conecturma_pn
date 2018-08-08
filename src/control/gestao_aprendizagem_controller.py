@@ -469,12 +469,8 @@ def view_turma():
     metodos utilizados : controller_read_ turma :interno dessa pagina:
     :return: dicionario com os parametros da turma a serem mostrados
     """
-    turma = []
-    for t in facade.read_estrutura_facade(TIPO_ESTRUTURA['turma']):
-        t['serie'] = SERIE[t['serie']]
-        t['vinculo_escola'] = get_nome_escola(t['vinculo_escola'])
-        turma.append(t)
-    return dict(turma=turma)
+
+    return dict(tipo=usuario_logado()['tipo'], turma=turma)
 
 
 def view_cadastrar_turma():

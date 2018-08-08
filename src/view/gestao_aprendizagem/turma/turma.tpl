@@ -4,11 +4,11 @@
   <div class="container">
     <div class="row">
       <div class=" col-md-3">
-        <p class="top-escolas-tabela">Redes</p>
-          % if tipo == '0':
+        <p class="top-escolas-tabela">Turma</p>
+          % if tipo != '3':
             <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
               <i class="fas fa-plus"></i>
-              &nbsp;Nova Rede
+              &nbsp;Nova Turma
             </button>
           % end
       </div>
