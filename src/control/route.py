@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from bottle import route, view, get
-from control.classes.permissao import permissao, algum_usuario_logado
+from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
+from facade.facade_main import Facade
+
+facade= Facade()
 
 
 """
@@ -52,12 +55,22 @@ Rotas da Tela de do Ambiente de aprendizagem
 @permissao('aluno_varejo')
 @view('caminho_aluno/jogar_conecturma')
 def view_ambiente_de_aprendizagem():
-    return
+    usuario=usuario_logado()
+
+    jogador=facade.search_observador_facade(usuario['nome'])
+    vida = jogador['vida']
+    moedas= jogador['moedas']
+    return dict(vida=vida, moedas=moedas)
 
 @route('/jogo')
 def jogo():
     from bottle import template
-    return template('jogo/index')
+    return template('jogo/iframe.html')
+
+@route('/index_jogo')
+def index_jogo():
+    from bottle import template
+    return template('jogo/index.html')
 
 
 @route('/api/plataforma/obterUltimaConclusao', method='POST')

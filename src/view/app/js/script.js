@@ -261,3 +261,11 @@ function delete_escola(id){
         location.reload();
     }
 }
+
+//function ifarame(){
+//    alert('hm');
+//
+//    document.getElementById('123').innerHTML('<iframe name="teste" src="/index_jogo" width="1000px" height="600px"></iframe>');
+//
+//
+//}

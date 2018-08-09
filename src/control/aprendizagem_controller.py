@@ -36,6 +36,7 @@ def obterUltimaConclusao():
 def verificarAcessoObjetoAprendizagem():
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
+
     if int(usuario['tipo']) < 6:
         retorno = {'objetosAprendizagemAcessiveis': parametros['objetosAprendizagem']}
     else:
