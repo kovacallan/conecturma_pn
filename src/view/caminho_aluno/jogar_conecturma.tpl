@@ -13,101 +13,109 @@
 <div class="container-fluid fundo">
     <div class="offset-md-1 light-game">
         <div class="center">
-            <div class="game">
-                <a href="javascript:void(0)" onclick="atualizarHud()" class="close-game">
-                    <img src="/Plugins/AcademicoConecturma/Eteg.Cronus.AcademicoConecturma.Web/assets/aluno/img/botao_voltar.png"></a>
-                <iframe id="frame_jogo" src="" width="1014px" height="614px" align="middle" style="border: 7px rgb(11, 104, 145) solid;"></iframe>
-            </div>
+              <div class="offset-md-9">
+                <div class="game">
+                    <a href="javascript:void(0)" onclick="atualizarHud()" class="close-game">
+
+                            <img src="/static/img/botao_voltar.png" style="padding-left:52px">
+                    </a>
+                </div>
+              </div>
+            <iframe id="frame_jogo" src="" width="1014px" height="614px" align="middle"
+                    style="border: 7px rgb(11, 104, 145) solid;"></iframe>
         </div>
     </div>
-    <div class="container cabecalho">
-        <div class="row icones header-menu">
-            <div align="center" class="col-md-2 offset-md-2">
+</div>
+<div class="container cabecalho">
+    <div class="row icones header-menu">
+        <div align="center" class="col-md-2 offset-md-2">
+            <figure class="figure">
+                <img src="/static/img/C.png" class="img-fluid C-icon">
+            </figure>
+        </div>
+
+        <div align="center" class="col-md-1">
+            <a href="/gestao_aprendizagem">
                 <figure class="figure">
-                    <img src="/static/img/C.png" class="img-fluid C-icon">
+                    <img src="/static/img/ambiente.png" class="img-fluid icon-edit">
                 </figure>
-            </div>
-
-            <div align="center" class="col-md-1">
-                <a href="/gestao_aprendizagem">
-                    <figure class="figure">
-                        <img src="/static/img/ambiente.png" class="img-fluid icon-edit">
-                    </figure>
-                </a>
-            </div>
-
-            <div align="center" class="col-md-1 offset-md-1">
-                <a href="https://www.facebook.com/conecturmaoficial/" target="_blank">
-                    <figure class="figure">
-                        <img src="/static/img/facebook.png" class="img-fluid icon-edit">
-                    </figure>
-                </a>
-            </div>
-
-            <div align="center" class="col-md-1 offset-md-1">
-                <a href="https://www.youtube.com/conecturma" target="_blank">
-                    <figure class="figure">
-                        <img src="/static/img/youtube.png" class="img-fluid icon-edit">
-                    </figure>
-                </a>
-            </div>
-
-            <div align="center" class="col-md-1">
-                <a href="/sair">
-                    <figure class="figure">
-
-                        <img src="/static/img/sair.png" class="img-fluid exit-icon">
-
-                    </figure>
-                </a>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container corpo-pag">
-        <div class="row">
-            <div class="col-md-3 avatar-std">
-                <img src="/static/img/boneco_base2.png" class="boneco_base img-fluid">
-                <img src="/static/img/AVATAR.png" class="avatar-ship img-fluid">
-                <!--<div class="offset-md-4 col-md-1">-->
-                    <span id="CRYSTAL">{{moedas}}</span>
-                    <span id="HP">{{vida}}</span>
-                <!--</div>-->
-            </div>
-
-            <div class="col-md-6 portal">
-                <div id="sol">
-                    
-                        <img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
-                    <a href="javascript:void(0)" class="btn-sun" style="cursor: pointer;">
-                <div class="sun" style="display: block;">
-                    &nbsp;<img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
-                </div>
             </a>
-                
-                </div>
-                <div>
-                    <img src="/static/img/disco-voador.png" class="img-fluid disco">
-                </div>
-                <div>
-                    <img src="/static/img/criancas.png" class="img-fluid criancas">
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <a href="#">
-                    <img src="/static/img/MEDALHAS.png" class="img-fluid">
-                </a>
-            </div>
-
-
         </div>
 
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <div align="center" class="col-md-1 offset-md-1">
+            <a href="https://www.facebook.com/conecturmaoficial/" target="_blank">
+                <figure class="figure">
+                    <img src="/static/img/facebook.png" class="img-fluid icon-edit">
+                </figure>
+            </a>
+        </div>
 
-    <script>
+        <div align="center" class="col-md-1 offset-md-1">
+            <a href="https://www.youtube.com/conecturma" target="_blank">
+                <figure class="figure">
+                    <img src="/static/img/youtube.png" class="img-fluid icon-edit">
+                </figure>
+            </a>
+        </div>
+
+        <div align="center" class="col-md-1">
+            <a href="/sair">
+                <figure class="figure">
+
+                    <img src="/static/img/sair.png" class="img-fluid exit-icon">
+
+                </figure>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container corpo-pag">
+    <div class="row">
+        <div class="col-md-3 avatar-std">
+            <img src="/static/img/boneco_base2.png" class="boneco_base img-fluid">
+            <img src="/static/img/AVATAR.png" class="avatar-ship img-fluid">
+            <!--<div class="offset-md-4 col-md-1">-->
+            <span id="CRYSTAL">{{moedas}}</span>
+            <span id="HP">{{vida}}</span>
+            <!--</div>-->
+        </div>
+
+        <div class="col-md-6 portal">
+            <div id="sol">
+
+                <img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
+                <a href="javascript:void(0)" class="btn-sun" style="cursor: pointer;">
+                    <div class="sun" style="display: block;">
+                        &nbsp;<img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
+                    </div>
+                </a>
+
+            </div>
+            <div>
+                <img src="/static/img/disco-voador.png" class="img-fluid disco">
+            </div>
+            <div>
+                <img src="/static/img/criancas.png" class="img-fluid criancas">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <a href="#">
+                <img src="/static/img/MEDALHAS.png" class="img-fluid">
+            </a>
+        </div>
+
+
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+<script>
 
 
 
@@ -260,6 +268,7 @@
         }
 
 
-    </script>
+
+</script>
 </div>
 %include('gestao_aprendizagem/footer/footer.tpl')
