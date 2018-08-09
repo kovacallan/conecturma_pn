@@ -259,13 +259,6 @@ def controller_create_turma():
     return controller_create_turma()
 
 
-@route('/turma/turma_update', method='POST')
-@permissao('diretor')
-def view_update_turma():
-    from control.gestao_aprendizagem_controller import view_update_turma
-    return view_update_turma()
-
-
 @route('/turma/turma_update_controller', method='POST')
 @permissao('diretor')
 def controller_update_turma():

@@ -211,7 +211,7 @@ function cadastro_escola(){
             $.post('/escola/criar_escola', {nome:nome, cnpj:cnpj, telefone:telefone, diretor:diretor, rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
             });
-            location.reload();
+            setTimeout(location.reload(), 3000);
         }
         else{
             alert('O campo telefone é obrigatório.');
@@ -315,6 +315,35 @@ function update_rede(id){
         }
         else{
             alert('O campo telefone é obrigatório.');
+            document.getElementById("telefone").style.boxShadow = "0px 0px 12px #fe1313";
+        }
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+    }
+}
+
+
+function cadastro_turma(){
+    nome = document.getElementById('nome').value;
+    serie = document.getElementById('serie').value;
+    escola = document.getElementById('escola').value;
+
+    if (nome != '' && nome != null){
+        if (serie!= '' && serie != null){
+            if (escola!= '' && escola != null){
+                $.post('/turma/cadastro_turma', {nome:nome, serie:serie, escola:escola},function(data){
+                });
+                location.reload();
+            }
+            else{
+                alert('O campo escola é obrigatório.');
+            document.getElementById("telefone").style.boxShadow = "0px 0px 12px #fe1313";
+            }
+
+        }
+        else{
+            alert('O campo série é obrigatório.');
             document.getElementById("telefone").style.boxShadow = "0px 0px 12px #fe1313";
         }
     }else{

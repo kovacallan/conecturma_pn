@@ -32,43 +32,43 @@
     <br/>
     <br/>
     <div id="new_school" style="display:none;">
-      %include('gestao_aprendizagem/rede/formulario_cadastro_nova_rede.tpl')
+      %include('gestao_aprendizagem/turma/formulario_cadastro_nova_turma.tpl')
     </div>
     <div id="accordion">
       <!-- inicio da tabela -->
 
       <div class="row">
         <div class="col-md-5 item-tabela topo-tab">
-          Nome da Rede
+          Nome da Turma
         </div>
 
         <div class="col-md-2 item-tabela topo-tab">
-          Gestor
+          Professor
         </div>
 
         <div class="col-md-2 item-tabela topo-tab">
-          Telefone
+          Escola
         </div>
         <div class="col-md-2 item-tabela topo-tab">
-          Numeros escolas
+          Série
         </div>
         <div class="col-md-1 item-tabela topo-tab">
         </div>
       </div>
       <!-- bloco de cabeçalho da lista -->
-       <%
-        for index,i in enumerate(rede):
-      %>
-        % if index % 2 ==0:
-          <div class="row row-par">
-            %include('gestao_aprendizagem/rede/rede_edicao_par.tpl')
-          </div>
-        % else:
-          <div class="row row-impar">
-            <input type="hidden" id ="id_escola" value="{{i['id']}}">
-            %include('gestao_aprendizagem/rede/rede_edicao_impar.tpl')
-          </div>
-        % end
+        <%
+          for index,i in enumerate(turma):
+        %>
+          % if index % 2 ==0:
+              <div class="row row-par">
+                %include('gestao_aprendizagem/turma/turma_edicao_par.tpl')
+              </div>
+            % else:
+              <div class="row row-impar">
+                <input type="hidden" id ="id_escola" value="{{i['id']}}">
+                %include('gestao_aprendizagem/turma/turma_edicao_impar.tpl')
+              </div>
+            % end
       <%
         end
       %>

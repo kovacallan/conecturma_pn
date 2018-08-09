@@ -469,28 +469,70 @@ def view_turma():
     metodos utilizados : controller_read_ turma :interno dessa pagina:
     :return: dicionario com os parametros da turma a serem mostrados
     """
+    escola, rede = get_escolas_e_rede_permissao()
+    turma = get_turma_de_acordo_com_tipo_usuario_logado()
+    return dict(tipo=usuario_logado()['tipo'], escola=escola, turma=turma)
 
-    return dict(tipo=usuario_logado()['tipo'], turma=turma)
 
+def get_turma_de_acordo_com_tipo_usuario_logado():
+    usuario = usuario_logado()
+    if usuario['tipo'] == TIPO_USUARIOS['administrador']:
+        turma = []
+        for i in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma']):
+            i['serie'] = SERIE[i['serie']]
+            i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
+            professor = []
+            for z in facade.search_observador_turma(vinculo_turma=str(i['id'])):
+                professor.append(z)
+            i.update({'professor': professor})
+            turma.append(i)
+        return turma
+    elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
+        turma = []
+        for i in facade.search_estrutura_turma_by_rede_facade(vinculo_rede=usuario['vinculo_rede']):
+            i['serie'] = SERIE[i['serie']]
+            i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
+            professor = []
+            for z in facade.search_observador_turma(vinculo_turma=str(i['id'])):
+                professor.append(z)
+            i.update({'professor': professor})
+            turma.append(i)
+        return turma
+    elif usuario['tipo'] == TIPO_USUARIOS['diretor']:
+        turma = []
+        for i in facade.search_estrutura_turma_by_escola_facade(vinculo_escola=usuario['vinculo_escola']):
+            i['serie'] = SERIE[i['serie']]
+            i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
+            professor = []
+            for z in facade.search_observador_turma(vinculo_turma=str(i['id'])):
+                professor.append(z)
+            i.update({'professor': professor})
+            turma.append(i)
+        return turma
+    else:
+        turma = []
+        i = facade.search_estrutura_id_facade(id=usuario['vinculo_turma'])
+        i['serie'] = SERIE[i['serie']]
+        i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
+        professor = []
+        for z in facade.search_observador_turma(vinculo_turma=str(i['id'])):
+            professor.append(z)
+        i.update({'professor': professor})
+        turma.append(i)
 
-def view_cadastrar_turma():
-    """
-    Pagina de cadastro de turma , mostra as escolas ja cadastradas no banco de dados
-    metodos usados: read_escola_facade
-    :return:o dicionario com as escolas
-    """
-    return dict(escolas=filtro_vinculo_cadastro_escola())
+        return turma
+
 
 
 def controller_create_turma():
     """
     """
-    turma = request.forms['turma_nome']
+    nome = request.forms['nome']
     serie = request.forms['serie']
     escola = request.forms['escola']
     vinculo_rede = facade.search_estrutura_id_facade(request.forms['escola'])
 
-    facade.create_estrutura_facade(nome=turma, tipo_estrutura='3', quem_criou=usuario_logado()['nome'], serie=serie,
+    facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
                                    vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
     redirect('/turma')
 
