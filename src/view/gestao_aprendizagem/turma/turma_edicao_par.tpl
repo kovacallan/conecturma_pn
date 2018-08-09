@@ -3,7 +3,7 @@
     {{i['nome']}}
 </div>
 <div class="col-md-2 item-tabela ">
-
+    {{i['professor']}}
 </div>
 <div class="col-md-2 item-tabela">
     {{i['vinculo_escola']}}
@@ -33,7 +33,7 @@
                             <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Escolas</button>
+                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Alunos</button>
                         </li>
                     </ul>
                 </div>
@@ -77,16 +77,16 @@
                     <div class="row">
                         <div class="container">
                             <div class="offset-md-1 distanciamento col-md-" style="margin-top: 20px">
-                                <p>Escolas
+                                <p>Alunos
                                     <i class="far fa-question-circle"></i>
                                 </p>
                             </div>
-                            %for z in i['professor']:
+                                % for z in i['aluno']:
                                 <div class="row">
                                     <div class="col-md-11">
                                         <div class="offset-md-1 nome-prof row row-impar">
                                             <div class="col-md-11">
-                                                {{z['nome']}}
+                                            {{z['nome']}}
                                             </div>
                                             <div class="col-md-1 item-tabela">
                                                 <a href="">
