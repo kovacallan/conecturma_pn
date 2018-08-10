@@ -27,7 +27,7 @@ def view_usuario_index():
     escola = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
     turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
 
-    return dict(observador_tipo=observador['tipo'], usuarios=usuario, redes=rede, escolas=escola, turmas=turma)
+    return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma)
 
 
 @permissao('professor')
@@ -37,9 +37,9 @@ def controller_index_usuario(observador):
     elif observador['tipo'] == TIPO_USUARIOS['professor']:
         return lista_de_usuarios_caso_observador_for_professor(observador['vinculo_turma'])
     elif observador['tipo'] == TIPO_USUARIOS['diretor']:
-        return lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])
+        return lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola']), get_escolas_e_rede_permissao()
     elif observador['tipo'] == TIPO_USUARIOS['gestor']:
-        return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
+        return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede']) , get_escolas_e_rede_permissao()
 
 
 @permissao('administrador')
@@ -62,6 +62,7 @@ def lista_de_usuarios_caso_observador_for_administrador():
             o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
             o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
             usuario.append(o)
+
     return usuario
 
 
@@ -213,6 +214,7 @@ def view_observador_cadastro():
         return template('observador/create_observador', tipo=tipo_observador)
     else:
         redirect('/observador')
+
 
 
 def controller_observador_cadastro():
