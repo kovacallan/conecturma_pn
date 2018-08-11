@@ -72,8 +72,8 @@ class DbObservador(Model):
     def search_observador_id(self, id):
 
         observador = self.load(id)
-
-        return observador
+        retorno = vars(observador)["_data"]
+        return retorno
 
     def search_observador_email(self, email):
         observador = None
