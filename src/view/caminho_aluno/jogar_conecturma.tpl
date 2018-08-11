@@ -13,7 +13,9 @@
 <div class="container-fluid fundo">
     <div class="offset-md-1 light-game">
         <div class="center">
+
             <div class="offset-md-8 col-md-2" align="right">
+
                 <div class="game">
                     <a href="javascript:void(0)" onclick="atualizarHud()" class="close-game">
                             <img src="/static/img/botao_voltar.png" style="padding-left:52px">
@@ -93,7 +95,9 @@
 
             </div>
             <div>
+
                 <img src="/static/img/disco-voador2.png" class="img-fluid disco">
+
             </div>
             <div>
                 <img src="/static/img/criancas.png" class="img-fluid criancas">
