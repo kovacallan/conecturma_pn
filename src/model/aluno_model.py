@@ -9,6 +9,8 @@ class DbAluno(Model):
     id = AutoIncrementField(primary_key=True)
     matricula = TextField()
     nome = TextField(fts=True, index=True)
+    nascimento = TextField(fts=True)
+    sexo = TextField(fts=True)
     nome_login = TextField(fts=True)
     senha = TextField()
     email = TextField(default='0')

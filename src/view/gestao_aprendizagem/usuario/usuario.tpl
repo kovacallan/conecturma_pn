@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class=" col-md-5">
-        <p class="top-escolas-tabela">Usuarios</p>
+        <p class="top-escolas-tabela">Usuários</p>
         % if tipo != '3':
             %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
         % end
@@ -12,7 +12,7 @@
       <div class="col-md-4 offset-md-5">
 
           <div class="input-group pesquisa">
-            <!--pesquisa-->nao exite
+            <!--pesquisa-->
             <!--<input class="form-control pesquisa-input" type="text" placeholder="Pesquisar" aria-label="Search" style="padding-left: 20px; border-radius: 40px;background-color: #dedede;height: 30px;z-index: -1" id="mysearch">
             <div class="input-group-addon" style="margin-left: -26px;border-radius: 40px; background-color: #f3f3f3; border:none;">
               <button type="submit" style="border-radius: 20px;border:1px transparent;height: 30px;" id="search-btn">
@@ -29,7 +29,7 @@
     <!--fim da row do conteudo acima da tabela -->
     <br/>
     <br/>
-    <div id="1" style="display:none;">1
+    <div id="1" style="display:none;">
       %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_gestor.tpl')
     </div>
      <div id="2" style="display:none;">
@@ -113,5 +113,6 @@
       document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
     }
   };
+
 </script>
 %include('gestao_aprendizagem/footer/footer.tpl')

@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from bottle import route, view, get
-from control.classes.permissao import permissao, algum_usuario_logado,usuario_logado
+from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
 from facade.facade_main import Facade
 
-facade=Facade()
+facade = Facade()
 
 """
 Rotas da Tela de Login
 """
+
 
 @route('/')
 @algum_usuario_logado
@@ -15,30 +16,36 @@ Rotas da Tela de Login
 def view_login_index():
     return
 
+
 @route('/login/login_observador', method='POST')
 def login_observador_controller():
     from control.login_controller import login_observador_controller
     return login_observador_controller()
+
 
 @route('/login/login_aluno', method='POST')
 def login_aluno_controller():
     from control.login_controller import login_aluno_controller
     return login_aluno_controller()
 
+
 @route('/esqueci_senha')
 def view_esqueci_senha():
     from control.login_controller import view_esqueci_senha
     return view_esqueci_senha()
+
 
 @route('/view_reformular_senha')
 def view_reformular_senha():
     from control.login_controller import view_reformular_senha
     return view_reformular_senha()
 
+
 @route('/controller_reformular_senha', method="POST")
 def controller_esqueci_senha():
     from control.login_controller import controller_esqueci_senha
     return controller_esqueci_senha()
+
 
 @route('/sair')
 def controller_login_sair():
@@ -49,6 +56,7 @@ def controller_login_sair():
 """
 Rotas da Tela de do Ambiente de aprendizagem
 """
+
 
 @route('/aluno/area_aluno')
 @permissao('aluno_varejo')
@@ -99,6 +107,7 @@ def verificarAcessoUnidade():
     from control.aprendizagem_controller import verificarAcessoUnidade
     return verificarAcessoUnidade()
 
+
 @route('/api/plataforma/verificarAcessoAventura', method='POST')
 def verificarAcessoAventura():
     from control.aprendizagem_controller import verificarAcessoAventura
@@ -108,6 +117,7 @@ def verificarAcessoAventura():
 """
 Rotas da Tela de do gestão de aprendizagem
 """
+
 
 @route('/gestao_aprendizagem')
 @permissao('responsavel_varejo')
@@ -125,18 +135,18 @@ def view_usuario_index():
     return view_usuario_index()
 
 
+@route('/usuario/cadastro_usuario', method='POST')
+@permissao('professor')
+def cadastro_usuario():
+    from control.gestao_aprendizagem_controller import cadastro_usuario
+    return cadastro_usuario()
+
+
 @route('/gestao_aprendizagem/usuario/redirect_cadastro')
 @permissao('professor')
 def controller_redirect_cadastro():
     from control.gestao_aprendizagem_controller import controller_redirect_cadastro
     return controller_redirect_cadastro()
-
-@route('/aluno/cadastro_aluno')
-@permissao('professor')
-@view('aluno/aluno_cadastro')
-def aluno():
-    from control.gestao_aprendizagem_controller import filtro_vinculo_cadastro_escola
-    return dict(escolas=filtro_vinculo_cadastro_escola())
 
 
 @route('/aluno_cadastro', method='POST')
@@ -144,6 +154,7 @@ def aluno():
 def create_aluno():
     from control.gestao_aprendizagem_controller import create_aluno
     return dict(escolas=create_aluno())
+
 
 @route('/observador/cadastro')
 @permissao('professor')
@@ -171,6 +182,7 @@ def view_observador_update():
 def controller_observador_update():
     from control.gestao_aprendizagem_controller import controller_observador_update
     return controller_observador_update()
+
 
 @route('/observador/email_existe', method='POST')
 @permissao('professor')
@@ -213,6 +225,7 @@ def controller_create_rede():
     from control.gestao_aprendizagem_controller import controller_create_rede
     return controller_create_rede()
 
+
 @route('/rede/editar_rede', method='POST')
 @permissao('gestor')
 def controller_editar_rede():
@@ -231,7 +244,7 @@ def view_escola_index():
 @permissao('gestor')
 def controller_escola_cadastro():
     from control.gestao_aprendizagem_controller import controller_escola_cadastro
-    return controller_escola_cadastro() 
+    return controller_escola_cadastro()
 
 
 @route('/escola/editar_escola', method='POST')
@@ -283,6 +296,7 @@ def relatorio_aluno_view():
     from control.gestao_aprendizagem_controller import relatorio_aluno_view
     return relatorio_aluno_view()
 
+
 @route('/relatorios/visualizar_relatorio_aluno')
 def relatorio_aluno():
     from control.gestao_aprendizagem_controller import relatorio_aluno
@@ -293,6 +307,7 @@ def relatorio_aluno():
 def relatorio_oa_aluno():
     from control.gestao_aprendizagem_controller import relatorio_oa_aluno
     return relatorio_oa_aluno()
+
 
 @route('/trazer_oas')
 def levar_oas_matematica():
@@ -305,12 +320,12 @@ Rotas da Tela de do gestão de aprendizagem
 """
 
 
-
 @route('/observador/create_observador_administrador', method="POST")
 @permissao('administrador')
 def controller_observador_cadastro():
     from control.administrativo_controller import controller_observador_cadastro
     return controller_observador_cadastro()
+
 
 @route('/administrador/pag_administrador')
 @permissao('administrador')

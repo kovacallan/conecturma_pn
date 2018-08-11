@@ -23,11 +23,23 @@ def view_usuario_index():
     """
     observador = usuario_logado()
     usuario = controller_index_usuario(observador)
-    rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
-    escola = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
-    turma = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+
+    escola, rede = get_escolas_e_rede_permissao()
+    turma = get_turma_de_acordo_com_tipo_usuario_logado()
 
     return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma)
+
+
+
+
+
+def cadastro_usuario():
+    for i in request.params:
+        print(i, " = ", request.params[i])
+
+
+
+
 
 
 @permissao('professor')
@@ -170,7 +182,7 @@ def verificar_nome_login(nome_login):
     return nome_login
 
 
-def controller_redirect_cadastro():
+def  controller_redirect_cadastro():
     tipo_usuario = request.params['tipo_usuario']
     redirect(PAGINA_DE_CADASTRO_POR_TIPO[tipo_usuario])
 
