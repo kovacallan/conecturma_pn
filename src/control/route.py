@@ -52,7 +52,8 @@ Rotas da Tela de do Ambiente de aprendizagem
 @permissao('aluno_varejo')
 @view('caminho_aluno/jogar_conecturma')
 def view_ambiente_de_aprendizagem():
-    return
+    from control.aprendizagem_controller import view_ambiente_de_aprendizagem
+    return view_ambiente_de_aprendizagem()
 
 @route('/jogo')
 def jogo():
