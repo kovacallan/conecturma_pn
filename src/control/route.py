@@ -142,34 +142,6 @@ def cadastro_usuario():
     return cadastro_usuario()
 
 
-@route('/gestao_aprendizagem/usuario/redirect_cadastro')
-@permissao('professor')
-def controller_redirect_cadastro():
-    from control.gestao_aprendizagem_controller import controller_redirect_cadastro
-    return controller_redirect_cadastro()
-
-
-@route('/aluno_cadastro', method='POST')
-@permissao('professor')
-def create_aluno():
-    from control.gestao_aprendizagem_controller import create_aluno
-    return dict(escolas=create_aluno())
-
-
-@route('/observador/cadastro')
-@permissao('professor')
-def view_observador_cadastro():
-    from control.gestao_aprendizagem_controller import view_observador_cadastro
-    return view_observador_cadastro()
-
-
-@route('/create_observador', method="POST")
-@permissao('professor')
-def controller_observador_cadastro():
-    from control.gestao_aprendizagem_controller import controller_observador_cadastro
-    return controller_observador_cadastro()
-
-
 @get('/observador/editar')
 @permissao('professor')
 def view_observador_update():

@@ -31,7 +31,7 @@
     <div class="row icones header-menu">
         <div align="center" class="col-md-2 offset-md-2">
             <figure class="figure">
-                <img src="/static/img/C.png" class="img-fluid C-icon">
+                <img src="/static/img/C_logo.png" class="img-fluid C-icon">
             </figure>
         </div>
 

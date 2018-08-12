@@ -65,23 +65,15 @@
           </div>
       </div>
 
-     <%
-        for index,i in enumerate(usuarios):
-      %>
-        %print('hm',index,i)
-        % if index % 2 ==0:
-          <div class="row row-par">
-            %include('gestao_aprendizagem/usuario/usuario_edicao_par.tpl')
-          </div>
-        % else:
-          <div class="row row-impar">
-            <input type="hidden" id ="id_escola" value="{{i['id']}}">
-            %include('gestao_aprendizagem/usuario/usuario_edicao_impar.tpl')
-          </div>
-        % end
-      <%
-        end
-      %>
+        <%
+            for index,i in enumerate(usuarios):
+        %>
+           %include('gestao_aprendizagem/usuario/usuario_template_edicao.tpl')
+        <%
+            end
+        %>
+
+
       <!-- bloco de cabeçalho da lista -->
 
     </div>
