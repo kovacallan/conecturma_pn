@@ -30,7 +30,7 @@ class DbObservador(Model):
     pontos_de_moedas = IntegerField(default=0)
 
     data_ultimo_login = TextField(default='')
-
+    ativo = TextField(default='0')
 
     def create_observador(self, **kwargs):
         self.create(**kwargs)
@@ -61,6 +61,7 @@ class DbObservador(Model):
     def redefinir_senha(self, id, senha):
         observador = DbObservador.load(id)
         observador.senha = senha
+        observador.ativo = '1'
 
         observador.save()
 

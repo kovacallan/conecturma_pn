@@ -347,3 +347,13 @@ def index_desativados():
 def desativados():
     from control.administrativo_controller import desativados
     return desativados()
+
+@get('/new_senha')
+def new_password():
+    from control.administrativo_controller import new_password
+    return new_password()
+
+@route('/novasenha', method='post')
+def novasenha():
+    from control.administrativo_controller import novasenha
+    return novasenha()

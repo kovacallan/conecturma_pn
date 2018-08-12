@@ -21,9 +21,6 @@ def itens_usuario_tem():
 
 
 def obterUltimaConclusao():
-    usuario = usuario_logado()
-    # ultimo_oa_jogado=facade.ultimo_oa_jogado_facade(usuario_logado()['id'])
-
     retorno = {
         'objetoAprendizagem': '',
         'unidade': '',
@@ -81,9 +78,14 @@ def verificarConclusoesObjetosAprendizagem():
 
 def view_ambiente_de_aprendizagem():
     usuario = usuario_logado()
-    jogador = facade.search_observador_facade(usuario['nome'])
-    vida = jogador['vida']
-    moedas = jogador['moedas']
+    if usuario['tipo'] == TIPO_USUARIOS['aluno']:
+        jogador = facade.search_aluno_id_facade(id_aluno=usuario['id'])
+        vida = jogador['pontos_de_vida']
+        moedas = jogador['pontos_de_moedas']
+    else:
+        jogador = facade.search_observador_id_facade(id=usuario['id'])
+        vida = jogador['pontos_de_vida']
+        moedas = jogador['pontos_de_moedas']
 
     return dict(vida=vida, moedas=moedas)
 

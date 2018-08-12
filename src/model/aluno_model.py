@@ -9,6 +9,7 @@ class DbAluno(Model):
     id = AutoIncrementField(primary_key=True)
     matricula = TextField()
     nome = TextField(fts=True, index=True)
+    primeiro_nome = TextField(fts=True, index=True)
     nascimento = TextField(fts=True)
     sexo = TextField(fts=True)
     nome_login = TextField(fts=True)
@@ -69,6 +70,13 @@ class DbAluno(Model):
                 )
             )
         return alunos
+
+    def search_aluno_primeiro_nome(self, primeiro_nome):
+        alun_pes = []
+        for search in DbAluno.query(DbAluno.primeiro_nome == primeiro_nome):
+            alun_pes.append(vars(search)["_data"])
+
+        return alun_pes
 
     def search_aluno_nome_login(self, nome_login):
 
