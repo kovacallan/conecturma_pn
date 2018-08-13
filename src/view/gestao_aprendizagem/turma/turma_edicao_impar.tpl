@@ -2,7 +2,7 @@
     {{i['nome']}}
 </div>
 <div class="col-md-2 item-tabela ">
-    {{i['vinculo_gestor_rede']}}
+    {{i['professor']}}
 </div>
 <div class="col-md-2 item-tabela">
     {{i['telefone']}}
@@ -64,7 +64,7 @@
                     <div class="col-md-" style="padding-left: 10px ;">
                       <label for="gestor">gestor</label>
                       <br>
-                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['vinculo_gestor_rede']}}">
+                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['professor']}}">
                     </div>
                   </div>
                   <!--fim da div dos dados ao lado da imagem-->
