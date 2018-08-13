@@ -1,7 +1,7 @@
-<div class="col-md-5 item-tabela ">
+<div class="col-md-4 item-tabela ">
   {{i['nome']}}
 </div>
-<div class="col-md-2 item-tabela ">
+<div class="col-md-3 item-tabela ">
   {{i['email']}}
 </div>
 <div class="col-md-2 item-tabela">
@@ -64,22 +64,10 @@
                   <div class="row distanciamento" style="margin-left: 5px;">
 
                       <div col="col-md-">
-                          <label for="login">login</label>
+                          <label for="login">Email</label>
                           <span style="color:#ff0000">*</span>
-                          <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['nome_login']}}">
+                          <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['email']}}">
                       </div>
-
-                      <div col="col-md-" style="margin-left: 100px;">
-                          <label for="login">senha</label>
-                          <span style="color:#ff0000">*</span>
-                          <div class="row">
-                              <img src="/static/img/{{i['senha'][0]}}.png">
-                              <img src="/static/img/{{i['senha'][1]}}.png">
-                              <img src="/static/img/{{i['senha'][2]}}.png">
-                              <img src="/static/img/{{i['senha'][3]}}.png">
-                          </div>
-                      </div>
-
                   </div>
                   <!--fim da div dos dados ao lado da imagem-->
                 </div>

@@ -13,7 +13,7 @@ class DbObservador(Model):
     telefone = TextField(default='0')
     cpf = TextField(default='0')
     email = TextField(fts=True,default='0')
-    data_nascimento=TextField(fts=True,default='0')
+    data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
 
     itens_comprados = ListField()

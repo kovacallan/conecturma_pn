@@ -82,7 +82,7 @@ def diretor_create(usuario):
 
 
 def gestor_create(usuario):
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=password_generate(),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=password_generate(),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=usuario['vinculo_rede'])
 
