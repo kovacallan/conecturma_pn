@@ -595,8 +595,9 @@ def descritores():
 def relatorio_aluno_view():
     observador = usuario_logado()
     turmas = facade.search_observador_turma(observador['vinculo_turma'])
+    turma = facade.search_d
 
-    print('observador,turmas',observador,turmas)
+    print('observador,turmas',len(observador),turmas)
     if observador['tipo'] == TIPO_USUARIOS['professor']:
         turmas= facade.search_observador_turma(observador['vinculo_turma'])
     todos_alunos_da_mesma_turma = trazer_todos_alunos_da_mesma_turma()

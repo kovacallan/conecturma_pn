@@ -11,6 +11,7 @@ class ObservadorFacade:
 
     def create_observador_facade(self, **kwargs):
         return self.observador.create_observador(**kwargs)
+
     def read_observador_facade(self):
         return self.observador.read_observador()
 
