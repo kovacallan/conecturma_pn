@@ -13,7 +13,9 @@
 <div class="container-fluid fundo">
     <div class="offset-md-1 light-game">
         <div class="center">
-              <div class="offset-md-9">
+
+            <div class="offset-md-8 col-md-2" align="right">
+
                 <div class="game">
                     <a href="javascript:void(0)" onclick="atualizarHud()" class="close-game">
                             <img src="/static/img/botao_voltar.png" style="padding-left:52px">
@@ -29,7 +31,7 @@
     <div class="row icones header-menu">
         <div align="center" class="col-md-2 offset-md-2">
             <figure class="figure">
-                <img src="/static/img/C.png" class="img-fluid C-icon">
+                <img src="/static/img/C_logo.png" class="img-fluid C-icon">
             </figure>
         </div>
 
@@ -93,7 +95,9 @@
 
             </div>
             <div>
-                <img src="/static/img/disco-voador1.png" class="img-fluid disco">
+
+                <img src="/static/img/disco-voador2.png" class="img-fluid disco">
+
             </div>
             <div>
                 <img src="/static/img/criancas.png" class="img-fluid criancas">
@@ -157,7 +161,7 @@
             console.log('os');
                 $(".light-game").fadeIn(function() {
                 console.log('elementos');
-                    var src = "/index_jogo";
+                    var src = "/jogo";
                     if ($('#frame_jogo').attr("src") === "") {
                     console.log('aqui');
                         $('#frame_jogo').attr("src", src);

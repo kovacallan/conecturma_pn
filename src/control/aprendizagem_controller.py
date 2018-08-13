@@ -21,9 +21,6 @@ def itens_usuario_tem():
 
 
 def obterUltimaConclusao():
-    usuario = usuario_logado()
-    # ultimo_oa_jogado=facade.ultimo_oa_jogado_facade(usuario_logado()['id'])
-
     retorno = {
         'objetoAprendizagem': '',
         'unidade': '',
@@ -79,27 +76,57 @@ def verificarConclusoesObjetosAprendizagem():
 
     return retorno
 
+def view_ambiente_de_aprendizagem():
+    usuario = usuario_logado()
+    if usuario['tipo'] == TIPO_USUARIOS['aluno']:
+        jogador = facade.search_aluno_id_facade(id_aluno=usuario['id'])
+        vida = jogador['pontos_de_vida']
+        moedas = jogador['pontos_de_moedas']
+    else:
+        jogador = facade.search_observador_id_facade(id=usuario['id'])
+        vida = jogador['pontos_de_vida']
+        moedas = jogador['pontos_de_moedas']
+
+    return dict(vida=vida, moedas=moedas)
 
 def registrarConclusao():
-    premios={
-        'OA': is_oa,
-        'VC': is_vc_or_cn,
-        'CN': is_vc_or_cn
-    }
+    usuario = usuario_logado()
+    if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
+        premios={
+            'OA': is_oa,
+            'VC': is_vc_or_cn,
+            'CN': is_vc_or_cn
+        }
 
-    return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
-        (aluno=usuario_logado()['id'],parametros=parametros_json_jogos(request.params.items()),
+        return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
+        (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
          oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+    else:
+        gamificacao = gamificacao_moeda_xp(parametros = parametros_json_jogos(request.params.items()))
+        premios = {
+            'medalhas': [''],
+            'moedas': gamificacao['moedas'],
+            'xp': gamificacao['xp']
+        }
+        return premios
+
 
 
 def obterPremiacao():
     parametros = parametros_json_jogos(request.params.items())
-    aluno1 = usuario_logado()
-    aluno = facade.search_aluno_nome_facade(nome=aluno1['nome'])
-    retorno = {
-        'moedas': int(aluno['pontos_de_moedas']),
-        'xp': int(aluno['pontos_de_vida'])
-    }
+    usuario = usuario_logado()
+    if usuario['tipo'] == TIPO_USUARIOS['aluno']:
+        aluno = facade.search_aluno_id_facade(id_aluno=usuario['id'])
+        retorno = {
+            'moedas': int(aluno['pontos_de_moedas']),
+            'xp': int(aluno['pontos_de_vida'])
+        }
+    else:
+        observador = facade.search_observador_id_facade(id=usuario['id'])
+        retorno = {
+            'moedas': int(observador['pontos_de_moedas']),
+            'xp': int(observador['pontos_de_vida'])
+        }
 
     return retorno
 
@@ -158,17 +185,16 @@ def verificarAcessoUnidade():
     return retorno
 
 def verificarAcessoAventura():
+    from control.dicionarios import AVENTURAS_CONECTURMA
     usuario = usuario_logado()
 
-    for i in facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id'])):
-
-        if int(usuario['tipo']) < 6:
-            parametros = parametros_json_jogos(request.params.items())
-            return {'aventurasAcessiveis': parametros['aventuras']}
-        else:
-            from control.dicionarios import AVENTURAS_CONECTURMA
-            serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
-            return AVENTURAS_CONECTURMA[serie_turma['serie']]
+    if int(usuario['tipo']) < 6:
+        parametros = parametros_json_jogos(request.params.items())
+        return AVENTURAS_CONECTURMA['3']
+    else:
+        from control.dicionarios import AVENTURAS_CONECTURMA
+        serie_turma = facade.search_estrutura_id_facade(int(usuario['vinculo_turma']))
+        return AVENTURAS_CONECTURMA[serie_turma['serie']]
 
 def is_oa(aluno, parametros, oa):
     from control.classes.permissao import update_cookie

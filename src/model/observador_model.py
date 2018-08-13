@@ -30,16 +30,11 @@ class DbObservador(Model):
     pontos_de_moedas = IntegerField(default=0)
 
     data_ultimo_login = TextField(default='')
+    ativo = TextField(default='0')
 
+    def create_observador(self, **kwargs):
+        self.create(**kwargs)
 
-    def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
-
-        if True or nome.isalpha() and cpf.isdigit() and tipo.isdigit():
-            self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
-                       vinculo_escola=escola, vinculo_turma = vinculo_turma)
-            return True
-        else:
-            return False
 
     def read_observador(self):
 
@@ -66,14 +61,15 @@ class DbObservador(Model):
     def redefinir_senha(self, id, senha):
         observador = DbObservador.load(id)
         observador.senha = senha
+        observador.ativo = '1'
 
         observador.save()
 
     def search_observador_id(self, id):
 
         observador = self.load(id)
-
-        return observador
+        retorno = vars(observador)["_data"]
+        return retorno
 
     def search_observador_email(self, email):
         observador = None

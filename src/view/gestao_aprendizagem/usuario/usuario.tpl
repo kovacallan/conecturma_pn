@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class=" col-md-5">
-        <p class="top-escolas-tabela">Usuarios</p>
+        <p class="top-escolas-tabela">Usuários</p>
         % if tipo != '3':
             %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
         % end
@@ -29,7 +29,7 @@
     <!--fim da row do conteudo acima da tabela -->
     <br/>
     <br/>
-    <div id="1" style="display:none;">1
+    <div id="1" style="display:none;">
       %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_gestor.tpl')
     </div>
      <div id="2" style="display:none;">
@@ -65,23 +65,15 @@
           </div>
       </div>
 
-     <%
-        for index,i in enumerate(usuarios):
-      %>
-        %print('hm',index,i)
-        % if index % 2 ==0:
-          <div class="row row-par">
-            %include('gestao_aprendizagem/usuario/usuario_edicao_par.tpl')
-          </div>
-        % else:
-          <div class="row row-impar">
-            <input type="hidden" id ="id_escola" value="{{i['id']}}">
-            %include('gestao_aprendizagem/usuario/usuario_edicao_impar.tpl')
-          </div>
-        % end
-      <%
-        end
-      %>
+        <%
+            for index,i in enumerate(usuarios):
+        %>
+           %include('gestao_aprendizagem/usuario/usuario_template_edicao.tpl')
+        <%
+            end
+        %>
+
+
       <!-- bloco de cabeçalho da lista -->
 
     </div>
@@ -113,5 +105,6 @@
       document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
     }
   };
+
 </script>
 %include('gestao_aprendizagem/footer/footer.tpl')

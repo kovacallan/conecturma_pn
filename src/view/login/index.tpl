@@ -37,7 +37,7 @@
 		                                <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
 		                                </br>
 		                                <label>Nome do usuário</label> <br>
-		                                <input data-val="true" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno" >
+		                                <input data-val="true" style="text-transform:uppercase" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno" >
                                     </div>
                                     <div class="pass">
                                         <img src="/static/img/btn-interrogacao.png" id="btn-interrogacao">
