@@ -12,7 +12,7 @@
       <div class="col-md-4 offset-md-5">
 
           <div class="input-group pesquisa">
-            <!--pesquisa-->nao exite
+            <!--pesquisa-->
             <!--<input class="form-control pesquisa-input" type="text" placeholder="Pesquisar" aria-label="Search" style="padding-left: 20px; border-radius: 40px;background-color: #dedede;height: 30px;z-index: -1" id="mysearch">
             <div class="input-group-addon" style="margin-left: -26px;border-radius: 40px; background-color: #f3f3f3; border:none;">
               <button type="submit" style="border-radius: 20px;border:1px transparent;height: 30px;" id="search-btn">

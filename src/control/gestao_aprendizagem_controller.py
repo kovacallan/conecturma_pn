@@ -596,10 +596,16 @@ def descritores():
 
 
 def relatorio_aluno_view():
+    observador = usuario_logado()
+    turmas = facade.search_observador_turma(observador['vinculo_turma'])
+
+    print('observador,turmas',observador,turmas)
+    if observador['tipo'] == TIPO_USUARIOS['professor']:
+        turmas= facade.search_observador_turma(observador['vinculo_turma'])
     todos_alunos_da_mesma_turma = trazer_todos_alunos_da_mesma_turma()
     observador = usuario_logado()
 
-    return dict(alunos=todos_alunos_da_mesma_turma, tipo=observador['tipo'])
+    return dict(alunos=todos_alunos_da_mesma_turma,turma=turmas, tipo=observador['tipo'])
 
 
 def relatorio_aluno():
