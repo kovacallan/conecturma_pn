@@ -13,7 +13,7 @@ class DbObservador(Model):
     telefone = TextField(default='0')
     cpf = TextField(default='0')
     email = TextField(fts=True,default='0')
-    data_nascimento=DateField(default=datetime.datetime.now)
+    data_nascimento=TextField(fts=True,default='0')
     tipo = TextField(fts=True)
 
     itens_comprados = ListField()
@@ -32,9 +32,10 @@ class DbObservador(Model):
     data_ultimo_login = TextField(default='')
     ativo = TextField(default='0')
 
-    def create_observador(self, **kwargs):
-        self.create(**kwargs)
 
+
+    def create_observador(self, **kwargs):
+        return self.create(**kwargs)
 
     def read_observador(self):
 
@@ -46,7 +47,7 @@ class DbObservador(Model):
                     cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
-                    vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
+                    nascimento=search.data_nascimento, vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
                 )
             )
 

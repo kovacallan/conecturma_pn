@@ -50,11 +50,11 @@
           </div>
 
           <div class="col-md-2 item-tabela topo-tab">
-            Escola
+            Email
           </div>
 
           <div class="col-md-2 item-tabela topo-tab">
-            Telefone
+            Escola
           </div>
 
           <div class="col-md-2 item-tabela topo-tab">

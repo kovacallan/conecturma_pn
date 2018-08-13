@@ -67,14 +67,14 @@ function validar_se_email_existe(email){
     $.ajax({
         url:    "/observador/email_existe",
         type:   "post",
-        data:   {teste_email:email.value},
+        data:   {teste_email:email},
         async: false,
 
         success: function( data ){
             retorno = data;
         }
     });
-    if(retorno == email.value){
+    if(retorno == email){
         return true;
     }
     else{
@@ -372,11 +372,10 @@ function cadastro_usuario(tipo){
 
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
-                if (email != '' && email != null && emailValidador(tipo+'_email') && validar_se_email_existe(email)){
+                if (email != '' && email != null && emailValidador(tipo+'_email') && !validar_se_email_existe(email)){
                     if (escola != '' && escola != null){
                         $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
                         });
-                        location.reload();
                     }
                     else{
                         alert('O campo escola é obrigatório.');
