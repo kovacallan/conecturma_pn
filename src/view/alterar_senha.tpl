@@ -1,18 +1,15 @@
-% include('header.tpl', title = 'Conecturma')
+% include('gestao_aprendizagem/header/header.tpl', title = 'Conecturma', css="css-listagem-escolas.css")
     <div class="row">
         <div align="center" class="col-md-12">
             <h1>Mudar senha</h1>
-            <form action="/new_senha" , method='post'>
-                Nome  :<input type="text" name="usuario"/><br>
-                Senha antiga :<input type="password" name="senha"/><br>
+            <form action="/novasenha" , method='post'>
+                <input type="hidden" name="id" value="{{id}}"/>
+                <input type="hidden" name="email" value="{{email}}"/>
                 Senha nova :<input type="password" name="senha_nova"/><br>
                 Confirme a nova senha:<input type="password" name="senha_conf"/><br>
                 <br>
-                <button type="submit">Entrar</button>
+                <button type="submit">Salvar</button>
             </form>
-            <a href="/">
-            <button>Voltar</button>
-        </a>
         </div>
     </div>
 % include('footer.tpl')

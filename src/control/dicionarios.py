@@ -47,7 +47,7 @@ SERIE = {
 }
 
 PAGINA_INICIAL = dict(
-    administrador='/administrador/pag_administrador',
+    administrador='/gestao_aprendizagem', #'/administrador/pag_administrador',
     gestor='/gestao_aprendizagem',
     diretor='/gestao_aprendizagem',
     professor='/gestao_aprendizagem',
@@ -57,12 +57,6 @@ PAGINA_INICIAL = dict(
     aluno_varejo='/aluno/area_aluno'
 )
 
-PAGINA_DE_CADASTRO_POR_TIPO = {
-    '1':'/observador/cadastro?tipo_observador=1',
-    '2':'/observador/cadastro?tipo_observador=2',
-    '3':'/observador/cadastro?tipo_observador=3',
-    '6':'/aluno/cadastro_aluno'
-}
 
 TIPO_ESTRUTURA = dict(
     rede='1',

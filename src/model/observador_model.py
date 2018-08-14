@@ -13,7 +13,7 @@ class DbObservador(Model):
     telefone = TextField(default='0')
     cpf = TextField(default='0')
     email = TextField(fts=True,default='0')
-    data_nascimento=DateField(default=datetime.datetime.now)
+    data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
 
     itens_comprados = ListField()
@@ -30,16 +30,12 @@ class DbObservador(Model):
     pontos_de_moedas = IntegerField(default=0)
 
     data_ultimo_login = TextField(default='')
+    ativo = TextField(default='0')
 
 
-    def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
 
-        if True or nome.isalpha() and cpf.isdigit() and tipo.isdigit():
-            self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
-                       vinculo_escola=escola, vinculo_turma = vinculo_turma)
-            return True
-        else:
-            return False
+    def create_observador(self, **kwargs):
+        return self.create(**kwargs)
 
     def read_observador(self):
 
@@ -51,7 +47,7 @@ class DbObservador(Model):
                     cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
-                    vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
+                    nascimento=search.data_nascimento, vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
                 )
             )
 
@@ -66,14 +62,15 @@ class DbObservador(Model):
     def redefinir_senha(self, id, senha):
         observador = DbObservador.load(id)
         observador.senha = senha
+        observador.ativo = '1'
 
         observador.save()
 
     def search_observador_id(self, id):
 
         observador = self.load(id)
-
-        return observador
+        retorno = vars(observador)["_data"]
+        return retorno
 
     def search_observador_email(self, email):
         observador = None

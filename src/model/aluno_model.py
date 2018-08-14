@@ -9,6 +9,9 @@ class DbAluno(Model):
     id = AutoIncrementField(primary_key=True)
     matricula = TextField()
     nome = TextField(fts=True, index=True)
+    primeiro_nome = TextField(fts=True, index=True)
+    nascimento = TextField(fts=True)
+    sexo = TextField(fts=True)
     nome_login = TextField(fts=True)
     senha = TextField()
     email = TextField(default='0')
@@ -41,8 +44,8 @@ class DbAluno(Model):
 
 
     def create_aluno(self, **kwargs):
-        if self.create(**kwargs):
-            return True
+        self.create(**kwargs)
+
 
     def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
 
@@ -54,7 +57,7 @@ class DbAluno(Model):
     def read_aluno(self):
         # O administrador deveria ver tambem a senha do aluno , lembrete de modificar esse metodo
         alunos = []
-        for search in self.query(order_by=self.nome):
+        for search in DbAluno.query(order_by=DbAluno.nome):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
@@ -62,10 +65,18 @@ class DbAluno(Model):
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma, email=search.email, cpf='', nome_login=search.nome_login
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf='', nome_login=search.nome_login,
+                    nascimento=search.nascimento
                 )
             )
         return alunos
+
+    def search_aluno_primeiro_nome(self, primeiro_nome):
+        alun_pes = []
+        for search in DbAluno.query(DbAluno.primeiro_nome == primeiro_nome):
+            alun_pes.append(vars(search)["_data"])
+
+        return alun_pes
 
     def search_aluno_nome_login(self, nome_login):
 

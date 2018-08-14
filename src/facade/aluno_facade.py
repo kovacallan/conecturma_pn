@@ -22,6 +22,9 @@ class AlunoFacade:
     def delete_aluno_facade(self, deletar_ids):
         return self.aluno.aluno_delete(deletar_ids)
 
+    def search_aluno_primeiro_nome_facade(self, primeiro_nome):
+        return self.aluno.search_aluno_primeiro_nome(primeiro_nome=primeiro_nome)
+
     def search_aluno_id_facade(self, id_aluno):
         return self.aluno.search_aluno_id(id_aluno=id_aluno)
 
