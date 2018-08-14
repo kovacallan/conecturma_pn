@@ -32,9 +32,9 @@
                         <li class="nav-item ">
                             <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
                         </li>
-                        <li class="nav-item">
-                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>
-                        </li>
+                        <!--<li class="nav-item">-->
+                            <!--<button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </div>
@@ -51,17 +51,17 @@
                                             <span style="color:red">*
                                                 <span></span>
                                         </label>
-                                        <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
+                                        <input type="text" placeholder="Escola do rock" class="form-control  input-height-30" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
-                                        <label for="data">Data de nascimeto</label>
+                                        <label for="data" style="margin-botton=7px">Data de nascimeto</label>
                                         <span style="color:#ff0000">*</span>
                                         <br>
-                                        <input type="date" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
+                                        <input type="date" size="25" class="form-control  input-height-30"  name="" id="aluno_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
-                                        <label for="telefone">Sexo</label>
-                                        <select id="aluno_sexo" class="custom-select custom-select-md">
+                                        <label for="aluno_sexo" style="margin-bottom:-6px;height:35px;">Sexo</label>
+                                        <select id="aluno_sexo" class="custom-select custom-select-md" >
                                             <option value="1">Masculino</option>
                                             <option value="2">Feminino</option>
                                         </select>
@@ -73,17 +73,17 @@
                                     <div col="col-md-">
                                         <label for="login">login</label>
                                         <span style="color:#ff0000">*</span>
-                                        <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['nome_login']}}">
+                                        <input type="text" size="25" class="form-control "  name="" id="aluno_nascimento" value="{{i['nome_login']}}">
                                     </div>
 
                                     <div col="col-md-" style="margin-left: 100px;">
                                         <label for="login">senha</label>
                                         <span style="color:#ff0000">*</span>
                                         <div class="row">
-                                            <img src="/static/img/{{i['senha'][0]}}.png">
-                                            <img src="/static/img/{{i['senha'][1]}}.png">
-                                            <img src="/static/img/{{i['senha'][2]}}.png">
-                                            <img src="/static/img/{{i['senha'][3]}}.png">
+                                            <img src="/static/img/{{i['senha'][0]}}.png" style="padding-left:15px;">
+                                            <img src="/static/img/{{i['senha'][1]}}.png" style="padding-left:15px;">
+                                            <img src="/static/img/{{i['senha'][2]}}.png" style="padding-left:15px;">
+                                            <img src="/static/img/{{i['senha'][3]}}.png" style="padding-left:15px;">
                                         </div>
                                     </div>
 

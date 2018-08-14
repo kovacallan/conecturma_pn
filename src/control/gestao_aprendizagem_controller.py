@@ -406,15 +406,21 @@ def get_escolas_e_rede_permissao():
         rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
         escola = []
         for i in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola']):
+            print('oi')
             if i['vinculo_rede'] != '0':
                 i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
             else:
                 i['vinculo_rede_id'] = i['vinculo_rede']
-                i['vinculo_rede'] = ''
+                i['vinculo_rede'] = '0'
+                print('oi3', i['vinculo_rede_id'])
             if i['vinculo_diretor_escola'] != '0':
+                print('oi4')
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
+            print('hm')
+
+        print('hmmmmmmmmm')
 
         return escola, rede
 
@@ -600,10 +606,17 @@ def descritores():
 
 
 def relatorio_aluno_view():
+    observador = usuario_logado()
+    turmas = facade.search_observador_turma(observador['vinculo_turma'])
+    turma = facade.search_d
+
+    print('observador,turmas',len(observador),turmas)
+    if observador['tipo'] == TIPO_USUARIOS['professor']:
+        turmas= facade.search_observador_turma(observador['vinculo_turma'])
     todos_alunos_da_mesma_turma = trazer_todos_alunos_da_mesma_turma()
     observador = usuario_logado()
 
-    return dict(alunos=todos_alunos_da_mesma_turma, tipo=observador['tipo'])
+    return dict(alunos=todos_alunos_da_mesma_turma,turma=turmas, tipo=observador['tipo'])
 
 
 def relatorio_aluno():

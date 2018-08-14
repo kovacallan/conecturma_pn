@@ -15,6 +15,7 @@ class DbEstrutura(Model):
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_diretor_escola = TextField(fts=True, default='0')
     vinculo_professor_turma = TextField(fts=True, default='0')
+    vinculo_professor2_turma = TextField(fts=True, default='0')
     cnpj = TextField(default='0')
 
     endereco = TextField(default='0')

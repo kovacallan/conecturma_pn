@@ -25,9 +25,9 @@
               <li class="nav-item ">
                 <a class="nav-link active " data-toggle="tab" href="#nossa-escola" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
               </li>
-              <li class="nav-item">
-                <button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Professores</button>
-              </li>
+              <!--<li class="nav-item">-->
+                <!--<button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Professores</button>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>
@@ -60,8 +60,9 @@
                       </select>
                   </div>
                   </div>
+                </div>
                   <h5>Acesso</h5>
-                  <div class="row distanciamento" style="margin-left: 5px;">
+                  <div class="row distanciamento">
 
                       <div col="col-md-">
                           <label for="login">Email</label>

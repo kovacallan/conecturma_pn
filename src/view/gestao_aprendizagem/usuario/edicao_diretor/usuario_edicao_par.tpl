@@ -32,9 +32,9 @@
                         <li class="nav-item ">
                             <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
                         </li>
-                        <li class="nav-item">
-                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>
-                        </li>
+                        <!--<li class="nav-item">-->
+                            <!--<button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </div>
@@ -48,20 +48,19 @@
                                 <div class="row distanciamento" style="margin-left: 5px;">
                                     <div class=" col-md-">
                                         <label for="nome" style="background-color: inherit;">Nome:
-                                            <span style="color:red">*
-                                                <span></span>
+                                            <span style="color:red">*</span>
                                         </label>
-                                        <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
+                                        <input type="text" placeholder="Escola do rock" class="form-control input-height-30" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
                                         <label for="data">Data de nascimeto</label>
                                         <span style="color:#ff0000">*</span>
                                         <br>
-                                        <input type="date" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
+                                        <input type="date" size="25" class="form-control input-height-30"  name="" id="aluno_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
-                                        <label for="telefone">Sexo</label>
-                                        <select id="aluno_sexo" class="custom-select custom-select-md">
+                                        <label for="telefone" style="margin-botton:5px;">Sexo</label>
+                                        <select id="aluno_sexo" class="custom-select custom-select-md .input-height-30">
                                             <option value="1">Masculino</option>
                                             <option value="2">Feminino</option>
                                         </select>

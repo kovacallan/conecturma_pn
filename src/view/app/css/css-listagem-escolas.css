@@ -195,3 +195,11 @@ a:hover{
 .row-impar{
 	background-color: #f3f3f3;
 }
+
+.seta-cima{
+    transform: rotate(180deg);
+}
+
+.input-height-30{
+height:30px;
+}
