@@ -45,16 +45,16 @@
     <div id="accordion">
       <!-- inicio da tabela -->
       <div class="row">
-          <div class="col-md-5 item-tabela topo-tab">
+          <div class="col-md-4 item-tabela topo-tab">
             Nome
+          </div>
+
+          <div class="col-md-3 item-tabela topo-tab">
+            Email
           </div>
 
           <div class="col-md-2 item-tabela topo-tab">
             Escola
-          </div>
-
-          <div class="col-md-2 item-tabela topo-tab">
-            Telefone
           </div>
 
           <div class="col-md-2 item-tabela topo-tab">

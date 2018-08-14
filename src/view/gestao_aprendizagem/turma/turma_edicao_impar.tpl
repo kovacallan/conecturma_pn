@@ -5,9 +5,10 @@
     {{i['professor']}}
 </div>
 <div class="col-md-2 item-tabela">
-    {{i['telefone']}}
+    {{i['vinculo_escola']}}
 </div>
 <div class="col-md-2 item-tabela">
+    {{i['serie']}}
 </div>
 <div class="col-md-1 item-tabela card">
   <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">

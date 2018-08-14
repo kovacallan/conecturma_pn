@@ -1,8 +1,8 @@
 <!--informaçoes-->
-<div class="col-md-5 item-tabela ">
+<div class="col-md-4 item-tabela ">
     {{i['nome']}}
 </div>
-<div class="col-md-2 item-tabela ">
+<div class="col-md-3 item-tabela ">
     {{i['email']}}
 </div>
 <div class="col-md-2 item-tabela">

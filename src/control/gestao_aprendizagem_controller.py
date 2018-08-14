@@ -31,15 +31,19 @@ def view_usuario_index():
 
 def cadastro_usuario():
     usuario = request.params
+    print(usuario['tipo'])
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
         aluno_create(usuario=usuario)
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
+        print("Entrei aqui!")
         professor_create(usuario)
         send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['diretor']:
         diretor_create(usuario)
+        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     else:
         gestor_create(usuario)
+        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
 
 def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
@@ -67,7 +71,7 @@ def professor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
     facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=password_generate(),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
-                                    vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'],
+                                    vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola']
                                     )
 
 def diretor_create(usuario):
@@ -78,7 +82,7 @@ def diretor_create(usuario):
 
 
 def gestor_create(usuario):
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=password_generate(),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=password_generate(),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=usuario['vinculo_rede'])
 
@@ -101,8 +105,9 @@ def send_email_confirmation(nome, email):
     msg['Subject'] = "Bem Vindo, a conecturma!"
     senha = "@onde2929"
     body = "<p>" \
-                "<h4>Bem Vindo "+nome+",a plataforma da Conecturma!</h4>" \
-                "Segue o link para ativação da conta da Conecturma:"\
+                "<h3>"+nome+"</h3>"\
+                "<h4>Agora você faz parte da Conecturma!</h4>" \
+                "Segue o link para ativação da conta da Conecturma: </br>"\
                 "<a href='"+url+"'>"+url+"</a>"
     msg.attach(MIMEText(body, 'html'))
     print(msg)
@@ -122,7 +127,8 @@ def novasenha():
     email = request.params['email']
     senha = request.params['senha_nova']
     usuario = facade.search_observador_email_facade(email=email)
-    facade.redefinir_senha_facade(id=usuario['id'], senha=senha)
+    facade.redefinir_senha_facade(id=usuario['id'], senha=sha512_crypt.hash(senha))
+
 
 @permissao('professor')
 def controller_index_usuario(observador):
@@ -261,7 +267,8 @@ def controller_observador_update():
 def controller_checar_se_email_existe():
     email = request.params['teste_email']
     verificacao = facade.search_observador_email_facade(email=email)
-    if verificacao is not None:
+
+    if verificacao != None:
         return verificacao['email']
     else:
         return None
