@@ -12,10 +12,11 @@
     {{i['tipo']}}
 </div>
 <div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
-        <i id="setinha" class='fas fa-angle-down'></i>
-    </a>
+    <div data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
+        class="setonha" id="id-escola-d-rock" >
+        <!--onclick="seta('id-escola-d-rock')"-->
+        <img id="setinha" class="seta-baixa" src="/static/img/seta-baixa.png">
+    </div>
 </div>
 
 <!--fim das informaçoes da tabela-->
@@ -32,9 +33,9 @@
                         <li class="nav-item ">
                             <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
                         </li>
-                        <li class="nav-item">
-                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>
-                        </li>
+                        <!--<li class="nav-item">-->
+                            <!--<button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </div>
@@ -85,16 +86,6 @@
                 <br>
             </div>
             <div class="container">
-<<<<<<< HEAD
-                <div class="row" style="margin-bottom: 10px">
-                    <!--%if tipo != '2':-->
-                                                                            <!--<div class="col-md-1">-->
-                                                                            <!--<span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">-->
-                                                                            <!--<i class="far fa-trash-alt" style="color:#969696;"></i>-->
-                                                                            <!--</span>-->
-                                                                            <!--</div>-->
-                    <!--%end-->
-=======
                 <!--<div class="row" style="margin-bottom: 10px">
 
                             <div class="col-md-1">
@@ -114,5 +105,7 @@
         </div>
     </div>
     </form>
-</div>
-</div>
+
+
+
+
