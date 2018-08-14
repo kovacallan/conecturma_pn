@@ -6,7 +6,7 @@
     {{i['vinculo_rede']}}
 </div>
 <div class="col-md-2 item-tabela">
-    {{i['vinculo_diretor_escola']}}
+    {{i['vinculo_escola']}}
 </div>
 <div class="col-md-2 item-tabela">
     {{i['telefone']}}
@@ -58,9 +58,7 @@
                                         <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
-                                        <label for="CNPJ">CNPJ</label>
-                                        <br>
-                                        <input type="text" size="24" class="form-control" name="" id="cnpj{{i['id']}}" value="{{i['cnpj']}}">
+
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
@@ -73,7 +71,7 @@
                                     <div class="col-md-" style="padding-left: 10px ;">
                                         <label for="diretor">diretor</label>
                                         <br>
-                                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['vinculo_diretor_escola']}}">
+                                        <input type="text" size="33" class="form-control" name="" id="" value="">
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
@@ -81,7 +79,7 @@
                                         <label for="rede">Rede de Ensino:
 
                                         </label>
-                                        <input type="hidden" size="59" class="form-control" name="" id="rede{{i['id']}}" value="{{i['vinculo_rede_id']}}">
+                                            <input type="hidden" size="59" class="form-control" name="" id="rede{{i['id']}}" value="{{i['vinculo_rede_id']}}">
                                         <input type="text" size="59" class="form-control" name="" value="{{i['vinculo_rede']}}">
                                     </div>
                                 </div>
@@ -130,13 +128,13 @@
             </div>
             <div class="container">
                 <div class="row" style="margin-bottom: 10px">
-                    % if tipo != '2':
-                            <div class="col-md-1">
-                                <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
-                                    <i class="far fa-trash-alt" style="color:#969696;"></i>
-                                </span>
-                            </div>
-                    % end
+                    <!--%if tipo != '2':-->
+                                                                            <!--<div class="col-md-1">-->
+                                                                            <!--<span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">-->
+                                                                            <!--<i class="far fa-trash-alt" style="color:#969696;"></i>-->
+                                                                            <!--</span>-->
+                                                                            <!--</div>-->
+                    <!--%end-->
                     <div class="offset-md-10 col-md-1">
                         <span onclick="update_escola({{i['id']}})" style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;"></i>

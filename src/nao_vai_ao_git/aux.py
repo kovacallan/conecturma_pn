@@ -17,20 +17,20 @@ for x in range(0,10):
                                         telefone='telefone',
                                         email='email@email.seila'+str(x),
                                         tipo=TIPO_USUARIOS['professor'],
-                                        escola='1',vinculo_turma='2')
+                                        vinculo_escola='1',vinculo_turma='2')
     elif x%5 ==0:
 
         facade.create_observador_facade(nome='professor' +str(x), senha='123' +str(x), telefone='telefone',
                                         email='email@email' +str(x) + 'seila', tipo=TIPO_USUARIOS['professor'],
-                                        escola='1', vinculo_turma='3')
+                                        vinculo_escola='1', vinculo_turma='3')
     elif x%7:
         facade.create_observador_facade(nome='professor' + str(x), senha='123' + str(x), telefone='telefone',
                                         email='email@email' + str(x) + 'seila', tipo=TIPO_USUARIOS['professor'],
-                                        escola='1', vinculo_turma='4')
+                                        vinculo_escola='1', vinculo_turma='4')
     else:
         facade.create_observador_facade(nome='professor' + str(x), senha='123' + str(x), telefone='telefone',
                                         email='email@email' + str(x) + 'seila', tipo=TIPO_USUARIOS['professor'],
-                                        escola='1', vinculo_turma='5')
+                                        vinculo_escola='1', vinculo_turma='5')
 
 for x in range(0, 20):
     if x % 3 == 0:
