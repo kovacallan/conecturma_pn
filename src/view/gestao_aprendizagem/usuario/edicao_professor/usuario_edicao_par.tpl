@@ -86,7 +86,19 @@
 
                 <br>
             </div>
-            <!--<div class="container">-->
+
+                    <div class="offset-md-10 col-md-1">
+                        <span onclick="update_escola({{i['id']}})" style="cursor:pointer;">
+                            <i class="fas fa-edit edit-ico" style="color: #969696;"></i>
+                        </span>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    </form>
+
+           <!--<div class="container">-->
                 <!--&lt;!&ndash;<div class="row" style="margin-bottom: 10px">-->
 
                             <!--<div class="col-md-1">-->
@@ -95,7 +107,7 @@
                                 <!--</span>-->
                             <!--</div>-->
 
-<!--&gt;>>>>>> 50b1f8c6ce76d3fd04803265ff1de11c503627ad-->
+<!--&gt;
                     <!--<div class="offset-md-10 col-md-1">-->
                         <!--<span onclick="update_escola({{i['id']}})" style="cursor:pointer;">-->
                             <!--<i class="fas fa-edit edit-ico" style="color: #969696;"></i>-->
