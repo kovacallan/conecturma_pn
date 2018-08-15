@@ -444,7 +444,6 @@ def get_escolas_e_rede_permissao():
         escola['vinculo_rede'] = get_nome_rede(vinculo_rede=escola['vinculo_rede'])
         escola['vinculo_diretor_escola'] = usuario['nome']
         rede = facade.search_estrutura_id_facade(id=usuario['vinculo_rede'])
-
         return escola, rede
 
 
@@ -545,7 +544,6 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
         turma = []
         if usuario['vinculo_turma'] != '0':
             i = facade.search_estrutura_id_facade(id=usuario['vinculo_turma'])
-            print(i)
             i['serie'] = SERIE[i['serie']]
             i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
             professor = ''
