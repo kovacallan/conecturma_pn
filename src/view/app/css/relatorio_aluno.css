@@ -28,12 +28,37 @@ table.table-bordered > tbody > tr > td{
   font-size:27px;
   color:#299ae8;
   display: inline-block;
-  
+
 }
 
 input {
-
+  padding: 0;
+  margin:0;
   vertical-align: middle;
   position: relative;
+  /* top: -4px; */
   top: 3px;
+  overflow: hidden;
+
+}
+
+#rodape{
+  background-color: #bed7ea;
+  padding: 10px 0;
+  position: static;
+  bottom: 0;
+  width: 100%;
+
+}
+#rodape a{
+  font-family: Calibri, sans-serif;
+  font-size: 17.76px;
+  text-decoration: none;
+  color: #9bacba;
+  padding-top: 5px;
+
+}
+
+.hiddenRow {
+    padding: 0 !important;
 }

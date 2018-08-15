@@ -2,12 +2,13 @@
     {{i['nome']}}
 </div>
 <div class="col-md-2 item-tabela ">
-    {{i['vinculo_gestor_rede']}}
+    {{i['professor']}}
 </div>
 <div class="col-md-2 item-tabela">
-    {{i['telefone']}}
+    {{i['vinculo_escola']}}
 </div>
 <div class="col-md-2 item-tabela">
+    {{i['serie']}}
 </div>
 <div class="col-md-1 item-tabela card">
   <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
@@ -64,7 +65,7 @@
                     <div class="col-md-" style="padding-left: 10px ;">
                       <label for="gestor">gestor</label>
                       <br>
-                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['vinculo_gestor_rede']}}">
+                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['professor']}}">
                     </div>
                   </div>
                   <!--fim da div dos dados ao lado da imagem-->

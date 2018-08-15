@@ -45,16 +45,16 @@
     <div id="accordion">
       <!-- inicio da tabela -->
       <div class="row">
-          <div class="col-md-5 item-tabela topo-tab">
+          <div class="col-md-4 item-tabela topo-tab">
             Nome
+          </div>
+
+          <div class="col-md-3 item-tabela topo-tab">
+            Email
           </div>
 
           <div class="col-md-2 item-tabela topo-tab">
             Escola
-          </div>
-
-          <div class="col-md-2 item-tabela topo-tab">
-            Telefone
           </div>
 
           <div class="col-md-2 item-tabela topo-tab">
@@ -64,7 +64,6 @@
           <div class="col-md-1 item-tabela topo-tab">
           </div>
       </div>
-
         <%
             for index,i in enumerate(usuarios):
         %>
@@ -73,13 +72,18 @@
             end
         %>
 
-
       <!-- bloco de cabeçalho da lista -->
-
-    </div>
   </div>
+</div>
+</div>
 
 <script type="text/javascript">
+    $(function(){
+        $(".setonha").on("show.bs.dropdown hide.bs.dropdown", function(){
+          $(this).find(".seta-baixa").toggleClass("seta-cima");
+        });
+                });
+
 
   function test(ide) {
     console.log(ide);
@@ -88,23 +92,23 @@
     console.log(x, y)
     if (x == "none") {
       document.getElementById("nova-escola").style.display = 'block';
-      document.getElementById(ide).innerHTML = '<i class="fas fa-angle-up"></i>';
+      document.getElementById(ide).innerHTML = '<img id="setinha" src="../../app/img/seta-cima.png"';
     }
     else {
       document.getElementById("nova-escola").style.display = 'none';
-      document.getElementById(ide).innerHTML = '<i class="fas fa-angle-down"></i>';
+      document.getElementById(ide).innerHTML = '<img id="setinha" src="../../app/img/seta-baixa.png"';
       // document.getElementById(drop).style.display='block':
     }
   }
 
-  function seta(ide) {
-    setinha = document.getElementById(ide).querySelectorAll("#setinha");
-    if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';
-    } else {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
-    }
-  };
+  <!--function seta(ide) {-->
+    <!--setinha = document.getElementById(ide).querySelectorAll("#setinha");-->
+    <!--if (setinha[0].className == 'seta-baixa') {-->
+      <!--document.getElementById(ide).innerHTML = '<img id="setinha" class="seta-cima" src="/static/img/seta-cima.png">'-->
+    <!--} else {-->
+      <!--document.getElementById(ide).innerHTML = '<img id="setinha" class="seta-baixo" src="/static/img/seta-baixa.png">'-->
+    <!--}-->
+  <!--};-->
 
 </script>
 %include('gestao_aprendizagem/footer/footer.tpl')
