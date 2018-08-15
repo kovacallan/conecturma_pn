@@ -359,6 +359,7 @@ function cadastro_turma(){
 
 
 function cadastro_usuario(tipo){
+    alert(tipo);
     if (tipo == 'aluno'){
         nome = document.getElementById(tipo+'_nome').value;
         nascimento = document.getElementById(tipo+'_nascimento').value;
@@ -399,7 +400,7 @@ function cadastro_usuario(tipo){
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
-                    if(true)//!validar_se_email_existe(email)){
+                    if(true){//!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
                             });
@@ -430,12 +431,12 @@ function cadastro_usuario(tipo){
             document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
         }
     }
-    if(tipo == 'diretor'){
+    else if(tipo == 'diretor'){
+        alert('entrei aqui')
         nome = document.getElementById(tipo+'_nome').value;
         nascimento = document.getElementById(tipo+'_nascimento').value;
         email = document.getElementById(tipo+'_email').value;
         escola = document.getElementById(tipo+'_escola').value;
-
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
@@ -512,3 +513,4 @@ function cadastro_usuario(tipo){
             document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
         }
     }
+}
