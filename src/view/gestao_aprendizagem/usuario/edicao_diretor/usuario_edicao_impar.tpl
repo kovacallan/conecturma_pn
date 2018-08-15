@@ -42,7 +42,7 @@
                     <div class=" col-md-">
                       <label for="nome" style="background-color: inherit;">Nome:
                         <span style="color:#ff0000">*
-                        <span>
+                        </span>
                       </label>
                       <input type="text" class="form-control" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
                     </div>
@@ -61,6 +61,7 @@
                   </div>
                   </div>
                 </div>
+
                   <h5>Acesso</h5>
                   <div class="row distanciamento">
 
@@ -72,8 +73,10 @@
                   </div>
                   <!--fim da div dos dados ao lado da imagem-->
                 </div>
+            </form>
               </div>
           </div>
+
           <!-- aqui termina o conteudo da guia do dados de escola  -->
             <!--<div class="row">
               <div class="container">
@@ -105,8 +108,5 @@
             </span>
           </div>
         </div>-->
-      </div>
-    </div>
   </div>
-  </form>
 </div>

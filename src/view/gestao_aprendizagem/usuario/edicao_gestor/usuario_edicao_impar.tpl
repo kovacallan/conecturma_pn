@@ -72,6 +72,7 @@
                   <!--fim da div dos dados ao lado da imagem-->
                 </div>
               </div>
+            </form>
           </div>
           <!-- aqui termina o conteudo da guia do dados de escola  -->
             <!--<div class="row">
@@ -107,5 +108,3 @@
       </div>
     </div>
   </div>
-  </form>
-</div>
