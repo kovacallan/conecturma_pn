@@ -78,29 +78,30 @@
                                 <!--fim da div dos dados ao lado da imagem-->
                             </div>
                         </div>
+                    </form>
                 </div>
                 <!-- aqui termina o conteudo da guia do dados de escola  -->
 
                 <br>
             </div>
-            <div class="container">
-                <!--<div class="row" style="margin-bottom: 10px">
+        </div>
+            <!--<div class="container">-->
+                <!--&lt;!&ndash;<div class="row" style="margin-bottom: 10px">-->
 
-                            <div class="col-md-1">
-                                <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
-                                    <i class="far fa-trash-alt" style="color:#969696;"></i>
-                                </span>
-                            </div>
+                            <!--<div class="col-md-1">-->
+                                <!--<span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">-->
+                                    <!--<i class="far fa-trash-alt" style="color:#969696;"></i>-->
+                                <!--</span>-->
+                            <!--</div>-->
 
-                    <div class="offset-md-10 col-md-1">
-                        <span onclick="update_escola({{i['id']}})" style="cursor:pointer;">
-                            <i class="fas fa-edit edit-ico" style="color: #969696;"></i>
-                        </span>
-                    </div>
-                </div>-->
-            </div>
+                    <!--<div class="offset-md-10 col-md-1">-->
+                        <!--<span onclick="update_escola({{i['id']}})" style="cursor:pointer;">-->
+                            <!--<i class="fas fa-edit edit-ico" style="color: #969696;"></i>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                <!--</div>&ndash;&gt;-->
+            <!--</div>-->
         </div>
     </div>
-    </form>
-</div>
+
 </div>

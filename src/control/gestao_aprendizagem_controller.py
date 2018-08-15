@@ -39,10 +39,12 @@ def cadastro_usuario():
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
         aluno_create(usuario=usuario)
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
+        print("Entrei aqui!")
         professor_create(usuario)
         #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['diretor']:
         diretor_create(usuario)
+
         #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     else:
         gestor_create(usuario)
@@ -409,6 +411,7 @@ def get_escolas_e_rede_permissao():
         rede = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
         escola = []
         for i in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola']):
+            print('oi')
             if i['vinculo_rede'] != '0':
                 i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
@@ -416,8 +419,10 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede'] = '0'
             if i['vinculo_diretor_escola'] != '0':
+                print('oi4')
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
+          
 
         return escola, rede
 
@@ -605,7 +610,6 @@ def descritores():
 def relatorio_aluno_view():
     observador = usuario_logado()
     turmas = facade.search_observador_turma(observador['vinculo_turma'])
-
     todos_alunos_da_mesma_turma = trazer_todos_alunos_da_mesma_turma()
     return dict(alunos=todos_alunos_da_mesma_turma,turma=turmas, tipo=observador['tipo'])
 

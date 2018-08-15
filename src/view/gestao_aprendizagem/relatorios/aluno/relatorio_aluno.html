@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/reset.css">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Relatório de Aluno </title>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/css-gestao-aprendizagem.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/icon_conecturma.png" >
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/relatorio_aluno.css">
+
+
+</head>
+
+<body>
+  <header id="header-content">
+    <div class="container-fluid teste">
+      <div class="row">
+        <div class="col-md order-1">
+          <figure>
+            <img src="img/conecturma-logo.png" id="conecturma-logo" class="img">
+          </figure>
+        </div>
+
+      <div class="col order-2">
+        <h1 id="header-text" style="position:relative;right:150px;">Gestão de Aprendizagem</h1>
+      </div>
+
+
+
+    </div>
+  </header><br/><br/>
+
+<section class="container">
+    <div class="col-md text-rel" style="padding-left:0px;">
+      <h2>Relatório de aluno </h2>
+    </div>
+
+    <div class="col-md nome_aluno" style="padding-left:0px;">
+      <span> Allan Vodka da Silva </span> - Turma: <span id="turma-num">1002</span>
+    </div>
+
+    <div class="input-group checkbox-group">
+        <input type="checkbox" id="portugues" value="portugues" checked> <label  class="portugues" for="portugues">Língua Portuguesa</label>
+        <input type="checkbox" id="matematica" value="matematica" checked> <label class="matematica" for="matematica">Matemática</label>
+    </div>
+
+    <div class="container offset-md-8" style="position:relative; right:27px;">
+        <a href="" class="offset-md-4" > <img src="img/print-icon.png" alt="" style="width:2%; height:auto;"> </a>
+    </div>
+
+  <table class="table table-bordered" style="margin-top:0;">
+    <thead style="background-color:#9ed0f6;">
+      <tr style="color:#fff;">
+        <th scope="col">Descritor</th>
+        <th scope="col">Desempenho</th>
+        <th scope="col" style="padding-right:0px;"> <img class="img-fluid" src="img/!-icon.png">  </th>
+      </tr>
+    </thead>
+
+    <tbody style="background-color:#f3f3f3;">
+      <tr>
+        <td>Distinguir sons e palavras com os dígrafos vocálicos formados por M e N depois de vogais - SEA</td>
+        <td> <img src="img/feed-pos.png" style="display: block; margin-left: auto; margin-right: auto"> </td>
+        <td data-toggle="collapse" data-target=".demo" class="accordion-toggle"> <a data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
+            <i id="setinha" class="fas fa-angle-down"></i></a>
+        </td>
+      </tr>
+
+      <tr>
+           <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse demo">
+             <canvas id="myChart" ></canvas> </div> </td>
+       </tr>
+
+
+      <tr>
+        <td>Reconhecer que muitas letras podem produzir sons diferentes e certos sons podem ser produzidos </br>
+          por letras diferentes (S, SS, Z, X) - SEAA</td>
+        <td> <img src="img/feed-med.png" style="display: block; margin-left: auto; margin-right: auto"> </div></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td >Completar palavras conhecidas em um relato escrito - ESC</td>
+        <td> <img src="img/feed-neg.png" style="display: block; margin-left: auto; margin-right: auto"> </td>
+        <td> <a data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
+            <i id="setinha" class="fas fa-angle-down"></i></a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+<footer id="rodape" align="center">
+  <a href="#"> Políticas de privacidade | copyright 20 </a>
+</footer>
+
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="assets/js/scriptes.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>
