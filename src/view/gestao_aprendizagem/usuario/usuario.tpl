@@ -98,37 +98,67 @@
   </div>
 </div>
 </div>
+<script type="text/javascript" src="/static/js/jquery-3.3.1-min.js"></script>
+<script>
 
+
+$(document).ready(function(){
+    $("button#dads").click(function(){
+        $("div#novo-gestor").toggle(100);
+    });
+});
+
+$(document).ready(function(){
+    $("button#prof").click(function(){
+        $("div#novo-professor").toggle(100);
+    });
+});
+
+$(document).ready(function(){
+    $("button#diretor").click(function(){
+        $("div#novo-diretor").toggle(100);
+    });
+});
+
+$(document).ready(function(){
+    $("button#aluno").click(function(){
+        $("div#novo-aluno").toggle(100);
+    });
+});
+
+
+
+</script>
 <script type="text/javascript">
-    $(function(){
-        $(".setonha").on("show.bs.dropdown hide.bs.dropdown", function(){
-          $(this).find(".seta-baixa").toggleClass("seta-cima");
-        });
-                });
 
 
-  function test(ide) {
-    console.log(ide);
-    y = document.getElementById(ide).innerHTML;
-    x = document.getElementById("nova-escola").style.display;
-    console.log(x, y)
-    if (x == "none") {
-      document.getElementById("nova-escola").style.display = 'block';
-      document.getElementById(ide).innerHTML = '<img id="setinha" src="../../app/img/seta-cima.png"';
-    }
-    else {
-      document.getElementById("nova-escola").style.display = 'none';
-      document.getElementById(ide).innerHTML = '<img id="setinha" src="../../app/img/seta-baixa.png"';
-      // document.getElementById(drop).style.display='block':
-    }
-  }
+
+  function test(ide) {-->
+    <!--console.log(ide);-->
+    <!--y = document.getElementById(ide).innerHTML;-->
+    <!--x = document.getElementById("nova-escola").style.display;-->
+    <!--prof = document.getElementById("novo-prof").style.display;-->
+    <!--diretor = document.getElementById("novo-diretor");-->
+    <!--gestor = document.getElementById("novo-gestor");-->
+    <!--aluno = document.getElementById("novo-aluno");-->
+    <!--console.log(x, y)-->
+    <!--if (prof == "none") {-->
+      <!--document.getElementById("novo-prof").style.display = 'block';-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';-->
+    <!--}-->
+    <!--else {-->
+      <!--document.getElementById("nova-escola").style.display = 'none';-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';-->
+      <!--// document.getElementById(drop).style.display='block':-->
+    <!--}-->
+  <!--}-->
 
   <!--function seta(ide) {-->
     <!--setinha = document.getElementById(ide).querySelectorAll("#setinha");-->
-    <!--if (setinha[0].className == 'seta-baixa') {-->
-      <!--document.getElementById(ide).innerHTML = '<img id="setinha" class="seta-cima" src="/static/img/seta-cima.png">'-->
+    <!--if (setinha[0].className == 'fas fa-angle-down') {-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>'-->
     <!--} else {-->
-      <!--document.getElementById(ide).innerHTML = '<img id="setinha" class="seta-baixo" src="/static/img/seta-baixa.png">'-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'-->
     <!--}-->
   <!--};-->
 

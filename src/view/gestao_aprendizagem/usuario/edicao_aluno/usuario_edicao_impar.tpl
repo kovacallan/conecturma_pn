@@ -11,7 +11,7 @@
 {{i['tipo']}}
 </div>
 <div class="col-md-1 item-tabela card">
-  <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
+  <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
     <i id="setinha" class="fas fa-angle-down"></i>
   </a>
 </div>
@@ -63,13 +63,13 @@
                   <h5>Acesso</h5>
                   <div class="row distanciamento" style="margin-left: 5px;">
 
-                      <div col="col-md-">
+                      <div class="col-md-">
                           <label for="login">login</label>
                           <span style="color:#ff0000">*</span>
                           <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['nome_login']}}">
                       </div>
 
-                      <div col="col-md-" style="margin-left: 100px;">
+                      <div class="col-md-" style="margin-left: 100px;">
                           <label for="login">senha</label>
                           <span style="color:#ff0000">*</span>
                           <div class="row">

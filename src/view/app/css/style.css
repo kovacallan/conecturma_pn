@@ -231,4 +231,10 @@ cartoons-pass figure:hover img,figure.hover img {
     bottom: 70px;
 }
 
+.display-block{
+display:block;
+}
 
+.display-none{
+display:none;
+}

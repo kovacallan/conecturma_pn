@@ -5,12 +5,12 @@
         Novo Gestor
     </div>
     <div class="col-md-1 item-tabela">
-        <button id="dads" class="normalizar-botao" onclick="test(this.id);">
-            <i class='fas fa-angle-up'></i>
+        <button id="dads" class="normalizar-botao">
+            <i  class='fas fa-angle-up'></i>
         </button>
     </div>
 </div>
-<div class="row row-impar" id="nova-escola" style="display: block">
+<div class="row row-impar" id="novo-gestor" style="display: block">
     <div class="container">
         <div id="teste" class="row new-scola">
             <!--conteudo interno do botao a partir daqui-->
