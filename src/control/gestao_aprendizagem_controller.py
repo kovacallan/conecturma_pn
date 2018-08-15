@@ -41,14 +41,14 @@ def cadastro_usuario():
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
         print("Entrei aqui!")
         professor_create(usuario)
-        #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['diretor']:
         diretor_create(usuario)
 
-        #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     else:
         gestor_create(usuario)
-        #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
 
 def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
@@ -74,7 +74,7 @@ def create_student_login(nome_completo):
 
 def professor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=sha512_crypt.hash('123'),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'],
                                     vinculo_turma=usuario['vinculo_turma']
@@ -82,13 +82,13 @@ def professor_create(usuario):
 
 def diretor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'], senha=sha512_crypt.hash('123'),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'])
 
 
 def gestor_create(usuario):
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=sha512_crypt.hash('123'),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=usuario['vinculo_rede'])
 
