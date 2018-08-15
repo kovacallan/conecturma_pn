@@ -8,6 +8,11 @@ from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA,
 
 facade = Facade()
 
+niveis_pontuação = {
+        'dificil': 2,
+        'medio': 1,
+        'facil': 0
+    }
 
 @permissao('responsavel_varejo')
 def view_gestao_aprendizagem():
@@ -25,7 +30,6 @@ def view_usuario_index():
     usuario = controller_index_usuario(observador)
     escola, rede = get_escolas_e_rede_permissao()
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
-    print(facade.read_observador_facade())
     return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma)
 
 
@@ -37,13 +41,14 @@ def cadastro_usuario():
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
         print("Entrei aqui!")
         professor_create(usuario)
-        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+        #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['diretor']:
         diretor_create(usuario)
-        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+
+        #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     else:
         gestor_create(usuario)
-        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+        #send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
 
 def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
@@ -69,20 +74,20 @@ def create_student_login(nome_completo):
 
 def professor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=password_generate(),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=sha512_crypt.hash('123'),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola']
                                     )
 
 def diretor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'], senha=password_generate(),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'], senha=sha512_crypt.hash('123'),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'])
 
 
 def gestor_create(usuario):
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=password_generate(),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=sha512_crypt.hash('123'),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=usuario['vinculo_rede'])
 
@@ -413,14 +418,11 @@ def get_escolas_e_rede_permissao():
             else:
                 i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede'] = '0'
-                print('oi3', i['vinculo_rede_id'])
             if i['vinculo_diretor_escola'] != '0':
                 print('oi4')
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
-            print('hm')
-
-        print('hmmmmmmmmm')
+          
 
         return escola, rede
 
@@ -608,14 +610,7 @@ def descritores():
 def relatorio_aluno_view():
     observador = usuario_logado()
     turmas = facade.search_observador_turma(observador['vinculo_turma'])
-    turma = facade.search_d
-
-    print('observador,turmas',len(observador),turmas)
-    if observador['tipo'] == TIPO_USUARIOS['professor']:
-        turmas= facade.search_observador_turma(observador['vinculo_turma'])
     todos_alunos_da_mesma_turma = trazer_todos_alunos_da_mesma_turma()
-    observador = usuario_logado()
-
     return dict(alunos=todos_alunos_da_mesma_turma,turma=turmas, tipo=observador['tipo'])
 
 
@@ -625,35 +620,18 @@ def relatorio_aluno():
     aluno['vinculo_turma'] = get_nome_turma(vinculo_turma=aluno['vinculo_turma'])
     descritores = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'])
     oa = []
-    vezes_jogada = []
     porcentagem_aluno = []
-
     for i in descritores:
         if 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
             desempenho = facade.search_oa_facade(id_aluno=str(aluno['id']), objeto_aprendizagem=i['sigla_oa'])
             oa.append(i)
             if desempenho != None:
-                porcentagem_aluno.append(cor_desempenho(desempenho=desempenho))
+                porcentagem_aluno.append(convert_game_data_for_numeric(convertendo_str_in_dict([i for i in desempenho['jogo_jogado']])))
             else:
                 porcentagem_aluno.append(None)
-
+    print(porcentagem_aluno)
     return template('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe', oa=oa,
                     porcentagem=porcentagem_aluno, aluno=aluno, tipo=observador['tipo'])
-
-
-def relatorio_oa_aluno():
-    id_aluno = request.params['aluno']
-    oa = request.params['oa']
-
-    aluno = facade.search_aluno_id_facade(id_aluno=id_aluno)
-    desempenho = facade.search_oa_facade(id_aluno=str(id_aluno), objeto_aprendizagem=oa)
-    pontuacao = checar_pontuiacao(desempenho=desempenho)
-    vezes_jogada = len(desempenho['jogo_jogado'])
-    porcentagem_aluno = porcentagem_pontuacao(pontuacao, vezes_jogada)
-
-    return template('gestao_aprendizagem/relatorios/aluno/relatorio_oa_aluno', aluno=aluno,
-                    vezes_jogas=vezes_jogada, porcentagem_do_aluno=porcentagem_aluno)
-
 
 def levar_oas_matematica():
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
@@ -681,9 +659,15 @@ def levar_oas_matematica():
                 else:
                     porcentagem_aluno.append(None)
 
-    return template('gestao_aprendizagem/relatorios/aluno/teste_table.tpl', oa=oa, aluno=aluno,
+    return template('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl', oa=oa, aluno=aluno,
                     porcentagem=porcentagem_aluno)
 
+
+def convert_game_data_for_numeric(desempenho):
+    lista_de_pontuacao = []
+    for i in desempenho['nivel']:
+        lista_de_pontuacao.append(i['nivel'])
+    return lista_de_pontuacao
 
 def filtro_vinculo_cadastro_rede():
     observador_logado = usuario_logado()
@@ -749,40 +733,6 @@ def trazer_todos_alunos_da_mesma_turma():
     return alunos
 
 
-def checar_pontuiacao(desempenho):
-    niveis_pontuação = {
-        'dificil': 2,
-        'medio': 1,
-        'facil': 0
-    }
-    pontuacao = 0
-    for i in desempenho['jogo_jogado']:
-        dict_dado_jogo = convertendo_str_in_dict(i)
-        if dict_dado_jogo['termino'] == True:
-            pontuacao += niveis_pontuação[dict_dado_jogo['nivel']]
-
-    return pontuacao
-
-
-def media_pontuacao(pontuacao, vezes_jogada):
-    media = pontuacao / vezes_jogada
-
-    return media
-
-
-def porcentagem_pontuacao(pontuacao, vezes_jogada):
-    maximo_pontos = vezes_jogada * 2
-    porcentagem = (pontuacao * 100) // maximo_pontos
-
-    return str(porcentagem)
-
-
-def cor_desempenho(desempenho):
-    pontuacao = checar_pontuiacao(desempenho=desempenho)
-    vezes_jogada = len(desempenho['jogo_jogado'])
-    porcentagem_aluno = porcentagem_pontuacao(pontuacao, vezes_jogada)
-
-    return int(porcentagem_aluno)
 
 
 def convertendo_str_in_dict(str):
