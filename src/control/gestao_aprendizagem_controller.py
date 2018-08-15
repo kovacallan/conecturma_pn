@@ -76,7 +76,8 @@ def professor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
     facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=sha512_crypt.hash('123'),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
-                                    vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola']
+                                    vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'],
+                                    vinculo_turma=usuario['vinculo_turma']
                                     )
 
 def diretor_create(usuario):
@@ -542,21 +543,25 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
         return turma
     else:
         turma = []
-        i = facade.search_estrutura_id_facade(id=usuario['vinculo_turma'])
-        i['serie'] = SERIE[i['serie']]
-        i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
-        professor = ''
-        aluno = []
-        for z in facade.search_observador_turma(vinculo_turma=str(i['id'])):
-            if z != []:
-                professor = z['nome']
-        i.update({'professor': professor})
-        for y in facade.search_aluno_by_turma_facade(vinculo_turma=str(i['id'])):
-            aluno.append(y)
-        i.update({'aluno': aluno})
-        turma.append(i)
+        if usuario['vinculo_turma'] != '0':
+            i = facade.search_estrutura_id_facade(id=usuario['vinculo_turma'])
+            print(i)
+            i['serie'] = SERIE[i['serie']]
+            i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
+            professor = ''
+            aluno = []
+            for z in facade.search_observador_turma(vinculo_turma=str(i['id'])):
+                if z != []:
+                    professor = z['nome']
+            i.update({'professor': professor})
+            for y in facade.search_aluno_by_turma_facade(vinculo_turma=str(i['id'])):
+                aluno.append(y)
+            i.update({'aluno': aluno})
+            turma.append(i)
 
-        return turma
+            return turma
+        else:
+            return -1
 
 
 def controller_create_turma():
