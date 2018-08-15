@@ -5,9 +5,7 @@
     <div class="row">
       <div class=" col-md-5">
         <p class="top-escolas-tabela">Usuários</p>
-        % if tipo != '3':
-            %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
-        % end
+        %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
       </div>
       <div class="col-md-4 offset-md-5">
 
@@ -29,18 +27,42 @@
     <!--fim da row do conteudo acima da tabela -->
     <br/>
     <br/>
-    <div id="1" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_gestor.tpl')
-    </div>
-     <div id="2" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_diretor.tpl')
-    </div>
-   <div id="3" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
-    </div>
-   <div id="4" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
-    </div>
+    %if tipo == '3':
+        <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    %elif tipo == '0':
+        <div id="1" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_gestor.tpl')
+        </div>
+         <div id="2" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_diretor.tpl')
+        </div>
+       <div id="3" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
+        </div>
+       <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    %elif tipo == '1':
+         <div id="2" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_diretor.tpl')
+        </div>
+       <div id="3" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
+        </div>
+       <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    %elif tipo == '2':
+       <div id="3" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
+        </div>
+       <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    % end
+
 
     <div id="accordion">
       <!-- inicio da tabela -->
@@ -64,7 +86,6 @@
           <div class="col-md-1 item-tabela topo-tab">
           </div>
       </div>
-
         <%
             for index,i in enumerate(usuarios):
         %>
@@ -73,38 +94,73 @@
             end
         %>
 
-
       <!-- bloco de cabeçalho da lista -->
-
-    </div>
   </div>
+</div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-3.3.1-min.js"></script>
+<script>
 
+
+$(document).ready(function(){
+    $("button#dads").click(function(){
+        $("div#novo-gestor").toggle(100);
+    });
+});
+
+$(document).ready(function(){
+    $("button#prof").click(function(){
+        $("div#novo-professor").toggle(100);
+    });
+});
+
+$(document).ready(function(){
+    $("button#diretor").click(function(){
+        $("div#novo-diretor").toggle(100);
+    });
+});
+
+$(document).ready(function(){
+    $("button#aluno").click(function(){
+        $("div#novo-aluno").toggle(100);
+    });
+});
+
+
+
+</script>
 <script type="text/javascript">
 
-  function test(ide) {
-    console.log(ide);
-    y = document.getElementById(ide).innerHTML;
-    x = document.getElementById("nova-escola").style.display;
-    console.log(x, y)
-    if (x == "none") {
-      document.getElementById("nova-escola").style.display = 'block';
-      document.getElementById(ide).innerHTML = '<i class="fas fa-angle-up"></i>';
-    }
-    else {
-      document.getElementById("nova-escola").style.display = 'none';
-      document.getElementById(ide).innerHTML = '<i class="fas fa-angle-down"></i>';
-      // document.getElementById(drop).style.display='block':
-    }
-  }
 
-  function seta(ide) {
-    setinha = document.getElementById(ide).querySelectorAll("#setinha");
-    if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';
-    } else {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
-    }
-  };
+
+  function test(ide) {-->
+    <!--console.log(ide);-->
+    <!--y = document.getElementById(ide).innerHTML;-->
+    <!--x = document.getElementById("nova-escola").style.display;-->
+    <!--prof = document.getElementById("novo-prof").style.display;-->
+    <!--diretor = document.getElementById("novo-diretor");-->
+    <!--gestor = document.getElementById("novo-gestor");-->
+    <!--aluno = document.getElementById("novo-aluno");-->
+    <!--console.log(x, y)-->
+    <!--if (prof == "none") {-->
+      <!--document.getElementById("novo-prof").style.display = 'block';-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';-->
+    <!--}-->
+    <!--else {-->
+      <!--document.getElementById("nova-escola").style.display = 'none';-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';-->
+      <!--// document.getElementById(drop).style.display='block':-->
+    <!--}-->
+  <!--}-->
+
+  <!--function seta(ide) {-->
+    <!--setinha = document.getElementById(ide).querySelectorAll("#setinha");-->
+    <!--if (setinha[0].className == 'fas fa-angle-down') {-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>'-->
+    <!--} else {-->
+      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'-->
+    <!--}-->
+  <!--};-->
 
 </script>
 %include('gestao_aprendizagem/footer/footer.tpl')

@@ -1,6 +1,32 @@
 $("#new_user").on("click",function(){
     var radioValue = $("input[name='tipo_usuario']:checked").val();
     $("#" + radioValue).css("display","block");
+
+    gestor = document.getElementById('1').style.display;
+    diretor = document.getElementById('2').style.display;
+    professor = document.getElementById('3').style.display;
+    aluno = document.getElementById('4').style.display;
+    if (radioValue =='1'){
+    diretor = document.getElementById('2').style.display='none';
+    professor = document.getElementById('3').style.display='none';
+    aluno = document.getElementById('4').style.display='none';
+    }
+    else if(radioValue =='2') {
+    gestor = document.getElementById('1').style.display='none';
+    professor = document.getElementById('3').style.display='none';
+    aluno = document.getElementById('4').style.display='none';
+    }
+    else if(radioValue =='3'){
+    gestor = document.getElementById('1').style.display='none';
+    diretor = document.getElementById('2').style.display='none';
+    aluno = document.getElementById('4').style.display='none';
+    }
+    else if(radioValue =='4'){
+    gestor = document.getElementById('1').style.display='none';
+    diretor = document.getElementById('2').style.display='none';
+    professor = document.getElementById('3').style.display='none';
+    }
+    console.log('teste',gestor,diretor,professor,aluno,radioValue);
 });
 
 function esqueci_senha(){
@@ -405,11 +431,11 @@ function cadastro_usuario(tipo){
         }
     }
     else if(tipo == 'diretor'){
+        alert('entrei aqui')
         nome = document.getElementById(tipo+'_nome').value;
         nascimento = document.getElementById(tipo+'_nascimento').value;
         email = document.getElementById(tipo+'_email').value;
         escola = document.getElementById(tipo+'_escola').value;
-
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){

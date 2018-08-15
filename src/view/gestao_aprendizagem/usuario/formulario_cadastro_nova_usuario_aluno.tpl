@@ -5,12 +5,12 @@
         Novo Aluno
     </div>
     <div class="col-md-1 item-tabela">
-        <button id="dads" class="normalizar-botao" onclick="test(this.id);">
+        <button id="aluno" class="normalizar-botao" onclick="test(this.id);">
             <i class='fas fa-angle-up'></i>
         </button>
     </div>
 </div>
-<div class="row row-impar" id="nova-escola" style="display: block">
+<div class="row row-impar" id="novo-aluno" style="display: block">
     <div class="container">
         <div id="teste" class="row new-scola">
             <!--conteudo interno do botao a partir daqui-->
@@ -53,18 +53,28 @@
                                 <label for="telefone">Escola</label>
                                 <span style="color:#ff0000">*</span>
                                 <select id="aluno_escola" class="custom-select custom-select-md">
-                                    % for i in escolas:
-                                        <option value="{{i['id']}}">{{i['nome']}}</option>
+                                    % if isinstance(escolas, list):
+                                        % for i in escolas:
+                                            <option value="{{i['id']}}">{{i['nome']}}</option>
+                                        % end
+                                    % else:
+                                        <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
                                     % end
                                 </select>
                             </div>
                             <div class="col-md-12" style="margin-top: 10px;">
                                 <label for="telefone">Turma</label>
                                 <select id="aluno_turma" class="custom-select custom-select-md">
-                                    <option value="0"></option>
-                                    % for i in turmas:
-                                        <option value="{{i['id']}}">{{i['nome']}}</option>
-                                    % end
+                                    %if tipo != '3':
+                                        <option value="0"></option>
+                                        % for i in turmas:
+                                            <option value="{{i['id']}}">{{i['nome']}}</option>
+                                        % end
+                                    %else:
+                                        % for i in turmas:
+                                            <option value="{{i['id']}}">{{i['nome']}}</option>
+                                        % end
+                                    %end
                                 </select>
                             </div>
                         </div>

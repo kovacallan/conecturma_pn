@@ -11,7 +11,7 @@
 {{i['tipo']}}
 </div>
 <div class="col-md-1 item-tabela card">
-  <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
+  <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="o_setinha{{i['id']}}" onclick="seta('o_setinha{{i['id']}}')">
     <i id="setinha" class="fas fa-angle-down"></i>
   </a>
 </div>
@@ -25,9 +25,9 @@
               <li class="nav-item ">
                 <a class="nav-link active " data-toggle="tab" href="#nossa-escola" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
               </li>
-              <li class="nav-item">
-                <button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Professores</button>
-              </li>
+              <!--<li class="nav-item">-->
+                <!--<button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Professores</button>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>
@@ -63,7 +63,7 @@
                   <h5>Acesso</h5>
                   <div class="row distanciamento" style="margin-left: 5px;">
 
-                      <div col="col-md-">
+                      <div class="col-md-">
                           <label for="login">Email</label>
                           <span style="color:#ff0000">*</span>
                           <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['email']}}">
@@ -72,6 +72,7 @@
                   <!--fim da div dos dados ao lado da imagem-->
                 </div>
               </div>
+            </form>
           </div>
           <!-- aqui termina o conteudo da guia do dados de escola  -->
             <!--<div class="row">
@@ -107,5 +108,3 @@
       </div>
     </div>
   </div>
-  </form>
-</div>

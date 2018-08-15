@@ -274,13 +274,6 @@ def relatorio_aluno():
     from control.gestao_aprendizagem_controller import relatorio_aluno
     return relatorio_aluno()
 
-
-@route('/relatorios/visualizar_relatorio_oa_aluno')
-def relatorio_oa_aluno():
-    from control.gestao_aprendizagem_controller import relatorio_oa_aluno
-    return relatorio_oa_aluno()
-
-
 @route('/trazer_oas')
 def levar_oas_matematica():
     from control.gestao_aprendizagem_controller import levar_oas_matematica

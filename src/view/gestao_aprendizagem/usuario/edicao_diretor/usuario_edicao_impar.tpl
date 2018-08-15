@@ -11,10 +11,12 @@
 {{i['tipo']}}
 </div>
 <div class="col-md-1 item-tabela card">
-  <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
+<a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="o_setinha{{i['id']}}" onclick="seta('o_setinha{{i['id']}}')">
     <i id="setinha" class="fas fa-angle-down"></i>
-  </a>
+</a>
 </div>
+
+
 <div class="container">
   <div class="row row-impar">
     <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" data-parent="#accordion">
@@ -25,9 +27,9 @@
               <li class="nav-item ">
                 <a class="nav-link active " data-toggle="tab" href="#nossa-escola" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
               </li>
-              <li class="nav-item">
-                <button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Professores</button>
-              </li>
+              <!--<li class="nav-item">-->
+                <!--<button class="nav-link" data-toggle="tab" href="#nossa-escola-prof" aria-controls="scola-do-rock-prof" aria-selected="false">Professores</button>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>
@@ -42,28 +44,31 @@
                     <div class=" col-md-">
                       <label for="nome" style="background-color: inherit;">Nome:
                         <span style="color:#ff0000">*
-                        <span>
+                        </span>
                       </label>
-                      <input type="text" class="form-control" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
+                      <input type="text" class="form-control input-height-30" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
                     </div>
                    <div class="col-md-" style="padding-left: 10px">
                       <label for="data">Data de nascimeto</label>
                       <span style="color:#ff0000">*</span>
                       <br>
-                      <input type="date" size="25" class="form-control" value="{{i['nascimento']}}"  name="" id="aluno_nascimento" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
+                      <input type="date" size="25" class="form-control input-height-30" value="{{i['nascimento']}}"  name="" id="aluno_nascimento" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
                   </div>
                    <div class="col-md-" style="padding-left: 10px">
-                      <label for="telefone">Sexo</label>
-                      <select id="aluno_sexo" class="custom-select custom-select-md">
+                      <label for="aluno_sexo" style="margin-bottom:-6px; height: 35px;">Sexo</label>
+                      <select id="aluno_sexo" class="custom-select custom-select-md " style="height:35px">
                           <option value="1">Masculino</option>
                           <option value="2">Feminino</option>
                       </select>
                   </div>
                   </div>
+                    <br>
+                </div>
+
                   <h5>Acesso</h5>
                   <div class="row distanciamento" style="margin-left: 5px;">
 
-                      <div col="col-md-">
+                      <div class="col-md-">
                           <label for="login">Email</label>
                           <span style="color:#ff0000">*</span>
                           <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['email']}}">
@@ -71,8 +76,11 @@
                   </div>
                   <!--fim da div dos dados ao lado da imagem-->
                 </div>
+                  </div>
+            </form>
               </div>
           </div>
+
           <!-- aqui termina o conteudo da guia do dados de escola  -->
             <!--<div class="row">
               <div class="container">
@@ -104,8 +112,5 @@
             </span>
           </div>
         </div>-->
-      </div>
-    </div>
   </div>
-  </form>
 </div>

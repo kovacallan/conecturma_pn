@@ -5,12 +5,12 @@
         Novo Diretor
     </div>
     <div class="col-md-1 item-tabela">
-        <button id="dads" class="normalizar-botao" onclick="test(this.id);">
+        <button id="diretor" class="normalizar-botao" onclick="test(this.id);">
             <i class='fas fa-angle-up'></i>
         </button>
     </div>
 </div>
-<div class="row row-impar" id="nova-escola" style="display: block">
+<div class="row row-impar" id="novo-diretor" style="display: block">
     <div class="container">
         <div id="teste" class="row new-scola">
             <!--conteudo interno do botao a partir daqui-->
@@ -33,8 +33,7 @@
                                 <label for="nome" style="background-color: inherit;">Nome Completo
                                     <span style="color:#ff0000">*</span>
                                 </label>
-                                <input type="text" class="form-control" size="30" name="" id="diretor_nome"
-                                       onchange="document.getElementById('diretor_nome').style.boxShadow = 'none'">
+                                <input type="text" class="form-control" size="30" name="" id="diretor_nome" onchange="document.getElementById('diretor_nome').style.boxShadow = 'none'">
                             </div>
                             <div class="col-md-4" style="padding-left: 10px">
                                 <label for="data">Data de nascimeto</label>
