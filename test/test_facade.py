@@ -252,6 +252,7 @@ class FacadeTest(unittest.TestCase):
     """INICIO TESTE OBSERVADOR"""
 
     def _create_observador(self):
+        self._create_rede()
         observador1 = self.facade.create_observador_facade(nome='Egg', senha='span', telefone='(21)9999-9999',
                                                            cpf='123456789', email='egg@span.com.br', rede='Rede Conecturma', escola='0',
                                                            tipo=TIPO_USUARIOS['administrador'])
@@ -407,8 +408,11 @@ class FacadeTest(unittest.TestCase):
 
     def _search_obsevador_by_rede(self):
         self._create_observador()
+        rede=facade.search_estrutura_id_facade(1)
+        print('rede,existe?',rede)
         observador1= self.facade.search_observador_id_facade(1)
-        observador_rede1= self.facade.search_observador_by_rede_facade("Rede Conecturma")
+        observador_rede1= self.facade.search_observador_by_rede_facade("1")
+        print(':/',observador_rede1)
         self.assertEqual(observador_rede1[0]['nome'],observador1.nome)
         observador2 = self.facade.search_observador_id_facade(2)
         observador_rede2 = self.facade.search_observador_by_rede_facade("Nenhuma")
@@ -423,7 +427,13 @@ class FacadeTest(unittest.TestCase):
 
     def _search_observador_escola(self):
         self._create_observador()
-        observador1=self.facade.search_observador_escola()
+        pessoa=self.facade.search_observador_id_facade(2)
+        observador1=self.facade.search_observador_escola('2')
+        print('testin',observador1)
+
+
+    def test_search_obs_escola(self):
+        self._search_observador_escola()
 
     def _delete_observador(self):
         observador1 = self.facade.read_observador_facade()
@@ -452,10 +462,15 @@ class FacadeTest(unittest.TestCase):
     """TESTE REDE"""
 
     def _create_rede(self):
-        rede = self.facade.create_estrutura_facade(tipo_estrutura='1', nome="egg", telefone="(21)9999-9999")
+        rede = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'],
+                                                   nome="egg",
+                                                   telefone="(21)9999-9999")
         rede2 = self.facade.search_estrutura_facade("1", "egg")
         self.assertIsNot(rede, None)
         self.assertIsNot(rede2, None)
+
+    def test_create_rede(self):
+        self._create_rede()
 
     def _update_rede(self):
         rede = self.facade.create_estrutura_facade(nome="egg", telefone="(21)9999-9999")
@@ -481,8 +496,7 @@ class FacadeTest(unittest.TestCase):
             escolhidos.append(redes['id'])
         self.facade.delete_rede_facade(escolhidos)
 
-    def test_create_rede(self):
-        self._create_rede()
+
 
     def _test_update_rede(self):
         self._update_rede()

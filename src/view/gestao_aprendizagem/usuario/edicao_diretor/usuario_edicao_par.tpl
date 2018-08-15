@@ -13,7 +13,7 @@
 </div>
 <div class="col-md-1 item-tabela card colocar-direita">
     <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
+        class="" id="o_setinha{{i['id']}}" onclick="seta('o_setinha{{i['id']}}')">
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
 </div>
@@ -69,7 +69,7 @@
                                 <h5>Acesso</h5>
                                 <div class="row distanciamento" style="margin-left: 5px;">
 
-                                    <div col="col-md-">
+                                    <div class="col-md-">
                                         <label for="login">Email</label>
                                         <span style="color:#ff0000">*</span>
                                         <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['email']}}">
