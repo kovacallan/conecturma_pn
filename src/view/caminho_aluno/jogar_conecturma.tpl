@@ -239,11 +239,13 @@
             );
         });
         function enviarRequisicaoAjax(parametros, callbackSucesso, callbackErro) {
+            HOST = 'http://localhost:8080/'
+            //HOST = 'http://ec2-34-219-137-245.us-west-2.compute.amazonaws.com/'
             console.log("enviarRequisicaoAjax parametros", parametros);
             console.log(parametros.operacao);
             var jqXhr = jQuery.ajax({
                 type: "POST",
-                url: "http://127.0.0.1:8080/" + "api/plataforma/" + parametros.operacao,
+                url: HOST + "api/plataforma/" + parametros.operacao,
                 traditional: true,
                 data: JSON.stringify(parametros),
                 contentType: "application/json; charset=utf-8",

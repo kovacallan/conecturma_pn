@@ -23,7 +23,6 @@
               </button>
               <!--pesquisa-->
             </div>
-          </div>
         </form>
       </div>
       <!--fim da div de pesquisa-->
@@ -58,9 +57,8 @@
         </div>
       </div>
       <!-- bloco de cabeçalho da lista -->
-      <%
-        for index,i in enumerate(escola):
-      %>
+      
+        %for index,i in enumerate(escola):
         % if index % 2 ==0:
           <div class="row row-par">
             %include('gestao_aprendizagem/escola/escola_edicao_par.tpl')
@@ -71,9 +69,7 @@
             %include('gestao_aprendizagem/escola/escola_edicao_impar.tpl')
           </div>
         % end
-      <%
-        end
-      %>
+        %end
     </div>
   </div>
 </div>

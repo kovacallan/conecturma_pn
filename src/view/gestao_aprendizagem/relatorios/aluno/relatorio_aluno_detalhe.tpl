@@ -18,8 +18,10 @@
         <div class="container offset-md-8" style="position:relative; right:27px;">
             <a href="" class="offset-md-4" > <img src="img/print-icon.png" alt="" style="width:2%; height:auto;"> </a>
         </div>
+        <div id="teste">
+            % include('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')
+        </div>
 
-        % include('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')
     </section>
 </div>
 %include('gestao_aprendizagem/footer/footer.tpl')

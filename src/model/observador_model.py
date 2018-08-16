@@ -138,7 +138,7 @@ class DbObservador(Model):
                     cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
-                    vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
+                    vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma, nascimento=search.data_nascimento
                 )
             )
         return observador
@@ -163,10 +163,8 @@ class DbObservador(Model):
         observador = []
         for read in DbObservador.query(DbObservador.vinculo_rede == vinculo_rede, order_by=DbObservador.nome):
             observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
-                     email=read.email, tipo=read.tipo,
-                     vinculo_rede=read.vinculo_rede,
-                     vinculo_escola=read.vinculo_escola,
-                     vinculo_turma=read.vinculo_turma))
+                     email=read.email, tipo=read.tipo, vinculo_rede=read.vinculo_rede, vinculo_escola=read.vinculo_escola,
+                     vinculo_turma=read.vinculo_turma, nascimento=read.data_nascimento))
 
 
         return observador

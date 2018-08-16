@@ -80,8 +80,12 @@
                                         <label for="rede">Rede de Ensino:
 
                                         </label>
-                                        <input type="hidden" size="59" class="form-control" name="" id="rede{{i['id']}}" value="{{i['vinculo_rede_id']}}">
-                                        <input type="text" size="59" class="form-control" name="" value="{{i['vinculo_rede']}}">
+                                        % if i['vinculo_rede'] != '0':
+                                            <input type="hidden" size="59" class="form-control" name="" id="rede{{i['id']}}" value="{{i['vinculo_rede_id']}}">
+                                            <input type="text" size="59" class="form-control" name="" value="{{i['vinculo_rede']}}">
+                                        % else:
+                                            <input type="text" size="59" class="form-control" name="" value=" ">
+                                        %end
                                     </div>
                                 </div>
                                 <!--fim da div dos dados ao lado da imagem-->
