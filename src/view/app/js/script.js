@@ -431,7 +431,6 @@ function cadastro_usuario(tipo){
         }
     }
     else if(tipo == 'diretor'){
-        alert('entrei aqui')
         nome = document.getElementById(tipo+'_nome').value;
         nascimento = document.getElementById(tipo+'_nascimento').value;
         email = document.getElementById(tipo+'_email').value;

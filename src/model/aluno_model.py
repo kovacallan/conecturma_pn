@@ -114,7 +114,8 @@ class DbAluno(Model):
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf='', nascimento = search.nascimento,
+                    nome_login= search.nome_login
                 )
             )
         return alunos
@@ -130,7 +131,8 @@ class DbAluno(Model):
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma, email=search.email, cpf=''
+                    vinculo_turma=search.vinculo_turma, email=search.email, cpf='', nascimento = search.nascimento,
+                    nome_login=search.nome_login
                 )
             )
 

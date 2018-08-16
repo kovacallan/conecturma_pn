@@ -91,9 +91,7 @@ class DbEstrutura(Model):
             lista = DbEstrutura.load(int(id))
             lista_dic = vars(lista)["_data"]
         else:
-            lista_dic = dict(
-                nome=" "
-            )
+            lista_dic = -1
 
         return lista_dic
 
@@ -107,7 +105,7 @@ class DbEstrutura(Model):
 
     def search_turma_by_rede(self, vinculo_rede):
         turma = []
-        for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_rede == vinculo_rede),
+        for lista in self.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_rede == vinculo_rede),
                                 order_by=DbEstrutura.nome):
             turma.append(vars(lista)["_data"])
 
@@ -115,7 +113,15 @@ class DbEstrutura(Model):
 
     def search_turma_by_escola(self, vinculo_escola):
         turma = []
-        for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_escola == vinculo_escola),
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_escola == vinculo_escola),
+                                order_by=DbEstrutura.nome):
+            turma.append(vars(lista)["_data"])
+
+            return turma
+
+    def search_turma_by_escola2(self, vinculo_escola):
+        turma = []
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_escola == vinculo_escola),
                                 order_by=DbEstrutura.nome):
             turma.append(vars(lista)["_data"])
 

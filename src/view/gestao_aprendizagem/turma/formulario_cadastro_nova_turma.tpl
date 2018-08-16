@@ -53,9 +53,13 @@
                                         <span style="color:#ff0000">*</span>
                                     </label>
                                     <select class="custom-select" name="escola" id="escola" aria-label="Example select with button addon">
-                                        % for i in escola:
-                                            <option value="{{i['id']}}">{{i['nome']}}</option>
-                                        %end
+                                        % if isinstance(escola, list):
+                                            % for i in escola:
+                                                <option value="{{i['id']}}">{{i['nome']}}</option>
+                                            %end
+                                        % else:
+                                            <option value="{{escola['id']}}">{{escola['nome']}}</option>
+                                        % end
                                     </select>
                                 </div>
                             </div>
