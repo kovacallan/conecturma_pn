@@ -28,11 +28,11 @@
                 <i id="setinha" class="fas fa-angle-down grafico{{i['id']}}"></i></a>
             </td>
         </tr>
-
+        <!--
         <tr>
            <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
              <canvas id="myChart" ></canvas> </div> </td>
-        </tr>
+        </tr>-->
 
          %teste+=1
         % end

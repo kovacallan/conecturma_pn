@@ -8,7 +8,7 @@ from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA,
 
 facade = Facade()
 
-niveis_pontuação = {
+niveis_pontuacao = {
         'dificil': 2,
         'medio': 1,
         'facil': 0
@@ -632,15 +632,18 @@ def relatorio_aluno():
     aluno['vinculo_turma'] = get_nome_turma(vinculo_turma=aluno['vinculo_turma'])
     descritores = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'])
     oa = []
+    vezes_jogada = []
     porcentagem_aluno = []
+
     for i in descritores:
         if 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
             desempenho = facade.search_oa_facade(id_aluno=str(aluno['id']), objeto_aprendizagem=i['sigla_oa'])
             oa.append(i)
             if desempenho != None:
-                porcentagem_aluno.append(convert_game_data_for_numeric(convertendo_str_in_dict([i for i in desempenho['jogo_jogado']])))
+                porcentagem_aluno.append(cor_desempenho(desempenho=desempenho))
             else:
                 porcentagem_aluno.append(None)
+
     print(porcentagem_aluno)
     return template('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe', oa=oa,
                     porcentagem=porcentagem_aluno, aluno=aluno, tipo=observador['tipo'])
@@ -675,11 +678,44 @@ def levar_oas_matematica():
                     porcentagem=porcentagem_aluno)
 
 
+def checar_pontuiacao(desempenho):
+    niveis_pontuação = {
+        'dificil': 2,
+        'medio': 1,
+        'facil': 0
+    }
+    pontuacao = 0
+    for i in desempenho['jogo_jogado']:
+        dict_dado_jogo = convertendo_str_in_dict(i)
+        if dict_dado_jogo['termino'] == True:
+            pontuacao += niveis_pontuação[dict_dado_jogo['nivel']]
+
+    return pontuacao
+
+
+def media_pontuacao(pontuacao, vezes_jogada):
+    media = pontuacao / vezes_jogada
+
+    return media
+
+
+def porcentagem_pontuacao(pontuacao, vezes_jogada):
+    maximo_pontos = vezes_jogada * 2
+    porcentagem = (pontuacao * 100) // maximo_pontos
+
+    return str(porcentagem)
+
+
+def cor_desempenho(desempenho):
+    pontuacao = checar_pontuiacao(desempenho=desempenho)
+    vezes_jogada = len(desempenho['jogo_jogado'])
+    porcentagem_aluno = porcentagem_pontuacao(pontuacao, vezes_jogada)
+
+    return int(porcentagem_aluno)
+
 def convert_game_data_for_numeric(desempenho):
-    lista_de_pontuacao = []
-    for i in desempenho['nivel']:
-        lista_de_pontuacao.append(i['nivel'])
-    return lista_de_pontuacao
+    return niveis_pontuacao[desempenho['nivel']]
+
 
 def filtro_vinculo_cadastro_rede():
     observador_logado = usuario_logado()
