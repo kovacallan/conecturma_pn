@@ -137,9 +137,13 @@ function mouse_out(letra){
   }
 }
 
+
+
+
 function login_aluno(){
   nome = document.getElementById('Login').value;
   senha = [];
+
   for (var i in letras_senha){
     if (letras_senha[i]){
       senha.push(letras_senha[i]);
@@ -151,6 +155,7 @@ function login_aluno(){
      window.location.replace(data);
   });
 }
+
 
 function login_professor(){
   email = document.getElementById('inputEmail').value;
@@ -513,3 +518,35 @@ function cadastro_usuario(tipo){
         }
     }
 }
+
+
+
+
+  function test(ide) {
+   console.log(ide);
+    y = document.getElementById(ide).innerHTML;
+    x = document.getElementById("nova-escola").style.display;
+    prof = document.getElementById("novo-prof").style.display;
+    diretor = document.getElementById("novo-diretor");
+    gestor = document.getElementById("novo-gestor");
+    aluno = document.getElementById("novo-aluno");
+    console.log(x, y)
+    if (prof == "none") {
+    document.getElementById("novo-prof").style.display = 'block';
+    document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';
+    }
+    else {
+    document.getElementById("nova-escola").style.display = 'none';
+    document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
+    // document.getElementById(drop).style.display='block':
+    }
+    }
+
+  function seta(ide){
+    setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>'
+    } else {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'
+    }
+  };

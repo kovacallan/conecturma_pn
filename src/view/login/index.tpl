@@ -32,6 +32,7 @@
                                     </div>
                                 </section>
                                 <section class="content-login">
+
                                     <div class="student">
                                        <img src="/static/img/aluno-seta.png" id="aluno-seta">
 		                                <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
@@ -101,20 +102,21 @@
                                                 <div id="k" onmouseout="mouse_out('k')" onmouseover="mouse_in('k')" onclick="mudaEstado('k')" class="box-cartoons on">
                                                     <figure>
                                                     <img class="img_selecionada" src="/static/img/avatar_11.png" data-imagem-selecionada="k">
-                                                    <figure>
+                                                    </figure>
                                                 </div>
                                                 <div id="l"  onmouseout="mouse_out('l')" onmouseover="mouse_in('l')" onclick="mudaEstado('l')" class="box-cartoons on">
                                                     <figure>
                                                     <img class="img_selecionada" src="/static/img/avatar_12.png" data-imagem-selecionada="l">
-                                                    <figure>
+                                                    </figure>
                                                 </div>
 		                        	        </div>
                                             <div>
-                                                <button id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
+                                                <button type="submit" id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
+
                                 </section>
                         </div>
                     </main>
@@ -155,5 +157,14 @@
     </div>-->
     <script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
     <script type="text/javascript" src="../static/js/script.js"></script>
+    <script type="text/javascript">
+
+        document.addEventListener('keydown', function(event) {
+        if (event.keyCode == 13) {// enter
+       login_professor()
+        }
+    });
+
+    </script>
 </body>
 </html>

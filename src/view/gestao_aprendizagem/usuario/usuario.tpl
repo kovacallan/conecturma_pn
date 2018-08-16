@@ -82,8 +82,22 @@
 
 $(document).ready(function(){
     $("button#dads").click(function(){
-        $("div#novo-gestor").toggle(100);
+        /*$("div#novo-gestor").toggle(100);-->*/
+        console.log(this);
+         if("i.fas.fa-angle-up"){
+         alert('if')
+        $("div#novo-gestor").hide(100);
+        $("i.fas.fa-angle-up").removeClass("fa-angle-up").addClass("fa-angle-down");
+       }
+       else {
+       alert("estou no else");
+         $("div#novo-gestor").show(100);
+        $("i.fas.fa-angle-down").removeClass("fa-angle-down").addClass("fa-angle-up");
+       }
+
+
     });
+    return false
 });
 
 $(document).ready(function(){
@@ -107,38 +121,6 @@ $(document).ready(function(){
 
 
 </script>
-<script type="text/javascript">
 
 
-
-  function test(ide) {-->
-    <!--console.log(ide);-->
-    <!--y = document.getElementById(ide).innerHTML;-->
-    <!--x = document.getElementById("nova-escola").style.display;-->
-    <!--prof = document.getElementById("novo-prof").style.display;-->
-    <!--diretor = document.getElementById("novo-diretor");-->
-    <!--gestor = document.getElementById("novo-gestor");-->
-    <!--aluno = document.getElementById("novo-aluno");-->
-    <!--console.log(x, y)-->
-    <!--if (prof == "none") {-->
-      <!--document.getElementById("novo-prof").style.display = 'block';-->
-      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';-->
-    <!--}-->
-    <!--else {-->
-      <!--document.getElementById("nova-escola").style.display = 'none';-->
-      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';-->
-      <!--// document.getElementById(drop).style.display='block':-->
-    <!--}-->
-  <!--}-->
-
-  <!--function seta(ide) {-->
-    <!--setinha = document.getElementById(ide).querySelectorAll("#setinha");-->
-    <!--if (setinha[0].className == 'fas fa-angle-down') {-->
-      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>'-->
-    <!--} else {-->
-      <!--document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'-->
-    <!--}-->
-  <!--};-->
-
-</script>
 %include('gestao_aprendizagem/footer/footer.tpl')
