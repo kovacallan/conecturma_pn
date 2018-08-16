@@ -15,7 +15,7 @@
             </div>
             <div align="left">
             
-            <a href="#" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
+            <a href="/relatorios/aluno" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
             <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
 
             </div>
@@ -58,7 +58,7 @@
         </div>
         <div align="left">
         
-                <a href="#" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
+                <a href="/relatorios/aluno" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
                 <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
                 <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da escola</span></a>
         </div>
@@ -99,7 +99,7 @@
         </div>
         <div align="left">
         
-                <a href="#" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
+                <a href="/relatorios/aluno" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
                 <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
                 <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da escola</span></a>
                 <a href="#" class="list-group-item li-background justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da Rede</span></a>
