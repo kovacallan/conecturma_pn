@@ -29,6 +29,7 @@ $("#new_user").on("click",function(){
     console.log('teste',gestor,diretor,professor,aluno,radioValue);
 });
 
+
 function esqueci_senha(){
     email = document.getElementById('email')
     if(validar_se_email_existe(email)){
@@ -404,7 +405,8 @@ function cadastro_usuario(tipo){
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
-                    if(true)//!validar_se_email_existe(email)){
+                    if(true){//!validar_se_email_existe(email)){
+
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
                             });
@@ -435,7 +437,7 @@ function cadastro_usuario(tipo){
             document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
         }
     }
-    if(tipo == 'diretor'){
+    else if(tipo == 'diretor'){
         nome = document.getElementById(tipo+'_nome').value;
         nascimento = document.getElementById(tipo+'_nascimento').value;
         email = document.getElementById(tipo+'_email').value;
@@ -517,9 +519,7 @@ function cadastro_usuario(tipo){
             document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
         }
     }
-<<<<<<< HEAD
-}
-
+    }
 
 
 
@@ -551,5 +551,3 @@ function cadastro_usuario(tipo){
       document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'
     }
   };
-=======
->>>>>>> origin/master

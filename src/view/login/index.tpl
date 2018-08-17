@@ -20,7 +20,7 @@
                         <div id="Login-div">
                                 <img src="/static/img/login-img.png" id="login-img">
                                 <section class="content-professor">
-                                    <div class="professor">
+                                        <div class="professor">
                                         <img src="/static/img/professor-seta.png" id="professor-seta">
                                         <h2 class="h3 mb-3 font-weight-normal professor-text">Professor</h2>
                                         <label for="inputEmail" class="sr-only">Email</label>
@@ -32,7 +32,7 @@
                                     </div>
                                 </section>
                                 <section class="content-login">
-
+                                    <form>
                                     <div class="student">
                                        <img src="/static/img/aluno-seta.png" id="aluno-seta">
 		                                <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
@@ -116,7 +116,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                        </form>
                                 </section>
                         </div>
                     </main>
@@ -159,12 +159,12 @@
     <script type="text/javascript" src="../static/js/script.js"></script>
     <script type="text/javascript">
 
-        document.addEventListener('keydown', function(event) {
+
+ document.addEventListener('keydown', function(event) {
         if (event.keyCode == 13) {// enter
-       login_professor()
+        	login_professor();
         }
     });
-
     </script>
 </body>
 </html>
