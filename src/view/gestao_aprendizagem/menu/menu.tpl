@@ -2,7 +2,7 @@
 <div class="row" style="margin-right: 0px;">
         <div class="col-md-3 order-md-1" style="margin-top: 15px;">
         <div>
-            <a href="#" class="home-font" >
+            <a href="/gestao_aprendizagem" class="home-font" >
                 <p class="list-group-item home-background">
                         <span style="margin-left: 56px">
                                 Home
@@ -45,7 +45,7 @@
 <div class="row" style="margin-right: 0px;">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                     <span style="margin-left: 56px">
                             Home
@@ -86,7 +86,7 @@
 <div class="row" style="margin-right: 0px;">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                     <span style="margin-left: 56px">
                             Home
@@ -129,7 +129,7 @@
 <div class="row" style="margin-right: 0px;">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                 <span style="margin-left: 56px">
                     Home
