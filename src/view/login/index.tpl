@@ -21,6 +21,7 @@
                                 <img src="/static/img/login-img.png" id="login-img">
                                 <section class="content-professor">
                                         <div class="professor">
+                                            <form>
                                         <img src="/static/img/professor-seta.png" id="professor-seta">
                                         <h2 class="h3 mb-3 font-weight-normal professor-text">Professor</h2>
                                         <label for="inputEmail" class="sr-only">Email</label>
@@ -29,6 +30,7 @@
                                         <input type="password" id="inputPassword" class="form-control class_senha" placeholder="Senha" required="">
                                         <button onclick="login_professor()" id="btn-professor" style="cursor:pointer"></button>
                                         <a href="#" onclick="" class="lost-pass">Esqueci minha senha</a>
+                                                </form>
                                     </div>
                                 </section>
                                 <section class="content-login">
@@ -36,7 +38,7 @@
                                     <div class="student">
                                        <img src="/static/img/aluno-seta.png" id="aluno-seta">
 		                                <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
-		                                </br>
+		                                <br/>
 		                                <label>Nome do usuário</label> <br>
 		                                <input data-val="true" style="text-transform:uppercase" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno" >
                                     </div>

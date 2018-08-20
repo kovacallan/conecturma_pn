@@ -125,7 +125,9 @@ def send_email_confirmation(nome, email):
     server.quit()
 
 def new_password():
-    email = request.params['email']
+    id=usuario_logado()['id']
+    email= usuario_logado()['email']
+    # email = request.params['email']
 
     return template('alterar_senha.tpl', id=id, email=email)
 

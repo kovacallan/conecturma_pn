@@ -552,4 +552,3 @@ function cadastro_usuario(tipo){
     }
   };
 
-}
