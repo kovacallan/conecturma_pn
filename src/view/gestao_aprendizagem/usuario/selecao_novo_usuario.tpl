@@ -32,7 +32,7 @@ Aluno
 %elif tipo =='3':
 <input name="tipo_usuario" type="radio" aria-label="Radio button for following text input" value="4">
 Aluno
-
+<br>
 %end
 
 <button type="button" class="botao-nova-escola" id="new_user">

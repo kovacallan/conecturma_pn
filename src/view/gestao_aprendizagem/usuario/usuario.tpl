@@ -5,9 +5,7 @@
     <div class="row">
       <div class=" col-md-5">
         <p class="top-escolas-tabela">Usuários</p>
-        % if tipo != '3':
-            %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
-        % end
+        %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
       </div>
       <div class="col-md-4 offset-md-5">
 
@@ -29,18 +27,42 @@
     <!--fim da row do conteudo acima da tabela -->
     <br/>
     <br/>
-    <div id="1" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_gestor.tpl')
-    </div>
-     <div id="2" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_diretor.tpl')
-    </div>
-   <div id="3" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
-    </div>
-   <div id="4" style="display:none;">
-      %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
-    </div>
+    %if tipo == '3':
+        <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    %elif tipo == '0':
+        <div id="1" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_gestor.tpl')
+        </div>
+         <div id="2" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_diretor.tpl')
+        </div>
+       <div id="3" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
+        </div>
+       <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    %elif tipo == '1':
+         <div id="2" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_diretor.tpl')
+        </div>
+       <div id="3" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
+        </div>
+       <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    %elif tipo == '2':
+       <div id="3" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_professor.tpl')
+        </div>
+       <div id="4" style="display:none;">
+          %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
+        </div>
+    % end
+
 
     <div id="accordion">
       <!-- inicio da tabela -->

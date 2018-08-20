@@ -405,8 +405,8 @@ function cadastro_usuario(tipo){
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
-                    if(true){//!validar_se_email_existe(email)){
 
+                    if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
                             });
@@ -442,11 +442,10 @@ function cadastro_usuario(tipo){
         nascimento = document.getElementById(tipo+'_nascimento').value;
         email = document.getElementById(tipo+'_email').value;
         escola = document.getElementById(tipo+'_escola').value;
-
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
-                    if(true){
+                    if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola},function(data){
                             });
@@ -487,7 +486,7 @@ function cadastro_usuario(tipo){
         if (nome != '' && nome != null){
             if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
-                    if(true){
+                    if(!validar_se_email_existe(email)){
                         if (rede != '' && rede != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_rede:rede},function(data){
                             });
@@ -519,6 +518,7 @@ function cadastro_usuario(tipo){
             document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
         }
     }
+
     }
 
 
@@ -551,3 +551,5 @@ function cadastro_usuario(tipo){
       document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'
     }
   };
+
+}

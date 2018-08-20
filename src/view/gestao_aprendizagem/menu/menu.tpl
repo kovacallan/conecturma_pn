@@ -2,7 +2,7 @@
 <div class="row" style="margin-right: 0px;">
         <div class="col-md-3 order-md-1" style="margin-top: 15px;">
         <div>
-            <a href="#" class="home-font" >
+            <a href="/gestao_aprendizagem" class="home-font" >
                 <p class="list-group-item home-background">
                         <span style="margin-left: 56px">
                                 Home
@@ -16,7 +16,7 @@
             <div align="left">
             
             <a href="/relatorios/aluno" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
-            <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
+            <!--<a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>-->
 
             </div>
             <div class="list-group-item  gerenc-cadastro">
@@ -45,7 +45,7 @@
 <div class="row" style="margin-right: 0px;">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                     <span style="margin-left: 56px">
                             Home
@@ -59,8 +59,8 @@
         <div align="left">
         
                 <a href="/relatorios/aluno" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
-                <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
-                <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da escola</span></a>
+                <!--<a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
+                <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da escola</span></a>-->
         </div>
         <div class="list-group-item  gerenc-cadastro">
             <div class="row">
@@ -86,7 +86,7 @@
 <div class="row" style="margin-right: 0px;">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                     <span style="margin-left: 56px">
                             Home
@@ -100,9 +100,9 @@
         <div align="left">
         
                 <a href="/relatorios/aluno" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
-                <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
+                <!--<a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
                 <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da escola</span></a>
-                <a href="#" class="list-group-item li-background justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da Rede</span></a>
+                <a href="#" class="list-group-item li-background justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da Rede</span></a>-->
         </div>
         <div class="list-group-item  gerenc-cadastro">
             <div class="row">
@@ -129,7 +129,7 @@
 <div class="row" style="margin-right: 0px;">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                 <span style="margin-left: 56px">
                     Home
@@ -143,9 +143,9 @@
         <div align="left">
         
             <a href="/relatorios/aluno" class="list-group-item li-background"><span style="margin-left: 54px;">Desempenho de aluno</span></a>
-            <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
+            <!--<a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da turma</span></a>
             <a href="#" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da escola</span></a>
-            <a href="#" class="list-group-item li-background justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da Rede</span></a>
+            <a href="#" class="list-group-item li-background justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Desempenho da Rede</span></a>-->
         </div>
         <div class="list-group-item  gerenc-cadastro">
             <div class="row">
@@ -165,6 +165,5 @@
         </div>
 
         <a class="list-group-item recursos-ped recursos-ped-background" href="#"> <img src="/static/img/recursos_ico.png" class="mr-2 recursos-ico"> Recursos pedagogicos</a>
-
     </div>
 </div>

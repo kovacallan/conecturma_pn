@@ -53,18 +53,28 @@
                                 <label for="telefone">Escola</label>
                                 <span style="color:#ff0000">*</span>
                                 <select id="aluno_escola" class="custom-select custom-select-md">
-                                    % for i in escolas:
-                                        <option value="{{i['id']}}">{{i['nome']}}</option>
+                                    % if isinstance(escolas, list):
+                                        % for i in escolas:
+                                            <option value="{{i['id']}}">{{i['nome']}}</option>
+                                        % end
+                                    % else:
+                                        <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
                                     % end
                                 </select>
                             </div>
                             <div class="col-md-12" style="margin-top: 10px;">
                                 <label for="telefone">Turma</label>
                                 <select id="aluno_turma" class="custom-select custom-select-md">
-                                    <option value="0"></option>
-                                    % for i in turmas:
-                                        <option value="{{i['id']}}">{{i['nome']}}</option>
-                                    % end
+                                    %if tipo != '3':
+                                        <option value="0"></option>
+                                        % for i in turmas:
+                                            <option value="{{i['id']}}">{{i['nome']}}</option>
+                                        % end
+                                    %else:
+                                        % for i in turmas:
+                                            <option value="{{i['id']}}">{{i['nome']}}</option>
+                                        % end
+                                    %end
                                 </select>
                             </div>
                         </div>

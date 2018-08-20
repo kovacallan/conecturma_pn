@@ -34,7 +34,7 @@ class EstruturaFacade:
         return self.estrutura.search_turma_by_rede(vinculo_rede=vinculo_rede)
 
     def search_estrutura_turma_by_escola_facade(self,vinculo_escola):
-        return self.estrutura.search_turma_by_escola(vinculo_escola=vinculo_escola)
+        return self.estrutura.search_turma_by_escola2(vinculo_escola=vinculo_escola)
 
     def search_oa_by_type_and_aventura_facade(self, aventura, disciplina):
         return self.estrutura.search_oa_by_type_and_aventura(aventura=aventura, disciplina=disciplina)

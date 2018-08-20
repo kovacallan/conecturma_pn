@@ -31,9 +31,11 @@
     <!--fim da row do conteudo acima da tabela -->
     <br/>
     <br/>
-    <div id="new_school" style="display:none;">
-      %include('gestao_aprendizagem/turma/formulario_cadastro_nova_turma.tpl')
-    </div>
+    %if tipo != '3':
+      <div id="new_school" style="display:none;">
+        %include('gestao_aprendizagem/turma/formulario_cadastro_nova_turma.tpl')
+      </div>
+    %end
     <div id="accordion">
       <!-- inicio da tabela -->
 
@@ -56,22 +58,26 @@
         </div>
       </div>
       <!-- bloco de cabeçalho da lista -->
-        <%
-          for index,i in enumerate(turma):
-        %>
-          % if index % 2 ==0:
-              <div class="row row-par">
-                %include('gestao_aprendizagem/turma/turma_edicao_par.tpl')
-              </div>
-            % else:
-              <div class="row row-impar">
-                <input type="hidden" id ="id_escola" value="{{i['id']}}">
-                %include('gestao_aprendizagem/turma/turma_edicao_impar.tpl')
-              </div>
-            % end
-      <%
-        end
-      %>
+      % if isinstance(turma,list):
+          <%
+            for index,i in enumerate(turma):
+          %>
+            % if index % 2 ==0:
+                <div class="row row-par">
+                  %include('gestao_aprendizagem/turma/turma_edicao_par.tpl')
+                </div>
+              % else:
+                <div class="row row-impar">
+                  <input type="hidden" id ="id_escola" value="{{i['id']}}">
+                  %include('gestao_aprendizagem/turma/turma_edicao_impar.tpl')
+                </div>
+              % end
+          <%
+            end
+          %>
+      % else:
+      <h2>Você não está cadastrado a nenhuma turma.</h2>
+      % end
     </div>
   </div>
 </div>

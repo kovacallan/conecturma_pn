@@ -33,8 +33,7 @@
                                 <label for="nome" style="background-color: inherit;">Nome Completo
                                     <span style="color:#ff0000">*</span>
                                 </label>
-                                <input type="text" class="form-control" size="30" name="" id="diretor_nome"
-                                       onchange="document.getElementById('diretor_nome').style.boxShadow = 'none'">
+                                <input type="text" class="form-control" size="30" name="" id="diretor_nome" onchange="document.getElementById('diretor_nome').style.boxShadow = 'none'">
                             </div>
                             <div class="col-md-4" style="padding-left: 10px">
                                 <label for="data">Data de nascimeto</label>
