@@ -14,25 +14,20 @@
     <div class="light-game">
         <div class="center">
             <div class="container">
-            <!--<div class="row">-->
                 <div class="row">
                     <div class="col-md-12">
-
                         <div class="game">
                             <a href="javascript:void(0)" onclick="atualizarHud()" class="close-game">
                                 <img src="/static/img/botao_voltar.png" style="float:right;margin-right:45px;   ">
                             </a>
-                        </div><!--
-
-                    --></div>
+                        </div>
+                    </div>
                 </div>
             </div>
                 <div class="row" >
                      <iframe id="frame_jogo"  src="" width="1014px" height="614px" align="middle"
                         style="border: 7px rgb(11, 104, 145) solid;margin-left: auto;margin-right: auto;"></iframe>
                 </div>
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </div>
 <div class="container cabecalho">
