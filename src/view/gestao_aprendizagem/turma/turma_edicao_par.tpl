@@ -85,8 +85,15 @@
                                 <div class="row">
                                     <div class="col-md-11">
                                         <div class="offset-md-1 nome-prof row row-impar">
-                                            <div class="col-md-11">
-                                            {{z['nome']}}
+                                            <div class="col-md-2">
+                                            {{z['nome_login']}}
+                                            </div>
+                                            <div class="offset-md-1 col-md-8">
+                                              senha :
+                                              <img src="/static/img/{{z['senha'][0]}}.png" style="padding-left:15px;">
+                                              <img src="/static/img/{{z['senha'][1]}}.png" style="padding-left:15px;">
+                                              <img src="/static/img/{{z['senha'][2]}}.png" style="padding-left:15px;">
+                                              <img src="/static/img/{{z['senha'][3]}}.png" style="padding-left:15px;">
                                             </div>
                                             <div class="col-md-1 item-tabela">
                                                 <a href="">

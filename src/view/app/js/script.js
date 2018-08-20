@@ -403,7 +403,7 @@ function cadastro_usuario(tipo){
         turma = document.getElementById(tipo+'_turma').value;
 
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
 
                     if(!validar_se_email_existe(email)){
@@ -426,11 +426,11 @@ function cadastro_usuario(tipo){
                     alert('O campo email é obrigatório.');
                     document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');
@@ -443,7 +443,7 @@ function cadastro_usuario(tipo){
         email = document.getElementById(tipo+'_email').value;
         escola = document.getElementById(tipo+'_escola').value;
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
                     if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
@@ -466,11 +466,11 @@ function cadastro_usuario(tipo){
                     alert('O campo email é obrigatório.');
                     document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');
@@ -484,7 +484,7 @@ function cadastro_usuario(tipo){
         rede = document.getElementById(tipo+'_rede').value;
 
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
                     if(!validar_se_email_existe(email)){
                         if (rede != '' && rede != null){
@@ -507,11 +507,11 @@ function cadastro_usuario(tipo){
                     alert('O campo email é obrigatório.');
                     document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');

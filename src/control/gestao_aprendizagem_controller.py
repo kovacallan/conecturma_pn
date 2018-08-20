@@ -127,6 +127,7 @@ def send_email_confirmation(nome, email):
 def new_password():
     id=usuario_logado()['id']
     email= usuario_logado()['email']
+    print("lembrar de descomentar o id e email")
     # email = request.params['email']
 
     return template('alterar_senha.tpl', id=id, email=email)
@@ -428,7 +429,6 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede'] = '0'
             if i['vinculo_diretor_escola'] != '0':
-                print('oi4')
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
           
@@ -516,6 +516,7 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
                 aluno.append(y)
             i.update({'aluno': aluno})
             turma.append(i)
+        print('turma',turma)
         return turma
     elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
         turma = []
