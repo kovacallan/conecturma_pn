@@ -373,7 +373,7 @@ function cadastro_usuario(tipo){
         turma = document.getElementById(tipo+'_turma').value;
 
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (escola != '' && escola != null){
                     $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, sexo:sexo, vinculo_escola:escola, vinculo_turma:turma},function(data){
                     });
@@ -383,11 +383,11 @@ function cadastro_usuario(tipo){
                     alert('O campo escola é obrigatório.');
                     document.getElementById(tipo+'_escola').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');

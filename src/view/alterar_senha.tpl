@@ -6,11 +6,11 @@
                 <div class="offset-md-4 row">
                 <input type="hidden" name="id" value="{{id}}"/>
                 <input type="hidden" name="email" value="{{email}}"/>
-                Senha nova :<input type="password" name="senha_nova"/><br/>
+                Senha nova <input type="password" name="senha_nova"/><br/>
                 </div>
                 <br>
                 <div class="offset-md-3 row" style="padding-left:30px;">
-                Confirme a nova senha:<input type="password" name="senha_conf"/>
+                Confirme a nova senha<input type="password" name="senha_conf"/>
                 </div>
                 <br>
                 <button type="submit">Salvar</button>
