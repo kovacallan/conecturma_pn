@@ -265,14 +265,33 @@ def descritores():
 @permissao('professor')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno')
 def relatorio_aluno_view():
-    from control.gestao_aprendizagem_controller import relatorio_aluno_view
-    return relatorio_aluno_view()
+    from control.relatorio_controller import Relatorio
+    from control.gestao_aprendizagem_controller import get_nome_turma
+
+    relatorio = Relatorio()
+    relatorio.get_alunos(usuario_online_dados=usuario_logado(), nome_turma=get_nome_turma)
+
+    return dict(tipo = usuario_logado()['tipo'], alunos = relatorio.alunos)
 
 
 @route('/relatorios/visualizar_relatorio_aluno')
+@view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe')
 def relatorio_aluno():
-    from control.gestao_aprendizagem_controller import relatorio_aluno
-    return relatorio_aluno()
+    from bottle import request
+    from facade.facade_main import Facade
+    from control.relatorio_controller import Relatorio
+
+    relatorio = Relatorio()
+
+    aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
+    turma = facade.search_estrutura_id_facade(id=aluno['vinculo_turma'])
+
+    relatorio.get_descritores(serie=turma['serie'])
+    relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
+    relatorio.convert_nivel_for_numeric()
+
+
+    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa = relatorio.descritores, porcentagem={'teste':None})
 
 @route('/trazer_oas')
 def levar_oas_matematica():

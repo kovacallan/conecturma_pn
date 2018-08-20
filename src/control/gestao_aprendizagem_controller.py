@@ -618,36 +618,6 @@ def controller_update_turma():
 def descritores():
     return
 
-
-def relatorio_aluno_view():
-    observador = usuario_logado()
-    turmas = facade.search_observador_turma(observador['vinculo_turma'])
-    todos_alunos_da_mesma_turma = trazer_todos_alunos_da_mesma_turma()
-    return dict(alunos=todos_alunos_da_mesma_turma,turma=turmas, tipo=observador['tipo'])
-
-
-def relatorio_aluno():
-    observador = usuario_logado()
-    aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
-    aluno['vinculo_turma'] = get_nome_turma(vinculo_turma=aluno['vinculo_turma'])
-    descritores = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'])
-    oa = []
-    vezes_jogada = []
-    porcentagem_aluno = []
-
-    for i in descritores:
-        if 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
-            desempenho = facade.search_oa_facade(id_aluno=str(aluno['id']), objeto_aprendizagem=i['sigla_oa'])
-            oa.append(i)
-            if desempenho != None:
-                porcentagem_aluno.append(cor_desempenho(desempenho=desempenho))
-            else:
-                porcentagem_aluno.append(None)
-
-    print(porcentagem_aluno)
-    return template('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe', oa=oa,
-                    porcentagem=porcentagem_aluno, aluno=aluno, tipo=observador['tipo'])
-
 def levar_oas_matematica():
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
     descritores = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'])
@@ -779,9 +749,6 @@ def trazer_todos_alunos_da_mesma_turma():
         i['vinculo_turma'] = get_nome_turma(i['vinculo_turma'])
 
     return alunos
-
-
-
 
 def convertendo_str_in_dict(str):
     from ast import literal_eval

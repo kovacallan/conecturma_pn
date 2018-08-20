@@ -39,6 +39,8 @@ class EstruturaFacade:
     def search_oa_by_type_and_aventura_facade(self, aventura, disciplina):
         return self.estrutura.search_oa_by_type_and_aventura(aventura=aventura, disciplina=disciplina)
 
+    def search_descritor_serie_facade(self, serie):
+        return self.estrutura.search_descritor_serie(serie=serie)
 
     def ja_tem_item_facade(self, usuario_logado):
 

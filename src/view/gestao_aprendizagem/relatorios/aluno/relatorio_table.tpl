@@ -13,8 +13,8 @@
           <tr>
             <td>{{i['descricao_descritor']}}</td>
             <td>
-                %if porcentagem[teste] == None:
-                    %pass
+              %if porcentagem[teste] == None:
+                %pass
               %elif int(porcentagem[teste]) >= 70:
                 <img src="/static/img/feed-pos.png" style="display: block; margin-left: auto; margin-right: auto">
               %elif int(porcentagem[teste]) >= 50 and int(porcentagem[teste]) <= 69:

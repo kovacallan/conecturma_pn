@@ -39,7 +39,7 @@ class DbEstrutura(Model):
     aventura = TextField(fts=True, default='0')
 
     quem_criou = TextField(default='0')
-    serie = TextField(default='0')
+    serie = TextField(fts=True, default='0')
 
     tipo_item = TextField(default='0')
     preco = IntegerField(default=0)
@@ -119,13 +119,16 @@ class DbEstrutura(Model):
 
             return turma
 
-    def search_turma_by_escola2(self, vinculo_escola):
-        turma = []
-        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_escola == vinculo_escola),
-                                order_by=DbEstrutura.nome):
-            turma.append(vars(lista)["_data"])
+    def search_descritor_serie(self,serie):
+        from control.dicionarios import TIPO_ESTRUTURA
+        oas = []
 
-            return turma
+        for i in DbEstrutura.query((DbEstrutura.tipo_estrutura == TIPO_ESTRUTURA['objeto_de_aprendizagem']) &
+                                   (DbEstrutura.serie == serie), order_by=DbEstrutura.id):
+
+            oas.append(vars(i)["_data"])
+
+        return oas
 
     def search_oa_by_type_and_aventura(self, aventura ,disciplina):
         oas = []
