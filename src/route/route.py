@@ -289,9 +289,11 @@ def relatorio_aluno():
     relatorio.get_descritores(serie=turma['serie'])
     relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
     relatorio.convert_nivel_for_numeric()
+    relatorio.set_color_face()
+    relatorio.set_pontuacao_porcentagem()
 
-
-    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa = relatorio.descritores, porcentagem={'teste':None})
+    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa = relatorio.descritores, porcentagem=relatorio.porcentagem,
+                pontos=relatorio.porcentagem_solo)
 
 @route('/trazer_oas')
 def levar_oas_matematica():

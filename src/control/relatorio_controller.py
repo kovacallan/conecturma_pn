@@ -7,6 +7,8 @@ class Relatorio(object):
         self.descritores = None
         self.desempenho = None
         self.pontuacao = None
+        self.porcentagem = None
+        self.porcentagem_solo = []
 
     def get_alunos(self, usuario_online_dados, nome_turma):
         from facade.aluno_facade import AlunoFacade
@@ -59,7 +61,13 @@ class Relatorio(object):
         self.desempenho = pontuacao
 
     def set_color_face(self):
-        pass
+        porcentagem = []
+
+        for i in self.pontuacao:
+            porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
+
+        self.porcentagem = porcentagem
+
 
     def convert_nivel_for_numeric(self):
         niveis_pontuação = {
@@ -76,9 +84,19 @@ class Relatorio(object):
                     dict_dado_jogo = self.convertendo_str_in_dict(z)
                     if dict_dado_jogo['termino'] == True:
                         pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
-                dicionario.append({i['objeto_aprendizagem']:pontuacao})
+                dicionario.append(pontuacao)
 
         self.pontuacao = dicionario
+
+    def set_pontuacao_porcentagem(self):
+        for i in self.pontuacao:
+            tamanho = len(i)
+            porcentagem = []
+            z = 1
+            while z <= tamanho:
+                porcentagem.append(int((sum(i[0:z]) * 100) / (2 * z)))
+                z+=1
+            self.porcentagem_solo.append(porcentagem)
 
     def convertendo_str_in_dict(self, str):
         from ast import literal_eval
