@@ -12,8 +12,9 @@
     {{i['serie']}}
 </div>
 <div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
+    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion"
+       aria-controls="collapse{{i['id']}}"
+       class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
 </div>
@@ -23,110 +24,128 @@
 <!-- aqui começa os dados internos do acordeon -->
 <div class="container">
     <div class="row row-par">
-    <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
+        <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel"
+             aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs abas" role="tablist">
-                        <li class="nav-item ">
-                            <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Alunos</button>
-                        </li>
-                    </ul>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs abas" role="tablist">
+                            <li class="nav-item ">
+                                <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab"
+                                   aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof"
+                                        aria-controls="escola-do-rock-prof" aria-selected="false">Alunos
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <!-- aqui começa o conteudo das guias  -->
-            <div class="tab-content row-par">
-                <div class="tab-pane container active" id="{{i['id']}}">
-                    <form>
-                        <input type="hidden" id ="id_escola{{i['id']}}" value="{{i['id']}}">
-                        <div class="row distanciamento" style="margin-top: 30px">
-                            <div class="col-md-12">
-                                <div class="row distanciamento">
-                                    <div class=" col-md-6" style="margin-left: 10px;">
-                                        <label for="nome" style="background-color: inherit;">Nome:
-                                            <span style="color:red">*
+                <!-- aqui começa o conteudo das guias  -->
+                <div class="tab-content row-par">
+                    <div class="tab-pane container active" id="{{i['id']}}">
+                        <form>
+                            <input type="hidden" id="id_escola{{i['id']}}" value="{{i['id']}}">
+                            <div class="row distanciamento" style="margin-top: 30px">
+                                <div class="col-md-12">
+                                    <div class="row distanciamento">
+                                        <div class=" col-md-6" style="margin-left: 10px;">
+                                            <label for="nome" style="background-color: inherit;">Nome:
+                                                <span style="color:red">*
                                                 <span>
-                                        </label>
-                                        <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
+                                            </label>
+                                            <input type="text" placeholder="Escola do rock" class="form-control"
+                                                   size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
+                                        </div>
+                                        <div class="col-md-4" style="padding-left: 10px">
+                                            <label for="CNPJ">serie</label>
+                                            <br>
+                                            <input type="text" size="24" class="form-control" name=""
+                                                   id="serie{{i['id']}}" value="{{i['serie']}}">
+                                        </div>
                                     </div>
-                                    <div class="col-md-4" style="padding-left: 10px">
-                                        <label for="CNPJ">serie</label>
-                                        <br>
-                                        <input type="text" size="24" class="form-control" name="" id="serie{{i['id']}}" value="{{i['serie']}}">
+                                    <div class="row distanciamento">
+                                        <div class="col-md-10" style="margin-left: 10px;">
+                                            <label for="telefone">escola:
+                                                <span style="color:#ff0000">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" size="21" name=""
+                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}">
+                                        </div>
                                     </div>
+                                    <!--fim da div dos dados ao lado da imagem-->
                                 </div>
-                                <div class="row distanciamento">
-                                    <div class="col-md-10" style="margin-left: 10px;">
-                                        <label for="telefone">escola:
-                                            <span style="color:#ff0000">*</span>
-                                        </label>
-                                        <input type="text" class="form-control" size="21" name="" id="escola{{i['id']}}" value="{{i['vinculo_escola']}}">
-                                    </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- aqui termina o conteudo da guia do dados de escola  -->
+                    <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel"
+                         aria-labelledby="{{i['nome']}}-prof">
+                        <div class="row">
+                            <div class="container">
+                                <div class="offset-md-1 distanciamento col-md-" style="margin-top: 20px">
+                                    <p>Alunos
+                                        <i class="far fa-question-circle"></i>
+                                    </p>
                                 </div>
-                                <!--fim da div dos dados ao lado da imagem-->
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- aqui termina o conteudo da guia do dados de escola  -->
-                <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel" aria-labelledby="{{i['nome']}}-prof">
-                    <div class="row">
-                        <div class="container">
-                            <div class="offset-md-1 distanciamento col-md-" style="margin-top: 20px">
-                                <p>Alunos
-                                    <i class="far fa-question-circle"></i>
-                                </p>
-                            </div>
+                                %x=0
                                 % for z in i['aluno']:
+                                %print('teste html',x,z)
+                                %x=x+1
                                 <div class="row">
                                     <div class="col-md-11">
                                         <div class="offset-md-1 nome-prof row row-impar">
-                                            <div class="col-md-2">
-                                            {{z['nome_login']}}
+                                            <div class="col-md-5" style="padding-top: 10px;padding-bottom: 10px;">
+                                                Nome: {{z['nome']}}
+                                                <br>
+                                                <br>
+                                                Login :{{z['nome_login']}}
                                             </div>
-                                            <div class="offset-md-1 col-md-8">
-                                              senha :
-                                              <img src="/static/img/{{z['senha'][0]}}.png" style="padding-left:15px;">
-                                              <img src="/static/img/{{z['senha'][1]}}.png" style="padding-left:15px;">
-                                              <img src="/static/img/{{z['senha'][2]}}.png" style="padding-left:15px;">
-                                              <img src="/static/img/{{z['senha'][3]}}.png" style="padding-left:15px;">
-                                            </div>
-                                            <div class="col-md-1 item-tabela">
-                                                <a href="">
-                                                    <i class="fas fa-edit edit-ico"></i>
-                                                </a>
+                                            <div class="offset-md-1 col-md-6" style="padding:10px">
+
+                                                <span style="margin-left:62px"> &nbsp;senha :</span>
+                                                <br>
+                                                <img src="/static/img/{{z['senha'][0]}}.png"
+                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                <img src="/static/img/{{z['senha'][1]}}.png"
+                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                <img src="/static/img/{{z['senha'][2]}}.png"
+                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                <img src="/static/img/{{z['senha'][3]}}.png"
+                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            %end
+
+
+                                %end
+                            </div>
                         </div>
                     </div>
+                    <br>
                 </div>
-                <br>
-            </div>
-            <div class="container">
-                <div class="row" style="margin-bottom: 10px">
-                    % if tipo != '2':
+                <div class="container">
+                    <div class="row" style="margin-bottom: 10px">
+                        % if tipo != '2':
                         <div class="col-md-1">
                             <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                                 <i class="far fa-trash-alt" style="color:#969696;"></i>
                             </span>
                         </div>
-                    % end
-                    <div class="offset-md-10 col-md-1">
+                        % end
+                        <div class="offset-md-10 col-md-1">
                         <span onclick="update_rede({{i['id']}})" style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;"></i>
                         </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
-    </form>
-</div>
 </div>

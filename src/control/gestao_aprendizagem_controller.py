@@ -137,6 +137,7 @@ def novasenha():
     senha = request.params['senha_nova']
     usuario = facade.search_observador_email_facade(email=email)
     facade.redefinir_senha_facade(id=usuario['id'], senha=sha512_crypt.hash(senha))
+    redirect('/')
 
 
 @permissao('professor')

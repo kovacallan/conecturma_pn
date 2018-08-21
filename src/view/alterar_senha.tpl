@@ -15,18 +15,17 @@
                 <br>
                 <div class="row">
                     <div class="offset-md-7 col-md-2">
-                        <button style="background-color:#ff4d4d;margin-left:33px;" type="submit" class="botao-nova-escola">
+                        <a style="background-color:#ff4d4d;margin-left:33px;" href="/" class="botao-nova-escola">
                   &nbsp;        Cancelar
-                        </button>
+                        </a>
                     </div>
                     <div class="col-md-2" style="padding-left: 30px;">
                         <button type="submit" class="botao-nova-escola">
-                  &nbsp;        Novo Usuário
+                  &nbsp;        Mudar senha
                         </button>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
-% include('footer.tpl')
+% include('gestao_aprendizagem/footer/footer.tpl')
