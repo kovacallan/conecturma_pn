@@ -63,9 +63,9 @@
                       <input type="text" class="form-control" size="21" name="" id="telefone{{i['id']}}" value="{{i['telefone']}}">
                     </div>
                     <div class="col-md-" style="padding-left: 10px ;">
-                      <label for="diretor">diretor</label>
+                      <label for="data_cadastro">data de cadastro</label>
                       <br>
-                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['vinculo_diretor_escola']}}">
+                        <input type="text" size="33" class="form-control" name="" id="data_cadastro" value="data_cadastro">
                     </div>
                   </div>
                   <div class="row distanciamento">

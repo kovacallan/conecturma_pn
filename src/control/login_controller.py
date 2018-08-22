@@ -1,5 +1,5 @@
 from bottle import request, redirect,response, template
-from control.classes.permissao import Login_Observador, Login_Aluno
+from control.classes.permissao import Login_Observador, Login_Aluno, usuario_logado
 from facade.facade_main import *
 
 
@@ -33,7 +33,8 @@ def view_esqueci_senha():
 
 
 def view_reformular_senha():
-    email = request.params['email']
+    email=usuario_logado()['email']
+    # email = request.params['email']
     pesquisa = facade.search_observador_email_facade(email=email)
     return template('login/reformular_senha.tpl', id=pesquisa['id'], email=pesquisa['email'])
 

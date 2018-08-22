@@ -50,7 +50,7 @@
           Telefone
         </div>
         <div class="col-md-2 item-tabela topo-tab">
-          Numeros escolas
+          Numero escolas
         </div>
         <div class="col-md-1 item-tabela topo-tab">
         </div>

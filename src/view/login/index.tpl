@@ -20,7 +20,8 @@
                         <div id="Login-div">
                                 <img src="/static/img/login-img.png" id="login-img">
                                 <section class="content-professor">
-                                    <div class="professor">
+                                        <div class="professor">
+                                            <form>
                                         <img src="/static/img/professor-seta.png" id="professor-seta">
                                         <h2 class="h3 mb-3 font-weight-normal professor-text">Professor</h2>
                                         <label for="inputEmail" class="sr-only">Email</label>
@@ -29,13 +30,15 @@
                                         <input type="password" id="inputPassword" class="form-control class_senha" placeholder="Senha" required="">
                                         <button onclick="login_professor()" id="btn-professor" style="cursor:pointer"></button>
                                         <a href="#" onclick="" class="lost-pass">Esqueci minha senha</a>
+                                                </form>
                                     </div>
                                 </section>
                                 <section class="content-login">
+                                    <form>
                                     <div class="student">
                                        <img src="/static/img/aluno-seta.png" id="aluno-seta">
 		                                <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
-		                                </br>
+		                                <br/>
 		                                <label>Nome do usuário</label> <br>
 		                                <input data-val="true" style="text-transform:uppercase" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno" >
                                     </div>
@@ -101,20 +104,21 @@
                                                 <div id="k" onmouseout="mouse_out('k')" onmouseover="mouse_in('k')" onclick="mudaEstado('k')" class="box-cartoons on">
                                                     <figure>
                                                     <img class="img_selecionada" src="/static/img/avatar_11.png" data-imagem-selecionada="k">
-                                                    <figure>
+                                                    </figure>
                                                 </div>
                                                 <div id="l"  onmouseout="mouse_out('l')" onmouseover="mouse_in('l')" onclick="mudaEstado('l')" class="box-cartoons on">
                                                     <figure>
                                                     <img class="img_selecionada" src="/static/img/avatar_12.png" data-imagem-selecionada="l">
-                                                    <figure>
+                                                    </figure>
                                                 </div>
 		                        	        </div>
                                             <div>
-                                                <button id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
+                                                <button type="submit" id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
+                                        </form>
                                 </section>
                         </div>
                     </main>
@@ -155,5 +159,14 @@
     </div>-->
     <script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
     <script type="text/javascript" src="../static/js/script.js"></script>
+    <script type="text/javascript">
+
+
+ document.addEventListener('keydown', function(event) {
+        if (event.keyCode == 13) {// enter
+        	login_professor();
+        }
+    });
+    </script>
 </body>
 </html>
