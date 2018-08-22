@@ -60,15 +60,23 @@
                                         <div class="col-md-12">
                                             <label for="rede">Rede de Ensino:</label>
                                             <select class="custom-select" name="rede" id="rede" aria-label="Example select with button addon">
-                                                <option value="0" selected></option>
-                                                % for z in rede:
-                                                    <option value="{{z['id']}}">{{z['nome']}}</option>
-                                                % end
+                                                % if isinstance(rede, list):
+                                                    <option value="0" selected></option>
+                                                    % for z in rede:
+                                                        <option value="{{z['id']}}">{{z['nome']}}</option>
+                                                    % end
+                                                %else:
+                                                    %if rede != -1:
+                                                        <option value="{{rede['id']}}">{{rede['nome']}}</option>
+                                                    %else:
+                                                        <option value=" "></option>
+                                                    %end
+                                                %end
                                             </select>
                                         </div>
                                     </div>
-                                    <!--fim da div dos dados ao lado da imagem-->
                                 </div>
+                                    <!--fim da div dos dados ao lado da imagem-->
                                 <div class="offset-md-1 row distanciamento">
                                     <div class="col-md-6">
                                         <label for="endereco">Endereço</label>

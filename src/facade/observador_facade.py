@@ -9,9 +9,9 @@ class ObservadorFacade:
         self.observador = DbObservador()
 
 
-    def create_observador_facade(self, nome, senha, telefone, email, tipo,escola, vinculo_turma='0',cpf='0', rede='0'):
-        return self.observador.create_observador(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email,
-                                                 tipo=tipo, rede=str(rede), escola=str(escola),vinculo_turma=str(vinculo_turma))
+    def create_observador_facade(self, **kwargs):
+        return self.observador.create_observador(**kwargs)
+
     def read_observador_facade(self):
         return self.observador.read_observador()
 
@@ -54,6 +54,10 @@ class ObservadorFacade:
     def search_observador_inativos_facade(self, nome):
         return self.observador.search_observador_inativos(nome)
 
+    def search_diretor_vinculo_escola_facade(self, vinculo_escola):
+        return self.observador.search_diretor_vinculo_escola(vinculo_escola = vinculo_escola)
+
+
     def observador_in_turma_facade(self, id_observador, vinculo_turma):
         self.observador.observador_in_turma(id_observador=id_observador,vinculo_turma=vinculo_turma)
 
@@ -70,3 +74,5 @@ class ObservadorFacade:
         self.observador.equipar_item(id_usuario=id, itens=itens)
 
 
+    def pesquisa_email_facade(self, letras):
+        return self.observador.pesquisa_email(letras=letras)

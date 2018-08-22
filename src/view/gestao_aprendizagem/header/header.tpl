@@ -20,9 +20,9 @@
                 <header>
                 <div class="row">
                     <div class="col-md-3">
-                        
-                        <img src="/static/img/conecturma-logo.png" id="conecturma-logo" class="img img-fluid">
-                        
+                        <a href="/gestao_aprendizagem">
+                            <img src="/static/img/conecturma-logo.png" id="conecturma-logo" class="img img-fluid">
+                        </a>
                     </div>
                     <div class="col-md-5">
                         <h1 id="header-text">Gestão de Aprendizagem</h1>
@@ -33,9 +33,9 @@
                             </div>
     
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform: uppercase; background-color: rgb(158, 208, 246); position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-                                <a class="dropdown-item" href="#" style="color:#fff;">Administrativo</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" style="color:#fff;">Aprendizagem</a>
+                                <!--<a class="dropdown-item" href="#" style="color:#fff;">Administrativo</a>
+                                <div class="dropdown-divider"></div>-->
+                                <a class="dropdown-item" href="/aluno/area_aluno" style="color:#fff;">Aprendizagem</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/sair" style="color:#fff;">Sair</a>
                             </div>

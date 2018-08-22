@@ -17,12 +17,12 @@
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
 </div>
-</div>
+
 <!--fim das informaçoes da tabela-->
 
 <!-- aqui começa os dados internos do acordeon -->
-
-<div class="row row-par">
+<div class="container">
+    <div class="row row-par">
     <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
 
@@ -42,23 +42,24 @@
             <div class="tab-content row-par">
                 <div class="tab-pane container active" id="{{i['id']}}">
                     <form>
+                        <input type="hidden" id ="id_escola{{i['id']}}" value="{{i['id']}}">
                         <div class="row distanciamento" style="margin-top: 30px">
-                            <div class="offset-md-1 col-md-3">
+                            <div class="col-md-3">
                                 <img src="/static/img/editar-foto.png" style="border:2px black;z-index: 0;">
                             </div>
-                            <div class=" col-md-8">
+                            <div class="col-md-9">
                                 <div class="row distanciamento">
                                     <div class=" col-md-">
                                         <label for="nome" style="background-color: inherit;">Nome:
                                             <span style="color:red">*
                                                 <span>
                                         </label>
-                                        <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome" value="{{i['nome']}}">
+                                        <input type="text" placeholder="Escola do rock" class="form-control" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
                                         <label for="CNPJ">CNPJ</label>
                                         <br>
-                                        <input type="text" size="24" class="form-control" name="" id="CNPJ" value="{{i['cnpj']}}">
+                                        <input type="text" size="24" class="form-control" name="" id="cnpj{{i['id']}}" value="{{i['cnpj']}}">
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
@@ -66,20 +67,25 @@
                                         <label for="telefone">telefone:
                                             <span style="color:#ff0000">*</span>
                                         </label>
-                                        <input type="text" class="form-control" size="21" name="" id="telefone" value="{{i['telefone']}}">
+                                        <input type="text" class="form-control" size="21" name="" id="telefone{{i['id']}}" value="{{i['telefone']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px ;">
                                         <label for="diretor">diretor</label>
                                         <br>
-                                        <input type="text" size="33" class="form-control" name="" id="diretor" {{i[ 'vinculo_diretor_escola']}}>
+                                        <input type="text" size="33" class="form-control" name="" id="diretor{{i['id']}}" value="{{i['vinculo_diretor_escola']}}">
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
                                     <div class="col-md-">
                                         <label for="rede">Rede de Ensino:
-                                            
+
                                         </label>
-                                        <input type="text" size="59" class="form-control" name="" id="rede" value="{{i['vinculo_rede']}}">
+                                        % if i['vinculo_rede'] != '0':
+                                            <input type="hidden" size="59" class="form-control" name="" id="rede{{i['id']}}" value="{{i['vinculo_rede_id']}}">
+                                            <input type="text" size="59" class="form-control" name="" value="{{i['vinculo_rede']}}">
+                                        % else:
+                                            <input type="text" size="59" class="form-control" name="" value=" ">
+                                        %end
                                     </div>
                                 </div>
                                 <!--fim da div dos dados ao lado da imagem-->
@@ -87,36 +93,36 @@
                             <div class="offset-md-1 distanciamento row" style="">
                                 <div class="col-md-6">
                                     <label for="endereco">Endereço</label>
-                                    <input type="text" class="form-control" size="49" name="endereco" id="rede" value="{{i['endereco']}}">
+                                    <input type="text" class="form-control" size="49" name="endereco" id="endereco{{i['id']}}" value="{{i['endereco']}}">
                                 </div>
                                 <div class="col-md-2" style="padding-left: 10px ;">
                                     <label for="numero">Numero</label>
-                                    <input type="text" class="form-control" size="5" name="numero" id="numero" value="{{i['numero']}}">
+                                    <input type="text" class="form-control" size="5" name="numero" id="numero{{i['id']}}" value="{{i['numero']}}">
                                 </div>
                                 <div class="col-md-4" style="padding-left: 10px ;">
                                     <label for="bairro">Bairro</label>
-                                    <input type="text" class="form-control" size="24" name="bairro" id="bairro" value="{{i['bairro']}}">
+                                    <input type="text" class="form-control" size="24" name="bairro" id="bairro{{i['id']}}" value="{{i['bairro']}}">
                                 </div>
                             </div>
                             <div class="offset-md-1  row">
                                 <div class="col-md-6">
                                     <label for="complemento">Complemento</label>
-                                    <input type="text" class="form-control" size="50" name="endereço" id="complemento" value="{{i['complemento']}}">
+                                    <input type="text" class="form-control" size="50" name="endereço" id="complemento{{i['id']}}" value="{{i['complemento']}}">
                                 </div>
                                 <div class="col-md-6" style="padding-left: 10px ;">
                                     <label for="cep">CEP</label>
-                                    <input type="text" class="form-control" size="32" name="cep" id="cep" value="{{i['cep']}}">
+                                    <input type="text" class="form-control" size="32" name="cep" id="cep{{i['id']}}" value="{{i['cep']}}">
                                 </div>
 
                             </div>
                             <div class="offset-md-1 row distanciamento">
                                 <div class="col-md-6">
                                     <label for="estado">Estado</label>
-                                    <input type="text" class="form-control" size="50" name="estado" id="estado" value="{{i['estado']}}">
+                                    <input type="text" class="form-control" size="50" name="estado" id="estado{{i['id']}}" value="{{i['estado']}}">
                                 </div>
                                 <div class="col-md-6" style="padding-left: 10px ;">
                                     <label for="municipio">Municipio</label>
-                                    <input type="text" class="form-control" size="32" name="municipio" id="municipio" value="{{i['municipio']}}">
+                                    <input type="text" class="form-control" size="32" name="municipio" id="municipio{{i['id']}}" value="{{i['municipio']}}">
                                 </div>
                             </div>
                         </div>
@@ -130,34 +136,22 @@
                                     <i class="far fa-question-circle"></i>
                                 </p>
                             </div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="offset-md-1 nome-prof row row-impar">
-                                        <div class="col-md-11">
-                                            MARIA DA SILVA FIGUEIREDO
-                                        </div>
-                                        <div class="col-md-1 item-tabela">
-                                            <a href="">
-                                                <i class="fas fa-edit edit-ico"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="offset-md-1 nome-prof row row-impar">
-                                        <div class="col-md-11">
-                                            TIAGO MATEUS BRUNO DA SILVA SILVEIRA
-                                        </div>
-                                        <div class="col-md-1 item-tabela">
-                                            <a href="">
-                                                <i class="fas fa-edit edit-ico"></i>
-                                            </a>
+                            % for z in i['professor']:
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <div class="offset-md-1 nome-prof row row-impar">
+                                            <div class="col-md-11">
+                                                {{z['nome']}}
+                                            </div>
+                                            <div class="col-md-1 item-tabela">
+                                                <a href="">
+                                                    <i class="fas fa-edit edit-ico"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            %end
 
                         </div>
                     </div>
@@ -166,19 +160,22 @@
             </div>
             <div class="container">
                 <div class="row" style="margin-bottom: 10px">
-                    <div class="col-md-1">
-                        <a href="#">
-                            <i class="far fa-trash-alt" style="color:#969696;"></i>
-                        </a>
-                    </div>
+                    % if tipo != '2':
+                        <div class="col-md-1">
+                            <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+                                <i class="far fa-trash-alt" style="color:#969696;"></i>
+                            </span>
+                        </div>
+                    % end
                     <div class="offset-md-10 col-md-1">
-                        <a href="">
+                        <span onclick="update_escola({{i['id']}})" style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;"></i>
-                        </a>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     </form>
+</div>
 </div>

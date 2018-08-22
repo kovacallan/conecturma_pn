@@ -167,7 +167,9 @@ cartoons-pass figure:hover img,figure.hover img {
     border: none;
     margin-left: 81px;
     margin-top: 30px;
-}
+    }
+
+
 
 #Login-div .professor  button{
 	background: url(img/btn-prof.png) 0 0 no-repeat;
@@ -220,6 +222,7 @@ cartoons-pass figure:hover img,figure.hover img {
 
 }
 
+
 footer{
     position: absolute;
     bottom: 0;
@@ -229,3 +232,12 @@ footer{
 
 
 }
+
+.display-block{
+display:block;
+}
+
+.display-none{
+display:none;
+}
+

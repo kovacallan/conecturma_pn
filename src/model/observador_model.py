@@ -13,7 +13,7 @@ class DbObservador(Model):
     telefone = TextField(default='0')
     cpf = TextField(default='0')
     email = TextField(fts=True,default='0')
-    data_nascimento=DateField(default=datetime.datetime.now)
+    data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
 
     itens_comprados = ListField()
@@ -30,16 +30,12 @@ class DbObservador(Model):
     pontos_de_moedas = IntegerField(default=0)
 
     data_ultimo_login = TextField(default='')
+    ativo = TextField(default='0')
 
 
-    def create_observador(self, nome, senha, telefone, email, tipo, escola, vinculo_turma='0',rede='0', cpf='0'):
 
-        if True or nome.isalpha() and cpf.isdigit() and tipo.isdigit():
-            self.create(nome=nome, senha=senha, telefone=telefone, cpf=cpf, email=email, tipo=tipo, vinculo_rede=rede,
-                       vinculo_escola=escola, vinculo_turma = vinculo_turma)
-            return True
-        else:
-            return False
+    def create_observador(self, **kwargs):
+        return self.create(**kwargs)
 
     def read_observador(self):
 
@@ -51,7 +47,7 @@ class DbObservador(Model):
                     cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
-                    vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
+                    nascimento=search.data_nascimento, vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
                 )
             )
 
@@ -66,14 +62,15 @@ class DbObservador(Model):
     def redefinir_senha(self, id, senha):
         observador = DbObservador.load(id)
         observador.senha = senha
+        observador.ativo = '1'
 
         observador.save()
 
     def search_observador_id(self, id):
 
         observador = self.load(id)
-
-        return observador
+        retorno = vars(observador)["_data"]
+        return retorno
 
     def search_observador_email(self, email):
         observador = None
@@ -141,7 +138,7 @@ class DbObservador(Model):
                     cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
-                    vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
+                    vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma, nascimento=search.data_nascimento
                 )
             )
         return observador
@@ -166,10 +163,9 @@ class DbObservador(Model):
         observador = []
         for read in DbObservador.query(DbObservador.vinculo_rede == vinculo_rede, order_by=DbObservador.nome):
             observador.append(dict(id=read.id, nome=read.nome, senha=read.senha, telefone=read.telefone, cpf=read.cpf,
-                     email=read.email, tipo=read.tipo,
-                     vinculo_rede=read.vinculo_rede,
-                     vinculo_escola=read.vinculo_escola,
-                     vinculo_turma=read.vinculo_turma))
+                     email=read.email, tipo=read.tipo, vinculo_rede=read.vinculo_rede, vinculo_escola=read.vinculo_escola,
+                     vinculo_turma=read.vinculo_turma, nascimento=read.data_nascimento))
+
 
         return observador
 
@@ -179,6 +175,15 @@ class DbObservador(Model):
             usuario = pesquisa
 
         return usuario
+
+    def search_diretor_vinculo_escola(self, vinculo_escola):
+        from control.dicionarios import TIPO_USUARIOS
+        observador = None
+        for search in DbObservador.query((DbObservador.tipo == TIPO_USUARIOS['diretor']) & (DbObservador.vinculo_escola == vinculo_escola)):
+            observador = vars(search)["_data"]
+
+        return observador
+
 
     def login_date(self, id, data):
         """
@@ -219,3 +224,11 @@ class DbObservador(Model):
                     if itens['tipo_item'] == '4':
                         usuario.corpo = itens['id']
         usuario.save()
+
+    def pesquisa_email(self, letras):
+        observador = []
+        for i in DbObservador.all():
+            if letras in i.email:
+                observador.append(vars(i)["_data"])
+
+        return observador

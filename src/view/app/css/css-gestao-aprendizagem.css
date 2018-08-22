@@ -170,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .Ola{
 	font-size: 25.81px;
-	color:#3fe3d6;
+	color:#0391E6;
 }
 
 .fonte-texto{
@@ -278,3 +278,8 @@ h1, h2, h3, h4, h5, h6 {
 	border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
+
+.dropdown-item:focus, .dropdown-item:hover{
+background-color:initial;
+}
+

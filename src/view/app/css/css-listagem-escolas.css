@@ -21,31 +21,29 @@
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     border: 1px solid transparent;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-
-
 }
+
 button:focus{
 	outline: 1px transparent;
 }
+
 .normalizar-botao{
 	background-color: inherit;
 	border: 1px transparent;
 	padding-right: 50px;
 }
+
 .input-group{
 	top:50px;
 	opacity: 0.5;
 }
+
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     color: #495057;
     background-color: inherit;
@@ -54,11 +52,12 @@ button:focus{
     border-right-color: transparent;
     border-bottom-color: red;
     border-left-color: transparent;
-
 }
+
 .nome-prof{
     border: 1px solid white;
 }
+
 .botao-salvar{
 	background-color: #0391E6;
 	color: white;
@@ -68,24 +67,19 @@ button:focus{
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     border: 1px solid transparent;
-    padding: .375rem .75rem;
+    padding: .375rem .70rem;
     font-size: 1rem;
     line-height: 1.5;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-
-
-
 }
+
 .pesquisa{
 	width: 60%;
 	float: right;
 }
+
 /*.pesquisa-input{
 	padding-left: 20px;
 	border-radius: 40px;
@@ -97,27 +91,33 @@ button:focus{
 	color:#969696;
 	float: right;
 }
+
 .fa-angle-up{
 	color:#969696;
 	float: right;	
 }
+
 .nav-link.show {
     color: black;
     background-color: inherit;
     border-color: white white white;
 }
+
 .nav-link{
 	color: #4c4c4c;
 	background-color: inherit;
 	padding:.5rem 0rem;
 	margin-left: 10px;
 }
+
 .form-control:focus{
 	box-shadow: 0;
 }
+
 a:hover{
 	color: inherit;
 }
+
 .form-control {
     display: block;
     width: 100%;
@@ -137,28 +137,31 @@ a:hover{
 
 }
 
-
-
 .top-escolas-tabela{
 	font-family: "Arial";
 	font-size: 25.08pt;
-	color: #3fe3d6;
+	color: #0391E6;
 	margin-bottom: 0px;
 }
+
 .card{
 	background-color: initial;
 }
+
 .edit-ico{
 	float: right;
 	color:#969696;
 }
+
 .aba-prof{
       min-height: 366px;
 }
+
 .distanciamento{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
 .item-tabela{
 	border: 1px solid white;
 	font-family: "Arial";
@@ -166,8 +169,8 @@ a:hover{
 	font-size: 12pt;
     padding-top: 14px;
     padding-bottom: 14px;
-
 }
+
 .item-tabela-h{
 	border: 1px solid white;
 	padding-left: 10px;
@@ -176,7 +179,6 @@ a:hover{
 	font-size: 12pt;
     color: #ffffff;
     padding-top: 14px;
-
 }
 
 .accordion:after {
@@ -187,11 +189,24 @@ a:hover{
     margin-left: 5px;
 }
 
-
 .row-par{
 	background-color: #dedede;
 }
 
 .row-impar{
 	background-color: #f3f3f3;
+}
+
+.seta-cima{
+    transform: rotate(180deg);
+}
+
+.input-height-30{
+    height:30px;
+}
+
+.mudar_senha{
+    color:#0391e6;
+    margin-left: -6px;
+    margin-top: 51px;
 }

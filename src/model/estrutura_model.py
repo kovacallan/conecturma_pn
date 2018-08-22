@@ -15,6 +15,7 @@ class DbEstrutura(Model):
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_diretor_escola = TextField(fts=True, default='0')
     vinculo_professor_turma = TextField(fts=True, default='0')
+    vinculo_professor2_turma = TextField(fts=True, default='0')
     cnpj = TextField(default='0')
 
     endereco = TextField(default='0')
@@ -38,7 +39,7 @@ class DbEstrutura(Model):
     aventura = TextField(fts=True, default='0')
 
     quem_criou = TextField(default='0')
-    serie = TextField(default='0')
+    serie = TextField(fts=True, default='0')
 
     tipo_item = TextField(default='0')
     preco = IntegerField(default=0)
@@ -63,7 +64,7 @@ class DbEstrutura(Model):
     def read_estrutura(self, tipo_estrutura):
         listas = []
 
-        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == tipo_estrutura), order_by=DbEstrutura.id):
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == tipo_estrutura) & (DbEstrutura.ativo == '1'), order_by=DbEstrutura.id):
             listas.append(vars(lista)["_data"])
 
         return listas
@@ -87,27 +88,24 @@ class DbEstrutura(Model):
 
     def search_estrutura_id(self, id):
         if id != '0':
-            print('Teste: ',id)
             lista = DbEstrutura.load(int(id))
             lista_dic = vars(lista)["_data"]
         else:
-            lista_dic = dict(
-                nome=" "
-            )
+            lista_dic = -1
 
         return lista_dic
 
     def search_escola_by_rede(self, vinculo_rede):
         escola = []
-        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '2') and (DbEstrutura.vinculo_rede == vinculo_rede),
-                                       order_by=self.nome):
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '2') & (DbEstrutura.vinculo_rede == vinculo_rede) &
+                                       (DbEstrutura.ativo == '1'),order_by=self.nome):
             escola.append(vars(lista)["_data"])
 
         return escola
 
     def search_turma_by_rede(self, vinculo_rede):
         turma = []
-        for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_rede == vinculo_rede),
+        for lista in self.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_rede == vinculo_rede),
                                 order_by=DbEstrutura.nome):
             turma.append(vars(lista)["_data"])
 
@@ -115,11 +113,22 @@ class DbEstrutura(Model):
 
     def search_turma_by_escola(self, vinculo_escola):
         turma = []
-        for lista in self.query((DbEstrutura.tipo_estrutura == '3') and (DbEstrutura.vinculo_escola == vinculo_escola),
+        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_escola == vinculo_escola),
                                 order_by=DbEstrutura.nome):
             turma.append(vars(lista)["_data"])
 
             return turma
+
+    def search_descritor_serie(self,serie):
+        from control.dicionarios import TIPO_ESTRUTURA
+        oas = []
+
+        for i in DbEstrutura.query((DbEstrutura.tipo_estrutura == TIPO_ESTRUTURA['objeto_de_aprendizagem']) &
+                                   (DbEstrutura.serie == serie), order_by=DbEstrutura.id):
+
+            oas.append(vars(i)["_data"])
+
+        return oas
 
     def search_oa_by_type_and_aventura(self, aventura ,disciplina):
         oas = []
@@ -129,14 +138,20 @@ class DbEstrutura(Model):
 
         return oas
 
-    def update_estrutura(self, update_id, nome='0', telefone='0', vinculo_rede='0', cep='0', endereco='0',
-                         numero='0', cidade='0',
-                         estado='0', uf='0', serie='0', tipo_item='0', preco=None, tipo_medalha=None,
-                         descricao=None,
-                         descricao_completa=None, nome_usuario=None, tipo_usuario=None, vinculo_escola=None,
-                         vinculo_professor_turma="0"):
-        estrutura = self.load(update_id)
-        [setattr(estrutura, parametro, valor) for parametro, valor in locals().items() if valor]
+    def update_estrutura(self, **kwargs):
+        new_data_escola = kwargs['estrutura']
+        estrutura = self.load(int(new_data_escola['id']))
+        for i in new_data_escola:
+            if new_data_escola[i] and new_data_escola[i] != ' ':
+                setattr(estrutura, i, new_data_escola[i])
+        if estrutura.save():
+            return True
+        else:
+            return False
+
+    def delete_estrutura(self, id):
+        estrutura = self.load(int(id))
+        estrutura.ativo = '0'
         estrutura.save()
 
     def func_anotacoes_estrutura_turma(self, id_estrutura, mensagem):
@@ -153,9 +168,3 @@ class DbEstrutura(Model):
         estrutura = self.load(id_estrutura)
         estrutura.anotacoes_estrutura_rede.append(mensagem)
         estrutura.save()
-
-    # def delete_estrutura_test(self, deletar_ids):
-    #
-    #     for deletar_ids in deletar_ids:
-    #         usuario = self.load(deletar_ids)
-    #         usuario.delete(deletar_ids)

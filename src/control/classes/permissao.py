@@ -62,9 +62,9 @@ class Login_Aluno(object):
     def login(self):
         facade = Facade()
         hash = self.gerar_hash()
-        aluno = facade.search_aluno_nome_login_facade(nome_login=self.nome)
+        aluno = facade.search_aluno_nome_login_facade(nome_login=self.nome.upper())
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
-        if aluno['nome_login'] == self.nome:
+        if aluno['nome_login'] == self.nome.upper():
             if aluno['senha'] == self.senha:
                 aluno_logado = dict(
                     id=aluno['id'],

@@ -14,6 +14,7 @@
 
 <body>
     <div class="container-fluid bg">
+
         <div class="container">
             <div class="col-md-12" style="top: 29px;">
                 <div class="bg_login">
@@ -27,6 +28,8 @@
                                     <div id="titulo-aluno">
                                         <img src="/static/img/aluno-seta.png" id="aluno-seta" class="img-fluid" alt="Responsive image">
                                         <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
+
+
                                     </div>
                                         <br>
                                     <label>Nome do usuário</label>
@@ -58,10 +61,13 @@
                                                     <img class="img_selecionada" src="/static/img/avatar_03.png" data-imagem-selecionada="c" class="img-fluid" alt="Responsive image">
                                                 </figure>
                                             </div>
+
                                             <div id="d" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
                                                     <img class="img_selecionada" src="/static/img/avatar_04.png" data-imagem-selecionada="d" class="img-fluid" alt="Responsive image">
                                                 </figure>
+
+
                                             </div>
                                         </div>
                                         <div class="row">
@@ -115,6 +121,7 @@
 
                                         </button>
                                     </div>
+
                                 </div>
                                 <input data-val="true" data-val-required="A senha do usuário é obrigatória" id="senhaAluno" name="Senha" type="hidden" value="">
 
@@ -144,11 +151,10 @@
                                         </div>
 
 
-
-                        </section>
-                        </div>
-                        </form>
-                        </div>
+  </section>
+  </div>
+  </form>
+  </div>
 
 
 
@@ -163,6 +169,7 @@
     </div>
     </div>
     </div>
+
 
 
 
@@ -203,5 +210,17 @@
         <img src="/static/img/edufuturo-1.png">
 
     </footer>
+
+
+    <script type="text/javascript">
+
+
+ document.addEventListener('keydown', function(event) {
+        if (event.keyCode == 13) {// enter
+        	login_professor();
+        }
+    });
+    </script>
+
 </body>
 </html>
