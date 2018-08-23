@@ -248,6 +248,12 @@ def controller_create_turma():
     return controller_create_turma()
 
 
+@route('/turma/update_turma')
+@permissao('professor')
+def controller_turma_editar():
+    from control.gestao_aprendizagem_controller import controller_edit_turma
+    return controller_edit_turma()
+
 @route('/turma/turma_update_controller', method='POST')
 @permissao('diretor')
 def controller_update_turma():

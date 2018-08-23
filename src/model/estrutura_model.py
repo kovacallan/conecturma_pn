@@ -139,11 +139,11 @@ class DbEstrutura(Model):
         return oas
 
     def update_estrutura(self, **kwargs):
-        new_data_escola = kwargs['estrutura']
-        estrutura = self.load(int(new_data_escola['id']))
-        for i in new_data_escola:
-            if new_data_escola[i] and new_data_escola[i] != ' ':
-                setattr(estrutura, i, new_data_escola[i])
+        new_data_estrutura = kwargs['estrutura']
+        estrutura = self.load(int(new_data_estrutura['id']))
+        for i in new_data_estrutura:
+            if new_data_estrutura[i] and new_data_estrutura[i] != ' ':
+                setattr(estrutura, i, new_data_estrutura[i])
         if estrutura.save():
             return True
         else:

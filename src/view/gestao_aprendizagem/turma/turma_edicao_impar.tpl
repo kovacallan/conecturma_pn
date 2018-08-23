@@ -39,7 +39,7 @@
                 <div class="tab-content row-impar">
                     <div class="tab-pane container active" id="nossa-escola">
                         <form>
-                            <input type="hidden" id="id_escola{{i['id']}}" value="{{i['id']}}">
+                            <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row" style="margin-top: 30px">
                                 <div class="col-md-3">
                                     <img src="/static/img/editar-foto.png" style="border:2px black;z-index: 0;">
@@ -49,7 +49,7 @@
                                         <div class=" col-md-">
                                             <label for="nome" style="background-color: inherit;">Nome:
                                                 <span style="color:#ff0000">*
-                        <span>
+                                                </span>
                                             </label>
                                             <input type="text" class="form-control" size="30" name=""
                                                    id="nome{{i['id']}}" value="{{i['nome']}}">
@@ -135,41 +135,41 @@
                                     </p>
                                 </div>
                             </div>
-                                %x=0
-                                % for z in i['aluno']:
-                                %print('teste html',x,z)
-                                %x=x+1
-                                <div class="row">
-                                    <div class="col-md-11">
-                                        <div class="offset-md-1 nome-prof row row-par">
-                                            <div class="col-md-5" style="padding-top: 10px;padding-bottom: 10px;">
-                                                Nome: {{z['nome']}}
 
-                                                <br>
-                                                Login :{{z['nome_login']}}
-                                            </div>
-                                            <div class="offset-md-1 col-md-6" style="padding:10px">
+                            % for z in i['aluno']:
 
-                                                <span style="margin-left:62px"> &nbsp;senha :</span>
-                                                <br>
-                                                <img src="/static/img/{{z['senha'][0]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][1]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][2]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][3]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
 
-                                            </div>
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <div class="offset-md-1 nome-prof row row-par">
+                                        <div class="col-md-5" style="padding-top: 10px;padding-bottom: 10px;">
+                                            Nome: {{z['nome']}}
+
+                                            <br>
+                                            Login :{{z['nome_login']}}
+                                        </div>
+                                        <div class="offset-md-1 col-md-6" style="padding:10px">
+
+                                            <span style="margin-left:62px"> &nbsp;senha :</span>
+                                            <br>
+                                            <img src="/static/img/{{z['senha'][0]}}.png"
+                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                            <img src="/static/img/{{z['senha'][1]}}.png"
+                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                            <img src="/static/img/{{z['senha'][2]}}.png"
+                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                            <img src="/static/img/{{z['senha'][3]}}.png"
+                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+
                                         </div>
                                     </div>
                                 </div>
-
-
-                                %end
                             </div>
+
+
+                            %end
                         </div>
+                    </div>
                 </div>
                 <br>
             </div>

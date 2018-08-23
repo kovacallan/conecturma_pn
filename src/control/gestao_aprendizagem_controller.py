@@ -430,7 +430,7 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
             else:
                 i['vinculo_rede_id'] = i['vinculo_rede']
-                i['vinculo_rede'] = '0'
+                i['vinculo_rede'] = ' '
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
@@ -588,6 +588,12 @@ def controller_create_turma():
     facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
                                    vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
     redirect('/turma')
+
+def controller_edit_turma():
+    id_turma=request.forms['id']
+    nome = request.forms['nome']
+    print('controler',id_turma,nome)
+    facade.update_estrutura_facade(id=id_turma, nome=nome)
 
 
 def view_update_turma():

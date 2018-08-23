@@ -362,7 +362,22 @@ function cadastro_turma(){
     }
 }
 
+function update_turma(id){
 
+    id = document.getElementById('id_turma'+id).value;
+    nome = document.getElementById('nome'+id).value;
+
+    if (nome != '' && nome != null){
+            alert('to no if');
+            $.post('/turma/update_turma', {id:id, nome:nome},function(data){
+            });
+            alert('hm');
+            location.reload();
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+    }
+}
 
 function cadastro_usuario(tipo){
     if (tipo == 'aluno'){
@@ -552,3 +567,12 @@ function cadastro_usuario(tipo){
     }
   };
 
+     function allow_edit(content_class_id){
+    console.log('teste');
+
+    console.log('teste');
+    $('.disabled'+content_class_id).prop("disabled", false);
+    $('#icone_edit'+content_class_id).hide();
+    $('#edit'+content_class_id).show();
+
+}

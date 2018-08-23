@@ -85,7 +85,7 @@
                                     <label for="numero">Numero</label>
                                     <input type="text" class="form-control disabled{{i['id']}}" size="5" name="numero" id="numero{{i['id']}}" value="{{i['numero']}}" disabled>
                                 </div>
-                                <div class="col-md-4" style="padding-left: 10px ;">
+                                <div class="col-md-4" style="padding-left: 10px;padding-right: 30px;">
                                     <label for="bairro">Bairro</label>
                                     <input type="text" class="form-control disabled{{i['id']}}" size="24" name="bairro" id="bairro{{i['id']}}" value="{{i['bairro']}}" disabled>
                                 </div>
@@ -95,7 +95,7 @@
                                     <label for="complemento">Complemento</label>
                                     <input type="text" class="form-control disabled{{i['id']}}" size="50" name="endereço" id="complemento{{i['id']}}" value="{{i['complemento']}}" disabled>
                                 </div>
-                                <div class="col-md-6" style="padding-left: 10px ;">
+                                <div class="col-md-6" style="padding-left: 10px;padding-right: 30px;">
                                     <label for="cep">CEP</label>
                                     <input type="text" class="form-control disabled{{i['id']}}" size="32" name="cep" id="cep{{i['id']}}" value="{{i['cep']}}" disabled>
                                 </div>
@@ -106,12 +106,13 @@
                                     <label for="estado">Estado</label>
                                     <input type="text" class="form-control disabled{{i['id']}}" size="50" name="estado" id="estado{{i['id']}}" value="{{i['estado']}}" disabled>
                                 </div>
-                                <div class="col-md-6" style="padding-left: 10px ;">
+                                <div class="col-md-6" style="padding-left: 10px ;padding-right: 30px;">
                                     <label for="municipio">Municipio</label>
                                     <input type="text" class="form-control disabled{{i['id']}}" size="32" name="municipio" id="municipio{{i['id']}}" value="{{i['municipio']}}" disabled>
                                 </div>
                             </div>
                         </div>
+                    </form>
                 </div>
                 <!-- aqui termina o conteudo da guia do dados de escola  -->
                 <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel" aria-labelledby="{{i['nome']}}-prof">
@@ -153,27 +154,16 @@
                         </div>
                     % end
                     <div class="offset-md-10 col-md-1">
-                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" style="cursor:pointer;">
+                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}" style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;"></i>
                         </span>
-                        <!--<span onclick="update_rede({{i['id']}})" style="cursor:pointer;">-->
-                            <!--<i class="fas fa-edit edit-ico" style="color: #969696;"></i>-->
-                        <!--</span>-->
+                        <span onclick="update_rede({{i['id']}})" id="edit{{i['id']}}" style="cursor:pointer;display:none;">
+                            <i class="far fa-save fa-lg" style="color: #969696;padding-left: 16px;"></i>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </form>
 </div>
 </div>
-<script>
-    function allow_edit(content_class_id){
-    console.log('teste');
-
-    console.log('teste');
-    $('.disabled'+content_class_id).prop("disabled", false); // Enable all */
-
-
-}
-</script>
