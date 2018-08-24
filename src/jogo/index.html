@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>CONECTURMA</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1, IE=9">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="robots" content="noindex,nofollow" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="initial-scale=1 maximum-scale=1 user-scalable=0 minimal-ui" />
+	<script src="GLOBAL/js/OnlineAPI.js"></script>
+	<script src="GLOBAL/js/OfflineAPI.js"></script>
+	
+</head>
+<body>
+<script type="text/javascript">
+
+	BasicGame.isOnline = BasicGame.OfflineAPI.isOnlineMode();
+
+	if(!BasicGame.isOnline) {
+
+		location.href = "UV1/UV1MAPA/index.html";
+
+	} else {
+
+		BasicGame.OnlineAPI.initialize(true);
+		BasicGame.OnlineAPI.obterUltimaConclusao (
+	        function(resposta){
+				console.log(resposta);
+				
+	        	var url = "UV1/UV1MAPA";
+	        	if(resposta.unidade) {
+	        		url = resposta.universo + "/" + resposta.aventura + "/" + resposta.unidade + "/" + resposta.unidade + "MAPA/";
+	        	} else if(resposta.aventura) {
+	        		url = resposta.universo + "/" + resposta.aventura + "/" + resposta.aventura + "MAPA/";
+	        	} else if(resposta.universo) {
+	        		url = resposta.universo + "/" + resposta.universo + "MAPA/";
+	        	}
+	        	console.log(url);
+	        	location.href = url;
+	        },
+	        function(erro) {
+	            console.log(erro);
+	        }
+		);
+	}
+
+
+</script>
+</body>
+</html>
