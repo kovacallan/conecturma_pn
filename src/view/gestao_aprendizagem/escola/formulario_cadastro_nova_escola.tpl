@@ -53,7 +53,7 @@
                                         <div class="col-md-6" style="padding-left: 10px ;">
                                             <label for="diretor">Diretor</label>
                                             <br>
-                                            <input type="text" size="29" class="form-control" name="" id="diretor">
+                                            <input type="text" size="29" class="form-control" name="" id="data_de_criacao">
                                         </div>
                                     </div>
                                     <div class="row distanciamneto">
