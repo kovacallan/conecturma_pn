@@ -41,83 +41,33 @@
                         <form>
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row" style="margin-top: 30px">
-                                <div class="col-md-3">
-                                    <img src="/static/img/editar-foto.png" style="border:2px black;z-index: 0;">
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row distanciamneto">
-                                        <div class=" col-md-">
+                             <div class="col-md-12">
+                                    <div class="row distanciamento">
+                                        <div class=" col-md-6" style="margin-left: 10px;">
                                             <label for="nome" style="background-color: inherit;">Nome:
-                                                <span style="color:#ff0000">*
+                                                <span style="color:red">*
                                                 </span>
                                             </label>
-                                            <input type="text" class="form-control" size="30" name=""
-                                                   id="nome{{i['id']}}" value="{{i['nome']}}">
+                                            <input type="text" placeholder="Escola do rock" class="form-control disabled{{i['id']}}"
+                                                   size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>
                                         </div>
-                                        <div class="col-md-" style="padding-left: 10px">
-                                            <label for="CNPJ">CNPJ</label>
+                                        <div class="col-md-4" style="padding-left: 10px">
+                                            <label for="serie">serie</label>
                                             <br>
                                             <input type="text" size="24" class="form-control" name=""
-                                                   id="cnpj{{i['id']}}" value="{{i['cnpj']}}">
+                                                   id="serie{{i['id']}}" value="{{i['serie']}}" disabled>
                                         </div>
                                     </div>
                                     <div class="row distanciamento">
-                                        <div class="col-md-">
-                                            <label for="telefone">telefone:
+                                        <div class="col-md-10" style="margin-left: 10px;">
+                                            <label for="telefone">escola:
                                                 <span style="color:#ff0000">*</span>
                                             </label>
                                             <input type="text" class="form-control" size="21" name=""
-                                                   id="telefone{{i['id']}}" value="{{i['telefone']}}">
-                                        </div>
-                                        <div class="col-md-" style="padding-left: 10px ;">
-                                            <label for="gestor">gestor</label>
-                                            <br>
-                                            <input type="text" size="33" class="form-control" name=""
-                                                   id="diretor{{i['id']}}" value="{{i['professor']}}">
+                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}" disabled>
                                         </div>
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
-                                </div>
-                                <div class="offset-md-1 row distanciamento" style="">
-                                    <div class="col-md-6">
-                                        <label for="endereco">Endereço</label>
-                                        <input type="text" class="form-control" size="49" name="endereco"
-                                               id="endereco{{i['id']}}" value="{{i['endereco']}}">
-                                    </div>
-                                    <div class="col-md-2" style="padding-left: 10px ;">
-                                        <label for="numero">Numero</label>
-                                        <input type="text" class="form-control" size="5" name="numero"
-                                               id="numero{{i['id']}}" value="{{i['numero']}}">
-                                    </div>
-                                    <div class="col-md-4" style="padding-left: 10px ;">
-                                        <label for="bairro">Bairro</label>
-                                        <input type="text" class="form-control" size="24" name="bairro"
-                                               id="bairro{{i['id']}}" value="{{i['bairro']}}">
-                                    </div>
-                                </div>
-                                <div class="offset-md-1 row distanciamento">
-                                    <div class="col-md-6">
-                                        <label for="complemento">complemento</label>
-                                        <input type="text" class="form-control" size="50" name="endereço"
-                                               id="complemento{{i['id']}}" value="{{i['complemento']}}">
-                                    </div>
-                                    <div class="col-md-6" style="padding-left: 10px ;">
-                                        <label for="cep">CEP</label>
-                                        <input type="text" class="form-control" size="32" name="cep" id="cep{{i['id']}}"
-                                               value="{{i['cep']}}">
-                                    </div>
-                                </div>
-                                <div class="offset-md-1 row distanciamento">
-                                    <div class="col-md-6">
-                                        <label for="estado">Estado</label>
-                                        <input type="text" class="form-control" size="50" name="estado"
-                                               id="estado{{i['id']}}" value="{{i['estado']}}">
-                                    </div>
-                                    <div class="col-md-6" style="padding-left: 10px ;">
-                                        <label for="municipio">Municipio</label>
-                                        <input type="text" class="form-control" size="32" name="municipio"
-                                               id="municipio{{i['id']}}" value="{{i['municipio']}}">
-                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -182,10 +132,15 @@
                 </div>
                 % end
                 <div class="offset-md-10 col-md-1">
-            <span onclick="update_rede({{i['id']}})" style="cursor:pointer;">
-              <i class="fas fa-edit edit-ico"></i>
-            </span>
-                </div>
+                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                              style="cursor:pointer;">
+                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
+                        </span>
+                        <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
+                              style="cursor:pointer;display:none;">
+                            <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
+                        </span>
+                    </div>
             </div>
         </div>
     </div>

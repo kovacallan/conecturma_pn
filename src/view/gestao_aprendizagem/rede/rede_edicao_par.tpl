@@ -51,14 +51,14 @@
                                     <div class=" col-md-">
                                         <label for="nome" style="background-color: inherit;">Nome:
                                             <span style="color:red">*
-                                                <span>
+                                            </span>
                                         </label>
-                                        <input type="text" placeholder="Escola do rock" class="form-control disabled{{i['id']}}" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>
+                                        <input type="text" placeholder="Escola do rock" class="form-control disabled{{i['id']}} " size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
                                         <label for="CNPJ">CNPJ</label>
                                         <br>
-                                        <input type="text" size="24" class="form-control disabled{{i['id']}}" name="" id="cnpj{{i['id']}}" value="{{i['cnpj']}}" disabled>
+                                        <input type="text" size="24" class="form-control disabled{{i['id']}} " name="" id="cnpj{{i['id']}}" value="{{i['cnpj']}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row distanciamento">
@@ -167,3 +167,33 @@
     </div>
 </div>
 </div>
+
+<script>
+    function nao_sair_sem_salvar(id_class){
+   var id = "."+id;
+var $elem = $(id);
+
+$elem.on("mouseenter", function (e) {
+    e.stopImmediatePropagation();
+});
+
+$elem.tooltip({ items: id, content: "Salve meu bom"});
+
+$elem.on("click", function (e) {
+
+    $elem.tooltip("open");
+});
+
+
+$elem.on("mouseleave", function (e) {
+    e.stopImmediatePropagation();
+});
+
+    }
+
+function myFunction(id) {
+    var element = document.getElementById("myDIV");
+    element.classList.remove("mystyle");
+}
+
+</script>

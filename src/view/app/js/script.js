@@ -253,6 +253,7 @@ function update_escola(id){
             $.post('/escola/editar_escola', {id:id, nome:nome, cnpj:cnpj, telefone:telefone, vinculo_rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
             });
+
             location.reload();
         }
         else{
@@ -368,10 +369,10 @@ function update_turma(id){
     nome = document.getElementById('nome'+id).value;
 
     if (nome != '' && nome != null){
-            alert('to no if');
+    console.log('testeif',nome,id);
             $.post('/turma/update_turma', {id:id, nome:nome},function(data){
+            console.log("hm");
             });
-            alert('hm');
             location.reload();
     }else{
         alert('O campo nome é obrigatório.');
@@ -576,3 +577,10 @@ function cadastro_usuario(tipo){
     $('#edit'+content_class_id).show();
 
 }
+
+//function nao-sair-sem-salvar(id){
+//
+//alert('Voce nao salvou a sua ediçao , tem certeza que deseja sair ?');
+//
+//
+//}

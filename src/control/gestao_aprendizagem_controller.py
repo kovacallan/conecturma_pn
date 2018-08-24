@@ -590,10 +590,8 @@ def controller_create_turma():
     redirect('/turma')
 
 def controller_edit_turma():
-    id_turma=request.forms['id']
-    nome = request.forms['nome']
-    print('controler',id_turma,nome)
-    facade.update_estrutura_facade(id=id_turma, nome=nome)
+    print('controler',request.params)
+    facade.update_estrutura_facade(estrutura=request.params)
 
 
 def view_update_turma():
