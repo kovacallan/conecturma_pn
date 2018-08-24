@@ -1,0 +1,34 @@
+POSITIONS
+        // this.guri = this.addSpriteMeu('guri_happy',680,264);
+        this.guri = this.add.sprite(680,264, 'guri_happy');
+
+         // this.alternativas = this.addSpriteMeu('alternativas',111,293, 0);
+        this.alternativas = this.add.sprite(111,293, 'alternativas', 0);
+
+        // this.alternativas = this.addSpriteMeu('alternativas',111,403, 1);
+        this.alternativas = this.add.sprite(111,403, 'alternativas', 1);
+
+        var click = this.addSpriteMeu("clickAnimation", 250, 478); 
+        click.animations.add('clickAnim', null, 18, true);
+        click.animations.play('clickAnim'); 
+
+
+
+        this.intro = this.add.sprite(214, 436, 'intro_1'); // y inicial = 700
+        this.intro = this.add.sprite(643, 480, 'intro_2');  // y inicial = 700
+        this.arrow = this.addSpriteMeu("arrow", 248, 486);  // emoticon - 248, 486 / inicial - 354, 199
+        -----------------------------------------------------------------------------------------------------
+
+
+        this.celular = this.add.sprite(370, 604, 'celular');
+        this.tela = this.add.sprite(396,235, 'tela');
+        this.tela.alpha = 0;
+        this.tela.scale.set(0.1, 0.1);
+
+         this.add.tween(this.celular).to({y:206}, 500, Phaser.Easing.Quadratic.InOut, true).onComplete.add(function() {
+            this.add.tween(this.tela).to({alpha:1}, 500, Phaser.Easing.Quadratic.InOut, true);
+            this.add.tween(this.tela.scale).to({x:1, y:1}, 800, Phaser.Easing.Quadratic.InOut, true).onComplete.add(function() {
+                //toca som da questão
+                //mostra as alternativas - e enablesomquestion e libera o click
+            }, this);
+         }, this);

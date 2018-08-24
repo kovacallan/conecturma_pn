@@ -12,7 +12,7 @@
     {{i['tipo']}}
 </div>
 <div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
+    <a data-toggle="collapse" href="#collapsea{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapsea{{i['id']}}"
         class="" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
@@ -23,7 +23,7 @@
 <!-- aqui começa os dados internos do acordeon -->
 <div class="container">
     <div class="row row-par">
-    <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapsea{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
 
             <div class="row">

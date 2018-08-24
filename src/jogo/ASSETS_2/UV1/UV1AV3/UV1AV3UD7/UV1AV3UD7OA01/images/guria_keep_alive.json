@@ -1,0 +1,251 @@
+﻿{"frames": [
+
+{
+	"filename": "indiozinho_sby instância 10000",
+	"frame": {"x":0,"y":0,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10001",
+	"frame": {"x":0,"y":248,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10002",
+	"frame": {"x":0,"y":496,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10003",
+	"frame": {"x":0,"y":744,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10004",
+	"frame": {"x":0,"y":992,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10005",
+	"frame": {"x":0,"y":1240,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10006",
+	"frame": {"x":0,"y":1488,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10007",
+	"frame": {"x":0,"y":1736,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10008",
+	"frame": {"x":139,"y":0,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10009",
+	"frame": {"x":139,"y":248,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10010",
+	"frame": {"x":139,"y":496,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10011",
+	"frame": {"x":139,"y":744,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10012",
+	"frame": {"x":139,"y":992,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10013",
+	"frame": {"x":139,"y":1240,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10014",
+	"frame": {"x":139,"y":1488,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10015",
+	"frame": {"x":139,"y":1736,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10016",
+	"frame": {"x":278,"y":0,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10017",
+	"frame": {"x":278,"y":248,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10018",
+	"frame": {"x":278,"y":496,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10019",
+	"frame": {"x":278,"y":744,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10020",
+	"frame": {"x":278,"y":992,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10021",
+	"frame": {"x":278,"y":1240,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10022",
+	"frame": {"x":278,"y":1488,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10023",
+	"frame": {"x":278,"y":1736,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10024",
+	"frame": {"x":417,"y":0,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10025",
+	"frame": {"x":417,"y":248,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10026",
+	"frame": {"x":417,"y":496,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10027",
+	"frame": {"x":417,"y":744,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10028",
+	"frame": {"x":417,"y":992,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}
+,{
+	"filename": "indiozinho_sby instância 10029",
+	"frame": {"x":417,"y":1240,"w":139,"h":248},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":248},
+	"sourceSize": {"w":139,"h":248}
+}],
+"meta": {
+	"app": "Adobe Animate",
+	"version": "15.1.0.210",
+	"image": "india_keep_alive.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":2048},
+	"scale": "1"
+}
+}
