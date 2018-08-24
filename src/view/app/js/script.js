@@ -253,6 +253,7 @@ function update_escola(id){
             $.post('/escola/editar_escola', {id:id, nome:nome, cnpj:cnpj, telefone:telefone, vinculo_rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
             });
+
             location.reload();
         }
         else{
@@ -362,7 +363,22 @@ function cadastro_turma(){
     }
 }
 
+function update_turma(id){
 
+    id = document.getElementById('id_turma'+id).value;
+    nome = document.getElementById('nome'+id).value;
+
+    if (nome != '' && nome != null){
+    console.log('testeif',nome,id);
+            $.post('/turma/update_turma', {id:id, nome:nome},function(data){
+            console.log("hm");
+            });
+            location.reload();
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+    }
+}
 
 function cadastro_usuario(tipo){
     if (tipo == 'aluno'){
@@ -552,3 +568,19 @@ function cadastro_usuario(tipo){
     }
   };
 
+     function allow_edit(content_class_id){
+    console.log('teste');
+
+    console.log('teste');
+    $('.disabled'+content_class_id).prop("disabled", false);
+    $('#icone_edit'+content_class_id).hide();
+    $('#edit'+content_class_id).show();
+
+}
+
+//function nao-sair-sem-salvar(id){
+//
+//alert('Voce nao salvou a sua ediçao , tem certeza que deseja sair ?');
+//
+//
+//}
