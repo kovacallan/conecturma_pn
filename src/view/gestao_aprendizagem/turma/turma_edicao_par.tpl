@@ -107,13 +107,15 @@
 
                                                 <span style="margin-left:62px"> &nbsp;senha :</span>
                                                 <br>
-                                                <img src="/static/img/{{z['senha'][0]}}.png"
+                                                <img src="/static/img/{{z['senha'][3]}}.png"
                                                      style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                 <img src="/static/img/{{z['senha'][2]}}.png"
+                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+
                                                 <img src="/static/img/{{z['senha'][1]}}.png"
                                                      style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][2]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][3]}}.png"
+
+                                                <img src="/static/img/{{z['senha'][0]}}.png"
                                                      style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
 
                                             </div>
