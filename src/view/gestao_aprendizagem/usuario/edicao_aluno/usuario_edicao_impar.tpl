@@ -11,13 +11,13 @@
 {{i['tipo']}}
 </div>
 <div class="col-md-1 item-tabela card">
-  <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
+  <a data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
     <i id="setinha" class="fas fa-angle-down"></i>
   </a>
 </div>
 <div class="container">
   <div class="row row-impar">
-    <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" data-parent="#accordion">
+    <div id="collapsea{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" data-parent="#accordion">
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
@@ -44,13 +44,13 @@
                         <span style="color:#ff0000">*
                           </span>
                       </label>
-                      <input type="text" class="form-control  input-height-30" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
+                      <input type="text" class="form-control  input-height-30 disabled{{i['id']}}" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>
                     </div>
                    <div class="col-md-" style="padding-left: 10px">
                       <label for="data">Data de nascimeto</label>
                       <span style="color:#ff0000">*</span>
                       <br>
-                      <input type="date" size="25" class="form-control  input-height-30" value="{{i['nascimento']}}"  name="" id="aluno_nascimento" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
+                      <input type="date" size="25" class="form-control  input-height-30" value="{{i['nascimento']}}"  name="" id="aluno_nascimento" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'" disabled>
                   </div>
                    <div class="col-md form-control" style="padding-left: 10px">
                       <label for="aluno_sexo" style="margim-botton:5px">Sexo</label>
@@ -66,7 +66,7 @@
                       <div class="col-md-">
                           <label for="login">login</label>
                           <span style="color:#ff0000">*</span>
-                          <input type="text" size="25" class="form-control"  name="" id="aluno_nascimento" value="{{i['nome_login']}}">
+                          <input type="text" size="25" class="form-control disabled{{i['id']}}"  name="" id="login" value="{{i['nome_login']}}">
                       </div>
 
                       <div class="col-md-" style="margin-left: 100px;">
@@ -120,4 +120,6 @@
       </div>
     </div>
   </div>
+<script>
 
+</script>
