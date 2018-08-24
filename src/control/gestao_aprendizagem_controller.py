@@ -106,7 +106,7 @@ def send_email_confirmation(nome, email):
     from email.mime.text import MIMEText
     import smtplib
 
-    url = 'http://127.0.0.1:8080/new_senha?email='+email
+    url = 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com/new_senha?email='+email
     msg = MIMEMultipart()
     msg['From'] = "ti@conecturma.com.br"
     msg['To'] = email
