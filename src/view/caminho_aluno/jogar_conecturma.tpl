@@ -96,7 +96,7 @@
             $(".btn-sun").click(function () {
                hide_sun_elements();
                //Utilizado para mover o foco para o jogo, logo após clicar no sol.
-               console.log('teste');
+     
                $('iframe#frame_jogo').contents().find('body').trigger('pageshow');
             });
             $.reject({
@@ -198,8 +198,8 @@
             );
         });
         function enviarRequisicaoAjax(parametros, callbackSucesso, callbackErro) {
-            HOST = 'http://localhost:8080/'
-            //HOST = 'http://ec2-34-219-137-245.us-west-2.compute.amazonaws.com/'
+            //HOST = 'http://localhost:8080/'
+            HOST = 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com/'
             console.log("enviarRequisicaoAjax parametros", parametros);
             console.log(parametros.operacao);
             var jqXhr = jQuery.ajax({
