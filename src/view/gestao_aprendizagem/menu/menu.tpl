@@ -1,8 +1,8 @@
 % if tipo == '3':
-<div class="row" style="margin-right: 0px;">
+<div class="row" style="margin-right: 0px;margin-top:20px;">
         <div class="col-md-3 order-md-1" style="margin-top: 15px;">
         <div>
-            <a href="#" class="home-font" >
+            <a href="/gestao_aprendizagem" class="home-font" >
                 <p class="list-group-item home-background">
                         <span style="margin-left: 56px">
                                 Home
@@ -42,10 +42,10 @@
     </div>
 
 % elif tipo == '2':
-<div class="row" style="margin-right: 0px;">
+<div class="row" style="margin-right: 0px;margin-top:20px">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                     <span style="margin-left: 56px">
                             Home
@@ -83,10 +83,10 @@
     </div>
 </div>
 % elif tipo == '1':
-<div class="row" style="margin-right: 0px;">
+<div class="row" style="margin-right: 0px;margin-top:20px">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                     <span style="margin-left: 56px">
                             Home
@@ -126,10 +126,10 @@
     </div>
 </div>
 % elif tipo == '0':
-<div class="row" style="margin-right: 0px;">
+<div class="row" style="margin-right: 0px;margin-top: 20px;">
     <div class="col-md-3 order-md-1" style="margin-top: 15px;">
     <div>
-        <a href="#" class="home-font" >
+        <a href="/gestao_aprendizagem" class="home-font" >
             <p class="list-group-item home-background">
                 <span style="margin-left: 56px">
                     Home

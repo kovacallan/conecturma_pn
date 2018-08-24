@@ -8,16 +8,81 @@ body{
     
 }
 
+.menu{
+   background-image: url(/static/img/menu/barra.png);
+   height: 120px;
+   background-repeat: no-repeat;
+}
+
+.menu ul li {
+   list-style: none;
+   float: left;
+}
+
+.c{
+   background: url(/static/img/menu/C_logo.png) 0 0 no-repeat;
+   width: 182px;
+   height: 162px;
+}
+
+.ambiente{
+   background: url(/static/img/menu/ambiente.png) 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.ambiente a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
+}
+
+.facebook{
+   background: url(/static/img/menu/facebook.png) 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.facebook a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
+}
+
+.youtube{
+   background: url(/static/img/menu/youtube.png) 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.youtube a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
+}
+
+.sair{
+   background: url(/static/img/menu/sair.png) 0 0 no-repeat;
+   width: 40px;
+   height: 37px;
+   margin-top: 45px;
+}
+.sair a{
+   width: 40px;
+   height: 37px;
+   display: inline-block;
+}
 
 
-.header-menu{
-    background:url("/static/img/barra.png") no-repeat center center;
-    background-size: 70% 80%;
-    z-index: 0;
-}
-.C-icon{
-    
-}
+
+
+
+
+
+
+
+
+
 .icon-edit{
     margin-top: 45px;
 }
@@ -42,7 +107,7 @@ body{
 
 .portal{
     width: 40%;
-    bottom: 50px;
+    bottom: 30px;
     z-index: 1;
     
 }

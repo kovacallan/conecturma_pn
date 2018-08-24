@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class=" col-md-3">
-        <p class="top-escolas-tabela">Redes</p>
+        <p class="top-escolas-tabela" style="padding-top:5px;">Redes</p>
           % if tipo == '0':
             <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
               <i class="fas fa-plus"></i>
@@ -50,7 +50,7 @@
           Telefone
         </div>
         <div class="col-md-2 item-tabela topo-tab">
-          Numeros escolas
+          Numero escolas
         </div>
         <div class="col-md-1 item-tabela topo-tab">
         </div>

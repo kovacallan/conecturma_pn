@@ -97,6 +97,8 @@ def password_generate():
     senha=random.sample(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                          'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'z', '!','@','#','$','%','&','*'], 8)
     senha.sort()
+
+    print(senha)
     return ''.join(senha)
 
 def send_email_confirmation(nome, email):
@@ -134,6 +136,7 @@ def novasenha():
     senha = request.params['senha_nova']
     usuario = facade.search_observador_email_facade(email=email)
     facade.redefinir_senha_facade(id=usuario['id'], senha=sha512_crypt.hash(senha))
+    redirect('/')
 
 
 @permissao('professor')
@@ -424,9 +427,8 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
             else:
                 i['vinculo_rede_id'] = i['vinculo_rede']
-                i['vinculo_rede'] = '0'
+                i['vinculo_rede'] = ' '
             if i['vinculo_diretor_escola'] != '0':
-                print('oi4')
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
           
@@ -514,6 +516,7 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
                 aluno.append(y)
             i.update({'aluno': aluno})
             turma.append(i)
+        print('turma',turma)
         return turma
     elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
         turma = []
@@ -583,6 +586,10 @@ def controller_create_turma():
                                    vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
     redirect('/turma')
 
+def controller_edit_turma():
+    print('controler',request.params)
+    facade.update_estrutura_facade(estrutura=request.params)
+
 
 def view_update_turma():
     """
@@ -617,36 +624,6 @@ def controller_update_turma():
 
 def descritores():
     return
-
-
-def relatorio_aluno_view():
-    observador = usuario_logado()
-    turmas = facade.search_observador_turma(observador['vinculo_turma'])
-    todos_alunos_da_mesma_turma = trazer_todos_alunos_da_mesma_turma()
-    return dict(alunos=todos_alunos_da_mesma_turma,turma=turmas, tipo=observador['tipo'])
-
-
-def relatorio_aluno():
-    observador = usuario_logado()
-    aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
-    aluno['vinculo_turma'] = get_nome_turma(vinculo_turma=aluno['vinculo_turma'])
-    descritores = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'])
-    oa = []
-    vezes_jogada = []
-    porcentagem_aluno = []
-
-    for i in descritores:
-        if 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
-            desempenho = facade.search_oa_facade(id_aluno=str(aluno['id']), objeto_aprendizagem=i['sigla_oa'])
-            oa.append(i)
-            if desempenho != None:
-                porcentagem_aluno.append(cor_desempenho(desempenho=desempenho))
-            else:
-                porcentagem_aluno.append(None)
-
-    print(porcentagem_aluno)
-    return template('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe', oa=oa,
-                    porcentagem=porcentagem_aluno, aluno=aluno, tipo=observador['tipo'])
 
 def levar_oas_matematica():
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
@@ -779,9 +756,6 @@ def trazer_todos_alunos_da_mesma_turma():
         i['vinculo_turma'] = get_nome_turma(i['vinculo_turma'])
 
     return alunos
-
-
-
 
 def convertendo_str_in_dict(str):
     from ast import literal_eval

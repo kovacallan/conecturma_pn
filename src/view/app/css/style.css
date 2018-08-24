@@ -1,10 +1,26 @@
+@font-face {
+     font-family: chewy;
+     src: url('/static/fontes/Chewy.ttf');
+}
+body{
+overflow: hidden;
+}
+
 .bg{
 
-	background:url("img/tela-login_fundo.png");
+	background:url("img/tela-login_fundo.png") no-repeat center center;
+	height: 110vh;
+    background-size: 110% 100%;
+
 
 }
+
 .bg_login{
-	background:url("img/fundo-copy.png");
+	background:url("img/fundo-copy.png") no-repeat center center ;
+	height: 100vh;
+    max-width:1000px ;
+    max-height: 800px;
+	background-size: 74% 99%;
 }
 
 #Login{
@@ -12,211 +28,190 @@
 	display: block;
 }
 
+.email-prof{
+   border-radius: .25rem;
+    height: 30px;
+}
+.senha-prof{
+    border-radius: .25rem;
+    height: 30px;
+}
+
 #login-img{
-	position: relative;
-	margin: 0;
-	padding: 0;
-	top: 158px;
-	left: 300px;
-	max-width:400px;
-    max-height:150px;
-    width: auto;
-    height: auto;
+
+position: relative;
+bottom: 10px;
+margin-left: 220px;
+width:35%;
+
+
 }
 
 #Login-div{
-	position: relative;
-	bottom: 150px;
+    margin-top: 88px;
+    margin-left: -96px;
+}
+#titulo-prof{
+margin-left: 30px;
+margin-top: 1px;
 }
 
+#titulo-aluno{
+margin-left: -7px;
+margin-bottom: -13px;
+margin-top: 11px
+}
+ .content-login {
+/*	 background: url(../img/fundo-copy.png) 0 0 no-repeat; */
+	margin-right: 150px;
+    margin-left: 240px;
+    margin-top: -30px;
 
 
-
-.content-login {
-	/*background: url(../img/fundo-copy.png) 0 0 no-repeat;*/
-	width: 90%;
-	height: 789px;
-	margin-left: 4%;
 }
 
-.cartoons-pass{
+/* .cartoons-pass{
 	clear: both;
+} */
+
+.cartoons-pass img{
+    width: 91%;
+    clear: both;
+
 }
 
-.cartoons-pass .box-cartoons {
+ .cartoons-pass .box-cartoons {
 
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 53px;
     border: 1px solid #146118;
-    float: left;
     position: relative;
-    top: 250px;
-    left: 180px;
+    left: 10px;
+    top: 5px;
     background-color: rgba(113, 194, 117, 0.5);
-    border-radius: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+
+    margin-right: 4px;
+    margin-bottom: 4px;
 	text-align: center;
-    padding: 4px 0 0 0;
+    padding: 3px 0 0 1px;
+    }
+cartoons-pass figure:hover img,figure.hover img {
+
+    width: 50px;
+    height: 53px;
+    left: 10px;
+    top: 5px;
+    border: 1px solid #146118;
+    background-color: green;
+
+    margin-right: 4px;
+    margin-bottom: 4px;
+	text-align: center;
+    padding: 3px 0 0 0;
+}
+
+.cartoons-pass .box-selected{
+    background-color: rgba(229, 255, 84, 0.5);
 
 }
+
  /*.box-cartoons:active {
 	background-color: green;
 }*/
 
-.professor{
-	position: relative;
-	float: left;
-	left: 650px;
-	top: 300px;
 
-}
 
 #professor-seta{
 	margin: 0;
 	padding: 0;
 	border:0;
 	position: relative;
-	right: 15%;
-	top: 35px;
+	right: 35px;
+	top: 36px;
 }
 
-.student{
-	padding: 0;
-	margin: 0;
-	border: 0;
-	position: relative;
-	top: 300px;
-	right: 50px;
-	float: left;
-	}
-#aluno-seta{
+
+ #aluno-seta{
 	margin: 0;
 	padding: 0;
 	position: relative;
-	bottom: 24px;
+     bottom: 2px;
+
 }
 
 .lost-pass{
 	color: #90EE90;
 	text-decoration: underline;
-	position: relative;
-	margin: 0;
-	padding: 0;
-	bottom: 29px;
-	right: 110px;
 }
 
-.class_email{
-	padding: 0;
-	border:0;
-	margin-bottom: 30px;
-}
-.class_senha{
-	padding: 0;
-	margin: 0;
-}
+
 .professor-text{
-	font-family: "Roboto", sans-serif;
+	font-family: "chewy", sans-serif;
 	color: #FFFFFF;
+    font-size: 26.23px;
 	text-shadow: 4px 6px 8px #000000;
-	margin: 0;
-	border: 0;
+
 }
+
+.label-prof-email, .label-prof-senha{
+    font-family: "Arial", sans-serif;
+	font-size: 16.43px;
+    color: #FFFFFF;
+	text-shadow: 4px 6px 8px #000000;
+}
+
 
 /* Botoes */
-#botao_aluno {
-
-
+.pass button {
+	background: url(img/btn-aluno.png) 0 0 no-repeat;
     width: 110px;
-    height: 47px;
-    border: 0;
-    margin-left: 0px;
-    background: url('img/btn-aluno.png') 0 0 no-repeat;
-    margin-left:0;
-    padding: 0;
-    border:0;
+    height: 55px;
+    border: none;
+    margin-left: 81px;
+    margin-top: 30px;
     position: relative;
-    top: 280px;
-    left: 260px;
-
-}
-
-#btn-professor{
-	background: url('img/btn-prof.png') 0 0 no-repeat;
-	border: 0;
-	width: 105px;
-    height: 50px;
-    position: relative;
-    top: 150px;
-    left: 80px;
-    margin: 0;
-    padding: 0;
-}
-
-.pass #btn-interrogacao{
-	position: relative;
-	margin: 0;
-	padding: 0;
-	top: 420px;
-	right: 155px;
+    left: 27px;
+    bottom: 10px;
+    }
 
 
-}
-/*.btn-login-pass button{
-	background: url(../img/btn-aluno.png) 0 0 no-repeat;
-	margin-left:0;
-	padding: 0;
-	border:0;
-	position: relative;
-	top: 300px;
-	left: 150px;
+
+#Login-div .professor  button{
+	background: url(img/btn-prof.png) 0 0 no-repeat;
+	width: 110px;
+    height: 55px;
+    border: none;
+   margin-left: 80px;
+    margin-top: 20px;
+  }
 
 
-}*/
 
 
 #aluno{
-	position: relative;
-	bottom: 20px;
-	margin-bottom: 20px;
-	font-family: "Roboto", sans-serif;
-	color: #FFFFFF;
+	/* margin-bottom: 20px; */
+	font-family: "chewy", sans-serif;
+	font-size: 26.23px;
+    color: #FFFFFF;
 	text-shadow: 4px 6px 8px #000000;
 }
 
 .student label{
-	font-family: "Roboto", sans-serif;
-	color: #FFFFFF;
+	font-family: "Arial", sans-serif;
+	font-size: 16.43px;
+    color: #FFFFFF;
 	text-shadow: 4px 6px 8px #000000;
 }
 
 .pass-title{
-	font-family: "janda_manatee_solidregular";
-	font-size: 120%;
+	font-family: "Arial";
+	font-size: 16.43px;
 	color: #FFFFFF;
 	text-shadow: 4px 4px 8px #000000;
-	position:relative;
-	top: 420px;
-	right: 250px;
-}
+	}
 
-cartoons-pass figure:hover img,figure.hover img {
 
-   	width: 70px;
-    height: 70px;
-    border: 1px solid #146118;
-    background-color: green;
-    border-radius: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-	text-align: center;
-    padding: 4px 0 0 0;
-}
 
-.cartoons-pass .box-cartoons:hover {
-  background-color: rgba(229, 255, 84, 0.5);
-}
 
 .on {
   -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -226,9 +221,21 @@ cartoons-pass figure:hover img,figure.hover img {
   transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.logo{
-    position: relative;
-    bottom: 70px;
+
+.cartoons-pass .box-selected{
+    background-color: rgba(229, 255, 84, 0.5);
+
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: -5px;
+
+
+
 }
 
 .display-block{
@@ -237,4 +244,19 @@ display:block;
 
 .display-none{
 display:none;
+}
+
+@media only screen and (min-width: 1900px){
+footer{
+ position: absolute;
+    bottom: 0;
+    width: 100%;
+    bottom: 100px;
+    margin-bottom: 83px;
+}
+.bg_login{
+
+	height: 80vh;
+    background-size: 107% 109%;
+}
 }

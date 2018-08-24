@@ -20,9 +20,9 @@
                 <header>
                 <div class="row">
                     <div class="col-md-3">
-                        
-                        <img src="/static/img/conecturma-logo.png" id="conecturma-logo" class="img img-fluid">
-                        
+                        <a href="/gestao_aprendizagem">
+                            <img src="/static/img/conecturma-logo.png" id="conecturma-logo" class="img img-fluid">
+                        </a>
                     </div>
                     <div class="col-md-5">
                         <h1 id="header-text">Gestão de Aprendizagem</h1>

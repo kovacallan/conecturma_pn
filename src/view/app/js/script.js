@@ -29,6 +29,7 @@ $("#new_user").on("click",function(){
     console.log('teste',gestor,diretor,professor,aluno,radioValue);
 });
 
+
 function esqueci_senha(){
     email = document.getElementById('email')
     if(validar_se_email_existe(email)){
@@ -137,9 +138,13 @@ function mouse_out(letra){
   }
 }
 
+
+
+
 function login_aluno(){
   nome = document.getElementById('Login').value;
   senha = [];
+
   for (var i in letras_senha){
     if (letras_senha[i]){
       senha.push(letras_senha[i]);
@@ -151,6 +156,7 @@ function login_aluno(){
      window.location.replace(data);
   });
 }
+
 
 function login_professor(){
   email = document.getElementById('inputEmail').value;
@@ -247,6 +253,7 @@ function update_escola(id){
             $.post('/escola/editar_escola', {id:id, nome:nome, cnpj:cnpj, telefone:telefone, vinculo_rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
             });
+
             location.reload();
         }
         else{
@@ -356,7 +363,22 @@ function cadastro_turma(){
     }
 }
 
+function update_turma(id){
 
+    id = document.getElementById('id_turma'+id).value;
+    nome = document.getElementById('nome'+id).value;
+
+    if (nome != '' && nome != null){
+    console.log('testeif',nome,id);
+            $.post('/turma/update_turma', {id:id, nome:nome},function(data){
+            console.log("hm");
+            });
+            location.reload();
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+    }
+}
 
 function cadastro_usuario(tipo){
     if (tipo == 'aluno'){
@@ -367,7 +389,7 @@ function cadastro_usuario(tipo){
         turma = document.getElementById(tipo+'_turma').value;
 
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (escola != '' && escola != null){
                     $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, sexo:sexo, vinculo_escola:escola, vinculo_turma:turma},function(data){
                     });
@@ -377,11 +399,11 @@ function cadastro_usuario(tipo){
                     alert('O campo escola é obrigatório.');
                     document.getElementById(tipo+'_escola').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');
@@ -397,8 +419,9 @@ function cadastro_usuario(tipo){
         turma = document.getElementById(tipo+'_turma').value;
 
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
+
                     if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
@@ -419,11 +442,11 @@ function cadastro_usuario(tipo){
                     alert('O campo email é obrigatório.');
                     document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');
@@ -436,7 +459,7 @@ function cadastro_usuario(tipo){
         email = document.getElementById(tipo+'_email').value;
         escola = document.getElementById(tipo+'_escola').value;
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
                     if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
@@ -459,11 +482,11 @@ function cadastro_usuario(tipo){
                     alert('O campo email é obrigatório.');
                     document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');
@@ -477,7 +500,7 @@ function cadastro_usuario(tipo){
         rede = document.getElementById(tipo+'_rede').value;
 
         if (nome != '' && nome != null){
-            if (nascimento != '' && nascimento != null){
+//            if (nascimento != '' && nascimento != null){
                 if (email != '' && email != null && emailValidador(tipo+'_email')){
                     if(!validar_se_email_existe(email)){
                         if (rede != '' && rede != null){
@@ -500,15 +523,64 @@ function cadastro_usuario(tipo){
                     alert('O campo email é obrigatório.');
                     document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
                 }
-            }
-            else{
-                alert('O campo nascimento é obrigatório.');
-                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
-            }
+//            }
+//            else{
+//                alert('O campo nascimento é obrigatório.');
+//                document.getElementById(tipo+'_nascimento').style.boxShadow = "0px 0px 12px #fe1313";
+//            }
         }
         else{
             alert('O campo nome é obrigatório.');
             document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
         }
     }
+
+    }
+
+
+
+  function test(ide) {
+   console.log(ide);
+    y = document.getElementById(ide).innerHTML;
+    x = document.getElementById("nova-escola").style.display;
+    prof = document.getElementById("novo-prof").style.display;
+    diretor = document.getElementById("novo-diretor");
+    gestor = document.getElementById("novo-gestor");
+    aluno = document.getElementById("novo-aluno");
+    console.log(x, y)
+    if (prof == "none") {
+    document.getElementById("novo-prof").style.display = 'block';
+    document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';
+    }
+    else {
+    document.getElementById("nova-escola").style.display = 'none';
+    document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
+    // document.getElementById(drop).style.display='block':
+    }
+    }
+
+  function seta(ide){
+    setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>'
+    } else {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'
+    }
+  };
+
+     function allow_edit(content_class_id){
+    console.log('teste');
+
+    console.log('teste');
+    $('.disabled'+content_class_id).prop("disabled", false);
+    $('#icone_edit'+content_class_id).hide();
+    $('#edit'+content_class_id).show();
+
 }
+
+//function nao-sair-sem-salvar(id){
+//
+//alert('Voce nao salvou a sua ediçao , tem certeza que deseja sair ?');
+//
+//
+//}

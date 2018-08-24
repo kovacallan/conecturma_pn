@@ -49,15 +49,14 @@
                             <div class="col-md-12">
                                 <div class="row distanciamneto" style="margin-left: 5px;">
                                     <div class=" col-md-">
-                                        <label for="nome" style="background-color: inherit;">Nome:
-                                            <span style="color:#ff0000">*
-                          </span>
+                                        <label for="nome{{i['id']}}" style="background-color: inherit;">Nome:
+                                            <span style="color:#ff0000">*</span>
                                         </label>
-                                        <input type="text" class="form-control" size="30" name="" id="nome{{i['id']}}"
+                                        <input type="text" class="form-control" size="30" name="n" id="nome{{i['id']}}"
                                                value="{{i['nome']}}">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
-                                        <label for="data">Data de nascimeto</label>
+                                        <label for="aluno_nascimento">Data de nascimeto</label>
                                         <span style="color:#ff0000">*</span>
                                         <br>
                                         <input type="date" size="25" class="form-control" value="{{i['nascimento']}}"
@@ -65,7 +64,7 @@
                                                onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
-                                        <label for="telefone">Sexo</label>
+                                        <label for="aluno_sexo">Sexo</label>
                                         <select id="aluno_sexo" class="custom-select custom-select-md">
                                             <option value="1">Masculino</option>
                                             <option value="2">Feminino</option>
@@ -76,9 +75,9 @@
                                 <div class="row distanciamento" style="margin-left: 5px;">
 
                                     <div class="col-md-">
-                                        <label for="login">Email</label>
+                                        <label for="professor_email">Email</label>
                                         <span style="color:#ff0000">*</span>
-                                        <input type="text" size="25" class="form-control" name="" id="aluno_nascimento"
+                                        <input type="text" size="25" class="form-control" name="" id="professor_email"
                                                value="{{i['email']}}">
                                     </div>
                                 </div>

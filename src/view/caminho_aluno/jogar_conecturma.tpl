@@ -11,62 +11,35 @@
 </head>
 <body>
 <div class="container-fluid fundo">
-    <div class="offset-md-1 light-game">
+    <div class="light-game">
         <div class="center">
-
-            <div class="offset-md-8 col-md-2" align="right">
-
-                <div class="game">
-                    <a href="javascript:void(0)" onclick="atualizarHud()" class="close-game">
-                            <img src="/static/img/botao_voltar.png" style="padding-left:52px">
-                    </a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="game">
+                            <a href="javascript:void(0)" onclick="atualizarHud()" class="close-game">
+                                <img src="/static/img/botao_voltar.png" style="float:right;margin-right:45px;   ">
+                            </a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            <iframe id="frame_jogo" src="" width="1014px" height="614px" align="middle"
-                    style="border: 7px rgb(11, 104, 145) solid;"></iframe>
-        </div>
+            </div>
+                <div class="row" >
+                     <iframe id="frame_jogo"  src="" width="1014px" height="614px" align="middle"
+                        style="border: 7px rgb(11, 104, 145) solid;margin-left: auto;margin-right: auto;"></iframe>
+                </div>
     </div>
 </div>
-<div class="container cabecalho">
-    <div class="row icones header-menu">
-        <div align="center" class="col-md-2 offset-md-2">
-            <figure class="figure">
-                <img src="/static/img/C_logo.png" class="img-fluid C-icon">
-            </figure>
-        </div>
-
-        <div align="center" class="col-md-1">
-            <a href="/gestao_aprendizagem">
-                <figure class="figure">
-                    <img src="/static/img/ambiente.png" class="img-fluid icon-edit">
-                </figure>
-            </a>
-        </div>
-
-        <div align="center" class="col-md-1 offset-md-1">
-            <a href="https://www.facebook.com/conecturmaoficial/" target="_blank">
-                <figure class="figure">
-                    <img src="/static/img/facebook.png" class="img-fluid icon-edit">
-                </figure>
-            </a>
-        </div>
-
-        <div align="center" class="col-md-1 offset-md-1">
-            <a href="https://www.youtube.com/conecturma" target="_blank">
-                <figure class="figure">
-                    <img src="/static/img/youtube.png" class="img-fluid icon-edit">
-                </figure>
-            </a>
-        </div>
-
-        <div align="center" class="col-md-1">
-            <a href="/sair">
-                <figure class="figure">
-
-                    <img src="/static/img/sair.png" class="img-fluid exit-icon">
-
-                </figure>
-            </a>
+<div style="zindex"class="container cabecalho">
+    <div class="row">
+        <div class="menu col-md-9 offset-md-2">
+            <ul>
+                <li class="c"></li>
+                <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
+                <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
+                <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
+                <li class="sair offset-md-1"><a href="/sair"></a></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -119,21 +92,13 @@
         crossorigin="anonymous"></script>
 
 <script>
-
-
-
-
-
         $(document).ready(function () {
-
             $(".btn-sun").click(function () {
-
                hide_sun_elements();
                //Utilizado para mover o foco para o jogo, logo após clicar no sol.
                console.log('teste');
                $('iframe#frame_jogo').contents().find('body').trigger('pageshow');
             });
-
             $.reject({
                 reject: {
                     safari: true, // Apple Safari
@@ -145,7 +110,6 @@
                     unknown: true // Demais
                 },
                 display: ['chrome'],
-
                 header: 'Seu navegador não é suportado!', // Header Text
                 paragraph1: 'Os jogos da Conecturma necessitam do Google Chrome para funcionar.', // Paragraph 1
                 paragraph2: 'Você pode efetuar a instalação através do link abaixo:',
@@ -154,7 +118,6 @@
                 closeLink: "FECHAR"
             });
         });
-
         function hide_sun_elements(){
         console.log('hide');
             $(".portal").fadeOut(function(){
@@ -171,7 +134,6 @@
             $(".cabecalho").fadeOut();
             $(".corpo-pag").fadeOut();
         }
-
         // Avoid 'console' errors in browsers that lack a console.
         // From: http://alvarotrigo.com/blog/disabling-javascript-console-in-production-enviroments-and-internet-explorer/
         (function () {
@@ -185,17 +147,14 @@
             ];
             var length = methods.length;
             var console = (window.console = window.console || {});
-
             while (length--) {
                 method = methods[length];
-
                 // Only stub undefined methods.
                 if (!console[method]) {
                     console[method] = noop;
                 }
             }
         }());
-
         window.addEventListener("message", function (event) {
             console.log("PostMessage recebido.");
             var origemEvento = event.origin;
@@ -259,7 +218,6 @@
              $(".cabecalho").show();
             $(".corpo-pag").show();
             $(".portal").show();
-
             $.ajax({
                 type: "POST",
                // url: '/AcademicoConecturma/AmbienteAprendizagem/ObterValoresHud',
@@ -269,11 +227,7 @@
                     $('div.star').text(hud.pontos);
                 }
             });
-
         }
-
-
-
 </script>
 </div>
 %include('gestao_aprendizagem/footer/footer.tpl')
