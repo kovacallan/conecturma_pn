@@ -11,28 +11,68 @@ body{
 
 
 .menu{
-    background:url("/static/img/barra.png") no-repeat center center;
-    background-size: 70% 80%;
-    z-index: 0;
+   background-image: url(../img/menu/barra.png);
+   height: 120px;
+   background-repeat: no-repeat;
 }
+
+.menu ul li {
+   list-style: none;
+   float: left;
+}
+
 .c{
-    background:url("/static/img/C_logo.png") no-repeat center center;
+   background: url(../img/menu/C_logo.png) 0 0 no-repeat;
+   width: 182px;
+   height: 162px;
 }
 
 .ambiente{
-background:url("/static/img/ambiente.png") no-repeat center center;
+   background: url(../img/menu/ambiente.png) 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.ambiente a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
 }
 
 .facebook{
-background:url("/static/img/facebook.png") no-repeat center center;
+   background: url(../img/menu/facebook.png) 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.facebook a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
 }
 
 .youtube{
-background:url("/static/img/youtube.png") no-repeat center center;
+   background: url(../img/menu/youtube.png) 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.youtube a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
 }
 
 .sair{
-background:url("/static/img/sair.png") no-repeat center center;
+   background: url(../img/menu/sair.png) 0 0 no-repeat;
+   width: 40px;
+   height: 37px;
+   margin-top: 45px;
+}
+.sair a{
+   width: 40px;
+   height: 37px;
+   display: inline-block;
 }
 
 

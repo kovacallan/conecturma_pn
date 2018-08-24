@@ -136,7 +136,7 @@
                                                 <h2 class="h3 mb-3 font-weight-normal professor-text">Professor</h2>
                                             </div>
                                             <label for="inputEmail" class="label-prof-email">Email</label><br>
-                                            <input type="email" id="inputEmail" class="email-prof" placeholder="Email" required="">
+                                            <input type="text" id="inputEmail" class="email-prof" placeholder="Email" required="">
                                             <br>
                                             <br>
                                             <label for="inputPassword" class="label-prof-senha" style="margin-bottom: 0;">Senha</label><br>
