@@ -30,50 +30,21 @@
                 </div>
     </div>
 </div>
-<div class="container cabecalho">
-    <div class="row icones header-menu">
-        <div align="center" class="col-md-2 offset-md-2">
-            <figure class="figure">
-                <img src="/static/img/C_logo.png" class="img-fluid C-icon">
-            </figure>
-        </div>
 
-        <div align="center" class="col-md-1">
-            <a href="/gestao_aprendizagem">
-                <figure class="figure">
-                    <img src="/static/img/ambiente.png" class="img-fluid icon-edit">
-                </figure>
-            </a>
-        </div>
 
-        <div align="center" class="col-md-1 offset-md-1">
-            <a href="https://www.facebook.com/conecturmaoficial/" target="_blank">
-                <figure class="figure">
-                    <img src="/static/img/facebook.png" class="img-fluid icon-edit">
-                </figure>
-            </a>
-        </div>
-
-        <div align="center" class="col-md-1 offset-md-1">
-            <a href="https://www.youtube.com/conecturma" target="_blank">
-                <figure class="figure">
-                    <img src="/static/img/youtube.png" class="img-fluid icon-edit">
-                </figure>
-            </a>
-        </div>
-
-        <div align="center" class="col-md-1">
-            <a href="/sair">
-                <figure class="figure">
-
-                    <img src="/static/img/sair.png" class="img-fluid exit-icon">
-
-                </figure>
-            </a>
-        </div>
-    </div>
-</div>
-
+            <div class="container">
+                <div class="col-md-9 offset-md-2">
+                    <div class="menu">
+                        <ul>
+                            <li class="c"></li>
+                            <li class="ambiente"><a href="#"></a></li>
+                            <li class="facebook offset-md-1"><a href="#"></a></li>
+                            <li class="youtube offset-md-1"><a href="#"></a></li>'
+                            <li class="sair offset-md-1"><a href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
 <div class="container corpo-pag">
     <div class="row">
