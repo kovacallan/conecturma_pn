@@ -127,10 +127,7 @@ def send_email_confirmation(nome, email):
     server.quit()
 
 def new_password():
-    id=usuario_logado()['id']
-    email= usuario_logado()['email']
-    print("lembrar de descomentar o id e email")
-    # email = request.params['email']
+    email = request.params['email']
 
     return template('alterar_senha.tpl', id=id, email=email)
 
