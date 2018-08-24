@@ -3,8 +3,8 @@ if (window.BasicGame === undefined) {
 }
 
 BasicGame.OnlineAPI = {
-	//HOST_PLATAFORMA: 'http://ec2-34-219-137-245.us-west-2.compute.amazonaws.com/',
-	HOST_PLATAFORMA: 'http://localhost:8080/aluno/area_aluno',
+	HOST_PLATAFORMA: 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com',
+	//HOST_PLATAFORMA: 'http://localhost:8080/aluno/area_aluno',
 
     mapaChamadasFuncoes: [],
 
