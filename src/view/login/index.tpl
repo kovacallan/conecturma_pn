@@ -144,7 +144,7 @@
                                              <!--<a href="#" onclick="" class="lost-pass">Esqueci minha senha</a> -->
                                             <br>
                                             <br>
-                                            <button type="submit" onclick="login_professor()" id="btn-professor"></button>
+                                            <button onclick="login_professor()" id="btn-professor" style="cursor: pointer;"></button>
                                         </div>
 
 
