@@ -278,6 +278,7 @@ def relatorio_aluno_view():
     relatorio = Relatorio()
     relatorio.get_alunos(usuario_online_dados=usuario_logado(), nome_turma=get_nome_turma)
 
+
     return dict(tipo = usuario_logado()['tipo'], alunos = relatorio.alunos)
 
 
@@ -299,7 +300,7 @@ def relatorio_aluno():
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
 
-    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa = relatorio.descritores, porcentagem=relatorio.porcentagem,
+    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.porcentagem_solo)
 
 @route('/trazer_oas')
