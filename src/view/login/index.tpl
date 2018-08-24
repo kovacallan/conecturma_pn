@@ -20,7 +20,7 @@
                 <div class="bg_login">
                     <main class="row">
 
-                        <form class="form-group">
+                        <div class="form-group">
                          <img src="/static/img/login-img-2.png" id="login-img"   alt="Responsive image">
                             <section class="content-login col-md">
 
@@ -117,20 +117,17 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button type="submit">
+                                        <button id="botao_aluno" onclick="login_aluno()" style="cursor:pointer" id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
 
                                         </button>
                                     </div>
 
                                 </div>
                                 <input data-val="true" data-val-required="A senha do usuário é obrigatória" id="senhaAluno" name="Senha" type="hidden" value="">
-
-
-
-    </section>
-    </form>
-    <div id="Login-div">
-                            <form class="form-group">
+                        </section>
+                        </div>
+                        <div id="Login-div">
+                            <div class="form-group">
                                 <div class="col-md">
                                    <section class="content-professor">
                                         <div class="professor">
@@ -147,14 +144,14 @@
                                              <!--<a href="#" onclick="" class="lost-pass">Esqueci minha senha</a> -->
                                             <br>
                                             <br>
-                                            <button type="submit" id="btn-professor"></button>
+                                            <button type="submit" onclick="login_professor()" id="btn-professor"></button>
                                         </div>
 
 
-  </section>
-  </div>
-  </form>
-  </div>
+          </section>
+          </div>
+          </div>
+          </div>
 
 
 
