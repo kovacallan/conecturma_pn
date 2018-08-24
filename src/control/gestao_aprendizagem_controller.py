@@ -378,7 +378,7 @@ def controller_create_rede():
                                        endereco=request.params['endereco'], numero=request.params['numero'],
                                        bairro=request.params['bairro'], complemento=request.params['complemento'],
                                        cep=request.params['cep'], estado=request.params['estado'],
-                                       municipio=request.params['municipio']
+                                       municipio=request.params['municipio'], data_de_criacao=request.params['data_de_criacao']
                                        )
 
 
@@ -471,12 +471,12 @@ def controller_escola_cadastro():
     if nome != '' and nome != None and telefone != '' and telefone != None:
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=nome,
                                        cnpj=request.params['cnpj'], telefone=request.params['telefone'],
-                                       vinculo_diretor_escola=request.params['diretor'],
+
                                        vinculo_rede=request.params['rede'],
                                        endereco=request.params['endereco'], numero=request.params['numero'],
                                        bairro=request.params['bairro'], complemento=request.params['complemento'],
                                        cep=request.params['cep'], estado=request.params['estado'],
-                                       municipio=request.params['municipio']
+                                       municipio=request.params['municipio'], data_de_criacao =request.params['data_de_criacao']
                                        )
 
 
@@ -581,7 +581,7 @@ def controller_create_turma():
     serie = request.forms['serie']
     escola = request.forms['escola']
     vinculo_rede = facade.search_estrutura_id_facade(request.forms['escola'])
-
+    data_de_criacao = request.forms['data_de_criacao']
     facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
                                    vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
     redirect('/turma')

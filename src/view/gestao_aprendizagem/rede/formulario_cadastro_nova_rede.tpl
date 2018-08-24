@@ -50,6 +50,12 @@
                                             </label>
                                             <input type="text" class="form-control" size="26" name="" id="telefone" onchange="document.getElementById('telefone').style.boxShadow = 'none'" value="">
                                         </div>
+                                          <div class="col-md-6">
+                                            <label for="data_de_criacao">Data de Criação:
+                                            </label>
+                                            <input type="text" class="form-control" size="26" name="" id="data_de_criacao"  value="" disabled>
+                                        </div>
+
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div>
@@ -106,3 +112,8 @@
             <!-- acordeon -->
         </div>
     </div>
+
+<script>
+    var date = new Date;
+    document.getElementById('data_de_criacao').value = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+</script>
