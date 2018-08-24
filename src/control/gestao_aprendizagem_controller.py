@@ -516,7 +516,6 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
                 aluno.append(y)
             i.update({'aluno': aluno})
             turma.append(i)
-        print('turma',turma)
         return turma
     elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
         turma = []
