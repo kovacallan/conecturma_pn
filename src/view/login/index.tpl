@@ -83,12 +83,12 @@
                                             </div>
                                             <div id="g" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_07.png" data-imagem-selecionada="g" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada" src="/static/img/avatar_07.png" data-imagem-selecionada="g" class="img-fluid" alt="Responsive image" style="position:relative;top: 3px">
                                                 </figure>
                                             </div>
                                             <div id="h" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_08.png" data-imagem-selecionada="h" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada" src="/static/img/avatar_08.png" data-imagem-selecionada="h" class="img-fluid" alt="Responsive image" style="position:relative;bottom:6px">
                                                 </figure>
                                             </div>
                                         </div>
@@ -103,9 +103,9 @@
                                                     <img class="img_selecionada" src="/static/img/avatar_10.png" data-imagem-selecionada="j" class="img-fluid" alt="Responsive image">
                                                 </figure>
                                             </div>
-                                            <div id="k" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
+                                            <div id="k" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on" >
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_11.png" data-imagem-selecionada="k" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada" src="/static/img/avatar_11.png" data-imagem-selecionada="k" class="img-fluid" alt="Responsive image" style="position:  relative;bottom: 3px;">
                                                 </figure>
                                             </div>
                                             <div id="l" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">

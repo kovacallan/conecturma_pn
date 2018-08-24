@@ -10,14 +10,41 @@ body{
 
 
 
-.header-menu{
+.menu{
     background:url("/static/img/barra.png") no-repeat center center;
     background-size: 70% 80%;
     z-index: 0;
 }
-.C-icon{
-    
+.c{
+    background:url("/static/img/C_logo.png") no-repeat center center;
 }
+
+.ambiente{
+background:url("/static/img/ambiente.png") no-repeat center center;
+}
+
+.facebook{
+background:url("/static/img/facebook.png") no-repeat center center;
+}
+
+.youtube{
+background:url("/static/img/youtube.png") no-repeat center center;
+}
+
+.sair{
+background:url("/static/img/sair.png") no-repeat center center;
+}
+
+
+
+
+
+
+
+
+
+
+
 .icon-edit{
     margin-top: 45px;
 }
