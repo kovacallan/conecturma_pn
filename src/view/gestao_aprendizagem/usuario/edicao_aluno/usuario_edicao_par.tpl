@@ -42,7 +42,7 @@
             <div class="tab-content row-par">
                 <div class="tab-pane container active" id="{{i['id']}}">
                     <form>
-                        <input type="hidden" id ="id_escola{{i['id']}}" value="{{i['id']}}">
+                        <input type="hidden" id ="id_aluno{{i['id']}}" value="{{i['id']}}">
                         <div class="row distanciamento" style="margin-top: 30px">
                             <div class="col-md-12">
                                 <div class="row distanciamento" style="margin-left: 5px;">
@@ -51,17 +51,17 @@
                                             <span style="color:red">*
                                                 </span>
                                         </label>
-                                        <input type="text" placeholder="Escola do rock" class="form-control  input-height-30" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}">
+                                        <input type="text" placeholder="nome{{i['nome']}}" class="form-control disabled{{i['id']}} input-height-30" size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
                                         <label for="data" style="margin-botton=7px">Data de nascimeto</label>
                                         <span style="color:#ff0000">*</span>
                                         <br>
-                                        <input type="date" size="25" class="form-control  input-height-30"  name="" id="aluno_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'">
+                                        <input type="date" size="25" class="form-control  input-height-30"  name="" id="aluno_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'" disabled>
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
                                         <label for="aluno_sexo" style="margin-bottom:-6px;height:35px;">Sexo</label>
-                                        <select id="aluno_sexo" class="custom-select custom-select-md" >
+                                        <select id="aluno_sexo" class="custom-select custom-select-md" disabled>
                                             <option value="1">Masculino</option>
                                             <option value="2">Feminino</option>
                                         </select>
@@ -73,12 +73,13 @@
                                     <div class="col-md-">
                                         <label for="login">login</label>
                                         <span style="color:#ff0000">*</span>
-                                        <input type="text" size="25" class="form-control "  name="" id="aluno_nascimento" value="{{i['nome_login']}}">
+                                        <input type="text" size="25" class="form-control disabled{{i['id']}}"  name="" id="aluno_login{{i['id']}}" value="{{i['nome_login']}}" style="text-transform:uppercase;" disabled>
                                     </div>
 
                                     <div class="col-md-" style="margin-left: 100px;">
                                         <label for="login">senha</label>
                                         <span style="color:#ff0000">*</span>
+
                                         <div class="row">
                                             <img src="/static/img/{{i['senha'][0]}}.png" style="padding-left:15px;">
                                             <img src="/static/img/{{i['senha'][1]}}.png" style="padding-left:15px;">
@@ -90,6 +91,21 @@
                                 </div>
                                 <!--fim da div dos dados ao lado da imagem-->
                             </div>
+                             <div class="col-md-1">
+              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+                <i class="far fa-trash-alt" style="color:#969696;"></i>
+              </span>
+                    </div>
+                             <div class="offset-md-10 col-md-1">
+                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                              style="cursor:pointer;">
+                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
+                        </span>
+                        <span onclick="update_aluno({{i['id']}})" id="edit{{i['id']}}"
+                              style="cursor:pointer;display:none;">
+                            <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
+                        </span>
+                    </div>
                         </div>
                 
                 <!-- aqui termina o conteudo da guia do dados de escola  -->

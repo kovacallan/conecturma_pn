@@ -93,7 +93,7 @@
                             <i class="fas fa-edit edit-ico" style="color: #969696;"></i>
                         </span>
                     </div>
-                </div>-->
+                </div>
             </div>
         </div>
     </div>

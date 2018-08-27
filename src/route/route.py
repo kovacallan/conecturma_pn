@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from bottle import route, view, get
+from bottle import route, view, get, request
+
+from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
 from facade.facade_main import Facade
 
@@ -141,6 +143,25 @@ def cadastro_usuario():
     from control.gestao_aprendizagem_controller import cadastro_usuario
     return cadastro_usuario()
 
+@route('/checar_login_existente', method='POST')
+def checar_se_existe():
+    from facade.facade_main import Facade
+    facade=Facade()
+    nome_login= request.params['login']
+    existe_usuario = facade.search_aluno_primeiro_nome_facade(nome_login)
+    if existe_usuario == []:
+        return dict(resposta='nao existe login')
+    else:
+        return dict(resposta='existe login')
+
+@route('/aluno/update_aluno', method='POST')
+def aluno_edit():
+    id= request.params['id']
+    nome = request.params['nome']
+    nome_login=request.params['login']
+    aluno_c=Aluno_controler()
+    print('teste',locals())
+    return aluno_c.update_aluno(id=id,nome=nome,nome_login=nome_login)
 
 @get('/observador/editar')
 @permissao('professor')

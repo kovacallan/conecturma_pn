@@ -578,6 +578,52 @@ function cadastro_usuario(tipo){
 
 }
 
+function update_aluno(id){
+    console.log(id);
+    id = document.getElementById('id_aluno'+id).value;
+    nome = document.getElementById('nome'+id).value;
+    login = document.getElementById('aluno_login'+id).value;
+    console.log('testando',id,nome,login);
+
+    if (nome != '' && nome != null){
+        if(login != '' && login != null){
+            $.post('/checar_login_existente', {login:login},function(data){
+            console.log("hm",data.resposta);
+            if (data.resposta=='nao existe login'){
+                console.log('eits',nome,id);
+                $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
+                    console.log("hm");
+                });
+            location.reload();
+            }else{
+            alert('ja existe esse login');
+            }
+            });
+
+            }
+            else{
+        alert('o campo login nao pode estar vazio ');
+
+        }
+
+
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+        }
+        }
+
+
+//}
+//
+//    id = document.getElementById('id_turma'+id).value;
+//    nome = document.getElementById('nome'+id).value;
+//    login = document.getElementById();
+//    console.log('testando',id,nome,login);
+//
+//
+//}
+
 //function nao-sair-sem-salvar(id){
 //
 //alert('Voce nao salvou a sua ediçao , tem certeza que deseja sair ?');

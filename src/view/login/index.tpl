@@ -34,7 +34,7 @@
                                         <br>
                                     <label>Nome do usuário</label>
                                     <br>
-                                    <input data-val="true" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno">
+                                    <input data-val="true" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno" style="text-transform:uppercase;">
 
                                 </div>
 
@@ -48,23 +48,23 @@
                                         <div class="row">
                                             <div id="a" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_01.png" data-imagem-selecionada="a" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_01.png" data-imagem-selecionada="a" alt="Responsive image">
                                                 </figure>
                                             </div>
                                             <div id="b" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_02.png" data-imagem-selecionada="b" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_02.png" data-imagem-selecionada="b" alt="Responsive image">
                                                 </figure>
                                             </div>
                                             <div id="c" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_03.png" data-imagem-selecionada="c" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_03.png" data-imagem-selecionada="c" alt="Responsive image">
                                                 </figure>
                                             </div>
 
                                             <div id="d" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_04.png" data-imagem-selecionada="d" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_04.png" data-imagem-selecionada="d" alt="Responsive image">
                                                 </figure>
 
 
@@ -73,51 +73,51 @@
                                         <div class="row">
                                             <div id="e" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_05.png" data-imagem-selecionada="e" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_05.png" data-imagem-selecionada="e" alt="Responsive image">
                                                 </figure>
                                             </div>
                                             <div id="f" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_06.png" data-imagem-selecionada="f" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_06.png" data-imagem-selecionada="f" alt="Responsive image">
                                                 </figure>
                                             </div>
                                             <div id="g" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_07.png" data-imagem-selecionada="g" class="img-fluid" alt="Responsive image" style="position:relative;top: 3px">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_07.png" data-imagem-selecionada="g" alt="Responsive image" style="position:relative;top: 3px">
                                                 </figure>
                                             </div>
                                             <div id="h" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_08.png" data-imagem-selecionada="h" class="img-fluid" alt="Responsive image" style="position:relative;bottom:6px">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_08.png" data-imagem-selecionada="h"  alt="Responsive image" style="position:relative;bottom:6px">
                                                 </figure>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div id="i" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_09.png" data-imagem-selecionada="i" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_09.png" data-imagem-selecionada="i" alt="Responsive image">
                                                 </figure>
                                             </div>
                                             <div id="j" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_10.png" data-imagem-selecionada="j" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_10.png" data-imagem-selecionada="j" alt="Responsive image">
                                                 </figure>
                                             </div>
                                             <div id="k" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on" >
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_11.png" data-imagem-selecionada="k" class="img-fluid" alt="Responsive image" style="position:  relative;bottom: 3px;">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_11.png" data-imagem-selecionada="k"  alt="Responsive image" style="position:  relative;bottom: 3px;">
                                                 </figure>
                                             </div>
                                             <div id="l" onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)" onclick="mudaEstado(this.id)" class="box-cartoons on">
                                                 <figure>
-                                                    <img class="img_selecionada" src="/static/img/avatar_12.png" data-imagem-selecionada="l" class="img-fluid" alt="Responsive image">
+                                                    <img class="img_selecionada img-fluid" src="/static/img/avatar_12.png" data-imagem-selecionada="l" alt="Responsive image">
                                                 </figure>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div>
-                                        <button id="botao_aluno" onclick="login_aluno()" style="cursor:pointer" id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
+                                        <button id="botao_aluno" onclick="login_aluno()" style="cursor:pointer">
 
                                         </button>
                                     </div>

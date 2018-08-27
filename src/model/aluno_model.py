@@ -47,7 +47,7 @@ class DbAluno(Model):
         self.create(**kwargs)
 
 
-    def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
+    def update_aluno(self, update_id, nome, nome_login, turma='0', escola='0', rede='0'):
 
         aluno_up = self.load(update_id)
         [setattr(aluno_up, parametro, valor) for parametro, valor in locals().items() if
