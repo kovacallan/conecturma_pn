@@ -182,6 +182,11 @@ def read_de_medalha():
     from control.gestao_aprendizagem_controller import read_de_medalha
     return read_de_medalha()
 
+@route('/aluno/medalhas')
+@view('caminho_aluno/medalhas.tpl')
+def read_medalha_aluno():
+    from control.aprendizagem_controller import  read_medalha_album
+    return read_medalha_album()
 
 @route('/rede')
 @permissao('gestor')

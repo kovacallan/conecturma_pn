@@ -400,3 +400,12 @@ def parametros_json_jogos(parametro):
     return parametros
 
 
+def read_medalha_album():
+    medalhas = []
+
+    for medalha in facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha']):
+        print('1',medalha)
+        medalhas.append(medalha)
+
+    return dict(medalhas=medalhas)
+
