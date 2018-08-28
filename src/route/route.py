@@ -149,7 +149,7 @@ def checar_se_existe():
     facade=Facade()
     nome_login= request.params['login']
     existe_usuario = facade.search_aluno_primeiro_nome_facade(nome_login)
-    if existe_usuario == []:
+    if existe_usuario != []:
         return dict(resposta='nao existe login')
     else:
         return dict(resposta='existe login')
@@ -160,7 +160,6 @@ def aluno_edit():
     nome = request.params['nome']
     nome_login=request.params['login']
     aluno_c=Aluno_controler()
-    print('teste',locals())
     return aluno_c.update_aluno(id=id,nome=nome,nome_login=nome_login)
 
 @get('/observador/editar')
@@ -273,7 +272,6 @@ def controller_create_turma():
 @permissao('professor')
 def controller_turma_editar():
     from control.gestao_aprendizagem_controller import controller_edit_turma
-    print('hi')
     return controller_edit_turma()
 
 @route('/turma/turma_update_controller', method='POST')

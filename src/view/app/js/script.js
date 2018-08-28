@@ -568,7 +568,7 @@ function cadastro_usuario(tipo){
     }
   };
 
-     function allow_edit(content_class_id){
+  function allow_edit(content_class_id){
     console.log('teste');
 
     console.log('teste');
@@ -577,6 +577,7 @@ function cadastro_usuario(tipo){
     $('#edit'+content_class_id).show();
 
 }
+
 
 function update_aluno(id){
     console.log(id);
@@ -589,7 +590,7 @@ function update_aluno(id){
         if(login != '' && login != null){
             $.post('/checar_login_existente', {login:login},function(data){
             console.log("hm",data.resposta);
-            if (data.resposta=='nao existe login'){
+            if (data.resposta =='nao existe login'){
                 console.log('eits',nome,id);
                 $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
                     console.log("hm");
@@ -613,6 +614,52 @@ function update_aluno(id){
         }
         }
 
+
+
+
+
+function update_observador(id){
+    console.log('entrei?');
+    id = document.getElementById("observador_id"+id).value;
+    nome = document.getElementById("nome_obs"+id).value;
+    email= document.getElementById("email"+id).value;
+
+
+    if (nome != '' && nome != null){
+            if (email != '' && nome !=null){
+                if(validar_se_email_existe(email)==false){
+                console.log('email existe');
+                $.post('/observador/update_observador', {id:id, nome:nome,email:email},function(data){
+                    console.log("hm");
+                });
+                location.reload();
+                }
+                else{
+                console.log("hm,emailnao existe");
+                $.post('/observador/update_observador', {id:id, nome:nome},function(data){
+                    console.log("hm,email");
+                });
+                location.reload();
+                }
+               }else{
+            alert('O email nao pode estar vazio');
+            }
+
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+        }
+        }
+
+function allow_edit_obs(content_class_id){
+    console.log('teste');
+
+    console.log('teste');
+    $('.disabledo'+content_class_id).prop("disabled", false);
+    $('#icone_edito'+content_class_id).hide();
+    $('#edito'+content_class_id).show();
+
+}
 
 //}
 //

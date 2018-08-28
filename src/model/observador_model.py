@@ -53,7 +53,7 @@ class DbObservador(Model):
 
         return observador
 
-    def update_observador(self, update_id, nome, telefone, cpf, email,vinculo_turma,vinculo_escola):
+    def update_observador(self, update_id, nome, email):
 
         observador = self.load(update_id)
         [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.all()]

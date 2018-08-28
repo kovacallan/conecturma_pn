@@ -274,10 +274,21 @@ def view_observador_update():
 
 
 def controller_observador_update():
+    try:
+        email =request.params['email']
+        # verificacao = facade.search_observador_email_facade(email=email)
+        print('intry')
+    except KeyError:
+        observador = facade.search_observador_id_facade(request.params['id'])
+        email = observador['email']
+        print('outtry')
+
     facade.update_observador_facade(id=request.params['id'], nome=request.params['nome'],
-                                    telefone=request.params['telefone'], cpf=request.params['cpf'],
-                                    email=request.params['email'])
-    redirect('/observador/read_observador')
+                                    email=email)
+    # redirect('/observador/read_observador')
+
+def teste(email):
+    return email
 
 
 def controller_checar_se_email_existe():
