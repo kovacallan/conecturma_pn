@@ -186,7 +186,8 @@ def read_de_medalha():
 @view('caminho_aluno/medalhas.tpl')
 def read_medalha_aluno():
     from control.aprendizagem_controller import  read_medalha_album
-    return read_medalha_album()
+    aluno=usuario_logado()['id']
+    return read_medalha_album(aluno)
 
 @route('/rede')
 @permissao('gestor')

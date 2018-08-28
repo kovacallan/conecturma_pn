@@ -39,7 +39,7 @@
 
 <div class="container">
 <div style="margin-left: 90px;">
-    <div class="titulo" style="margin-top: 30px;"> </div>
+    <div class="titulo  recentes" style="margin-top: 30px;"> </div>
             <br>
         <div style=""> <img src="img/recentes.png"> </div>
     </div>
@@ -47,12 +47,11 @@
     <div class="col-md offset-md-1">
        <br>
         <br>
-        % if (!medalhas)
 
-        for i in medalhas:
+        % if medalha_aluno!=[]:
 
 
-        <div class="row">
+        <div class="row recentes">
            <div class="bounce" style="background-image: url('img//fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1;">
                <figure  >
                    <img class="medalha-lista-ultimas" src="/static/medalha/download-{{i['id']}}.gif">
@@ -191,6 +190,19 @@
 
 
 </main>
+<script>
+    function recebe_medalha (medalha){
+    if (medalha == [])
+    {
+        getElementByClass('recentes').style.display=none;
+    }
+    else
+    {
+        getElementByClass('recentes').style.display=true;
+    }
+
+    }
+</script>
 </body>
 </html>
 
