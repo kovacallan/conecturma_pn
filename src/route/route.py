@@ -65,7 +65,10 @@ def view_ambiente_de_aprendizagem():
     from control.aprendizagem_controller import view_ambiente_de_aprendizagem
     return view_ambiente_de_aprendizagem()
 
-
+@route('/guarda_roupa')
+def view_guarda_roupa():
+    from bottle import template
+    return template('caminho_aluno/guarda_roupa/index')
 @route('/jogo')
 def jogo():
     from bottle import template
