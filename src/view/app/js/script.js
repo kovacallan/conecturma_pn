@@ -606,8 +606,6 @@ function update_aluno(id){
         alert('o campo login nao pode estar vazio ');
 
         }
-
-
     }else{
         alert('O campo nome é obrigatório.');
         document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
@@ -623,10 +621,11 @@ function update_observador(id){
     id = document.getElementById("observador_id"+id).value;
     nome = document.getElementById("nome_obs"+id).value;
     email= document.getElementById("email"+id).value;
-
-
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    teste = email.match(mailformat);
+    console.log(teste,email);
     if (nome != '' && nome != null){
-            if (email != '' && nome !=null){
+            if (email != '' && nome !=null && email.match(mailformat)){
                 if(validar_se_email_existe(email)==false){
                 console.log('email existe');
                 $.post('/observador/update_observador', {id:id, nome:nome,email:email},function(data){
@@ -639,10 +638,10 @@ function update_observador(id){
                 $.post('/observador/update_observador', {id:id, nome:nome},function(data){
                     console.log("hm,email");
                 });
-                location.reload();
+//                location.reload();
                 }
                }else{
-            alert('O email nao pode estar vazio');
+            alert('Por favor , digite um email valido');
             }
 
     }else{

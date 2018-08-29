@@ -277,7 +277,6 @@ def controller_observador_update():
     try:
         email =request.params['email']
         # verificacao = facade.search_observador_email_facade(email=email)
-        print('intry')
     except KeyError:
         observador = facade.search_observador_id_facade(request.params['id'])
         email = observador['email']

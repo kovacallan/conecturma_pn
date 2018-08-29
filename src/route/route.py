@@ -149,7 +149,7 @@ def checar_se_existe():
     facade=Facade()
     nome_login= request.params['login']
     existe_usuario = facade.search_aluno_primeiro_nome_facade(nome_login)
-    if existe_usuario != []:
+    if existe_usuario == []:
         return dict(resposta='nao existe login')
     else:
         return dict(resposta='existe login')

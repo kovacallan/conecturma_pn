@@ -56,7 +56,7 @@
                                         <label for="data">Data de nascimeto</label>
                                         <span style="color:#ff0000">*</span>
                                         <br>
-                                        <input type="date" size="25" class="form-control input-height-30"  name="" id="aluno_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'" disabled>
+                                        <input type="date" size="25" class="form-control input-height-30"  name="" id="observador_nascimento" value="{{i['nascimento']}}" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'" disabled>
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px">
                                         <label for="sexo" style="margin-botton:5px;">Sexo</label>
@@ -72,7 +72,7 @@
                                     <div class="col-md-">
                                         <label for="email{{i['email']}}">Email</label>
                                         <span style="color:#ff0000">*</span>
-                                        <input type="text" size="25" class="form-control disabledo{{i['id']}}"  name="" id="email{{i['email']}}" value="{{i['email']}}" disabled>
+                                        <input type="email" size="25" class="form-control disabledo{{i['id']}}"  name="" id="email{{i['id']}}" value="{{i['email']}}" disabled>
                                     </div>
                                 </div>
                                 <!--fim da div dos dados ao lado da imagem-->
