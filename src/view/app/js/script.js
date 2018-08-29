@@ -559,6 +559,9 @@ function cadastro_usuario(tipo){
     }
     }
 
+    function checar_se_algo_mudou_obs{
+    var
+    }
   function seta(ide){
     setinha = document.getElementById(ide).querySelectorAll("#setinha");
     if (setinha[0].className == 'fas fa-angle-down') {
