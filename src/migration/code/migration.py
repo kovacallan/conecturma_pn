@@ -6,6 +6,15 @@ facade=Facade()
 facade.create_observador_facade(nome="administrador", senha=sha512_crypt.hash("@onde2929"), telefone="21999999999", cpf="0",email="admin", tipo='0',
                                             rede='0',escola='0')
 
+""" Migration das Itens Cores """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Amarelo", tipo_item="1", preco=0, image_name="amarelo.png", is_default=True)
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Azul", tipo_item="1", preco=0, image_name="azul.png", is_default=True )
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Laranja", tipo_item="1", preco=0, image_name="laranja.png", is_default=True)
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Rosa", tipo_item="1", preco=0, image_name="rosa.png", is_default=True)
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Vermelho", tipo_item="1", preco=0, image_name="vermelho.png", is_default=True)
+
+""" Migration das Oas """
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01", descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01", nome_descritor="Estante de Leitura", descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)", serie="1", disciplina="2")
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Acerte as Letras", sigla_oa="UV1AV1UD1OA02", descricao="Diferenciar letras de outros sinais gráficos, como os números e os sinais de pontuação (SEA - Sistema de Escrita Alfabética)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="SE1.02", nome_descritor="Acerte as Letras", descricao_descritor="Compreender a função das letras e do alfabeto", serie="1", disciplina="1")
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Régua Maluca", sigla_oa="UV1AV1UD1OA03", descricao="Representar, contar, ler e registrar quantidades por meio de desenhos (números de 1 a 10) (Tratamento da Informação)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="TI1.01", nome_descritor="Régua Maluca", descricao_descritor="Colocar os números de volta ao seu lugar correto na régua", serie="1", disciplina="2")

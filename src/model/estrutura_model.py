@@ -41,8 +41,10 @@ class DbEstrutura(Model):
     quem_criou = TextField(default='0')
     serie = TextField(fts=True, default='0')
 
-    tipo_item = TextField(default='0')
+    tipo_item = TextField(fts=True, default='0')
     preco = IntegerField(default=0)
+    image_name = TextField(fts=True, default="0")
+    is_default = BooleanField()
 
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='0')
