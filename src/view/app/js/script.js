@@ -559,17 +559,78 @@ function cadastro_usuario(tipo){
     }
     }
 
-    function checar_se_algo_mudou_obs{
-    var
-    }
+//function checar_se_algo_mudou_obs(id){
+//    lista_do_id = id.split('');
+//    var numero_id = [];
+//    for (x=0;x!= lista_do_id.length;x++){
+//
+//        if (!isNaN(lista_do_id[x])){
+//        numero_id.push(lista_do_id[x]);
+//
+//        }
+//    }
+//
+//    id=numero_id.join('');
+//    var nome = document.getElementById('nome_obs'+id).value;
+//    var email= document.getElementById('email'+id).value;
+//    data_resposta;
+//
+//      $.post('/check_mudanca_cadastro ', {id:id, nome:nome, email:email}, function (data){
+//      if(data.resposta =='teve mudança'){
+//            console.log('data',data.resposta);
+//        data_resposta=data.resposta;
+//
+//        return 'teve mudança';
+//      }
+//      else {
+//            data_resposta=data.resposta;
+//          console.log('DESGRAÇAAAAAAA',data_resposta)
+//        }
+//
+//       });
+//
+//       }
+
   function seta(ide){
-    setinha = document.getElementById(ide).querySelectorAll("#setinha");
-    if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>'
-    } else {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'
+
+  lista_do_id = ide.split('');
+    var numero_id = [];
+    for (x=0;x!= lista_do_id.length;x++){
+
+        if (!isNaN(lista_do_id[x])){
+        numero_id.push(lista_do_id[x]);
+
+        }
     }
-  };
+
+    erid=numero_id.join('');
+    var nome = document.getElementById('nome_obs'+erid).value;
+    var email= document.getElementById('email'+erid).value;
+
+      $.post('/check_mudanca_cadastro ', {id:ide, nome:nome, email:email}, function (data){
+      if(data.resposta =='teve mudança'){
+                    console.log('toniif');
+                    confirm('voce nao salvou os dados de ... , tem certeza que deseja sair ?');
+
+                        }
+       else{
+       console.log(ide);
+//       setinha_aux(ide);
+
+       }
+       });
+       }
+
+function setinha_aux(ide)
+    alert('eita');
+    setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    console.log(ide);
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';
+    } else {
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
+    }
+  }
 
   function allow_edit(content_class_id){
     console.log('teste');
@@ -578,9 +639,7 @@ function cadastro_usuario(tipo){
     $('.disabled'+content_class_id).prop("disabled", false);
     $('#icone_edit'+content_class_id).hide();
     $('#edit'+content_class_id).show();
-
 }
-
 
 function update_aluno(id){
     console.log(id);
@@ -639,7 +698,6 @@ function update_observador(id){
                 else{
                 console.log("hm,emailnao existe");
                 $.post('/observador/update_observador', {id:id, nome:nome},function(data){
-                    console.log("hm,email");
                 });
 //                location.reload();
                 }

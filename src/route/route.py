@@ -154,6 +154,30 @@ def checar_se_existe():
     else:
         return dict(resposta='existe login')
 
+@route('/check_mudanca_cadastro',method='POST')
+def check_changes():
+    '''
+    metodo para usar no ajax do javascript checar_se_algo_mudou_obs(id) , que serve para o formulario de usuarios
+    :return: uma mensagem informando se os dados recebidos sao iguais ou nao as do banco
+    '''
+    id= request.params['id']
+    nome = request.params['nome']
+    email= request.params['email']
+
+    aff=[]
+    for id in id :
+        if id.isdigit():
+            aff.append(id)
+    id=''.join(aff)
+
+    observador =facade.search_observador_id_facade(id)
+
+    if observador['nome']==nome and observador['email'] == email:
+        return dict(resposta=' nop chuck testa , sem mudança')
+    elif observador['nome'] != nome or observador['email'] != email:
+        return dict(resposta ='teve mudança')
+
+
 @route('/aluno/update_aluno', method='POST')
 def aluno_edit():
     id= request.params['id']

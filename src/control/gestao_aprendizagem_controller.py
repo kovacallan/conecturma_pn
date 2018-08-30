@@ -280,7 +280,6 @@ def controller_observador_update():
     except KeyError:
         observador = facade.search_observador_id_facade(request.params['id'])
         email = observador['email']
-        print('outtry')
 
     facade.update_observador_facade(id=request.params['id'], nome=request.params['nome'],
                                     email=email)
