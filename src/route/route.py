@@ -163,7 +163,6 @@ def check_changes():
     id= request.params['id']
     nome = request.params['nome']
     email= request.params['email']
-
     aff=[]
     for id in id :
         if id.isdigit():
@@ -171,12 +170,31 @@ def check_changes():
     id=''.join(aff)
 
     observador =facade.search_observador_id_facade(id)
+    print(observador['nome'])
 
     if observador['nome']==nome and observador['email'] == email:
         return dict(resposta=' nop chuck testa , sem mudança')
     elif observador['nome'] != nome or observador['email'] != email:
-        return dict(resposta ='teve mudança')
+        return dict(resposta ='teve mudança',nome=observador['nome'])
 
+@route('/check_mudanca_cadastro_aluno',method='POST')
+def check_change_mudanca_alun():
+    id = request.params['id']
+    nome = request.params['nome']
+    login = request.params['login']
+    aff = []
+    for id in id:
+        if id.isdigit():
+            aff.append(id)
+    id = ''.join(aff)
+
+    aluno = facade.search_aluno_id_facade(id)
+    print(aluno['nome'])
+
+    if aluno['nome'] == nome and aluno['login'] == login:
+        return dict(resposta=' nop chuck testa , sem mudança')
+    elif aluno['nome'] != nome or aluno['email'] != aluno:
+        return dict(resposta='teve mudança', nome=aluno['nome'])
 
 @route('/aluno/update_aluno', method='POST')
 def aluno_edit():
