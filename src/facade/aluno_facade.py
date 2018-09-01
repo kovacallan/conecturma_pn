@@ -18,6 +18,11 @@ class AlunoFacade:
     def update_aluno_facade(self, id, nome , senha):
         return self.aluno.update_aluno(update_id=id, nome=nome, senha=senha)
 
+    def set_itens_student_facade(self, id, itens):
+        self.aluno.set_itens_student(id, itens)
+
+    def get_itens_student_facade(self,id):
+        return self.aluno.get_itens_student(id=id)
 
     def delete_aluno_facade(self, deletar_ids):
         return self.aluno.aluno_delete(deletar_ids)

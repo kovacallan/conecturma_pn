@@ -8,11 +8,24 @@ facade.create_observador_facade(nome="administrador", senha=sha512_crypt.hash("@
 
 """ Migration das Itens Cores """
 
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Amarelo", tipo_item="1", preco=0, image_name="amarelo.png", is_default=True)
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Azul", tipo_item="1", preco=0, image_name="azul.png", is_default=True )
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Laranja", tipo_item="1", preco=0, image_name="laranja.png", is_default=True)
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Rosa", tipo_item="1", preco=0, image_name="rosa.png", is_default=True)
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Vermelho", tipo_item="1", preco=0, image_name="vermelho.png", is_default=True)
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Amarelo", tipo_item="1", preco='0', image_name="amarelo.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Azul", tipo_item="1", preco='0', image_name="azul.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Laranja", tipo_item="1", preco='0', image_name="laranja.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Rosa", tipo_item="1", preco='0', image_name="rosa.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Verde", tipo_item="1", preco='0', image_name="verde.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Vermelho", tipo_item="1", preco='0', image_name="vermelho.png")
+
+""" Migration das Itens rosto """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Feliz", tipo_item="2", preco='0', image_name="rosto-01.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Piscadinha", tipo_item="2", preco='0', image_name="rosto-02.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Apaixonado", tipo_item="2", preco='0', image_name="rosto-03.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Lingua", tipo_item="2", preco='0', image_name="rosto-04.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Maluco", tipo_item="2", preco='0', image_name="rosto-05.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Sufoco", tipo_item="2", preco='0', image_name="rosto-06.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Assustado", tipo_item="2", preco='0', image_name="rosto-07.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Sem graça", tipo_item="2", preco='0', image_name="rosto-08.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Rindo", tipo_item="2", preco='0', image_name="rosto-09.png")
 
 """ Migration das Oas """
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01", descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01", nome_descritor="Estante de Leitura", descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)", serie="1", disciplina="2")

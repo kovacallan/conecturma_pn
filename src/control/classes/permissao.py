@@ -66,7 +66,7 @@ class Login_Aluno(object):
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
         if aluno['nome_login'] == self.nome.upper():
             if aluno['senha'] == self.senha:
-                aluno_logado = dict(
+                """aluno_logado = dict(
                     id=aluno['id'],
                     nome=aluno['nome'],
                     tipo=aluno['tipo_aluno'],
@@ -78,9 +78,9 @@ class Login_Aluno(object):
                     ultima_aventura= aluno['ultima_aventura'],
                     moeda=aluno['pontos_de_moedas'],
                     xp=aluno['pontos_de_vida']
-                )
-                response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
-                return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
+                )"""
+                response.set_cookie("BUMBA", aluno, path='/', secret=hash)
+                return PAGINA_INICIAL[tipo_observador(aluno['tipo'])]
         else:
             return '/'
 

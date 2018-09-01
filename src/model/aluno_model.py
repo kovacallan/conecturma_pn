@@ -18,7 +18,7 @@ class DbAluno(Model):
     tipo_aluno = TextField(default='0')
     cpf_responsavel = TextField(default='0')
 
-    itens_comprados = ListField()
+    armario = ListField()
     cor = TextField(default='0')
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
@@ -61,15 +61,24 @@ class DbAluno(Model):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                    tipo=search.tipo_aluno, cor=search.cor,armario=search.armario, rosto=search.rosto,
+                    acessorio=search.acessorio, corpo=search.corpo,pontos_de_vida=search.pontos_de_vida,
+                    pontos_de_moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
                     vinculo_turma=search.vinculo_turma, email=search.email, cpf='', nome_login=search.nome_login,
                     nascimento=search.nascimento
                 )
             )
         return alunos
+
+    def set_itens_student(self, id, itens):
+        student = DbAluno.load(int(id))
+        for i in itens:
+            student.armario.append(i['id'])
+        student.save()
+
+    def get_itens_student(self, id):
+        student_itens = DbAluno.load(int(id))
+        return student_itens.armario
 
     def search_aluno_primeiro_nome(self, primeiro_nome):
         alun_pes = []
@@ -82,18 +91,13 @@ class DbAluno(Model):
 
         alun_pes = None
         for search in DbAluno.query(DbAluno.nome_login == nome_login):
-            alun_pes = dict(
-                id=search.id, matricula=search.matricula, nome=search.nome,nome_login=search.nome_login, senha=search.senha,
-                tipo_aluno=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo, vinculo_serie=search.vinculo_serie,
-                pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                vinculo_turma=search.vinculo_turma, email=search.email, cpf='',
-                ultima_aventura=search.ultima_aventura, ultima_unidade=search.ultima_unidade,
-                ultima_objeto_aprendizagem=search.ultima_objeto_aprendizagem
-            )
+            alun_pes = vars(search)['_data']
+            alun_pes['tipo'] = alun_pes['tipo_aluno']
 
         return alun_pes
+
+    def get_itens_closet(self):
+        pass
 
     def search_aluno_nome(self, nome):
 

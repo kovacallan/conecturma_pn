@@ -65,10 +65,19 @@ def view_ambiente_de_aprendizagem():
     from control.aprendizagem_controller import view_ambiente_de_aprendizagem
     return view_ambiente_de_aprendizagem()
 
-@route('/guarda_roupa')
+
+
+@route('/aluno/guarda_roupa')
+@permissao('aluno_varejo')
 def view_guarda_roupa():
     from bottle import template
-    return template('caminho_aluno/guarda_roupa/index')
+    from control.guarda_roupa_controller import Guarda_roupa
+
+    guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
+    guarda_roupa.get_item_student_have()
+    return template('caminho_aluno/guarda_roupa/index', cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto())
+
+
 @route('/jogo')
 def jogo():
     from bottle import template

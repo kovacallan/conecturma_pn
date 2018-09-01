@@ -4,7 +4,7 @@ from passlib.hash import sha512_crypt
 import random
 
 from control.classes.permissao import usuario_logado, permissao
-from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE
+from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_ITEM
 
 facade = Facade()
 
@@ -39,7 +39,6 @@ def cadastro_usuario():
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
         aluno_create(usuario=usuario)
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
-        print("Entrei aqui!")
         professor_create(usuario)
         send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['diretor']:
@@ -52,11 +51,19 @@ def cadastro_usuario():
 
 def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
+    nome_login = create_student_login(usuario['nome'])
+    cor = []
+
     facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
                                primeiro_nome=usuario['nome'].split()[0].upper(),nascimento=usuario['nascimento'],
                                sexo=usuario['sexo'],vinculo_rede=vinculo_rede['vinculo_rede'],
                                vinculo_escola=usuario['vinculo_escola'], vinculo_turma=usuario['vinculo_turma'],
-                               nome_login=create_student_login(usuario['nome']), senha=password_student_generate())
+                               nome_login=nome_login, senha=password_student_generate())
+
+    aluno = facade.search_aluno_nome_login_facade(nome_login=nome_login)
+
+    facade.set_itens_student_facade(id=aluno['id'], itens = facade.get_itens_free_facade())
+
 
 def password_student_generate():
     senha=random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'], 4)
@@ -79,6 +86,7 @@ def professor_create(usuario):
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'],
                                     vinculo_turma=usuario['vinculo_turma']
                                     )
+
 
 def diretor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])

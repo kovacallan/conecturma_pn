@@ -16,7 +16,11 @@ class DbObservador(Model):
     data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
 
-    itens_comprados = ListField()
+    armario_cores = ListField()
+    armario_rosto = ListField()
+    armario_acessorios = ListField()
+    armario_corpo = ListField()
+
     cor = TextField(default='0')
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
@@ -44,7 +48,7 @@ class DbObservador(Model):
             observador.append(
                 dict(
                     id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                    cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
+                    cpf=search.cpf, email=search.email, tipo=search.tipo,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
                     nascimento=search.data_nascimento, vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma

@@ -62,21 +62,26 @@
                             <div class="itens">
                                 <img id="setaUp" src="/static/img/avatar-top-button.png">
                                 <div id="item-comprado-cores" class="item-comprado-cores">
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('amarelo')" style="margin-top:-65px;margin-left: -10px;">
-                                        <img class="componente-loja-comprado" src="/static/img/body/amarelo.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('azul')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/azul.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('laranja')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/laranja.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('rosa')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/rosa.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('verde')" style="margin-top:-60px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/verde.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('vermelho')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/vermelho.png"></div>
+                                    %z = 0
+                                    % for i in cores:
+                                        % if z % 2 == 0:
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color({{i['nome']}})" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                        % else:
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color({{i['nome']}})" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                         % end
+                                        %z += 1
+                                    % end
                                 </div>
                                 <div id="item-comprado-rosto" class="item-comprado-rosto" style="display:none;">
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('rosto-01')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/rosto-01.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('rosto-02')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/rosto-02.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('rosto-03')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/rosto-03.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('rosto-04')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/rosto-04.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('rosto-05')" style="margin-top:-60px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/rosto-05.png"></div>
-                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('rosto-06')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/rosto-06.png"></div>
+                                    %z = 0
+                                    % for i in rostos:
+                                        % if z % 2 == 0:
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face({{i['nome']}})" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                        % else:
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face({{i['nome']}})" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                        % end
+                                        %z += 1
+                                    % end
                                 </div>
                                 <div id="item-comprado-acessorios" class="item-comprado-acessorios" style="display:none;"></div>
                                 <div id="item-comprado-corpo" class="item-comprado-corpo" style="display:none;"></div>
