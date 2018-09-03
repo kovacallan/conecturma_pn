@@ -10,10 +10,12 @@
 <div class="col-md-2 item-tabela">
 {{i['tipo']}}
 </div>
-<div class="col-md-1 item-tabela card">
-  <a data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
-    <i id="setinha" class="fas fa-angle-down"></i>
-  </a>
+<div class="col-md-1 item-tabela card" style="padding:0px">
+    <a data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true"
+       aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')"
+       style="height:43px">
+        <i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 10px;"></i>
+    </a>
 </div>
 <div class="container">
   <div class="row row-impar">
