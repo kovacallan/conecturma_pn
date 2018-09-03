@@ -36,6 +36,15 @@ def img(filename):
     """
     return static_file(filename, root='././view/app/img')
 
+@route('/static/fotos_usuarios/<filename>')
+def img(filename):
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(filename, root='././view/app/fotos_usuarios')
+
 @route('/static/img/menu/<filename>')
 def img_menu(filename):
     """

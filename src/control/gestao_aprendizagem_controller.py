@@ -17,7 +17,8 @@ niveis_pontuacao = {
 @permissao('responsavel_varejo')
 def view_gestao_aprendizagem():
     observador = usuario_logado()
-    return dict(usuario=observador['nome'], tipo=observador['tipo'])
+    obs=facade.search_observador_id_facade(usuario_logado()['id'])
+    return dict(usuario=observador['nome'], tipo=observador['tipo'],foto_obs=obs['nome_foto_perfil'])
 
 
 @permissao('professor')

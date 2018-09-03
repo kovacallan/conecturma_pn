@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-from bottle import route, view, get, request
+import os
+
+from bottle import route, view, get, request, post, redirect, Bottle, delete
 
 from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
 from facade.facade_main import Facade
+from model.observador_model import DbObservador
 
 facade = Facade()
 
@@ -439,3 +442,21 @@ def new_password():
 def novasenha():
     from control.administrativo_controller import novasenha
     return novasenha()
+
+
+@post('/upload_img')
+def upload():
+    upload_file = request.POST['uploadfile']
+    nome_foto = upload_file.filename
+    obs=facade.search_observador_id_facade(usuario_logado()['id'])
+    print(obs['nome_foto_perfil'])
+    hm=obs['nome_foto_perfil']
+    Bottle.delete(Bottle,path='view/app/fotos_usuarios'+hm, method='DELETE')
+    usuario=DbObservador.load(usuario_logado()['id'])
+    usuario.nome_foto_perfil=nome_foto
+    usuario.save()
+    upload_file.save('view/app/fotos_usuarios', overwrite=True)
+    redirect('/')
+
+@delete()
+

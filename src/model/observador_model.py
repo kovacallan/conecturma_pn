@@ -15,6 +15,7 @@ class DbObservador(Model):
     email = TextField(fts=True,default='0')
     data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
+    nome_foto_perfil=TextField(default='default-profile.png')
 
     itens_comprados = ListField()
     cor = TextField(default='0')
