@@ -458,5 +458,4 @@ def upload():
     upload_file.save('view/app/fotos_usuarios', overwrite=True)
     redirect('/')
 
-@delete()
 
