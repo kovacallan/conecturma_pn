@@ -189,9 +189,8 @@ def check_change_mudanca_alun():
     id = ''.join(aff)
 
     aluno = facade.search_aluno_id_facade(id)
-    print(aluno['nome'])
 
-    if aluno['nome'] == nome and aluno['login'] == login:
+    if aluno['nome'] == nome and aluno['nome_login'] == login:
         return dict(resposta=' nop chuck testa , sem mudança')
     elif aluno['nome'] != nome or aluno['email'] != aluno:
         return dict(resposta='teve mudança', nome=aluno['nome'])
