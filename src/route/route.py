@@ -75,7 +75,7 @@ def view_guarda_roupa():
 
     guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
     guarda_roupa.get_item_student_have()
-    return template('caminho_aluno/guarda_roupa/index', cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto())
+    return template('caminho_aluno/guarda_roupa/index', cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(), acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo)
 
 
 @route('/jogo')

@@ -44,7 +44,7 @@ class DbAluno(Model):
 
 
     def create_aluno(self, **kwargs):
-        self.create(**kwargs)
+        return self.create(**kwargs)
 
 
     def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
@@ -72,9 +72,14 @@ class DbAluno(Model):
 
     def set_itens_student(self, id, itens):
         student = DbAluno.load(int(id))
-        for i in itens:
-            student.armario.append(i['id'])
-        student.save()
+        try:
+            for i in itens:
+                student.armario.append(i['id'])
+            student.save()
+
+            return True
+        except:
+            return False
 
     def get_itens_student(self, id):
         student_itens = DbAluno.load(int(id))

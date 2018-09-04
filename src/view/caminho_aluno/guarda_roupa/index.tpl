@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div align="center" class="col-md-6">
+                        <div class="col-md-6">
                             <div class="avatar">
                                 <div class="title">
                                 </div>
@@ -65,9 +65,9 @@
                                     %z = 0
                                     % for i in cores:
                                         % if z % 2 == 0:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color({{i['nome']}})" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
                                         % else:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color({{i['nome']}})" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
                                          % end
                                         %z += 1
                                     % end
@@ -76,15 +76,39 @@
                                     %z = 0
                                     % for i in rostos:
                                         % if z % 2 == 0:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face({{i['nome']}})" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
                                         % else:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face({{i['nome']}})" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
                                         % end
                                         %z += 1
                                     % end
                                 </div>
-                                <div id="item-comprado-acessorios" class="item-comprado-acessorios" style="display:none;"></div>
-                                <div id="item-comprado-corpo" class="item-comprado-corpo" style="display:none;"></div>
+                                <div id="item-comprado-acessorios" class="item-comprado-acessorios" style="display:none;">
+                                    %z = 0
+                                    % if acessorios == []:
+                                        % for i in acessorios:
+                                            % if z % 2 == 0:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_acessorios('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % else:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_acessorios('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % end
+                                            %z += 1
+                                        % end
+                                    % end
+                                </div>
+                                <div id="item-comprado-corpo" class="item-comprado-corpo" style="display:none;">
+                                    %z = 0
+                                    % if corpos == []:
+                                        % for i in corpos:
+                                            % if z % 2 == 0:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_body('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % else:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_body('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % end
+                                            %z += 1
+                                        % end
+                                    % end
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,12 +164,24 @@
 
             var flag_rosto = 0;
             function change_avatar_color(color){
+                color=color.toLowerCase();
                 $("#avatar-itens-cor").remove();
-                $("#avatar_usuario").append("<img id='avatar-itens-cor' src='/static/img/body/"+color+".png' class='avatar-itens-cor' style='z-index: 11;'>");
+                $("#avatar_usuario").append("<img id='avatar-itens-cor' src='/static/img/body/"+color+"' class='avatar-itens-cor' style='z-index: 11;'>");
             }
             function change_avatar_face(face){
+                face=face.toLowerCase();
                 $("#avatar-itens-rosto").remove();
-                $("#avatar_usuario").append("<img id='avatar-itens-rosto' src='/static/img/rosto/"+face+".png' class='avatar-itens-rosto' style='z-index: 12;'>");
+                $("#avatar_usuario").append("<img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto' style='z-index: 12;'>");
+            }
+            function change_avatar_acessorios(acessorios){
+                acessorios=acessorios.toLowerCase();
+                $("#avatar-itens-cor").remove();
+                $("#avatar_usuario").append("<img id='avatar-itens-cor' src='/static/img/body/"+acessorios+"' class='avatar-itens-cor' style='z-index: 11;'>");
+            }
+            function change_avatar_body(body){
+                body=body.toLowerCase();
+                $("#avatar-itens-rosto").remove();
+                $("#avatar_usuario").append("<img id='avatar-itens-rosto' src='/static/img/rosto/"+body+"' class='avatar-itens-rosto' style='z-index: 12;'>");
             }
         </script>
     </body>

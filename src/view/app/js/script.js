@@ -392,8 +392,9 @@ function cadastro_usuario(tipo){
 //            if (nascimento != '' && nascimento != null){
                 if (escola != '' && escola != null){
                     $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, sexo:sexo, vinculo_escola:escola, vinculo_turma:turma},function(data){
+                        window.location.replace(data);
                     });
-                    window.location.reload(true)
+                    
                 }
                 else{
                     alert('O campo escola é obrigatório.');
@@ -425,6 +426,7 @@ function cadastro_usuario(tipo){
                     if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
+                                window.location.replace(data);
                             });
                         }
                         else{
@@ -464,8 +466,9 @@ function cadastro_usuario(tipo){
                     if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola},function(data){
+                                window.location.replace(data);
                             });
-                            location.reload();
+                            
                         }
                         else{
                             alert('O campo escola é obrigatório.');
@@ -505,8 +508,8 @@ function cadastro_usuario(tipo){
                     if(!validar_se_email_existe(email)){
                         if (rede != '' && rede != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_rede:rede},function(data){
+                                window.location.replace(data);
                             });
-                            setTimeout(location.reload(), 5000);
                         }
                         else{
                             alert('O campo rede é obrigatório.');

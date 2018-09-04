@@ -70,6 +70,19 @@ class DbObservador(Model):
 
         observador.save()
 
+    def set_itens_responsaveis(self, id, itens):
+        student = DbObservador.load(int(id))
+        try:
+            for i in itens:
+                student.armario.append(i['id'])
+            student.save()
+
+            return True
+        except:
+            return False
+
+
+
     def search_observador_id(self, id):
 
         observador = self.load(id)

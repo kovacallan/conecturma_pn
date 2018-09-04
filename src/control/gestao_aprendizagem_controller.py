@@ -43,7 +43,6 @@ def cadastro_usuario():
         send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['diretor']:
         diretor_create(usuario)
-
         send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     else:
         gestor_create(usuario)
@@ -54,16 +53,16 @@ def aluno_create(usuario):
     nome_login = create_student_login(usuario['nome'])
     cor = []
 
-    facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
+    aluno = facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
                                primeiro_nome=usuario['nome'].split()[0].upper(),nascimento=usuario['nascimento'],
                                sexo=usuario['sexo'],vinculo_rede=vinculo_rede['vinculo_rede'],
                                vinculo_escola=usuario['vinculo_escola'], vinculo_turma=usuario['vinculo_turma'],
                                nome_login=nome_login, senha=password_student_generate())
 
-    aluno = facade.search_aluno_nome_login_facade(nome_login=nome_login)
-
-    facade.set_itens_student_facade(id=aluno['id'], itens = facade.get_itens_free_facade())
-
+    if isinstance(aluno,object):
+        itens = facade.set_itens_student_facade(id=aluno.id, itens = facade.get_itens_free_facade())
+        if itens:
+            return '/gestao_aprendizagem/usuario'
 
 def password_student_generate():
     senha=random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'], 4)
@@ -81,24 +80,37 @@ def create_student_login(nome_completo):
 
 def professor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
+    professor=facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'],
                                     vinculo_turma=usuario['vinculo_turma']
                                     )
+    if isinstance(professor, object):
+        itens = facade.set_itens_responsaveis_facade(id=professor.id, itens=facade.get_itens_free_facade())
+        if itens:
+            return '/gestao_aprendizagem/usuario'
 
 
 def diretor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
+    diretor=facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
-                                    vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'])
+                                   vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'])
+    if isinstance(diretor, object):
+        itens = facade.set_itens_responsaveis_facade(id=diretor.id, itens=facade.get_itens_free_facade())
+        if itens:
+            return '/gestao_aprendizagem/usuario'
+
 
 
 def gestor_create(usuario):
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
+    gestor=facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=usuario['vinculo_rede'])
+    if isinstance(gestor, object):
+        itens = facade.set_itens_responsaveis_facade(id=gestor.id, itens=facade.get_itens_free_facade())
+        if itens:
+            return '/gestao_aprendizagem/usuario'
 
 
 def password_generate():
