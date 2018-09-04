@@ -4,14 +4,14 @@
     <div style="margin-left: 41px;">
         <div class="row">
             <div class="col-md-3">
-                <form method="POST" enctype="multipart/form-data" action="/upload_img">
+                <!--<form method="POST" enctype="multipart/form-data" action="/upload_img">-->
                     <label for="img-obs" class="efeito-img">
                     <span class="muda_foto_obs efeito-img">mudar foto</span>
                         <img src="/static/fotos_usuarios/{{foto_obs}}" class="profile-image img-responsive img-circle">
                     </label>
-                    <input type="file" id='img-obs' name="uploadfile" style="display:none"/><br>
-                    <input type="submit" value="Salvar"/>
-                </form>
+                    <input type="file" id='img-obs' name="uploadfile" style="display:none" onchange=""/><br>
+                    <!--<input type="submit" value="Salvar" style="margin-left:43px;"/>-->
+                <!--</form>-->
 
             </div>
             <div class="col-md-9">

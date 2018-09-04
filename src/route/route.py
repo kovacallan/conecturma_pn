@@ -446,15 +446,18 @@ def novasenha():
 
 @post('/upload_img')
 def upload():
-    upload_file = request.POST['uploadfile']
-    ext=upload_file.filename.split('.')[1]
-    nome_foto =upload_file.filename = usuario_logado()['nome']+'.'+ext
-    # if ext not in ('png', 'jpeg','jpg'):
-    #     return 'extensao nao permitida'
-    usuario=DbObservador.load(usuario_logado()['id'])
-    usuario.nome_foto_perfil=nome_foto
-    usuario.save()
-    upload_file.save('view/app/fotos_usuarios', overwrite=True)
-    redirect('/')
+    try:
+        upload_file = request.POST['uploadfile']
+        ext=upload_file.filename.split('.')[1]
+        nome_foto =upload_file.filename = usuario_logado()['nome']+'.'+ext
+        if ext not in ('png', 'jpeg','jpg'):
+            redirect('/')
+        usuario=DbObservador.load(usuario_logado()['id'])
+        usuario.nome_foto_perfil=nome_foto
+        usuario.save()
+        upload_file.save('view/app/fotos_usuarios', overwrite=True)
+        redirect('/')
+    except AttributeError:
+        redirect('/')
 
 
