@@ -447,11 +447,10 @@ def novasenha():
 @post('/upload_img')
 def upload():
     upload_file = request.POST['uploadfile']
-    nome_foto = upload_file.filename
-    obs=facade.search_observador_id_facade(usuario_logado()['id'])
-    print(obs['nome_foto_perfil'])
-    hm=obs['nome_foto_perfil']
-    Bottle.delete(Bottle,path='view/app/fotos_usuarios'+hm, method='DELETE')
+    ext=upload_file.filename.split('.')[1]
+    nome_foto =upload_file.filename = usuario_logado()['nome']+'.'+ext
+    # if ext not in ('png', 'jpeg','jpg'):
+    #     return 'extensao nao permitida'
     usuario=DbObservador.load(usuario_logado()['id'])
     usuario.nome_foto_perfil=nome_foto
     usuario.save()
