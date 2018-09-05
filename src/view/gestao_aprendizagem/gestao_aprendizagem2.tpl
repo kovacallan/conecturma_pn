@@ -10,7 +10,7 @@
                         <img src="/static/fotos_usuarios/{{foto_obs}}" class="profile-image blah img-responsive img-circle">
                     </label>
                     <input type="file" id='img-obs' name="uploadfile" onchange="readURL(this);" style="display:none"/><br>
-                    <input type="submit" value="Salvar" class="botao-salvar" id="salv" style="display:none"/>
+                    <input type="submit" value="Salvar" class="botao-salvar"/>
                 </form>
             </div>
             <div class="col-md-9">
@@ -59,85 +59,27 @@
             </p>
         </div>
     </div>
-
-
 </div>
- <div class="resize-container" style="background-color: #29e;
-  color: white;
-  font-size: 20px;
-  font-family: sans-serif;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 30px 20px;
-  width: 500px;
-  height:500px;
-  box-sizing: border-box;">
-  <div class="resize-drag draggable" style=" display: inline-block;
-  width: 100px;
-  height: 140px;
-  background-color:black;">
-     Resize from any edge or corner
-  </div>
-</div>
-<script src="https://unpkg.com/interactjs@1.3.4/dist/interact.min.js"></script>
-<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
 <script>
 function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 ext=input.files[0].name.split('.')[1];
                 console.log(ext);
-                if (ext != 'png' && ext!= 'jpg' && ext!= 'jpeg'){
-                         $('#salv').css('display','block');
-                        alert('POOOOO , coloca um png ou jpg ou jpeg ae');
-                }else{
-                 $('#salv').css('display','block');
-                 }
+                if (ext != 'png'){
+                alert('POOOOO , coloca um png ae');
+                }
+
                 reader.onload = function (e) {
                     $('.blah')
                         .attr('src', e.target.result)
-                        //.width(150)
-                        //.height(200);
+                       // .width(150)
+                       //  .height(200);
                 };
 
                 reader.readAsDataURL(input.files[0]);
 
             }
         }
-
-</script>
-<script>
-interact('.draggable').draggable({
-    // enable inertial throwing
-    inertia: false,
-    // keep the element within the area of it's parent
-    restrict: {
-      restriction: "parent",
-      endOnly: false,
-      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-    },
-
-    // call this function on every dragmove event
-    onmove: dragMoveListener,
-    // call this function on every dragend event
-    onend: function (event) {
-    }
-  });
-
-  function dragMoveListener (event) {
-    var target = event.target,
-        // keep the dragged position in the data-x/data-y attributes
-        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-    // translate the element
-    target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)';
-
-    // update the posiion attributes
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-  }
 </script>
 %include('gestao_aprendizagem/footer/footer.tpl')

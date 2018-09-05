@@ -451,7 +451,7 @@ def upload():
         ext=upload_file.filename.split('.')[1]
         nome_foto =upload_file.filename = usuario_logado()['nome']+'.'+ext
         if ext not in ('png', 'jpeg','jpg'):
-            redirect('/')
+            redirect('/gestao_aprendizagem2')
         usuario=DbObservador.load(usuario_logado()['id'])
         usuario.nome_foto_perfil=nome_foto
         usuario.save()
@@ -461,3 +461,9 @@ def upload():
         redirect('/')
 
 
+@route('/gestao_aprendizagem2')
+@permissao('responsavel_varejo')
+@view('gestao_aprendizagem/gestao_aprendizagem2')
+def view_gestao_aprendizagem():
+    from control.gestao_aprendizagem_controller import view_gestao_aprendizagem
+    return view_gestao_aprendizagem()

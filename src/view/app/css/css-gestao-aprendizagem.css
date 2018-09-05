@@ -176,6 +176,9 @@ h1, h2, h3, h4, h5, h6 {
     display:none;
     z-index:1;
 }
+.muda_foto_obs:hover{
+display:inline;
+}
 
 .Ola{
 	font-size: 25.81px;
@@ -292,3 +295,14 @@ h1, h2, h3, h4, h5, h6 {
 background-color:initial;
 }
 
+.botao-salvar{
+	background-color: #0391E6;
+	color: white;
+	display: inline-block;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-left:40px;
+
+}
