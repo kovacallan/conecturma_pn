@@ -5,7 +5,7 @@
     <div class="footer-font">Política de Privacidade | Copyright &copy; Aondê Educacional</div>
 </footer>-->
 
-<!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
+<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
 <script type="text/javascript" src="../static/js/Chart.min.js"></script>
 <script type="text/javascript" src="../static/js/vanilla-masker.js"></script>
 <script type="text/javascript" src="../static/js/bootstrap.bundle.min.js"></script>

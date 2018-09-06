@@ -18,7 +18,8 @@ niveis_pontuacao = {
 def view_gestao_aprendizagem():
     observador = usuario_logado()
     obs=facade.search_observador_id_facade(usuario_logado()['id'])
-    return dict(usuario=observador['nome'], tipo=observador['tipo'],foto_obs=obs['nome_foto_perfil'])
+    print(obs)
+    return dict(usuario=observador['nome'], tipo=observador['tipo'],foto_obs=obs['nome_foto_perfil'],css_foto=obs['aux_css_foto'])
 
 
 @permissao('professor')
@@ -28,6 +29,7 @@ def view_usuario_index():
     :return:
     """
     observador = usuario_logado()
+
     usuario = controller_index_usuario(observador)
     escola, rede = get_escolas_e_rede_permissao()
     turma = get_turma_de_acordo_com_tipo_usuario_logado()

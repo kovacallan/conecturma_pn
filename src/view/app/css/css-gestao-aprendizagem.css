@@ -159,6 +159,7 @@ h1, h2, h3, h4, h5, h6 {
 	border-radius: 100px;
 	box-sizing: border-box;
 	z-index:-1;
+	margin-left: -19px;
 }
 
 .efeito-img:hover .profile-image {
@@ -305,4 +306,10 @@ background-color:initial;
     line-height: 1.5;
     margin-left:40px;
 
+}
+
+.doughnut {
+    border: 18px solid #f00;
+    border-radius: 100px;
+    height:173px;
 }

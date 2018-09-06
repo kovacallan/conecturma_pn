@@ -460,6 +460,12 @@ def upload():
     except AttributeError:
         redirect('/')
 
+@route('/salvar_css_foto',method='post')
+def salvar_css_foto():
+    observador=DbObservador.load(usuario_logado()['id'])
+    observador.aux_css_foto=request.params['posicao_foto']
+    print('foi',request.params['posicao_foto'])
+    observador.save()
 
 @route('/gestao_aprendizagem2')
 @permissao('responsavel_varejo')

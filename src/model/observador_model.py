@@ -32,6 +32,7 @@ class DbObservador(Model):
 
     data_ultimo_login = TextField(default='')
     ativo = TextField(default='0')
+    aux_css_foto=TextField(default='0')
 
 
 
