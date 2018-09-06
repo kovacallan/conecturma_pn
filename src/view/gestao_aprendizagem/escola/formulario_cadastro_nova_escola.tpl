@@ -51,9 +51,9 @@
                                             <input type="text" class="form-control" size="26" name="" id="telefone" onchange="document.getElementById('telefone').style.boxShadow = 'none'" value="">
                                         </div>
                                         <div class="col-md-6" style="padding-left: 10px ;">
-                                            <label for="diretor">Diretor</label>
+                                            <label for="data_de_criacao">Data de Criação</label>
                                             <br>
-                                            <input type="text" size="29" class="form-control" name="" id="diretor">
+                                            <input type="text" size="29" class="form-control" name="" id="data_de_criacao" disabled>
                                         </div>
                                     </div>
                                     <div class="row distanciamneto">
@@ -130,3 +130,10 @@
             <!-- acordeon -->
         </div>
     </div>
+
+<script>
+
+    date = new Date;
+    document.getElementById('data_de_criacao').value = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+
+</script>

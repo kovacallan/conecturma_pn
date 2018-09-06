@@ -399,4 +399,54 @@ def parametros_json_jogos(parametro):
 
     return parametros
 
+def getMedalhas():
+    medalha_socio = []
+    medalha_jogo = []
+    todas_medalhas = facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha'])
+    print(todas_medalhas[12])
+    for i in todas_medalhas:
+        if i['tipo_medalha'] == '1':
+            medalha_socio.append(i)
+        else:
+         medalha_jogo.append(i)
+
+
+    return dict(todas_medalhas=todas_medalhas,medalha_jogo=medalha_jogo,medalha_socio=medalha_socio,medalha_recente=[],aluno_id=usuario_logado()['id'])
+
+
+# Resgatando Medalhas e Medalhas que o Aluno possui
+def read_medalha_album(aluno):
+    medalha_socio = []
+    medalha_jogo = []
+    medalha_aluno = []
+
+
+
+    for i in facade.search_aluno_id_facade(id_aluno=usuario_logado()['id'])['medalha']:
+        medalha_aluno.append(i.decode('utf-8'))
+
+    todas_medalhas= facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha'])
+    for medalha in todas_medalhas:
+        if medalha['tipo_medalha']== '1':
+            medalha_socio.append(medalha)
+
+        else:
+            medalha_jogo.append(medalha)
+
+    if medalha_aluno != []:
+        medalha_recente = []
+        if len(medalha_aluno) > 4:
+            z = medalha_aluno[len(medalha_aluno) - 4:len(medalha_aluno)]
+        else:
+            z = medalha_aluno
+
+        for i in medalha_socio:
+            if str(i['id']) in z:
+                medalha_recente.append(i)
+        for i in medalha_jogo:
+            if str(i['id']) in z:
+                medalha_recente.append(i)
+
+        print(medalha_recente)
+    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno)
 

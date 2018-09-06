@@ -39,6 +39,7 @@ class DbEstrutura(Model):
     aventura = TextField(fts=True, default='0')
 
     quem_criou = TextField(default='0')
+    data_de_criacao = TextField(default='0')
     serie = TextField(fts=True, default='0')
 
     tipo_item = TextField(fts=True, default='0')

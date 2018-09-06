@@ -193,6 +193,7 @@ class DbAluno(Model):
         alun_pes = None
         for search in DbAluno.query(DbAluno.id == id_aluno):
             alun_pes = vars(search)["_data"]
+            alun_pes['medalha'] = search.medalhas
         return alun_pes
 
     def alunos_in_turma(self, id_aluno, vinculo_turma):

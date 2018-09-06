@@ -79,7 +79,7 @@
         </div>
 
         <div class="col-md-3">
-            <a href="#">
+            <a href="/aluno/medalhas">
                 <img src="/static/img/MEDALHAS.png" class="img-fluid">
             </a>
         </div>

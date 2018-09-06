@@ -216,6 +216,26 @@ def read_de_medalha():
     from control.gestao_aprendizagem_controller import read_de_medalha
     return read_de_medalha()
 
+@route ('medalha/aluno-medalhas',method='POST')
+def medalhas_aluno():
+    from control.aprendizagem_controller import read_medalha_album
+    aluno = usuario_logado()['id']
+    aluno_medalhas = read_medalha_album(aluno)
+    return dict(aluno_medalhas=aluno_medalhas)
+
+
+
+@route('/aluno/medalhas')
+@permissao('aluno_varejo')
+@view('caminho_aluno/medalhas.tpl')
+def read_medalha_aluno():
+    from control.aprendizagem_controller import read_medalha_album,getMedalhas
+    aluno = usuario_logado()['id']
+    if int(usuario_logado()['tipo']) < 6 or int(usuario_logado()['tipo']) < 6:
+        return getMedalhas()
+
+    else:
+        return read_medalha_album(aluno)
 
 @route('/rede')
 @permissao('gestor')
