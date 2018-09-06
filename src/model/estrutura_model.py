@@ -42,8 +42,10 @@ class DbEstrutura(Model):
     data_de_criacao = TextField(default='0')
     serie = TextField(fts=True, default='0')
 
-    tipo_item = TextField(default='0')
-    preco = IntegerField(default=0)
+    tipo_item = TextField(fts=True, default='0')
+    preco = TextField(fts=True, default='0')
+    image_name = TextField(fts=True, default="0")
+
 
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='0')
@@ -138,6 +140,22 @@ class DbEstrutura(Model):
             oas.append(vars(i)["_data"])
 
         return oas
+
+    def get_itens_free(self):
+        itens = []
+        for i in DbEstrutura.query((DbEstrutura.tipo_estrutura == '4') & (DbEstrutura.preco == '0'), order_by=DbEstrutura.id):
+            itens.append(vars(i)["_data"])
+
+        return itens
+
+
+    def get_itens_for_type(self, type_item):
+        itens = []
+        for i in DbEstrutura.query((DbEstrutura.tipo_item == type_item), order_by=DbEstrutura.id):
+            itens.append(vars(i)["_data"])
+
+        return itens
+
 
     def update_estrutura(self, **kwargs):
         new_data_estrutura = kwargs['estrutura']

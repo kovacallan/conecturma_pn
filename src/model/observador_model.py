@@ -16,7 +16,8 @@ class DbObservador(Model):
     data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
 
-    itens_comprados = ListField()
+    armario = ListField()
+
     cor = TextField(default='0')
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
@@ -44,7 +45,7 @@ class DbObservador(Model):
             observador.append(
                 dict(
                     id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                    cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
+                    cpf=search.cpf, email=search.email, tipo=search.tipo,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
                     nascimento=search.data_nascimento, vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
@@ -65,6 +66,21 @@ class DbObservador(Model):
         observador.ativo = '1'
 
         observador.save()
+
+    def get_itens_responsaveis(self, id):
+        responsaveis_itens = DbObservador.load(int(id))
+        return responsaveis_itens.armario
+
+    def set_itens_responsaveis(self, id, itens):
+        student = DbObservador.load(int(id))
+        try:
+            for i in itens:
+                student.armario.append(i['id'])
+            student.save()
+
+            return True
+        except:
+            return False
 
     def search_observador_id(self, id):
 

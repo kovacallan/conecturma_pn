@@ -42,6 +42,12 @@ class EstruturaFacade:
     def search_descritor_serie_facade(self, serie):
         return self.estrutura.search_descritor_serie(serie=serie)
 
+    def get_itens_for_type_facade(self, type_item):
+        return self.estrutura.get_itens_for_type(type_item=type_item)
+
+    def get_itens_free_facade(self):
+        return self.estrutura.get_itens_free()
+
     def ja_tem_item_facade(self, usuario_logado):
 
         return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)

@@ -1,0 +1,811 @@
+﻿{"frames": [
+
+{
+	"filename": "Symbol 4 instância 10000",
+	"frame": {"x":1,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10001",
+	"frame": {"x":77,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10002",
+	"frame": {"x":153,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10003",
+	"frame": {"x":229,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10004",
+	"frame": {"x":305,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10005",
+	"frame": {"x":381,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10006",
+	"frame": {"x":457,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10007",
+	"frame": {"x":533,"y":1,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10008",
+	"frame": {"x":608,"y":1,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10009",
+	"frame": {"x":683,"y":1,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10010",
+	"frame": {"x":758,"y":1,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10011",
+	"frame": {"x":833,"y":1,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10012",
+	"frame": {"x":908,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10013",
+	"frame": {"x":1,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10014",
+	"frame": {"x":77,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10015",
+	"frame": {"x":153,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10016",
+	"frame": {"x":229,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10017",
+	"frame": {"x":305,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10018",
+	"frame": {"x":381,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10019",
+	"frame": {"x":1,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10020",
+	"frame": {"x":457,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10021",
+	"frame": {"x":533,"y":127,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10022",
+	"frame": {"x":609,"y":127,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10023",
+	"frame": {"x":684,"y":127,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10024",
+	"frame": {"x":759,"y":127,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10025",
+	"frame": {"x":834,"y":127,"w":73,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10026",
+	"frame": {"x":908,"y":127,"w":73,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10027",
+	"frame": {"x":1,"y":253,"w":73,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10028",
+	"frame": {"x":75,"y":253,"w":72,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10029",
+	"frame": {"x":148,"y":253,"w":72,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10030",
+	"frame": {"x":221,"y":253,"w":72,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10031",
+	"frame": {"x":294,"y":253,"w":73,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10032",
+	"frame": {"x":368,"y":253,"w":73,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10033",
+	"frame": {"x":442,"y":253,"w":73,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10034",
+	"frame": {"x":516,"y":253,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10035",
+	"frame": {"x":591,"y":253,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10036",
+	"frame": {"x":666,"y":253,"w":74,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10037",
+	"frame": {"x":741,"y":253,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10038",
+	"frame": {"x":817,"y":253,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10039",
+	"frame": {"x":893,"y":253,"w":82,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10040",
+	"frame": {"x":1,"y":379,"w":85,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10041",
+	"frame": {"x":87,"y":379,"w":86,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10042",
+	"frame": {"x":174,"y":379,"w":83,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10043",
+	"frame": {"x":258,"y":379,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10044",
+	"frame": {"x":336,"y":379,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10045",
+	"frame": {"x":414,"y":379,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10046",
+	"frame": {"x":492,"y":379,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10047",
+	"frame": {"x":571,"y":379,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10048",
+	"frame": {"x":650,"y":379,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10049",
+	"frame": {"x":729,"y":379,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10050",
+	"frame": {"x":808,"y":379,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10051",
+	"frame": {"x":887,"y":379,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10052",
+	"frame": {"x":1,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10053",
+	"frame": {"x":80,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10054",
+	"frame": {"x":159,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10055",
+	"frame": {"x":238,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10056",
+	"frame": {"x":317,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10057",
+	"frame": {"x":396,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10058",
+	"frame": {"x":475,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10059",
+	"frame": {"x":554,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10060",
+	"frame": {"x":633,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10061",
+	"frame": {"x":712,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10062",
+	"frame": {"x":791,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10063",
+	"frame": {"x":870,"y":505,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10064",
+	"frame": {"x":1,"y":630,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10065",
+	"frame": {"x":80,"y":630,"w":78,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10066",
+	"frame": {"x":159,"y":630,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10067",
+	"frame": {"x":237,"y":630,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10068",
+	"frame": {"x":315,"y":630,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10069",
+	"frame": {"x":393,"y":630,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10070",
+	"frame": {"x":471,"y":630,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10071",
+	"frame": {"x":549,"y":630,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10072",
+	"frame": {"x":627,"y":630,"w":77,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10073",
+	"frame": {"x":705,"y":630,"w":76,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10074",
+	"frame": {"x":782,"y":630,"w":76,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10075",
+	"frame": {"x":859,"y":630,"w":76,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10076",
+	"frame": {"x":936,"y":630,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10077",
+	"frame": {"x":1,"y":756,"w":80,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10078",
+	"frame": {"x":82,"y":756,"w":84,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10079",
+	"frame": {"x":167,"y":756,"w":81,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10080",
+	"frame": {"x":249,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10081",
+	"frame": {"x":325,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10082",
+	"frame": {"x":401,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10083",
+	"frame": {"x":477,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10084",
+	"frame": {"x":553,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10085",
+	"frame": {"x":629,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10086",
+	"frame": {"x":705,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10087",
+	"frame": {"x":781,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10088",
+	"frame": {"x":857,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10089",
+	"frame": {"x":933,"y":756,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10090",
+	"frame": {"x":1,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10091",
+	"frame": {"x":77,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10092",
+	"frame": {"x":153,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10093",
+	"frame": {"x":229,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10094",
+	"frame": {"x":305,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10095",
+	"frame": {"x":381,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10096",
+	"frame": {"x":457,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10097",
+	"frame": {"x":533,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10098",
+	"frame": {"x":609,"y":882,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}
+,{
+	"filename": "Symbol 4 instância 10099",
+	"frame": {"x":1,"y":1,"w":75,"h":125},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":88,"h":125},
+	"sourceSize": {"w":88,"h":125}
+}],
+"meta": {
+	"app": "Adobe Flash Professional",
+	"version": "15.0.0.173",
+	"image": "junior.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1"
+}
+}
