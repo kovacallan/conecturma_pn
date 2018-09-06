@@ -364,6 +364,15 @@ function cadastro_turma(){
     }
 }
 
+function se_tem_medalha(aluno_medalha){
+aluno = document.getElementById('aluno').value;
+    $.POST('medalha/aluno-medalhas',{id:id},function(data){
+    console.log("entrei hehe",data);
+    medalu=data.aluno_medalhas
+
+    })
+
+}
 function update_turma(id){
 
     id = document.getElementById('id_turma'+id).value;

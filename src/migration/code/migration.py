@@ -1,10 +1,36 @@
 from facade.facade_main import *
-from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID
+from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID,TIPO_MEDALHA_NOME
 from passlib.hash import sha512_crypt
 
 facade=Facade()
 facade.create_observador_facade(nome="administrador", senha=sha512_crypt.hash("@onde2929"), telefone="21999999999", cpf="0",email="admin", tipo='0',
                                             rede='0',escola='0')
+
+'''medalhas'''
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Eu penso, eu consigo!',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Pensamento Crítico',descricao_completa='Estimulamos a curiosidade e o     gosto por aventura, que são     inerentes a todas as crianças.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Liderança',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Liderança',descricao_completa='A história, os jogos e os desafios       estimulam as crianças a manter     atitudes positivas, serem   autoconfiantes e resilientes, e a     enfrentarem pressões e   influências negativas, tomando   decisões após uma visão holística     do contexto')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Comunicação',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Comunicação',descricao_completa='Trabalhamos as posturas e    habilidades das crianças para que     elas possam se comunicar melhor.     Abordamos, por exemplo, como a     comunicação pode acontecer de    forma verbal e não verbal, por      meio de palavras, gestos,    expressões faciais')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Cooperação',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Colaboração',descricao_completa='A colaboração é estimulada na     plataforma online, na qual as     crianças podem interagir com    colegas, e nos livros, nos quais      cerca de 60% das atividades     propõem trabalhos em grupos.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Faço meu Caminho!',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Adaptabilidade',descricao_completa='Os materiais da Conecturma    podem ser adaptados, visando a     personalização do processo de    aprendizagem, de forma que haja     respeito a necessidades e estilos     individuais.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Inovação',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Inovação',descricao_completa='A Conecturma é uma plataforma     transmídia de aprendizagem   inovadora por natureza. Em    contato com a plataforma, as     crianças são estimuladas a    estarem sempre um passo a     frente, pesquisando,  questionando, construindo e testando hipóteses.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Cidadania',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Cidadania global',descricao_completa='Trabalhamos com o conceito de     educação interdimensional,  entendendo que o processo de     aprendizagem é muito mais amplo     que o desenvolvimento acadêmico    relacionado às disciplinas.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Autonomia',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Produtividade e responsabilidade',descricao_completa='Em nossa metodologia, as crianças     participam da construção do    conhecimento de forma ativa,    tornando-se mais autônomas e    protagonistas dos próprios   processos de aprendizagem.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Alcançando Objetivos',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Empreendedorismo',descricao_completa='Encorajamos as crianças a    experimentarem, arriscarem,  criarem e errarem, mostrando    sempre que os erros são     obstáculos transitórios  importantes no processo de    aprendizagem que nos fazem    valorizar nossas conquistas')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Super Projeto',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Acesso, análise e síntese da     informação',descricao_completa='Todos os capítulos dos livros     sugerem projetos para trabalho    em grupo. Nos projetos, as     crianças precisam acessar, analisar    e, em alguns casos, sintetizar     informações de diversas fontes.')
+
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Jogador',tipo_medalha='2',descricao='Jogador',descricao_completa='Jogou o primeiro jogo.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Dose Dupla',tipo_medalha='2',descricao='Dose Dupla',descricao_completa='Jogou mais de uma vez 10 jogos diferentes')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Dezena',tipo_medalha='2',descricao='Dezena',descricao_completa='Jogou um único jogo mais de 10 vezes.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Fera da Matemática',tipo_medalha='2',descricao='Fera da Matemática',descricao_completa='Concluiu 3 jogos (uma semana de conteúdo)')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Fera da Língua Portuguesa',tipo_medalha='2',descricao='Fera da Língua Portuguesa',descricao_completa='Concluiu 3 jogos (uma semana de conteúdo)')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Musical',tipo_medalha='2',descricao='Musical',descricao_completa='Abriu um videoclipe')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='De novo!',tipo_medalha='2',descricao='De novo!',descricao_completa='Assistiu a um videoclipe mais de 3 vezes')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Presença',tipo_medalha='2',descricao='Presença',descricao_completa='Acessou a Conecturm a 3 dias seguidos.')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Magia da Matemática',tipo_medalha='2',descricao='Magia da Matemática',descricao_completa='Jogou 5 jogos de matemática em sequência terminando no nível difícil')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Magia da Língua Portuguesa',tipo_medalha='2',descricao='Magia da Língua Portuguesa',descricao_completa='Jogou 5 jogos de LP em sequência terminando no nível difícil')
+
+
+
 
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01", descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01", nome_descritor="Estante de Leitura", descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)", serie="1", disciplina="2")
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Acerte as Letras", sigla_oa="UV1AV1UD1OA02", descricao="Diferenciar letras de outros sinais gráficos, como os números e os sinais de pontuação (SEA - Sistema de Escrita Alfabética)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="SE1.02", nome_descritor="Acerte as Letras", descricao_descritor="Compreender a função das letras e do alfabeto", serie="1", disciplina="1")

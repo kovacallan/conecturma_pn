@@ -34,7 +34,7 @@
                                         <br>
                                     <label>Nome do usuário</label>
                                     <br>
-                                    <input data-val="true" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno">
+                                    <input data-val="true" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno" style="text-transform:uppercase;">
 
                                 </div>
 
