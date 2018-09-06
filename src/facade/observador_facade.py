@@ -18,6 +18,9 @@ class ObservadorFacade:
     def redefinir_senha_facade(self, id, senha):
         self.observador.redefinir_senha(id=id, senha=senha)
 
+    def get_itens_responsaveis_facade(self, id):
+        return self.observador.get_itens_responsaveis(id=id)
+
     def set_itens_responsaveis_facade(self, id, itens):
         return self.observador.set_itens_responsaveis(id=id, itens=itens)
 

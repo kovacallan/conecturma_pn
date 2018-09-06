@@ -27,6 +27,32 @@ facade.create_estrutura_facade(tipo_estrutura="4", nome="Assustado", tipo_item="
 facade.create_estrutura_facade(tipo_estrutura="4", nome="Sem graça", tipo_item="2", preco='0', image_name="rosto-08.png")
 facade.create_estrutura_facade(tipo_estrutura="4", nome="Rindo", tipo_item="2", preco='0', image_name="rosto-09.png")
 
+""" Migration das Itens acessorio """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Saco", tipo_item="3", preco='3', image_name="2cabeca-01.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Tubarão", tipo_item="3", preco='10', image_name="2cabeca-02.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Mexicano", tipo_item="3", preco='20', image_name="2cabeca-03.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Capacete Soldado", tipo_item="3", preco='30', image_name="2cabeca-04.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Planta", tipo_item="3", preco='35', image_name="2cabeca-05.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Flor", tipo_item="3", preco='40', image_name="2cabeca-06.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Polvo", tipo_item="3", preco='45', image_name="2cabeca-07.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Lagosta", tipo_item="3", preco='50', image_name="2cabeca-08.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Astronalta", tipo_item="3", preco='60', image_name="2cabeca-09.png")
+
+
+""" Migration das Itens corpo """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Malhado", tipo_item="4", preco='5', image_name="2corpo-01.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Tubarão", tipo_item="4", preco='13', image_name="2corpo-02.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Romano", tipo_item="4", preco='25', image_name="2corpo-03.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Soldado", tipo_item="4", preco='35', image_name="2corpo-04.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Planta", tipo_item="4", preco='40', image_name="2corpo-05.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Caverna", tipo_item="4", preco='45', image_name="2corpo-06.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Polvo", tipo_item="4", preco='50', image_name="2corpo-07.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Lagosta", tipo_item="4", preco='55', image_name="2corpo-08.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Astronalta", tipo_item="4", preco='70', image_name="2corpo-09.png")
+
+
 """ Migration das Oas """
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01", descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01", nome_descritor="Estante de Leitura", descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)", serie="1", disciplina="2")
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Acerte as Letras", sigla_oa="UV1AV1UD1OA02", descricao="Diferenciar letras de outros sinais gráficos, como os números e os sinais de pontuação (SEA - Sistema de Escrita Alfabética)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="SE1.02", nome_descritor="Acerte as Letras", descricao_descritor="Compreender a função das letras e do alfabeto", serie="1", disciplina="1")

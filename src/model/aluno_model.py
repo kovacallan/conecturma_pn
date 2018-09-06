@@ -153,7 +153,7 @@ class DbAluno(Model):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    tipo=search.tipo_aluno, armario=search.armario, cor=search.cor,
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
@@ -214,13 +214,13 @@ class DbAluno(Model):
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
 
-        if int(usuario.pontos_de_moedas) < preco:
+        if usuario.pontos_de_moedas < preco:
             print("você não tem moeda")
         else:
             dinheiros= int(usuario.pontos_de_moedas)
-            dinheiros -= preco
+            dinheiros -= int(preco)
             usuario.pontos_de_moedas = str(dinheiros)
-            usuario.itens_comprados.append(id_item)
+            usuario.armario.append(id_item)
             usuario.save()
 
     def ver_itens_comprados(self, id_usuario):
@@ -231,20 +231,20 @@ class DbAluno(Model):
         return itens
 
     def equipar_item(self, id_usuario, itens):
-
         usuario = self.load(id_usuario)
-        if itens['tipo_item'] == '1':
-            usuario.cor = itens['id']
-        else:
-            if itens['tipo_item'] == '2':
-                usuario.rosto = itens['id']
-            else:
-                if itens['tipo_item'] == '3':
-                    usuario.acessorio = itens['id']
-                else:
-                    if itens['tipo_item'] == '4':
-                        usuario.corpo = itens['id']
+        for i in itens:
+           if i != -1:
+                if i['tipo_item'] == '1':
+                    usuario.cor = i['id']
+                elif i['tipo_item'] == '2':
+                    usuario.rosto = i['id']
+                elif i['tipo_item'] == '3':
+                    usuario.acessorio = i['id']
+                elif i['tipo_item'] == '4':
+                    usuario.corpo = i['id']
         usuario.save()
+
+        print(usuario.cor, usuario.rosto, usuario.acessorio, usuario.corpo)
 
     def avatar(self, id):
 

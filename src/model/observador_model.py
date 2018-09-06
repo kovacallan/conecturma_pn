@@ -16,10 +16,7 @@ class DbObservador(Model):
     data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
 
-    armario_cores = ListField()
-    armario_rosto = ListField()
-    armario_acessorios = ListField()
-    armario_corpo = ListField()
+    armario = ListField()
 
     cor = TextField(default='0')
     rosto = TextField(default='0')
@@ -70,6 +67,10 @@ class DbObservador(Model):
 
         observador.save()
 
+    def get_itens_responsaveis(self, id):
+        responsaveis_itens = DbObservador.load(int(id))
+        return responsaveis_itens.armario
+
     def set_itens_responsaveis(self, id, itens):
         student = DbObservador.load(int(id))
         try:
@@ -80,8 +81,6 @@ class DbObservador(Model):
             return True
         except:
             return False
-
-
 
     def search_observador_id(self, id):
 

@@ -38,21 +38,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div align="center" class="col-md-6">
                             <div class="avatar">
                                 <div class="title">
                                 </div>
                                 <div class="avatar">
                                     <img id="avatar" src="/static/img/body/avatar-naked.png">
                                     <div id="avatar_usuario">
-                                        
+                                        <input id='avatar-itens-cor-id' type='hidden' value='0'>
+                                        <input id='avatar-itens-rosto-id' type='hidden' value='0'>
+                                        <input id='avatar-itens-acessorios-id' type='hidden' value='0'>
+                                        <input id='avatar-itens-body-id' type='hidden' value='0'>
                                     </div>
                                     <div class="space_ship">
                                         <img id="nave" src="/static/img/space_avatar.png">
                                         <input id="apelido" type="text" name="apelido" value="teste">
                                         <div class="botoes">
-                                            <img src="/static/img/btn-salvar.png" style="cursor:pointer;">
-                                            <img src="/static/img/botao_limpar.png" style="cursor:pointer;">
+                                            <img onclick="salvar_avatar()" src="/static/img/btn-salvar.png" style="cursor:pointer;">
                                         </div>
                                     </div>
                                 </div>
@@ -65,9 +67,17 @@
                                     %z = 0
                                     % for i in cores:
                                         % if z % 2 == 0:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            %if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            % else:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            % end
                                         % else:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            %if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_color('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            %else:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/body/{{i['image_name']}}"></div>
+                                            %end
                                          % end
                                         %z += 1
                                     % end
@@ -76,21 +86,38 @@
                                     %z = 0
                                     % for i in rostos:
                                         % if z % 2 == 0:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            %if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            %else:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % end
                                         % else:
-                                            <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_face('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % else:
+                                                <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                            % end
+
                                         % end
                                         %z += 1
                                     % end
                                 </div>
                                 <div id="item-comprado-acessorios" class="item-comprado-acessorios" style="display:none;">
                                     %z = 0
-                                    % if acessorios == []:
+                                    % if acessorios != []:
                                         % for i in acessorios:
                                             % if z % 2 == 0:
-                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_acessorios('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                                % if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_acessorios('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/acessorio/{{i['image_name']}}"></div>
+                                                % else:
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/acessorio/{{i['image_name']}}"></div>
+                                                % end
                                             % else:
-                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_acessorios('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                                % if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_acessorios('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/acessorio/{{i['image_name']}}"></div>
+                                                % else:
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/acessorio/{{i['image_name']}}"></div>
+                                                % end
                                             % end
                                             %z += 1
                                         % end
@@ -98,12 +125,21 @@
                                 </div>
                                 <div id="item-comprado-corpo" class="item-comprado-corpo" style="display:none;">
                                     %z = 0
-                                    % if corpos == []:
+                                    % if corpos != []:
                                         % for i in corpos:
                                             % if z % 2 == 0:
-                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_body('{{i['image_name']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                                % if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_body('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/corpo/{{i['image_name']}}"></div>
+                                                % else:
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-65px;margin-left: -10px;"><img class="componente-loja-comprado" src="/static/img/corpo/{{i['image_name']}}"></div>
+                                                % end
+
                                             % else:
-                                                <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_body('{{i['image_name']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/rosto/{{i['image_name']}}"></div>
+                                                % if str(i['id']) in itens_usuario or usuario_logado['tipo']<= '5':
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="change_avatar_body('{{i['image_name']}}','{{i['id']}}')" style="margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/corpo/{{i['image_name']}}"></div>
+                                                % else:
+                                                    <div class="item-comprado-avatar scale-bounce" onclick="comprar_acessorio('{{i['id']}}')" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);margin-top:-30px;margin-left: 100px;"><img class="componente-loja-comprado" src="/static/img/corpo/{{i['image_name']}}"></div>
+                                                % end
                                             % end
                                             %z += 1
                                         % end
@@ -162,26 +198,41 @@
                 }
             }    
 
+            function comprar_acessorio(item){
+                $.post('/comprar_item', {item:item},function(data){
+                 });
+            }
+
+            function salvar_avatar(){
+                $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
+                ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value},function(data){
+                 });
+            }
+
             var flag_rosto = 0;
-            function change_avatar_color(color){
+            function change_avatar_color(color, id){
                 color=color.toLowerCase();
                 $("#avatar-itens-cor").remove();
-                $("#avatar_usuario").append("<img id='avatar-itens-cor' src='/static/img/body/"+color+"' class='avatar-itens-cor' style='z-index: 11;'>");
+                $("#avatar-itens-cor-id").remove();
+                $("#avatar_usuario").append("<input id='avatar-itens-cor-id' type='hidden' value='"+id+"'><img id='avatar-itens-cor' src='/static/img/body/"+color+"' value='teste' class='avatar-itens-cor imagem-pocicao-"+color.slice(0,4)+"' style='z-index: 11;'>");
             }
-            function change_avatar_face(face){
+            function change_avatar_face(face, id){
                 face=face.toLowerCase();
                 $("#avatar-itens-rosto").remove();
-                $("#avatar_usuario").append("<img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto' style='z-index: 12;'>");
+                $("#avatar-itens-rosto-id").remove();
+                $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12;'>");
             }
-            function change_avatar_acessorios(acessorios){
+            function change_avatar_acessorios(acessorios, id){
                 acessorios=acessorios.toLowerCase();
-                $("#avatar-itens-cor").remove();
-                $("#avatar_usuario").append("<img id='avatar-itens-cor' src='/static/img/body/"+acessorios+"' class='avatar-itens-cor' style='z-index: 11;'>");
+                $("#avatar-itens-acessorios").remove();
+                $("#avatar-itens-acessorios-id").remove();
+                $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorios+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorios.slice(0,10)+"' style='z-index: 13;'>");
             }
-            function change_avatar_body(body){
+            function change_avatar_body(body, id){
                 body=body.toLowerCase();
-                $("#avatar-itens-rosto").remove();
-                $("#avatar_usuario").append("<img id='avatar-itens-rosto' src='/static/img/rosto/"+body+"' class='avatar-itens-rosto' style='z-index: 12;'>");
+                $("#avatar-itens-body").remove();
+                $("#avatar-itens-body-id").remove();
+                $("#avatar_usuario").append("<input id='avatar-itens-body-id' type='hidden' value='"+id+"'><img id='avatar-itens-body' src='/static/img/corpo/"+body+"' class='avatar-itens-corpo' style='z-index: 12;'>");
             }
         </script>
     </body>

@@ -150,14 +150,26 @@ body, html{
 
 .avatar-itens-cor{
     position: absolute;
-    top: 23%;
-    left: 191px;
+    top: -4%;
+    left: 145px;
+}
+
+.avatar-itens-acessorio{
+    position: absolute;
+    top: -4%;
+    left: 145px;
+}
+
+.avatar-itens-corpo{
+    position: absolute;
+    top: -9%;
+    left: 103px;
 }
 
 .avatar-itens-rosto{
     position: absolute;
     top: 28%;
-    left: 38.2%;
+    left: 103px;
 }
 
 /*area avatar*/
@@ -215,4 +227,102 @@ body, html{
     max-width: 60px;
     max-height: 60px;
     margin-top: 20px;
+}
+
+.imagem-pocicao-amar{
+    left: 190px;
+    top: 23%;
+}
+.imagem-pocicao-azul{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-lara{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-rosa{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-verd{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-verm{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-rosto-01{
+    left: 215px;
+}
+.imagem-pocicao-rosto-02{
+    left: 215px;
+}
+.imagem-pocicao-rosto-03{
+    top: 27%;
+    left: 207px;
+}
+.imagem-pocicao-rosto-04{
+    top: 28%;
+    left: 215px;
+}
+
+.imagem-pocicao-rosto-05{
+    top: 24%;
+    left: 210px;
+}
+
+.imagem-pocicao-rosto-06{
+    top: 27%;
+    left: 196px;
+}
+
+.imagem-pocicao-rosto-07{
+    top: 27%;
+    left: 214px;
+}
+.imagem-pocicao-rosto-08{
+    top: 27%;
+    left: 211px;
+}
+.imagem-pocicao-rosto-09{
+    top: 27%;
+    left: 206px;
+}
+.imagem-pocicao-2cabeca-01{
+    top: -10%;
+    left: 99px;
+}
+.imagem-pocicao-2cabeca-02{
+    top: -9%;
+    left: 107px;
+}
+.imagem-pocicao-2cabeca-03{
+    top: -9%;
+    left: 107px;
+}
+.imagem-pocicao-2cabeca-04{
+    top: -9%;
+    left: 107px;
+}
+.imagem-pocicao-2cabeca-05{
+    top: -11%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-06{
+    top: -9%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-07{
+    top: -9%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-08{
+    top: -9%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-09{
+    top: -9%;
+    left: 103px;
 }

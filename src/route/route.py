@@ -74,8 +74,30 @@ def view_guarda_roupa():
     from control.guarda_roupa_controller import Guarda_roupa
 
     guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
-    guarda_roupa.get_item_student_have()
-    return template('caminho_aluno/guarda_roupa/index', cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(), acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo)
+    guarda_roupa.get_item_comprar()
+    guarda_roupa.get_item_user_have()
+
+    return template('caminho_aluno/guarda_roupa/index',usuario_logado = usuario_logado(), cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(),
+                    acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo(), itens_usuario = guarda_roupa.get_itens_user())
+
+@route('/comprar_item', method='POST')
+@permissao('aluno_varejo')
+def buy_item():
+    from bottle import request
+    from control.guarda_roupa_controller import Guarda_roupa
+
+    guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
+    guarda_roupa.buy_item(id_item=request.params['item'])
+
+@route('/equipar_item', method='POST')
+@permissao('aluno_varejo')
+def equip_item():
+    from bottle import request
+    item = []
+    for i in request.params:
+        item.append(facade.search_estrutura_id_facade(id=request.params[i]))
+
+    facade.equipar_item_facade(id=usuario_logado()['id'],itens=item)
 
 
 @route('/jogo')
