@@ -49,7 +49,7 @@
     <div class="row">
         <div class="col-md-3 avatar-std">
             <img src="/static/img/boneco_base2.png" class="boneco_base img-fluid">
-            <a href="/guarda_roupa" style="left: 69%;width: 40px;height: 41px;position:  absolute;top: 3px;"></a>
+            <a href="/aluno/guarda_roupa" style="left: 69%;width: 40px;height: 41px;position:  absolute;top: 3px;"></a>
             <img src="/static/img/AVATAR.png" class="avatar-ship img-fluid">
             <!--<div class="offset-md-4 col-md-1">-->
             <span id="CRYSTAL">{{moedas}}</span>

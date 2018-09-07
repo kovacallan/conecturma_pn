@@ -80,6 +80,7 @@ def view_ambiente_de_aprendizagem():
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         jogador = facade.search_aluno_id_facade(id_aluno=usuario['id'])
+        print(jogador)
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
     else:
@@ -432,9 +433,9 @@ def read_medalha_album(aluno):
 
         else:
             medalha_jogo.append(medalha)
-
+    medalha_recente = []
     if medalha_aluno != []:
-        medalha_recente = []
+
         if len(medalha_aluno) > 4:
             z = medalha_aluno[len(medalha_aluno) - 4:len(medalha_aluno)]
         else:
@@ -447,6 +448,5 @@ def read_medalha_album(aluno):
             if str(i['id']) in z:
                 medalha_recente.append(i)
 
-        print(medalha_recente)
     return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno)
 
