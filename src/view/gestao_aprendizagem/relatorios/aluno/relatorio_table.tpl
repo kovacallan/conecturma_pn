@@ -23,8 +23,8 @@
                     %end
                 </td>
                 <td data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
-                    <i id="setinha_grafico{{i['id']}}_down" onclick="funcoes('grafico{{i['id']}}', {{pontos[teste]}})" class="fas fa-angle-down"></i>
-                    <i id="setinha_grafico{{i['id']}}_up" onclick="funcoes('grafico{{i['id']}}', {{pontos[teste]}})" class="fas fa-angle-up" style="display:none;"></i>
+                    <!--<i id="setinha_grafico{{i['id']}}_down" onclick="funcoes('grafico{{i['id']}}', {{pontos[teste]}})" class="fas fa-angle-down"></i>
+                    <i id="setinha_grafico{{i['id']}}_up" onclick="funcoes('grafico{{i['id']}}', {{pontos[teste]}})" class="fas fa-angle-up" style="display:none;"></i>-->
                 </td>
             </tr>
             <tr>
