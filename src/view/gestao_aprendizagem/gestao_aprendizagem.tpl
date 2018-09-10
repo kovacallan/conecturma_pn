@@ -3,29 +3,27 @@
 <div class="col-md-9 order-md-3 texto-inicial" style="margin-top: 70px;">
     <div style="margin-left: 41px;">
         <div class="row">
-            <div class="col-md-3" style="border-radius: 113px;position:relative;z-index:5;">
-                <form method="POST" enctype="multipart/form-data" action="/upload_img">
-                        <div class="col-md-12 doughnut " style="height: 173px;position:relative;{{css_foto}};" onclick="getElementById('image').style.zIndex='1'">
-                            <div id="image" class="draggable" style="position:relative;z-index:-1;">
+<div class="col-md-3" id='inter' style="border-radius: 113px;position:relative;z-index:5;">
+                <form method="POST" enctype="multipart/form-data" action="http://localhost:8080/upload_img">
+                        <div class="col-md-12 doughnut" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" ><!--onclick="getElementById(&#39;image&#39;).style.zIndex=&#39;1&#39;"-->
+                            <div id="image" class="" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
                                 <!--<div>-->
-                                <img src="/static/fotos_usuarios/{{foto_obs}}"
-                                     class="profile-image daggeable blah img-responsive img-circle">
+                                <img src="/static/fotos_usuarios/{{foto_obs}}" class="profile-image blah img-responsive img-circle" style="margin-top: 25px;" >
 
                                 <!--</div>-->
                             </div>
                         </div>
 
-                    <div class="row" style="margin-top:1px;">
-                        <label for="img-obs" class="efeito-img botao-salvar"
-                               style="font-size: 10pt;padding: 4px;margin-left: 5px;border-radius: 100px;">Mudar Imagem
+                    <div class="row" style="margin-top:5px;margin-left:25px;">
+                        <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="left" title="por favor coloque uma imagem de ate 1MB , em formato jpeg , png ou jpg"></i><label for="img-obs" class="efeito-img botao-salvar" style="font-size: 10pt;padding: 6px;margin-left: 10px;border-radius: 100px;">Mudar Imagem
                             Perfil</label>
-                        <input type="file" id='img-obs' name="uploadfile" onchange="readURL(this);"
-                               style="display:none"/><br>
-                        <input type="submit" value="Salvar" class="botao-salvar" id="salv" style="display:none"/>
+                        <input type="file" id="img-obs" name="uploadfile" onchange="readURL(this);" style="display:none"><br>
+                        <input type="submit" value="Salvar" class="botao-salvar" id="salv" style="display:none;margin-left: 49px;">
                     </div>
                 </form>
             </div>
-            <div class="col-md-9">
+
+            <div class="col-md-9" style="padding-left: 60px;">
                 <div class="row fonte-texto" style="margin-top:18px;">
                     <h3 class="Ola">Olá <strong>{{usuario}}</strong></h3>
                     <p>
@@ -74,24 +72,8 @@
 
 
 </div>
-<!--<div class="resize-container" style="background-color: #29e;-->
-<!--color: white;-->
-<!--font-size: 20px;-->
-<!--font-family: sans-serif;-->
-<!--border-radius: 8px;-->
-<!--padding: 20px;-->
-<!--margin: 30px 20px;-->
-<!--width: 500px;-->
-<!--height:500px;-->
-<!--box-sizing: border-box;">-->
-<!--<div class="resize-drag draggable" style=" display: inline-block;-->
-<!--width: 100px;-->
-<!--height: 140px;-->
-<!--background-color:black;">-->
-<!--Resize from any edge or corner-->
-<!--</div>-->
-<!--</div>-->
-<script src="https://unpkg.com/interactjs@1.3.4/dist/interact.min.js"></script>
+
+<script src="../static/js/interact.min.js"></script>
 <script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
 <script>
 function readURL(input) {
@@ -100,22 +82,24 @@ function readURL(input) {
                 ext=input.files[0].name.split('.')[1];
                 console.log(ext,input.files[0].size,input.files);
                 if (ext != 'png' && ext!= 'jpg' && ext!= 'jpeg'){
-                         $('#salv').css('display','block');
                         alert('POOOOO , coloca um png ou jpg ou jpeg ae');
-                }else{
-                 $('#salv').css('display','block');
-                 }
-                reader.onload = function (e) {
-                    $('.blah')
-                        .attr('src', e.target.result)
-                        //.width(150)
-                        //.height(200);
-                };
+                }else if (input.files[0].size > 1048576){
+                        alert('por favor selecione uma imagem ate 1MB');
+                        }
+                else{
+                        //getElementById('image').style.zIndex='1';
+                    $('#salv').css('display','block');
+                  var element = document.getElementById("image");
+                    element.classList.add("draggable");
+                    reader.onload = function (e) {
+                        $('.blah')
+                            .attr('src', e.target.result)
+                    };
+        }
 
                 reader.readAsDataURL(input.files[0]);
-
             }
-        }
+            }
 
 
 
@@ -129,7 +113,7 @@ interact('.draggable').draggable({
     restrict: {
       restriction: "parent",
       endOnly: false,
-      elementRect: { top: 0, left: 0, bottom: 1.1, right: 1.1 }
+      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
 
     // call this function on every dragmove event
@@ -169,4 +153,24 @@ interact('.draggable').draggable({
 
 
 </script>
+<!--<div class="resize-container" style="background-color: #29e;-->
+<!--color: white;-->
+<!--font-size: 20px;-->
+<!--font-family: sans-serif;-->
+<!--border-radius: 8px;-->
+<!--padding: 20px;-->
+<!--margin: 30px 20px;-->
+<!--width: 500px;-->
+<!--height:500px;-->
+<!--box-sizing: border-box;">-->
+<!--<div class="resize-drag draggable" style=" display: inline-block;-->
+<!--width: 100px;-->
+<!--height: 140px;-->
+<!--background-color:black;">-->
+<!--Resize from any edge or corner-->
+<!--</div>-->
+<!--</div>-->
+
+
+
 %include('gestao_aprendizagem/footer/footer.tpl')

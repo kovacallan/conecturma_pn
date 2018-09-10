@@ -155,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .profile-image{
 	width: 148px;
-    height: 141px;
+    height: 150px;
 	border-radius: 100px;
 	box-sizing: border-box;
 	z-index:-1;
@@ -309,7 +309,7 @@ background-color:initial;
 }
 
 .doughnut {
-    border: 18px solid #f00;
+    border: 18px solid white;
     border-radius: 100px;
     height:173px;
 }

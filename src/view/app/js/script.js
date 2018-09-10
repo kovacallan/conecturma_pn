@@ -757,7 +757,80 @@ function allow_edit_obs(content_class_id){
     $('#edito'+content_class_id).show();
 
 }
-
+//function readURL(input) {
+//            if (input.files && input.files[0]) {
+//                var reader = new FileReader();
+//                ext=input.files[0].name.split('.')[1];
+//                console.log(ext,input.files[0].size,input.files);
+//
+//                if (ext != 'png' && ext!= 'jpg' && ext!= 'jpeg'){
+//                       $('#error').css('display','block');
+//
+//                }else if(input.files[0].size > 1048576){
+//                alert('por favor selecione uma imagem de tamanho 1MB ou menor');
+//
+//                 }
+//                 reader.onload = function (e) {
+//                 console.log('que',e);
+//                    $('.blah').attr('src', e.target.result)
+//                        //.width(150)
+//                        //.height(200);
+//                 };
+//                 reader.readAsDataURL(input.files[0]);
+//                 $('#salv').css('display','block');
+//
+//
+//
+//
+//            }
+//        }
+//
+//    interact('.draggable').draggable({
+//    // enable inertial throwing
+//    inertia: false,
+//    // keep the element within the area of it's parent
+//    restrict: {
+//      restriction: "parent",
+//      endOnly: false,
+//      elementRect: { top: 0, left: 0, bottom: 1.1, right: 1.1 }
+//    },
+//
+//    // call this function on every dragmove event
+//    onmove: dragMoveListener,
+//    // call this function on every dragend event
+//    onend: function (event) {
+//    }
+//  });
+//
+//  function dragMoveListener (event) {
+//    console.log('test',event.target);
+//    var target = event.target,
+//
+//        // keep the dragged position in the data-x/data-y attributes
+//        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+//        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+//    // translate the element
+//    target.style.webkitTransform =
+//    target.style.transform =
+//      'translate(' + x + 'px, ' + y + 'px)';
+//
+//
+//
+//    // update the posiion attributes
+//    target.setAttribute('data-x', x);
+//    target.setAttribute('data-y', y);
+//    var z; // x negativo
+//    var w;  //y negativo
+//    console.log('hm',x,y);
+//    $.ajax({
+//     url: '/salvar_css_foto',
+//     data: {
+//        posicao_foto:'transform:translate(' + x + 'px, ' + y + 'px)'
+//    },
+//    dataType: 'json',
+//    type: 'post'
+//});
+//  }
 //}
 //
 //    id = document.getElementById('id_turma'+id).value;

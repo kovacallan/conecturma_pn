@@ -458,6 +458,7 @@ def upload():
         upload_file.save('view/app/fotos_usuarios', overwrite=True)
         redirect('/')
     except AttributeError:
+        print('erro')
         redirect('/')
 
 @route('/salvar_css_foto',method='post')
