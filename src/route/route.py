@@ -66,6 +66,40 @@ def view_ambiente_de_aprendizagem():
     return view_ambiente_de_aprendizagem()
 
 
+
+@route('/aluno/guarda_roupa')
+@permissao('aluno_varejo')
+def view_guarda_roupa():
+    from bottle import template
+    from control.guarda_roupa_controller import Guarda_roupa
+
+    guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
+    guarda_roupa.get_item_comprar()
+    guarda_roupa.get_item_user_have()
+
+    return template('caminho_aluno/guarda_roupa/index',usuario_logado = usuario_logado(), cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(),
+                    acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo(), itens_usuario = guarda_roupa.get_itens_user())
+
+@route('/comprar_item', method='POST')
+@permissao('aluno_varejo')
+def buy_item():
+    from bottle import request
+    from control.guarda_roupa_controller import Guarda_roupa
+
+    guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
+    guarda_roupa.buy_item(id_item=request.params['item'])
+
+@route('/equipar_item', method='POST')
+@permissao('aluno_varejo')
+def equip_item():
+    from bottle import request
+    item = []
+    for i in request.params:
+        item.append(facade.search_estrutura_id_facade(id=request.params[i]))
+
+    facade.equipar_item_facade(id=usuario_logado()['id'],itens=item)
+
+
 @route('/jogo')
 def jogo():
     from bottle import template
@@ -298,6 +332,7 @@ def relatorio_aluno_view():
     relatorio = Relatorio()
     relatorio.get_alunos(usuario_online_dados=usuario_logado(), nome_turma=get_nome_turma)
 
+
     return dict(tipo = usuario_logado()['tipo'], alunos = relatorio.alunos)
 
 
@@ -319,7 +354,7 @@ def relatorio_aluno():
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
 
-    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa = relatorio.descritores, porcentagem=relatorio.porcentagem,
+    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.porcentagem_solo)
 
 @route('/trazer_oas')

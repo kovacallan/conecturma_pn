@@ -18,7 +18,7 @@ class DbAluno(Model):
     tipo_aluno = TextField(default='0')
     cpf_responsavel = TextField(default='0')
 
-    itens_comprados = ListField()
+    armario = ListField()
     cor = TextField(default='0')
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
@@ -44,7 +44,7 @@ class DbAluno(Model):
 
 
     def create_aluno(self, **kwargs):
-        self.create(**kwargs)
+        return self.create(**kwargs)
 
 
     def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
@@ -61,15 +61,29 @@ class DbAluno(Model):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
+                    tipo=search.tipo_aluno, cor=search.cor,armario=search.armario, rosto=search.rosto,
+                    acessorio=search.acessorio, corpo=search.corpo,pontos_de_vida=search.pontos_de_vida,
+                    pontos_de_moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
                     vinculo_turma=search.vinculo_turma, email=search.email, cpf='', nome_login=search.nome_login,
                     nascimento=search.nascimento
                 )
             )
         return alunos
+
+    def set_itens_student(self, id, itens):
+        student = DbAluno.load(int(id))
+        try:
+            for i in itens:
+                student.armario.append(i['id'])
+            student.save()
+
+            return True
+        except:
+            return False
+
+    def get_itens_student(self, id):
+        student_itens = DbAluno.load(int(id))
+        return student_itens.armario
 
     def search_aluno_primeiro_nome(self, primeiro_nome):
         alun_pes = []
@@ -82,18 +96,13 @@ class DbAluno(Model):
 
         alun_pes = None
         for search in DbAluno.query(DbAluno.nome_login == nome_login):
-            alun_pes = dict(
-                id=search.id, matricula=search.matricula, nome=search.nome,nome_login=search.nome_login, senha=search.senha,
-                tipo_aluno=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
-                rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo, vinculo_serie=search.vinculo_serie,
-                pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                vinculo_turma=search.vinculo_turma, email=search.email, cpf='',
-                ultima_aventura=search.ultima_aventura, ultima_unidade=search.ultima_unidade,
-                ultima_objeto_aprendizagem=search.ultima_objeto_aprendizagem
-            )
+            alun_pes = vars(search)['_data']
+            alun_pes['tipo'] = alun_pes['tipo_aluno']
 
         return alun_pes
+
+    def get_itens_closet(self):
+        pass
 
     def search_aluno_nome(self, nome):
 
@@ -144,7 +153,7 @@ class DbAluno(Model):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    tipo=search.tipo_aluno, armario=search.armario, cor=search.cor,
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
@@ -206,13 +215,13 @@ class DbAluno(Model):
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
 
-        if int(usuario.pontos_de_moedas) < preco:
+        if usuario.pontos_de_moedas < preco:
             print("você não tem moeda")
         else:
             dinheiros= int(usuario.pontos_de_moedas)
-            dinheiros -= preco
+            dinheiros -= int(preco)
             usuario.pontos_de_moedas = str(dinheiros)
-            usuario.itens_comprados.append(id_item)
+            usuario.armario.append(id_item)
             usuario.save()
 
     def ver_itens_comprados(self, id_usuario):
@@ -223,20 +232,20 @@ class DbAluno(Model):
         return itens
 
     def equipar_item(self, id_usuario, itens):
-
         usuario = self.load(id_usuario)
-        if itens['tipo_item'] == '1':
-            usuario.cor = itens['id']
-        else:
-            if itens['tipo_item'] == '2':
-                usuario.rosto = itens['id']
-            else:
-                if itens['tipo_item'] == '3':
-                    usuario.acessorio = itens['id']
-                else:
-                    if itens['tipo_item'] == '4':
-                        usuario.corpo = itens['id']
+        for i in itens:
+           if i != -1:
+                if i['tipo_item'] == '1':
+                    usuario.cor = i['id']
+                elif i['tipo_item'] == '2':
+                    usuario.rosto = i['id']
+                elif i['tipo_item'] == '3':
+                    usuario.acessorio = i['id']
+                elif i['tipo_item'] == '4':
+                    usuario.corpo = i['id']
         usuario.save()
+
+        print(usuario.cor, usuario.rosto, usuario.acessorio, usuario.corpo)
 
     def avatar(self, id):
 
