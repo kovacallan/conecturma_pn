@@ -73,12 +73,37 @@ def view_guarda_roupa():
     from bottle import template
     from control.guarda_roupa_controller import Guarda_roupa
 
+    if usuario_logado()['tipo'] >= '6':
+        usuario = facade.search_aluno_id_facade(id_aluno=usuario_logado()['id'])
+    else:
+        usuario = facade.search_observador_id_facade(id=usuario_logado()['id'])
+
+    if usuario['cor'] != '0':
+        cor = facade.search_estrutura_id_facade(id=usuario['cor'])
+    else:
+        cor = '0'
+
+    if usuario['rosto'] != '0':
+        rosto = facade.search_estrutura_id_facade(id=usuario['rosto'])
+    else:
+        rosto = '0'
+
+    if usuario['acessorio'] != '0':
+        acessorio = facade.search_estrutura_id_facade(id=usuario['acessorio'])
+    else:
+        acessorio = '0'
+
+    if usuario['corpo'] != '0':
+        corpo = facade.search_estrutura_id_facade(id=usuario['corpo'])
+    else:
+        corpo = '0'
+
     guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
     guarda_roupa.get_item_comprar()
     guarda_roupa.get_item_user_have()
 
-    return template('caminho_aluno/guarda_roupa/index',usuario_logado = usuario_logado(), cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(),
-                    acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo(), itens_usuario = guarda_roupa.get_itens_user())
+    return template('caminho_aluno/guarda_roupa/index',usuario_logado = usuario_logado(), apelido = usuario['apelido'], cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo,
+                    cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(), acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo(), itens_usuario = guarda_roupa.get_itens_user())
 
 @route('/comprar_item', method='POST')
 @permissao('aluno_varejo')
@@ -93,12 +118,15 @@ def buy_item():
 @permissao('aluno_varejo')
 def equip_item():
     from bottle import request
+    usuario = usuario_logado()
     item = []
+
     for i in request.params:
-        item.append(facade.search_estrutura_id_facade(id=request.params[i]))
-
-    facade.equipar_item_facade(id=usuario_logado()['id'],itens=item)
-
+        if i != 'apelido':
+            item.append(facade.search_estrutura_id_facade(id=request.params[i]))
+    if request.params['apelido'] != '0' or request.params['apelido'] != "" or request.params['apelido'] != None:
+        facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])
+    facade.equipar_item_facade(id=usuario['id'], itens=item)
 
 @route('/jogo')
 def jogo():

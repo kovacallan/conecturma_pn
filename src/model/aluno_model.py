@@ -17,6 +17,7 @@ class DbAluno(Model):
     email = TextField(default='0')
     tipo_aluno = TextField(default='0')
     cpf_responsavel = TextField(default='0')
+    apelido = TextField(fts=True, default='0')
 
     armario = ListField()
     cor = TextField(default='0')
@@ -195,6 +196,11 @@ class DbAluno(Model):
             alun_pes = vars(search)["_data"]
             alun_pes['medalha'] = search.medalhas
         return alun_pes
+
+    def set_apelido(self, id, apelido):
+        aluno = DbAluno.load(int(id))
+        aluno.apelido = apelido
+        aluno.save()
 
     def alunos_in_turma(self, id_aluno, vinculo_turma):
         from facade.estrutura_facade import EstruturaFacade

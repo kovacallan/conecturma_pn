@@ -66,6 +66,7 @@
             </div>
             <a href="/aluno/guarda_roupa" style="left: 69%;width: 40px;height: 41px;position:  absolute;top: 3px;"></a>
             <img src="/static/img/AVATAR.png" class="avatar-ship img-fluid">
+            <span id="apelido" style="position: absolute; top: 47%; left: 59px; color: #fff; font-weight: bold;">{{apelido}}</span>
             <!--<div class="offset-md-4 col-md-1">-->
             <span id="CRYSTAL">{{moedas}}</span>
             <span id="HP">{{vida}}</span>

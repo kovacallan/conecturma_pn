@@ -110,7 +110,7 @@ def view_ambiente_de_aprendizagem():
         acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
         corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
 
-    return dict(vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
+    return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
 
 def registrarConclusao():
     usuario = usuario_logado()

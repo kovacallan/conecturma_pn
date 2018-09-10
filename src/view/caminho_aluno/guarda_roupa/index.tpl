@@ -43,16 +43,43 @@
                                 <div class="title">
                                 </div>
                                 <div class="avatar">
-                                    <img id="avatar" src="/static/img/body/avatar-naked.png">
                                     <div id="avatar_usuario">
-                                        <input id='avatar-itens-cor-id' type='hidden' value='0'>
-                                        <input id='avatar-itens-rosto-id' type='hidden' value='0'>
-                                        <input id='avatar-itens-acessorios-id' type='hidden' value='0'>
-                                        <input id='avatar-itens-body-id' type='hidden' value='0'>
+                                        %if cor != '0':
+                                            <img id='avatar-itens-cor' src="/static/img/body/2{{cor['image_name']}}" class='avatar-itens-cor imagem-pocicao-"+color.slice(0,4)+"' style="z-index: 11; position: absolute; left: 100px; top: -9%;">
+                                            <input id='avatar-itens-cor-id' type='hidden' value='{{cor["id"]}}'>
+                                        %else:
+                                            <img id="avatar" src="/static/img/body/avatar-naked.png">
+                                            <input id='avatar-itens-cor-id' type='hidden' value='0'>
+                                        %end
+
+                                        %if rosto != '0':
+                                            <img id='avatar-itens-rosto' src="/static/img/rosto/2{{rosto['image_name']}}" style="z-index: 12; position: absolute; top: -10%; left: 102px;">
+                                            <input id='avatar-itens-rosto-id' type='hidden' value='{{rosto["id"]}}'>
+                                        %else:
+                                            <input id='avatar-itens-rosto-id' type='hidden' value='0'>
+                                        %end
+
+                                        %if acessorio != '0':
+                                            <img src="/static/img/acessorio/{{acessorio['image_name']}}" style="z-index: 13; position: absolute; top: -10%; left: 98px;">
+                                            <input id='avatar-itens-acessorios-id' type='hidden' value='{{acessorio["id"]}}'>
+                                        %else:
+                                            <input id='avatar-itens-acessorios-id' type='hidden' value='0'>
+                                        %end
+
+                                        %if corpo != '0':
+                                            <img id='avatar-itens-body' src="/static/img/corpo/{{corpo['image_name']}}" style="z-index: 12; position: absolute;top: -9%;left: 103px;">
+                                            <input id='avatar-itens-body-id' type='hidden' value='{{corpo["id"]}}'>
+                                        %else:
+                                            <input id='avatar-itens-body-id' type='hidden' value='0'>
+                                        %end
                                     </div>
                                     <div class="space_ship">
                                         <img id="nave" src="/static/img/space_avatar.png">
-                                        <input id="apelido" type="text" name="apelido" value="teste">
+                                        % if apelido != '0':
+                                            <input id="apelido" type="text" name="apelido" value="{{apelido}}">
+                                        % else:
+                                            <input id="apelido" type="text" name="apelido" value="">
+                                        % end
                                         <div class="botoes">
                                             <img onclick="salvar_avatar()" src="/static/img/btn-salvar.png" style="cursor:pointer;">
                                         </div>
@@ -205,7 +232,8 @@
 
             function salvar_avatar(){
                 $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
-                ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value},function(data){
+                ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value, apelido:document.getElementById("apelido").value},function(data){
+                    window.location.replace("/");
                  });
             }
 

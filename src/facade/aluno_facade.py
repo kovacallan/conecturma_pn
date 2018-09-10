@@ -33,6 +33,9 @@ class AlunoFacade:
     def search_aluno_id_facade(self, id_aluno):
         return self.aluno.search_aluno_id(id_aluno=id_aluno)
 
+    def set_apelido_facade(self, id, apelido):
+        return self.aluno.set_apelido(id=id, apelido=apelido)
+
     def search_aluno_escola_facade(self, vinculo_escola):
         return self.aluno.search_aluno_by_escola(escola=vinculo_escola)
 
