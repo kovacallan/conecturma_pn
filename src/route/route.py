@@ -4,8 +4,9 @@ import os
 from bottle import route, view, get, request, post, redirect, Bottle, delete
 
 from control.aluno_controller import Aluno_controler
-from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
+from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado, historico
 from facade.facade_main import Facade
+from model.historico_model import DbHistorico
 from model.observador_model import DbObservador
 
 facade = Facade()

@@ -384,13 +384,14 @@ def controller_create_rede():
     """
     nome = request.params['nome']
     telefone = request.params['telefone']
+    print('create',locals(),usuario_logado()['nome'])
     if nome != '' and nome != None and telefone != '' and telefone != None:
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
                                        cnpj=request.params['cnpj'], telefone=request.params['telefone'],
                                        endereco=request.params['endereco'], numero=request.params['numero'],
                                        bairro=request.params['bairro'], complemento=request.params['complemento'],
                                        cep=request.params['cep'], estado=request.params['estado'],
-                                       municipio=request.params['municipio']
+                                       municipio=request.params['municipio'],quem_criou=usuario_logado()['nome']
                                        )
 
 
