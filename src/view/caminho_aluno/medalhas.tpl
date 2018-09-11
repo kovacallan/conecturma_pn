@@ -35,8 +35,7 @@
 </header>
 
 <main>
-
-    <div class="container">
+    <div class="container offset-md-2">
         <div style="margin-left: 11px;">
             <div class="titulo offset-md-0" style="margin-top: 30px;margin-left: -21px;"></div>
 
@@ -69,13 +68,10 @@
             <img class="medalha-lista-ultimas"  src="/static/img/medalha/socio/socio-{{i['id']}}.gif">
         </figure>
     </div>
-
-
     </div>
     </div>
 
-    <img src="/static/img/medalha/separador.png" align="center"
-         style="top: 20px;position: relative; margin-left: 100px;">
+    <img src="/static/img/medalha/separador.png" align="center" style="top: 20px;position: relative; margin-left: 100px;">
     %end
     %end
     %end
@@ -113,7 +109,6 @@
                     %   if str(i['id']) in medalha_aluno:
                     <div class="todasmedalhas bounce"
                          style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
-
                         <img alt="Jogador " class="medalha-lista-todas" data-id="" data-imagem=""
                              id="{{i['id']}}"
                              src="/static/img/medalha/jogo-{{i['id']}}.gif" style="">
@@ -124,7 +119,6 @@
                         <img alt="Jogador " class="medalha-lista-todas" data-id="" data-imagem=""
                              id="{{i['id']}} "
                              src="/static/img/medalha/jogo-{{i['id']}}.gif" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
-
                     </div>
                     %end
                     % end
@@ -132,52 +126,33 @@
 
             </div>
         </div>
-
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="todas-medalhas">
                 <div class="row col-md-11" style="padding-left: 32px;">
                     % for i in medalha_socio:
                     %  if str(i['id']) in medalha_aluno:
 
-                    <div class="todasmedalhas bounce"
-                         style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
-
-
+                    <div class="todasmedalhas bounce" style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
                         <img alt=" " class="medalha-lista-todas" data-id="" data-imagem=""
                              id="{{i['id']}}"
                              src="/static/img/medalha/socio/socio-{{i['id']}}.gif" style="">
-
-
                     </div>
                     %else:
                     <div class="todasmedalhas bounce"
                          style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
-
-
                         <img alt=" " class="medalha-lista-todas" data-id="" data-imagem=""
                              id="{{i['id']}}"
                              src="/static/img/medalha/socio/socio-{{i['id']}}.gif" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
-
 
                     </div>
                     %end
                     %end
                 </div>
-
-
             </div>
-
         </div>
-
     </div>
     <br>
-
-
-    </div>
-
-
-
-
+  </div>
 </main>
 
 </body>
