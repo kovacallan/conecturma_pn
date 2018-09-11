@@ -101,7 +101,6 @@ def view_guarda_roupa():
     guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
     guarda_roupa.get_item_comprar()
     guarda_roupa.get_item_user_have()
-
     return template('caminho_aluno/guarda_roupa/index',usuario_logado = usuario_logado(), apelido = usuario['apelido'], cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo,
                     cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(), acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo(), itens_usuario = guarda_roupa.get_itens_user())
 
@@ -123,6 +122,7 @@ def equip_item():
 
     for i in request.params:
         if i != 'apelido':
+
             item.append(facade.search_estrutura_id_facade(id=request.params[i]))
     if request.params['apelido'] != '0' or request.params['apelido'] != "" or request.params['apelido'] != None:
         facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])

@@ -111,10 +111,22 @@ body, html{
     margin-left: 104px;
 }
 
+.cores a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
 #rosto{
     background: url(/static/img/btn-face.png) 0 0 no-repeat;
     width: 144px;
     height: 149px;
+}
+
+.rosto a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
 }
 
 #corpo{
@@ -123,10 +135,22 @@ body, html{
     height: 149px;
 }
 
+#corpo a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
 #acessorios{
     background: url(/static/img/btn-accessories.png) 0 0 no-repeat;
     width: 144px;
     height: 149px;
+}
+
+.acessorios a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
 }
 
 .itens-loja-corpo{
