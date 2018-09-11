@@ -139,7 +139,10 @@ def permissao(quem_tem_permissao):
                 if int(TIPO_USUARIOS[quem_tem_permissao]) >= int(que['tipo']):
                     try:
                         histo = HistoricoFacade()
-                        histo.create_historico_facade(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
+                        if 'get'in function.__name__:
+                            pass
+                        else:
+                            histo.create_historico_facade(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
                         # teste=histo.search_historico_nome_facade('administrador')
                     except Exception as e:
                         print('erro',e)
