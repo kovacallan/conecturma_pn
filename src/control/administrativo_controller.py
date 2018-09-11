@@ -70,3 +70,9 @@ def desativados():
         usuarios.append(h)
 
     return dict(usuarios=usuarios)
+
+def index_historico_controller():
+    historico = facade.read_historico_facade()
+    print(historico)
+    historico
+    return dict(usuario=historico)

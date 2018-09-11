@@ -3,10 +3,11 @@ import os
 
 from bottle import route, view, get, request, post, redirect, Bottle, delete
 
+from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
-from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado, historico
+from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
 from facade.facade_main import Facade
-from model.historico_model import DbHistorico
+# from model.historico_model import DbHistorico
 from model.observador_model import DbObservador
 
 facade = Facade()
@@ -174,7 +175,6 @@ def check_changes():
     id=''.join(aff)
 
     observador =facade.search_observador_id_facade(id)
-    print(observador['nome'])
 
     if observador['nome']==nome and observador['email'] == email:
         return dict(resposta=' nop chuck testa , sem mudança')
@@ -389,7 +389,7 @@ def controller_observador_cadastro():
 @permissao('administrador')
 @view('areas_administrativo.tpl')
 def view_adm():
-    return
+    return index_historico_controller()
 
 
 @route('/pesquisa_aluno_in_turma')
@@ -466,7 +466,6 @@ def upload():
 def salvar_css_foto():
     observador=DbObservador.load(usuario_logado()['id'])
     observador.aux_css_foto=request.params['posicao_foto']
-    print('foi',request.params['posicao_foto'])
     observador.save()
 
 @route('/gestao_aprendizagem2')

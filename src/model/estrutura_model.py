@@ -39,6 +39,7 @@ class DbEstrutura(Model):
     aventura = TextField(fts=True, default='0')
 
     quem_criou = TextField(default='0')
+    data_criacao = DateTimeField(default=datetime.datetime.now())
     serie = TextField(fts=True, default='0')
 
     tipo_item = TextField(default='0')
@@ -80,7 +81,7 @@ class DbEstrutura(Model):
         return lista_teste
 
     def search_estrutura(self, tipo_estrutura, nome):
-
+        lista_dic= []
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
             lista_dic=vars(lista)["_data"]
 

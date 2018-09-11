@@ -18,7 +18,6 @@ niveis_pontuacao = {
 def view_gestao_aprendizagem():
     observador = usuario_logado()
     obs=facade.search_observador_id_facade(usuario_logado()['id'])
-    print(obs)
     return dict(usuario=observador['nome'], tipo=observador['tipo'],foto_obs=obs['nome_foto_perfil'],css_foto=obs['aux_css_foto'])
 
 
@@ -38,7 +37,6 @@ def view_usuario_index():
 
 def cadastro_usuario():
     usuario = request.params
-    print(usuario['tipo'])
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
         aluno_create(usuario=usuario)
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
@@ -384,7 +382,6 @@ def controller_create_rede():
     """
     nome = request.params['nome']
     telefone = request.params['telefone']
-    print('create',locals(),usuario_logado()['nome'])
     if nome != '' and nome != None and telefone != '' and telefone != None:
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
                                        cnpj=request.params['cnpj'], telefone=request.params['telefone'],
@@ -535,7 +532,6 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
         turma = []
         for i in facade.search_estrutura_turma_by_rede_facade(vinculo_rede=usuario['vinculo_rede']):
             i['serie'] = SERIE[i['serie']]
-            print('i', i)
             i['vinculo_escola'] = get_nome_escola(vinculo_escola=i['vinculo_escola'])
             professor = ''
             aluno = []

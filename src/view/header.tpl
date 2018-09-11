@@ -13,7 +13,7 @@
     <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
+<body style="overflow: auto">
     <div class="container">
          <div align="right" class="col-md-12">
             <a href="/gestao_aprendizagem"><button>gestao de aprendizagem</button></a>

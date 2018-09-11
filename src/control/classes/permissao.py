@@ -1,6 +1,7 @@
 from bottle import redirect, response, request
 from datetime import datetime
 from control.dicionarios import *
+from facade.historico_facade import HistoricoFacade
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
 
@@ -136,27 +137,15 @@ def permissao(quem_tem_permissao):
             que = request.get_cookie("BUMBA", secret=banana)
             if banana and que:
                 if int(TIPO_USUARIOS[quem_tem_permissao]) >= int(que['tipo']):
-                    print('print', function.__name__,usuario_logado()['nome'])
-                    hist = DbHistorico()
-                    hist.create_historico(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
+                    try:
+                        histo = HistoricoFacade()
+                        histo.create_historico_facade(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
+                        # teste=histo.search_historico_nome_facade('administrador')
+                    except Exception as e:
+                        print('erro',e)
                     return function(*args, **kwargs)
                 else:
                     redirect('/error403')
-            else:
-                redirect('/')
-
-        return decorator
-
-    return observador
-
-def historico(usuario_que_atuou):
-    def observador(function):
-        def decorator(*args, **kwargs):
-            banana = request.get_cookie("KIM", secret=KEY_HASH)
-            que = request.get_cookie("BUMBA", secret=banana)
-            if banana and que:
-                DbHistorico.acao_feita(function.__name__,usuario_que_atuou)
-                return function(*args, **kwargs)
             else:
                 redirect('/')
 
