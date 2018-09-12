@@ -10,6 +10,9 @@ class HistoricoFacade:
         return self.historico.create_historico(**kwargs)
 
     def update_historico_facade(self,**kwargs):
+        '''
+        futuro para acrescentar os dados de criaçao das coisas e os internos das funçoes usadas
+        '''
         return self.historico.update_historico(**kwargs)
 
     def read_historico_facade(self):

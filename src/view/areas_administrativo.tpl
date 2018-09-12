@@ -1,4 +1,4 @@
-% include('header.tpl', title = 'Conecturma')
+%include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-gestao-aprendizagem.css")
 <div align="center" class="col-md-12">
     <h1>Bem Vindo Administrador</h1>
     <h2>A Conecturma!</h2>
@@ -15,7 +15,7 @@
         <a href="/ler_medalha">MEDALHAS</a><br>
         <a href="/usuarios_inativados">INATIVADOS</a>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-5" style="margin-top:50px;">
         <table class="table" style="border-collapse: collapse;">
             <tr>
                 <th scope="col" style="border: 1px solid #dddddd">nome do usuario</th>
@@ -29,7 +29,7 @@
                 <!--<td style="border: 1px solid #dddddd">{{i['id']}}</td>-->
                 <td style="border: 1px solid #dddddd" >{{i['nome_usuario']}}</td>
                 <td style="border: 1px solid #dddddd">{{i['acao']}}</td>
-                <td style="border: 1px solid #dddddd">{{i['momento']}}</td>
+                <td style="border: 1px solid #dddddd">{{i['momento'].strftime("%d-%m-%Y %H:%M:%S")}}</td>
             </tr>
 
             %end
@@ -39,4 +39,4 @@
     </div>
 </div>
 
-% include('footer.tpl')
+%include('gestao_aprendizagem/footer/footer.tpl')

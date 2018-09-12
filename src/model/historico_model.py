@@ -50,3 +50,12 @@ class DbHistorico(Model):
             listas.append(vars(lista)["_data"])
 
         return listas
+
+    def search_historico_acao(self,acao):
+        listas = []
+
+        for lista in DbHistorico.query((DbHistorico.nome_usuario == nome),
+                                       order_by=DbHistorico.id):
+            listas.append(vars(lista)["_data"])
+
+        return listas

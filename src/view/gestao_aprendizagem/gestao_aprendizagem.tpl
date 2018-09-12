@@ -73,8 +73,30 @@
 
 </div>
 
-<script src="../static/js/interact.min.js"></script>
-<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
+<!--<script src="../static/js/interact.min.js"></script>-->
+<!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
+
+<!--<div class="resize-container" style="background-color: #29e;-->
+<!--color: white;-->
+<!--font-size: 20px;-->
+<!--font-family: sans-serif;-->
+<!--border-radius: 8px;-->
+<!--padding: 20px;-->
+<!--margin: 30px 20px;-->
+<!--width: 500px;-->
+<!--height:500px;-->
+<!--box-sizing: border-box;">-->
+<!--<div class="resize-drag draggable" style=" display: inline-block;-->
+<!--width: 100px;-->
+<!--height: 140px;-->
+<!--background-color:black;">-->
+<!--Resize from any edge or corner-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+%include('gestao_aprendizagem/footer/footer.tpl')
 <script>
 function readURL(input) {
             if (input.files && input.files[0]) {
@@ -153,24 +175,3 @@ interact('.draggable').draggable({
 
 
 </script>
-<!--<div class="resize-container" style="background-color: #29e;-->
-<!--color: white;-->
-<!--font-size: 20px;-->
-<!--font-family: sans-serif;-->
-<!--border-radius: 8px;-->
-<!--padding: 20px;-->
-<!--margin: 30px 20px;-->
-<!--width: 500px;-->
-<!--height:500px;-->
-<!--box-sizing: border-box;">-->
-<!--<div class="resize-drag draggable" style=" display: inline-block;-->
-<!--width: 100px;-->
-<!--height: 140px;-->
-<!--background-color:black;">-->
-<!--Resize from any edge or corner-->
-<!--</div>-->
-<!--</div>-->
-
-
-
-%include('gestao_aprendizagem/footer/footer.tpl')

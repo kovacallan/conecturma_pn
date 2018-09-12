@@ -8,7 +8,7 @@ facade=Facade()
 
 facade.create_estrutura_facade(nome='escola E',tipo_estrutura=TIPO_ESTRUTURA['escola'],telefone='21 55555555', cnpj='054782548')
 facade.create_estrutura_facade(nome='rede R',tipo_estrutura=TIPO_ESTRUTURA['rede'],telefone='21 22556848', cnpj='20115482',vinculo_escola='1')
-facade.create_observador_facade(nome='aaJoao d', telefone='21979645254', tipo=TIPO_USUARIOS['diretor'], vinculo_escola='1', email='lalala@gmail.com', cpf='04432547' )
+facade.create_observador_facade(nome='aaJoao d', telefone='21979645254', tipo=TIPO_USUARIOS['diretor'], vinculo_escola='1', email='lalala@gmail.com', senha='@onde2929', cpf='04432547' )
 facade.create_observador_facade(nome='Paulo g', tipo=TIPO_USUARIOS['gestor'], telefone='2125243578', vinculo_escola='1', email='saijsa@huahsa.com',vinculo_rede='2')
 facade.create_observador_facade(nome='AAAAAAA g', tipo=TIPO_USUARIOS['gestor'], telefone='25696969', vinculo_escola='1', email='organizaçao@huahsa.org',vinculo_rede='2')
 facade.create_observador_facade(nome='Sorte G', tipo=TIPO_USUARIOS['gestor'], telefone='0800 MIL', vinculo_escola='1', email='SAUDADRES@huahsa.com',vinculo_rede='2')
@@ -17,7 +17,7 @@ facade.create_observador_facade(nome='PEDANTE d', telefone='0800 0500 2099', tip
 
 for x in range(0,4):
     facade.create_estrutura_facade(nome="nome" + str(x), vinculo_escola='1',)
-    facade.create_observador_facade(nome='aagestor'+str(x), telefone='21979645254', tipo=TIPO_USUARIOS['gestor'],
+    facade.create_observador_facade(nome='aagestor'+str(x),senha='@onde2929', telefone='21979645254', tipo=TIPO_USUARIOS['gestor'],
                                     vinculo_escola='1', email='tent@cool.'+str(x)+'s', cpf='04432547')
 
 for x in range(0,10):
