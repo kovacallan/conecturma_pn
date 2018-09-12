@@ -66,9 +66,10 @@ Rotas da Tela de do Ambiente de aprendizagem
 
 
 @route('/aluno/area_aluno')
-@permissao('aluno_varejo')
+# @permissao('aluno_varejo')
 @view('caminho_aluno/jogar_conecturma')
-def view_ambiente_de_aprendizagem():
+@permissao('aluno_varejo')
+def view_ambiente_de_aprendizagem(no_repeat=False):
     from control.aprendizagem_controller import view_ambiente_de_aprendizagem
     return view_ambiente_de_aprendizagem()
 
@@ -127,24 +128,26 @@ Rotas da Tela de do gestão de aprendizagem
 
 
 @route('/gestao_aprendizagem')
-@permissao('responsavel_varejo')
+# @permissao('responsavel_varejo')
 @view('gestao_aprendizagem/gestao_aprendizagem')
-def view_gestao_aprendizagem():
+@permissao('responsavel_varejo')
+def view_gestao_aprendizagem(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_gestao_aprendizagem
     return view_gestao_aprendizagem()
 
 
 @route('/gestao_aprendizagem/usuario')
-@permissao('professor')
+# @permissao('professor')
 @view('gestao_aprendizagem/usuario/usuario')
-def view_usuario_index():
+@permissao('professor')
+def view_usuario_index(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_usuario_index
     return view_usuario_index()
 
 
 @route('/usuario/cadastro_usuario', method='POST')
 @permissao('professor')
-def cadastro_usuario():
+def cadastro_usuario(no_repeat=False):
     from control.gestao_aprendizagem_controller import cadastro_usuario
     return cadastro_usuario()
 
@@ -209,28 +212,28 @@ def aluno_edit():
 
 @get('/observador/editar')
 @permissao('professor')
-def view_observador_update():
+def view_observador_update(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_observador_update
     return view_observador_update()
 
 
 @route('/observador/update_observador', method='POST')
 @permissao('professor')
-def controller_observador_update():
+def controller_observador_update(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_observador_update
     return controller_observador_update()
 
 
 @route('/observador/email_existe', method='POST')
 @permissao('professor')
-def controller_checar_se_email_existe():
+def controller_checar_se_email_existe(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_checar_se_email_existe
     return controller_checar_se_email_existe()
 
 
 @route('/medalha_cadastro')
 @view('observador/medalha_cadastro.tpl')
-def cadastrar_medalha():
+def cadastrar_medalha(no_repeat=False):
     return
 
 
@@ -241,87 +244,90 @@ def controller_medalha_cadastro():
 
 
 @route('/ler_medalha')
-@permissao('professor')
+# @permissao('professor')
 @view('observador/medalha_index.tpl')
-def read_de_medalha():
+@permissao('professor')
+def read_de_medalha(no_repeat=False):
     from control.gestao_aprendizagem_controller import read_de_medalha
     return read_de_medalha()
 
 
 @route('/rede')
-@permissao('gestor')
+# @permissao('gestor')
 @view("gestao_aprendizagem/rede/rede")
-def view_index_rede():
+@permissao('gestor')
+def view_index_rede(norepeat=False):
     from control.gestao_aprendizagem_controller import view_index_rede
     return view_index_rede()
 
 
 @route('/rede/criar_rede', method='POST')
 @permissao('gestor')
-def controller_create_rede():
+def controller_create_rede(norepeat=False):
     from control.gestao_aprendizagem_controller import controller_create_rede
-    return controller_create_rede()
+    return controller_create_rede(norepeat)
 
 
 @route('/rede/editar_rede', method='POST')
 @permissao('gestor')
-def controller_editar_rede():
+def controller_editar_rede(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_editar_rede
     return controller_editar_rede()
 
 
 @route('/escola')
 @view('gestao_aprendizagem/escola/escola')
-def view_escola_index():
+def view_escola_index(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_escola_index
     return view_escola_index()
 
 
 @route('/escola/criar_escola', method='POST')
 @permissao('gestor')
-def controller_escola_cadastro():
+def controller_escola_cadastro(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_escola_cadastro
     return controller_escola_cadastro()
 
 
 @route('/escola/editar_escola', method='POST')
 @permissao('diretor')
-def controller_escola_editar():
+def controller_escola_editar(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_escola_update
     return controller_escola_update()
 
 
 @route('/deletar_estrutura', method='POST')
 @permissao('diretor')
-def controller_estrutura_deletar():
+def controller_estrutura_deletar(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_estrutura_delete
     return controller_estrutura_delete()
 
 
 @route('/turma')
-@permissao('professor')
+# @permissao('professor')
 @view('gestao_aprendizagem/turma/turma')
-def view_turma():
+@permissao('professor')
+def view_turma(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_turma
     return view_turma()
 
 
 @route('/turma/cadastro_turma', method='POST')
 @permissao('diretor')
-def controller_create_turma():
+def controller_create_turma(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_create_turma
     return controller_create_turma()
 
 
 @route('/turma/update_turma', method='POST')
 @permissao('professor')
-def controller_turma_editar():
+def controller_turma_editar(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_edit_turma
     return controller_edit_turma()
 
 @route('/turma/turma_update_controller', method='POST')
 @permissao('diretor')
-def controller_update_turma():
+def controller_update_turma(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_update_turma
     return controller_update_turma()
 
@@ -333,9 +339,10 @@ def descritores():
 
 
 @route('/relatorios/aluno')
-@permissao('professor')
+# @permissao('professor')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno')
-def relatorio_aluno_view():
+@permissao('professor')
+def relatorio_aluno_view(no_repeat=False):
     from control.relatorio_controller import Relatorio
     from control.gestao_aprendizagem_controller import get_nome_turma
 
@@ -348,7 +355,7 @@ def relatorio_aluno_view():
 
 @route('/relatorios/visualizar_relatorio_aluno')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe')
-def relatorio_aluno():
+def relatorio_aluno(no_repeat=False):
     from bottle import request
     from facade.facade_main import Facade
     from control.relatorio_controller import Relatorio
@@ -380,15 +387,15 @@ Rotas da Tela de do gestão de aprendizagem
 
 @route('/observador/create_observador_administrador', method="POST")
 @permissao('administrador')
-def controller_observador_cadastro():
+def controller_observador_cadastro(no_repeat=False):
     from control.administrativo_controller import controller_observador_cadastro
     return controller_observador_cadastro()
 
 
 @route('/administrador/pag_administrador')
-@permissao('administrador')
 @view('areas_administrativo.tpl')
-def view_adm():
+@permissao('administrador')
+def view_adm(norepeat=False):
     return index_historico_controller()
 
 
@@ -399,9 +406,10 @@ def pesquisar_aluno_turma():
 
 
 @route('/loja/cadastrar_item')
-@permissao('administrador')
+# @permissao('administrador')
 @view('loja/cadastrar_item.tpl')
-def cadastrar_item():
+@permissao('administrador')
+def cadastrar_item(no_repeat=False):
     return
 
 
@@ -468,9 +476,11 @@ def salvar_css_foto():
     observador.aux_css_foto=request.params['posicao_foto']
     observador.save()
 
-@route('/gestao_aprendizagem2')
-@permissao('responsavel_varejo')
-@view('gestao_aprendizagem/gestao_aprendizagem2')
-def view_gestao_aprendizagem():
-    from control.gestao_aprendizagem_controller import view_gestao_aprendizagem
-    return view_gestao_aprendizagem()
+
+# @route('/gestao_aprendizagem2')
+# # @permissao('responsavel_varejo')
+# @view('gestao_aprendizagem/gestao_aprendizagem2')
+# @permissao('responsavel_varejo')
+# def view_gestao_aprendizagem(no_repeat=False):
+#     from control.gestao_aprendizagem_controller import view_gestao_aprendizagem
+#     return view_gestao_aprendizagem()

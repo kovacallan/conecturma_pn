@@ -73,6 +73,5 @@ def desativados():
 
 def index_historico_controller():
     historico = facade.read_historico_facade()
-    print(historico)
-    historico
+
     return dict(usuario=historico)

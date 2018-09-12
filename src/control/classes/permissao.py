@@ -142,8 +142,13 @@ def permissao(quem_tem_permissao):
                         if 'get'in function.__name__:
                             pass
                         else:
+                            hm=function(norepeat=True)
+                            # print('hmm',hm)
                             histo.create_historico_facade(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
-                        # teste=histo.search_historico_nome_facade('administrador')
+                            print('toaqui',function.__name__)
+                            teste=histo.search_historico_nome_facade('administrador')
+                            DbHistorico.testando_hash(DbHistorico,usuario_logado()['id'],hm)
+                            # print('hm',hm)
                     except Exception as e:
                         print('erro',e)
                     return function(*args, **kwargs)

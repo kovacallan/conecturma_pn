@@ -9,20 +9,22 @@ from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA,
 facade = Facade()
 
 niveis_pontuacao = {
-        'dificil': 2,
-        'medio': 1,
-        'facil': 0
-    }
+    'dificil': 2,
+    'medio': 1,
+    'facil': 0
+}
+
 
 @permissao('responsavel_varejo')
-def view_gestao_aprendizagem():
+def view_gestao_aprendizagem(norepeat=False):
     observador = usuario_logado()
-    obs=facade.search_observador_id_facade(usuario_logado()['id'])
-    return dict(usuario=observador['nome'], tipo=observador['tipo'],foto_obs=obs['nome_foto_perfil'],css_foto=obs['aux_css_foto'])
+    obs = facade.search_observador_id_facade(usuario_logado()['id'])
+    return dict(usuario=observador['nome'], tipo=observador['tipo'], foto_obs=obs['nome_foto_perfil'],
+                css_foto=obs['aux_css_foto'])
 
 
 @permissao('professor')
-def view_usuario_index():
+def view_usuario_index(norepeat=False):
     """
     mostra todos os usuarios , escolas e redes cadastradas
     :return:
@@ -34,7 +36,7 @@ def view_usuario_index():
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
     return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma)
 
-
+# colocar permissao para historico funcionar
 def cadastro_usuario():
     usuario = request.params
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
@@ -51,18 +53,21 @@ def cadastro_usuario():
         gestor_create(usuario)
         send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
 
+
 def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
     facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
-                               primeiro_nome=usuario['nome'].split()[0].upper(),nascimento=usuario['nascimento'],
-                               sexo=usuario['sexo'],vinculo_rede=vinculo_rede['vinculo_rede'],
+                               primeiro_nome=usuario['nome'].split()[0].upper(), nascimento=usuario['nascimento'],
+                               sexo=usuario['sexo'], vinculo_rede=vinculo_rede['vinculo_rede'],
                                vinculo_escola=usuario['vinculo_escola'], vinculo_turma=usuario['vinculo_turma'],
                                nome_login=create_student_login(usuario['nome']), senha=password_student_generate())
 
+
 def password_student_generate():
-    senha=random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'], 4)
+    senha = random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'], 4)
     senha.sort()
     return ''.join(senha)
+
 
 def create_student_login(nome_completo):
     nome_login = nome_completo.split()[0].upper()
@@ -75,49 +80,56 @@ def create_student_login(nome_completo):
 
 def professor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['professor'], nome=usuario['nome'],
+                                    senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'],
                                     vinculo_turma=usuario['vinculo_turma']
                                     )
 
+
 def diretor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['diretor'], nome=usuario['nome'],
+                                    senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=vinculo_rede['vinculo_rede'], vinculo_escola=usuario['vinculo_escola'])
 
 
 def gestor_create(usuario):
-    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'], senha=sha512_crypt.hash(password_generate()),
+    facade.create_observador_facade(tipo=TIPO_USUARIOS['gestor'], nome=usuario['nome'],
+                                    senha=sha512_crypt.hash(password_generate()),
                                     data_nascimento=usuario['nascimento'], email=usuario['email'],
                                     vinculo_rede=usuario['vinculo_rede'])
 
 
 def password_generate():
-    senha=random.sample(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-                         'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'z', '!','@','#','$','%','&','*'], 8)
+    senha = random.sample(
+        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+         'm',
+         'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'z', '!', '@', '#', '$', '%', '&', '*'], 8)
     senha.sort()
 
     print(senha)
     return ''.join(senha)
+
 
 def send_email_confirmation(nome, email):
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
     import smtplib
 
-    url = 'http://127.0.0.1:8080/new_senha?email='+email
+    url = 'http://127.0.0.1:8080/new_senha?email=' + email
     msg = MIMEMultipart()
     msg['From'] = "ti@conecturma.com.br"
     msg['To'] = email
     msg['Subject'] = "Bem Vindo, a conecturma!"
     senha = "@onde2929"
     body = "<p>" \
-                "<h3>"+nome+"</h3>"\
-                "<h4>Agora você faz parte da Conecturma!</h4>" \
-                "Segue o link para ativação da conta da Conecturma: </br>"\
-                "<a href='"+url+"'>"+url+"</a>"
+           "<h3>" + nome + "</h3>" \
+                           "<h4>Agora você faz parte da Conecturma!</h4>" \
+                           "Segue o link para ativação da conta da Conecturma: </br>" \
+                           "<a href='" + url + "'>" + url + "</a>"
     msg.attach(MIMEText(body, 'html'))
     print(msg)
 
@@ -127,10 +139,12 @@ def send_email_confirmation(nome, email):
     server.sendmail(msg['From'], msg['To'], msg.as_string())
     server.quit()
 
+
 def new_password():
     email = request.params['email']
 
     return template('alterar_senha.tpl', id=id, email=email)
+
 
 def novasenha():
     email = request.params['email']
@@ -141,7 +155,7 @@ def novasenha():
 
 
 @permissao('professor')
-def controller_index_usuario(observador):
+def controller_index_usuario(observador,norepeat=False):
     if observador['tipo'] == TIPO_USUARIOS['administrador']:
         return lista_de_usuarios_caso_observador_for_administrador()
     elif observador['tipo'] == TIPO_USUARIOS['professor']:
@@ -152,8 +166,8 @@ def controller_index_usuario(observador):
         return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
 
 
-@permissao('administrador')
-def lista_de_usuarios_caso_observador_for_administrador():
+@permissao('administrador',)
+def lista_de_usuarios_caso_observador_for_administrador(norepeat=False):
     usuario = []
     aluno = facade.read_aluno_facade()
     observador = facade.read_observador_facade()
@@ -178,7 +192,7 @@ def lista_de_usuarios_caso_observador_for_administrador():
 
 
 @permissao('gestor')
-def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede):
+def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede,norepeat=False):
     usuario = []
 
     aluno = facade.search_aluno_by_rede_facade(vinculo_rede)
@@ -202,7 +216,7 @@ def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede):
 
 
 @permissao('diretor')
-def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola):
+def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola,norepeat=False):
     usuario = []
     aluno = facade.search_aluno_escola_facade(vinculo_escola=vinculo_escola)
     observador = facade.search_observador_escola(vinculo_escola=vinculo_escola)
@@ -229,7 +243,7 @@ def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola):
 
 
 @permissao('professor')
-def lista_de_usuarios_caso_observador_for_professor(vinculo_turma):
+def lista_de_usuarios_caso_observador_for_professor(vinculo_turma,norepeat=False):
     usuario = []
     aluno = facade.search_aluno_by_turma_facade(vinculo_turma=vinculo_turma)
 
@@ -266,7 +280,6 @@ def get_nome_turma(vinculo_turma):
     return ''
 
 
-
 def view_observador_update():
     nome = request.params['nome']
     observador = facade.search_observador_facade(nome)
@@ -276,7 +289,7 @@ def view_observador_update():
 
 def controller_observador_update():
     try:
-        email =request.params['email']
+        email = request.params['email']
         # verificacao = facade.search_observador_email_facade(email=email)
     except KeyError:
         observador = facade.search_observador_id_facade(request.params['id'])
@@ -285,6 +298,7 @@ def controller_observador_update():
     facade.update_observador_facade(id=request.params['id'], nome=request.params['nome'],
                                     email=email)
     # redirect('/observador/read_observador')
+
 
 def teste(email):
     return email
@@ -337,7 +351,7 @@ def view_index_rede():
         rede_no_sistema_lista.append(redes_sistema)
         for i in rede_no_sistema_lista:
             escola = []
-            for z in facade.search_estrutura_escola_by_rede_facade(vinculo_rede=i['id']):
+            for z in facade.search_estrutura_escola_by_rede_facade(vinculo_rede=str(i['id'])):
                 escola.append(z)
 
                 i.update({'escola': escola})
@@ -374,7 +388,7 @@ def redes_no_sistema():
         return rede
 
 
-def controller_create_rede():
+def controller_create_rede(norepeat):
     """
     Cria rede com os parametros de nome da rede e o telefone da mesma
     metodos usados:create rede facade
@@ -382,14 +396,17 @@ def controller_create_rede():
     """
     nome = request.params['nome']
     telefone = request.params['telefone']
-    if nome != '' and nome != None and telefone != '' and telefone != None:
+    if norepeat:
+        return locals()
+    elif nome != '' and nome != None and telefone != '' and telefone != None:
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
                                        cnpj=request.params['cnpj'], telefone=request.params['telefone'],
                                        endereco=request.params['endereco'], numero=request.params['numero'],
                                        bairro=request.params['bairro'], complemento=request.params['complemento'],
                                        cep=request.params['cep'], estado=request.params['estado'],
-                                       municipio=request.params['municipio'],quem_criou=usuario_logado()['nome']
+                                       municipio=request.params['municipio'], quem_criou=usuario_logado()['nome']
                                        )
+    return locals()
 
 
 def controller_editar_rede():
@@ -441,7 +458,6 @@ def get_escolas_e_rede_permissao():
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
-          
 
         return escola, rede
 
@@ -520,13 +536,13 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
             aluno = []
             for z in facade.search_observador_turma(vinculo_turma=str(i['id'])):
                 if z != []:
-                    professor=z['nome']
+                    professor = z['nome']
             i.update({'professor': professor})
             for y in facade.search_aluno_by_turma_facade(vinculo_turma=str(i['id'])):
                 aluno.append(y)
             i.update({'aluno': aluno})
             turma.append(i)
-        print('turma',turma)
+        print('turma', turma)
         return turma
     elif usuario['tipo'] == TIPO_USUARIOS['gestor']:
         turma = []
@@ -595,8 +611,9 @@ def controller_create_turma():
                                    vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
     redirect('/turma')
 
+
 def controller_edit_turma():
-    print('controler',request.params)
+    print('controler', request.params)
     facade.update_estrutura_facade(estrutura=request.params)
 
 
@@ -633,6 +650,7 @@ def controller_update_turma():
 
 def descritores():
     return
+
 
 def levar_oas_matematica():
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
@@ -698,6 +716,7 @@ def cor_desempenho(desempenho):
     porcentagem_aluno = porcentagem_pontuacao(pontuacao, vezes_jogada)
 
     return int(porcentagem_aluno)
+
 
 def convert_game_data_for_numeric(desempenho):
     return niveis_pontuacao[desempenho['nivel']]
@@ -765,6 +784,7 @@ def trazer_todos_alunos_da_mesma_turma():
         i['vinculo_turma'] = get_nome_turma(i['vinculo_turma'])
 
     return alunos
+
 
 def convertendo_str_in_dict(str):
     from ast import literal_eval
