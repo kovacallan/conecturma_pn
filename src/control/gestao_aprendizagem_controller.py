@@ -599,17 +599,19 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
             return -1
 
 
-def controller_create_turma():
-    """
-    """
+def controller_create_turma(norepeat):
+
     nome = request.forms['nome']
     serie = request.forms['serie']
     escola = request.forms['escola']
     vinculo_rede = facade.search_estrutura_id_facade(request.forms['escola'])
-
-    facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
+    if norepeat:
+        return dict(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
                                    vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
-    redirect('/turma')
+    else:
+        facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
+                                   vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
+    # redirect('/turma')
 
 
 def controller_edit_turma():

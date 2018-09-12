@@ -5,6 +5,7 @@ from facade.historico_facade import HistoricoFacade
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
 
+
 from model.historico_model import DbHistorico
 
 """Constante para a key de hash temporariamente"""
@@ -141,14 +142,17 @@ def permissao(quem_tem_permissao):
                         histo = HistoricoFacade()
                         if 'get'in function.__name__:
                             pass
+                        elif 'view' in function.__name__:
+                            histo.create_historico_facade(acao=function.__name__, nome_usuario=usuario_logado()['nome'],
+                                                          momento=datetime.now())
+                            print('so view')
                         else:
-                            hm=function(norepeat=True)
-                            # print('hmm',hm)
+                            retorno_da_func=function(norepeat=True)
+                            print('hmm',retorno_da_func)
                             histo.create_historico_facade(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
                             print('toaqui',function.__name__)
-                            teste=histo.search_historico_nome_facade('administrador')
-                            DbHistorico.testando_hash(DbHistorico,usuario_logado()['id'],hm)
-                            # print('hm',hm)
+                            # teste=histo.search_historico_nome_facade('administrador')
+                            histo.historico_de_dados_cadastrados_facade(usuario_logado()['id'],retorno_da_func)
                     except Exception as e:
                         print('erro',e)
                     return function(*args, **kwargs)

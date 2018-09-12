@@ -70,6 +70,12 @@ Rotas da Tela de do Ambiente de aprendizagem
 @view('caminho_aluno/jogar_conecturma')
 @permissao('aluno_varejo')
 def view_ambiente_de_aprendizagem(no_repeat=False):
+    '''
+    A funçao view_ambiente_de_aprendizagem checa o tipo de usuario e retorna as vidas e as moedas
+    :param no_repeat: auxiliar para guardar o historico sem erros nao é utilizado nessa funçao
+    , ver a funçao permissao no arquivo permissao , para mais detalhes
+    :return: vidas e moedas do usuario logado
+    '''
     from control.aprendizagem_controller import view_ambiente_de_aprendizagem
     return view_ambiente_de_aprendizagem()
 
@@ -151,40 +157,43 @@ def cadastro_usuario(no_repeat=False):
     from control.gestao_aprendizagem_controller import cadastro_usuario
     return cadastro_usuario()
 
+
 @route('/checar_login_existente', method='POST')
 def checar_se_existe():
     from facade.facade_main import Facade
-    facade=Facade()
-    nome_login= request.params['login']
+    facade = Facade()
+    nome_login = request.params['login']
     existe_usuario = facade.search_aluno_primeiro_nome_facade(nome_login)
     if existe_usuario == []:
         return dict(resposta='nao existe login')
     else:
         return dict(resposta='existe login')
 
-@route('/check_mudanca_cadastro',method='POST')
+
+@route('/check_mudanca_cadastro', method='POST')
 def check_changes():
     '''
     metodo para usar no ajax do javascript checar_se_algo_mudou_obs(id) , que serve para o formulario de usuarios
     :return: uma mensagem informando se os dados recebidos sao iguais ou nao as do banco
     '''
-    id= request.params['id']
+    id = request.params['id']
     nome = request.params['nome']
-    email= request.params['email']
-    aff=[]
-    for id in id :
+    email = request.params['email']
+    aff = []
+    for id in id:
         if id.isdigit():
             aff.append(id)
-    id=''.join(aff)
+    id = ''.join(aff)
 
-    observador =facade.search_observador_id_facade(id)
+    observador = facade.search_observador_id_facade(id)
 
-    if observador['nome']==nome and observador['email'] == email:
+    if observador['nome'] == nome and observador['email'] == email:
         return dict(resposta=' nop chuck testa , sem mudança')
     elif observador['nome'] != nome or observador['email'] != email:
-        return dict(resposta ='teve mudança',nome=observador['nome'])
+        return dict(resposta='teve mudança', nome=observador['nome'])
 
-@route('/check_mudanca_cadastro_aluno',method='POST')
+
+@route('/check_mudanca_cadastro_aluno', method='POST')
 def check_change_mudanca_alun():
     id = request.params['id']
     nome = request.params['nome']
@@ -202,13 +211,15 @@ def check_change_mudanca_alun():
     elif aluno['nome'] != nome or aluno['email'] != aluno:
         return dict(resposta='teve mudança', nome=aluno['nome'])
 
+
 @route('/aluno/update_aluno', method='POST')
 def aluno_edit():
-    id= request.params['id']
+    id = request.params['id']
     nome = request.params['nome']
-    nome_login=request.params['login']
-    aluno_c=Aluno_controler()
-    return aluno_c.update_aluno(id=id,nome=nome,nome_login=nome_login)
+    nome_login = request.params['login']
+    aluno_c = Aluno_controler()
+    return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login)
+
 
 @get('/observador/editar')
 @permissao('professor')
@@ -307,23 +318,24 @@ def controller_estrutura_deletar(no_repeat=False):
 # @permissao('professor')
 @view('gestao_aprendizagem/turma/turma')
 @permissao('professor')
-def view_turma(no_repeat=False):
+def view_turma(norepeat=False):
     from control.gestao_aprendizagem_controller import view_turma
     return view_turma()
 
 
 @route('/turma/cadastro_turma', method='POST')
 @permissao('diretor')
-def controller_create_turma(no_repeat=False):
+def controller_create_turma(norepeat=False):
     from control.gestao_aprendizagem_controller import controller_create_turma
-    return controller_create_turma()
+    return controller_create_turma(norepeat)
 
 
 @route('/turma/update_turma', method='POST')
 @permissao('professor')
-def controller_turma_editar(no_repeat=False):
+def controller_turma_editar(norepeat=False):
     from control.gestao_aprendizagem_controller import controller_edit_turma
     return controller_edit_turma()
+
 
 @route('/turma/turma_update_controller', method='POST')
 @permissao('diretor')
@@ -349,8 +361,7 @@ def relatorio_aluno_view(no_repeat=False):
     relatorio = Relatorio()
     relatorio.get_alunos(usuario_online_dados=usuario_logado(), nome_turma=get_nome_turma)
 
-
-    return dict(tipo = usuario_logado()['tipo'], alunos = relatorio.alunos)
+    return dict(tipo=usuario_logado()['tipo'], alunos=relatorio.alunos)
 
 
 @route('/relatorios/visualizar_relatorio_aluno')
@@ -371,8 +382,9 @@ def relatorio_aluno(no_repeat=False):
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
 
-    return dict(tipo = usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
+    return dict(tipo=usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.porcentagem_solo)
+
 
 @route('/trazer_oas')
 def levar_oas_matematica():
@@ -442,10 +454,12 @@ def desativados():
     from control.administrativo_controller import desativados
     return desativados()
 
+
 @get('/new_senha')
 def new_password():
     from control.administrativo_controller import new_password
     return new_password()
+
 
 @route('/novasenha', method='post')
 def novasenha():
@@ -457,12 +471,12 @@ def novasenha():
 def upload():
     try:
         upload_file = request.POST['uploadfile']
-        ext=upload_file.filename.split('.')[1]
-        nome_foto =upload_file.filename = usuario_logado()['nome']+'.'+ext
-        if ext not in ('png', 'jpeg','jpg'):
+        ext = upload_file.filename.split('.')[1]
+        nome_foto = upload_file.filename = usuario_logado()['nome'] + '.' + ext
+        if ext not in ('png', 'jpeg', 'jpg'):
             redirect('/gestao_aprendizagem2')
-        usuario=DbObservador.load(usuario_logado()['id'])
-        usuario.nome_foto_perfil=nome_foto
+        usuario = DbObservador.load(usuario_logado()['id'])
+        usuario.nome_foto_perfil = nome_foto
         usuario.save()
         upload_file.save('view/app/fotos_usuarios', overwrite=True)
         redirect('/')
@@ -470,12 +484,12 @@ def upload():
         print('erro')
         redirect('/')
 
-@route('/salvar_css_foto',method='post')
-def salvar_css_foto():
-    observador=DbObservador.load(usuario_logado()['id'])
-    observador.aux_css_foto=request.params['posicao_foto']
-    observador.save()
 
+@route('/salvar_css_foto', method='post')
+def salvar_css_foto():
+    observador = DbObservador.load(usuario_logado()['id'])
+    observador.aux_css_foto = request.params['posicao_foto']
+    observador.save()
 
 # @route('/gestao_aprendizagem2')
 # # @permissao('responsavel_varejo')

@@ -14,7 +14,7 @@ class DbHistorico(Model):
     def create_historico(self, **kwargs):
         self.create(**kwargs)
 
-    def testando_hash(self,hist_id,key_value):
+    def hist_dados_cadastrados(self,hist_id,key_value):
         print('e',hist_id,key_value)
         hist_atual=self.load(hist_id)
         for k,v in key_value.items():
@@ -61,7 +61,7 @@ class DbHistorico(Model):
     def search_historico_acao(self,acao):
         listas = []
 
-        for lista in DbHistorico.query((DbHistorico.nome_usuario == nome),
+        for lista in DbHistorico.query((DbHistorico.acao == acao),
                                        order_by=DbHistorico.id):
             listas.append(vars(lista)["_data"])
 
