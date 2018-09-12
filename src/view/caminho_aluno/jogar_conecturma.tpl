@@ -61,7 +61,7 @@
                     <img src="/static/img/acessorio/{{acessorio}}" style="z-index: 13; position: absolute; width: 56%;">
                 %end
                 %if corpo != '0':
-                    <img src="/static/img/corpo/{{corpo}}" style="z-index: 12; position: absolute; width: 56%;     margin-left: 2px; margin-top: 2px;">
+                    <img src="/static/img/corpo/2{{corpo}}" style="z-index: 12; position: absolute; width: 56%;     margin-left: 2px; margin-top: 2px;">
                 %end
             </div>
             <a href="/aluno/guarda_roupa" style="left: 69%;width: 40px;height: 41px;position:  absolute;top: 3px;"></a>

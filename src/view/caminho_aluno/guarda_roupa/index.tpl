@@ -24,19 +24,20 @@
                     <div class="col-md-4">
                         <div class="cristais">
                             <img src="/static/img/total_cristais_loja.png">
+                            <span style="    font-family: 'arial';color: #fff;text-shadow: 2px 2px #733e00;font-size: 20px;position: absolute;top: 60px;    margin-left: 38px;z-index: 50;">{{cristais}}</span>
                         </div>
                         <div class="loja_space_avatar">
                              % if apelido != '0':
-                                    <input id="apelido" type="text" name="apelido" value="{{apelido}}" style="beckground-color: #e75619;font-family: 'arial';color: #fff;border: 1px solid #ff8039;border-radius: 8px;height: 45px;width: 190px;padding: 0 0;font-size: 30px;text-shadow: 2px 2px #58210a;text-align: center;position: absolute;top: 41%;margin-left: 29%;">
+                                    <input id="apelido" type="text" name="apelido" onchange="salvar_avatar();" maxlength="12" value="{{apelido}}" style="text-transform:uppercase; background-color: #e75619;font-family: 'arial';color: #fff;border: 1px solid #ff8039;border-radius: 8px;height: 45px;width: 190px;padding: 0 0;font-size: 30px;text-shadow: 2px 2px #58210a;text-align: center;position: absolute;top: 41%;margin-left: 29%;">
                                 % else:
-                                    <input id="apelido" type="text" name="apelido" value="" style="beckground-color: #e75619;font-family: 'arial';color: #fff;border: 1px solid #ff8039;border-radius: 8px;height: 45px;width: 190px;padding: 0 0;font-size: 30px;text-shadow: 2px 2px #58210a;text-align: center;position: absolute;top: 41%;margin-left: 29%;>
+                                    <input id="apelido" type="text" name="apelido" onchange="salvar_avatar();" value="" maxlength="12" style="text-transform:uppercase; background-color: #e75619;font-family: 'arial';color: #fff;border: 1px solid #ff8039;border-radius: 8px;height: 45px;width: 190px;padding: 0 0;font-size: 30px;text-shadow: 2px 2px #58210a;text-align: center;position: absolute;top: 41%;margin-left: 29%;">
                                 % end
                         </div>
                         <div class="loja_avatar">
                             <div class="avatar">
                                 <div id="avatar_usuario">
                                     %if cor != '0':
-                                        <img id='avatar-itens-cor' src="/static/img/body/2{{cor['image_name']}}" class='avatar-itens-cor imagem-pocicao-"+color.slice(0,4)+"' style="z-index: 11; position: absolute; left: 100px; top: -9%;">
+                                        <img id='avatar-itens-cor' src="/static/img/body/{{cor['image_name']}}" class='avatar-itens-cor imagem-pocicao-"+color.slice(0,4)+"' style="z-index: 11; position: absolute;top: 14px;left: 5px;">
                                         <input id='avatar-itens-cor-id' type='hidden' value='{{cor["id"]}}'>
                                     %else:
                                         <img id="avatar" src="/static/img/body/avatar-naked.png">
@@ -44,21 +45,21 @@
                                     %end
 
                                     %if rosto != '0':
-                                        <img id='avatar-itens-rosto' src="/static/img/rosto/2{{rosto['image_name']}}" style="z-index: 12; position: absolute; top: -10%; left: 102px;">
+                                        <img id='avatar-itens-rosto' src="/static/img/rosto/{{rosto['image_name']}}" style="z-index: 12; position: absolute; top: 37px; left: 30px;">
                                         <input id='avatar-itens-rosto-id' type='hidden' value='{{rosto["id"]}}'>
                                     %else:
                                         <input id='avatar-itens-rosto-id' type='hidden' value='0'>
                                     %end
 
                                     %if acessorio != '0':
-                                        <img src="/static/img/acessorio/{{acessorio['image_name']}}" style="z-index: 13; position: absolute; top: -10%; left: 98px;">
+                                        <img id='avatar-itens-acessorios' src="/static/img/acessorio/{{acessorio['image_name']}}" style="z-index: 13; position: absolute; top: -168px; left: -81px;">
                                         <input id='avatar-itens-acessorios-id' type='hidden' value='{{acessorio["id"]}}'>
                                     %else:
                                         <input id='avatar-itens-acessorios-id' type='hidden' value='0'>
                                     %end
 
                                     %if corpo != '0':
-                                        <img id='avatar-itens-body' src="/static/img/corpo/{{corpo['image_name']}}" style="z-index: 12; position: absolute;top: -9%;left: 103px;">
+                                        <img id='avatar-itens-body' src="/static/img/corpo/2{{corpo['image_name']}}" style="z-index: 12; position: absolute;top: -165px;left: -84px;">
                                         <input id='avatar-itens-body-id' type='hidden' value='{{corpo["id"]}}'>
                                     %else:
                                         <input id='avatar-itens-body-id' type='hidden' value='0'>
@@ -77,10 +78,12 @@
                     <div class="col-md-8">
                         <div class="loja-categorias">
                                 <div class="row">
+
                                     <div id="cor" class="cores scale-bounce"><a onclick="mostrar_itens(1)" style="cursor:pointer;"></a></div>
-                                    <div id="rosto" class="rosto scale-bounce"><a onclick="mostrar_itens(2)" style="cursor:pointer;"></a></div>
-                                    <div id="acessorios" class="acessorios scale-bounce"><a onclick="mostrar_itens(3)" style="cursor:pointer;"></a></div>
-                                    <div id="corpo" class="scale-bounce"><a onclick="mostrar_itens(4)" style="cursor:pointer;"></a></div>
+                                    <div id="rosto" class="rosto scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(2)" style="cursor:pointer;"></a></div>
+                                    <div id="acessorios" class="acessorios scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(3)" style="cursor:pointer;"></a></div>
+                                    <div id="corpo" class="scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(4)" style="cursor:pointer;"></a></div>
+
                                 </div>
                         </div>
 
@@ -95,9 +98,12 @@
                                         % if i > 0:
                                             <div id="bloco-cor-{{i+1}}" style="display:none">
                                                 %for a in range(z,z+3):
-                                                    <div class="itens-loja-corpo" onclick="change_avatar_color('{{cores[a]['image_name']}}','{{cores[a]['id']}}'); salvar_avatar();" style="margin-left: 5px;">
+                                                    <div class="itens-loja-corpo" onclick="change_avatar_color('{{cores[a]['image_name']}}','{{cores[a]['id']}}'); salvar_avatar(); check_color_cor('botao_ok_{{cores[a]['id']}}');" style="margin-left: 5px;">
+                                                        <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                            <img id="botao_ok_{{cores[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                        </div>
                                                         <div style="padding-top: 35px; float: left; width: 100%; text-align: center;">
-                                                            <img class="" src="/static/img/body/{{cores[a]['image_name']}}"  style="max-height: 140px;">
+                                                            <img class="" src="/static/img/body/{{cores[a]['image_name']}}"  style="width: 50%;">
                                                         </div>
                                                     </div>
                                                 %end
@@ -109,9 +115,12 @@
                                             <div id="bloco-cor-{{i+1}}">
                                                 %for a in range(z, len(cores)):
                                                     %if z < 3:
-                                                        <div class="itens-loja-corpo" onclick="change_avatar_color('{{cores[a]['image_name']}}','{{cores[a]['id']}}'); salvar_avatar();" style="margin-left: 5px;">
+                                                        <div class="itens-loja-corpo" onclick="change_avatar_color('{{cores[a]['image_name']}}','{{cores[a]['id']}}'); salvar_avatar();check_color_cor('botao_ok_{{cores[a]['id']}}');;" style="margin-left: 5px;">
+                                                            <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                                <img id="botao_ok_{{cores[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                            </div>
                                                             <div style="padding-top: 35px; float: left; width: 100%; text-align: center;">
-                                                                <img class="" src="/static/img/body/{{cores[a]['image_name']}}"  style="max-height: 140px;">
+                                                                <img class="" src="/static/img/body/{{cores[a]['image_name']}}"  style="width: 50%;">
                                                             </div>
                                                         </div>
                                                     %else:
@@ -135,9 +144,12 @@
                                         % if i > 0:
                                             <div id="bloco-rosto-{{i+1}}" style="display:none">
                                                 %for a in range(z,z+3):
-                                                    <div class="itens-loja-corpo" onclick="change_avatar_face('{{rostos[a]['image_name']}}','{{rostos[a]['id']}}')" style="margin-left: 5px;">
+                                                    <div class="itens-loja-corpo" onclick="change_avatar_face('{{rostos[a]['image_name']}}','{{rostos[a]['id']}}'); salvar_avatar();check_color_rosto('botao_ok_{{rostos[a]['id']}}');" style="margin-left: 5px;">
+                                                        <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                                <img id="botao_ok_{{rostos[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                        </div>
                                                         <div style="padding-top: 60px; float: left; width: 100%; text-align: center;">
-                                                            <img class="rosto" src="/static/img/rosto/{{rostos[a]['image_name']}}">
+                                                            <img class="rosto" src="/static/img/rosto/{{rostos[a]['image_name']}}" style="width: 50%;">
                                                         </div>
                                                     </div>
                                                 %end
@@ -149,9 +161,12 @@
                                             <div id="bloco-rosto-{{i+1}}">
                                                 %for a in range(z, len(rostos)):
                                                     %if z < 3:
-                                                        <div class="itens-loja-corpo" onclick="change_avatar_face('{{rostos[a]['image_name']}}','{{rostos[a]['id']}}')" style="margin-left: 5px;">
+                                                        <div class="itens-loja-corpo" onclick="change_avatar_face('{{rostos[a]['image_name']}}','{{rostos[a]['id']}}'); salvar_avatar(); check_color_rosto('botao_ok_{{rostos[a]['id']}}');" style="margin-left: 5px;">
+                                                            <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                                <img id="botao_ok_{{rostos[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                            </div>
                                                             <div style="padding-top: 60px; float: left; width: 100%; text-align: center;">
-                                                                <img class="rosto" src="/static/img/rosto/{{rostos[a]['image_name']}}">
+                                                                <img class="rosto" src="/static/img/rosto/{{rostos[a]['image_name']}}" style="width: 50%;">
                                                             </div>
                                                         </div>
                                                     %else:
@@ -178,8 +193,11 @@
                                                 %for a in range(z,z+3):
                                                     <div class="itens-loja-corpo" style="margin-left: 5px;">
                                                         % if str(acessorios[a]['id']) in itens_usuario or usuario_logado['tipo']<= '5':
-                                                            <div style="float: left; width: 100%; text-align: center;" onclick="change_avatar_acessorios('{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}')">
-                                                                <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top:-36px;">
+                                                            <div style="float: left; width: 100%; text-align: center;" onclick="change_avatar_acessorios('{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}'); salvar_avatar(); check_color_acessorios('botao_ok_{{acessorios[a]['id']}}');">
+                                                                <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                                    <img id="botao_ok_{{acessorios[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                                </div>
+                                                                <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top: 6px;">
                                                             </div>
                                                         % else:
                                                             <div style="float: left; width: 100%; text-align: center;">
@@ -207,8 +225,11 @@
                                                     %if z < 3:
                                                         <div class="itens-loja-corpo" style="margin-left: 5px;">
                                                             % if str(acessorios[a]['id']) in itens_usuario or usuario_logado['tipo']<= '5':
-                                                                <div style="float: left; width: 100%; text-align: center;" onclick="change_avatar_acessorios('{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}')">
-                                                                    <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top:-36px;">
+                                                                <div style="float: left; width: 100%; text-align: center;" onclick="change_avatar_acessorios('{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}'); salvar_avatar(); check_color_acessorios('botao_ok_{{acessorios[a]['id']}}');">
+                                                                    <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                                        <img id="botao_ok_{{acessorios[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                                    </div>
+                                                                    <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top: 6px;">
                                                                 </div>
                                                             % else:
 
@@ -250,22 +271,27 @@
                                                 %for a in range(z,z+3):
                                                     <div class="itens-loja-corpo" style="margin-left: 5px;">
                                                         % if str(corpos[a]['id']) in itens_usuario or usuario_logado['tipo']<= '5':
-                                                            <div style="padding-top: 35px; float: left; width: 100%; text-align: center;" onclick="change_avatar_body('{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')">
-                                                                <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="max-width: 127px;">
+                                                            <div style="padding-top: 35px; float: left; width: 100%; text-align: center;" onclick="change_avatar_body('{{corpos[a]['image_name']}}','{{corpos[a]['id']}}'); salvar_avatar(); check_color_corpo('botao_ok_{{corpos[a]['id']}}');">
+                                                                <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                                    <img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                                </div>
+                                                                <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                             </div>
                                                         %else:
-                                                            <div style="padding-top: 35px; float: left; width: 100%; text-align: center;">
-                                                                <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="max-width: 127px;">
+                                                            <div style="padding-top: 29px; float: left; width: 100%; text-align: center;">
+                                                                <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                             </div>
-                                                            <div style="position: relative; margin-left: 35px;">
-                                                                <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                            <div style="margin-top: 117px;">
+                                                                <div style="position: relative; margin-left: 35px;">
+                                                                    <img src="/static/img/custo_cristais.png" style="margin-top: 41px;">
+                                                                </div>
+                                                                <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
+                                                                    {{corpos[a]['preco']}}
+                                                                </div>
+                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                    <img src="/static/img/btn_comprar.png">
+                                                                </a>
                                                             </div>
-                                                            <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
-                                                                {{corpos[a]['preco']}}
-                                                            </div>
-                                                            <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="    position: relative; margin-left: 44px; float: left;top: -26px;">
-                                                                <img src="/static/img/btn_comprar.png">
-                                                            </a>
                                                         %end
                                                     </div>
                                                 %end
@@ -279,22 +305,27 @@
                                                     %if z < 3:
                                                         <div class="itens-loja-corpo" style="margin-left: 5px;">
                                                              % if str(corpos[a]['id']) in itens_usuario or usuario_logado['tipo']<= '5':
-                                                                <div style="padding-top: 35px; float: left; width: 100%; text-align: center;" onclick="change_avatar_body('{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')">
-                                                                    <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="max-width: 127px;">
+                                                                <div style="padding-top: 35px; float: left; width: 100%; text-align: center;" onclick="change_avatar_body('{{corpos[a]['image_name']}}','{{corpos[a]['id']}}'); salvar_avatar(); check_color_corpo('botao_ok_{{corpos[a]['id']}}');">
+                                                                    <div style="position: absolute; top: 357px; margin-left: 78px;">
+                                                                        <img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                                    </div>
+                                                                    <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                                 </div>
                                                             %else:
-                                                                <div style="padding-top: 35px; float: left; width: 100%; text-align: center;">
-                                                                    <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="max-width: 127px;">
+                                                                <div style="padding-top: 29px; float: left; width: 100%; text-align: center;">
+                                                                    <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                                 </div>
-                                                                <div style="position: relative; margin-left: 35px;">
-                                                                    <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                                <div style="margin-top: 117px;">
+                                                                    <div style="position: relative; margin-left: 35px;">
+                                                                        <img src="/static/img/custo_cristais.png" style="margin-top: 41px;">
+                                                                    </div>
+                                                                    <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
+                                                                        {{corpos[a]['preco']}}
+                                                                    </div>
+                                                                    <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                        <img src="/static/img/btn_comprar.png">
+                                                                    </a>
                                                                 </div>
-                                                                <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
-                                                                    {{corpos[a]['preco']}}
-                                                                </div>
-                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
-                                                                    <img src="/static/img/btn_comprar.png">
-                                                                </a>
                                                             %end
                                                         </div>
                                                     %else:
@@ -311,7 +342,9 @@
                                 </div>
                             </div>
                             <div class="botoes">
-                                <img onclick="salvar_avatar()" src="/static/img/btn-salvar.png" style="cursor:pointer;">
+                                <a href="/"  onclick="salvar_avatar()" >
+                                    <img src="/static/img/btn-salvar.png" style="cursor:pointer;">
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -320,20 +353,67 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
+
+            %if cor != []:
+                cor = "botao_ok_{{cor['id']}}"
+                $("#"+cor).removeAttr('style');
+            %end
+            %if rosto != []:
+                rosto = "botao_ok_{{rosto['id']}}"
+                $("#"+rosto).removeAttr('style');
+            %end
+            %if acessorio != []:
+                acessorio = "botao_ok_{{acessorio['id']}}"
+                $("#"+acessorio).removeAttr('style');
+            %end
+            %if corpo != []:
+                corpo = "botao_ok_{{corpo['id']}}"
+                $("#"+corpo).removeAttr('style');
+            %end
+
+            function check_color_cor(id){
+                document.getElementById(cor).style.filter = "grayscale(100%)";
+                $("#"+id).removeAttr('style');
+                cor=id;
+            }
+            function check_color_rosto(id){
+                document.getElementById(rosto).style.filter = "grayscale(100%)";
+                $("#"+id).removeAttr('style');
+                rosto=id;
+            }
+            function check_color_acessorios(id){
+                document.getElementById(acessorio).style.filter = "grayscale(100%)";
+                $("#"+id).removeAttr('style');
+                acessorio=id;
+            }
+            function check_color_corpo(id){
+                document.getElementById(corpo).style.filter = "grayscale(100%)";
+                $("#"+id).removeAttr('style');
+                corpo=id;
+            }
+
             var display=1;
             function flag_display_none(flag){
                 switch(flag){
                     case 1:
-                        document.getElementById('item-comprado-cores').style.display = "none"; 
+                        document.getElementById('item-comprado-cores').style.display = "none";
+                        document.getElementById("cor").style.filter = "grayscale(100%)";
+                        $("#cor").css({"background-size": "60%", "position": "relative", "top": "11px"});
                         break;
                     case 2:
+                        document.getElementById("rosto").style.filter = "grayscale(100%)";
                         document.getElementById('item-comprado-rosto').style.display = "none";
+                        $("#rosto").css({"background-size": "60%", "position": "relative", "top": "11px"});
                         break;
                     case 3:
+                        document.getElementById("acessorios").style.filter = "grayscale(100%)";
                         document.getElementById('item-comprado-acessorios').style.display = "none";
+                        $("#acessorios").css({"background-size": "60%", "position": "relative", "top": "11px"});
                         break;
                     case 4:
+                        document.getElementById("corpo").style.filter = "grayscale(100%)";
                         document.getElementById('item-comprado-corpo').style.display = "none";
+                        $("#corpo").css({"background-size": "60%", "position": "relative", "top": "11px"});
                         break;
                 } 
             }
@@ -343,21 +423,28 @@
                     case 1:
                         flag_display_none(display)
                         document.getElementById('item-comprado-cores').style.display = "block";
-                        
-                        display = 1 
+                        $("#cor").addClass("scale-bounce");
+                        $("#cor").removeAttr('style');
+                        display = 1
                         break;
                     case 2:
                         flag_display_none(display)
+                        $("#rosto").removeAttr('style');
+                        $("#rosto").css("scale-bounce");
                         document.getElementById('item-comprado-rosto').style.display = "block"; 
                         display = 2
                         break;
                     case 3:
                         flag_display_none(display)
+                        $("#acessorios").removeAttr('style');
+                        $("#acessorios").addClass("scale-bounce");
                         document.getElementById('item-comprado-acessorios').style.display = "block"; 
                         display = 3
                         break;
                     case 4:
                         flag_display_none(display)
+                        $("#corpo").removeAttr('style');
+                        $("#corpo").addClass("scale-bounce");
                         document.getElementById('item-comprado-corpo').style.display = "block"; 
                         display = 4
                         break; 
@@ -401,8 +488,7 @@
             }
             function salvar_avatar(){
                 $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
-                ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value},function(data){
-                    window.location.replace("/");
+                ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value, apelido:document.getElementById("apelido").value},function(data){
                  });
             }
             var flag_rosto = 0;
@@ -410,7 +496,7 @@
                 color=color.toLowerCase();
                 $("#avatar-itens-cor").remove();
                 $("#avatar-itens-cor-id").remove();
-                $("#avatar_usuario").append("<input id='avatar-itens-cor-id' type='hidden' value='"+id+"'><img id='avatar-itens-cor' src='/static/img/body/"+color+"' value='teste' class='avatar-itens-cor imagem-pocicao-"+color.slice(0,4)+"' style='z-index: 11;position: absolute;top: 12px;left: 5px;'>");
+                $("#avatar_usuario").append("<input id='avatar-itens-cor-id' type='hidden' value='"+id+"'><img id='avatar-itens-cor' src='/static/img/body/"+color+"' value='teste' class='avatar-itens-cor imagem-pocicao-"+color.slice(0,4)+"' style='z-index: 11;position: absolute;top: 14px;left: 5px;'>");
             }
             function change_avatar_face(face, id){
                 face=face.toLowerCase();
@@ -422,7 +508,7 @@
                 acessorios=acessorios.toLowerCase();
                 $("#avatar-itens-acessorios").remove();
                 $("#avatar-itens-acessorios-id").remove();
-                $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorios+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorios.slice(0,10)+"' style='z-index: 13;    position: absolute;top: -174px;left: -89px;'>");
+                $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorios+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorios.slice(0,10)+"' style='z-index: 13; position: absolute;top: -168px; left: -81px;'>");
             }
             function change_avatar_body(body, id){
                 body=body.toLowerCase();
