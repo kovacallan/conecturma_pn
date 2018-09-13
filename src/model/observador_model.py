@@ -30,7 +30,7 @@ class DbObservador(Model):
     pontos_de_vida = IntegerField(default=0)
     pontos_de_moedas = IntegerField(default=0)
 
-    data_ultimo_login = TextField(default='')
+    data_ultimo_login = TextField(default='',index=True)
     ativo = TextField(default='0')
     aux_css_foto=TextField(default='0')
 

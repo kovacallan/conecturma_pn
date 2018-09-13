@@ -52,6 +52,7 @@ class ObservadorFacade:
         return self.observador.search_observador_turma(vinculo_turma=vinculo_turma)
 
     def search_observador_inativos_facade(self, nome):
+        '''Nao é exatamente isso ,por enquanto é uma pesquisa geral no banco'''
         return self.observador.search_observador_inativos(nome)
 
     def search_diretor_vinculo_escola_facade(self, vinculo_escola):

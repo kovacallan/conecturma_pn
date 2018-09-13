@@ -86,7 +86,11 @@ class AlunoFacade:
         return self.aluno.armazenar_ultimo_jogo_jogado(id_aluno, jogo)
 
     def ultimo_oa_jogado_facade(self, id_aluno):
-        return self.aluno.ultimo_oa_jogado(id_aluno)
+        return self.aluno.mostrar_ultimo_oa_jogado(id_aluno)
+
+    def mostrar_ultimo_oa_jogado(self,id_aluno):
+        print('que',id_aluno)
+        return self.aluno.mostrar_ultimo_oa_jogado(id_aluno)
 
     def get_medalhas_facade(self, id_aluno):
         return self.aluno.get_medalhas(id_aluno=id_aluno)

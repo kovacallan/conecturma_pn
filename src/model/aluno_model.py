@@ -276,13 +276,12 @@ class DbAluno(Model):
         aluno.save()
 
     def armazenar_ultimo_jogo_jogado(self, id_aluno, jogo):
-
         aluno=self.load(id_aluno)
         aluno.ultimo_oa_jogado=jogo
         aluno.save()
 
-    def ultimo_oa_jogado(self,id_aluno):
-
+    def mostrar_ultimo_oa_jogado(self,id_aluno):
+        print('wut',id_aluno)
         aluno=self.search_aluno_id(id_aluno)
 
         return aluno['ultimo_oa_jogado']
