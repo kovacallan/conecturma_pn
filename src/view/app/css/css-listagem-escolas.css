@@ -94,7 +94,18 @@ button:focus{
 	width: 60%;
 	float: right;
 }
+.img-resize{
+    width: 102px;
+    height: 102px;
+}
+.w-descricao{
+    width: 283px;
+}
+.w-motivo{
+    width: 268px;
+    height: 95px;
 
+}
 /*.pesquisa-input{
 	padding-left: 20px;
 	border-radius: 40px;

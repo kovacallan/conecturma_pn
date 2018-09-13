@@ -75,8 +75,68 @@
                                                    id="escola{{i['id']}}" value="{{i['vinculo_escola']}}" disabled>
                                         </div>
                                     </div>
+                                     <div id="dar_medalhas_todos">
+                                        <button class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos</button>
+                                        <!-- conteudo do botao -->
+                                        <!--MODAL PRIMARIO-->
+                                        <div class="modal fade" id="medalha_todos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle"> Dar Medalhas </h5>
+
+
+
+
+                                                            <!-- Modal -->
+
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">Ação</th>
+                                                                    <th scope="col">Medalha</th>
+                                                                    <th scope="col">Descrição</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td  style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-11.gif" ></td>
+                                                                    <td class="w-descricao"></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-12.gif" ></td>
+                                                                    <td class="w-descricao"></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td colspan="1"  style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-13.gif" ></td>
+                                                                    <td class="w-descricao"></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fim do conteúdo -->
+
+                                    </div> <!--Fechando janela de medalhas -->
+
                                     <!--fim da div dos dados ao lado da imagem-->
-                                </div>
+                                </div> <!-- fechando col-md-12 -->
                             </div>
                         </form>
                     </div>
@@ -100,63 +160,64 @@
                                                         <h5 class="modal-title" id="exampleModalLongTitle">Medalhas obtidas</h5>
 
 
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" id="dar-medalha" data-target="#modal-dar-medalha" data-dismiss="#medalha_janela" onclick="sumir()"
-                                                            Dar medalhas
-                                                        </button>
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" id="dar-medalha" data-target="#modal-dar-medalha" data-dismiss="#medalha_janela" onclick="sumir()"
+                                                            style="margin-left: 85px;">
+                                                                Dar medalhas
+                                                            </button>
 
-                                                        <!-- Modal -->
+                                                            <!-- Modal -->
 
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                            <tr>
-                                                                <th scope="col">Ação</th>
-                                                                <th scope="col">Medalha</th>
-                                                                <th scope="col">Descrição</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                                <td><img src="/static/img/medalha/jogo-11.gif" style="width:30%"></td>
-                                                                <td></td>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">Ação</th>
+                                                                    <th scope="col">Medalha</th>
+                                                                    <th scope="col">Descrição</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-11.gif" ></td>
+                                                                    <td class="w-descricao"></td>
 
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                                <td><img src="/static/img/medalha/jogo-12.gif" style="width:30%"></td>
-                                                                <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-12.gif" ></td>
+                                                                    <td class="w-descricao"></td>
 
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                                <td colspan="1"><img src="/static/img/medalha/jogo-13.gif" style="width:30%"></td>
-                                                                <td></td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td colspan="1"  style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-13.gif" ></td>
+                                                                    <td class="w-descricao"></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- Fim do conteúdo -->
+                                            <!-- Fim do conteúdo -->
 
                                     </div> <!--Fechando janela de medalhas -->
 
                                     <!-- MODAL DAR MEDALHAS-->
                                     <div class="modal fade" id="modal-dar-medalha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"  aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -168,25 +229,29 @@
                                                             <th scope="col">Ação</th>
                                                             <th scope="col">Medalha</th>
                                                             <th scope="col">Descrição</th>
+                                                            <th scope="col"> Motivo</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr>
                                                             <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                            <td><img src="/static/img/medalha/socio/socio-10.gif" style="width:30%"></td>
-                                                            <td></td>
+                                                            <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-10.gif" ></td>
+                                                            <td class="w-descricao"></td>
+                                                            <td> <textarea class="w-motivo" maxlenght=140 placeholder="Max 140 caracteres"></textarea></td>
 
                                                         </tr>
                                                         <tr>
                                                             <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                            <td><img src="/static/img/medalha/socio/socio-1.gif" style="width:30%"></td>
-                                                            <td></td>
+                                                            <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-1.gif" ></td>
+                                                            <td class="w-descricao"></td>
+                                                            <td> <textarea class="w-motivo" maxlenght=140 placeholder="Max 140 caracteres"></textarea></td>
 
                                                         </tr>
                                                         <tr>
                                                             <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                            <td colspan="1"><img src="/static/img/medalha/socio/socio-2.gif" style="width:30%"></td>
-                                                            <td></td>
+                                                            <td colspan="1"  style="width: 1px;"|><img class="img-resize" src="/static/img/medalha/socio/socio-2.gif" ></td>
+                                                            <td class="w-descricao"></td>
+                                                            <td> <textarea class="w-motivo" maxlenght=140 placeholder="Max 140 caracteres"></textarea></td>
                                                         </tr>
                                                         </tbody>
                                                     </table>

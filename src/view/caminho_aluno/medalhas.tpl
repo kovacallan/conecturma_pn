@@ -36,16 +36,16 @@
 
 <main>
 
-    <div class="container">
+    <div class="container offset-md-2">
         <div style="margin-left: 11px;">
-            <div class="titulo offset-md-0" style="margin-top: 30px;margin-left: -21px;"></div>
+            <div class="titulo" style="margin-top: 30px;margin-left: -17px;"></div>
 
 
             <br>
             %if (medalha_recente):
             %  for i in medalha_recente:
 
-            <div style=""><img src="/static/img/medalha/recentes.png"></div>
+            <div style="margin-left: -14px;"><img src="/static/img/medalha/recentes.png"></div>
         </div>
 
         <div class="col-md">
@@ -103,7 +103,7 @@
 
         </ul>
     </div>
-    <div class="tab-content" id="pills-tabContent">
+    <div class="tab-content" id="pills-tabContent" style="width:990px;">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
             <div class="todas-medalhas">
