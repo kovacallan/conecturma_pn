@@ -48,9 +48,25 @@
 <div class="container corpo-pag">
     <div class="row">
         <div class="col-md-3 avatar-std">
-            <img src="/static/img/boneco_base2.png" class="boneco_base img-fluid">
-            <a href="/guarda_roupa" style="left: 69%;width: 40px;height: 41px;position:  absolute;top: 3px;"></a>
+            <div class="avatar_usuario">
+                %if cor != '0':
+                    <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: absolute; width: 56%;">
+                %else:
+                    <img src="/static/img/boneco_base2.png" class="boneco_base img-fluid">
+                %end
+                %if rosto != '0':
+                    <img src="/static/img/rosto/2{{rosto}}" style="z-index: 12; position: absolute; width: 56%;">
+                %end
+                %if acessorio != '0':
+                    <img src="/static/img/acessorio/{{acessorio}}" style="z-index: 13; position: absolute; width: 56%;">
+                %end
+                %if corpo != '0':
+                    <img src="/static/img/corpo/2{{corpo}}" style="z-index: 12; position: absolute; width: 56%;     margin-left: 2px; margin-top: 2px;">
+                %end
+            </div>
+            <a href="/aluno/guarda_roupa" style="left: 69%;width: 40px;height: 41px;position:  absolute;top: 3px;"></a>
             <img src="/static/img/AVATAR.png" class="avatar-ship img-fluid">
+            <span id="apelido" style="position: absolute; top: 47%; left: 59px; color: #fff; font-weight: bold;">{{apelido}}</span>
             <!--<div class="offset-md-4 col-md-1">-->
             <span id="CRYSTAL">{{moedas}}</span>
             <span id="HP">{{vida}}</span>

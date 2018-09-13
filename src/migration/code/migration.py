@@ -68,15 +68,15 @@ facade.create_estrutura_facade(tipo_estrutura="4", nome="Astronalta", tipo_item=
 
 """ Migration das Itens corpo """
 
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Malhado", tipo_item="4", preco='5', image_name="2corpo-01.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Tubarão", tipo_item="4", preco='13', image_name="2corpo-02.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Romano", tipo_item="4", preco='25', image_name="2corpo-03.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Soldado", tipo_item="4", preco='35', image_name="2corpo-04.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Planta", tipo_item="4", preco='40', image_name="2corpo-05.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Caverna", tipo_item="4", preco='45', image_name="2corpo-06.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Polvo", tipo_item="4", preco='50', image_name="2corpo-07.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Lagosta", tipo_item="4", preco='55', image_name="2corpo-08.png")
-facade.create_estrutura_facade(tipo_estrutura="4", nome="Astronalta", tipo_item="4", preco='70', image_name="2corpo-09.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Malhado", tipo_item="4", preco='5', image_name="corpo-01.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Tubarão", tipo_item="4", preco='13', image_name="corpo-02.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Romano", tipo_item="4", preco='25', image_name="corpo-03.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Soldado", tipo_item="4", preco='35', image_name="corpo-04.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Planta", tipo_item="4", preco='40', image_name="corpo-05.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Caverna", tipo_item="4", preco='45', image_name="corpo-06.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Polvo", tipo_item="4", preco='50', image_name="corpo-07.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Lagosta", tipo_item="4", preco='55', image_name="corpo-08.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Astronalta", tipo_item="4", preco='70', image_name="corpo-09.png")
 
 
 """ Migration das Oas """
