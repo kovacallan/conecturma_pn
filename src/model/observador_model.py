@@ -15,6 +15,7 @@ class DbObservador(Model):
     email = TextField(fts=True,default='0')
     data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
+    apelido = TextField(fts=True, default='0')
 
     armario = ListField()
 
