@@ -37,7 +37,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof"
-                                        aria-controls="escola-do-rock-prof" aria-selected="false">Alunos
+                                   aria-controls="escola-do-rock-prof" aria-selected="false">Alunos
                                 </a>
                             </li>
                         </ul>
@@ -89,6 +89,119 @@
                                     <p>Alunos
                                         <i class="far fa-question-circle"></i>
                                     </p>
+                                    <div id="janela_medalhas">
+                                        <button class="botao float-right" data-toggle="modal" data-target="#medalha_janela">Medalhas</button>
+                                        <!-- conteudo do botao -->
+                                        <!--MODAL PRIMARIO-->
+                                        <div class="modal fade" id="medalha_janela" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Medalhas obtidas</h5>
+
+
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" id="dar-medalha" data-target="#modal-dar-medalha" data-dismiss="#medalha_janela" onclick="sumir()"
+                                                            Dar medalhas
+                                                        </button>
+
+                                                        <!-- Modal -->
+
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">Ação</th>
+                                                                <th scope="col">Medalha</th>
+                                                                <th scope="col">Descrição</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                <td><img src="/static/img/medalha/jogo-11.gif" style="width:30%"></td>
+                                                                <td></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                <td><img src="/static/img/medalha/jogo-12.gif" style="width:30%"></td>
+                                                                <td></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                <td colspan="1"><img src="/static/img/medalha/jogo-13.gif" style="width:30%"></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Fim do conteúdo -->
+
+                                    </div> <!--Fechando janela de medalhas -->
+
+                                    <!-- MODAL DAR MEDALHAS-->
+                                    <div class="modal fade" id="modal-dar-medalha" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"  aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Ação</th>
+                                                            <th scope="col">Medalha</th>
+                                                            <th scope="col">Descrição</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                            <td><img src="/static/img/medalha/socio/socio-10.gif" style="width:30%"></td>
+                                                            <td></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                            <td><img src="/static/img/medalha/socio/socio-1.gif" style="width:30%"></td>
+                                                            <td></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                            <td colspan="1"><img src="/static/img/medalha/socio/socio-2.gif" style="width:30%"></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" id="botao-fechar" data-dismiss="modal">Fechar</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FECHANDO O MODEL DAR MEDALHAS -->
+
+
                                 </div>
 
                                 % for z in i['aluno']:
@@ -96,6 +209,7 @@
 
                                 <div class="row">
                                     <div class="col-md-11">
+
                                         <div class="offset-md-1 nome-prof row row-impar">
                                             <div class="col-md-5" style="padding-top: 10px;padding-bottom: 10px;">
                                                 Nome: {{z['nome']}}
@@ -109,7 +223,7 @@
                                                 <br>
                                                 <img src="/static/img/{{z['senha'][3]}}.png"
                                                      style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                 <img src="/static/img/{{z['senha'][2]}}.png"
+                                                <img src="/static/img/{{z['senha'][2]}}.png"
                                                      style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
 
                                                 <img src="/static/img/{{z['senha'][1]}}.png"
@@ -144,11 +258,11 @@
                               style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
                         </span>
-                        <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
-                              style="cursor:pointer;display:none;">
+                            <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
+                                  style="cursor:pointer;display:none;">
                             <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
                         </span>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,3 +270,17 @@
         </form>
     </div>
 </div>
+<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
+<script type="text/javascript">
+function sumir(){
+
+$('#modal-dar-medalha').on('show.bs.modal', function () {
+    $('#medalha_janela').css('display','none');
+
+});
+
+$('#modal-dar-medalha').on('hidden.bs.modal', function () {
+   $('#medalha_janela').css('display','block');
+});
+}
+</script>
