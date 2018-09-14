@@ -477,7 +477,7 @@ class FacadeTest(unittest.TestCase):
         self._observador_in_turma()
 
     def _login_date(self):
-
+        pass
 
 
     # def _test_anotacoes(self):

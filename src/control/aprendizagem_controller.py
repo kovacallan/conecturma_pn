@@ -157,32 +157,32 @@ def verificarAcessoUnidade():
             retorno = {'unidadesAcessiveis': acesso_unidade}
     return retorno
 
-def verificarAcessoUnidade():
-    usuario = usuario_logado()
-    parametros = parametros_json_jogos(request.params.items())
-    if int(usuario['tipo']) < 6:
-        retorno = {'unidadesAcessiveis': parametros['unidades']}
-    else:
-        desempenho_aluno = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        if desempenho_aluno == []:
-            retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
-        else:
-            acesso_unidade = []
-            for i in parametros['unidades']:
-                desempenho_unidade = facade.unidade_teste_facade(id_aluno=str(usuario['id']), unidade=i)
-                if desempenho_unidade == []:
-                    acesso_unidade.append(i)
-                    break
-                else:
-                    desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
-                    if desempenho_oa == []:
-                        acesso_unidade.append(i)
-
-                        break
-                    else:
-                        acesso_unidade.append(i)
-            retorno = {'unidadesAcessiveis': acesso_unidade}
-    return retorno
+# def verificarAcessoUnidade():
+#     usuario = usuario_logado()
+#     parametros = parametros_json_jogos(request.params.items())
+#     if int(usuario['tipo']) < 6:
+#         retorno = {'unidadesAcessiveis': parametros['unidades']}
+#     else:
+#         desempenho_aluno = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
+#         if desempenho_aluno == []:
+#             retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
+#         else:
+#             acesso_unidade = []
+#             for i in parametros['unidades']:
+#                 desempenho_unidade = facade.unidade_teste_facade(id_aluno=str(usuario['id']), unidade=i)
+#                 if desempenho_unidade == []:
+#                     acesso_unidade.append(i)
+#                     break
+#                 else:
+#                     desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
+#                     if desempenho_oa == []:
+#                         acesso_unidade.append(i)
+#
+#                         break
+#                     else:
+#                         acesso_unidade.append(i)
+#             retorno = {'unidadesAcessiveis': acesso_unidade}
+#     return retorno
 
 def verificarAcessoAventura():
     from control.dicionarios import AVENTURAS_CONECTURMA
