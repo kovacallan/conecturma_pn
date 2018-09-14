@@ -212,13 +212,24 @@
 <script type="text/javascript">
 function sumir(){
 
-$('#modal-dar-medalha').on('show.bs.modal', function () {
-    $('#medalha_janela').css('display','none');
+    $('#modal-dar-medalha').on('show.bs.modal', function () {
+        $('#medalha_janela').css('display','none');
 
-});
+    });
 
-$('#modal-dar-medalha').on('hidden.bs.modal', function () {
-   $('#medalha_janela').css('display','block');
-});
+    $('#modal-dar-medalha').on('hidden.bs.modal', function () {
+       $('#medalha_janela').css('display','block');
+    });
+}
+
+idMedalha='';
+function idMedalha(id){
+    alert(id)
+    idMedalha = id;
+}
+
+function entregarMedalha(alunoid){
+    alert(alunoid);
+    alert(idMedalha);
 }
 </script>

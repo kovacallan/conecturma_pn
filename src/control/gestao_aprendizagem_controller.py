@@ -4,7 +4,7 @@ from passlib.hash import sha512_crypt
 import random
 
 from control.classes.permissao import usuario_logado, permissao
-from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_ITEM
+from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_ITEM, TIPO_MEDALHA_NOME
 
 facade = Facade()
 
@@ -516,7 +516,12 @@ def view_turma():
     """
     escola, rede = get_escolas_e_rede_permissao()
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
-    return dict(tipo=usuario_logado()['tipo'], escola=escola, turma=turma)
+    medalha = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'])
+    medalhas = []
+    for i in medalha:
+        if i['tipo_medalha'] == TIPO_MEDALHA_NOME['SocioEmocional']:
+            medalhas.append(i)
+    return dict(tipo=usuario_logado()['tipo'], escola=escola, turma=turma, medalhas = medalhas)
 
 
 def get_turma_de_acordo_com_tipo_usuario_logado():
@@ -533,6 +538,10 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
                     professor=z['nome']
             i.update({'professor': professor})
             for y in facade.search_aluno_by_turma_facade(vinculo_turma=str(i['id'])):
+                medalha = []
+                for m in y['medalha']:
+                    medalha.append(facade.search_estrutura_id_facade(id=m))
+                y['medalha'] = medalha
                 aluno.append(y)
             i.update({'aluno': aluno})
             turma.append(i)

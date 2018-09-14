@@ -335,7 +335,6 @@ def controller_create_turma():
 @permissao('professor')
 def controller_turma_editar():
     from control.gestao_aprendizagem_controller import controller_edit_turma
-    print('hi')
     return controller_edit_turma()
 
 @route('/turma/turma_update_controller', method='POST')
