@@ -343,6 +343,12 @@ def controller_update_turma():
     from control.gestao_aprendizagem_controller import controller_update_turma
     return controller_update_turma()
 
+@route('/turma/entregar_medalha_aluno', method='POST')
+@permissao('diretor')
+def controller_entregar_medalha_aluno():
+    from control.gestao_aprendizagem_controller import controller_entregar_medalha_aluno
+    return controller_entregar_medalha_aluno()
+
 
 @route('/cadastro_descritor_view')
 @view('descritor/index.tpl')

@@ -538,6 +538,8 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
                     professor=z['nome']
             i.update({'professor': professor})
             for y in facade.search_aluno_by_turma_facade(vinculo_turma=str(i['id'])):
+                y['medalha'].sort(key=int)
+                print(y['medalha'])
                 medalha = []
                 for m in y['medalha']:
                     medalha.append(facade.search_estrutura_id_facade(id=m))
@@ -649,6 +651,11 @@ def controller_update_turma():
 
     redirect('/turma')
 
+def controller_entregar_medalha_aluno():
+    
+    for i in request.params['medalha']:
+        if i != ',':
+            facade.set_medalha_facade(id_aluno = request.params['aluno'], medalha=i)
 
 def descritores():
     return

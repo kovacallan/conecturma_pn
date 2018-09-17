@@ -303,6 +303,12 @@ class DbAluno(Model):
 
         return aluno['ultimo_oa_jogado']
 
+    def set_medalha(self, id_aluno, medalha):
+        
+        aluno = DbAluno.load(int(id_aluno))
+        aluno.medalhas.append(medalha)
+
+
     def get_medalhas(self, id_aluno):
 
         aluno=DbAluno.load(int(id_aluno))

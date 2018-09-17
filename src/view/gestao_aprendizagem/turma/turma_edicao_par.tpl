@@ -222,14 +222,14 @@ function sumir(){
     });
 }
 
-idMedalha='';
-function idMedalha(id){
-    alert(id)
-    idMedalha = id;
+idMedalha=[];
+function getIdMedalha(id){
+    index = idMedalha.indexOf(id);
+    index == -1 ? idMedalha.push(id):idMedalha.splice(index,1);
 }
 
 function entregarMedalha(alunoid){
-    alert(alunoid);
-    alert(idMedalha);
+    $.post('/turma/entregar_medalha_aluno', {aluno:alunoid, medalha:idMedalha.toString()},function(data){
+    });
 }
 </script>

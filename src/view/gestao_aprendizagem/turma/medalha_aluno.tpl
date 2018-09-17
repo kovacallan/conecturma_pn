@@ -32,11 +32,19 @@
                         <tbody>
                         % if z['medalha'] != []:
                             % for m in z['medalha']:
-                                <tr>
-                                    <th scope="row"><!--<input type="checkbox" name="vehicle1" value="">--></th>
-                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-{{m['image_name']}}.gif" ></td>
-                                    <td class="w-descricao">{{m['descricao_completa']}}</td>
-                                </tr>
+                                % if m['tipo_medalha'] == '2':
+                                    <tr>
+                                        <th scope="row"><!--<input type="checkbox" name="vehicle1" value="">--></th>
+                                        <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-{{m['image_name']}}.gif" ></td>
+                                        <td class="w-descricao">{{m['descricao_completa']}}</td>
+                                    </tr>
+                                % else:
+                                    <tr>
+                                        <th scope="row"><!--<input type="checkbox" name="vehicle1" value="">--></th>
+                                        <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{m['image_name']}}.gif" ></td>
+                                        <td class="w-descricao">{{m['descricao_completa']}}</td>
+                                    </tr>
+                                % end
                             % end
                         % end
                         </tbody>
@@ -78,9 +86,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        % for q in medalhas:
+                        %  medalha=[]
+                            % for i in medalhas:
+                                % if i not in z['medalha']:
+                                    % medalha.append(i)
+                                % end
+                            % end
+                        % for q in medalha:
                             <tr>
-                                <th scope="row"><input id="idMedalha" onChange="idMedalha(this)" type="checkbox" name="vehicle1" value="{{q['id']}}"></th>
+                                <th scope="row"><input id="idMedalha_{{q['id']}}" onChange="getIdMedalha('{{q['id']}}')" type="checkbox"></th>
                                 <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{q['image_name']}}.gif" ></td>
                                 <td class="w-descricao">{{q['descricao_completa']}}</td>
                                 <td> <textarea class="w-motivo" maxlenght=140 placeholder="Max 140 caracteres"></textarea></td>
