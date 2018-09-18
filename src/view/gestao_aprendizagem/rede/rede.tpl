@@ -23,8 +23,8 @@
               </button>
               <!--pesquisa-->
             </div>
-          </div>
         </form>
+          </div>
       </div>
       <!--fim da div de pesquisa-->
     </div>

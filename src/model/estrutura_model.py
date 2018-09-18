@@ -139,7 +139,7 @@ class DbEstrutura(Model):
 
         return oas
 
-    def update_estrutura(self, **kwargs):
+    def update_estrutura(self, **kwargs: dict):
         new_data_estrutura = kwargs['estrutura']
         estrutura = self.load(int(new_data_estrutura['id']))
         for i in new_data_estrutura:

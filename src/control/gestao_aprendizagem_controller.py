@@ -155,7 +155,7 @@ def novasenha():
 
 
 @permissao('professor')
-def controller_index_usuario(observador,norepeat=False):
+def controller_index_usuario(observador,no_repeat=False):
     if observador['tipo'] == TIPO_USUARIOS['administrador']:
         return lista_de_usuarios_caso_observador_for_administrador()
     elif observador['tipo'] == TIPO_USUARIOS['professor']:
@@ -167,7 +167,7 @@ def controller_index_usuario(observador,norepeat=False):
 
 
 @permissao('administrador',)
-def lista_de_usuarios_caso_observador_for_administrador(norepeat=False):
+def lista_de_usuarios_caso_observador_for_administrador(no_repeat=False):
     usuario = []
     aluno = facade.read_aluno_facade()
     observador = facade.read_observador_facade()
@@ -286,15 +286,21 @@ def view_observador_update():
     return template('observador/update_observador', id=observador['id'], nome=observador['nome'],
                     telefone=observador['telefone'], cpf=observador['cpf'], email=observador['email'])
 
-
-def controller_observador_update():
+@permissao('professor')
+def controller_observador_update(no_repeat=False):
     try:
+
         email = request.params['email']
+        if no_repeat:
+            id = request.params['id']
+            nome = request.params['nome']
+        return locals()
         # verificacao = facade.search_observador_email_facade(email=email)
     except KeyError:
         observador = facade.search_observador_id_facade(request.params['id'])
         email = observador['email']
-
+        if no_repeat:
+            return locals()
     facade.update_observador_facade(id=request.params['id'], nome=request.params['nome'],
                                     email=email)
     # redirect('/observador/read_observador')
@@ -388,7 +394,7 @@ def redes_no_sistema():
         return rede
 
 
-def controller_create_rede(norepeat):
+def controller_create_rede(no_repeat):
     """
     Cria rede com os parametros de nome da rede e o telefone da mesma
     metodos usados:create rede facade
@@ -396,17 +402,27 @@ def controller_create_rede(norepeat):
     """
     nome = request.params['nome']
     telefone = request.params['telefone']
-    if norepeat:
+    cnpj = request.params['cnpj']
+    telefone = request.params['telefone']
+    endereco = request.params['endereco']
+    numero = request.params['numero']
+    bairro = request.params['bairro']
+    complemento = request.params['complemento']
+    cep = request.params['cep']
+    estado = request.params['estado']
+    municipio = request.params['municipio']
+    quem_criou = usuario_logado()['nome']
+    if no_repeat:
+        print('locals',locals())
         return locals()
     elif nome != '' and nome != None and telefone != '' and telefone != None:
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
-                                       cnpj=request.params['cnpj'], telefone=request.params['telefone'],
-                                       endereco=request.params['endereco'], numero=request.params['numero'],
-                                       bairro=request.params['bairro'], complemento=request.params['complemento'],
-                                       cep=request.params['cep'], estado=request.params['estado'],
-                                       municipio=request.params['municipio'], quem_criou=usuario_logado()['nome']
+                                       cnpj=cnpj, telefone=telefone,
+                                       endereco=endereco, numero=numero,
+                                       bairro=bairro, complemento=complemento,
+                                       cep=cep, estado=estado,
+                                       municipio=municipio, quem_criou=quem_criou
                                        )
-    return locals()
 
 
 def controller_editar_rede():
@@ -490,11 +506,24 @@ def get_nome_diretor_da_escola(vinculo_escola):
         return diretor['nome']
 
 
-def controller_escola_cadastro():
+def controller_escola_cadastro(no_repeat):
     nome = request.params['nome']
     telefone = request.params['telefone']
-
+    cnpj = request.params['cnpj']
+    telefone = request.params['telefone']
+    vinculo_diretor_escola = request.params['diretor']
+    vinculo_rede = request.params['rede']
+    endereco = request.params['endereco']
+    numero = request.params['numero']
+    bairro = request.params['bairro']
+    complemento = request.params['complemento']
+    cep = request.params['cep']
+    estado = request.params['estado']
+    municipio = request.params['municipio']
     if nome != '' and nome != None and telefone != '' and telefone != None:
+        if no_repeat==True:
+            print('hei')
+            return locals()
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=nome,
                                        cnpj=request.params['cnpj'], telefone=request.params['telefone'],
                                        vinculo_diretor_escola=request.params['diretor'],
@@ -614,8 +643,10 @@ def controller_create_turma(norepeat):
     # redirect('/turma')
 
 
-def controller_edit_turma():
-    print('controler', request.params)
+def controller_edit_turma(no_repeat):
+    if no_repeat:
+        estrutura=request.params
+        return estrutura
     facade.update_estrutura_facade(estrutura=request.params)
 
 
@@ -632,7 +663,7 @@ def view_update_turma():
                         turma['vinculo_escola']))
 
 
-def controller_update_turma():
+def controller_update_turma(norepeat):
     teste = request.forms
 
     turma = request.forms['turma']
@@ -646,7 +677,8 @@ def controller_update_turma():
     if professores is not '' or professores is not []:
         for p in professores:
             facade.observador_in_turma_facade(id_observador=p, vinculo_turma=turma)
-
+    if norepeat:
+        return locals()
     redirect('/turma')
 
 

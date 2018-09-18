@@ -2,7 +2,7 @@
 import unittest
 
 from src.facade.facade_main import Facade
-from control.dicionarios import TIPO_ESTRUTURA, TIPO_USUARIOS
+from control.dicionarios import TIPO_ESTRUTURA, TIPO_USUARIOS, TIPO_ITEM, TIPO_MEDALHA_NOME
 
 facade = Facade()
 
@@ -112,7 +112,7 @@ class FacadeTest(unittest.TestCase):
         self._pesq_alun_obj()
 
     def _aluno_in_turma(self):
-        self._create_turma()
+        self._create_estrutura()
         aluno1 = self.facade.create_aluno_facade(matricula="0", nome="egg", escola="Escola Conecturma", senha="123",
                                                  vinculo_rede='0')
         alunoer1 = self.facade.search_aluno_nome_facade("egg")
@@ -267,7 +267,7 @@ class FacadeTest(unittest.TestCase):
     """INICIO TESTE OBSERVADOR"""
 
     def _create_observador(self):
-        self._create_rede()
+        self._create_estrutura()
         rede=self.facade.search_estrutura_facade(TIPO_ESTRUTURA['rede'],'Rede Conecturma')
         observador1 = self.facade.create_observador_facade(nome='Egg', senha='span', telefone='(21)9999-9999',
                                                            cpf='123456789', email='egg@span.com.br', vinculo_rede=str(rede['id']), escola='0',
@@ -421,7 +421,7 @@ class FacadeTest(unittest.TestCase):
 
     def _search_obsevador_by_rede(self):
         self._create_observador()
-        self._create_rede()
+        self._create_estrutura()
         observador1= self.facade.search_observador_id_facade(1)
         observador_rede1= self.facade.search_observador_by_rede_facade('1')
         self.assertEqual(observador_rede1[0]['nome'],observador1['nome'])
@@ -477,7 +477,17 @@ class FacadeTest(unittest.TestCase):
         self._observador_in_turma()
 
     def _login_date(self):
+        '''testavel via front e em parceria com o webtest'''
         pass
+
+    def _pesquisa_email_facade(self):
+        self._create_observador()
+        observador=self.facade.search_observador_id_facade(1)
+        obs=self.facade.pesquisa_email_facade(observador['email'])
+        self.assertEqual(obs[0]['nome'],observador['nome'])
+
+    def test_search_pesquisa_email(self):
+        self._pesquisa_email_facade()
 
 
     # def _test_anotacoes(self):
@@ -501,111 +511,146 @@ class FacadeTest(unittest.TestCase):
 
     """FIM TESTE OBSERVADOR"""
 
-    """TESTE REDE"""
+    """TESTE ESTRUTURAS"""
 
-    def _create_rede(self):
+    def _create_estrutura(self):
         rede = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'],
                                                    nome="Rede Conecturma",
                                                    telefone="(21)9999-9999")
-        rede2 = self.facade.search_estrutura_facade("1", "egg")
         self.assertIsNot(rede, None)
-        self.assertIsNot(rede2, None)
-
-    def test_create_rede(self):
-        self._create_rede()
-
-    def _update_rede(self):
-        rede = self.facade.create_estrutura_facade(nome="egg", telefone="(21)9999-9999")
-        self.assertIsNot(rede, None)
-        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="egg")
-        self.assertIsNot(rede1, None)
-
-        rede_up = self.facade.update_estrutura_facade(rede.id, nome="Ni", telefone="(11)8888-8888")
-        rede = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Ni")
-        self.assertEqual(rede['nome'], "Ni")
-        self.assertEqual(rede['telefone'], "(11)8888-8888")
-
-    def _pesquisa_rede(self):
-        rede = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Ni")
-        self.assertIs(rede, rede)
-        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Sily walk")
-        self.assertIs(rede1, None)
-
-    def _delete_rede(self):
-        rede = self.facade.read_estrutura_facade(tipo_estrutura="1")
-        escolhidos = []
-        for redes in rede:
-            escolhidos.append(redes['id'])
-        self.facade.delete_rede_facade(escolhidos)
-
-
-
-    def _test_update_rede(self):
-        self._update_rede()
-
-    def _test_pesquisa_rede(self):
-        self._pesquisa_rede()
-
-    def _test_delete_rede(self):
-        self._update_rede()
-        self._delete_rede()
-
-    """FIM TESTE REDE"""
-
-    """TESTE FACADE ESCOLA"""
-
-    def _create_escola(self):
+        escola= self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'],nome='escola conecturma')
+        self.assertIsNot(escola,None)
+        escola_rede=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'],nome='escola da rede',vinculo_rede='1')
+        self.assertIsNot(escola_rede,None)
+        turma=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'],nome='turma conecturma')
+        self.assertIsNot(turma,None)
+        item_cabeca = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'],nome='cabeca',tipo_item=TIPO_ITEM['rosto'],descricao='uma cabeca',descricao_completa='é so isso mesmo , uma cabeça , oq esperava?')
+        self.assertIsNot(item_cabeca,None)
+        item_ombro = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'], nome='ombro',
+                                                          tipo_item=TIPO_ITEM['corpo'], descricao='uma parte do corpo',
+                                                          descricao_completa='é so isso mesmo , um ombro , oq esperava?')
+        self.assertIsNot(item_ombro,None)
+        item_joelho = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'], nome='Joelho',
+                                                          tipo_item=TIPO_ITEM['cor'], descricao='uma parte do cu...elhiunho',
+                                                          descricao_completa='é so isso mesmo , um cor , oq esperava?')
+        self.assertIsNot(item_joelho,None)
+        item_e_pe= self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'], nome='e pe',
+                                                          tipo_item=TIPO_ITEM['acessorio'], descricao='uma parte do corpo, pe do exodia',
+                                                          descricao_completa='é so isso mesmo , um pe , oq esperava?')
+        self.assertIsNot(item_e_pe,None)
+        medalha_socio=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'],tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'], nome='social comunismo')
+        self.assertIsNot(medalha_socio,None)
+        medalha_jogo=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'],tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'], nome='fazendo joguinhos')
+        self.assertIsNot(medalha_jogo,None)
+        # medalha_jogo = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'],
+        #                                                    nome='fazendo joguinhos')
+        iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo_estrutura='4', tipo_item='1', preco=0)
+        self.assertIsNot(iten1, None)
         escola = self.facade.create_estrutura_facade(nome='Do bairro', bairro='de baixo', telefone='2266 6622',
                                                      numero='21 ', UF='RJ', cidade='Pindamonhagaba',
                                                      cep='22287111')
         self.assertIsNot(escola, None)
+        turma1 = self.facade.create_estrutura_facade(nome="Knight", tipo_estrutura="3", serie="1", vinculo_escola="1",
+                                                     quem_criou="Ni")
+        self.assertIsNot(turma1, None)
 
-    def _update_escola(self):
-        escola = self.facade.search_escola_facade("Do bairro")
-        self.facade.update_escola_facade(escola['id'], nome="Ni", telefone="33355567", vinculo_rede="abelhinha",
-                                         cep="22270 999", endereco="rua do teste ", numero='666',
-                                         cidade="RIO DE JANEIRO",
-                                         estado='RJ')
-        escola2 = self.facade.search_escola_facade("Ni")
+    def test_create_estrutura(self):
+        self._create_estrutura()
+
+    def _read_estrutura(self):
+        self._create_estrutura()
+        read=facade.read_estrutura_facade(TIPO_ESTRUTURA['escola'])
+        self.assertEqual(read[0]['nome'],'escola conecturma')
+
+    def test_read_estrutura(self):
+        self._read_estrutura()
+
+    def _update_rede(self):
+        self._create_estrutura()
+        rede = self.facade.create_estrutura_facade(nome="egg", telefone="(21)9999-9999")
+        self.assertIsNot(rede, None)
+        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="egg")
+        self.assertIsNot(rede1, None)
+        estrutura = {'id': '1', 'telefone': '(11)8888-8888', 'nome': 'Ni'}
+        rede_up = self.facade.update_estrutura_facade(estrutura=estrutura)
+        rede = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Ni")
+        self.assertEqual(rede['nome'], "Ni")
+        self.assertEqual(rede['telefone'], "(11)8888-8888")
+
+        escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome="Do bairro")
+        estrutura = {'telefone': '33355567', 'nome': 'Ni', 'vinculo_rede': 'abelhinha',
+                     'cep': '22270 999', 'endereco': 'rua-do teste', 'numero': '666', 'cidade': 'RIO DE JANEIRO',
+                     'estado': 'RJ', 'id': str(escola['id'])}
+
+        self.facade.update_estrutura_facade(estrutura=estrutura)
+        escola2 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='Ni')
         self.assertEqual(escola2['nome'], "Ni")
-        self.assertEqual(escola2['endereco'], "rua do teste ")
+        self.assertEqual(escola2['endereco'], 'rua-do teste')
         self.assertEqual(escola2['numero'], '666')
         self.assertEqual(escola2['vinculo_rede'], "abelhinha")
         self.assertEqual(escola2['telefone'], "33355567")
 
-    def _pesquisa_escola(self):
-        escola = self.facade.search_estrutura_facade(tipo_estrutura="2", nome="Do bairro")
-        self.assertIs(escola, escola)
-        escola1 = self.facade.search_estrutura_facade(tipo_estrutura="2", nome="Sily walk")
-        self.assertIs(escola1, {})
+    def _update_escola(self):
+        self._create_estrutura()
+        escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome="Do bairro")
+        estrutura = {'telefone': '33355567', 'nome': 'Ni', 'vinculo_rede': 'abelhinha',
+                     'cep': '22270 999', 'endereco': 'rua-do teste', 'numero': '666', 'cidade': 'RIO DE JANEIRO',
+                     'estado': 'RJ', 'id': str(escola['id'])}
 
-    def _test_create_delete_escola(self):
-        self._create_escola()
+        self.facade.update_estrutura_facade(estrutura=estrutura)
+        escola2 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='Ni')
+        self.assertEqual(escola2['nome'], "Ni")
+        self.assertEqual(escola2['endereco'], 'rua-do teste')
+        self.assertEqual(escola2['numero'], '666')
+        self.assertEqual(escola2['vinculo_rede'], "abelhinha")
+        self.assertEqual(escola2['telefone'], "33355567")
 
-    def _test_pesquisa_escola(self):
-        self._create_escola()
-        self._pesquisa_escola()
-
-    def _test_update_escola(self):
-        self._create_escola()
+    def test_update_estrutura(self):
         self._update_escola()
+        self._update_rede()
 
-    """FIM TESTE ESCOLA"""
-    """TESTE TURMA"""
+    def _pesquisa_estrutura(self):
+        self._create_estrutura()
+        rede = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Rede Conecturma")
+        self.assertEqual(rede['nome'],'Rede Conecturma')
+        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="2", nome="escola conecturma")
+        self.assertEqual(rede1['nome'],'escola conecturma')
+        rede = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Rede Conecturma")
+        self.assertEqual(rede['nome'], 'Rede Conecturma')
+        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="2", nome="escola conecturma")
+        self.assertEqual(rede1['nome'], 'escola conecturma')
 
-    def _create_turma(self):
-        turma1 = self.facade.create_estrutura_facade(nome="Knight", tipo_estrutura="3", serie="1", vinculo_escola="1",
-                                                     quem_criou="Ni")
-        self.assertIsNot(turma1, None)
-        turma2= self.facade.create_estrutura_facade()
+    def _pesquisa_escola(self):
+        self._create_estrutura()
+        escola = self.facade.search_estrutura_facade(tipo_estrutura="2", nome="Do bairro")
+        self.assertEqual(escola['nome'],"Do bairro")
+        escola1 = self.facade.search_estrutura_facade(tipo_estrutura="2", nome="Sily walk")
+        self.assertEqual(escola1, [])
 
-    def _search_turma(self):
-        turma1 = self.facade.search_estrutura_facade(tipo_estrutura="3", nome="Knight")
-        self.assertIn(turma1['nome'], "Knight")
-        self.assertIn(turma1['quem_criou'], "Ni")
+    def _pesquisa_estrutura_id(self):
+        self._create_estrutura()
+        estrutura=self.facade.search_estrutura_id_facade(1)
+        print(estrutura)
+
+    def test_pesquisas_estrutura(self):
+        self._pesquisa_estrutura()
+        self._pesquisa_escola()
+        self._pesquisa_estrutura_id()
+
+
+
+    def _ja_possui_item(self):
+        self._comprar_item()
+        item=facade.ja_tem_item_facade('2')
+        self.assertEqual(item[0],'1')
+
+    def test_ja_possui_item(self):
+        self._ja_possui_item()
+
 
     def _vincular_professor_turma(self):
-        turma = self.facade.search_turma_facade("Knight")
+        self._create_estrutura()
+        turma = self.facade.search_estrutura_facade(TIPO_ESTRUTURA['turma'],"Knight")
         professor = self.facade.search_observador_facade("Monty")
         self.facade.vincular_professor_turma_facade(turma['id'], professor['id'])
 
@@ -619,20 +664,11 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(professor.nome, 'Monty')
         self.assertEqual(professor.email, 'Monty@python.com.br')
 
-    def test_create_delete_turma(self):
-        self._create_turma()
-
     def _test_vincular_professor_turma(self):
-        self._create_turma()
+        self._create_estrutura()
         self._create_observador()
         self._vincular_professor_turma()
         self._ver_professor_turma()
-        self._delete_observador()
-
-    def test_create_search_delete_turma(self):
-        self._create_turma()
-        self._search_turma()
-        # self._delete_turma()
 
     """FIM TESTE TURMA """
 

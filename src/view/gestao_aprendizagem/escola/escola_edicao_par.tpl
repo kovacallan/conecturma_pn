@@ -13,7 +13,7 @@
 </div>
 <div class="col-md-1 item-tabela card colocar-direita">
     <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
+        class="" id="id-escola-d-rock{{i['id']}}" onclick="setinha_aux('id-escola-d-rock{{i['id']}}')">
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
 </div>

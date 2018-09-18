@@ -11,15 +11,19 @@ class DbHistorico(Model):
     acao=TextField(default='0',index=True)
     momento=DateTimeField(default=datetime.datetime.now,index=True)
     parametros_funcao=HashField()
+
     def create_historico(self, **kwargs):
         self.create(**kwargs)
 
-    def hist_dados_cadastrados(self,hist_id,key_value):
+    def hist_dados_cadastrado(self,hist_id,key_value):
         print('e',hist_id,key_value)
         hist_atual=self.load(hist_id)
         for k,v in key_value.items():
             print('j',k,v)
-            hist_atual.parametros_funcao[k]=v
+            if k =='no_repeat':
+                pass
+            else:
+                hist_atual.parametros_funcao[k]=v
 
     def read_historico(self):
         historico = []

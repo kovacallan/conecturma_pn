@@ -426,6 +426,7 @@ function cadastro_usuario(tipo){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
                             });
+                            location.reload();
                         }
                         else{
                             alert('O campo escola é obrigatório.');
@@ -661,11 +662,11 @@ function cadastro_usuario(tipo){
 
 function setinha_aux(ide){
     setinha = document.getElementById(ide).querySelectorAll("#setinha");
-    console.log(ide);
+    console.log(ide,setinha);
     if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 15px;padding-top: 10px;"></i>';
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 10px;padding-top: 5px;"></i>';
     } else {
-        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 10px;"></i>';
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 10px;padding-top: 5px;"></i>';
     }
   }
 

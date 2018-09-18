@@ -70,12 +70,6 @@ Rotas da Tela de do Ambiente de aprendizagem
 @view('caminho_aluno/jogar_conecturma')
 @permissao('aluno_varejo')
 def view_ambiente_de_aprendizagem(no_repeat=False):
-    '''
-    A funçao view_ambiente_de_aprendizagem checa o tipo de usuario e retorna as vidas e as moedas
-    :param no_repeat: auxiliar para guardar o historico sem erros nao é utilizado nessa funçao
-    , ver a funçao permissao no arquivo permissao , para mais detalhes
-    :return: vidas e moedas do usuario logado
-    '''
     from control.aprendizagem_controller import view_ambiente_de_aprendizagem
     return view_ambiente_de_aprendizagem()
 
@@ -155,6 +149,9 @@ def view_usuario_index(no_repeat=False):
 @permissao('professor')
 def cadastro_usuario(no_repeat=False):
     from control.gestao_aprendizagem_controller import cadastro_usuario
+    if no_repeat:
+        usuario=request.params
+        return usuario
     return cadastro_usuario()
 
 
@@ -204,7 +201,7 @@ def check_change_mudanca_alun():
             aff.append(id)
     id = ''.join(aff)
 
-    aluno = facade.search_aluno_id_facade(id)
+    aluno = facade.search_aluno_id_facade(int(id))
 
     if aluno['nome'] == nome and aluno['nome_login'] == login:
         return dict(resposta=' nop chuck testa , sem mudança')
@@ -267,22 +264,25 @@ def read_de_medalha(no_repeat=False):
 # @permissao('gestor')
 @view("gestao_aprendizagem/rede/rede")
 @permissao('gestor')
-def view_index_rede(norepeat=False):
+def view_index_rede(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_index_rede
     return view_index_rede()
 
 
 @route('/rede/criar_rede', method='POST')
 @permissao('gestor')
-def controller_create_rede(norepeat=False):
+def controller_create_rede(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_create_rede
-    return controller_create_rede(norepeat)
+    return controller_create_rede(no_repeat)
 
 
 @route('/rede/editar_rede', method='POST')
 @permissao('gestor')
 def controller_editar_rede(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_editar_rede
+    if no_repeat:
+        estrutura = request.params
+        return estrutura
     return controller_editar_rede()
 
 
@@ -297,13 +297,16 @@ def view_escola_index(no_repeat=False):
 @permissao('gestor')
 def controller_escola_cadastro(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_escola_cadastro
-    return controller_escola_cadastro()
+    return controller_escola_cadastro(no_repeat)
 
 
 @route('/escola/editar_escola', method='POST')
 @permissao('diretor')
 def controller_escola_editar(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_escola_update
+    if no_repeat:
+        estrutura = request.params
+        return estrutura
     return controller_escola_update()
 
 
@@ -318,30 +321,30 @@ def controller_estrutura_deletar(no_repeat=False):
 # @permissao('professor')
 @view('gestao_aprendizagem/turma/turma')
 @permissao('professor')
-def view_turma(norepeat=False):
+def view_turma(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_turma
     return view_turma()
 
 
 @route('/turma/cadastro_turma', method='POST')
 @permissao('diretor')
-def controller_create_turma(norepeat=False):
+def controller_create_turma(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_create_turma
-    return controller_create_turma(norepeat)
+    return controller_create_turma(no_repeat)
 
 
 @route('/turma/update_turma', method='POST')
 @permissao('professor')
-def controller_turma_editar(norepeat=False):
+def controller_turma_editar(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_edit_turma
-    return controller_edit_turma()
+    return controller_edit_turma(no_repeat)
 
 
 @route('/turma/turma_update_controller', method='POST')
 @permissao('diretor')
 def controller_update_turma(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_update_turma
-    return controller_update_turma()
+    return controller_update_turma(no_repeat)
 
 
 @route('/cadastro_descritor_view')
@@ -407,7 +410,7 @@ def controller_observador_cadastro(no_repeat=False):
 @route('/administrador/pag_administrador')
 @view('areas_administrativo.tpl')
 @permissao('administrador')
-def view_adm(norepeat=False):
+def view_adm(no_repeat=False):
     return index_historico_controller()
 
 

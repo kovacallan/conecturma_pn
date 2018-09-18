@@ -11,7 +11,7 @@
 </div>
 <div class="col-md-1 item-tabela card">
     <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
-       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
+       aria-controls="collapse{{i['id']}}" id="id-nossa-escola{{i['id']}}" onclick="setinha_aux('id-nossa-escola{{i['id']}}')">
         <i id="setinha" class="fas fa-angle-down"></i>
     </a>
 </div>
