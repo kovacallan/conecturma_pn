@@ -79,10 +79,10 @@
                         <div class="loja-categorias">
                                 <div class="row">
 
-                                    <div id="cor" class="cores scale-bounce"><a onclick="mostrar_itens(1)" style="cursor:pointer;"></a></div>
-                                    <div id="rosto" class="rosto scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(2)" style="cursor:pointer;"></a></div>
-                                    <div id="acessorios" class="acessorios scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(3)" style="cursor:pointer;"></a></div>
-                                    <div id="corpo" class="scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(4)" style="cursor:pointer;"></a></div>
+                                    <div id="cor" class="cores scale-bounce"><a onclick="mostrar_itens(1), scale_click('cor')" style="cursor:pointer;"></a></div>
+                                    <div id="rosto" class="rosto scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(2), scale_click('rosto')" style="cursor:pointer;"></a></div>
+                                    <div id="acessorios" class="acessorios scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(3), scale_click('acessorios')" style="cursor:pointer;"></a></div>
+                                    <div id="corpo" class="scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(4),scale_click('corpo')" style="cursor:pointer;"></a></div>
 
                                 </div>
                         </div>
@@ -354,19 +354,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
 
-            %if cor != []:
+            %if cor != '0':
                 cor = "botao_ok_{{cor['id']}}"
                 $("#"+cor).removeAttr('style');
             %end
-            %if rosto != []:
+            %if rosto != '0':
                 rosto = "botao_ok_{{rosto['id']}}"
                 $("#"+rosto).removeAttr('style');
             %end
-            %if acessorio != []:
+            %if acessorio != '0':
                 acessorio = "botao_ok_{{acessorio['id']}}"
                 $("#"+acessorio).removeAttr('style');
             %end
-            %if corpo != []:
+            %if corpo != '0':
                 corpo = "botao_ok_{{corpo['id']}}"
                 $("#"+corpo).removeAttr('style');
             %end
@@ -423,7 +423,7 @@
                     case 1:
                         flag_display_none(display)
                         document.getElementById('item-comprado-cores').style.display = "block";
-                        $("#cor").addClass("scale-bounce");
+                        //$("#cor").addClass("scale-bounce");
                         $("#cor").removeAttr('style');
                         display = 1
                         break;
@@ -516,6 +516,16 @@
                 $("#avatar-itens-body-id").remove();
                 $("#avatar_usuario").append("<input id='avatar-itens-body-id' type='hidden' value='"+id+"'><img id='avatar-itens-body' src='/static/img/corpo/2"+body+"' class='avatar-itens-corpo' style='z-index: 12;position: absolute;top: -165px;left: -84px;'>");
             }
+
+              function scale_click (id) {
+
+                element =  document.getElementById(id);
+                   $("#"+id).removeClass('scale-bounce')
+                       element.offsetWidth = element.offsetWidth;
+                    $("#"+id).addClass('scale-bounce')
+                     console.log("opa, coloquei");
+
+               }
         </script>
     </body>
 </html>

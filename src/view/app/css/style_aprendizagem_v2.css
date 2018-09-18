@@ -81,8 +81,6 @@ body{
 
 
 
-
-
 .icon-edit{
     margin-top: 45px;
 }
@@ -154,15 +152,15 @@ display:none;
 
 #CRYSTAL{
     position: absolute;
-    left: 166px;
+    left: 196px;
     color: #fff;
     font-weight: bold;
-    top: 13%;
+    top: 18%;
 }
 #HP {
     position: absolute;
-    top: 23%;
-    left: 215px;
+    top: 32%;
+    left: 260px;
     color: #fff;
     font-weight: bold;
 }

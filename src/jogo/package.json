@@ -1,0 +1,35 @@
+{
+  "name": "Conecturma_AV123",
+  "description": "Conecturma com Aventura 1, Aventura 2 e Aventura 3",
+  "version": "0.0.3",
+  "idConecturma": "1000",
+  "main": "main.js",
+  "authors": [
+    "Aonde Educacional <contato@conecturma.com.br>"
+  ],
+  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./start-electron.js",
+    "pack:osx": "electron-packager . \"Conecturma AV123\" --out=dist/osx --platform=darwin --arch=x64 --version=0.36.2 --icon=icon.icns --ignore=dist --ignore=assets --ignore=builder.json --ignore=bower.json --ignore=README.md --ignore=.gitignore --overwrite",
+    "pack:win": "electron-packager . \"Conecturma AV123\" --out=dist/win --platform=win32 --arch=ia32 --version=0.36.2 --icon=icon.ico --ignore=dist --ignore=assets --ignore=builder.json --ignore=bower.json --ignore=README.md --ignore=.gitignore --ignore=preview.png --overwrite",
+    "mac": "electron-packager . Conecturma --out=instalador --platform=darwin --arch=x64 --icon=.icon.icns --version=0.36.2 --overwrite",
+    "teste": "electron-packager ./ Conecturma --platform:win32 --out=./instalador --version 0.30.2 --overwrite --icon=./icon.ico",
+    "packageWin": "electron-packager ./ Conecturma --platform=win32 --arch=ia32 asar=true --out=instalador --icon=icon.ico --overwrite --ignore='node_modules/dev-dependency'",
+    "packageLinux": "electron-packager ./ Conecturma --platform=linux --arch=ia32 asar=true --out=instalador --icon=icon.ico --overwrite --ignore='node_modules/dev-dependency'"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.0",
+    "cookie-parser": "~1.4.1",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^8.0.0",
+    "electron-prebuilt": "^0.36.9",
+    "standard": "^6.0.8"
+  }
+}
