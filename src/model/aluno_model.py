@@ -304,10 +304,17 @@ class DbAluno(Model):
         return aluno['ultimo_oa_jogado']
 
     def set_medalha(self, id_aluno, medalha):
-        
-        aluno = DbAluno.load(int(id_aluno))
-        aluno.medalhas.append(medalha)
-
+        try:
+            aluno = DbAluno.load(int(id_aluno))
+            for i in medalha:
+                if i != ',':
+                    aluno.medalhas.append(medalha)
+        except KeyError:
+            print("Tivemos um problema para econtrar esse aluno")
+            return False
+        else:
+            aluno.save()
+            return True
 
     def get_medalhas(self, id_aluno):
 

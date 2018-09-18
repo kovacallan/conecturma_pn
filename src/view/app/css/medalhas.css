@@ -185,3 +185,11 @@ right: 50px;
 .nav-link .active{
     background-color: #f72020;
 }
+
+.modal-dialog{
+   overflow-y: initial !important
+}
+.modal-body{
+   height: 250px;
+   overflow-y: auto;
+}

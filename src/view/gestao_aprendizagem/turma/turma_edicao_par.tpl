@@ -230,6 +230,7 @@ function getIdMedalha(id){
 
 function entregarMedalha(alunoid){
     $.post('/turma/entregar_medalha_aluno', {aluno:alunoid, medalha:idMedalha.toString()},function(data){
+        window.location.replace(data);
     });
 }
 </script>

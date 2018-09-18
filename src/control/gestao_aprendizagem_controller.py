@@ -652,10 +652,11 @@ def controller_update_turma():
     redirect('/turma')
 
 def controller_entregar_medalha_aluno():
-    
-    for i in request.params['medalha']:
-        if i != ',':
-            facade.set_medalha_facade(id_aluno = request.params['aluno'], medalha=i)
+    medalhas = facade.set_medalha_facade(id_aluno = request.params['aluno'], medalha=request.params['medalha'])
+    if medalhas:
+        return '/turma'
+    else:
+        print('erro')
 
 def descritores():
     return

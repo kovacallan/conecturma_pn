@@ -97,7 +97,7 @@ class AlunoFacade:
         return self.aluno.ultimo_oa_jogado(id_aluno)
 
     def set_medalha_facade(self, id_aluno, medalha):
-        self.aluno.set_medalha(id_aluno=id_aluno, medalha=medalha)
+        return self.aluno.set_medalha(id_aluno=id_aluno, medalha=medalha)
 
     def get_medalhas_facade(self, id_aluno):
         return self.aluno.get_medalhas(id_aluno=id_aluno)
