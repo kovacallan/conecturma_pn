@@ -42,7 +42,7 @@
 
             <br>
             %if (medalha_recente):
-            %  for i in medalha_recente:
+
 
             <div style="margin-left: -14px;"><img src="/static/img/medalha/recentes.png"></div>
         </div>
@@ -51,30 +51,37 @@
             <br>
             <br>
             <div class="row">
-                <div class="bounce"
-                     style="background-image: url('/static/img/medalha/fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1;">
-                    %if i['tipo_medalha']== '2' :
-                    <figure>
-                        <img class="medalha-lista-ultimas"  src="/static/img/medalha/jogo-{{i['id']}}.gif">
-                    </figure>
+                    % for i in medalha_recente:
+                        %if i['tipo_medalha']== '2' :
+                            <div class="bounce" style="background-image: url('/static/img/medalha/fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1; margin-left:0px;margin-right:10px;">
+                                <figure>
+                                    <img class="medalha-lista-ultimas"  src="/static/img/medalha/jogo-{{i['id']}}.gif">
+                                </figure>
 
-                </div>
+                             </div>
+
+                            %else:
+                                         <div class="bounce" style=" background-image: url('/static/img/medalha/fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1; margin-left:0px;margin-right:10px;">
+
+                                            <figure>
+                                                 <img class="medalha-lista-ultimas"  src="/static/img/medalha/socio/socio-{{i['id']}}.gif">
+                                            </figure>
+                                         </div>
+                            %end
+            %end
+                    %end
+            </div>
 
 
             </div>
-        </div>
-        %else:
-        <figure>
-            <img class="medalha-lista-ultimas"  src="/static/img/medalha/socio/socio-{{i['id']}}.gif">
-        </figure>
-    </div>
-    </div>
-    </div>
 
-    <img src="/static/img/medalha/separador.png" align="center" style="top: 20px;position: relative; margin-left: 100px;">
-    %end
-    %end
-    %end
+
+
+
+    <img src="/static/img/medalha/separador.png" align="center" style="top: 20px;position: relative; margin-left: auto; margin-right:auto;">
+
+
+
     <br>
     <br>
     <br>
