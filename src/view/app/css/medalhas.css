@@ -10,7 +10,7 @@ color:#fff
 }
 
 body{
-    background: url('/static/img/medalha/img/bg_aluno2.jpg') center no-repeat !important;
+    background: url('/static/img/bg_aluno2.jpg') center no-repeat !important;
     background-size: 100% 100%;
      -webkit-background-size: cover;
     -moz-background-size: cover;
