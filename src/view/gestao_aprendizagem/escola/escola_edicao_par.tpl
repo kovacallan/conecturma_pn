@@ -5,15 +5,18 @@
 <div class="col-md-2 item-tabela ">
     {{i['vinculo_rede']}}
 </div>
-<div class="col-md-2 item-tabela">
+<div class="col-md-2 item-tabela" >
     {{i['vinculo_diretor_escola']}}
 </div>
 <div class="col-md-2 item-tabela">
     {{i['telefone']}}
 </div>
-<div class="col-md-1 item-tabela card colocar-direita">
+<div class="col-md-1 item-tabela card colocar-direita" style="padding:0">
     <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="" id="id-escola-d-rock{{i['id']}}" onclick="setinha_aux('id-escola-d-rock{{i['id']}}')">
+        class="" id="id-escola-d-rock{{i['id']}}" onclick="setinha_aux('id-escola-d-rock{{i['id']}}')" style="height: 50px;
+    padding-right: 15px;
+    padding-top: 15px;
+    width: 64px;">
         <i id="setinha" class='fas fa-angle-down'></i>
     </a>
 </div>

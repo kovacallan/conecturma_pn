@@ -622,8 +622,14 @@ function cadastro_usuario(tipo){
 
                         }
        else{
-       console.log(ide);
-       setinha_aux(ide);
+      console.log(ide);
+       setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    console.log(ide,setinha);
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 15px;padding-top: 15px;"></i>';
+    } else {
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 15px;"></i>';
+    }
 
        }
        });
@@ -638,7 +644,13 @@ function cadastro_usuario(tipo){
                         }
        else{
        console.log(ide);
-       setinha_aux(ide);
+       setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    console.log(ide,setinha);
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 15px;padding-top: 15px;"></i>';
+    } else {
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 15px;"></i>';
+    }
 
        }
        });
@@ -664,9 +676,9 @@ function setinha_aux(ide){
     setinha = document.getElementById(ide).querySelectorAll("#setinha");
     console.log(ide,setinha);
     if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 10px;padding-top: 5px;"></i>';
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style=""></i>';
     } else {
-        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 10px;padding-top: 5px;"></i>';
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style=""></i>';
     }
   }
 
