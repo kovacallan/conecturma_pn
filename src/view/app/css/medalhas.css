@@ -146,6 +146,9 @@ right: 50px;
     height: 195px;
     
 }
+.modal{
+overflow-y:scroll;
+}
 
 .medalha-lista-todas{
     padding-top: 5px;

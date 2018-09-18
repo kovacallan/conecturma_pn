@@ -48,9 +48,9 @@
 <div class="container corpo-pag">
     <div class="row">
         <div class="col-md-3 avatar-std">
-            <div class="avatar_usuario">
+            <div class="avatar_usuario" style="position: absolute;">
                 %if cor != '0':
-                    <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: absolute; width: 56%;">
+                    <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: relative;width: 76%; bottom: 65px; right: 28px;">
                 %else:
                     <img src="/static/img/boneco_base2.png" class="boneco_base img-fluid">
                 %end
@@ -64,8 +64,13 @@
                     <img src="/static/img/corpo/2{{corpo}}" style="z-index: 12; position: absolute; width: 56%;     margin-left: 2px; margin-top: 2px;">
                 %end
             </div>
-            <a href="/aluno/guarda_roupa" style="left: 69%;width: 40px;height: 41px;position:  absolute;top: 3px;"></a>
-            <img src="/static/img/AVATAR.png" class="avatar-ship img-fluid">
+            <img src="/static/img/acess.png" style="width: 156px; height: 208px;margin-left: 139px;">
+            <a href="/aluno/guarda_roupa" style="left: 77%;width: 48px;height: 60px;position:  absolute;top: 3px;"></a>
+            <div class="avatar-base-box" style="position:absolute;">
+                <img src="/static/img/avatar-base1.png" class="avatar-ship img-fluid" style=" position: relative; bottom: 28px; right: 16px;"> <br>
+                <img src="/static/img/avatar-box-name2.png" style=" position: relative;  bottom: 31px;  left: 8px;">
+             </div>
+
             <span id="apelido" style="position: absolute; top: 47%; left: 59px; color: #fff; font-weight: bold;">{{apelido}}</span>
             <!--<div class="offset-md-4 col-md-1">-->
             <span id="CRYSTAL">{{moedas}}</span>
