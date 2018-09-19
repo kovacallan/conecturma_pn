@@ -469,3 +469,4 @@ def new_password():
 def novasenha():
     from control.administrativo_controller import novasenha
     return novasenha()
+
