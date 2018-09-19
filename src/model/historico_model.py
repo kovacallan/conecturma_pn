@@ -13,7 +13,7 @@ class DbHistorico(Model):
     parametros_funcao=HashField()
 
     def create_historico(self, **kwargs):
-        self.create(**kwargs)
+        return self.create(**kwargs)
 
     def hist_dados_cadastrado(self,hist_id,key_value):
         print('e',hist_id,key_value)
@@ -24,6 +24,7 @@ class DbHistorico(Model):
                 pass
             else:
                 hist_atual.parametros_funcao[k]=v
+        hist_atual.save()
 
     def read_historico(self):
         historico = []

@@ -155,17 +155,17 @@ class DbEstrutura(Model):
         estrutura.ativo = '0'
         estrutura.save()
 
-    def func_anotacoes_estrutura_turma(self, id_estrutura, mensagem):
-        estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_turma.append(mensagem)
-        estrutura.save()
-
-    def func_anotacoes_estrutura_escola(self, id_estrutura, mensagem):
-        estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_escola.append(mensagem)
-        estrutura.save()
-
-    def func_anotacoes_estrutura_rede(self, id_estrutura, mensagem):
-        estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_rede.append(mensagem)
-        estrutura.save()
+    # def func_anotacoes_estrutura_turma(self, id_estrutura, mensagem):
+    #     estrutura = self.load(id_estrutura)
+    #     estrutura.anotacoes_estrutura_turma.append(mensagem)
+    #     estrutura.save()
+    #
+    # def func_anotacoes_estrutura_escola(self, id_estrutura, mensagem):
+    #     estrutura = self.load(id_estrutura)
+    #     estrutura.anotacoes_estrutura_escola.append(mensagem)
+    #     estrutura.save()
+    #
+    # def func_anotacoes_estrutura_rede(self, id_estrutura, mensagem):
+    #     estrutura = self.load(id_estrutura)
+    #     estrutura.anotacoes_estrutura_rede.append(mensagem)
+    #     estrutura.save()

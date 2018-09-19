@@ -46,12 +46,12 @@ class EstruturaFacade:
 
         return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)
 
-    def anotacoes_observador_turma_facade(self, id_estrutura,mensagem):
-        return self.estrutura.func_anotacoes_estrutura_turma(id_estrutura,mensagem)
-
-    def anotacoes_observador_escola_facade(self, id_estrutura,mensagem):
-        return self.estrutura.func_anotacoes_estrutura_escola(id_estrutura,mensagem)
-
-    def anotacoes_observador_rede_facade(self,id_estrutura,mensagem):
-        return self.estrutura.func_anotacoes_estrutura_rede(id_estrutura,mensagem)
+    # def anotacoes_observador_turma_facade(self, id_estrutura,mensagem):
+    #     return self.estrutura.func_anotacoes_estrutura_turma(id_estrutura,mensagem)
+    #
+    # def anotacoes_observador_escola_facade(self, id_estrutura,mensagem):
+    #     return self.estrutura.func_anotacoes_estrutura_escola(id_estrutura,mensagem)
+    #
+    # def anotacoes_observador_rede_facade(self,id_estrutura,mensagem):
+    #     return self.estrutura.func_anotacoes_estrutura_rede(id_estrutura,mensagem)
 

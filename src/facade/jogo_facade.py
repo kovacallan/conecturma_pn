@@ -19,7 +19,6 @@ class OaConcluidoFacade:
     def objeto_concluido_facade(self,id_aluno,objeto_aprendizagem):
         return self.oaconcluido.search_oa(id_aluno,objeto_aprendizagem)
 
-
     def unidade_teste_facade(self, id_aluno, unidade):
         return self.oaconcluido.unidade_teste(id_aluno=id_aluno, unidade=unidade)
 
