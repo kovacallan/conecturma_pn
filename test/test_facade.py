@@ -522,7 +522,7 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(escola,None)
         escola_rede=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'],nome='escola da rede',vinculo_rede='1')
         self.assertIsNot(escola_rede,None)
-        turma=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'],nome='turma conecturma')
+        turma=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'],nome='turma conecturma',vinculo_escola='2',vinculo_rede='1')
         self.assertIsNot(turma,None)
         item_cabeca = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'],nome='cabeca',tipo_item=TIPO_ITEM['rosto'],descricao='uma cabeca',descricao_completa='é so isso mesmo , uma cabeça , oq esperava?')
         self.assertIsNot(item_cabeca,None)
@@ -542,17 +542,20 @@ class FacadeTest(unittest.TestCase):
         self.assertIsNot(medalha_socio,None)
         medalha_jogo=self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'],tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'], nome='fazendo joguinhos')
         self.assertIsNot(medalha_jogo,None)
-        # medalha_jogo = self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'],
-        #                                                    nome='fazendo joguinhos')
+
         iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo_estrutura='4', tipo_item='1', preco=0)
         self.assertIsNot(iten1, None)
         escola = self.facade.create_estrutura_facade(nome='Do bairro', bairro='de baixo', telefone='2266 6622',
                                                      numero='21 ', UF='RJ', cidade='Pindamonhagaba',
                                                      cep='22287111')
+
         self.assertIsNot(escola, None)
         turma1 = self.facade.create_estrutura_facade(nome="Knight", tipo_estrutura="3", serie="1", vinculo_escola="1",
                                                      quem_criou="Ni")
         self.assertIsNot(turma1, None)
+
+        oa= self.facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'],
+                                                           nome='fazendo joguinhos')
 
     def test_create_estrutura(self):
         self._create_estrutura()
@@ -606,8 +609,8 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(escola2['telefone'], "33355567")
 
     def test_update_estrutura(self):
-        self._update_escola()
         self._update_rede()
+        self._update_escola()
 
     def _pesquisa_estrutura(self):
         self._create_estrutura()
@@ -630,14 +633,28 @@ class FacadeTest(unittest.TestCase):
     def _pesquisa_estrutura_id(self):
         self._create_estrutura()
         estrutura=self.facade.search_estrutura_id_facade(1)
-        print(estrutura)
+        self.assertEqual(estrutura['nome'],'Rede Conecturma')
+
+    def _search_estrutura_escola_by_rede(self):
+        escola=self.facade.search_estrutura_escola_by_rede_facade('1')
+        self.assertEqual(escola[0]['nome'],'escola da rede')
+
+    def _search_estrutura_turma_by_rede(self):
+        turma=self.facade.search_estrutura_turma_by_rede_facade('1')
+        self.assertEqual(turma[0]['nome'],'turma conecturma')
+
+    def _search_estrutura_turma_by_escola(self):
+        turma=self.facade.search_estrutura_turma_by_escola_facade('2')
+        self.assertEqual(turma[0]['nome'], 'turma conecturma')
+
+    def _search_oa_by_type_and_aventura_facade(self):
 
     def test_pesquisas_estrutura(self):
         self._pesquisa_estrutura()
         self._pesquisa_escola()
         self._pesquisa_estrutura_id()
-
-
+        self._search_estrutura_escola_by_rede()
+        self._search_estrutura_turma_by_rede()
 
     def _ja_possui_item(self):
         self._comprar_item()

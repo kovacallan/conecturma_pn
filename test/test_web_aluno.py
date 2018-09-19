@@ -1,8 +1,10 @@
-from index import application
+from src.main import main
 import unittest
 from webtest import TestApp, TestResponse
 import sys
 from http.cookiejar import CookieJar
+
+application= main()
 
 test_app = TestApp(application, cookiejar=CookieJar())
 test_response = TestResponse()
