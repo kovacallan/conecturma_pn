@@ -229,13 +229,19 @@ function getIdMedalha(id){
 }
 
 function entregarMedalha(alunoid){
-    $.post('/turma/entregar_medalha_aluno', {aluno:alunoid, medalha:idMedalha.toString()},function(data){
-        if(data == '1'){
-            window.location.replace('/turma');
-            alert("Medalha foi entregue com sucesso!");
-        }else{
-            alert("Erro");
-        }
-    });
+    for(i=0; i<idMedalha.length;i++){
+        motivo =document.getElementById('medalha_motivo_'+idMedalha[i]).value;
+        $.post('/turma/entregar_medalha_aluno', {aluno:alunoid, medalha:idMedalha[i], motivo:motivo},function(data){
+            if(data == '0'){
+                break;
+            }  
+        });    
+    }
+    if(i==idMedalha.length){
+        window.location.replace('/turma');
+        alert("Medalha foi entregue com sucesso!");           
+    }else{
+        alert("Erro");
+    }
 }
 </script>

@@ -87,18 +87,15 @@
                     </thead>
                     <tbody>
                         %  medalha=[]
-                            % for i in medalhas:
-                                % if i not in z['medalha']:
-                                    % medalha.append(i)
-                                % end
+                        % for i in medalhas:
+                            % if i not in z['medalha']:
+                                <tr>
+                                    <th scope="row"><input id="idMedalha_{{i['id']}}" onChange="getIdMedalha('{{i['id']}}')" type="checkbox"></th>
+                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{i['image_name']}}.gif" ></td>
+                                    <td class="w-descricao">{{i['descricao_completa']}}</td>
+                                    <td> <textarea id="medalha_motivo_{{i['id']}}" class="w-motivo" maxlenght=140 placeholder="Max 140 caracteres"></textarea></td>
+                                </tr>
                             % end
-                        % for q in medalha:
-                            <tr>
-                                <th scope="row"><input id="idMedalha_{{q['id']}}" onChange="getIdMedalha('{{q['id']}}')" type="checkbox"></th>
-                                <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{q['image_name']}}.gif" ></td>
-                                <td class="w-descricao">{{q['descricao_completa']}}</td>
-                                <td> <textarea class="w-motivo" maxlenght=140 placeholder="Max 140 caracteres"></textarea></td>
-                            </tr>
                         % end
                     </tbody>
                 </table>
