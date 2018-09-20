@@ -210,7 +210,7 @@ def verificarAcessoUnidade():
 def verificarAcessoAventura():
     from control.dicionarios import AVENTURAS_CONECTURMA
     usuario = usuario_logado()
-
+    print(usuario)
     if int(usuario['tipo']) < 6:
         parametros = parametros_json_jogos(request.params.items())
         return AVENTURAS_CONECTURMA['3']

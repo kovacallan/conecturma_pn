@@ -286,7 +286,7 @@ class DbAluno(Model):
         vidas +=int(premio['xp'])
         if premio['medalhas'] != [] or premio['medalhas'] != None or premio['medalhas'] != False:
             for i in premio['medalhas']:
-                aluno.medalhas.append(i)
+                aluno.medalhas.append(dict(id_medalha=i, motivo_medalha=""))
         aluno.pontos_de_moedas=str(moedas)
         aluno.pontos_de_vida=str(vidas)
         aluno.save()

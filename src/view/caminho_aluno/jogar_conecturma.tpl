@@ -50,18 +50,18 @@
         <div class="col-md-3 avatar-std">
             <div class="avatar_usuario" style="position: absolute;">
                 %if cor != '0':
-                    <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: relative;width: 76%; bottom: 65px; right: 28px;">
+                    <img src="/static/img/body/{{cor}}" style="z-index: 11; position: relative;width: 70%; bottom: -13px; right: -16px;">
                 %else:
-                    <img src="/static/img/boneco_base2.png" class="boneco_base img-fluid">
+                    <img src="/static/img/body/avatar-naked.png" style="z-index: 11; position: relative;width: 70%; bottom: 0px; right: -12px;">
                 %end
                 %if rosto != '0':
-                    <img src="/static/img/rosto/2{{rosto}}" style="z-index: 12; position: absolute; width: 56%;">
+                    <img src="/static/img/rosto/{{rosto}}" style="z-index: 12; position: absolute; width: 56%; right: 48px; top: 25px;">
                 %end
                 %if acessorio != '0':
                     <img src="/static/img/acessorio/{{acessorio}}" style="z-index: 13; position: absolute; width: 56%;">
                 %end
                 %if corpo != '0':
-                    <img src="/static/img/corpo/2{{corpo}}" style="z-index: 12; position: absolute; width: 56%;     margin-left: 2px; margin-top: 2px;">
+                    <img src="/static/img/corpo/{{corpo}}" style="z-index: 12; position: absolute; width: 56%;     margin-left: 2px; margin-top: 2px;">
                 %end
             </div>
             <img src="/static/img/acess.png" style="width: 156px; height: 208px;margin-left: 139px;">
