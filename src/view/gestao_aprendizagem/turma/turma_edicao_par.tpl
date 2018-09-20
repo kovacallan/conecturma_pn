@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                      <div id="dar_medalhas_todos">
-                                        <button class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos</button>
+                                        <button type="button" class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos</button>
                                         <!-- conteudo do botao -->
                                         <!--MODAL PRIMARIO-->
                                         <div class="modal fade" id="medalha_todos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -89,9 +89,7 @@
 
                                                             <!-- Modal -->
 
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
+
                                                         </div>
                                                         <div class="modal-body">
                                                             <table class="table table-bordered">
@@ -127,12 +125,13 @@
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
 
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Fim do conteúdo -->
 
-                                    </div> <!--Fechando janela de medalhas -->
+                                    </div> <!--Fechando janela de dar medalhas -->
 
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div> <!-- fechando col-md-12 -->
