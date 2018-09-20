@@ -2,6 +2,8 @@
 import unittest
 import datetime
 
+from model.estrutura_model import DbEstrutura
+from model.historico_model import DbHistorico
 from src.facade.facade_main import Facade
 from control.dicionarios import TIPO_ESTRUTURA, TIPO_USUARIOS, TIPO_ITEM, TIPO_MEDALHA_NOME, TIPO_OAS_ID
 
@@ -592,46 +594,36 @@ class FacadeTest(unittest.TestCase):
 
     def _update_rede(self):
         self._create_estrutura()
-        rede = self.facade.create_estrutura_facade(nome="egg", telefone="(21)9999-9999")
-        self.assertIsNot(rede, None)
-        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="egg")
-        self.assertIsNot(rede1, None)
+        rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Rede Conecturma")
+        self.assertEqual(rede1['nome'],'Rede Conecturma')
         estrutura = {'id': '1', 'telefone': '(11)8888-8888', 'nome': 'Ni'}
         rede_up = self.facade.update_estrutura_facade(estrutura=estrutura)
         rede = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Ni")
         self.assertEqual(rede['nome'], "Ni")
         self.assertEqual(rede['telefone'], "(11)8888-8888")
 
-        escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome="Do bairro")
-        estrutura = {'telefone': '33355567', 'nome': 'Ni', 'vinculo_rede': 'abelhinha',
-                     'cep': '22270 999', 'endereco': 'rua-do teste', 'numero': '666', 'cidade': 'RIO DE JANEIRO',
-                     'estado': 'RJ', 'id': str(escola['id'])}
-
-        self.facade.update_estrutura_facade(estrutura=estrutura)
-        escola2 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='Ni')
-        self.assertEqual(escola2['nome'], "Ni")
-        self.assertEqual(escola2['endereco'], 'rua-do teste')
-        self.assertEqual(escola2['numero'], '666')
-        self.assertEqual(escola2['vinculo_rede'], "abelhinha")
-        self.assertEqual(escola2['telefone'], "33355567")
-
     def _update_escola(self):
         self._create_estrutura()
         escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome="Do bairro")
+        self.assertEqual(escola['nome'],'Do bairro')
         estrutura = {'telefone': '33355567', 'nome': 'Ni', 'vinculo_rede': 'abelhinha',
-                     'cep': '22270 999', 'endereco': 'rua-do teste', 'numero': '666', 'cidade': 'RIO DE JANEIRO',
+                     'cep': '22270 999', 'endereco': 'rua do teste', 'numero': '666', 'cidade': 'RIO DE JANEIRO',
                      'estado': 'RJ', 'id': str(escola['id'])}
 
         self.facade.update_estrutura_facade(estrutura=estrutura)
         escola2 = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome='Ni')
-        self.assertEqual(escola2['nome'], "Ni")
-        self.assertEqual(escola2['endereco'], 'rua-do teste')
+
+        self.assertEqual(escola2['nome'], 'Ni')
+        self.assertEqual(escola2['endereco'], 'rua do teste')
         self.assertEqual(escola2['numero'], '666')
-        self.assertEqual(escola2['vinculo_rede'], "abelhinha")
-        self.assertEqual(escola2['telefone'], "33355567")
+        self.assertEqual(escola2['vinculo_rede'], 'abelhinha')
+        self.assertEqual(escola2['telefone'], '33355567')
+        self.assertEqual(escola2['endereco'], 'rua do teste')
 
     def test_update_estrutura(self):
         self._update_rede()
+
+    def test_update_escola(self):
         self._update_escola()
 
     def _pesquisa_estrutura(self):
@@ -671,7 +663,7 @@ class FacadeTest(unittest.TestCase):
 
     def _search_oa_by_type_and_aventura_facade(self):
         oa = self.facade.search_oa_by_type_and_aventura_facade(aventura='AV1',disciplina='2')
-        print(oa)
+        self.assertEqual(oa[0]['nome'],'Estante')
 
     def _search_descritor_serie_facade(self):
         desc = self.facade.search_descritor_serie_facade('1')
@@ -711,11 +703,53 @@ class FacadeTest(unittest.TestCase):
         self._read_historico()
 
     def _hist_dados_cadastrado(self):
-        dados={'nome':'xinchorino','facilidade':20,'cao':'nao','gato':'noop'}
+        self._create_historico()
+        dados = {'nome':'xinchorino','facilidade':20,'cao':'nao','gato':'noop'}
         self.facade.historico_de_dados_cadastrados_facade(1,dados)
+        teste=self.facade.ver_dados_cadastrados_facade(1)
+        self.assertEqual(teste['nome'],'xinchorino')
+        self.assertEqual(teste['facilidade'],'20')
+        self.assertEqual(teste['cao'],'nao')
+        self.assertEqual(teste['gato'],'noop')
 
+    def test_hist_dados_cadastro(self):
+        self._hist_dados_cadastrado()
+
+    def _search_historico_id_facade(self):
+        self._create_historico()
+        hist=self.facade.search_historico_id_facade(1)
+        self.assertEqual(hist['nome_usuario'],'administrador')
+        self.assertEqual(hist['acao'],'recriar um filho da mae')
+
+
+    def _search_historico_nome(self):
+        self._create_historico()
+        hist = self.facade.search_historico_nome_facade('administrador')
+        self.assertEqual(hist[0]['nome_usuario'],'administrador')
+        self.assertEqual(hist[0]['acao'],'recriar um filho da mae')
+
+    def _search_hist_acao(self):
+        self._create_historico()
+        hist = self.facade.search_historico_acao_facade('recriar um filho da mae')
+        self.assertEqual(hist[0]['nome_usuario'],'administrador')
+
+    def test_search_historico(self):
+        self._search_historico_id_facade()
+        self._search_historico_nome()
+        self._search_hist_acao()
 
     """FIM TESTE FACADE HISTORICO"""
+
+    """ TESTE DE JOGO FACADE"""
+    # {id'_aluno': '2', 'unidade': 'UV1AV1UD1', 'objeto_aprendizagem': 'UV1AV1UD1OA02'}
+    def _create_oa_concluido_facade(self):
+        pass
+
+    def _search_desempenho_concluido_id_aluno_facade(self,id_aluno):
+        pass
+
+
+    """FIM DE TESTE DE JOGO"""
 
     """TESTE INATIVOS"""
 

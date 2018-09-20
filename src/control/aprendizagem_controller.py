@@ -42,6 +42,7 @@ def verificarAcessoObjetoAprendizagem():
         else:
             teste = []
             for i in parametros['objetosAprendizagem']:
+                print('checando como passa de nivel',i,parametros['objetosAprendizagem'])
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
                 if desempenho_oa == []:
 
@@ -331,6 +332,7 @@ def de_novo(id_aluno,oa):
             return False
 
 def magia_da_matematica(id_aluno, aventura):
+    print('testando se existe M',id_aluno,aventura)
     oa = facade.search_oa_by_type_and_aventura_facade(aventura='UV1AV1', disciplina=DICIPLINA_NOME['matematica'])
     oas_terminandos_dificel = 0
     for i in oa:
@@ -348,6 +350,7 @@ def magia_da_matematica(id_aluno, aventura):
         return False
 
 def magia_da_lingua_portuguesa(id_aluno, aventura):
+    print('testando se existe aventura P',id_aluno,aventura)
     oa = facade.search_oa_by_type_and_aventura_facade(aventura='UV1AV1', disciplina=DICIPLINA_NOME['lingua Portuguesa'])
     oas_terminandos_dificel = 0
     for i in oa:

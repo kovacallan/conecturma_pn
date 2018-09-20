@@ -18,8 +18,14 @@ class HistoricoFacade:
     def read_historico_facade(self):
         return self.historico.read_historico()
 
-    def historico_de_dados_cadastrados_facade(self,hist_id,dicionari):
+    def historico_de_dados_cadastrados_facade(self,hist_id:int,dicionari:dict):
         return self.historico.hist_dados_cadastrado(hist_id,dicionari)
+
+    def ver_dados_cadastrados_facade(self,ide):
+        return self.historico.ver_dados_cadastrados(ide)
+
+    def search_historico_id_facade(self,id:int):
+        return self.historico.search_historico_id(id)
 
     def search_historico_nome_facade(self,nome):
         return self.historico.search_historico_nome(nome)

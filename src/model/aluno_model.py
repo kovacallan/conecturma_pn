@@ -281,7 +281,6 @@ class DbAluno(Model):
         aluno.save()
 
     def mostrar_ultimo_oa_jogado(self,id_aluno):
-        print('wut',id_aluno)
         aluno=self.search_aluno_id(id_aluno)
 
         return aluno['ultimo_oa_jogado']

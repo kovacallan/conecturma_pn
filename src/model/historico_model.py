@@ -16,15 +16,22 @@ class DbHistorico(Model):
         return self.create(**kwargs)
 
     def hist_dados_cadastrado(self,hist_id,key_value):
-        print('e',hist_id,key_value)
         hist_atual=self.load(hist_id)
         for k,v in key_value.items():
-            print('j',k,v)
             if k =='no_repeat':
                 pass
             else:
                 hist_atual.parametros_funcao[k]=v
         hist_atual.save()
+
+    def ver_dados_cadastrados(self,id_hist):
+        historico=self.load(id_hist)
+
+        dados= dict()
+        for x,y in historico.parametros_funcao.items():
+            dados[x.decode('UTF-8')]=y.decode('UTF-8')
+
+        return dados
 
     def read_historico(self):
         historico = []
@@ -53,7 +60,14 @@ class DbHistorico(Model):
         else:
             return False
 
+    def search_historico_id(self,id):
+        if id != '0':
+            lista = DbHistorico.load(int(id))
+            lista_dic = vars(lista)["_data"]
+        else:
+            lista_dic = -1
 
+        return lista_dic
     def search_historico_nome(self, nome):
         listas = []
 
