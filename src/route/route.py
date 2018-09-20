@@ -261,12 +261,11 @@ def medalhas_aluno():
 @view('caminho_aluno/medalhas.tpl')
 def read_medalha_aluno():
     from control.aprendizagem_controller import read_medalha_album,getMedalhas
-    aluno = usuario_logado()['id']
-    if int(usuario_logado()['tipo']) < 6 or int(usuario_logado()['tipo']) < 6:
-        return getMedalhas()
-
+    aluno = usuario_logado()
+    if int(aluno['tipo']) < 6:
+        return getMedalhas(aluno)
     else:
-        return read_medalha_album(aluno)
+        return read_medalha_album(aluno['id'])
 
 @route('/rede')
 @permissao('gestor')

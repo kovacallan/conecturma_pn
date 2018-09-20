@@ -35,13 +35,13 @@
                                 % if m['tipo_medalha'] == '2':
                                     <tr>
                                         <th scope="row"><!--<input type="checkbox" name="vehicle1" value="">--></th>
-                                        <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-{{m['image_name']}}.gif" ></td>
+                                        <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-{{m['image_name']}}.png" ></td>
                                         <td class="w-descricao">{{m['descricao_completa']}}</td>
                                     </tr>
                                 % else:
                                     <tr>
                                         <th scope="row"><!--<input type="checkbox" name="vehicle1" value="">--></th>
-                                        <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{m['image_name']}}.gif" ></td>
+                                        <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{m['image_name']}}.png" ></td>
                                         <td class="w-descricao">{{m['descricao_completa']}}</td>
                                     </tr>
                                 % end
@@ -91,7 +91,7 @@
                             % if i not in z['medalha']:
                                 <tr>
                                     <th scope="row"><input id="idMedalha_{{i['id']}}" onChange="getIdMedalha('{{i['id']}}')" type="checkbox"></th>
-                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{i['image_name']}}.gif" ></td>
+                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/socio/socio-{{i['image_name']}}.png" ></td>
                                     <td class="w-descricao">{{i['descricao_completa']}}</td>
                                     <td> <textarea id="medalha_motivo_{{i['id']}}" class="w-motivo" maxlenght=140 placeholder="Max 140 caracteres"></textarea></td>
                                 </tr>

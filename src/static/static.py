@@ -84,14 +84,11 @@ def img_menu(filename):
 
 @route ('/static/img/medalha/<filename>')
 def img_medalha_jogo(filename):
-    return static_file(filename, root='././view/app/img/medalha')
+    return static_file(filename, root='././view/app/img/medalha/jogo')
 
 @route ('/static/img/medalha/socio/<filename>')
 def img_medalha_socio(filename):
     return static_file(filename, root='././view/app/img/medalha/socio')
-@route ('/static/img/medalha/img/<filename>')
-def img_todas(filename):
-    return static_file(filename, root='././view/app/img/medalha/img')
 
 @route('/GLOBAL/<path:path>')
 def global_path(path):

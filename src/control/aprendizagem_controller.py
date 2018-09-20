@@ -422,31 +422,30 @@ def parametros_json_jogos(parametro):
 
     return parametros
 
-def getMedalhas():
+def getMedalhas(aluno):
     medalha_socio = []
     medalha_jogo = []
     todas_medalhas = facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha'])
-    print(todas_medalhas[12])
     for i in todas_medalhas:
         if i['tipo_medalha'] == '1':
             medalha_socio.append(i)
         else:
-         medalha_jogo.append(i)
+            medalha_jogo.append(i)
 
 
-    return dict(todas_medalhas=todas_medalhas,medalha_jogo=medalha_jogo,medalha_socio=medalha_socio,medalha_recente=[],aluno_id=usuario_logado()['id'])
+    return dict(todas_medalhas=todas_medalhas,medalha_jogo=medalha_jogo,medalha_socio=medalha_socio,medalha_recente=[],aluno_id=aluno['id'])
 
 
 # Resgatando Medalhas e Medalhas que o Aluno possui
 def read_medalha_album(aluno):
+    from control.gestao_aprendizagem_controller import convertendo_str_in_dict
     medalha_socio = []
     medalha_jogo = []
     medalha_aluno = []
 
-
-
-    for i in facade.search_aluno_id_facade(id_aluno=usuario_logado()['id'])['medalha']:
-        medalha_aluno.append(i.decode('utf-8'))
+    for i in facade.search_aluno_id_facade(id_aluno=aluno)['medalha']:
+        i = convertendo_str_in_dict(str=i.decode('utf-8'))
+        medalha_aluno.append(i['id_medalha'])
 
     todas_medalhas= facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha'])
     for medalha in todas_medalhas:

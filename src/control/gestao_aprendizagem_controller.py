@@ -541,7 +541,6 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
                 medalha = []
                 for m in y['medalha']:
                     m = convertendo_str_in_dict(m)
-                    print(m)
                     medalha.append(facade.search_estrutura_id_facade(id=m['id_medalha']))
                 medalha = sorted(medalha, key=lambda k: k['id'])
                 y['medalha'] = medalha

@@ -42,8 +42,6 @@
 
             <br>
             %if (medalha_recente):
-
-
             <div style="margin-left: -14px;"><img src="/static/img/medalha/recentes.png"></div>
         </div>
 
@@ -51,115 +49,116 @@
             <br>
             <br>
             <div class="row">
-                    % for i in medalha_recente:
-                        %if i['tipo_medalha']== '2' :
-                            <div class="bounce" style="background-image: url('/static/img/medalha/fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1; margin-left:0px;margin-right:10px;">
-                                <figure>
-                                    <img class="medalha-lista-ultimas"  src="/static/img/medalha/jogo-{{i['id']}}.gif">
-                                </figure>
+                % for i in medalha_recente:
+                    %if i['tipo_medalha']== '2' :
+                        <div class="bounce" style="background-image: url('/static/img/medalha/fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1; margin-left:0px;margin-right:10px;">
+                            <figure>
+                                <img class="medalha-lista-ultimas" src="/static/img/medalha/jogo-{{i['id']}}.png">
+                            </figure>
+                        </div>
 
-                             </div>
+                    %else:
+                        <div class="bounce" style=" background-image: url('/static/img/medalha/fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1; margin-left:0px;margin-right:10px;">
 
-                            %else:
-                                         <div class="bounce" style=" background-image: url('/static/img/medalha/fundo-medalha-recente.png');width: 220px;height:220px;text-align: center;display: block;opacity: 1; margin-left:0px;margin-right:10px;">
-
-                                            <figure>
-                                                 <img class="medalha-lista-ultimas"  src="/static/img/medalha/socio/socio-{{i['id']}}.gif">
-                                            </figure>
-                                         </div>
-                            %end
+                            <figure>
+                                <img class="medalha-lista-ultimas" src="/static/img/medalha/socio/socio-{{i['id']}}.png">
+                            </figure>
+                        </div>
+                    %end
+                %end
+            </div>
             %end
-                    %end
-            </div>
-
-
-            </div>
 
 
 
-
-    <img src="/static/img/medalha/separador.png" align="center" style="top: 20px;position: relative; margin-left: auto; margin-right:auto;">
-
-
-
-    <br>
-    <br>
-    <br>
-
-
-    <div class="row" style="margin-left: -3px;">
-        <div class="col-md-3">
-            <img src="/static/img/medalha/medalhas.png" style="margin-left: -13px;">
         </div>
 
-        <ul class="nav nav-pills mb-3 nav-botoes" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                   aria-controls="pills-home" aria-selected="true"
-                   style="text-transform:uppercase;border-radius:10px;">Desempenho</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                   aria-controls="pills-profile" aria-selected="false"
-                   style="margin-left:20px;text-transform:uppercase;border-radius: 10px;">SócioEmocional</a>
-            </li>
 
-        </ul>
-    </div>
-    <div class="tab-content" id="pills-tabContent" style="width:990px;">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <img src="/static/img/medalha/separador.png" align="center"
+             style="top: 20px;position: relative; margin-left: auto; margin-right:auto;">
 
-            <div class="todas-medalhas">
-                <div class="row col-md-11" style="padding-left: 32px;">
 
-                    % for i in medalha_jogo:
-                    %   if str(i['id']) in medalha_aluno:
-                    <div class="todasmedalhas bounce"
-                         style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
-                        <img alt="Jogador " class="medalha-lista-todas" data-id="" data-imagem=""
-                             id="{{i['id']}}"
-                             src="/static/img/medalha/jogo-{{i['id']}}.gif" style="">
-                    </div>
-                    %else:
-                    <div class="todasmedalhas bounce"
-                         style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
-                        <img alt="Jogador " class="medalha-lista-todas" data-id="" data-imagem=""
-                             id="{{i['id']}} "
-                             src="/static/img/medalha/jogo-{{i['id']}}.gif" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
-                    </div>
-                    %end
-                    % end
-                </div>
+        <br>
+        <br>
+        <br>
 
+
+        <div class="row" style="margin-left: -3px;">
+            <div class="col-md-3">
+                <img src="/static/img/medalha/medalhas.png" style="margin-left: -13px;">
             </div>
+
+            <ul class="nav nav-pills mb-3 nav-botoes" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                       aria-controls="pills-home" aria-selected="true"
+                       style="text-transform:uppercase;border-radius:10px;">Desempenho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                       aria-controls="pills-profile" aria-selected="false"
+                       style="margin-left:20px;text-transform:uppercase;border-radius: 10px;">SócioEmocional</a>
+                </li>
+
+            </ul>
         </div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div class="todas-medalhas">
-                <div class="row col-md-11" style="padding-left: 32px;">
-                    % for i in medalha_socio:
-                    %  if str(i['id']) in medalha_aluno:
+        <div class="tab-content" id="pills-tabContent" style="width:990px;">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
-                    <div class="todasmedalhas bounce" style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
-                        <img alt=" " class="medalha-lista-todas" data-id="" data-imagem=""
-                             id="{{i['id']}}"
-                             src="/static/img/medalha/socio/socio-{{i['id']}}.gif" style="">
-                    </div>
-                    %else:
-                    <div class="todasmedalhas bounce"
-                         style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
-                        <img alt=" " class="medalha-lista-todas" data-id="" data-imagem=""
-                             id="{{i['id']}}"
-                             src="/static/img/medalha/socio/socio-{{i['id']}}.gif" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                <div class="todas-medalhas">
+                    <div class="row col-md-11" style="padding-left: 32px;">
 
+                        % for i in medalha_jogo:
+                        % if str(i['id']) in medalha_aluno:
+                        <div class="todasmedalhas bounce"
+                             style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
+                            <img alt="Jogador " class="medalha-lista-todas" data-id="" data-imagem=""
+                                 id="{{i['id']}}"
+                                 src="/static/img/medalha/jogo-{{i['id']}}.png" style="">
+                        </div>
+                        %else:
+                        <div class="todasmedalhas bounce"
+                             style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
+                            <img alt="Jogador " class="medalha-lista-todas" data-id="" data-imagem=""
+                                 id="{{i['id']}} "
+                                 src="/static/img/medalha/jogo-{{i['id']}}.png"
+                                 style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                        </div>
+                        %end
+                        % end
                     </div>
-                    %end
-                    %end
+
                 </div>
             </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="todas-medalhas">
+                    <div class="row col-md-11" style="padding-left: 32px;">
+                        % for i in medalha_socio:
+                        % if str(i['id']) in medalha_aluno:
+
+                        <div class="todasmedalhas bounce"
+                             style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
+                            <img alt=" " class="medalha-lista-todas" data-id="" data-imagem=""
+                                 id="{{i['id']}}"
+                                 src="/static/img/medalha/socio/socio-{{i['id']}}.png" style="">
+                        </div>
+                        %else:
+                        <div class="todasmedalhas bounce"
+                             style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
+                            <img alt=" " class="medalha-lista-todas" data-id="" data-imagem=""
+                                 id="{{i['id']}}"
+                                 src="/static/img/medalha/socio/socio-{{i['id']}}.png"
+                                 style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+
+                        </div>
+                        %end
+                        %end
+                    </div>
+                </div>
+            </div>
         </div>
+        <br>
     </div>
-    <br>
-  </div>
 </main>
 
 </body>
