@@ -193,3 +193,8 @@ overflow-y:scroll;
    height: 250px;
    overflow-y: auto;
 }
+
+.modal-content{
+    height: 455px;
+    width: 594px;
+}

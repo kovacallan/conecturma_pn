@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                      <div id="dar_medalhas_todos">
-                                        <button type="button" class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos</button>
+                                        <button type="button" class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos </button>
                                         <!-- conteudo do botao -->
                                         <!--MODAL PRIMARIO-->
                                         <div class="modal fade" id="medalha_todos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

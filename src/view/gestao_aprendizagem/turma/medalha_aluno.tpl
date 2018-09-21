@@ -10,7 +10,7 @@
 
 
                     <button type="button" class="btn btn-primary" data-toggle="modal" id="dar-medalha" data-target="#modal-dar-medalha{{z['id']}}" data-dismiss="#medalha_janela" onclick="sumir()"
-                    style="margin-left: 85px;cursor: pointer;">
+                    style="margin-left: 247px;cursor: pointer;">
                         Dar medalhas
                     </button>
 

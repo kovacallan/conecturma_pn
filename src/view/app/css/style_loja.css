@@ -19,6 +19,16 @@ body, html{
     animation: scaleBounce 1s linear;
 }
 
+.scale-bounce1{
+    opacity: 1!important;
+    -webkit-animation: scaleBounce1 1s linear;
+    -moz-animation: scaleBounce1 1s linear;
+    -ms-animation: scaleBounce1 1s linear;
+    -o-animation: scaleBounce1 1s linear;
+    animation: scaleBounce1 1s linear;
+
+}
+
 @keyframes scaleBounce{
     0%{
         transform: scale(1.5);
@@ -31,6 +41,23 @@ body, html{
         transform: scale(1.1);
     }
     100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleBounce1{
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
+    70%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    0%{
         opacity: 1;
         transform: scale(1);
     }
@@ -110,6 +137,7 @@ body, html{
     width: 144px;
     height: 149px;
     margin-left: 104px;
+
 }
 
 .cores a{
@@ -122,6 +150,7 @@ body, html{
     background: url(/static/img/btn-face.png) 0 0 no-repeat;
     width: 144px;
     height: 149px;
+
 }
 
 .rosto a{
@@ -134,6 +163,7 @@ body, html{
     background: url(/static/img/btn-body.png) 0 0 no-repeat;
     width: 144px;
     height: 149px;
+
 }
 
 #corpo a{
@@ -146,6 +176,7 @@ body, html{
     background: url(/static/img/btn-accessories.png) 0 0 no-repeat;
     width: 144px;
     height: 149px;
+
 }
 
 .acessorios a{
