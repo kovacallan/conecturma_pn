@@ -42,7 +42,7 @@ def verificarAcessoObjetoAprendizagem():
         else:
             teste = []
             for i in parametros['objetosAprendizagem']:
-                print('checando como passa de nivel',i,parametros['objetosAprendizagem'])
+
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
                 if desempenho_oa == []:
 
@@ -57,8 +57,10 @@ def verificarAcessoObjetoAprendizagem():
 def verificarConclusoesObjetosAprendizagem():
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
+    print('entao sou eu q desbloqueio?',parametros)
     if int(usuario['tipo']) < 6:
         retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
+        print('test',retorno)
     else:
         cn_final = facade.oa_teste_facade(id_aluno=str(usuario['id']),
                                           oa='{}CN02'.format(parametros['objetosAprendizagem'][0:9]))
@@ -66,14 +68,20 @@ def verificarConclusoesObjetosAprendizagem():
             retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
         else:
             teste = []
+            print('fuu',parametros['objetosAprendizagem'])
             for i in parametros['objetosAprendizagem']:
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
+                try:
+                    print('desempenho oa',desempenho_oa[0]['jogo_jogado'])
+                except Exception as e:
+                    print(e)
                 if desempenho_oa == []:
                     pass
                 else:
                     teste.append(i)
 
             retorno = {'objetosConcluidos': teste}
+            print('teste',retorno)
 
     return retorno
 
@@ -92,6 +100,7 @@ def view_ambiente_de_aprendizagem():
 
 def registrarConclusao():
     usuario = usuario_logado()
+    print("regisrar conclusao l95",parametros_json_jogos(request.params.items()))
     if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
         premios={
             'OA': is_oa,
@@ -115,6 +124,7 @@ def registrarConclusao():
 
 def obterPremiacao():
     parametros = parametros_json_jogos(request.params.items())
+    print('obter premiacao',parametros)
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         aluno = facade.search_aluno_id_facade(id_aluno=usuario['id'])

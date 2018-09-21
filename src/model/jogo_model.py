@@ -13,8 +13,7 @@ class DesempenhoJogo(Model):
 
 
     def create_desempenho_jogo(self, *args,**kwargs):
-        print('fins de teste',args,kwargs)
-        self.create(*args,**kwargs)
+        return self.create(**kwargs)
 
     def search_desempenho_concluido_id_aluno(self, id_aluno):
         obj = []

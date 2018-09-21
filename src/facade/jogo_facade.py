@@ -5,7 +5,7 @@ class OaConcluidoFacade:
         self.oaconcluido = DesempenhoJogo()
 
     def create_oa_concluido_facade(self, **kwargs):
-        self.oaconcluido.create_desempenho_jogo(**kwargs)
+        return self.oaconcluido.create_desempenho_jogo(**kwargs)
 
     def search_desempenho_concluido_id_aluno_facade(self, id_aluno:int):
         return self.oaconcluido.search_desempenho_concluido_id_aluno(id_aluno)

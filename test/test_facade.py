@@ -743,10 +743,28 @@ class FacadeTest(unittest.TestCase):
     """ TESTE DE JOGO FACADE"""
     # {id'_aluno': '2', 'unidade': 'UV1AV1UD1', 'objeto_aprendizagem': 'UV1AV1UD1OA02'}
     def _create_oa_concluido_facade(self):
-        pass
+        oa_criad=self.facade.create_oa_concluido_facade(id_aluno= '1', unidade='UV1AV1UD1',objeto_aprendizagem='UV1AV1UD1OA02')
+        self.assertIsNotNone(oa_criad)
 
-    def _search_desempenho_concluido_id_aluno_facade(self,id_aluno):
-        pass
+    def test_create_oa_conluido(self):
+        self._create_oa_concluido_facade()
+
+    def _search_desempenho_concluido_id_aluno_facade(self):
+        self._create_oa_concluido_facade()
+        teste=self.facade.unidade_teste_facade(2,'UV1AV1UD1')
+        self.assertEqual(teste[0]['objeto_aprendizagem'],'UV1AV1UD1OA02')
+
+    def test_search_desempenho_concluido(self):
+        self._search_desempenho_concluido_id_aluno_facade()
+
+    def _unidade_concluida_facade(self):
+        self._create_oa_concluido_facade()
+        teste=self.facade.unidade_concluida_facade(2,'UV1AV1UD1')
+        self.assertEqual(teste[0]['objeto_aprendizagem'], 'UV1AV1UD1OA02')
+
+    def _search_oa_facade(self):
+        self._create_oa_concluido_facade()
+
 
 
     """FIM DE TESTE DE JOGO"""

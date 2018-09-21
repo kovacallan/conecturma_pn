@@ -717,16 +717,17 @@ def levar_oas_matematica():
 
 
 def checar_pontuiacao(desempenho):
-    niveis_pontuação = {
+    niveis_pontuacao = {
         'dificil': 2,
         'medio': 1,
         'facil': 0
     }
     pontuacao = 0
     for i in desempenho['jogo_jogado']:
+        print(i)
         dict_dado_jogo = convertendo_str_in_dict(i)
         if dict_dado_jogo['termino'] == True:
-            pontuacao += niveis_pontuação[dict_dado_jogo['nivel']]
+            pontuacao += niveis_pontuacao[dict_dado_jogo['nivel']]
 
     return pontuacao
 

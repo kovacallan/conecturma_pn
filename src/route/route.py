@@ -101,7 +101,6 @@ def verificarConclusoesObjetosAprendizagem():
 @route('/api/plataforma/registrarConclusao', method='POST')
 def registrarConclusao():
     from control.aprendizagem_controller import registrarConclusao
-    print('investigando create desempenho_jogo ')
     return registrarConclusao()
 
 
