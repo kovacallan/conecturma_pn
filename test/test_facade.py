@@ -21,7 +21,7 @@ class FacadeTest(unittest.TestCase):
         aluno1 = self.facade.create_aluno_facade(nome="egg", vinculo_escola="Escola Conecturma", matricula="123",
                                                  vinculo_rede="0")
         espero_aluno = self.facade.search_aluno_id_facade(1)
-        # self.assertIsNotNone(espero_aluno)
+        self.assertIsNotNone(espero_aluno)
         # self.assertEqual(aluno1, True)
         aluno2 = self.facade.create_aluno_facade(nome="dickens silverio", matricula="matri", nome_login="dickens",
                                                  senha="abcd", email="henrique_boladao@bol.com", tipo_aluno="6",
@@ -138,6 +138,8 @@ class FacadeTest(unittest.TestCase):
         aluno1 = self.facade.search_aluno_nome_objeto_facade("egg")
         item1 = self.facade.search_estrutura_facade(nome="burroquandofoge", tipo_estrutura="4")
         self.facade.compra_item_facade(aluno1.id, item1['id'])
+        aluno=self.facade.ver_item_comprado_facade(aluno1.id)
+        print('alun',aluno)
         self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
 
     def test_compra_item(self):
@@ -554,7 +556,7 @@ class FacadeTest(unittest.TestCase):
                                                            nome='fazendo joguinhos')
         self.assertIsNot(medalha_jogo, None)
 
-        iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo_estrutura='4', tipo_item='1', preco=0)
+        iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo_estrutura=TIPO_ESTRUTURA['item'], tipo_item='1', preco='0')
         self.assertIsNot(iten1, None)
         escola = self.facade.create_estrutura_facade(nome='Do bairro', bairro='de baixo', telefone='2266 6622',
                                                      numero='21 ', UF='RJ', cidade='Pindamonhagaba',
