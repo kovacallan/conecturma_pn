@@ -18,8 +18,14 @@ class ObservadorFacade:
     def redefinir_senha_facade(self, id, senha):
         self.observador.redefinir_senha(id=id, senha=senha)
 
-    def update_observador_facade(self, id, nome, email):
-        return self.observador.update_observador(id, nome, email)
+    def get_itens_responsaveis_facade(self, id):
+        return self.observador.get_itens_responsaveis(id=id)
+
+    def set_itens_responsaveis_facade(self, id, itens):
+        return self.observador.set_itens_responsaveis(id=id, itens=itens)
+
+    def update_observador_facade(self, id, nome, telefone, cpf, email,vinculo_turma,vinculo_escola):
+        return self.observador.update_observador(id, nome, telefone, cpf, email,vinculo_turma,vinculo_escola)
 
     def create_hash_login_facade(self,id, hash):
         self.observador.create_hash_login(id=id, hash=hash)

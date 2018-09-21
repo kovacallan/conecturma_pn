@@ -67,6 +67,7 @@ TIPO_ESTRUTURA = dict(
     historico='6',
     objeto_de_aprendizagem='7'
 )
+
 DICIPLINA = {
     '1' : 'Lingua Portuguesa',
     '2' : 'Matemática'

@@ -1,11 +1,84 @@
 from facade.facade_main import *
-from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID
+from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID,TIPO_MEDALHA_NOME
 from passlib.hash import sha512_crypt
 
 facade=Facade()
 facade.create_observador_facade(nome="administrador", senha=sha512_crypt.hash("@onde2929"), telefone="21999999999", cpf="0",email="admin", tipo='0',
                                             rede='0',escola='0')
 
+"""MEDALHA"""
+
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Eu penso, eu consigo!',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Pensamento Crítico',descricao_completa='Estimulamos a curiosidade e o     gosto por aventura, que são     inerentes a todas as crianças.', image_name = '1')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Liderança',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Liderança',descricao_completa='A história, os jogos e os desafios       estimulam as crianças a manter     atitudes positivas, serem   autoconfiantes e resilientes, e a     enfrentarem pressões e   influências negativas, tomando   decisões após uma visão holística     do contexto',image_name = '2')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Comunicação',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Comunicação',descricao_completa='Trabalhamos as posturas e    habilidades das crianças para que     elas possam se comunicar melhor.     Abordamos, por exemplo, como a     comunicação pode acontecer de    forma verbal e não verbal, por      meio de palavras, gestos,    expressões faciais',image_name = '3')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Cooperação',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Colaboração',descricao_completa='A colaboração é estimulada na     plataforma online, na qual as     crianças podem interagir com    colegas, e nos livros, nos quais      cerca de 60% das atividades     propõem trabalhos em grupos.', image_name = '4')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Faço meu Caminho!',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Adaptabilidade',descricao_completa='Os materiais da Conecturma    podem ser adaptados, visando a     personalização do processo de    aprendizagem, de forma que haja     respeito a necessidades e estilos     individuais.', image_name = '5')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Inovação',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Inovação',descricao_completa='A Conecturma é uma plataforma     transmídia de aprendizagem   inovadora por natureza. Em    contato com a plataforma, as     crianças são estimuladas a    estarem sempre um passo a     frente, pesquisando,  questionando, construindo e testando hipóteses.', image_name = '6')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Cidadania',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Cidadania global',descricao_completa='Trabalhamos com o conceito de     educação interdimensional,  entendendo que o processo de     aprendizagem é muito mais amplo     que o desenvolvimento acadêmico    relacionado às disciplinas.', image_name = '7')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Autonomia',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Produtividade e responsabilidade',descricao_completa='Em nossa metodologia, as crianças     participam da construção do    conhecimento de forma ativa,    tornando-se mais autônomas e    protagonistas dos próprios   processos de aprendizagem.', image_name = '8')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Alcançando Objetivos',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Empreendedorismo',descricao_completa='Encorajamos as crianças a    experimentarem, arriscarem,  criarem e errarem, mostrando    sempre que os erros são     obstáculos transitórios  importantes no processo de    aprendizagem que nos fazem    valorizar nossas conquistas', image_name = '9')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Super Projeto',tipo_medalha=TIPO_MEDALHA_NOME['SocioEmocional'],descricao='Acesso, análise e síntese da     informação',descricao_completa='Todos os capítulos dos livros     sugerem projetos para trabalho    em grupo. Nos projetos, as     crianças precisam acessar, analisar    e, em alguns casos, sintetizar     informações de diversas fontes.', image_name = '10')
+
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Jogador',tipo_medalha='2',descricao='Jogador',descricao_completa='Jogou o primeiro jogo.', image_name = '11')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Dose Dupla',tipo_medalha='2',descricao='Dose Dupla',descricao_completa='Jogou mais de uma vez 10 jogos diferentes', image_name = '12')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Dezena',tipo_medalha='2',descricao='Dezena',descricao_completa='Jogou um único jogo mais de 10 vezes.', image_name = '13')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Fera da Matemática',tipo_medalha='2',descricao='Fera da Matemática',descricao_completa='Concluiu 3 jogos (uma semana de conteúdo)', image_name = '14')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Fera da Língua Portuguesa',tipo_medalha='2',descricao='Fera da Língua Portuguesa',descricao_completa='Concluiu 3 jogos (uma semana de conteúdo)', image_name = '15')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Musical',tipo_medalha='2',descricao='Musical',descricao_completa='Abriu um videoclipe', image_name = '16')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='De novo!',tipo_medalha='2',descricao='De novo!',descricao_completa='Assistiu a um videoclipe mais de 3 vezes', image_name = '17')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Presença',tipo_medalha='2',descricao='Presença',descricao_completa='Acessou a Conecturm a 3 dias seguidos.', image_name = '18')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Magia da Matemática',tipo_medalha='2',descricao='Magia da Matemática',descricao_completa='Jogou 5 jogos de matemática em sequência terminando no nível difícil', image_name = '19')
+facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'], nome='Magia da Língua Portuguesa',tipo_medalha='2',descricao='Magia da Língua Portuguesa',descricao_completa='Jogou 5 jogos de LP em sequência terminando no nível difícil', image_name = '20')
+
+
+""" Migration das Itens Cores """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Amarelo", tipo_item="1", preco='0', image_name="amarelo.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Azul", tipo_item="1", preco='0', image_name="azul.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Laranja", tipo_item="1", preco='0', image_name="laranja.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Rosa", tipo_item="1", preco='0', image_name="rosa.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Verde", tipo_item="1", preco='0', image_name="verde.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Vermelho", tipo_item="1", preco='0', image_name="vermelho.png")
+
+""" Migration das Itens rosto """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Feliz", tipo_item="2", preco='0', image_name="rosto-01.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Piscadinha", tipo_item="2", preco='0', image_name="rosto-02.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Apaixonado", tipo_item="2", preco='0', image_name="rosto-03.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Lingua", tipo_item="2", preco='0', image_name="rosto-04.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Maluco", tipo_item="2", preco='0', image_name="rosto-05.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Sufoco", tipo_item="2", preco='0', image_name="rosto-06.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Assustado", tipo_item="2", preco='0', image_name="rosto-07.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Sem graça", tipo_item="2", preco='0', image_name="rosto-08.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Rindo", tipo_item="2", preco='0', image_name="rosto-09.png")
+
+""" Migration das Itens acessorio """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Saco", tipo_item="3", preco='3', image_name="2cabeca-01.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Tubarão", tipo_item="3", preco='10', image_name="2cabeca-02.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Mexicano", tipo_item="3", preco='20', image_name="2cabeca-03.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Capacete Soldado", tipo_item="3", preco='30', image_name="2cabeca-04.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Planta", tipo_item="3", preco='35', image_name="2cabeca-05.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Flor", tipo_item="3", preco='40', image_name="2cabeca-06.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Polvo", tipo_item="3", preco='45', image_name="2cabeca-07.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Lagosta", tipo_item="3", preco='50', image_name="2cabeca-08.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Astronalta", tipo_item="3", preco='60', image_name="2cabeca-09.png")
+
+
+""" Migration das Itens corpo """
+
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Malhado", tipo_item="4", preco='5', image_name="corpo-01.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Tubarão", tipo_item="4", preco='13', image_name="corpo-02.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Romano", tipo_item="4", preco='25', image_name="corpo-03.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Soldado", tipo_item="4", preco='35', image_name="corpo-04.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Planta", tipo_item="4", preco='40', image_name="corpo-05.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Caverna", tipo_item="4", preco='45', image_name="corpo-06.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Polvo", tipo_item="4", preco='50', image_name="corpo-07.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Lagosta", tipo_item="4", preco='55', image_name="corpo-08.png")
+facade.create_estrutura_facade(tipo_estrutura="4", nome="Astronalta", tipo_item="4", preco='70', image_name="corpo-09.png")
+
+
+""" Migration das Oas """
 
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01",aventura="AV1", descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01", nome_descritor="Estante de Leitura", descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)", serie="1", disciplina="2")
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Acerte as Letras", sigla_oa="UV1AV1UD1OA02",aventura="AV1", descricao="Diferenciar letras de outros sinais gráficos, como os números e os sinais de pontuação (SEA - Sistema de Escrita Alfabética)", tipo_oa= TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="SE1.02", nome_descritor="Acerte as Letras", descricao_descritor="Compreender a função das letras e do alfabeto", serie="1", disciplina="1")
@@ -79,3 +152,4 @@ facade.create_estrutura_facade(tipo_estrutura="7", nome="Ligando a Pontuação",
 facade.create_estrutura_facade(tipo_estrutura="7", nome="VideoClipe Semana 8", sigla_oa="UV1AV1UD8VC01",aventura="AV1", descricao="VideoClipe Semana 8", tipo_oa= TIPO_OAS_ID["VIDEO"], unidade="8", sigla_descritor="VC08", nome_descritor="VideoClipe Semana 8", descricao_descritor="VideoClipe Semana 8", serie="1", disciplina="1")
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Cinematic Semana 8 - A", sigla_oa="UV1AV1UD8CN01",aventura="AV1", descricao="Cinematic Semana 8 - A", tipo_oa= TIPO_OAS_ID["CINEMATIC"], unidade="8", sigla_descritor="DC15", nome_descritor="Cinematic Semana 8 - A", descricao_descritor="Cinematic Semana 8 - A", serie="1", disciplina="1")
 facade.create_estrutura_facade(tipo_estrutura="7", nome="Cinematic Semana 8 - B", sigla_oa="UV1AV1UD8CN02",aventura="AV1", descricao="Cinematic Semana 8 - B", tipo_oa= TIPO_OAS_ID["CINEMATIC"], unidade="8", sigla_descritor="DC16", nome_descritor="Cinematic Semana 8 - B", descricao_descritor="Cinematic Semana 8 - B", serie="1", disciplina="1")
+

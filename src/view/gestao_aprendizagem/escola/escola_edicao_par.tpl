@@ -73,7 +73,7 @@
                                         <input type="text" class="form-control disabled{{i['id']}}" size="21" name="" id="telefone{{i['id']}}" value="{{i['telefone']}}" disabled>
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px ;">
-                                        <label for="diretor">diretor</label>
+                                        <label for="diretor">Diretor</label>
                                         <br>
                                         <input type="text" size="33" class="form-control disabled{{i['id']}}" name="" id="diretor{{i['id']}}" value="{{i['vinculo_diretor_escola']}}" disabled>
                                     </div>

@@ -48,7 +48,7 @@
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div>
-                                <div class=" col-md-10">
+                                <div class=" col-md-6">
                                     <label for="escola" style="margin-top: 13px; background-color: inherit;">Escola:
                                         <span style="color:#ff0000">*</span>
                                     </label>
@@ -62,6 +62,13 @@
                                         % end
                                     </select>
                                 </div>
+                                <br>
+                                 <div class=" col-md-4">
+                                            <label for="data_de_criacao" style="margin-top: 13px"> Data de Criação:
+
+                                            </label>
+                                            <input style="height: 38px;" type="text" class="form-control" size="30" name="" id="data_de_criacao"  value="" disabled>
+                                        </div>
                             </div>
                         </div>
                         <!-- aqui termina o conteudo da guia do dados de escola  -->
@@ -81,3 +88,7 @@
             <!-- acordeon -->
         </div>
     </div>
+<script>
+    date = new Date;
+    document.getElementById('data_de_criacao').value = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+</script>

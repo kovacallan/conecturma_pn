@@ -18,6 +18,11 @@ class AlunoFacade:
     def update_aluno_facade(self, id:int, nome:str,nome_login:str):
         return self.aluno.update_aluno(update_id=id, nome=nome,nome_login=nome_login)
 
+    def set_itens_student_facade(self, id, itens):
+        return self.aluno.set_itens_student(id, itens)
+
+    def get_itens_student_facade(self,id):
+        return self.aluno.get_itens_student(id=id)
 
     def delete_aluno_facade(self, deletar_ids:list):
         return self.aluno.aluno_delete(deletar_ids)
@@ -28,7 +33,10 @@ class AlunoFacade:
     def search_aluno_id_facade(self,id_aluno : int):
         return self.aluno.search_aluno_id(id_aluno=id_aluno)
 
-    def search_aluno_escola_facade(self, vinculo_escola:str):
+    def set_apelido_facade(self, id, apelido):
+        return self.aluno.set_apelido(id=id, apelido=apelido)
+
+    def search_aluno_escola_facade(self, vinculo_escola: int):
         return self.aluno.search_aluno_by_escola(escola=vinculo_escola)
 
 
@@ -89,8 +97,10 @@ class AlunoFacade:
         return self.aluno.mostrar_ultimo_oa_jogado(id_aluno)
 
     def mostrar_ultimo_oa_jogado(self,id_aluno):
-        print('que',id_aluno)
         return self.aluno.mostrar_ultimo_oa_jogado(id_aluno)
+
+    def set_medalha_facade(self, id_aluno, medalha, motivo):
+        return self.aluno.set_medalha(id_aluno=id_aluno, medalha=medalha, motivo=motivo)
 
     def get_medalhas_facade(self, id_aluno):
         return self.aluno.get_medalhas(id_aluno=id_aluno)

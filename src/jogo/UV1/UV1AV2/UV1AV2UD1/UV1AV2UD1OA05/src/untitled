@@ -1,0 +1,14 @@
+this.caminho = getPathFile(UV1AV2UD1OA05);
+this.caminho = getPathFileSound(SOUNDS_UV1AV2UD1OA05);
+
+
+//mapa
+this.caminho = getPathFile(GLOBAL);
+
+		this.load.atlas('hudMapa', this.caminho+'hud_mapa.png', this.caminho+'hud_mapa.json');
+		this.load.image('iconeVideo', this.caminho+'icon_video_fixo.png');
+		this.load.atlas('videoIcon', this.caminho+'icon_video_mapa.png', this.caminho+'icon_video_mapa.json');
+
+this.caminho = getPathFile(UV1AV2UD1MAPA);
+
+this.caminho = getPathFileSound(SOUNDS_GLOBAL);

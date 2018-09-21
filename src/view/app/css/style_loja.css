@@ -1,0 +1,240 @@
+body, html{
+    font-family: Arial sans-serif;
+    font-weight: bold;
+    background-image: url(img/bg_aluno2.jpg);
+    height: 110%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    overflow-y:hidden;
+}
+
+.scale-bounce{
+    opacity: 1!important;
+    -webkit-animation: scaleBounce 1s linear;
+    -moz-animation: scaleBounce 1s linear;
+    -ms-animation: scaleBounce 1s linear;
+    -o-animation: scaleBounce 1s linear;
+    animation: scaleBounce 1s linear;
+}
+
+@keyframes scaleBounce{
+    0%{
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    50%{
+        transform: scale(1);
+    }
+    70%{
+        transform: scale(1.1);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.menu{
+    background-image: url(/static/img/menu/barra.png);
+    height: 120px;
+    background-repeat: no-repeat;
+}
+
+.menu ul li {
+    list-style: none;
+    float: left;
+}
+
+.c{
+    background: url(/static/img/menu/C_logo.png) 0 0 no-repeat;
+    width: 182px;
+    height: 162px;
+}
+
+.ambiente{
+    background: url(/static/img/menu/ambiente.png) 0 0 no-repeat;
+    width: 78px;
+    height: 68px;
+    margin-top: 32px;
+}
+.ambiente a{
+    width: 78px;
+    height: 68px;
+    display: inline-block;
+}
+
+.facebook{
+    background: url(/static/img/menu/facebook.png) 0 0 no-repeat;
+    width: 78px;
+    height: 68px;
+    margin-top: 32px;
+}
+.facebook a{
+    width: 78px;
+    height: 68px;
+    display: inline-block;
+}
+
+.youtube{
+    background: url(/static/img/menu/youtube.png) 0 0 no-repeat;
+    width: 78px;
+    height: 68px;
+    margin-top: 32px;
+}
+.youtube a{
+    width: 78px;
+    height: 68px;
+    display: inline-block;
+}
+
+.sair{
+    background: url(/static/img/menu/sair.png) 0 0 no-repeat;
+    width: 40px;
+    height: 37px;
+    margin-top: 45px;
+}
+.sair a{
+    width: 40px;
+    height: 37px;
+    display: inline-block;
+}
+
+.loja-categorias{
+    
+}
+
+#cor{
+    background: url(/static/img/btn-colors.png) 0 0 no-repeat;
+    width: 144px;
+    height: 149px;
+    margin-left: 104px;
+}
+
+.cores a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+#rosto{
+    background: url(/static/img/btn-face.png) 0 0 no-repeat;
+    width: 144px;
+    height: 149px;
+}
+
+.rosto a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+#corpo{
+    background: url(/static/img/btn-body.png) 0 0 no-repeat;
+    width: 144px;
+    height: 149px;
+}
+
+#corpo a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+#acessorios{
+    background: url(/static/img/btn-accessories.png) 0 0 no-repeat;
+    width: 144px;
+    height: 149px;
+}
+
+.acessorios a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+.itens-loja-corpo{
+    background-image: url(/static/img/box_item_avatar.png);
+    width: 190px;
+    height: 286px;
+    float: left;
+}
+
+.right_button{
+    position: absolute;
+    left: 88%;
+    top: 42%;
+}
+
+.right_button a{
+    display: block;
+    background: url(/static/img/right-button.png) 0 0 no-repeat;
+    width: 58px;
+    height: 255px;
+}
+
+.left_buttom{
+    position: absolute;
+    left: 0%;
+    top: 42%;
+}
+
+.left_buttom a{
+    display: block;
+    background: url(/static/img/left-button.png) 0 0 no-repeat;
+    width: 58px;
+    height: 255px;
+}
+
+.corpo{
+    max-height: 88px;
+}
+
+.custo-cristais-loja {
+
+    color: rgb(255, 234, 0);
+    text-shadow: rgb(72, 130, 157) 1px 2px;
+    font-size: 22.13px;
+}
+
+.loja_avatar{
+    position: absolute;
+    top:  26%;
+    left: 75px;                   
+}
+.botoes{
+    position: absolute;
+    cursor: pointer;
+    top: 106%;
+    right: 106px;
+}
+.cristais{
+    position: absolute;
+    left: -16%;
+    top: 17%;
+}
+
+.loja_space_avatar{
+    background: url(/static/img/space_avatar.png) 0 0 no-repeat;
+    position: absolute;
+    left: -62px;
+    top: 79%;
+    width: 464px;
+    height: 202px;
+}
+.botao-editar-avatar{
+    position: absolute;
+    top: 91%;
+    left: 18%;
+
+}
+.loja-luz-nave{
+    background: url(/static/img/luz.png) 0 0 no-repeat;
+    position: absolute;
+    left: -47%;
+    height: 609px;
+    width: 428px;
+    top: 20px;
+    margin-left: 128px;
+}

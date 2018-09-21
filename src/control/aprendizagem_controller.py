@@ -89,14 +89,37 @@ def view_ambiente_de_aprendizagem():
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         jogador = facade.search_aluno_id_facade(id_aluno=usuario['id'])
+        if jogador['cor'] != '0':
+            cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
+        else:
+            cor = jogador['cor']
+
+        if jogador['rosto'] != '0':
+            rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
+        else:
+            rosto = jogador['rosto']
+        if jogador['acessorio'] != '0':
+            acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
+        else:
+            acessorio = jogador['acessorio']
+        if jogador['corpo'] != '0':
+            corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
+        else:
+            corpo = jogador['corpo']
+
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
+
     else:
         jogador = facade.search_observador_id_facade(id=usuario['id'])
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
+        cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
+        rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
+        acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
+        corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
 
-    return dict(vida=vida, moedas=moedas)
+    return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
 
 def registrarConclusao():
     usuario = usuario_logado()
@@ -198,7 +221,7 @@ def verificarAcessoUnidade():
 def verificarAcessoAventura():
     from control.dicionarios import AVENTURAS_CONECTURMA
     usuario = usuario_logado()
-
+    print(usuario)
     if int(usuario['tipo']) < 6:
         parametros = parametros_json_jogos(request.params.items())
         return AVENTURAS_CONECTURMA['3']
@@ -412,4 +435,52 @@ def parametros_json_jogos(parametro):
 
     return parametros
 
+def getMedalhas(aluno):
+    medalha_socio = []
+    medalha_jogo = []
+    todas_medalhas = facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha'])
+    for i in todas_medalhas:
+        if i['tipo_medalha'] == '1':
+            medalha_socio.append(i)
+        else:
+            medalha_jogo.append(i)
+
+
+    return dict(todas_medalhas=todas_medalhas,medalha_jogo=medalha_jogo,medalha_socio=medalha_socio,medalha_recente=[],aluno_id=aluno['id'])
+
+
+# Resgatando Medalhas e Medalhas que o Aluno possui
+def read_medalha_album(aluno):
+    from control.gestao_aprendizagem_controller import convertendo_str_in_dict
+    medalha_socio = []
+    medalha_jogo = []
+    medalha_aluno = []
+
+    for i in facade.search_aluno_id_facade(id_aluno=aluno)['medalha']:
+        i = convertendo_str_in_dict(str=i.decode('utf-8'))
+        medalha_aluno.append(i['id_medalha'])
+
+    todas_medalhas= facade.read_estrutura_facade(TIPO_ESTRUTURA['medalha'])
+    for medalha in todas_medalhas:
+        if medalha['tipo_medalha']== '1':
+            medalha_socio.append(medalha)
+
+        else:
+            medalha_jogo.append(medalha)
+    medalha_recente = []
+    if medalha_aluno != []:
+
+        if len(medalha_aluno) > 4:
+            z = medalha_aluno[len(medalha_aluno) - 4:len(medalha_aluno)]
+        else:
+            z = medalha_aluno
+
+        for i in medalha_socio:
+            if str(i['id']) in z:
+                medalha_recente.append(i)
+        for i in medalha_jogo:
+            if str(i['id']) in z:
+                medalha_recente.append(i)
+
+    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno)
 

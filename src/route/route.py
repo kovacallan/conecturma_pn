@@ -74,6 +74,71 @@ def view_ambiente_de_aprendizagem(no_repeat=False):
     return view_ambiente_de_aprendizagem()
 
 
+
+@route('/aluno/guarda_roupa')
+@permissao('aluno_varejo')
+def view_guarda_roupa():
+    from bottle import template
+    from control.guarda_roupa_controller import Guarda_roupa
+
+    if usuario_logado()['tipo'] >= '6':
+        usuario = facade.search_aluno_id_facade(id_aluno=usuario_logado()['id'])
+    else:
+        usuario = facade.search_observador_id_facade(id=usuario_logado()['id'])
+
+    if usuario['cor'] != '0':
+        cor = facade.search_estrutura_id_facade(id=usuario['cor'])
+    else:
+        cor = '0'
+
+    if usuario['rosto'] != '0':
+        rosto = facade.search_estrutura_id_facade(id=usuario['rosto'])
+    else:
+        rosto = '0'
+
+    if usuario['acessorio'] != '0':
+        acessorio = facade.search_estrutura_id_facade(id=usuario['acessorio'])
+    else:
+        acessorio = '0'
+
+    if usuario['corpo'] != '0':
+        corpo = facade.search_estrutura_id_facade(id=usuario['corpo'])
+    else:
+        corpo = '0'
+
+    guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
+    guarda_roupa.get_item_comprar()
+    guarda_roupa.get_item_user_have()
+
+    print(cor)
+
+    return template('caminho_aluno/guarda_roupa/index',usuario_logado = usuario_logado(), apelido = usuario['apelido'], cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo, cristais=usuario['pontos_de_moedas'],
+                    cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(), acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo(), itens_usuario = guarda_roupa.get_itens_user())
+
+@route('/comprar_item', method='POST')
+@permissao('aluno_varejo')
+def buy_item():
+    from bottle import request
+    from control.guarda_roupa_controller import Guarda_roupa
+
+    guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
+    guarda_roupa.buy_item(id_item=request.params['item'])
+
+@route('/equipar_item', method='POST')
+@permissao('aluno_varejo')
+def equip_item():
+    from bottle import request
+    usuario = usuario_logado()
+    item = []
+
+    for i in request.params:
+        if i != 'apelido':
+
+            item.append(facade.search_estrutura_id_facade(id=request.params[i]))
+    if request.params['apelido'] != '0' or request.params['apelido'] != "" or request.params['apelido'] != None:
+        facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])
+    facade.equipar_item_facade(id=usuario['id'], itens=item)
+
 @route('/jogo')
 def jogo():
     from bottle import template
@@ -259,6 +324,25 @@ def read_de_medalha(no_repeat=False):
     from control.gestao_aprendizagem_controller import read_de_medalha
     return read_de_medalha()
 
+@route ('medalha/aluno-medalhas',method='POST')
+def medalhas_aluno():
+    from control.aprendizagem_controller import read_medalha_album
+    aluno = usuario_logado()['id']
+    aluno_medalhas = read_medalha_album(aluno)
+    return dict(aluno_medalhas=aluno_medalhas)
+
+
+
+@route('/aluno/medalhas')
+@permissao('aluno_varejo')
+@view('caminho_aluno/medalhas.tpl')
+def read_medalha_aluno():
+    from control.aprendizagem_controller import read_medalha_album,getMedalhas
+    aluno = usuario_logado()
+    if int(aluno['tipo']) < 6:
+        return getMedalhas(aluno)
+    else:
+        return read_medalha_album(aluno['id'])
 
 @route('/rede')
 # @permissao('gestor')
@@ -345,6 +429,12 @@ def controller_turma_editar(no_repeat=False):
 def controller_update_turma(no_repeat=False):
     from control.gestao_aprendizagem_controller import controller_update_turma
     return controller_update_turma(no_repeat)
+
+@route('/turma/entregar_medalha_aluno', method='POST')
+@permissao('diretor')
+def controller_entregar_medalha_aluno():
+    from control.gestao_aprendizagem_controller import controller_entregar_medalha_aluno
+    return controller_entregar_medalha_aluno()
 
 
 @route('/cadastro_descritor_view')

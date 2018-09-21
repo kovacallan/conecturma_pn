@@ -206,7 +206,7 @@ function cadastro_escola(){
     nome = document.getElementById('nome').value;
     cnpj = document.getElementById('cnpj').value;
     telefone = document.getElementById('telefone').value;
-    diretor = document.getElementById('diretor').value;
+    data_de_criacao = document.getElementById('data_de_criacao').value;
     rede = document.getElementById('rede').value;
     endereco = document.getElementById('endereco').value;
     numero = document.getElementById('numero').value;
@@ -218,10 +218,10 @@ function cadastro_escola(){
 
     if (nome != '' && nome != null){
         if (telefone != '' && telefone != null && telefone.length >= 10){
-            $.post('/escola/criar_escola', {nome:nome, cnpj:cnpj, telefone:telefone, diretor:diretor, rede:rede,
+            $.post('/escola/criar_escola', {nome:nome, cnpj:cnpj, telefone:telefone, data_de_criacao:data_de_criacao, rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
             });
-            setTimeout(location.reload(), 3000);
+         setTimeout(location.reload(), 3000);
         }
         else{
             alert('O campo telefone é obrigatório.');
@@ -285,13 +285,13 @@ function cadastro_rede(){
     cep = document.getElementById('cep').value;
     estado = document.getElementById('estado').value;
     municipio = document.getElementById('municipio').value;
-
+    data_de_criacao = document.getElementById('data_de_criacao').value;
     if (nome != '' && nome != null){
         if (telefone != '' && telefone != null && telefone.length >= 10){
             $.post('/rede/criar_rede', {nome:nome, cnpj:cnpj, telefone:telefone,
-            endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
+            endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio, data_de_criacao:data_de_criacao},function(data){
             });
-            location.reload();
+            setTimeout(location.reload(), 3000);
         }
         else{
             alert('O campo telefone é obrigatório.');
@@ -339,11 +339,12 @@ function cadastro_turma(){
     nome = document.getElementById('nome').value;
     serie = document.getElementById('serie').value;
     escola = document.getElementById('escola').value;
+    data_de_criacao = document.getElementById('data_de_criacao').value;
 
     if (nome != '' && nome != null){
         if (serie!= '' && serie != null){
             if (escola!= '' && escola != null){
-                $.post('/turma/cadastro_turma', {nome:nome, serie:serie, escola:escola},function(data){
+                $.post('/turma/cadastro_turma', {nome:nome, serie:serie, escola:escola, data_de_criacao:data_de_criacao},function(data){
                 });
                 location.reload();
             }
@@ -363,6 +364,15 @@ function cadastro_turma(){
     }
 }
 
+function se_tem_medalha(aluno_medalha){
+aluno = document.getElementById('aluno').value;
+    $.POST('medalha/aluno-medalhas',{id:id},function(data){
+    console.log("entrei hehe",data);
+    medalu=data.aluno_medalhas
+
+    })
+
+}
 function update_turma(id){
 
     id = document.getElementById('id_turma'+id).value;
@@ -392,8 +402,9 @@ function cadastro_usuario(tipo){
 //            if (nascimento != '' && nascimento != null){
                 if (escola != '' && escola != null){
                     $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, sexo:sexo, vinculo_escola:escola, vinculo_turma:turma},function(data){
+                        window.location.replace(data);
                     });
-                    window.location.reload(true)
+                    
                 }
                 else{
                     alert('O campo escola é obrigatório.');
@@ -425,6 +436,7 @@ function cadastro_usuario(tipo){
                     if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
+                                window.location.replace(data);
                             });
                             location.reload();
                         }
@@ -465,8 +477,9 @@ function cadastro_usuario(tipo){
                     if(!validar_se_email_existe(email)){
                         if (escola != '' && escola != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola},function(data){
+                                window.location.replace(data);
                             });
-                            location.reload();
+                            
                         }
                         else{
                             alert('O campo escola é obrigatório.');
@@ -506,8 +519,8 @@ function cadastro_usuario(tipo){
                     if(!validar_se_email_existe(email)){
                         if (rede != '' && rede != null){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_rede:rede},function(data){
+                                window.location.replace(data);
                             });
-                            setTimeout(location.reload(), 5000);
                         }
                         else{
                             alert('O campo rede é obrigatório.');

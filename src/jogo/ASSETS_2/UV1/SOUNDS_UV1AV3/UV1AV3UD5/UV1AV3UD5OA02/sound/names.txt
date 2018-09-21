@@ -1,0 +1,49 @@
+ O volume na unidade C n∆o tem nome.
+ O N£mero de SÇrie do Volume Ç DC0A-DF01
+
+ Pasta de C:\xampp\htdocs\conecturma\ASSETS\UV1\SOUNDS_UV1AV3\UV1AV3UD5\UV1AV3UD5OA02\sound
+
+22/02/2016  10:46    <DIR>          .
+22/02/2016  10:46    <DIR>          ..
+26/01/2016  16:47            72.902 AV3_S5_OA2_CtA.mp3
+26/01/2016  16:48           127.433 AV3_S5_OA2_DICA.mp3
+26/01/2016  16:47           126.647 AV3_S5_OA2_FINAL.mp3
+26/01/2016  16:46           613.799 AV3_S5_OA2_INTRO.mp3
+26/01/2016  16:13            23.204 AV3_S5_OA2_P1_DO.mp3
+26/01/2016  16:13            31.175 AV3_S5_OA2_P1_LHA.mp3
+26/01/2016  16:14            26.027 AV3_S5_OA2_P1_LI.mp3
+26/01/2016  16:15            35.522 AV3_S5_OA2_P1_LIQUIDO.mp3
+26/01/2016  16:12            28.304 AV3_S5_OA2_P1_MO.mp3
+26/01/2016  16:13            30.662 AV3_S5_OA2_P1_MOLHADO.mp3
+26/01/2016  16:14            25.562 AV3_S5_OA2_P1_QUI.mp3
+26/01/2016  16:16            30.470 AV3_S5_OA2_P1_SO.mp3
+26/01/2016  16:17            37.094 AV3_S5_OA2_P1_SOLIDO.mp3
+26/01/2016  16:34            37.079 AV3_S5_OA2_P2_CHEN.mp3
+26/01/2016  16:33            33.374 AV3_S5_OA2_P2_EN.mp3
+26/01/2016  16:34            45.740 AV3_S5_OA2_P2_ENCHENTE.mp3
+26/01/2016  16:31            34.352 AV3_S5_OA2_P2_GUEI.mp3
+26/01/2016  16:31            33.983 AV3_S5_OA2_P2_MAN.mp3
+26/01/2016  16:33            43.013 AV3_S5_OA2_P2_MANGUEIRA.mp3
+26/01/2016  16:29            31.577 AV3_S5_OA2_P2_NEI.mp3
+26/01/2016  16:30            29.444 AV3_S5_OA2_P2_RA.mp3
+26/01/2016  16:34            32.861 AV3_S5_OA2_P2_TE.mp3
+26/01/2016  16:29            30.791 AV3_S5_OA2_P2_TOR.mp3
+26/01/2016  16:32            40.559 AV3_S5_OA2_P2_TORNEIRA.mp3
+26/01/2016  16:36            34.691 AV3_S5_OA2_P3_A.mp3
+26/01/2016  16:44            49.694 AV3_S5_OA2_P3_CHE.mp3
+26/01/2016  16:35            37.673 AV3_S5_OA2_P3_DU.mp3
+26/01/2016  16:42            43.679 AV3_S5_OA2_P3_FO.mp3
+26/01/2016  16:44            42.236 AV3_S5_OA2_P3_I.mp3
+26/01/2016  16:41            42.476 AV3_S5_OA2_P3_LE.mp3
+26/01/2016  16:35            38.972 AV3_S5_OA2_P3_MAN.mp3
+26/01/2016  16:42            46.133 AV3_S5_OA2_P3_NAR.mp3
+26/01/2016  16:43            46.037 AV3_S5_OA2_P3_SAN.mp3
+26/01/2016  16:44            58.403 AV3_S5_OA2_P3_SANDUICHE.mp3
+26/01/2016  16:35            34.433 AV3_S5_OA2_P3_TA.mp3
+26/01/2016  16:41            47.993 AV3_S5_OA2_P3_TAMANDUA.mp3
+26/01/2016  16:41            39.188 AV3_S5_OA2_P3_TE.mp3
+26/01/2016  16:42            59.012 AV3_S5_OA2_P3_TELEFONAR.mp3
+26/01/2016  16:48           297.938 AV3_S5_OA2_RESUMO.mp3
+22/02/2016  10:46                 0 names.txt
+              40 arquivo(s)      2.520.132 bytes
+               2 pasta(s)   218.181.144.576 bytes dispon°veis

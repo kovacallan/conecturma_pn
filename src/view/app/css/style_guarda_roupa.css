@@ -1,0 +1,351 @@
+body, html{
+    background-image: url(img/bg_aluno2.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+
+.bounce-scale{
+animation: quicando 1s linear ;
+}
+
+.scale-bounce{
+    opacity: 1!important;
+    -webkit-animation: scaleBounce 1s linear;
+    -moz-animation: scaleBounce 1s linear;
+    -ms-animation: scaleBounce 1s linear;
+    -o-animation: scaleBounce 1s linear;
+    animation: scaleBounce 1s linear ;
+
+
+}
+
+@keyframes quicando{
+ 0%{
+        transform: scale(1);
+        opacity: 0;
+    }
+    50%{
+        transform: scale(1.5);
+    }
+    70%{
+        transform: scale(1.1);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleBounce{
+    0%{
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    50%{
+        transform: scale(1);
+    }
+    70%{
+        transform: scale(1.1);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.menu{
+    background-image: url(/static/img/menu/barra.png);
+    height: 120px;
+    background-repeat: no-repeat;
+}
+
+.menu ul li {
+    list-style: none;
+    float: left;
+}
+
+.c{
+    background: url(/static/img/menu/C_logo.png) 0 0 no-repeat;
+    width: 182px;
+    height: 162px;
+}
+
+.ambiente{
+    background: url(/static/img/menu/ambiente.png) 0 0 no-repeat;
+    width: 78px;
+    height: 68px;
+    margin-top: 32px;
+}
+.ambiente a{
+    width: 78px;
+    height: 68px;
+    display: inline-block;
+}
+
+.facebook{
+    background: url(/static/img/menu/facebook.png) 0 0 no-repeat;
+    width: 78px;
+    height: 68px;
+    margin-top: 32px;
+}
+.facebook a{
+    width: 78px;
+    height: 68px;
+    display: inline-block;
+}
+
+.youtube{
+    background: url(/static/img/menu/youtube.png) 0 0 no-repeat;
+    width: 78px;
+    height: 68px;
+    margin-top: 32px;
+}
+.youtube a{
+    width: 78px;
+    height: 68px;
+    display: inline-block;
+}
+
+.sair{
+    background: url(/static/img/menu/sair.png) 0 0 no-repeat;
+    width: 40px;
+    height: 37px;
+    margin-top: 45px;
+}
+.sair a{
+    width: 40px;
+    height: 37px;
+    display: inline-block;
+}
+
+/* Seleção do tipo de acessorio*/
+
+.cores{
+    background: url(/static/img/btn-colors.png) 0 0 no-repeat;
+    margin-left: 96px;
+    width: 113px;
+    height: 109px;
+}
+.cores a{
+    margin-top: -43px;
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+.rosto{
+    background: url(/static/img/btn-face.png) 0 0 no-repeat;
+    margin-bottom: 40px;
+    width: 113px;
+    height: 109px;
+}
+.rosto a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+.acessorios{
+    background: url(/static/img/btn-accessories.png) 0 0 no-repeat;
+    width: 113px;
+    height: 109px;
+}
+.acessorios a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+.corpo{
+    background: url(/static/img/btn-body.png) 0 0 no-repeat;
+    margin-left: 96px;
+    width: 113px;
+    height: 109px;
+}
+.corpo a{
+    width: 113px;
+    height: 109px;
+    display: inline-block;
+}
+
+.avatar-itens-cor{
+    position: absolute;
+    top: -4%;
+    left: 145px;
+}
+
+.avatar-itens-acessorio{
+    position: absolute;
+    top: -4%;
+    left: 145px;
+}
+
+.avatar-itens-corpo{
+    position: absolute;
+    top: -9%;
+    left: 103px;
+}
+
+.avatar-itens-rosto{
+    position: absolute;
+    top: 28%;
+    left: 103px;
+}
+
+/*area avatar*/
+
+.title{
+    background: url(/static/img/title_avatar.png) 0 0 no-repeat;
+    width: 170px;
+    height: 70px;
+}
+
+#nave{
+    margin-top: 285px;
+}
+
+#avatar{
+    position: absolute;
+    top: 116px;
+    left: 186px;
+
+}
+.botoes{
+    position: absolute;
+    top: 88%;
+    left: 24%;
+}
+#apelido{
+    background-color: #e75619;
+    font-family: 'janda_manatee_solidregular';
+    color: #fff;
+    border: 1px solid #ff8039;
+    border-radius: 8px;
+    height: 45px;
+    width: 190px;
+    padding: 0 0;
+    font-size: 30px;
+    text-shadow: 2px 2px #58210a;
+    text-align: center;
+    position: absolute;
+    top: 78%;
+    margin-left: -57%;
+}
+
+.item-comprado{
+    margin-left:19px;
+}
+
+.item-comprado-avatar{
+    background: url(/static/img/item_comprado.png) 0 0 no-repeat;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+}
+
+.componente-loja-comprado {
+    max-width: 60px;
+    max-height: 60px;
+    margin-top: 20px;
+}
+
+.imagem-pocicao-amar{
+    left: 190px;
+    top: 23%;
+}
+.imagem-pocicao-azul{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-lara{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-rosa{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-verd{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-verm{
+    top: 23%;
+    left: 190px;
+}
+.imagem-pocicao-rosto-01{
+    left: 215px;
+}
+.imagem-pocicao-rosto-02{
+    left: 215px;
+}
+.imagem-pocicao-rosto-03{
+    top: 27%;
+    left: 207px;
+}
+.imagem-pocicao-rosto-04{
+    top: 28%;
+    left: 215px;
+}
+
+.imagem-pocicao-rosto-05{
+    top: 24%;
+    left: 210px;
+}
+
+.imagem-pocicao-rosto-06{
+    top: 27%;
+    left: 196px;
+}
+
+.imagem-pocicao-rosto-07{
+    top: 27%;
+    left: 214px;
+}
+.imagem-pocicao-rosto-08{
+    top: 27%;
+    left: 211px;
+}
+.imagem-pocicao-rosto-09{
+    top: 27%;
+    left: 206px;
+}
+.imagem-pocicao-2cabeca-01{
+    top: -10%;
+    left: 99px;
+}
+.imagem-pocicao-2cabeca-02{
+    top: -9%;
+    left: 107px;
+}
+.imagem-pocicao-2cabeca-03{
+    top: -9%;
+    left: 107px;
+}
+.imagem-pocicao-2cabeca-04{
+    top: -9%;
+    left: 107px;
+}
+.imagem-pocicao-2cabeca-05{
+    top: -11%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-06{
+    top: -9%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-07{
+    top: -9%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-08{
+    top: -9%;
+    left: 103px;
+}
+.imagem-pocicao-2cabeca-09{
+    top: -9%;
+    left: 103px;
+}
