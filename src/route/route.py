@@ -345,10 +345,17 @@ def controller_update_turma():
     return controller_update_turma()
 
 @route('/turma/entregar_medalha_aluno', method='POST')
-@permissao('diretor')
+@permissao('professor')
 def controller_entregar_medalha_aluno():
     from control.gestao_aprendizagem_controller import controller_entregar_medalha_aluno
     return controller_entregar_medalha_aluno()
+
+@route('/turma/entregar_medalha_todos_alunos', method='POST')
+@permissao('professor')
+def entregar_medalha_todos_alunos():
+    print("Entrei aqui")
+    from control.gestao_aprendizagem_controller import entregar_medalha_todos_alunos
+    return entregar_medalha_todos_alunos()
 
 
 @route('/cadastro_descritor_view')
