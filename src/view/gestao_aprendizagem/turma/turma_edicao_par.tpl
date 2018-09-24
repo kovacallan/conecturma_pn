@@ -75,10 +75,63 @@
                                                    id="escola{{i['id']}}" value="{{i['vinculo_escola']}}" disabled>
                                         </div>
                                     </div>
-                                 <div id="dar_medalhas_todos">
-                                    %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
-                                </div> <!--Fechando janela de dar medalhas -->
+                                     <div id="dar_medalhas_todos">
+                                        <button type="button" class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos </button>
+                                        <!-- conteudo do botao -->
+                                        <!--MODAL PRIMARIO-->
+                                        <div class="modal fade" id="medalha_todos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle"> Dar Medalhas </h5>
 
+
+
+                                                            <!-- Modal -->
+
+
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">Ação</th>
+                                                                    <th scope="col">Medalha</th>
+                                                                    <th scope="col">Descrição</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td  style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-11.gif" ></td>
+                                                                    <td class="w-descricao"></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-12.gif" ></td>
+                                                                    <td class="w-descricao"></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
+                                                                    <td colspan="1"  style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-13.gif" ></td>
+                                                                    <td class="w-descricao"></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fim do conteúdo -->
+
+                                    </div> <!--Fechando janela de dar medalhas -->
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div> <!-- fechando col-md-12 -->
                             </div>
