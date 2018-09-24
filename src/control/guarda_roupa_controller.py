@@ -62,7 +62,6 @@ class Guarda_roupa(object):
         for i in itens:
             self.itens_user.append(i.decode('utf-8'))
 
-        print(self.itens_user)
 
     def buy_item(self, id_item):
         if self.usuario_logado['tipo'] <'6':

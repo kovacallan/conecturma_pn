@@ -11,8 +11,8 @@ def main():
 
     application = default_app()
 
-    #run(host='localhost', port=8080, reload=True, server='gunicorn', workers=4)
-    run(host='localhost', port=8080, reload=True, debug=True)
+    run(host='localhost', port=8080, reload=True, server='gunicorn', workers=4)
+    #run(host='localhost', port=8080, reload=True, debug=True)
 
 @route('/error403')
 def error403():

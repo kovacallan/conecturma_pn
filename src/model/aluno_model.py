@@ -150,7 +150,7 @@ class DbAluno(Model):
 
     def search_aluno_by_turma(self, vinculo_turma):
         alunos = []
-        for search in DbAluno.query(DbAluno.vinculo_turma == vinculo_turma, order_by=DbAluno.nome):
+        for search in DbAluno.query((DbAluno.vinculo_turma == vinculo_turma), order_by=DbAluno.nome):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
@@ -191,10 +191,10 @@ class DbAluno(Model):
 
     def search_aluno_id(self,id_aluno):
 
-        alun_pes = None
-        for search in DbAluno.query(DbAluno.id == id_aluno):
-            alun_pes = vars(search)["_data"]
-            alun_pes['medalha'] = search.medalhas
+        aluno = DbAluno.load(int(id_aluno))
+        alun_pes = vars(aluno)["_data"]
+        alun_pes['medalha'] = aluno.medalhas
+
         return alun_pes
 
     def set_apelido(self, id, apelido):

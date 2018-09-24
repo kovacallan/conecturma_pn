@@ -658,6 +658,11 @@ def controller_entregar_medalha_aluno():
     else:
        return "0"
 
+def entregar_medalha_todos_alunos():
+    print("teste turma medalha para todos", type(request.params['turma']), request.params['medalha'], request.params['motivo'])
+    alunos = facade.search_aluno_by_turma_facade(vinculo_turma=request.params['turma'])
+    return '0'
+
 def descritores():
     return
 

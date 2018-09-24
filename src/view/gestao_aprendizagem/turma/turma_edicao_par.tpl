@@ -132,7 +132,6 @@
                                             <!-- Fim do conteúdo -->
 
                                     </div> <!--Fechando janela de dar medalhas -->
-
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div> <!-- fechando col-md-12 -->
                             </div>
@@ -173,8 +172,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 %end
                             </div>
                         </div>
@@ -231,6 +228,23 @@ function entregarMedalha(alunoid){
     for(i=0; i<idMedalha.length;i++){
         motivo =document.getElementById('medalha_motivo_'+idMedalha[i]).value;
         $.post('/turma/entregar_medalha_aluno', {aluno:alunoid, medalha:idMedalha[i], motivo:motivo},function(data){
+            if(data == '0'){
+                break;
+            }  
+        });    
+    }
+    if(i==idMedalha.length){
+        window.location.replace('/turma');
+        alert("Medalha foi entregue com sucesso!");           
+    }else{
+        alert("Erro");
+    }
+}
+
+function entregarMedalhaTodos(turmaId){
+    for(i=0; i<idMedalha.length;i++){
+        motivo =document.getElementById('medalha_motivo_'+idMedalha[i]).value;
+        $.post('/turma/entregar_medalha_todos_alunos', {turma:turmaId, medalha:idMedalha[i], motivo:motivo},function(data){
             if(data == '0'){
                 break;
             }  
