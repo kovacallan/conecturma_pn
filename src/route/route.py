@@ -353,7 +353,6 @@ def controller_entregar_medalha_aluno():
 @route('/turma/entregar_medalha_todos_alunos', method='POST')
 @permissao('professor')
 def entregar_medalha_todos_alunos():
-    print("Entrei aqui")
     from control.gestao_aprendizagem_controller import entregar_medalha_todos_alunos
     return entregar_medalha_todos_alunos()
 

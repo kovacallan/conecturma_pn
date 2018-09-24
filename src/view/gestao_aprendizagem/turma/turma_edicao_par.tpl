@@ -75,62 +75,8 @@
                                                    id="escola{{i['id']}}" value="{{i['vinculo_escola']}}" disabled>
                                         </div>
                                     </div>
-                                     <div id="dar_medalhas_todos">
-                                        <button type="button" class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos </button>
-                                        <!-- conteudo do botao -->
-                                        <!--MODAL PRIMARIO-->
-                                        <div class="modal fade" id="medalha_todos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle"> Dar Medalhas </h5>
-
-
-
-                                                            <!-- Modal -->
-
-
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <table class="table table-bordered">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th scope="col">Ação</th>
-                                                                    <th scope="col">Medalha</th>
-                                                                    <th scope="col">Descrição</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                                    <td  style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-11.gif" ></td>
-                                                                    <td class="w-descricao"></td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                                    <td style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-12.gif" ></td>
-                                                                    <td class="w-descricao"></td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row"><input type="checkbox" name="vehicle1" value=""></th>
-                                                                    <td colspan="1"  style="width: 1px;"><img class="img-resize" src="/static/img/medalha/jogo-13.gif" ></td>
-                                                                    <td class="w-descricao"></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Fim do conteúdo -->
-
+                                    <div id="dar_medalhas_todos">
+                                        %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
                                     </div> <!--Fechando janela de dar medalhas -->
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div> <!-- fechando col-md-12 -->
@@ -204,57 +150,4 @@
         </form>
     </div>
 </div>
-<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
-<script type="text/javascript">
-function sumir(){
-
-    $('#modal-dar-medalha').on('show.bs.modal', function () {
-        $('#medalha_janela').css('display','none');
-
-    });
-
-    $('#modal-dar-medalha').on('hidden.bs.modal', function () {
-       $('#medalha_janela').css('display','block');
-    });
-}
-
-idMedalha=[];
-function getIdMedalha(id){
-    index = idMedalha.indexOf(id);
-    index == -1 ? idMedalha.push(id):idMedalha.splice(index,1);
-}
-
-function entregarMedalha(alunoid){
-    for(i=0; i<idMedalha.length;i++){
-        motivo =document.getElementById('medalha_motivo_'+idMedalha[i]).value;
-        $.post('/turma/entregar_medalha_aluno', {aluno:alunoid, medalha:idMedalha[i], motivo:motivo},function(data){
-            if(data == '0'){
-                break;
-            }  
-        });    
-    }
-    if(i==idMedalha.length){
-        window.location.replace('/turma');
-        alert("Medalha foi entregue com sucesso!");           
-    }else{
-        alert("Erro");
-    }
-}
-
-function entregarMedalhaTodos(turmaId){
-    for(i=0; i<idMedalha.length;i++){
-        motivo =document.getElementById('medalha_motivo_'+idMedalha[i]).value;
-        $.post('/turma/entregar_medalha_todos_alunos', {turma:turmaId, medalha:idMedalha[i], motivo:motivo},function(data){
-            if(data == '0'){
-                break;
-            }  
-        });    
-    }
-    if(i==idMedalha.length){
-        window.location.replace('/turma');
-        alert("Medalha foi entregue com sucesso!");           
-    }else{
-        alert("Erro");
-    }
-}
-</script>
+</div>

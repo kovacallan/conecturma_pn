@@ -41,15 +41,17 @@
                         <form>
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row" style="margin-top: 30px">
-                             <div class="col-md-12">
+                                <div class="col-md-12">
                                     <div class="row distanciamento">
                                         <div class=" col-md-6" style="margin-left: 10px;">
                                             <label for="nome" style="background-color: inherit;">Nome:
                                                 <span style="color:red">*
                                                 </span>
                                             </label>
-                                            <input type="text" placeholder="Escola do rock" class="form-control disabled{{i['id']}}"
-                                                   size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>
+                                            <input type="text" placeholder="Escola do rock"
+                                                   class="form-control disabled{{i['id']}}"
+                                                   size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}"
+                                                   disabled>
                                         </div>
                                         <div class="col-md-4" style="padding-left: 10px">
                                             <label for="serie">serie</label>
@@ -86,39 +88,7 @@
                                 </div>
                             </div>
 
-                            % for z in i['aluno']:
 
-
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <div class="offset-md-1 nome-prof row row-par">
-                                        <div class="col-md-5" style="padding-top: 10px;padding-bottom: 10px;">
-                                            Nome: {{z['nome']}}
-
-                                            <br>
-                                            Login :{{z['nome_login']}}
-                                        </div>
-                                        <div class="offset-md-1 col-md-6" style="padding:10px">
-
-                                            <span style="margin-left:62px"> &nbsp;senha :</span>
-                                            <br>
-
-                                           <img src="/static/img/{{z['senha'][3]}}.png"
-                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                            <img src="/static/img/{{z['senha'][2]}}.png"
-                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                             <img src="/static/img/{{z['senha'][1]}}.png"
-                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                             <img src="/static/img/{{z['senha'][0]}}.png"
-                                                 style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            %end
                         </div>
                     </div>
                 </div>
@@ -127,24 +97,22 @@
             <div class="row" style="margin-bottom: 10px">
                 % if tipo != '2':
                 <div class="col-md-1">
-              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
-                <i class="far fa-trash-alt" style="color:#969696;"></i>
-              </span>
+                  <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+                    <i class="far fa-trash-alt" style="color:#969696;"></i>
+                  </span>
                 </div>
                 % end
                 <div class="offset-md-10 col-md-1">
-                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
-                              style="cursor:pointer;">
-                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
-                        </span>
-                        <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
-                              style="cursor:pointer;display:none;">
+                    <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                          style="cursor:pointer;">
+                        <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
+                    </span>
+                    <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
+                          style="cursor:pointer;display:none;">
                             <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
-                        </span>
-                    </div>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 </div>
