@@ -1,22 +1,7 @@
 <!--informaçoes-->
-<div class="col-md-5 item-tabela ">
+<div style="cursor: pointer;" class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
+       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
-</div>
-<div class="col-md-2 item-tabela ">
-    {{i['professor']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['vinculo_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['serie']}}
-</div>
-<div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion"
-       aria-controls="collapse{{i['id']}}"
-       class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
-        <i id="setinha" class='fas fa-angle-down'></i>
-    </a>
 </div>
 
 <!--fim das informaçoes da tabela-->
@@ -95,25 +80,29 @@
                                 % for z in i['aluno']:
                                 <div class="row">
                                     <div class="col-md-11">
-                                        <div class="nome-prof row row-impar">
-                                            <div class="col-md-2">
-                                                %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                        <div class="row">
+                                            <div class="nome-prof row row-impar">
+                                                <div class="col-md-5" style="margin-top: 4px;">
+                                                    Nome: {{z['nome']}}
+                                                    <br>
+                                                    Login :{{z['nome_login']}}
+                                                </div>
+                                                <div class="col-md-5" style="padding:10px">
+                                                    <span style="margin-left: 32px;"> &nbsp;senha :</span>
+                                                    <img src="/static/img/{{z['senha'][3]}}.png"
+                                                         style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                    <img src="/static/img/{{z['senha'][2]}}.png"
+                                                         style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                    <img src="/static/img/{{z['senha'][1]}}.png"
+                                                         style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                    <img src="/static/img/{{z['senha'][0]}}.png"
+                                                         style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                </div>
                                             </div>
-                                            <div class="col-md-5" style="margin-top: 4px;">
-                                                Nome: {{z['nome']}}
-                                                <br>
-                                                Login :{{z['nome_login']}}
-                                            </div>
-                                            <div class="col-md-5" style="padding:10px">
-                                                <span style="margin-left: 32px;"> &nbsp;senha :</span>
-                                                <img src="/static/img/{{z['senha'][3]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][2]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][1]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                <img src="/static/img/{{z['senha'][0]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                            <div>
+                                                <div class="col-md-1">
+                                                    %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

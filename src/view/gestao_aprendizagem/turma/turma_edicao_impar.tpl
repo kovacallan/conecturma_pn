@@ -1,21 +1,10 @@
-<div class="col-md-5 item-tabela ">
+
+<div style="cursor: pointer;"  class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
+       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
 </div>
-<div class="col-md-2 item-tabela ">
-    {{i['professor']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['vinculo_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['serie']}}
-</div>
-<div class="col-md-1 item-tabela card">
-    <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
-       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
-        <i id="setinha" class="fas fa-angle-down"></i>
-    </a>
-</div>
+
+
 <div class="container">
     <div class="row row-impar">
         <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" data-parent="#accordion">
@@ -93,9 +82,6 @@
                                         <div class="row">
                                             <div class="col-md-11">
                                                 <div class="nome-prof row row-impar">
-                                                    <div class="col-md-2">
-                                                        %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
-                                                    </div>
                                                     <div class="col-md-5" style="margin-top: 4px;">
                                                         Nome: {{z['nome']}}
                                                         <br>
@@ -112,6 +98,9 @@
                                                         <img src="/static/img/{{z['senha'][0]}}.png"
                                                              style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
                                                     </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
                                                 </div>
                                             </div>
                                         </div>
