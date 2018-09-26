@@ -1,5 +1,4 @@
 <div id="janela_medalhas" style="margin-top: 9px;">
-    <a data-toggle="modal" data-target="#medalha_janela{{z['id']}}" style="cursor: pointer;"><img src="/static/img/icone-medalha-do-aluno.png"></a>
     <!-- conteudo do botao -->
     <!--MODAL PRIMARIO-->
     <div class="modal fade" id="medalha_janela{{z['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

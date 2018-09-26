@@ -132,7 +132,7 @@ button:focus{
 	color: #4c4c4c;
 	background-color: inherit;
 	padding:.5rem 0rem;
-	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .form-control:focus{
