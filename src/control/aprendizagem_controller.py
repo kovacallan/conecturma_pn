@@ -128,6 +128,7 @@ def view_ambiente_de_aprendizagem():
     return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
 
 def registrarConclusao():
+    """responsavel por desbloquear o proximo OA"""
     usuario = usuario_logado()
     dados_jogo= parametros_json_jogos(request.params.items())
     print("regisrar conclusao l130",parametros_json_jogos(request.params.items())['objetoAprendizagem'])

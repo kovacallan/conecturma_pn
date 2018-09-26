@@ -69,6 +69,12 @@ class FacadeTest(unittest.TestCase):
 
     def _set_itens_facade(self):
         self._create_estrutura()
+        self._create_aluno()
+
+        cabeça=self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'],nome="cabeça")
+        ombro= self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'])
+        itens=('lista','dicionarios')
+        self.facade.set_itens_student_facade('1',)
 
 
     def _search_aluno_id_facade(self):
