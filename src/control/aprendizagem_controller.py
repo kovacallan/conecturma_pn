@@ -139,6 +139,7 @@ def registrarConclusao():
                 'VC': is_vc_or_cn,
                 'CN': is_vc_or_cn
             }
+            # if autorizaçao_professor()==True:
 
             return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
             (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),

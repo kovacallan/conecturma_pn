@@ -67,6 +67,10 @@ class FacadeTest(unittest.TestCase):
     def test_update_aluno(self):
         self._update_aluno()
 
+    def _set_itens_facade(self):
+        self._create_estrutura()
+
+
     def _search_aluno_id_facade(self):
         self._create_aluno()
         aluno = self.facade.search_aluno_id_facade('1')
@@ -175,6 +179,7 @@ class FacadeTest(unittest.TestCase):
         self._pes_alun_by_turma()
 
     def _gravar_premiacao(self):
+        from control.gestao_aprendizagem_controller import convertendo_str_in_dict
         # premios = {
         #     'medalhas': gamificacao_medalha(aluno, oa=oa),
         #     'moedas': gamificacao['moedas'],'''int'''
@@ -186,14 +191,15 @@ class FacadeTest(unittest.TestCase):
             'moedas': 9,
             'xp': 10
         }
+        self._create_estrutura()
         self.facade.gravar_premiacao(1, premiacao)
         aluno = self.facade.search_aluno_id_facade(1)
         self.assertEqual(aluno['pontos_de_vida'], '10')
         self.assertEqual(aluno['pontos_de_moedas'], '9')
         medalha = self.facade.get_medalhas_facade(1)
-        self.assertEqual(medalha[0].decode('UTF-8'), '1')
-        self.assertEqual(medalha[1].decode('UTF-8'), '2')
-        self.assertEqual(medalha[2].decode('UTF-8'), '3')
+        for i in range(0,len(medalha)-1):
+            mel = convertendo_str_in_dict(medalha[i].decode('UTF-8'))
+            self.assertEqual(mel['id_medalha'],str(i+1))
 
     def test_gravar_premiacao(self):
         self._create_aluno()
@@ -212,12 +218,14 @@ class FacadeTest(unittest.TestCase):
         self._mostrar_ultimo_jogo_jogado()
 
     def _get_medalhas(self):
+        from control.gestao_aprendizagem_controller import convertendo_str_in_dict
         self._create_aluno()
         self._gravar_premiacao()
         alun = self.facade.search_aluno_id_facade(1)
         medalhas = self.facade.get_medalhas_facade(alun['id'])
-        print('medalhas', medalhas[0])
-        self.assertEqual(medalhas[0], '1'.encode('UTF-8'))
+        meld=medalhas[0].decode('UTF-8')
+        melda=convertendo_str_in_dict(meld)
+        self.assertEqual(melda['id_medalha'], '1')
 
     def test_get_medalhas(self):
         self._get_medalhas()

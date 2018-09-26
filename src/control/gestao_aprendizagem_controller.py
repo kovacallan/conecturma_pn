@@ -533,7 +533,7 @@ def controller_escola_cadastro(no_repeat):
     telefone = request.params['telefone']
     cnpj = request.params['cnpj']
     telefone = request.params['telefone']
-    vinculo_diretor_escola = request.params['diretor']
+    # vinculo_diretor_escola = request.params['diretor']
     vinculo_rede = request.params['rede']
     endereco = request.params['endereco']
     numero = request.params['numero']
