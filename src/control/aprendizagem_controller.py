@@ -1,5 +1,7 @@
 import json
 from bottle import route, view, request, redirect, response, get, template
+
+from control.gestao_aprendizagem_controller import convertendo_str_in_dict
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado
 from control.dicionarios import *
@@ -55,6 +57,7 @@ def verificarAcessoObjetoAprendizagem():
 
 
 def verificarConclusoesObjetosAprendizagem():
+
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
     print('entao sou eu q desbloqueio?',parametros)
@@ -71,14 +74,16 @@ def verificarConclusoesObjetosAprendizagem():
             print('fuu',parametros['objetosAprendizagem'])
             for i in parametros['objetosAprendizagem']:
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
-                try:
-                    print('desempenho oa',desempenho_oa[0]['jogo_jogado'])
-                except Exception as e:
-                    print(e)
+                # try:
+                # nivel_jogo = convertendo_str_in_dict(desempenho_oa[0]['jogo_jogado'][0])
                 if desempenho_oa == []:
                     pass
                 else:
                     teste.append(i)
+                # except Exception as e:
+                #     if e == " list index out of range":
+                #         pass
+                #     print(e)
 
             retorno = {'objetosConcluidos': teste}
             print('teste',retorno)
@@ -114,6 +119,7 @@ def view_ambiente_de_aprendizagem():
         jogador = facade.search_observador_id_facade(id=usuario['id'])
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
+        print(facade.search_estrutura_id_facade(id=jogador['cor']))
         cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
         rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
         acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
@@ -123,17 +129,30 @@ def view_ambiente_de_aprendizagem():
 
 def registrarConclusao():
     usuario = usuario_logado()
-    print("regisrar conclusao l95",parametros_json_jogos(request.params.items()))
+    dados_jogo= parametros_json_jogos(request.params.items())
+    print("regisrar conclusao l130",parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+    print("registrar conclusao l131",dados_jogo['niveis'],len(dados_jogo['niveis']))
     if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
-        premios={
-            'OA': is_oa,
-            'VC': is_vc_or_cn,
-            'CN': is_vc_or_cn
-        }
+        if dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True:
+            premios={
+                'OA': is_oa,
+                'VC': is_vc_or_cn,
+                'CN': is_vc_or_cn
+            }
 
-        return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
-        (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
-         oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+            return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
+            (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
+             oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+        else:
+            premios = {
+                'OA': is_oa,
+                'VC': is_vc_or_cn,
+                'CN': is_vc_or_cn
+            }
+
+            return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
+                (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
+                 oa='')
     else:
         gamificacao = gamificacao_moeda_xp(parametros = parametros_json_jogos(request.params.items()))
         premios = {
@@ -167,6 +186,7 @@ def obterPremiacao():
 def verificarAcessoUnidade():
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
+    print('investigando APl176',parametros)
     if int(usuario['tipo']) < 6:
         retorno = {'unidadesAcessiveis': parametros['unidades']}
     else:

@@ -72,15 +72,15 @@ class DbEstrutura(Model):
 
         return listas
 
-    def ja_possui_item(self, usuario_logado):
-        from model.aluno_model import DbAluno
-
-        usuario = DbAluno()
-        # [x.decode('utf-8') for x in usuario.i]
-        itens_usuario = usuario.ver_itens_comprados(id_usuario=int(usuario_logado))
-        itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura=TIPO_ESTRUTURA['item'])]
-        lista_teste = [z for z in itens if z not in itens_usuario]
-        return lista_teste
+    # def ja_possui_item(self, usuario_logado):
+    #     from model.aluno_model import DbAluno
+    #
+    #     usuario = DbAluno()
+    #     # [x.decode('utf-8') for x in usuario.i]
+    #     itens_usuario = usuario.ver_itens_comprados(id_usuario=int(usuario_logado))
+    #     itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura=TIPO_ESTRUTURA['item'])]
+    #     lista_teste = [z for z in itens if z not in itens_usuario]
+    #     return lista_teste
 
     def search_estrutura(self, tipo_estrutura, nome):
         lista_dic= []

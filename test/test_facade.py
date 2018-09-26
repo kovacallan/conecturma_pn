@@ -132,50 +132,6 @@ class FacadeTest(unittest.TestCase):
     def test_aluno_in_turma(self):
         self._aluno_in_turma()
 
-    def _comprar_item(self):
-        self._create_estrutura()
-        self._create_aluno()
-        aluno1 = self.facade.search_aluno_nome_objeto_facade("egg")
-        item1 = self.facade.search_estrutura_facade(nome="burroquandofoge", tipo_estrutura="4")
-        self.facade.compra_item_facade(aluno1.id, item1['id'])
-        aluno=self.facade.ver_item_comprado_facade(aluno1.id)
-        print('alun',aluno)
-        self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
-
-    def test_compra_item(self):
-        self._comprar_item()
-
-    def _ver_iten_comprado(self):
-        self._comprar_item()
-        aluno1 = self.facade.search_aluno_nome_objeto_facade("egg")
-        iten = self.facade.ver_item_comprado_facade(aluno1.id)
-        self.assertEqual([(aluno1.itens_comprados[0].decode('utf-8'))], iten)
-
-    def test_ver_itens_comprados(self):
-        self._ver_iten_comprado()
-
-    def _equipar_item_facade(self):
-        self._comprar_item()
-        aluno1 = self.facade.search_aluno_nome_facade("egg")
-        iten = self.facade.search_estrutura_facade(tipo_estrutura='5', nome="burroquandofoge")
-        self.facade.equipar_item_facade(aluno1['id'], iten)
-        aluno2 = self.facade.search_aluno_nome_facade("egg")
-        self.assertEqual(aluno2['cor'], str(iten['id']))
-
-    def test_equipar_item(self):
-        self._equipar_item_facade()
-
-    def _mostrar_avatar(self):
-        self._equipar_item_facade()
-        aluno1 = self.facade.search_aluno_nome_facade("egg")
-        self.facade.avatar_facade(aluno1['id'])
-        iten1 = self.facade.search_estrutura_facade(TIPO_ESTRUTURA['item'], "burroquandofoge")
-        self.assertEqual(self.facade.avatar_facade(aluno1['id'])['cor'], str(iten1['id']))
-        # self._delete_item()
-
-    def test_ver_avatar(self):
-        self._mostrar_avatar()
-
     def _anotacoes_no_aluno(self):
         self._create_aluno()
         mensagem2 = "tetativa..."
@@ -261,7 +217,8 @@ class FacadeTest(unittest.TestCase):
         alun = self.facade.search_aluno_id_facade(1)
         medalhas = self.facade.get_medalhas_facade(alun['id'])
         print('medalhas', medalhas[0])
-        self.assertEqual(medalhas[0],'1'.encode('UTF-8'))
+        self.assertEqual(medalhas[0], '1'.encode('UTF-8'))
+
     def test_get_medalhas(self):
         self._get_medalhas()
 
@@ -317,12 +274,16 @@ class FacadeTest(unittest.TestCase):
 
         observador1 = self.facade.search_observador_facade('Caio Lacildes')
         self.facade.update_observador_facade(id=observador1['id'], nome='Knight',
-                                             email='knight@ni.com')
-        observador2 = self.facade.search_observador_tipo_nome_facade('3', 'Knight')
-        self.facade.update_observador_facade(id=observador2['id'], nome='Knight', email='knight@ni.com')
+                                             email='knight@ni.com', telefone="21 999443243", cpf="9993245611",
+                                             vinculo_turma='1', vinculo_escola='2')
         observador3 = self.facade.search_observador_tipo_nome_facade('3', 'Knight')
         self.assertEqual(observador3['nome'], 'Knight')
         self.assertEqual(observador3['email'], 'knight@ni.com')
+        self.assertEqual(observador3['telefone'], "21 999443243")
+        self.assertEqual(observador3['cpf'], "9993245611")
+        self.assertEqual(observador3['vinculo_turma'], "1")
+        self.assertEqual(observador3['vinculo_escola'], "2")
+
 
     def test_create_update_delete_observador(self):
         self._create_observador()
@@ -556,7 +517,8 @@ class FacadeTest(unittest.TestCase):
                                                            nome='fazendo joguinhos')
         self.assertIsNot(medalha_jogo, None)
 
-        iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo_estrutura=TIPO_ESTRUTURA['item'], tipo_item='1', preco='0')
+        iten1 = self.facade.create_estrutura_facade(nome="burroquandofoge", tipo_estrutura=TIPO_ESTRUTURA['item'],
+                                                    tipo_item='1', preco='0')
         self.assertIsNot(iten1, None)
         escola = self.facade.create_estrutura_facade(nome='Do bairro', bairro='de baixo', telefone='2266 6622',
                                                      numero='21 ', UF='RJ', cidade='Pindamonhagaba',
@@ -567,20 +529,22 @@ class FacadeTest(unittest.TestCase):
                                                      quem_criou="Ni")
         self.assertIsNot(turma1, None)
 
-        oa1=facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01", aventura="AV1",
-                                       descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)",
-                                       tipo_oa=TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01",
-                                       nome_descritor="Estante de Leitura",
-                                       descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)",
-                                       serie="1", disciplina="2")
+        oa1 = facade.create_estrutura_facade(tipo_estrutura="7", nome="Estante", sigla_oa="UV1AV1UD1OA01",
+                                             aventura="AV1",
+                                             descricao="Distinguir coisas onde podemos encontrar números (Números e Operações - algebra e Funções)",
+                                             tipo_oa=TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="NU1.01",
+                                             nome_descritor="Estante de Leitura",
+                                             descricao_descritor="Localizar acontecimentos no tempo (ontem, hoje, amanhã)",
+                                             serie="1", disciplina="2")
         self.assertIsNotNone(oa1)
-        oa2=facade.create_estrutura_facade(tipo_estrutura="7", nome="Acerte as Letras", sigla_oa="UV1AV1UD1OA02",
-                                       aventura="AV1",
-                                       descricao="Diferenciar letras de outros sinais gráficos, como os números e os sinais de pontuação (SEA - Sistema de Escrita Alfabética)",
-                                       tipo_oa=TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="SE1.02",
-                                       nome_descritor="Acerte as Letras",
-                                       descricao_descritor="Compreender a função das letras e do alfabeto", serie="1",
-                                       disciplina="1")
+        oa2 = facade.create_estrutura_facade(tipo_estrutura="7", nome="Acerte as Letras", sigla_oa="UV1AV1UD1OA02",
+                                             aventura="AV1",
+                                             descricao="Diferenciar letras de outros sinais gráficos, como os números e os sinais de pontuação (SEA - Sistema de Escrita Alfabética)",
+                                             tipo_oa=TIPO_OAS_ID["MINI_GAME"], unidade="1", sigla_descritor="SE1.02",
+                                             nome_descritor="Acerte as Letras",
+                                             descricao_descritor="Compreender a função das letras e do alfabeto",
+                                             serie="1",
+                                             disciplina="1")
         self.assertIsNotNone(oa2)
 
     def test_create_estrutura(self):
@@ -597,7 +561,7 @@ class FacadeTest(unittest.TestCase):
     def _update_rede(self):
         self._create_estrutura()
         rede1 = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Rede Conecturma")
-        self.assertEqual(rede1['nome'],'Rede Conecturma')
+        self.assertEqual(rede1['nome'], 'Rede Conecturma')
         estrutura = {'id': '1', 'telefone': '(11)8888-8888', 'nome': 'Ni'}
         rede_up = self.facade.update_estrutura_facade(estrutura=estrutura)
         rede = self.facade.search_estrutura_facade(tipo_estrutura="1", nome="Ni")
@@ -607,7 +571,7 @@ class FacadeTest(unittest.TestCase):
     def _update_escola(self):
         self._create_estrutura()
         escola = self.facade.search_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome="Do bairro")
-        self.assertEqual(escola['nome'],'Do bairro')
+        self.assertEqual(escola['nome'], 'Do bairro')
         estrutura = {'telefone': '33355567', 'nome': 'Ni', 'vinculo_rede': 'abelhinha',
                      'cep': '22270 999', 'endereco': 'rua do teste', 'numero': '666', 'cidade': 'RIO DE JANEIRO',
                      'estado': 'RJ', 'id': str(escola['id'])}
@@ -664,12 +628,12 @@ class FacadeTest(unittest.TestCase):
         self.assertEqual(turma[0]['nome'], 'turma conecturma')
 
     def _search_oa_by_type_and_aventura_facade(self):
-        oa = self.facade.search_oa_by_type_and_aventura_facade(aventura='AV1',disciplina='2')
-        self.assertEqual(oa[0]['nome'],'Estante')
+        oa = self.facade.search_oa_by_type_and_aventura_facade(aventura='AV1', disciplina='2')
+        self.assertEqual(oa[0]['nome'], 'Estante')
 
     def _search_descritor_serie_facade(self):
         desc = self.facade.search_descritor_serie_facade('1')
-        self.assertEqual(desc[1]['nome'],'Acerte as Letras')
+        self.assertEqual(desc[1]['nome'], 'Acerte as Letras')
 
     def test_pesquisas_estrutura(self):
         self._pesquisa_estrutura()
@@ -680,21 +644,15 @@ class FacadeTest(unittest.TestCase):
         self._search_oa_by_type_and_aventura_facade()
         self._search_descritor_serie_facade()
 
-    def _ja_possui_item(self):
-        self._comprar_item()
-        item = facade.ja_tem_item_facade('2')
-        self.assertEqual(item[0], '5')
-
-    def test_ja_possui_item(self):
-        self._ja_possui_item()
 
     """FIM TESTE TURMA """
 
     """TESTE FACADE HISTORICO"""
 
     def _create_historico(self):
-        hist=self.facade.create_historico_facade(nome_usuario='administrador',acao='recriar um filho da mae',momento=datetime.datetime(2016,5,2,14,25,11))
-        self.assertIsNot(hist,None)
+        hist = self.facade.create_historico_facade(nome_usuario='administrador', acao='recriar um filho da mae',
+                                                   momento=datetime.datetime(2016, 5, 2, 14, 25, 11))
+        self.assertIsNot(hist, None)
 
     def _read_historico(self):
         historico = self.facade.read_historico_facade()
@@ -706,34 +664,33 @@ class FacadeTest(unittest.TestCase):
 
     def _hist_dados_cadastrado(self):
         self._create_historico()
-        dados = {'nome':'xinchorino','facilidade':20,'cao':'nao','gato':'noop'}
-        self.facade.historico_de_dados_cadastrados_facade(1,dados)
-        teste=self.facade.ver_dados_cadastrados_facade(1)
-        self.assertEqual(teste['nome'],'xinchorino')
-        self.assertEqual(teste['facilidade'],'20')
-        self.assertEqual(teste['cao'],'nao')
-        self.assertEqual(teste['gato'],'noop')
+        dados = {'nome': 'xinchorino', 'facilidade': 20, 'cao': 'nao', 'gato': 'noop'}
+        self.facade.historico_de_dados_cadastrados_facade(1, dados)
+        teste = self.facade.ver_dados_cadastrados_facade(1)
+        self.assertEqual(teste['nome'], 'xinchorino')
+        self.assertEqual(teste['facilidade'], '20')
+        self.assertEqual(teste['cao'], 'nao')
+        self.assertEqual(teste['gato'], 'noop')
 
     def test_hist_dados_cadastro(self):
         self._hist_dados_cadastrado()
 
     def _search_historico_id_facade(self):
         self._create_historico()
-        hist=self.facade.search_historico_id_facade(1)
-        self.assertEqual(hist['nome_usuario'],'administrador')
-        self.assertEqual(hist['acao'],'recriar um filho da mae')
-
+        hist = self.facade.search_historico_id_facade(1)
+        self.assertEqual(hist['nome_usuario'], 'administrador')
+        self.assertEqual(hist['acao'], 'recriar um filho da mae')
 
     def _search_historico_nome(self):
         self._create_historico()
         hist = self.facade.search_historico_nome_facade('administrador')
-        self.assertEqual(hist[0]['nome_usuario'],'administrador')
-        self.assertEqual(hist[0]['acao'],'recriar um filho da mae')
+        self.assertEqual(hist[0]['nome_usuario'], 'administrador')
+        self.assertEqual(hist[0]['acao'], 'recriar um filho da mae')
 
     def _search_hist_acao(self):
         self._create_historico()
         hist = self.facade.search_historico_acao_facade('recriar um filho da mae')
-        self.assertEqual(hist[0]['nome_usuario'],'administrador')
+        self.assertEqual(hist[0]['nome_usuario'], 'administrador')
 
     def test_search_historico(self):
         self._search_historico_id_facade()
@@ -743,9 +700,11 @@ class FacadeTest(unittest.TestCase):
     """FIM TESTE FACADE HISTORICO"""
 
     """ TESTE DE JOGO FACADE"""
+
     # {id'_aluno': '2', 'unidade': 'UV1AV1UD1', 'objeto_aprendizagem': 'UV1AV1UD1OA02'}
     def _create_oa_concluido_facade(self):
-        oa_criad=self.facade.create_oa_concluido_facade(id_aluno= '1', unidade='UV1AV1UD1',objeto_aprendizagem='UV1AV1UD1OA02')
+        oa_criad = self.facade.create_oa_concluido_facade(id_aluno='1', unidade='UV1AV1UD1',
+                                                          objeto_aprendizagem='UV1AV1UD1OA02')
         self.assertIsNotNone(oa_criad)
 
     def test_create_oa_conluido(self):
@@ -753,21 +712,19 @@ class FacadeTest(unittest.TestCase):
 
     def _search_desempenho_concluido_id_aluno_facade(self):
         self._create_oa_concluido_facade()
-        teste=self.facade.unidade_teste_facade(2,'UV1AV1UD1')
-        self.assertEqual(teste[0]['objeto_aprendizagem'],'UV1AV1UD1OA02')
+        teste = self.facade.unidade_teste_facade(2, 'UV1AV1UD1')
+        self.assertEqual(teste[0]['objeto_aprendizagem'], 'UV1AV1UD1OA02')
 
     def test_search_desempenho_concluido(self):
         self._search_desempenho_concluido_id_aluno_facade()
 
     def _unidade_concluida_facade(self):
         self._create_oa_concluido_facade()
-        teste=self.facade.unidade_concluida_facade(2,'UV1AV1UD1')
+        teste = self.facade.unidade_concluida_facade(2, 'UV1AV1UD1')
         self.assertEqual(teste[0]['objeto_aprendizagem'], 'UV1AV1UD1OA02')
 
     def _search_oa_facade(self):
         self._create_oa_concluido_facade()
-
-
 
     """FIM DE TESTE DE JOGO"""
 
@@ -884,6 +841,59 @@ class FacadeTest(unittest.TestCase):
 
     # def test_substituto_de_webtest(self):
     #     self._create_observador()
+
+    # def _comprar_item(self):
+    #     self._create_estrutura()
+    #     self._create_aluno()
+    #     aluno1 = self.facade.search_aluno_nome_objeto_facade("egg")
+    #     item1 = self.facade.search_estrutura_facade(nome="burroquandofoge", tipo_estrutura="4")
+    #     self.facade.compra_item_facade(aluno1.id, item1['id'])
+    #     aluno=self.facade.ver_item_comprado_facade(aluno1.id)
+    #     print('alun',aluno)
+    #     self.assertIn(str(item1['id']), aluno1.itens_comprados[-1].decode('utf-8'))
+
+    #
+    # def test_compra_item(self):
+    #     self._comprar_item()
+    #
+    # def _ver_iten_comprado(self):
+    #     self._comprar_item()
+    #     aluno1 = self.facade.search_aluno_nome_objeto_facade("egg")
+    #     iten = self.facade.ver_item_comprado_facade(aluno1.id)
+    #     self.assertEqual([(aluno1.itens_comprados[0].decode('utf-8'))], iten)
+    #
+    # def test_ver_itens_comprados(self):
+    #     self._ver_iten_comprado()
+    #
+    # def _equipar_item_facade(self):
+    #     self._comprar_item()
+    #     aluno1 = self.facade.search_aluno_nome_facade("egg")
+    #     iten = self.facade.search_estrutura_facade(tipo_estrutura='5', nome="burroquandofoge")
+    #     self.facade.equipar_item_facade(aluno1['id'], iten)
+    #     aluno2 = self.facade.search_aluno_nome_facade("egg")
+    #     self.assertEqual(aluno2['cor'], str(iten['id']))
+    #
+    # def test_equipar_item(self):
+    #     self._equipar_item_facade()
+    #
+    # def _mostrar_avatar(self):
+    #     self._equipar_item_facade()
+    #     aluno1 = self.facade.search_aluno_nome_facade("egg")
+    #     self.facade.avatar_facade(aluno1['id'])
+    #     iten1 = self.facade.search_estrutura_facade(TIPO_ESTRUTURA['item'], "burroquandofoge")
+    #     self.assertEqual(self.facade.avatar_facade(aluno1['id'])['cor'], str(iten1['id']))
+    #     # self._delete_item()
+    #
+    # def test_ver_avatar(self):
+    #     self._mostrar_avatar()
+
+    # def _ja_possui_item(self):
+    #     self._comprar_item()
+    #     item = facade.ja_tem_item_facade('2')
+    #     self.assertEqual(item[0], '5')
+    #
+    # def test_ja_possui_item(self):
+    #     self._ja_possui_item()
 
 
 if __name__ == '__main__':

@@ -8,10 +8,7 @@ from control.dicionarios import TIPO_USUARIOS_ID
 facade = Facade()
 
 def controller_observador_cadastro():
-    """
-    Cria o administradores , com nome , senha e telefone (tipo==0)
-    :return:
-    """
+
     nome = request.params['nome']
     senha = request.params['senha']
     telefone = request.params['telefone']
@@ -32,10 +29,7 @@ def view_adm():
 
 
 def pesquisar_aluno_turma():
-    """
-    Pesquisa o aluno dentro da turma
-    :return:
-    """
+
     aluno_ = request.params['nome_do_aluno']
     turma_ = request.params['nome_da_turma']
     facade.pesquisa_aluno_turma_facade(aluno_, turma_)

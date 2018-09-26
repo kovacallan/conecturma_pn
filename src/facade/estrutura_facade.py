@@ -48,9 +48,9 @@ class EstruturaFacade:
     def get_itens_free_facade(self):
         return self.estrutura.get_itens_free()
 
-    def ja_tem_item_facade(self, usuario_logado):
-
-        return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)
+    # def ja_tem_item_facade(self, usuario_logado):
+    #
+    #     return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)
 
     # def anotacoes_observador_turma_facade(self, id_estrutura,mensagem):
     #     return self.estrutura.func_anotacoes_estrutura_turma(id_estrutura,mensagem)

@@ -25,7 +25,7 @@ class ObservadorFacade:
         return self.observador.set_itens_responsaveis(id=id, itens=itens)
 
     def update_observador_facade(self, id, nome, telefone, cpf, email,vinculo_turma,vinculo_escola):
-        return self.observador.update_observador(id, nome, telefone, cpf, email,vinculo_turma,vinculo_escola)
+        return self.observador.update_observador(id=id, nome=nome, telefone=telefone, cpf=cpf, email=email,vinculo_turma=vinculo_turma,vinculo_escola=vinculo_escola)
 
     def create_hash_login_facade(self,id, hash):
         self.observador.create_hash_login(id=id, hash=hash)

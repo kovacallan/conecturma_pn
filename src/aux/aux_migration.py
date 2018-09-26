@@ -16,7 +16,7 @@ facade.create_observador_facade(nome='AZAR d', telefone='0800 2015 05', tipo=TIP
 facade.create_observador_facade(nome='PEDANTE d', telefone='0800 0500 2099', tipo=TIPO_USUARIOS['diretor'], vinculo_escola='1', email='DONACHICA@gmail.com', cpf='04432547' )
 
 for x in range(0,4):
-    facade.create_estrutura_facade(nome="nome" + str(x), vinculo_escola='1',)
+    facade.create_estrutura_facade(nome="nome" + str(x), vinculo_escola='1',tipo_estrutura=TIPO_ESTRUTURA['turma'],serie='2')
     facade.create_observador_facade(nome='aagestor'+str(x),senha='@onde2929', telefone='21979645254', tipo=TIPO_USUARIOS['gestor'],
                                     vinculo_escola='1', email='tent@cool.'+str(x)+'s', cpf='04432547')
 

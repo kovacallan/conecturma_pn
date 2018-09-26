@@ -55,11 +55,18 @@ class DbObservador(Model):
 
         return observador
 
-    def update_observador(self, update_id, nome, email):
-
-        observador = self.load(update_id)
-        [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.all()]
-        observador.save()
+    def update_observador(self, **kwargs):
+        print('recebeu isso',kwargs)
+        observador = self.load(kwargs['id'])
+        for i in kwargs:
+            if kwargs[i] and kwargs[i] != ' ':
+                setattr(observador, i, kwargs[i])
+        if observador.save():
+            return True
+        else:
+            return False
+        # [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.all()]
+        # observador.save()
 
     def redefinir_senha(self, id, senha):
         observador = DbObservador.load(id)
@@ -105,12 +112,11 @@ class DbObservador(Model):
         :param nome: nome do observador
         :return:
         """
-
         observador = None
         for search in DbObservador.query(DbObservador.nome == nome):
             observador = dict(
                 id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
+                cpf=search.cpf, email=search.email, tipo=search.tipo,
                 cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                 vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
                 vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
@@ -128,7 +134,7 @@ class DbObservador(Model):
         for search in DbObservador.query(DbObservador.tipo == tipo, order_by=DbObservador.nome):
             observador.append(dict(
                     id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                    cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
+                    cpf=search.cpf, email=search.email, tipo=search.tipo,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
                     vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
