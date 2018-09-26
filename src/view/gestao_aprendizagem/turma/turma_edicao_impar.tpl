@@ -70,6 +70,10 @@
                                         </div>
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
+                                    <div id="dar_medalhas_todos">
+                                        %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
+                                    </div> <!--Fechando janela de dar medalhas -->
+                                    <!--fim da div dos dados ao lado da imagem-->
                                 </div>
                             </div>
                         </form>
@@ -85,6 +89,33 @@
                                     <p>Alunos
                                         <i class="far fa-question-circle"></i>
                                     </p>
+                                     % for z in i['aluno']:
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <div class="nome-prof row row-impar">
+                                                    <div class="col-md-2">
+                                                        %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                                    </div>
+                                                    <div class="col-md-5" style="margin-top: 4px;">
+                                                        Nome: {{z['nome']}}
+                                                        <br>
+                                                        Login :{{z['nome_login']}}
+                                                    </div>
+                                                    <div class="col-md-5" style="padding:10px">
+                                                        <span style="margin-left: 32px;"> &nbsp;senha :</span>
+                                                        <img src="/static/img/{{z['senha'][3]}}.png"
+                                                             style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][2]}}.png"
+                                                             style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][1]}}.png"
+                                                             style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][0]}}.png"
+                                                             style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     %end
                                 </div>
                             </div>
 
