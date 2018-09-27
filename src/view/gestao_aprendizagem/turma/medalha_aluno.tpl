@@ -1,15 +1,19 @@
 <div id="janela_medalhas" style="margin-top: 9px;">
     <!-- Modal -->
 <div class="modal fade" id="medalha_janela{{z['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <div class="modal-dialog" role="document"   style="margin: 0px 0 0 20%;">
+ <div class="modal-dialog" role="document"   style="margin: 22px 0 0 20%;">
    <div class="modal-content tamanho">
 
      <div class="modal-body">
    <table class="table table-borderless">
-      <div class="table-head" style="margin-bottom: 10px; width: 102%">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="bottom: 13px; position: relative; left: 9px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       <div class="table-head" style="margin-bottom: 10px; width: 102%">
            <h5>Medalha</h5>
            <h5 id="header-2">Competência</h5>
            <h5 style="margin-left: 200px;">Comentário</h5>
+
        </div>
          <tbody>
             % for m in medalhas:
