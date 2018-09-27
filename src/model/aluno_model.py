@@ -251,7 +251,7 @@ class DbAluno(Model):
                     usuario.corpo = i['id']
         usuario.save()
 
-        print(usuario.cor, usuario.rosto, usuario.acessorio, usuario.corpo)
+
 
     def avatar(self, id):
 
@@ -306,7 +306,7 @@ class DbAluno(Model):
             aluno = DbAluno.load(int(id_aluno))
             aluno.medalhas.append(dict(id_medalha=medalha, motivo_medalha=motivo))
         except KeyError:
-            print("Tivemos um problema para econtrar esse aluno")
+
             return False
         else:
             aluno.save()

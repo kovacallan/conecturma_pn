@@ -60,10 +60,10 @@ def verificarConclusoesObjetosAprendizagem():
 
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
-    print('entao sou eu q desbloqueio?',parametros)
+
     if int(usuario['tipo']) < 6:
         retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
-        print('test',retorno)
+
     else:
         cn_final = facade.oa_teste_facade(id_aluno=str(usuario['id']),
                                           oa='{}CN02'.format(parametros['objetosAprendizagem'][0:9]))
@@ -71,7 +71,7 @@ def verificarConclusoesObjetosAprendizagem():
             retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
         else:
             teste = []
-            print('fuu',parametros['objetosAprendizagem'])
+
             for i in parametros['objetosAprendizagem']:
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
                 # try:
@@ -83,10 +83,9 @@ def verificarConclusoesObjetosAprendizagem():
                 # except Exception as e:
                 #     if e == " list index out of range":
                 #         pass
-                #     print(e)
+
 
             retorno = {'objetosConcluidos': teste}
-            print('teste',retorno)
 
     return retorno
 
@@ -119,7 +118,7 @@ def view_ambiente_de_aprendizagem():
         jogador = facade.search_observador_id_facade(id=usuario['id'])
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
-        print(facade.search_estrutura_id_facade(id=jogador['cor']))
+
         cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
         rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
         acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
@@ -131,8 +130,7 @@ def registrarConclusao():
     """responsavel por desbloquear o proximo OA"""
     usuario = usuario_logado()
     dados_jogo= parametros_json_jogos(request.params.items())
-    print("regisrar conclusao l130",parametros_json_jogos(request.params.items())['objetoAprendizagem'])
-    print("registrar conclusao l131",dados_jogo['niveis'],len(dados_jogo['niveis']))
+
     if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
         if dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True:
             premios={
@@ -168,7 +166,7 @@ def registrarConclusao():
 
 def obterPremiacao():
     parametros = parametros_json_jogos(request.params.items())
-    print('obter premiacao',parametros)
+
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         aluno = facade.search_aluno_id_facade(id_aluno=usuario['id'])
@@ -188,7 +186,7 @@ def obterPremiacao():
 def verificarAcessoUnidade():
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
-    print('investigando APl176',parametros)
+
     if int(usuario['tipo']) < 6:
         retorno = {'unidadesAcessiveis': parametros['unidades']}
     else:
@@ -243,7 +241,7 @@ def verificarAcessoUnidade():
 def verificarAcessoAventura():
     from control.dicionarios import AVENTURAS_CONECTURMA
     usuario = usuario_logado()
-    print(usuario)
+
     if int(usuario['tipo']) < 6:
         parametros = parametros_json_jogos(request.params.items())
         return AVENTURAS_CONECTURMA['3']
@@ -387,7 +385,7 @@ def de_novo(id_aluno,oa):
             return False
 
 def magia_da_matematica(id_aluno, aventura):
-    print('testando se existe M',id_aluno,aventura)
+
     oa = facade.search_oa_by_type_and_aventura_facade(aventura='UV1AV1', disciplina=DICIPLINA_NOME['matematica'])
     oas_terminandos_dificel = 0
     for i in oa:
@@ -405,7 +403,7 @@ def magia_da_matematica(id_aluno, aventura):
         return False
 
 def magia_da_lingua_portuguesa(id_aluno, aventura):
-    print('testando se existe aventura P',id_aluno,aventura)
+
     oa = facade.search_oa_by_type_and_aventura_facade(aventura='UV1AV1', disciplina=DICIPLINA_NOME['lingua Portuguesa'])
     oas_terminandos_dificel = 0
     for i in oa:

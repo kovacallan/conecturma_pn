@@ -153,7 +153,7 @@ def send_email_confirmation(nome, email):
                            "Segue o link para ativação da conta da Conecturma: </br>" \
                            "<a href='" + url + "'>" + url + "</a>"
     msg.attach(MIMEText(body, 'html'))
-    print(msg)
+
 
     server = smtplib.SMTP('mail.conecturma.com.br', 587)
     server.starttls()
@@ -436,7 +436,7 @@ def controller_create_rede(no_repeat):
     municipio = request.params['municipio']
     quem_criou = usuario_logado()['nome']
     if no_repeat:
-        print('locals', locals())
+
         return locals()
     elif nome != '' and nome != None and telefone != '' and telefone != None:
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
@@ -544,7 +544,7 @@ def controller_escola_cadastro(no_repeat):
     municipio = request.params['municipio']
     if nome != '' and nome != None and telefone != '' and telefone != None:
         if no_repeat == True:
-            print('hei')
+
             return locals()
         facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=nome,
                                        cnpj=request.params['cnpj'], telefone=request.params['telefone'],
@@ -724,7 +724,6 @@ def controller_entregar_medalha_aluno():
 
 
 def entregar_medalha_todos_alunos():
-    print("teste turma medalha para todos", request.params['turma'], request.params['medalha'], request.params['motivo'])
     alunos = facade.search_aluno_by_turma_facade(vinculo_turma=request.params['turma'])
     for i in alunos:
         medalhas = facade.set_medalha_facade(id_aluno=i['id'], medalha=request.params['medalha'], motivo=request.params['motivo'])
@@ -776,7 +775,7 @@ def checar_pontuiacao(desempenho):
     }
     pontuacao = 0
     for i in desempenho['jogo_jogado']:
-        print(i)
+
         dict_dado_jogo = convertendo_str_in_dict(i)
         if dict_dado_jogo['termino'] == True:
             pontuacao += niveis_pontuacao[dict_dado_jogo['nivel']]

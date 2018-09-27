@@ -145,10 +145,10 @@ def permissao(quem_tem_permissao):
                         elif 'view' in function.__name__:
                             histo.create_historico_facade(acao=function.__name__, nome_usuario=usuario_logado()['nome'],
                                                           momento=datetime.now())
-                            print('so view')
+
                         else:
                             retorno_da_func=function(no_repeat=True)
-                            print('to aqui e recebi isso',function.__name__,retorno_da_func)
+
                             histo.create_historico_facade(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
                             # teste=histo.search_historico_nome_facade('administrador')
                             histo.historico_de_dados_cadastrados_facade(usuario_logado()['id'],retorno_da_func)

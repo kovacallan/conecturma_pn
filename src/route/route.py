@@ -110,7 +110,7 @@ def view_guarda_roupa():
     guarda_roupa.get_item_comprar()
     guarda_roupa.get_item_user_have()
 
-    print(cor)
+
 
     return template('caminho_aluno/guarda_roupa/index',usuario_logado = usuario_logado(), apelido = usuario['apelido'], cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo, cristais=usuario['pontos_de_moedas'],
                     cores=guarda_roupa.get_cor(), rostos=guarda_roupa.get_rosto(), acessorios=guarda_roupa.get_acessorio(), corpos=guarda_roupa.get_corpo(), itens_usuario = guarda_roupa.get_itens_user())
@@ -580,7 +580,7 @@ def upload():
         upload_file.save('view/app/fotos_usuarios', overwrite=True)
         redirect('/')
     except AttributeError:
-        print('erro')
+
         redirect('/')
 
 

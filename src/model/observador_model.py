@@ -56,7 +56,7 @@ class DbObservador(Model):
         return observador
 
     def update_observador(self, **kwargs):
-        print('recebeu isso',kwargs)
+
         observador = self.load(kwargs['id'])
         for i in kwargs:
             if kwargs[i] and kwargs[i] != ' ':
