@@ -1,25 +1,8 @@
-<!--informaçoes-->
-<div class="col-md-5 item-tabela ">
+<div style="cursor: pointer;" class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
+       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
 </div>
-<div class="col-md-2 item-tabela ">
-    {{i['vinculo_rede']}}
-</div>
-<div class="col-md-2 item-tabela" >
-    {{i['vinculo_diretor_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['telefone']}}
-</div>
-<!--<div  style="padding:0">-->
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="col-md-1 item-tabela card colocar-direita" id="id-escola-d-rock{{i['id']}}" onclick="setinha_aux('id-escola-d-rock{{i['id']}}')" style="height: 50px;
-    padding-right: 15px;
-    padding-top: 15px;
-    width: 64px;">
-        <i id="setinha" class='fas fa-angle-down'></i>
-    </a>
-<!--</div>-->
+
 
 <!--fim das informaçoes da tabela-->
 

@@ -327,4 +327,18 @@ background-color: #0391E6;
     font-size: 1rem;
     line-height: 1.5;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+
+}
+
+.modal-dialog{
+   overflow-y: initial !important
+}
+.modal-body{
+   height: 250px;
+   overflow-y: auto;
+}
+
+.modal-content{
+    height: 455px;
 }

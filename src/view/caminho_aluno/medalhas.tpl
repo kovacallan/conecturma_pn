@@ -161,6 +161,34 @@
     </div>
 </main>
 
+<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+
+       $("*[alt=Jogador]").hover(function(e){
+             var title = $(this).attr('title');
+             $(this).data('titleText', title).removeAttr('title');
+             $("main").append('<div class="tooltip">'+title+'</div>');
+
+        })
+             $('.tooltip').css({
+                         top : e.pageY - 50,
+                         left : e.pageX + 20
+                         }).fadeIn();
+
+       }, function(){
+          $(this).attr('title', $(this).data('titleText'));
+          $('.tooltip').remove();
+       }).mousemove(function(e){
+          $('.tooltip').css({
+                         top : e.pageY - 50,
+                         left : e.pageX + 20
+                         })
+       })
+
+    });
+</script>
 </body>
 
 </html>

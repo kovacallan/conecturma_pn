@@ -76,16 +76,16 @@
                         </div>-->
                     </div>
                     <div class="col-md-8">
-                        <div class="loja-categorias">
+                        <ul class="loja-categorias" style="list-style-type: none; margin-left: -30px;">
                                 <div class="row">
 
-                                    <div id="cor" class="cores scale-bounce"><a onclick="mostrar_itens(1), scale_click('cor')" style="cursor:pointer;"></a></div>
-                                    <div id="rosto" class="rosto scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(2), scale_click('rosto')" style="cursor:pointer;"></a></div>
-                                    <div id="acessorios" class="acessorios scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(3), scale_click('acessorios')" style="cursor:pointer;"></a></div>
-                                    <div id="corpo" class="scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(4),scale_click('corpo')" style="cursor:pointer;"></a></div>
+                                    <li id="cor" class="cores scale-bounce"><a onclick="mostrar_itens(1), scale_click('cor')" style="cursor:pointer;"></a></li>
+                                    <li id="rosto" class="rosto scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(2), scale_click('rosto')" style="cursor:pointer;"></a></li>
+                                    <li id="acessorios" class="acessorios scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(3), scale_click('acessorios')" style="cursor:pointer;"></a></li>
+                                    <li id="corpo" class="scale-bounce" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%); background-size: 60%; position: relative; top: 11px;"><a onclick="mostrar_itens(4),scale_click('corpo')" style="cursor:pointer;"></a></li>
 
                                 </div>
-                        </div>
+                        </ul>
 
                         <div class="loja-itens">
                             <div class="offset-md-1">
@@ -398,22 +398,30 @@
                     case 1:
                         document.getElementById('item-comprado-cores').style.display = "none";
                         document.getElementById("cor").style.filter = "grayscale(100%)";
-                        $("#cor").css({"background-size": "60%", "position": "relative", "top": "11px"});
+                        $("#cor").css({"background-size": "60%",  "position":"relative", "top": "10px"});
+                        element = document.getElementById("cor");
+
+                        $("#cor").addClass('scale-bounce1');
+
+
                         break;
                     case 2:
                         document.getElementById("rosto").style.filter = "grayscale(100%)";
                         document.getElementById('item-comprado-rosto').style.display = "none";
-                        $("#rosto").css({"background-size": "60%", "position": "relative", "top": "11px"});
+                        $("#rosto").css({"background-size": "60%","position":"relative", "top": "10px" });
+                         $("#rosto").addClass('scale-bounce1');
                         break;
                     case 3:
                         document.getElementById("acessorios").style.filter = "grayscale(100%)";
                         document.getElementById('item-comprado-acessorios').style.display = "none";
-                        $("#acessorios").css({"background-size": "60%", "position": "relative", "top": "11px"});
+                        $("#acessorios").css({"background-size": "60%", "position":"relative", "top": "10px"});
+                         $("#acessorios").addClass('scale-bounce1');
                         break;
                     case 4:
                         document.getElementById("corpo").style.filter = "grayscale(100%)";
                         document.getElementById('item-comprado-corpo').style.display = "none";
-                        $("#corpo").css({"background-size": "60%", "position": "relative", "top": "11px"});
+                        $("#corpo").css({"background-size": "60%", "position":"relative", "top": "10px"});
+                        $("#corpo").addClass('scale-bounce1');
                         break;
                 } 
             }
@@ -422,30 +430,30 @@
                 switch(tipo){
                     case 1:
                         flag_display_none(display)
-                        document.getElementById('item-comprado-cores').style.display = "block";
-                        //$("#cor").addClass("scale-bounce");
+                        document.getElementById('item-comprado-cores').style.display = "inline-block";
+                        $("#cor").removeClass('scale-bounce1');
                         $("#cor").removeAttr('style');
                         display = 1
                         break;
                     case 2:
                         flag_display_none(display)
                         $("#rosto").removeAttr('style');
-                        $("#rosto").css("scale-bounce");
-                        document.getElementById('item-comprado-rosto').style.display = "block"; 
+                        $("#rosto").removeClass('scale-bounce1');
+                        document.getElementById('item-comprado-rosto').style.display = "inline-block";
                         display = 2
                         break;
                     case 3:
                         flag_display_none(display)
                         $("#acessorios").removeAttr('style');
-                        $("#acessorios").addClass("scale-bounce");
-                        document.getElementById('item-comprado-acessorios').style.display = "block"; 
+                        $("#acessorios").removeClass('scale-bounce1');
+                        document.getElementById('item-comprado-acessorios').style.display = "inline-block";
                         display = 3
                         break;
                     case 4:
                         flag_display_none(display)
                         $("#corpo").removeAttr('style');
-                        $("#corpo").addClass("scale-bounce");
-                        document.getElementById('item-comprado-corpo').style.display = "block"; 
+                        $("#corpo").removeClass('scale-bounce1');
+                        document.getElementById('item-comprado-corpo').style.display = "inline-block";
                         display = 4
                         break; 
                 }

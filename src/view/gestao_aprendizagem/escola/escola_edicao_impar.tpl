@@ -1,18 +1,8 @@
-<div class="col-md-5 item-tabela ">
+<div style="cursor: pointer;" class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
+       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
 </div>
-<div class="col-md-2 item-tabela ">
-    {{i['vinculo_rede']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['vinculo_diretor_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['telefone']}}
-</div>
-    <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" class="col-md-1 item-tabela card"
-       aria-controls="collapse{{i['id']}}" id="id-nossa-escola{{i['id']}}" onclick="setinha_aux('id-nossa-escola{{i['id']}}')">
-    </a>
+
 <div class="container">
     <div class="row row-impar">
         <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" data-parent="#accordion">
@@ -168,9 +158,9 @@
                     <br>
                 </div>
                 <div class="row" style="margin-bottom: 10px">
-                    % if int(tipo) <= 2:
+                    % if tipo != '2':
                     <div class="col-md-1">
-              <span onclick="delete_observador({{i['id']}})" style="cursor:pointer;">
+              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                 <i class="far fa-trash-alt" style="color:#969696;"></i>
               </span>
                     </div>

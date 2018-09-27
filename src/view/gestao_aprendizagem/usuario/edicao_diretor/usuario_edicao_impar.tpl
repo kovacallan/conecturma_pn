@@ -1,23 +1,9 @@
-<div class="col-md-4 item-tabela ">
+
+<div style="cursor: pointer;" class="col-md-9 item-tabela" id="id-nossa-escola" data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
     {{i['nome']}}
 </div>
-<div class="col-md-3 item-tabela ">
-    {{i['email']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['vinculo_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
+<div style="cursor: pointer;" class="col-md-3 item-tabela" data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true" aria-controls="collapse{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
     {{i['tipo']}}
-</div>
-<div class="col-md-1 item-tabela card" style="padding:0px">
-    <a data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
-       aria-controls="collapse{{i['id']}}" id="o_setinha{{i['id']}}" onclick="seta('o_setinha{{i['id']}}')" style="height:43px">
-
-        <i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 10px;"></i>
-        <!--<img id="setinha" class="seta-baixa" src="/static/img/seta-baixa.png">-->
-
-    </a>
 </div>
 
 

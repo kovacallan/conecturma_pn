@@ -50,28 +50,28 @@
         <div class="col-md-3 avatar-std">
             <div class="avatar_usuario" style="position: absolute;">
                 %if cor != '0':
-                    <img src="/static/img/body/{{cor}}" style="z-index: 11; position: relative;width: 70%; bottom: -13px; right: -16px;">
+                    <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: relative;width: 80%; bottom: 77px; right: 26px;">
                 %else:
                     <img src="/static/img/body/avatar-naked.png" style="z-index: 11; position: relative;width: 70%; bottom: 0px; right: -12px;">
                 %end
                 %if rosto != '0':
-                    <img src="/static/img/rosto/{{rosto}}" style="z-index: 12; position: absolute; width: 56%; right: 48px; top: 25px;">
+                    <img src="/static/img/rosto/2{{rosto}}" style="z-index: 12; position: absolute; width: 80%; right: 79px; top: -82px;">
                 %end
                 %if acessorio != '0':
-                    <img src="/static/img/acessorio/{{acessorio}}" style="z-index: 13; position: absolute; width: 56%;">
+                    <img src="/static/img/acessorio/{{acessorio}}" style="z-index: 13; position: absolute; width: 80%; left:-26px;top:-80px;">
                 %end
                 %if corpo != '0':
-                    <img src="/static/img/corpo/{{corpo}}" style="z-index: 12; position: absolute; width: 56%;     margin-left: 2px; margin-top: 2px;">
+                    <img src="/static/img/corpo/2{{corpo}}" style="z-index: 12; position: absolute; width: 80%; left: -24px; top: -75px;">
                 %end
             </div>
             <img src="/static/img/acess.png" style="width: 156px; height: 208px;margin-left: 139px;">
-            <a href="/aluno/guarda_roupa" style="left: 77%;width: 48px;height: 60px;position:  absolute;top: 3px;"></a>
+            <a href="/aluno/guarda_roupa" style="left: 82%;width: 58px;height: 60px;position:  absolute;top: 3px;"></a>
             <div class="avatar-base-box" style="position:absolute;">
                 <img src="/static/img/avatar-base1.png" class="avatar-ship img-fluid" style=" position: relative; bottom: 28px; right: 16px;"> <br>
                 <img src="/static/img/avatar-box-name2.png" style=" position: relative;  bottom: 31px;  left: 8px;">
              </div>
 
-            <span id="apelido" style="position: absolute; top: 47%; left: 59px; color: #fff; font-weight: bold;">{{apelido}}</span>
+            <span id="apelido" style="position: absolute; top: 49%; left: 68px; color: #fff; font-weight: bold;">{{apelido.upper()}}</span>
             <!--<div class="offset-md-4 col-md-1">-->
             <span id="CRYSTAL">{{moedas}}</span>
             <span id="HP">{{vida}}</span>

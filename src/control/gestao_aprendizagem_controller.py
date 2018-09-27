@@ -723,6 +723,17 @@ def controller_entregar_medalha_aluno():
         return "0"
 
 
+def entregar_medalha_todos_alunos():
+    print("teste turma medalha para todos", request.params['turma'], request.params['medalha'], request.params['motivo'])
+    alunos = facade.search_aluno_by_turma_facade(vinculo_turma=request.params['turma'])
+    for i in alunos:
+        medalhas = facade.set_medalha_facade(id_aluno=i['id'], medalha=request.params['medalha'], motivo=request.params['motivo'])
+        if not medalhas:
+            break
+            return "0"
+
+    return "1"
+
 def descritores():
     return
 

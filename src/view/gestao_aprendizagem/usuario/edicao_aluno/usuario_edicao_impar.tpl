@@ -1,22 +1,10 @@
-<div class="col-md-4 item-tabela ">
-  {{i['nome']}}
+<div style="cursor: pointer;" class="col-md-9 item-tabela" id="id-nossa-escola" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
+    {{i['nome']}}
 </div>
-<div class="col-md-3 item-tabela ">
-  {{i['email']}}
+<div style="cursor: pointer;" class="col-md-3 item-tabela" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
+    {{i['tipo']}}
 </div>
-<div class="col-md-2 item-tabela">
-  {{i['vinculo_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-{{i['tipo']}}
-</div>
-<div class="col-md-1 item-tabela card" style="padding:0px">
-    <a data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true"
-       aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')"
-       style="height:43px">
-        <i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 10px;"></i>
-    </a>
-</div>
+
 <div class="container">
   <div class="row row-impar">
     <div id="collapsea{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" data-parent="#accordion">
