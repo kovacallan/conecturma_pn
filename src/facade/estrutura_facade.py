@@ -34,7 +34,7 @@ class EstruturaFacade:
         return self.estrutura.search_turma_by_rede(vinculo_rede=vinculo_rede)
 
     def search_estrutura_turma_by_escola_facade(self,vinculo_escola):
-        return self.estrutura.search_turma_by_escola2(vinculo_escola=vinculo_escola)
+        return self.estrutura.search_turma_by_escola(vinculo_escola=vinculo_escola)
 
     def search_oa_by_type_and_aventura_facade(self, aventura, disciplina):
         return self.estrutura.search_oa_by_type_and_aventura(aventura=aventura, disciplina=disciplina)
@@ -48,16 +48,16 @@ class EstruturaFacade:
     def get_itens_free_facade(self):
         return self.estrutura.get_itens_free()
 
-    def ja_tem_item_facade(self, usuario_logado):
+    # def ja_tem_item_facade(self, usuario_logado):
+    #
+    #     return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)
 
-        return self.estrutura.ja_possui_item(usuario_logado=usuario_logado)
-
-    def anotacoes_observador_turma_facade(self, id_estrutura,mensagem):
-        return self.estrutura.func_anotacoes_estrutura_turma(id_estrutura,mensagem)
-
-    def anotacoes_observador_escola_facade(self, id_estrutura,mensagem):
-        return self.estrutura.func_anotacoes_estrutura_escola(id_estrutura,mensagem)
-
-    def anotacoes_observador_rede_facade(self,id_estrutura,mensagem):
-        return self.estrutura.func_anotacoes_estrutura_rede(id_estrutura,mensagem)
+    # def anotacoes_observador_turma_facade(self, id_estrutura,mensagem):
+    #     return self.estrutura.func_anotacoes_estrutura_turma(id_estrutura,mensagem)
+    #
+    # def anotacoes_observador_escola_facade(self, id_estrutura,mensagem):
+    #     return self.estrutura.func_anotacoes_estrutura_escola(id_estrutura,mensagem)
+    #
+    # def anotacoes_observador_rede_facade(self,id_estrutura,mensagem):
+    #     return self.estrutura.func_anotacoes_estrutura_rede(id_estrutura,mensagem)
 

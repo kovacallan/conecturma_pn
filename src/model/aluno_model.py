@@ -48,7 +48,7 @@ class DbAluno(Model):
         return self.create(**kwargs)
 
 
-    def update_aluno(self, update_id, nome, senha, turma='0', escola='0', rede='0'):
+    def update_aluno(self, update_id, nome, nome_login, turma='0', escola='0', rede='0'):
 
         aluno_up = self.load(update_id)
         [setattr(aluno_up, parametro, valor) for parametro, valor in locals().items() if
@@ -120,7 +120,7 @@ class DbAluno(Model):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    tipo=search.tipo_aluno, cor=search.cor,
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
@@ -137,7 +137,7 @@ class DbAluno(Model):
             alunos.append(
                 dict(
                     id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, itens_comprados=search.itens_comprados, cor=search.cor,
+                    tipo=search.tipo_aluno, cor=search.cor,
                     rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
                     vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
@@ -292,13 +292,11 @@ class DbAluno(Model):
         aluno.save()
 
     def armazenar_ultimo_jogo_jogado(self, id_aluno, jogo):
-
         aluno=self.load(id_aluno)
         aluno.ultimo_oa_jogado=jogo
         aluno.save()
 
-    def ultimo_oa_jogado(self,id_aluno):
-
+    def mostrar_ultimo_oa_jogado(self,id_aluno):
         aluno=self.search_aluno_id(id_aluno)
 
         return aluno['ultimo_oa_jogado']

@@ -486,6 +486,7 @@ BasicGame.GameBase.prototype = {
         if(BasicGame.isOnline) {
             BasicGame.OnlineAPI.registrarConclusao(this.listCorrects, this.listCompleted, function(data) {            
                 if(_this.eventConclusao) {
+
                     _this.eventConclusao.dispatch(data);
                 }
             }, function(error) {

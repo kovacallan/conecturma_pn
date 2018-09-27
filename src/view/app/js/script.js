@@ -438,6 +438,7 @@ function cadastro_usuario(tipo){
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
                                 window.location.replace(data);
                             });
+                            location.reload();
                         }
                         else{
                             alert('O campo escola é obrigatório.');
@@ -572,24 +573,299 @@ function cadastro_usuario(tipo){
     }
     }
 
-  function seta(ide){
-    setinha = document.getElementById(ide).querySelectorAll("#setinha");
-    if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>'
-    } else {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>'
-    }
-  };
+//function checar_se_algo_mudou_obs(id){
+//    lista_do_id = id.split('');
+//    var numero_id = [];
+//    for (x=0;x!= lista_do_id.length;x++){
+//
+//        if (!isNaN(lista_do_id[x])){
+//        numero_id.push(lista_do_id[x]);
+//
+//        }
+//    }
+//
+//    id=numero_id.join('');
+//    var nome = document.getElementById('nome_obs'+id).value;
+//    var email= document.getElementById('email'+id).value;
+//    data_resposta;
+//
+//      $.post('/check_mudanca_cadastro ', {id:id, nome:nome, email:email}, function (data){
+//      if(data.resposta =='teve mudança'){
+//            console.log('data',data.resposta);
+//        data_resposta=data.resposta;
+//
+//        return 'teve mudança';
+//      }
+//      else {
+//            data_resposta=data.resposta;
+//          console.log('DESGRAÇAAAAAAA',data_resposta)
+//        }
+//
+//       });
+//
+//       }
 
-     function allow_edit(content_class_id){
+  function seta(ide){
+
+  lista_do_id = ide.split('');
+    var numero_id = [];
+    var letras_id = [];
+    for (x=0;x!= lista_do_id.length;x++){
+
+        if (!isNaN(lista_do_id[x])){
+        numero_id.push(lista_do_id[x]);
+
+        }
+        else{
+        letras_id.push(lista_do_id[x])
+        }
+    }
+
+    nun_id=numero_id.join('');
+    let_id=letras_id.join('');
+    console.log('numeros-letras',nun_id,let_id)
+    if(let_id=='a_setinha'){
+    var nome = document.getElementById('nome'+nun_id).value;
+    var login= document.getElementById('aluno_login'+nun_id).value;
+
+    $.post('/check_mudanca_cadastro_aluno', {id:ide, nome:nome, login:login}, function (data){
+      if(data.resposta =='teve mudança'){
+                    console.log('toniif');
+                    alert('voce nao salvou os dados de'+data.nome);
+
+                        }
+       else{
+      console.log(ide);
+       setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    console.log(ide,setinha);
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 15px;padding-top: 15px;"></i>';
+    } else {
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 15px;"></i>';
+    }
+
+       }
+       });
+    }else{
+    var nome = document.getElementById('nome_obs'+nun_id).value;
+    var email= document.getElementById('email'+nun_id).value;
+    $.post('/check_mudanca_cadastro ', {id:ide, nome:nome, email:email}, function (data){
+      if(data.resposta =='teve mudança'){
+      console.log(nome)
+                    alert('voce nao salvou os dados de'+data.nome);
+
+                        }
+       else{
+       console.log(ide);
+       setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    console.log(ide,setinha);
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 15px;padding-top: 15px;"></i>';
+    } else {
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 15px;"></i>';
+    }
+
+       }
+       });
+    }
+//    var nome = document.getElementById('nome_obs'+nun_id).value;
+//    var email= document.getElementById('email'+nun_id).value;
+//
+//      $.post('/check_mudanca_cadastro ', {id:ide, nome:nome, email:email}, function (data){
+//      if(data.resposta =='teve mudança'){
+//                    console.log('toniif');
+//                    confirm('voce nao salvou os dados de ... , tem certeza que deseja sair ?');
+//
+//                        }
+//       else{
+//       console.log(ide);
+//       setinha_aux(ide);
+//
+//       }
+//       });
+       }
+
+function setinha_aux(ide){
+    setinha = document.getElementById(ide).querySelectorAll("#setinha");
+    console.log(ide,setinha);
+    if (setinha[0].className == 'fas fa-angle-down') {
+      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style=""></i>';
+    } else {
+        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style=""></i>';
+    }
+  }
+
+  function allow_edit(content_class_id){
     console.log('teste');
 
     console.log('teste');
     $('.disabled'+content_class_id).prop("disabled", false);
     $('#icone_edit'+content_class_id).hide();
     $('#edit'+content_class_id).show();
+}
+
+function update_aluno(id){
+    console.log(id);
+    id = document.getElementById('id_aluno'+id).value;
+    nome = document.getElementById('nome'+id).value;
+    login = document.getElementById('aluno_login'+id).value;
+    console.log('testando',id,nome,login);
+
+    if (nome != '' && nome != null){
+        if(login != '' && login != null){
+            $.post('/checar_login_existente', {login:login},function(data){
+            console.log("hm",data.resposta);
+            if (data.resposta =='nao existe login'){
+                console.log('eits',nome,id);
+                $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
+                    console.log("hm");
+                });
+            location.reload();
+            }else{
+            alert('ja existe esse login');
+            }
+            });
+
+            }
+            else{
+        alert('o campo login nao pode estar vazio ');
+
+        }
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+        }
+        }
+
+
+
+
+
+function update_observador(id){
+    console.log('entrei?');
+    id = document.getElementById("observador_id"+id).value;
+    nome = document.getElementById("nome_obs"+id).value;
+    email= document.getElementById("email"+id).value;
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    teste = email.match(mailformat);
+    console.log(teste,email);
+    if (nome != '' && nome != null){
+            if (email != '' && nome !=null && email.match(mailformat)){
+                if(validar_se_email_existe(email)==false){
+                console.log('email existe');
+                $.post('/observador/update_observador', {id:id, nome:nome,email:email},function(data){
+                    console.log("hm");
+                });
+                location.reload();
+                }
+                else{
+                console.log("hm,emailnao existe");
+                $.post('/observador/update_observador', {id:id, nome:nome},function(data){
+                });
+//                location.reload();
+                }
+               }else{
+            alert('Por favor , digite um email valido');
+            }
+
+    }else{
+        alert('O campo nome é obrigatório.');
+        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+        }
+        }
+
+function allow_edit_obs(content_class_id){
+    console.log('teste');
+
+    console.log('teste');
+    $('.disabledo'+content_class_id).prop("disabled", false);
+    $('#icone_edito'+content_class_id).hide();
+    $('#edito'+content_class_id).show();
 
 }
+//function readURL(input) {
+//            if (input.files && input.files[0]) {
+//                var reader = new FileReader();
+//                ext=input.files[0].name.split('.')[1];
+//                console.log(ext,input.files[0].size,input.files);
+//
+//                if (ext != 'png' && ext!= 'jpg' && ext!= 'jpeg'){
+//                       $('#error').css('display','block');
+//
+//                }else if(input.files[0].size > 1048576){
+//                alert('por favor selecione uma imagem de tamanho 1MB ou menor');
+//
+//                 }
+//                 reader.onload = function (e) {
+//                 console.log('que',e);
+//                    $('.blah').attr('src', e.target.result)
+//                        //.width(150)
+//                        //.height(200);
+//                 };
+//                 reader.readAsDataURL(input.files[0]);
+//                 $('#salv').css('display','block');
+//
+//
+//
+//
+//            }
+//        }
+//
+//    interact('.draggable').draggable({
+//    // enable inertial throwing
+//    inertia: false,
+//    // keep the element within the area of it's parent
+//    restrict: {
+//      restriction: "parent",
+//      endOnly: false,
+//      elementRect: { top: 0, left: 0, bottom: 1.1, right: 1.1 }
+//    },
+//
+//    // call this function on every dragmove event
+//    onmove: dragMoveListener,
+//    // call this function on every dragend event
+//    onend: function (event) {
+//    }
+//  });
+//
+//  function dragMoveListener (event) {
+//    console.log('test',event.target);
+//    var target = event.target,
+//
+//        // keep the dragged position in the data-x/data-y attributes
+//        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+//        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+//    // translate the element
+//    target.style.webkitTransform =
+//    target.style.transform =
+//      'translate(' + x + 'px, ' + y + 'px)';
+//
+//
+//
+//    // update the posiion attributes
+//    target.setAttribute('data-x', x);
+//    target.setAttribute('data-y', y);
+//    var z; // x negativo
+//    var w;  //y negativo
+//    console.log('hm',x,y);
+//    $.ajax({
+//     url: '/salvar_css_foto',
+//     data: {
+//        posicao_foto:'transform:translate(' + x + 'px, ' + y + 'px)'
+//    },
+//    dataType: 'json',
+//    type: 'post'
+//});
+//  }
+//}
+//
+//    id = document.getElementById('id_turma'+id).value;
+//    nome = document.getElementById('nome'+id).value;
+//    login = document.getElementById();
+//    console.log('testando',id,nome,login);
+//
+//
+//}
 
 //function nao-sair-sem-salvar(id){
 //
