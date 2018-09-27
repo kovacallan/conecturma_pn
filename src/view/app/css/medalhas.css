@@ -1,0 +1,200 @@
+html, body{
+    height: 100%;
+}
+
+a{
+color:#fff
+}
+a:hover{
+color:#fff
+}
+
+body{
+    background: url('/static/img/bg_aluno2.jpg') center no-repeat !important;
+    background-size: 100% 100%;
+     -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    width: 100%;
+    height: 909px !important;
+    overflow-x: hidden;
+    background-attachment: fixed !important;
+   
+}
+
+.todas-medalhas{
+    background-image: url('/static/img/medalha/fundo-todas.png');
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    height: 540px;
+   
+}
+
+.menu{
+    background-image: url('/static/img/menu/barra.png');
+    height: 120px;
+    background-repeat: no-repeat;
+    
+    
+   
+}
+
+.menu ul li{
+   
+    list-style-type: none;
+    float: left;
+}
+
+
+
+.c{
+   background: url('/static/img/menu/C_logo.png') 0 0 no-repeat;
+   width: 182px;
+   height: 162px;
+}
+
+.ambiente{
+   background: url('/static/img/menu/ambiente.png') 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.ambiente a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
+}
+
+.facebook{
+   background: url('/static/img/menu/facebook.png') 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.facebook a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
+}
+
+.youtube{
+   background: url('/static/img/menu/youtube.png') 0 0 no-repeat;
+   width: 78px;
+   height: 68px;
+   margin-top: 32px;
+}
+.youtube a{
+   width: 78px;
+   height: 68px;
+   display: inline-block;
+}
+
+.sair{
+   background: url('/static/img/menu/sair.png') 0 0 no-repeat;
+   width: 40px;
+   height: 37px;
+   margin-top: 45px;
+}
+.sair a{
+   width: 40px;
+   height: 37px;
+   display: inline-block;
+}
+
+
+.titulo{
+    background-image: url('/static/img/medalha/titulo.png');
+    width: 287px;
+    height: 36px;
+
+}
+
+.nav-botoes{
+margin-left: -80px;
+margin-top: -7px;
+}
+
+
+.nav-botoes li a{
+position:relative;
+right: 50px;
+}
+
+
+.nav-link {
+    background-color: #ffb8be!important;
+    border-radius: 10px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #f72020!important;
+    border-radius: 10px;
+}
+
+.row-medalhas{
+    margin-right: 0;
+    margin-left: 0;
+    
+}
+
+.medalha-lista-ultimas{
+    padding-top: 15px;
+    width: 158px;
+    
+}
+.modal{
+overflow-y:scroll;
+}
+
+.medalha-lista-todas{
+    padding-top: 5px;
+    max-width: 145px;
+    max-height: 145px;
+}
+
+.bounce{
+    opacity: 1!important;
+    -webkit-animation: scaleBounce 1s linear;
+    -moz-animation: scaleBounce 1s linear;
+    -ms-animation: scaleBounce 1s linear;
+    -o-animation: scaleBounce 1s linear;
+    animation: scaleBounce 1s linear
+}
+
+@keyframes scaleBounce{
+0% {
+    transform: scale(1.5);
+    opacity: 0;
+}
+
+50% {
+    transform: scale(1);
+}
+70% {
+    transform: scale(1.1);
+}
+100% {
+    opacity: 1;
+    transform: scale(1)
+}
+.nave-link {
+    background-color: #ffb8be!important;
+}
+
+.nav-link .active{
+    background-color: #f72020;
+}
+
+.modal-dialog{
+   overflow-y: initial !important
+}
+.modal-body{
+   height: 250px;
+   overflow-y: auto;
+}
+
+.modal-content{
+    height: 455px;
+    width: 594px;
+}

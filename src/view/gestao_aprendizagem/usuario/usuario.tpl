@@ -1,32 +1,11 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css") 
 %include('gestao_aprendizagem/menu/menu.tpl')
 <div class="col-md-9 order-md-3 botao-tabela">
-  <div class="container">
-    <div class="row">
-      <div class=" col-md-5">
+    <div style="left: -14px;margin-bottom: 30px;position: relative;">
         <p class="top-escolas-tabela">Usuários</p>
         %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
-      </div>
-      <div class="col-md-4 offset-md-5">
-
-          <div class="input-group pesquisa">
-            <!--pesquisa-->
-            <!--<input class="form-control pesquisa-input" type="text" placeholder="Pesquisar" aria-label="Search" style="padding-left: 20px; border-radius: 40px;background-color: #dedede;height: 30px;z-index: -1" id="mysearch">
-            <div class="input-group-addon" style="margin-left: -26px;border-radius: 40px; background-color: #f3f3f3; border:none;">
-              <button type="submit" style="border-radius: 20px;border:1px transparent;height: 30px;" id="search-btn">
-                <i class="fa fa-search"></i>
-              </button>
-              <!--pesquisa-->
-            </div>
-
-      </div>
-
-      </div>
-      <!--fim da div de pesquisa-->
     </div>
-    <!--fim da row do conteudo acima da tabela -->
-    <br/>
-    <br/>
+
     %if tipo == '3':
         <div id="4" style="display:none;">
           %include('gestao_aprendizagem/usuario/formulario_cadastro_nova_usuario_aluno.tpl')
@@ -67,24 +46,14 @@
     <div id="accordion">
       <!-- inicio da tabela -->
       <div class="row">
-          <div class="col-md-4 item-tabela topo-tab">
+          <div class="col-md-9 item-tabela topo-tab">
             Nome
           </div>
 
           <div class="col-md-3 item-tabela topo-tab">
-            Email
-          </div>
-
-          <div class="col-md-2 item-tabela topo-tab">
-            Escola
-          </div>
-
-          <div class="col-md-2 item-tabela topo-tab">
             Tipo
           </div>
 
-          <div class="col-md-1 item-tabela topo-tab">
-          </div>
       </div>
         <%
             for index,i in enumerate(usuarios):
@@ -139,8 +108,6 @@ $(document).ready(function(){
         $("div#novo-aluno").toggle(100);
     });
 });
-
-
 
 </script>
 

@@ -174,9 +174,11 @@ BasicGame.Game.prototype = {
 
     openLevel: function() {
         if(this.currentLevel < 1 || this.currentLevel > 3) {
+            console.log('errado?');
             return;
         }
         if(this.listCorrects[this.currentLevel-1] < 0) {
+            console.log('certo?')
             this.listCorrects[this.currentLevel-1] = 0;
         }
     },
@@ -963,12 +965,17 @@ BasicGame.Game.prototype = {
                 this.jogadasAtuais--;
                 this.noEmptyBase1 = true;
 
-                console.log(elem.key, this.primeiroAtual);
+                console.log('i',elem.key, this.primeiroAtual);
 
                 if(elem.key == this.primeiroAtual){
                     this.acertosTotais--;
                     console.log("certo");}
-            }else{
+                    else{
+                    console.log("errado");
+                    this.sound.play("hitErro");
+                    this.moveBack(elem);
+                    }
+             }else{
                 this.sound.play("hitErro");
                 this.moveBack(elem);
             }
@@ -980,15 +987,21 @@ BasicGame.Game.prototype = {
                 this.jogadasAtuais--;
                 this.noEmptyBase2 = true;
 
-                console.log(elem.key, this.segundoAtual);
+                console.log('i2',elem.key, this.segundoAtual);
 
                 if(elem.key == this.segundoAtual){
                     this.acertosTotais--;
                     console.log("certo");}
-            }else{
-                this.sound.play("hitErro");
-                this.moveBack(elem);
-            }
+                    else{
+                    console.log("errado2");
+                    this.sound.play("hitErro");
+                    this.moveBack(elem);
+                    }
+                }else{
+                console.log("erradoo2");
+                    this.sound.play("hitErro");
+                    this.moveBack(elem);
+                    }
         }else if((this.input.x >= this.posicao[2][0] && this.input.x <= this.posicao[2][1]) && !(this.noEmptyBase3)) {
             if(!(this.noEmptyBase3)) {
                 this.add.tween(elem).to({x: 685, y: 400}, 300, Phaser.Easing.Linear.None, true);
@@ -997,16 +1010,22 @@ BasicGame.Game.prototype = {
                 this.jogadasAtuais--;
                 this.noEmptyBase3 = true;
 
-                console.log(elem.key, this.terceiroAtual);
+                console.log('i3',elem.key, this.terceiroAtual);
 
                 if(elem.key == this.terceiroAtual){
                     this.acertosTotais--;
-                    console.log("certo");}
+                    console.log("certo");}else{
+                    console.log("errado3");
+                    this.sound.play("hitErro");
+                    this.moveBack(elem);
+                    }
             }else{
+            console.log("erradoo3");
                 this.sound.play("hitErro");
                 this.moveBack(elem);
             }
         }else{
+            console.log('?');
             this.sound.play("hitErro");
             this.moveBack(elem);
         }

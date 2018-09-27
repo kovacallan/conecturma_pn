@@ -1,22 +1,8 @@
-<!--informaçoes-->
-<div class="col-md-5 item-tabela ">
+<div style="cursor: pointer;" class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
+       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
 </div>
-<div class="col-md-2 item-tabela ">
-    {{i['vinculo_rede']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['vinculo_diretor_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['telefone']}}
-</div>
-<div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
-        <i id="setinha" class='fas fa-angle-down'></i>
-    </a>
-</div>
+
 
 <!--fim das informaçoes da tabela-->
 
@@ -70,7 +56,7 @@
                                         <input type="text" class="form-control disabled{{i['id']}}" size="21" name="" id="telefone{{i['id']}}" value="{{i['telefone']}}" disabled>
                                     </div>
                                     <div class="col-md-" style="padding-left: 10px ;">
-                                        <label for="diretor">diretor</label>
+                                        <label for="diretor">Diretor</label>
                                         <br>
                                         <input type="text" size="33" class="form-control disabled{{i['id']}}" name="" id="diretor{{i['id']}}" value="{{i['vinculo_diretor_escola']}}" disabled>
                                     </div>

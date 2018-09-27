@@ -1,19 +1,12 @@
-<div class="col-md-4 item-tabela ">
-  {{i['nome']}}
-</div>
-<div class="col-md-3 item-tabela ">
-  {{i['email']}}
-</div>
-<div class="col-md-2 item-tabela">
-  {{i['vinculo_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-{{i['tipo']}}
-</div>
-<div class="col-md-1 item-tabela card">
-  <a data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
-    <i id="setinha" class="fas fa-angle-down"></i>
-  </a>
+
+<div class="col-md-12" id="id-nossa-escola" style="padding:0">
+    <div style="cursor: pointer;float:right;" class="col-md-3 item-tabela" id="" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
+        {{i['tipo']}}
+    </div>
+    <div style="cursor: pointer;" class="col-md-9 item-tabela" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
+
+        {{i['nome']}}
+    </div>
 </div>
 <div class="container">
   <div class="row row-impar">
@@ -35,7 +28,7 @@
         <div class="tab-content row-impar">
           <div class="tab-pane container active" id="nossa-escola">
             <form>
-              <input type="hidden" id ="id_escola{{i['id']}}" value="{{i['id']}}">
+              <input type="hidden" id ="id_aluno{{i['id']}}" value="{{i['id']}}">
               <div class="row" style="margin-top: 30px">
                 <div class="col-md-12">
                   <div class="row distanciamneto" style="margin-left: 5px;">
@@ -52,9 +45,9 @@
                       <br>
                       <input type="date" size="25" class="form-control  input-height-30" value="{{i['nascimento']}}"  name="" id="aluno_nascimento" onchange="document.getElementById('aluno_nascimento').style.boxShadow = 'none'" disabled>
                   </div>
-                   <div class="col-md form-control" style="padding-left: 10px">
+                   <div class="col-md form-control" style="padding-left: 10px;background-color:inherit;">
                       <label for="aluno_sexo" style="margim-botton:5px">Sexo</label>
-                      <select id="aluno_sexo" class="custom-select custom-select-md  input-height-30">
+                      <select id="aluno_sexo" class="custom-select custom-select-md  input-height-30" disabled>
                           <option value="1">Masculino</option>
                           <option value="2">Feminino</option>
                       </select>
@@ -66,13 +59,14 @@
                       <div class="col-md-">
                           <label for="login">login</label>
                           <span style="color:#ff0000">*</span>
-                          <input type="text" size="25" class="form-control disabled{{i['id']}}"  name="" id="login" value="{{i['nome_login']}}">
+                          <input type="text" size="25" class="form-control disabled{{i['id']}}"  name="" id="aluno_login{{i['id']}}" value="{{i['nome_login']}}" style="text-transform:uppercase;" disabled>
                       </div>
 
                       <div class="col-md-" style="margin-left: 100px;">
-                          <label for="login">senha</label>
+                          senha
                           <span style="color:#ff0000">*</span>
                           <div class="row">
+
                               <img src="/static/img/{{i['senha'][0]}}.png" style="padding-left:15px;">
                               <img src="/static/img/{{i['senha'][1]}}.png" style="padding-left:15px;">
                               <img src="/static/img/{{i['senha'][2]}}.png" style="padding-left:15px;">
@@ -83,6 +77,21 @@
                   </div>
                   <!--fim da div dos dados ao lado da imagem-->
                 </div>
+                   <div class="col-md-1">
+              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+                <i class="far fa-trash-alt" style="color:#969696;"></i>
+              </span>
+                    </div>
+                             <div class="offset-md-10 col-md-1">
+                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                              style="cursor:pointer;">
+                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
+                        </span>
+                        <span onclick="update_aluno({{i['id']}})" id="edit{{i['id']}}"
+                              style="cursor:pointer;display:none;">
+                            <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
+                        </span>
+                    </div>
               </div>
               </form>
           </div>

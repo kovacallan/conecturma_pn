@@ -47,7 +47,7 @@ SERIE = {
 }
 
 PAGINA_INICIAL = dict(
-    administrador='/gestao_aprendizagem', #'/administrador/pag_administrador',
+    administrador='/administrador/pag_administrador',#'/gestao_aprendizagem'
     gestor='/gestao_aprendizagem',
     diretor='/gestao_aprendizagem',
     professor='/gestao_aprendizagem',
@@ -67,6 +67,7 @@ TIPO_ESTRUTURA = dict(
     historico='6',
     objeto_de_aprendizagem='7'
 )
+
 DICIPLINA = {
     '1' : 'Lingua Portuguesa',
     '2' : 'Matemática'

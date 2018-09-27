@@ -18,13 +18,13 @@ class DbEstrutura(Model):
     vinculo_professor2_turma = TextField(fts=True, default='0')
     cnpj = TextField(default='0')
 
-    endereco = TextField(default='0')
-    numero = TextField(default='0')
-    bairro = TextField(default='0')
-    complemento = TextField(default='0')
-    cep = TextField(default='0')
-    estado = TextField(default='0')
-    municipio = TextField(default='0')   
+    endereco = TextField(default='0',index=True,fts=True)
+    numero = TextField(default='0',index=True,fts=True)
+    bairro = TextField(default='0',index=True,fts=True)
+    complemento = TextField(default='0',index=True,fts=True)
+    cep = TextField(default='0',index=True,fts=True)
+    estado = TextField(default='0',index=True,fts=True)
+    municipio = TextField(default='0',index=True,fts=True)
 
     sigla_oa = TextField(fts=True, default='0')
     unidade=TextField(fts=True, default='0')
@@ -39,10 +39,13 @@ class DbEstrutura(Model):
     aventura = TextField(fts=True, default='0')
 
     quem_criou = TextField(default='0')
+    data_de_criacao = TextField(default='0')
     serie = TextField(fts=True, default='0')
 
-    tipo_item = TextField(default='0')
-    preco = IntegerField(default=0)
+    tipo_item = TextField(fts=True, default='0')
+    preco = TextField(fts=True, default='0')
+    image_name = TextField(fts=True, default="0")
+
 
     tipo_medalha = TextField(default='0')
     descricao = TextField(default='0')
@@ -69,18 +72,18 @@ class DbEstrutura(Model):
 
         return listas
 
-    def ja_possui_item(self, usuario_logado):
-        from model.aluno_model import DbAluno
-
-        usuario = DbAluno()
-        # [x.decode('utf-8') for x in usuario.i]
-        itens_usuario = usuario.ver_itens_comprados(id_usuario=int(usuario_logado))
-        itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura=TIPO_ESTRUTURA['item'])]
-        lista_teste = [z for z in itens if z not in itens_usuario]
-        return lista_teste
+    # def ja_possui_item(self, usuario_logado):
+    #     from model.aluno_model import DbAluno
+    #
+    #     usuario = DbAluno()
+    #     # [x.decode('utf-8') for x in usuario.i]
+    #     itens_usuario = usuario.ver_itens_comprados(id_usuario=int(usuario_logado))
+    #     itens = [str(y['id']) for y in self.read_estrutura(tipo_estrutura=TIPO_ESTRUTURA['item'])]
+    #     lista_teste = [z for z in itens if z not in itens_usuario]
+    #     return lista_teste
 
     def search_estrutura(self, tipo_estrutura, nome):
-
+        lista_dic= []
         for lista in DbEstrutura.query(DbEstrutura.tipo_estrutura == tipo_estrutura and DbEstrutura.nome == nome):
             lista_dic=vars(lista)["_data"]
 
@@ -138,7 +141,23 @@ class DbEstrutura(Model):
 
         return oas
 
-    def update_estrutura(self, **kwargs):
+    def get_itens_free(self):
+        itens = []
+        for i in DbEstrutura.query((DbEstrutura.tipo_estrutura == '4') & (DbEstrutura.preco == '0'), order_by=DbEstrutura.id):
+            itens.append(vars(i)["_data"])
+
+        return itens
+
+
+    def get_itens_for_type(self, type_item):
+        itens = []
+        for i in DbEstrutura.query((DbEstrutura.tipo_item == type_item), order_by=DbEstrutura.id):
+            itens.append(vars(i)["_data"])
+
+        return itens
+
+
+    def update_estrutura(self, **kwargs:dict):
         new_data_estrutura = kwargs['estrutura']
         estrutura = self.load(int(new_data_estrutura['id']))
         for i in new_data_estrutura:
@@ -154,17 +173,17 @@ class DbEstrutura(Model):
         estrutura.ativo = '0'
         estrutura.save()
 
-    def func_anotacoes_estrutura_turma(self, id_estrutura, mensagem):
-        estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_turma.append(mensagem)
-        estrutura.save()
-
-    def func_anotacoes_estrutura_escola(self, id_estrutura, mensagem):
-        estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_escola.append(mensagem)
-        estrutura.save()
-
-    def func_anotacoes_estrutura_rede(self, id_estrutura, mensagem):
-        estrutura = self.load(id_estrutura)
-        estrutura.anotacoes_estrutura_rede.append(mensagem)
-        estrutura.save()
+    # def func_anotacoes_estrutura_turma(self, id_estrutura, mensagem):
+    #     estrutura = self.load(id_estrutura)
+    #     estrutura.anotacoes_estrutura_turma.append(mensagem)
+    #     estrutura.save()
+    #
+    # def func_anotacoes_estrutura_escola(self, id_estrutura, mensagem):
+    #     estrutura = self.load(id_estrutura)
+    #     estrutura.anotacoes_estrutura_escola.append(mensagem)
+    #     estrutura.save()
+    #
+    # def func_anotacoes_estrutura_rede(self, id_estrutura, mensagem):
+    #     estrutura = self.load(id_estrutura)
+    #     estrutura.anotacoes_estrutura_rede.append(mensagem)
+    #     estrutura.save()

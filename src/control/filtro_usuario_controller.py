@@ -171,18 +171,16 @@ def filtro_turmas_de_acordo_com_rede(rede):
 def filtro_turma_de_acordo_com_escola(escola):
     turmas = facade.search_estrutura_turma_by_escola_facade(escola)
     return turmas
-@permissao('professor')
+
 def get_nome_rede(vinculo_rede):
     rede_nome = facade.search_estrutura_id_facade(vinculo_rede)['nome']
 
     return rede_nome
 
-@permissao('professor')
 def get_nome_escola(vinculo_escola):
     escola_nome = facade.search_estrutura_id_facade(vinculo_escola)
     return escola_nome['nome']
 
-@permissao('professor')
 def get_nome_turma(vinculo_turma):
     turma_nome = facade.search_estrutura_id_facade(vinculo_turma)['nome']
 

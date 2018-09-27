@@ -1,7 +1,5 @@
 from bottle import route, template 
  
-"""Teste"""
-
 @route("/GLOBAL/player/")
 def av1_mapa4(): 
     return template("jogo/GLOBAL/player/index.html") 

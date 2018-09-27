@@ -34,7 +34,7 @@ Aluno
 Aluno
 <br>
 %end
-
+<br>
 <button type="button" class="botao-nova-escola" id="new_user">
   <i class="fas fa-plus"></i>
   &nbsp;Novo Usuário

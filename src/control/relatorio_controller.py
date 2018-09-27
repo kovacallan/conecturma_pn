@@ -46,7 +46,6 @@ class Relatorio(object):
 
         self.descritores = facade.search_descritor_serie_facade(serie=serie)
 
-
     def get_desempenho(self, descritores, aluno):
         from facade.facade_main import Facade
         facade = Facade()

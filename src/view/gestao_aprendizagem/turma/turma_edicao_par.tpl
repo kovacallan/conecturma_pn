@@ -1,22 +1,7 @@
 <!--informaçoes-->
-<div class="col-md-5 item-tabela ">
+<div style="cursor: pointer;" class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
+       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
-</div>
-<div class="col-md-2 item-tabela ">
-    {{i['professor']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['vinculo_escola']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['serie']}}
-</div>
-<div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion"
-       aria-controls="collapse{{i['id']}}"
-       class="" id="id-escola-d-rock" onclick="seta('id-escola-d-rock')">
-        <i id="setinha" class='fas fa-angle-down'></i>
-    </a>
 </div>
 
 <!--fim das informaçoes da tabela-->
@@ -37,7 +22,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof"
-                                        aria-controls="escola-do-rock-prof" aria-selected="false">Alunos
+                                   aria-controls="escola-do-rock-prof" aria-selected="false">Alunos
                                 </a>
                             </li>
                         </ul>
@@ -49,7 +34,12 @@
                         <form>
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row distanciamento" style="margin-top: 30px">
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="height: 215px;">
+                                     <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                                       style="cursor:pointer; position: absolute; right: 0;">
+                                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
+                                        </span>
+
                                     <div class="row distanciamento">
                                         <div class=" col-md-6" style="margin-left: 10px;">
                                             <label for="nome" style="background-color: inherit;">Nome:
@@ -57,13 +47,22 @@
                                                 </span>
                                             </label>
                                             <input type="text" placeholder="Escola do rock" class="form-control disabled{{i['id']}}"
-                                                   size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>
+                                                   size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}" style="width: 298px;" disabled>
                                         </div>
-                                        <div class="col-md-4" style="padding-left: 10px">
+                                        <div class="col-md-4" style="padding-left: 10px; right: 72px;">
                                             <label for="serie">serie</label>
                                             <br>
                                             <input type="text" size="24" class="form-control" name=""
                                                    id="serie{{i['id']}}" value="{{i['serie']}}" disabled>
+                                        </div>
+                                    </div>
+                                      <div class="row distanciamento">
+                                        <div class="col-md-10" style="margin-left: 10px;">
+                                            <label for="professor">Professor:
+                                                <span style="color:#ff0000"></span>
+                                            </label>
+                                            <input type="text" class="form-control" size="21" name=""
+                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}"  style="width: 579px;" disabled>
                                         </div>
                                     </div>
                                     <div class="row distanciamento">
@@ -72,60 +71,53 @@
                                                 <span style="color:#ff0000">*</span>
                                             </label>
                                             <input type="text" class="form-control" size="21" name=""
-                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}" disabled>
+                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}"  style="width: 579px;" disabled>
                                         </div>
                                     </div>
+
+                                    <div id="dar_medalhas_todos">
+                                        %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
+                                    </div> <!--Fechando janela de dar medalhas -->
                                     <!--fim da div dos dados ao lado da imagem-->
-                                </div>
+                                </div> <!-- fechando col-md-12 -->
                             </div>
                         </form>
                     </div>
                     <!-- aqui termina o conteudo da guia do dados de escola  -->
                     <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel"
                          aria-labelledby="{{i['nome']}}-prof">
-                        <div class="row">
+                        <div class="row" style="margin-top: 12px;">
                             <div class="container">
-                                <div class="offset-md-1 distanciamento col-md-" style="margin-top: 20px">
-                                    <p>Alunos
-                                        <i class="far fa-question-circle"></i>
-                                    </p>
-                                </div>
-
                                 % for z in i['aluno']:
-
-
-                                <div class="row">
-                                    <div class="col-md-11">
-                                        <div class="offset-md-1 nome-prof row row-impar">
-                                            <div class="col-md-5" style="padding-top: 10px;padding-bottom: 10px;">
-                                                Nome: {{z['nome']}}
-                                                <br>
-                                                <br>
-                                                Login :{{z['nome_login']}}
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <div class="row row-impar nome-prof">
+                                                    <div class="col-md-4" style="margin-top: 4px;">
+                                                        Nome: {{z['nome']}}
+                                                        <br>
+                                                        Login :{{z['nome_login']}}
+                                                    </div>
+                                                    <div class="col-md-6 offset-md-2" style="padding:10px">
+                                                        <span style="margin-left: 17px;"> &nbsp;senha :</span>
+                                                        <img src="/static/img/{{z['senha'][0]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][1]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][2]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][3]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="offset-md-1 col-md-6" style="padding:10px">
-
-                                                <span style="margin-left:62px"> &nbsp;senha :</span>
-                                                <br>
-                                                <img src="/static/img/{{z['senha'][3]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-                                                 <img src="/static/img/{{z['senha'][2]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-
-                                                <img src="/static/img/{{z['senha'][1]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-
-                                                <img src="/static/img/{{z['senha'][0]}}.png"
-                                                     style="padding-left:11px;width: 15%;float:right;margin-right:5px;">
-
+                                            <div class="col-md-1 row-impar nome-prof">
+                                                <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal" data-target="#medalha_janela{{z['id']}}" style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
                                             </div>
+                                            %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
                                         </div>
                                     </div>
-                                </div>
-
-
                                 %end
-                            </div>
                         </div>
                     </div>
                     <br>
@@ -140,19 +132,17 @@
                         </div>
                         % end
                         <div class="offset-md-10 col-md-1">
-                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
-                              style="cursor:pointer;">
-                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
-                        </span>
-                        <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
-                              style="cursor:pointer;display:none;">
+
+                            <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
+                                  style="cursor:pointer;display:none;">
                             <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
                         </span>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         </form>
     </div>
+</div>
 </div>

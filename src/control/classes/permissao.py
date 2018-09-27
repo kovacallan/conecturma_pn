@@ -1,8 +1,12 @@
 from bottle import redirect, response, request
 from datetime import datetime
 from control.dicionarios import *
+from facade.historico_facade import HistoricoFacade
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
+
+
+from model.historico_model import DbHistorico
 
 """Constante para a key de hash temporariamente"""
 
@@ -62,11 +66,12 @@ class Login_Aluno(object):
     def login(self):
         facade = Facade()
         hash = self.gerar_hash()
+        print('nome',self.nome)
         aluno = facade.search_aluno_nome_login_facade(nome_login=self.nome.upper())
         response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
         if aluno['nome_login'] == self.nome.upper():
             if aluno['senha'] == self.senha:
-                aluno_logado = dict(
+                """aluno_logado = dict(
                     id=aluno['id'],
                     nome=aluno['nome'],
                     tipo=aluno['tipo_aluno'],
@@ -78,9 +83,9 @@ class Login_Aluno(object):
                     ultima_aventura= aluno['ultima_aventura'],
                     moeda=aluno['pontos_de_moedas'],
                     xp=aluno['pontos_de_vida']
-                )
-                response.set_cookie("BUMBA", aluno_logado, path='/', secret=hash)
-                return PAGINA_INICIAL[tipo_observador(aluno_logado['tipo'])]
+                )"""
+                response.set_cookie("BUMBA", aluno, path='/', secret=hash)
+                return PAGINA_INICIAL[tipo_observador(aluno['tipo'])]
         else:
             return '/'
 
@@ -133,6 +138,22 @@ def permissao(quem_tem_permissao):
             que = request.get_cookie("BUMBA", secret=banana)
             if banana and que:
                 if int(TIPO_USUARIOS[quem_tem_permissao]) >= int(que['tipo']):
+                    try:
+                        histo = HistoricoFacade()
+                        if 'get'in function.__name__:
+                            pass
+                        elif 'view' in function.__name__:
+                            histo.create_historico_facade(acao=function.__name__, nome_usuario=usuario_logado()['nome'],
+                                                          momento=datetime.now())
+
+                        else:
+                            retorno_da_func=function(no_repeat=True)
+
+                            histo.create_historico_facade(acao=function.__name__,nome_usuario=usuario_logado()['nome'],momento=datetime.now())
+                            # teste=histo.search_historico_nome_facade('administrador')
+                            histo.historico_de_dados_cadastrados_facade(usuario_logado()['id'],retorno_da_func)
+                    except Exception as e:
+                        print('erro',e)
                     return function(*args, **kwargs)
                 else:
                     redirect('/error403')
@@ -142,7 +163,6 @@ def permissao(quem_tem_permissao):
         return decorator
 
     return observador
-
 
 def tipo_observador(tipo):
     # return {
