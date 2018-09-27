@@ -1,5 +1,7 @@
 import json
 from bottle import route, view, request, redirect, response, get, template
+
+from control.gestao_aprendizagem_controller import convertendo_str_in_dict
 from facade.facade_main import Facade
 from control.classes.permissao import permissao, usuario_logado
 from control.dicionarios import *
@@ -42,6 +44,7 @@ def verificarAcessoObjetoAprendizagem():
         else:
             teste = []
             for i in parametros['objetosAprendizagem']:
+
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
                 if desempenho_oa == []:
 
@@ -54,10 +57,13 @@ def verificarAcessoObjetoAprendizagem():
 
 
 def verificarConclusoesObjetosAprendizagem():
+
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
+    print('entao sou eu q desbloqueio?',parametros)
     if int(usuario['tipo']) < 6:
         retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
+        print('test',retorno)
     else:
         cn_final = facade.oa_teste_facade(id_aluno=str(usuario['id']),
                                           oa='{}CN02'.format(parametros['objetosAprendizagem'][0:9]))
@@ -65,14 +71,22 @@ def verificarConclusoesObjetosAprendizagem():
             retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
         else:
             teste = []
+            print('fuu',parametros['objetosAprendizagem'])
             for i in parametros['objetosAprendizagem']:
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
+                # try:
+                # nivel_jogo = convertendo_str_in_dict(desempenho_oa[0]['jogo_jogado'][0])
                 if desempenho_oa == []:
                     pass
                 else:
                     teste.append(i)
+                # except Exception as e:
+                #     if e == " list index out of range":
+                #         pass
+                #     print(e)
 
             retorno = {'objetosConcluidos': teste}
+            print('teste',retorno)
 
     return retorno
 
@@ -105,6 +119,7 @@ def view_ambiente_de_aprendizagem():
         jogador = facade.search_observador_id_facade(id=usuario['id'])
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
+        print(facade.search_estrutura_id_facade(id=jogador['cor']))
         cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
         rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
         acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
@@ -113,17 +128,33 @@ def view_ambiente_de_aprendizagem():
     return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
 
 def registrarConclusao():
+    """responsavel por desbloquear o proximo OA"""
     usuario = usuario_logado()
+    dados_jogo= parametros_json_jogos(request.params.items())
+    print("regisrar conclusao l130",parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+    print("registrar conclusao l131",dados_jogo['niveis'],len(dados_jogo['niveis']))
     if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
-        premios={
-            'OA': is_oa,
-            'VC': is_vc_or_cn,
-            'CN': is_vc_or_cn
-        }
+        if dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True:
+            premios={
+                'OA': is_oa,
+                'VC': is_vc_or_cn,
+                'CN': is_vc_or_cn
+            }
+            # if autorizaçao_professor()==True:
 
-        return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
-        (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
-         oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+            return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
+            (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
+             oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+        else:
+            premios = {
+                'OA': is_oa,
+                'VC': is_vc_or_cn,
+                'CN': is_vc_or_cn
+            }
+
+            return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
+                (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
+                 oa='')
     else:
         gamificacao = gamificacao_moeda_xp(parametros = parametros_json_jogos(request.params.items()))
         premios = {
@@ -137,6 +168,7 @@ def registrarConclusao():
 
 def obterPremiacao():
     parametros = parametros_json_jogos(request.params.items())
+    print('obter premiacao',parametros)
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         aluno = facade.search_aluno_id_facade(id_aluno=usuario['id'])
@@ -156,6 +188,7 @@ def obterPremiacao():
 def verificarAcessoUnidade():
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
+    print('investigando APl176',parametros)
     if int(usuario['tipo']) < 6:
         retorno = {'unidadesAcessiveis': parametros['unidades']}
     else:
@@ -180,32 +213,32 @@ def verificarAcessoUnidade():
             retorno = {'unidadesAcessiveis': acesso_unidade}
     return retorno
 
-def verificarAcessoUnidade():
-    usuario = usuario_logado()
-    parametros = parametros_json_jogos(request.params.items())
-    if int(usuario['tipo']) < 6:
-        retorno = {'unidadesAcessiveis': parametros['unidades']}
-    else:
-        desempenho_aluno = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
-        if desempenho_aluno == []:
-            retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
-        else:
-            acesso_unidade = []
-            for i in parametros['unidades']:
-                desempenho_unidade = facade.unidade_teste_facade(id_aluno=str(usuario['id']), unidade=i)
-                if desempenho_unidade == []:
-                    acesso_unidade.append(i)
-                    break
-                else:
-                    desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
-                    if desempenho_oa == []:
-                        acesso_unidade.append(i)
-
-                        break
-                    else:
-                        acesso_unidade.append(i)
-            retorno = {'unidadesAcessiveis': acesso_unidade}
-    return retorno
+# def verificarAcessoUnidade():
+#     usuario = usuario_logado()
+#     parametros = parametros_json_jogos(request.params.items())
+#     if int(usuario['tipo']) < 6:
+#         retorno = {'unidadesAcessiveis': parametros['unidades']}
+#     else:
+#         desempenho_aluno = facade.search_desempenho_concluido_id_aluno_facade(id_aluno=str(usuario['id']))
+#         if desempenho_aluno == []:
+#             retorno = {'unidadesAcessiveis': [parametros['unidades'][0]]}
+#         else:
+#             acesso_unidade = []
+#             for i in parametros['unidades']:
+#                 desempenho_unidade = facade.unidade_teste_facade(id_aluno=str(usuario['id']), unidade=i)
+#                 if desempenho_unidade == []:
+#                     acesso_unidade.append(i)
+#                     break
+#                 else:
+#                     desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa='{}OA06'.format(i))
+#                     if desempenho_oa == []:
+#                         acesso_unidade.append(i)
+#
+#                         break
+#                     else:
+#                         acesso_unidade.append(i)
+#             retorno = {'unidadesAcessiveis': acesso_unidade}
+#     return retorno
 
 def verificarAcessoAventura():
     from control.dicionarios import AVENTURAS_CONECTURMA
@@ -354,6 +387,7 @@ def de_novo(id_aluno,oa):
             return False
 
 def magia_da_matematica(id_aluno, aventura):
+    print('testando se existe M',id_aluno,aventura)
     oa = facade.search_oa_by_type_and_aventura_facade(aventura='UV1AV1', disciplina=DICIPLINA_NOME['matematica'])
     oas_terminandos_dificel = 0
     for i in oa:
@@ -371,6 +405,7 @@ def magia_da_matematica(id_aluno, aventura):
         return False
 
 def magia_da_lingua_portuguesa(id_aluno, aventura):
+    print('testando se existe aventura P',id_aluno,aventura)
     oa = facade.search_oa_by_type_and_aventura_facade(aventura='UV1AV1', disciplina=DICIPLINA_NOME['lingua Portuguesa'])
     oas_terminandos_dificel = 0
     for i in oa:

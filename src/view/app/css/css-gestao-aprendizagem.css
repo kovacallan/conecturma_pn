@@ -155,17 +155,30 @@ h1, h2, h3, h4, h5, h6 {
 
 .profile-image{
 	width: 148px;
-    height: 141px;
+    height: 150px;
 	border-radius: 100px;
 	box-sizing: border-box;
+	z-index:-1;
+	margin-left: -19px;
 }
 
 .efeito-img:hover .profile-image {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
     opacity: 0.6;
+
 }
 .efeito-img:hover .middle {
   opacity: 1;
+  }
+.muda_foto_obs{
+    margin-left: 45px;
+    position: absolute;
+    bottom: 81px;
+    display:none;
+    z-index:1;
+}
+.muda_foto_obs:hover{
+display:inline;
 }
 
 .Ola{
@@ -283,6 +296,23 @@ h1, h2, h3, h4, h5, h6 {
 background-color:initial;
 }
 
+.botao-salvar{
+	background-color: #0391E6;
+	color: white;
+	display: inline-block;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-left:40px;
+
+}
+
+.doughnut {
+    border: 18px solid white;
+    border-radius: 100px;
+    height:173px;
+}
 .botao{
 background-color: #0391E6;
 	color: white;

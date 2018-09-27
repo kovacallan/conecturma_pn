@@ -1,4 +1,3 @@
-
 <div style="cursor: pointer;"  class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
        aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
@@ -30,7 +29,12 @@
                         <form>
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row" style="margin-top: 30px">
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="height: 215px;">
+                                     <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                                      style="cursor:pointer; position: absolute; right: 0;">
+                                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
+                                        </span>
+
                                     <div class="row distanciamento">
                                         <div class=" col-md-6" style="margin-left: 10px;">
                                             <label for="nome" style="background-color: inherit;">Nome:
@@ -40,9 +44,9 @@
                                             <input type="text" placeholder="Escola do rock"
                                                    class="form-control disabled{{i['id']}}"
                                                    size="30" name="" id="nome{{i['id']}}" value="{{i['nome']}}"
-                                                   disabled>
+                                                   style="width: 298px;"       disabled>
                                         </div>
-                                        <div class="col-md-4" style="padding-left: 10px">
+                                        <div class="col-md-4" style="padding-left: 10px; right: 72px;">
                                             <label for="serie">serie</label>
                                             <br>
                                             <input type="text" size="24" class="form-control" name=""
@@ -51,11 +55,19 @@
                                     </div>
                                     <div class="row distanciamento">
                                         <div class="col-md-10" style="margin-left: 10px;">
-                                            <label for="telefone">escola:
+                                            <label for="professor">Professor:
+                                                <span style="color:#ff0000"></span>
+                                            </label>
+                                            <input type="text" class="form-control" size="21" name=""
+                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}"  style="width: 579px;" disabled>
+                                        </div>
+                                    <div class="row distanciamento">
+                                        <div class="col-md-10" style="margin-left: 10px;">
+                                            <label for="escola{{i['id']}}">escola:
                                                 <span style="color:#ff0000">*</span>
                                             </label>
                                             <input type="text" class="form-control" size="21" name=""
-                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}" disabled>
+                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}" style="width: 579px;" disabled>
                                         </div>
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
@@ -128,4 +140,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

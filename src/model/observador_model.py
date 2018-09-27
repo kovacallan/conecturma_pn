@@ -15,10 +15,9 @@ class DbObservador(Model):
     email = TextField(fts=True,default='0')
     data_nascimento=TextField(fts=True, default='0')
     tipo = TextField(fts=True)
+    nome_foto_perfil=TextField(default='default-profile.png')
     apelido = TextField(fts=True, default='0')
-
     armario = ListField()
-
     cor = TextField(default='0')
     rosto = TextField(default='0')
     acessorio = TextField(default='0')
@@ -31,8 +30,9 @@ class DbObservador(Model):
     pontos_de_vida = IntegerField(default=0)
     pontos_de_moedas = IntegerField(default=0)
 
-    data_ultimo_login = TextField(default='')
+    data_ultimo_login = TextField(default='',index=True)
     ativo = TextField(default='0')
+    aux_css_foto=TextField(default='0')
 
 
 
@@ -55,11 +55,18 @@ class DbObservador(Model):
 
         return observador
 
-    def update_observador(self, update_id, nome, telefone, cpf, email,vinculo_turma,vinculo_escola):
-
-        observador = self.load(update_id)
-        [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.all()]
-        observador.save()
+    def update_observador(self, **kwargs):
+        print('recebeu isso',kwargs)
+        observador = self.load(kwargs['id'])
+        for i in kwargs:
+            if kwargs[i] and kwargs[i] != ' ':
+                setattr(observador, i, kwargs[i])
+        if observador.save():
+            return True
+        else:
+            return False
+        # [setattr(observador, parametro, valor) for parametro, valor in locals().items() if valor !=observador.all()]
+        # observador.save()
 
     def redefinir_senha(self, id, senha):
         observador = DbObservador.load(id)
@@ -105,12 +112,11 @@ class DbObservador(Model):
         :param nome: nome do observador
         :return:
         """
-
         observador = None
         for search in DbObservador.query(DbObservador.nome == nome):
             observador = dict(
                 id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
+                cpf=search.cpf, email=search.email, tipo=search.tipo,
                 cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                 vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
                 vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma
@@ -128,7 +134,7 @@ class DbObservador(Model):
         for search in DbObservador.query(DbObservador.tipo == tipo, order_by=DbObservador.nome):
             observador.append(dict(
                     id=search.id, nome=search.nome, senha=search.senha, telefone=search.telefone,
-                    cpf=search.cpf, email=search.email, tipo=search.tipo, itens_comprados=search.itens_comprados,
+                    cpf=search.cpf, email=search.email, tipo=search.tipo,
                     cor=search.cor, rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
                     vida=search.pontos_de_vida, moedas=search.pontos_de_moedas, vinculo_escola=search.vinculo_escola,
                     vinculo_rede=search.vinculo_rede, vinculo_turma=search.vinculo_turma

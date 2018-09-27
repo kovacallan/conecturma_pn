@@ -1,9 +1,10 @@
+<img src="/static/medalha/icone-medalha-de-turma.png" type="button" class="float-right" data-toggle="modal" data-target="#medalha_todos"
+style="position: relative; bottom: 200px; margin-right: 36px;">
 <div id="janela_medalhas" style="margin-top: 9px;">
     <!-- Modal -->
 <div class="modal fade" id="medalha_todos{{i['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
  <div class="modal-dialog" role="document"   style="margin: 0px 0 0 20%;">
    <div class="modal-content tamanho">
-
      <div class="modal-body">
    <table class="table table-borderless">
       <div class="table-head" style="margin-bottom: 10px; width: 102%">

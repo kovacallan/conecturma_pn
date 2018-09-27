@@ -484,8 +484,10 @@ BasicGame.GameBase.prototype = {
         }
 
         if(BasicGame.isOnline) {
-            BasicGame.OnlineAPI.registrarConclusao(this.listCorrects, this.listCompleted, function(data) {            
+            BasicGame.OnlineAPI.registrarConclusao(this.listCorrects, this.listCompleted, function(data) {
+            console.log('AAAAAAAAAAAAAAAAAAQUIIIIIIIIII , OLHA PARA EU AQUI FERRANDO O ROLE GameBase_alunos.js l488 , antes if');
                 if(_this.eventConclusao) {
+                console.log('AAAAAAAAAAAAAAAAAAQUIIIIIIIIII , OLHA PARA EU AQUI FERRANDO O ROLE GameBase_alunos.js l489');
                     _this.eventConclusao.dispatch(data);
                 }
             }, function(error) {
