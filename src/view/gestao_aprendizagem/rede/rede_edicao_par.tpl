@@ -3,23 +3,6 @@
        aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
 </div>
-<<<<<<< HEAD
-<div class="col-md-2 item-tabela ">
-    {{i['vinculo_gestor_rede']}}
-</div>
-<div class="col-md-2 item-tabela">
-    {{i['telefone']}}
-</div>
-<div class="col-md-2 item-tabela">
-</div>
-<div class="col-md-1 item-tabela card colocar-direita">
-    <a data-toggle="collapse" href="#collapse{{i['id']}}" aria-expanded="true" data-parent="#accordion" aria-controls="collapse{{i['id']}}"
-        class="" id="id-escola-d-rock{{i['id']}}" onclick="setinha_aux('id-escola-d-rock{{i['id']}}')">
-        <i id="setinha" class='fas fa-angle-down'></i>
-    </a>
-</div>
-=======
->>>>>>> 37bf0e750379ff2ec02aeb91da7b04952e35fa02
 
 <!--fim das informaçoes da tabela-->
 

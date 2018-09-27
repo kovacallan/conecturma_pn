@@ -1,10 +1,13 @@
 <!--informaçoes-->
 
-<div style="cursor: pointer;" class="col-md-9 item-tabela" id="id-nossa-escola" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
-    {{i['nome']}}
-</div>
-<div style="cursor: pointer;" class="col-md-3 item-tabela" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
-    {{i['tipo']}}
+<div class="col-md-12" id="id-nossa-escola" style="padding:0">
+    <div style="cursor: pointer;float:right;" class="col-md-3 item-tabela" id="" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
+        {{i['tipo']}}
+    </div>
+    <div style="cursor: pointer;" class="col-md-9 item-tabela" data-toggle="collapse" data-target="#collapsea{{i['id']}}" aria-expanded="true" aria-controls="collapsea{{i['id']}}" id="a_setinha{{i['id']}}" onclick="seta('a_setinha{{i['id']}}')">
+
+        {{i['nome']}}
+    </div>
 </div>
 <!--fim das informaçoes da tabela-->
 
