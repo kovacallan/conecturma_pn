@@ -1,4 +1,5 @@
-<button type="button" class="botao float-right" data-toggle="modal" data-target="#medalha_todos">Dar medalhas a todos os alunos </button>
+<img src="/static/medalha/icone-medalha-de-turma.png" type="button" class="float-right" data-toggle="modal" data-target="#medalha_todos"
+style="position: relative; bottom: 200px; margin-right: 36px;">
 <!-- conteudo do botao -->
 <!--MODAL PRIMARIO-->
 <div class="modal fade" id="medalha_todos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
