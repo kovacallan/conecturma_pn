@@ -86,6 +86,10 @@ def img_menu(filename):
 def img_medalha_jogo(filename):
     return static_file(filename, root='././view/app/img/medalha/jogo')
 
+@route('/static/medalha/<filename>')
+def img_medalha(filename):
+    return static_file(filename, root='././view/app/img/medalha')
+
 @route ('/static/img/medalha/socio/<filename>')
 def img_medalha_socio(filename):
     return static_file(filename, root='././view/app/img/medalha/socio')
