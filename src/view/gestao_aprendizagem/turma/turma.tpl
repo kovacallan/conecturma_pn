@@ -1,36 +1,16 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
 <div class="col-md-9 order-md-3 botao-tabela" style="margin-top: 6px;">
-  <div class="container">
-    <div class="row">
-      <div class=" col-md-3">
-        <p class="top-escolas-tabela">Turma</p>
-        % if tipo != '3':
-        <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
-          <i class="fas fa-plus"></i>
-          &nbsp;Nova Turma
-        </button>
-        % end
-      </div>
-      <div class="col-md-4 offset-md-5">
-        <form class="form">
-          <div class="input-group pesquisa">
-            <!--pesquisa-->
-            <!--<input class="form-control pesquisa-input" type="text" placeholder="Pesquisar" aria-label="Search" style="padding-left: 20px; border-radius: 40px;background-color: #dedede;height: 30px;z-index: -1" id="mysearch">
-            <div class="input-group-addon" style="margin-left: -26px;border-radius: 40px; background-color: #f3f3f3; border:none;">
-              <button type="submit" style="border-radius: 20px;border:1px transparent;height: 30px;" id="search-btn">
-                <i class="fa fa-search"></i>
-              </button>
-              <!--pesquisa-->
-          </div>
-      </div>
-      </form>
-    </div>
-    <!--fim da div de pesquisa-->
+  <div style="left: -14px;margin-bottom: 30px;position: relative;">
+    <p class="top-escolas-tabela">Turma</p>
+    % if tipo != '3':
+    <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
+      <i class="fas fa-plus"></i>
+      &nbsp;Nova Turma
+    </button>
+    % end
   </div>
-  <!--fim da row do conteudo acima da tabela -->
-  <br />
-  <br />
+
   %if tipo != '3':
   <div id="new_school" style="display:none;">
     %include('gestao_aprendizagem/turma/formulario_cadastro_nova_turma.tpl')
@@ -40,21 +20,8 @@
     <!-- inicio da tabela -->
 
     <div class="row">
-      <div class="col-md-5 item-tabela topo-tab">
-        Nome da Turma
-      </div>
-
-      <div class="col-md-2 item-tabela topo-tab">
-        Professor
-      </div>
-
-      <div class="col-md-2 item-tabela topo-tab">
-        Escola
-      </div>
-      <div class="col-md-2 item-tabela topo-tab">
-        Série
-      </div>
-      <div class="col-md-1 item-tabela topo-tab">
+      <div class="col-md-12 item-tabela topo-tab">
+        Turma
       </div>
     </div>
     <!-- bloco de cabeçalho da lista -->

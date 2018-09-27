@@ -1,12 +1,11 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
 <div class="col-md-9 order-md-3 botao-tabela" style="margin-top: 6px;">
-    <div style="left: -14px;position: relative;">
-      <p class="top-escolas-tabela" style="font-family: 'Arial';font-size: 25.08pt;color: #0391E6;margin-bottom: 0px;">Redes</p>
+    <div style="left: -14px;margin-bottom: 30px;position: relative;">
+      <p class="top-escolas-tabela">Redes</p>
       <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
-          <i class="fas fa-plus">
-              &nbsp;Nova Rede
-          </i>
+          <i class="fas fa-plus"></i>
+          &nbsp;nova rede
       </button>
     </div>
     <div id="new_school" style="display:none;">
@@ -16,21 +15,8 @@
       <!-- inicio da tabela -->
 
       <div class="row">
-        <div class="col-md-5 item-tabela topo-tab">
-          Nome da Rede
-        </div>
-
-        <div class="col-md-2 item-tabela topo-tab">
-          Gestor
-        </div>
-
-        <div class="col-md-2 item-tabela topo-tab">
-          Telefone
-        </div>
-        <div class="col-md-2 item-tabela topo-tab">
-          Numero escolas
-        </div>
-        <div class="col-md-1 item-tabela topo-tab">
+        <div class="col-md-12 item-tabela topo-tab">
+          Rede
         </div>
       </div>
       <!-- bloco de cabeçalho da lista -->

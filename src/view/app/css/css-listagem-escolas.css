@@ -132,7 +132,7 @@ button:focus{
 	color: #4c4c4c;
 	background-color: inherit;
 	padding:.5rem 0rem;
-	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .form-control:focus{
@@ -245,6 +245,7 @@ a:hover{
     overflow-y: auto;
 }
 
+
 /*  MODAL DE MEDALHAS *********
 ***********
 **********
@@ -317,3 +318,4 @@ textarea{
     overflow-x:hidden;
 }
 
+#id-nossa-escola:hover{background-color: #0391E6; color:white;}
