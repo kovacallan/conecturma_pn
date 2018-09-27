@@ -61,6 +61,7 @@
                                         </div>
                                     </div>
                                     <div id="dar_medalhas_todos">
+                                            <button type="button" class="botao float-right" data-toggle="modal" data-target="#medalha_todos{{i['id']}}">Dar medalhas a todos os alunos </button>
                                         %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
                                     </div> <!--Fechando janela de dar medalhas -->
                                     <!--fim da div dos dados ao lado da imagem-->

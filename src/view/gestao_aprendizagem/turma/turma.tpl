@@ -92,39 +92,30 @@
     index == -1 ? idMedalha.push(id) : idMedalha.splice(index, 1);
   }
 
-  function entregarMedalha(alunoid) {
-    for (i = 0; i < idMedalha.length; i++) {
-      motivo = document.getElementById('medalha_motivo_' + idMedalha[i]).value;
-      $.post('/turma/entregar_medalha_aluno', { aluno: alunoid, medalha: idMedalha[i], motivo: motivo }, function (data) {
-        if (data == '0') {
-          break;
-        }
-      });
-    }
-    if (i == idMedalha.length) {
-      window.location.replace('/turma');
-      alert("Medalha foi entregue com sucesso!");
-    } else {
-      alert("Erro");
-    }
+  function entregarMedalha(alunoid, medalha) {
+    motivo = document.getElementById("motivo"+medalha);
+    $.post('/turma/entregar_medalha_aluno', { aluno: alunoid, medalha: medalha, motivo: motivo.value}, function (data) {
+      if(data == '1'){
+        alert("Medalha foi entregue com sucesso!");
+        motivo.value='';
+      }
+      else{
+        alert("Erro, medalha não pode ser entregue.");
+      }
+    });
   }
 
-  function entregarMedalhaTodos(turmaId) {
-    for (i = 0; i < idMedalha.length; i++) {
-      motivo = document.getElementById('medalha_motivo_' + idMedalha[i]).value;
-      $.post('/turma/entregar_medalha_todos_alunos', { turma: turmaId, medalha: idMedalha[i], motivo: motivo }, function (data) {
-        alert(data);
-        if (data == '0') {
-          break;
-        }
-      });
-    }
-    if (i == idMedalha.length) {
-      window.location.replace('/turma');
+  function entregarMedalhaTodos(turmaId, medalha) {
+    motivo = document.getElementById("motivo"+medalha);
+    $.post('/turma/entregar_medalha_todos_alunos', { turma: turmaId, medalha: medalha, motivo: motivo.value }, function (data) {
+      if(data == '1'){
       alert("Medalha foi entregue com sucesso!");
-    } else {
-      alert("Erro");
-    }
+      motivo.value='';
+      }
+      else{
+        alert("Erro, medalha não pode ser entregue.");
+      }
+    });
   }
 </script>
 %include('gestao_aprendizagem/footer/footer.tpl')

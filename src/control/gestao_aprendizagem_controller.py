@@ -653,6 +653,7 @@ def controller_update_turma():
 
 def controller_entregar_medalha_aluno():
     medalhas = facade.set_medalha_facade(id_aluno = request.params['aluno'], medalha=request.params['medalha'], motivo=request.params['motivo'])
+    
     if medalhas:
        return "1"
     else:
