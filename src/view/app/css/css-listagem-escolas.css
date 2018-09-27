@@ -246,4 +246,76 @@ a:hover{
 }
 
 
+/*  MODAL DE MEDALHAS *********
+***********
+**********
+******************* */
+body{
+    width: 100%;
+    height: 100%;
+}
+table{
+    border: none;
+}
+
+.table-head {
+    color: #fff;
+    background-color: #0391e6;
+    border-radius: 20px;
+    display: -webkit-inline-box;
+    padding-left: 11px;
+    margin-right: 58px;
+    width: 100%;
+    padding-top:4px;
+}
+#header-2{
+    margin-left: 129px;
+}
+.table-head h5{
+    padding-left: 11px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.descricao{
+    border: 9px solid #1079c8;
+    border-radius: 20px 0 0 20px;
+    padding: 8px;
+}
+
+.tamanho{
+    width: 750px;
+    height: 454px;
+    overflow-x:hidden;
+    text-align: center;
+
+}
+
+textarea{
+     border: 9px solid #1079c8;
+    border-radius: 0px 20px 2px 0;
+    width:274px;
+    resize: none;
+    outline:none;
+}
+.btn-cor{
+    background-color: #1079c8;
+    color: #fff;
+    padding-bottom: 0;
+    padding-top: 0;
+    border-radius: 0 0 8px 8px;
+    position: relative;
+    margin-left: 480px;
+    bottom: 2px;
+}
+.modal-dialog{
+    overflow-y: initial !important
+
+}
+.modal-body{
+    height: 250px;
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+
 #id-nossa-escola:hover{background-color: #0391E6; color:white;}
