@@ -12,15 +12,19 @@
            <h5 style="margin-left: 200px;">Comentário</h5>
        </div>
 
- <tbody>
-   <tr>
-     <th scope="row"> <img src="img/socio/socio-1.png" style="width: 118px; height: auto;"> </th>
-     <td colspan="2" position: absolute; > <div style="display: inline-flex"><div class="descricao" style="width:274px;"><span>Pensamento crítico. Estimulamos a curiosidade e o gosto por aventura</span></div>
-     <textarea maxlength="140" placeholder="Máximo 140 caracteres!"></textarea></div>
-        <button type="button" class="btn btn-cor" style="">Enviar</button>
-       </td>
-   </tr>
-         </table>
+         <tbody>
+            % for m in medalhas:
+               <tr>
+                 <th scope="row"> <img src="/static/img/medalha/socio/socio-{{m['image_name']}}.png" style="width: 118px; height: auto;"> </th>
+                 <td colspan="2" position: absolute; > <div style="display: inline-flex">
+                     <div class="descricao" style="width:274px;"><span>{{m['descricao_completa']}}</span></div>
+                     <textarea maxlength="140" placeholder="Máximo 140 caracteres!"></textarea></div>
+                    <button type="button" class="btn btn-cor" onclick="entregarMedalha({{z['id']}})" style="cursor: pointer;">Enviar</button>
+                 </td>
+               </tr>
+            % end
+         </tbody>
+     </table>
 
 
        </div>
