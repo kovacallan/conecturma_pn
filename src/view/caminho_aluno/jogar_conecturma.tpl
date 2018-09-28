@@ -117,6 +117,8 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 
+<script src="../static/js/bootstrap.bundle.min.js"></script>
+
 <script>
         $(document).ready(function () {
             $(".btn-sun").click(function () {
@@ -224,8 +226,8 @@
             );
         });
         function enviarRequisicaoAjax(parametros, callbackSucesso, callbackErro) {
-            //HOST = 'http://localhost:8080/'
-            HOST = 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com/'
+            HOST = 'http://localhost:8080/'
+            //HOST = 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com/'
             console.log("enviarRequisicaoAjax parametros", parametros);
             console.log(parametros.operacao);
             var jqXhr = jQuery.ajax({

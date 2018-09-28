@@ -11,7 +11,7 @@ def main():
 
     application = default_app()
 
-    run(host='0.0.0.0', port=80, reload=True, server='gunicorn', workers=4)
+    run(host='localhost', port=8080, reload=True, server='gunicorn', workers=4)
     #run(host='localhost', port=8080, reload=True)
 
 
