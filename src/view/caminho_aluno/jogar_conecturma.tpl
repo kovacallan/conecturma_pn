@@ -221,7 +221,7 @@
         });
         function enviarRequisicaoAjax(parametros, callbackSucesso, callbackErro) {
             //HOST = 'http://localhost:8080/'
-            HOST = 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com/'
+            HOST = 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com/'
             console.log("enviarRequisicaoAjax parametros", parametros);
             console.log(parametros.operacao);
             var jqXhr = jQuery.ajax({
