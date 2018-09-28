@@ -440,13 +440,14 @@ def controller_create_rede(no_repeat):
 
         return locals()
     elif nome != '' and nome != None and telefone != '' and telefone != None:
-        facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
+        rede = facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'], nome=nome,
                                        cnpj=cnpj, telefone=telefone,
                                        endereco=endereco, numero=numero,
                                        bairro=bairro, complemento=complemento,
                                        cep=cep, estado=estado,
                                        municipio=municipio, quem_criou=quem_criou)
-
+    if isinstance(rede, object):
+        return '/rede'
 
 def controller_editar_rede():
     facade.update_estrutura_facade(estrutura=request.params)
@@ -547,7 +548,7 @@ def controller_escola_cadastro(no_repeat):
         if no_repeat == True:
 
             return locals()
-        facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=nome,
+        escola = facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'], nome=nome,
                                        cnpj=request.params['cnpj'], telefone=request.params['telefone'],
 
                                        vinculo_rede=request.params['rede'],
@@ -557,7 +558,8 @@ def controller_escola_cadastro(no_repeat):
                                        municipio=request.params['municipio'],
                                        data_de_criacao=request.params['data_de_criacao']
                                        )
-
+    if isinstance(escola, object):
+        return '/escola'
 
 def controller_escola_update():
     facade.update_estrutura_facade(estrutura=request.params)
@@ -580,7 +582,7 @@ def view_turma():
     for i in medalha:
         if i['tipo_medalha'] == TIPO_MEDALHA_NOME['SocioEmocional']:
             medalhas.append(i)
-    return dict(tipo=usuario_logado()['tipo'], escola=escola, turma=turma, medalhas=medalhas)
+    return dict(tipo=usuario_logado()['tipo'], TIPO_USUARIOS = TIPO_USUARIOS,escola=escola, turma=turma, medalhas=medalhas)
 
 
 def get_turma_de_acordo_com_tipo_usuario_logado():
@@ -671,9 +673,10 @@ def controller_create_turma(norepeat):
         return dict(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
                     data_de_criacao=request.forms['data_de_criacao'], vinculo_rede=vinculo_rede['vinculo_rede'])
     else:
-        facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
+        turma = facade.create_estrutura_facade(nome=nome, tipo_estrutura=TIPO_ESTRUTURA['turma'], serie=serie,
                                        vinculo_escola=escola, vinculo_rede=vinculo_rede['vinculo_rede'])
-    # redirect('/turma')
+    if isinstance(turma, object):
+        return '/turma'
 
 
 def controller_edit_turma(no_repeat):
@@ -717,7 +720,6 @@ def controller_update_turma(norepeat):
 
 def controller_entregar_medalha_aluno():
     medalhas = facade.set_medalha_facade(id_aluno=request.params['aluno'], medalha=request.params['medalha'], motivo=request.params['motivo'])
-
     if medalhas:
         return "1"
     else:

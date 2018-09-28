@@ -59,7 +59,7 @@
                                                 <span style="color:#ff0000"></span>
                                             </label>
                                             <input type="text" class="form-control" size="21" name=""
-                                                   id="escola{{i['id']}}" value="{{i['vinculo_escola']}}"  style="width: 579px;" disabled>
+                                                   id="professor{{i['id']}}" value="{{i['professor']}}"  style="width: 579px;" disabled>
                                         </div>
                                     <div class="row distanciamento">
                                         <div class="col-md-10" style="margin-left: 10px;">
@@ -71,9 +71,11 @@
                                         </div>
                                     </div>
                                     <!--fim da div dos dados ao lado da imagem-->
-                                    <div id="dar_medalhas_todos">
-                                        %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
-                                    </div> <!--Fechando janela de dar medalhas -->
+                                    % if tipo ==TIPO_USUARIOS['professor']:
+                                        <div id="dar_medalhas_todos">
+                                            %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
+                                        </div> <!--Fechando janela de dar medalhas -->
+                                    % end
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div>
                             </div>
@@ -107,13 +109,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 row-par nome-prof">
-                                                <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal" data-target="#medalha_janela{{z['id']}}" style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
-                                            </div>
-                                            %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                            % if tipo == TIPO_USUARIOS['professor']:
+                                                <div class="col-md-1 row-par nome-prof">
+                                                    <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal" data-target="#medalha_janela{{z['id']}}" style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
+                                                </div>
+                                                %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                            % end
                                         </div>
                                     </div>
                                 %end
+                            </div>
                         </div>
                     </div>
                 </div>
