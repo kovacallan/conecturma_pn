@@ -220,8 +220,9 @@ function cadastro_escola(){
         if (telefone != '' && telefone != null && telefone.length >= 10){
             $.post('/escola/criar_escola', {nome:nome, cnpj:cnpj, telefone:telefone, data_de_criacao:data_de_criacao, rede:rede,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
+                window.location.replace(data) 
             });
-         setTimeout(location.reload(), 3000);
+         
         }
         else{
             alert('O campo telefone é obrigatório.');
@@ -290,8 +291,8 @@ function cadastro_rede(){
         if (telefone != '' && telefone != null && telefone.length >= 10){
             $.post('/rede/criar_rede', {nome:nome, cnpj:cnpj, telefone:telefone,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio, data_de_criacao:data_de_criacao},function(data){
+                window.location.replace(data)
             });
-            setTimeout(location.reload(), 3000);
         }
         else{
             alert('O campo telefone é obrigatório.');
@@ -345,8 +346,8 @@ function cadastro_turma(){
         if (serie!= '' && serie != null){
             if (escola!= '' && escola != null){
                 $.post('/turma/cadastro_turma', {nome:nome, serie:serie, escola:escola, data_de_criacao:data_de_criacao},function(data){
+                    window.location.replace(data)
                 });
-                location.reload();
             }
             else{
                 alert('O campo escola é obrigatório.');
