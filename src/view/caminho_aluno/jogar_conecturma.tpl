@@ -71,7 +71,11 @@
                 <img src="/static/img/avatar-box-name2.png" style=" position: relative;  bottom: 31px;  left: 8px;">
              </div>
 
-            <span id="apelido" style="position: absolute; top: 49%; left: 68px; color: #fff; font-weight: bold;">{{apelido.upper()}}</span>
+            <span id="apelido" style="position: absolute; top: 49%; left: 68px; color: #fff; font-weight: bold;">
+                % if apelido != '0': 
+                    {{apelido.upper()}}
+                % end
+            </span>
             <!--<div class="offset-md-4 col-md-1">-->
             <span id="CRYSTAL">{{moedas}}</span>
             <span id="HP">{{vida}}</span>
