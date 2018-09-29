@@ -109,7 +109,7 @@ function validar_se_email_existe(email){
     }
 }
 
-var letras_senha = {'a':false, 'b':false, 'c':false, 'd':false, 'e':false, 'f':false, 'g':false, 'h':false, 'i':false, 'k':false, 'l':false};
+var letras_senha = {'a':false, 'b':false, 'c':false, 'd':false, 'e':false, 'f':false, 'g':false, 'h':false, 'i':false, 'j':false, 'k':false, 'l':false};
 
 function mudaEstado(letra){
  	var imagem = document.getElementById(letra);
