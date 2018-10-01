@@ -71,7 +71,11 @@
                 <img src="/static/img/avatar-box-name2.png" style=" position: relative;  bottom: 31px;  left: 8px;">
              </div>
 
-            <span id="apelido" style="position: absolute; top: 49%; left: 68px; color: #fff; font-weight: bold;">{{apelido.upper()}}</span>
+            <span id="apelido" style="position: absolute; top: 49%; left: 68px; color: #fff; font-weight: bold;">
+                % if apelido != '0': 
+                    {{apelido.upper()}}
+                % end
+            </span>
             <!--<div class="offset-md-4 col-md-1">-->
             <span id="CRYSTAL">{{moedas}}</span>
             <span id="HP">{{vida}}</span>
@@ -112,6 +116,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
+
+<script src="../static/js/bootstrap.bundle.min.js"></script>
 
 <script>
         $(document).ready(function () {

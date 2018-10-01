@@ -96,8 +96,8 @@
     motivo = document.getElementById("motivo"+medalha);
     $.post('/turma/entregar_medalha_aluno', { aluno: alunoid, medalha: medalha, motivo: motivo.value}, function (data) {
       if(data == '1'){
-        alert("Medalha foi entregue com sucesso!");
         motivo.value='';
+        setTimeout(alert("Medalha foi entregue com sucesso!"), 3000);
       }
       else{
         alert("Erro, medalha não pode ser entregue.");
@@ -106,11 +106,11 @@
   }
 
   function entregarMedalhaTodos(turmaId, medalha) {
-    motivo = document.getElementById("motivo"+medalha);
+    motivo = document.getElementById("motivo"+medalha+"_todos");
     $.post('/turma/entregar_medalha_todos_alunos', { turma: turmaId, medalha: medalha, motivo: motivo.value }, function (data) {
       if(data == '1'){
-      alert("Medalha foi entregue com sucesso!");
-      motivo.value='';
+        motivo.value='';
+        setTimeout(alert("Medalha foi entregue com sucesso!"), 3000);
       }
       else{
         alert("Erro, medalha não pode ser entregue.");
