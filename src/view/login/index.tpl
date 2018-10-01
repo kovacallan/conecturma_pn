@@ -167,9 +167,6 @@
     </div>
     </div>
 
-
-
-
     <script type="text/javascript">
         (function($) {
                 (function($) {
@@ -207,17 +204,6 @@
         <img src="/static/img/edufuturo-1.png">
 
     </footer>
-
-
-    <script type="text/javascript">
-
-
- document.addEventListener('keydown', function(event) {
-        if (event.keyCode == 13) {// enter
-        	login_professor();
-        }
-    });
-    </script>
 
 </body>
 </html>

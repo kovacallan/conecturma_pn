@@ -117,6 +117,8 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 
+<script src="../static/js/bootstrap.bundle.min.js"></script>
+
 <script>
         $(document).ready(function () {
             $(".btn-sun").click(function () {
