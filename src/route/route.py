@@ -122,7 +122,10 @@ def buy_item():
     from control.guarda_roupa_controller import Guarda_roupa
 
     guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
-    guarda_roupa.buy_item(id_item=request.params['item'])
+    if guarda_roupa.buy_item(id_item=request.params['item']):
+        return '1'
+    else:
+        return '0'
 
 @route('/equipar_item', method='POST')
 @permissao('aluno_varejo')
@@ -486,9 +489,21 @@ def relatorio_aluno(no_repeat=False):
 
 
 @route('/trazer_oas')
+@view('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')
 def levar_oas_matematica():
-    from control.gestao_aprendizagem_controller import levar_oas_matematica
-    return levar_oas_matematica()
+    from control.relatorio_controller import Relatorio
+    relatorio = Relatorio()
+
+    aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
+    turma = facade.search_estrutura_id_facade(id=aluno['vinculo_turma'])
+
+    relatorio.get_matematica_or_portugues_descritor(serie=turma['serie'], diciplina=request.params['diciplina'])
+    relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
+    relatorio.convert_nivel_for_numeric()
+    relatorio.set_color_face()
+    relatorio.set_pontuacao_porcentagem()
+
+    return dict(oa=relatorio.descritores, aluno=aluno, porcentagem=relatorio.porcentagem, pontos=relatorio.porcentagem_solo)
 
 
 """

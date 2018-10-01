@@ -492,6 +492,7 @@
 
              function comprar_acessorio(item){
                 $.post('/comprar_item', {item:item},function(data){
+                    alert(data)
                  });
             }
             function salvar_avatar(){

@@ -133,6 +133,18 @@ class DbEstrutura(Model):
 
         return oas
 
+    def search_descritor_serie_diciplina(self,serie, diciplina):
+        from control.dicionarios import TIPO_ESTRUTURA, DICIPLINA_NOME
+
+        oas = []
+
+        for i in DbEstrutura.query((DbEstrutura.tipo_estrutura == TIPO_ESTRUTURA['objeto_de_aprendizagem']) &
+                                   (DbEstrutura.serie == serie) & (DbEstrutura.disciplina == diciplina), order_by=DbEstrutura.id):
+
+            oas.append(vars(i)["_data"])
+
+        return oas
+
     def search_oa_by_type_and_aventura(self, aventura ,disciplina):
         oas = []
         for i in self.query((DbEstrutura.tipo_estrutura == '7') & (DbEstrutura.disciplina == disciplina) &

@@ -97,6 +97,11 @@ class Relatorio(object):
                 z+=1
             self.porcentagem_solo.append(porcentagem)
 
+    def get_matematica_or_portugues_descritor(self, serie, diciplina):
+        from facade.facade_main import Facade
+        facade = Facade()
+        self.descritores = facade.search_descritor_serie_diciplina_facade(serie = serie, diciplina=diciplina)
+
     def convertendo_str_in_dict(self, str):
         from ast import literal_eval
 

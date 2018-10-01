@@ -740,35 +740,6 @@ def descritores():
     return
 
 
-def levar_oas_matematica():
-    aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
-    descritores = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['objeto_de_aprendizagem'])
-    oa = []
-    porcentagem_aluno = []
-    diciplina = request.params['diciplina']
-
-    if diciplina != '0':
-        for i in descritores:
-            if i['disciplina'] == diciplina and 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
-                desempenho = facade.search_oa_facade(id_aluno=str(aluno['id']), objeto_aprendizagem=i['sigla_oa'])
-                oa.append(i)
-                if desempenho != None:
-                    porcentagem_aluno.append(cor_desempenho(desempenho=desempenho))
-                else:
-                    porcentagem_aluno.append(None)
-    else:
-        for i in descritores:
-            if 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
-                desempenho = facade.search_oa_facade(id_aluno=str(aluno['id']), objeto_aprendizagem=i['sigla_oa'])
-                oa.append(i)
-                if desempenho != None:
-                    porcentagem_aluno.append(cor_desempenho(desempenho=desempenho))
-                else:
-                    porcentagem_aluno.append(None)
-
-    return template('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl', oa=oa, aluno=aluno,
-                    porcentagem=porcentagem_aluno)
-
 
 def checar_pontuiacao(desempenho):
     niveis_pontuacao = {

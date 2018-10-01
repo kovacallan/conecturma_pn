@@ -223,12 +223,14 @@ class DbAluno(Model):
 
         if usuario.pontos_de_moedas < preco:
             print("você não tem moeda")
+            return False
         else:
             dinheiros= int(usuario.pontos_de_moedas)
             dinheiros -= int(preco)
             usuario.pontos_de_moedas = str(dinheiros)
             usuario.armario.append(id_item)
             usuario.save()
+            return True
 
     def ver_itens_comprados(self, id_usuario):
         #         id_usuario

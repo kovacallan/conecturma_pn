@@ -130,32 +130,18 @@ def view_ambiente_de_aprendizagem():
 def registrarConclusao():
     """responsavel por desbloquear o proximo OA"""
     usuario = usuario_logado()
-    dados_jogo= parametros_json_jogos(request.params.items())
+    if usuario['tipo'] == TIPO_USUARIOS['aluno']:
+        premios = {
+            'OA': is_oa,
+            'VC': is_vc_or_cn,
+            'CN': is_vc_or_cn
+        }
 
-    if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
-        if dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True:
-            premios={
-                'OA': is_oa,
-                'VC': is_vc_or_cn,
-                'CN': is_vc_or_cn
-            }
-            # if autorizaçao_professor()==True:
-
-            return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
-            (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
+        return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
+            (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
              oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
-        else:
-            premios = {
-                'OA': is_oa,
-                'VC': is_vc_or_cn,
-                'CN': is_vc_or_cn
-            }
-
-            return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
-                (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
-                 oa='')
     else:
-        gamificacao = gamificacao_moeda_xp(parametros = parametros_json_jogos(request.params.items()))
+        gamificacao = gamificacao_moeda_xp(parametros=parametros_json_jogos(request.params.items()))
         premios = {
             'medalhas': [''],
             'moedas': gamificacao['moedas'],
