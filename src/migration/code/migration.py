@@ -1,6 +1,7 @@
-from facade.facade_main import *
-from control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID,TIPO_MEDALHA_NOME
+from src.facade.facade_main import *
+from src.control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID,TIPO_MEDALHA_NOME
 from passlib.hash import sha512_crypt
+sys.path.extend(['/home/carlos/PycharmProjects/conecturma_pn', '/home/carlos/PycharmProjects/conecturma_pn/src', '/home/carlos/PycharmProjects/conecturma_pn/src/migration', '/home/carlos/PycharmProjects/conecturma_pn/src/migration/code'])
 
 facade=Facade()
 facade.create_observador_facade(nome="administrador", senha=sha512_crypt.hash("@onde2929"), telefone="21999999999", cpf="0",email="admin", tipo='0',

@@ -167,45 +167,43 @@
     </div>
     </div>
 
+    <script type="text/javascript">
+        (function($) {
+                (function($) {
+                        $('[data-imagem-selecionada]').on('click', function() {
+                            var senhaAluno = $('#senhaAluno');
+                            var senhaDigitada = senhaAluno.val();
+                            var caractere = $(this).data('imagem-selecionada');
+                            var div = $(this).parent();
 
-    <footer align="center">
+                            div.toggleClass('box-selected');
+                            if (senhaDigitada && senhaDigitada != '') {
+                                senhaDigitada = senhaDigitada.toString();
+                                if (senhaDigitada.indexOf(caractere.toString()) > -1) {
+                                    senhaDigitada = senhaDigitada.replace(caractere.toString(), '');
+                                } else {
+                                    senhaDigitada += caractere;
+                                }
+                            } else {
+                                senhaDigitada = caractere;
+                            }
+                            senhaAluno.val(senhaDigitada);
+                        });
+                    });
+                });
+    </script>
+    <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script  type="text/javascript" src="/static/js/bootstrap.bundle.min" ></script>
+    <script type="text/javascript" src="/static/js/script.js"></script>
+
+
+
+     <footer align="center">
 
         <img src="/static/img/edufuturo-1.png">
 
     </footer>
 
-    
-    <script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
-    <script  type="text/javascript" src="static/js/bootstrap.bundle.min.js" ></script>
-    <script type="text/javascript" src="static/js/script.js"></script>
-
-    <script type="text/javascript">
-        document.addEventListener('keydown', function(event) {
-            if (event.keyCode == 13) {// enter
-                login_professor();
-            }
-        });
-        
-        $('[data-imagem-selecionada]').on('click', function() {
-            var senhaAluno = $('#senhaAluno');
-            var senhaDigitada = senhaAluno.val();
-            var caractere = $(this).data('imagem-selecionada');
-            var div = $(this).parent();
-
-            div.toggleClass('box-selected');
-            if (senhaDigitada && senhaDigitada != '') {
-                senhaDigitada = senhaDigitada.toString();
-                if (senhaDigitada.indexOf(caractere.toString()) > -1) {
-                    senhaDigitada = senhaDigitada.replace(caractere.toString(), '');
-                } else {
-                    senhaDigitada += caractere;
-                }
-            } else {
-                senhaDigitada = caractere;
-            }
-            senhaAluno.val(senhaDigitada);
-        });
-    </script>
 </body>
 </html>
