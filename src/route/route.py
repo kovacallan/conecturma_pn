@@ -593,10 +593,9 @@ def upload():
         usuario.nome_foto_perfil = nome_foto
         usuario.save()
         upload_file.save('view/app/fotos_usuarios', overwrite=True)
-        redirect('/')
+        redirect('/gestao_aprendizagem')
     except AttributeError:
-
-        redirect('/')
+        redirect('/gestao_aprendizagem')
 
 
 @route('/salvar_css_foto', method='post')
