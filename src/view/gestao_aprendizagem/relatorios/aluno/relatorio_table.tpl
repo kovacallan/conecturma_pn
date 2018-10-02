@@ -1,6 +1,8 @@
 <table class="table table-bordered" style="margin-top:0;">
-    <thead style="background-color:#9ed0f6;">
+   <thead style="background-color:#9ed0f6;">
       <tr style="color:#fff;">
+
+
         <th scope="col" >Descritor</th>
         <th scope="col">Desempenho</th>
       </tr>
@@ -35,4 +37,5 @@
          %teste+=1
         % end
     </tbody>
+
 </table>
