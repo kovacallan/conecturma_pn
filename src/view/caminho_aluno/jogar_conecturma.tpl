@@ -34,7 +34,7 @@
     <div class="row">
         <div class="menu col-md-9 offset-md-2">
             <ul>
-                <li class="c"></li>
+                <li class="c"><a href="/aluno/area_aluno"></a></li>
                 <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
                 <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
                 <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
@@ -188,6 +188,7 @@
             console.log("message source: " + event.source);
             console.log("message data: " + event.data);
             var parametros = JSON.parse(event.data);
+            console.log("parametros AAAAA,jogoC"+JSON.stringify(parametros));
             enviarRequisicaoAjax(
                 parametros,
                 function (data, textStatus, jqXhr) {

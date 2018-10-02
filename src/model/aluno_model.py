@@ -229,6 +229,7 @@ class DbAluno(Model):
             usuario.pontos_de_moedas = str(dinheiros)
             usuario.armario.append(id_item)
             usuario.save()
+            print('comprou o item')
 
     def ver_itens_comprados(self, id_usuario):
         #         id_usuario

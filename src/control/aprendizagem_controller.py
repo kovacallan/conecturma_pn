@@ -35,7 +35,7 @@ def obterUltimaConclusao():
 def verificarAcessoObjetoAprendizagem():
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
-
+    print('verificar acesso OA ',parametros)
     if int(usuario['tipo']) < 6:
         retorno = {'objetosAprendizagemAcessiveis': parametros['objetosAprendizagem']}
     else:
@@ -61,7 +61,7 @@ def verificarConclusoesObjetosAprendizagem():
 
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
-
+    print('parametros conclusao OA',parametros)
     if int(usuario['tipo']) < 6:
         retorno = {'objetosConcluidos': parametros['objetosAprendizagem']}
 
@@ -75,15 +75,16 @@ def verificarConclusoesObjetosAprendizagem():
 
             for i in parametros['objetosAprendizagem']:
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
-                # try:
-                # nivel_jogo = convertendo_str_in_dict(desempenho_oa[0]['jogo_jogado'][0])
-                if desempenho_oa == []:
-                    pass
-                else:
-                    teste.append(i)
-                # except Exception as e:
-                #     if e == " list index out of range":
-                #         pass
+                try:
+                    print('desempenho oa1',desempenho_oa[0])
+                    print('desempenho oa',desempenho_oa[0]['jogo_jogado'])
+                    nivel_jogo = convertendo_str_in_dict(desempenho_oa[0]['jogo_jogado'][0])
+                    if desempenho_oa == []:
+                        print("desempenho",convertendo_str_in_dict(desempenho_oa[0]['jogo_jogado'][0]))
+                    elif len(desempenho_oa[0]['jogo_jogado'])== 3:
+                        teste.append(i)
+                except Exception as e:
+                    print('erro',e)
 
 
             retorno = {'objetosConcluidos': teste}
@@ -117,13 +118,29 @@ def view_ambiente_de_aprendizagem():
 
     else:
         jogador = facade.search_observador_id_facade(id=usuario['id'])
+        # vida = jogador['pontos_de_vida']
+        # moedas = jogador['pontos_de_moedas']
+
+        if jogador['cor'] != '0':
+            cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
+        else:
+            cor = jogador['cor']
+
+        if jogador['rosto'] != '0':
+            rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
+        else:
+            rosto = jogador['rosto']
+        if jogador['acessorio'] != '0':
+            acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
+        else:
+            acessorio = jogador['acessorio']
+        if jogador['corpo'] != '0':
+            corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
+        else:
+            corpo = jogador['corpo']
+
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
-
-        cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
-        rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
-        acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
-        corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
 
     return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
 
@@ -131,9 +148,14 @@ def registrarConclusao():
     """responsavel por desbloquear o proximo OA"""
     usuario = usuario_logado()
     dados_jogo= parametros_json_jogos(request.params.items())
-
+    print('todos dados jogo',dados_jogo)
     if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
-        if dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True:
+        try:
+            print('dados2',len(dados_jogo['niveis']),dados_jogo['niveis'])
+        except Exception as e:
+            print('aaaaa',e)
+        if len(dados_jogo['niveis'])==3:
+            print('dados jogo',dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True)
             premios={
                 'OA': is_oa,
                 'VC': is_vc_or_cn,
@@ -144,6 +166,20 @@ def registrarConclusao():
             return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]]\
             (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
              oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+
+        elif dados_jogo['niveis'][len(dados_jogo['niveis'])-1]==True:
+            print('dados jogo', dados_jogo['niveis'][len(dados_jogo['niveis']) - 1]['termino'] == True)
+            premios = {
+                'OA': is_oa,
+                'VC': is_vc_or_cn,
+                'CN': is_vc_or_cn
+            }
+            # if autorizaçao_professor()==True:
+
+            return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
+                (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
+                 oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
+
         else:
             premios = {
                 'OA': is_oa,
@@ -153,7 +189,7 @@ def registrarConclusao():
 
             return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
                 (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
-                 oa='')
+                 oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
     else:
         gamificacao = gamificacao_moeda_xp(parametros = parametros_json_jogos(request.params.items()))
         premios = {
@@ -167,7 +203,7 @@ def registrarConclusao():
 
 def obterPremiacao():
     parametros = parametros_json_jogos(request.params.items())
-
+    print('obter premiaçao',parametros)
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         aluno = facade.search_aluno_id_facade(id_aluno=usuario['id'])

@@ -21,7 +21,7 @@
         <div class="row">
             <div class="menu col-md-9 offset-md-2">
                 <ul>
-                    <li class="c"></li>
+                    <li class="c"><a href="/aluno/area_aluno"></a> </li>
                     <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
                     <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/"
                                                         target="_blank"></a></li>

@@ -12,11 +12,11 @@
                 <div class="row">
                     <div class="menu col-md-9 offset-md-2">
                         <ul>
-                            <li class="c"></li>
-                            <li class="ambiente"><a href="#"></a></li>
-                            <li class="facebook offset-md-1"><a href="#"></a></li>
-                            <li class="youtube offset-md-1"><a href="#"></a></li>'
-                            <li class="sair offset-md-1"><a href="#"></a></li>
+                            <li class="c"><a href="/aluno/area_aluno"></a></li>
+                            <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
+                            <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
+                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
+                            <li class="sair offset-md-1"><a href="/sair"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                                                             <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                 {{acessorios[a]['preco']}}
                                                             </div>
-                                                            <a onclick="comprar_acessorio('{{acessorios[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                            <a onclick="comprar_acessorio('{{acessorios[a]['id']}}','{{cristais}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
                                                                 <img src="/static/img/btn_comprar.png">
                                                             </a>
                                                         %end
@@ -242,7 +242,7 @@
                                                                 <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                     {{acessorios[a]['preco']}}
                                                                 </div>
-                                                                <a onclick="comprar_acessorio('{{acessorios[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                <a onclick="comprar_acessorio('{{acessorios[a]['id']}}','{{cristais}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
                                                                     <img src="/static/img/btn_comprar.png">
                                                                 </a>
                                                             %end
@@ -288,7 +288,7 @@
                                                                 <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                     {{corpos[a]['preco']}}
                                                                 </div>
-                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}','{{cristais}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
                                                                     <img src="/static/img/btn_comprar.png">
                                                                 </a>
                                                             </div>
@@ -322,7 +322,7 @@
                                                                     <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                         {{corpos[a]['preco']}}
                                                                     </div>
-                                                                    <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                    <a onclick="comprar_acessorio('{{corpos[a]['id']}}','{{cristais}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
                                                                         <img src="/static/img/btn_comprar.png">
                                                                     </a>
                                                                 </div>
@@ -490,8 +490,10 @@
                 }
             }
 
-             function comprar_acessorio(item){
+             function comprar_acessorio(item,dineiro){
+                console.log('grana',dineiro,item);
                 $.post('/comprar_item', {item:item},function(data){
+                window.reload();
                  });
             }
             function salvar_avatar(){
