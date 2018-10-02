@@ -740,7 +740,6 @@ def descritores():
     return
 
 
-
 def checar_pontuiacao(desempenho):
     niveis_pontuacao = {
         'dificil': 2,

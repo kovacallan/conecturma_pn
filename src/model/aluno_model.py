@@ -220,17 +220,17 @@ class DbAluno(Model):
         item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
-
-        if usuario.pontos_de_moedas < preco:
-            print("você não tem moeda")
-            return False
-        else:
-            dinheiros= int(usuario.pontos_de_moedas)
+        if int(usuario.pontos_de_moedas) >= int(preco):
+            dinheiros = int(usuario.pontos_de_moedas)
             dinheiros -= int(preco)
             usuario.pontos_de_moedas = str(dinheiros)
             usuario.armario.append(id_item)
             usuario.save()
             return True
+        else:
+            print("você não tem moeda")
+            return False
+
 
     def ver_itens_comprados(self, id_usuario):
         #         id_usuario

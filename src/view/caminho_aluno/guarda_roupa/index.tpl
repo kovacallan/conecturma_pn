@@ -203,15 +203,20 @@
                                                             <div style="float: left; width: 100%; text-align: center;">
                                                                 <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top:-36px;">
                                                             </div>
-                                                            <div style="position: relative; margin-left: 35px;">
-                                                            <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                            <div id="setinha-{{acessorios[a]['id']}}">
+
                                                             </div>
-                                                            <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
-                                                                {{acessorios[a]['preco']}}
+                                                            <div id="buy-{{acessorios[a]['id']}}">
+                                                                <div style="position: relative; margin-left: 35px;">
+                                                                <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                                </div>
+                                                                <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
+                                                                    {{acessorios[a]['preco']}}
+                                                                </div>
+                                                                <a onclick="comprar_acessorio('{{acessorios[a]['id']}}', 3, '{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                    <img src="/static/img/btn_comprar.png">
+                                                                </a>
                                                             </div>
-                                                            <a onclick="comprar_acessorio('{{acessorios[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
-                                                                <img src="/static/img/btn_comprar.png">
-                                                            </a>
                                                         %end
                                                     </div>
                                                 %end
@@ -236,15 +241,20 @@
                                                                 <div style="float: left; width: 100%; text-align: center;">
                                                                     <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top:-36px;">
                                                                 </div>
-                                                                <div style="position: relative; margin-left: 35px;">
-                                                                <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                                <div id="setinha-{{acessorios[a]['id']}}">
+
                                                                 </div>
-                                                                <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
-                                                                    {{acessorios[a]['preco']}}
+                                                                <div id="buy-{{acessorios[a]['id']}}">
+                                                                    <div style="position: relative; margin-left: 35px;">
+                                                                    <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                                    </div>
+                                                                    <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
+                                                                        {{acessorios[a]['preco']}}
+                                                                    </div>
+                                                                    <a onclick="comprar_acessorio('{{acessorios[a]['id']}}', 3, '{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                        <img src="/static/img/btn_comprar.png">
+                                                                    </a>
                                                                 </div>
-                                                                <a onclick="comprar_acessorio('{{acessorios[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
-                                                                    <img src="/static/img/btn_comprar.png">
-                                                                </a>
                                                             %end
                                                         </div>
                                                     %else:
@@ -273,7 +283,7 @@
                                                         % if str(corpos[a]['id']) in itens_usuario or usuario_logado['tipo']<= '5':
                                                             <div style="padding-top: 35px; float: left; width: 100%; text-align: center;" onclick="change_avatar_body('{{corpos[a]['image_name']}}','{{corpos[a]['id']}}'); salvar_avatar(); check_color_corpo('botao_ok_{{corpos[a]['id']}}');">
                                                                 <div style="position: absolute; top: 357px; margin-left: 78px;">
-                                                                    <img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                                    <img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png">
                                                                 </div>
                                                                 <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                             </div>
@@ -281,14 +291,17 @@
                                                             <div style="padding-top: 29px; float: left; width: 100%; text-align: center;">
                                                                 <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                             </div>
-                                                            <div style="margin-top: 117px;">
+                                                            <div id="setinha-{{corpos[a]['id']}}">
+
+                                                            </div>
+                                                            <div id="buy-{{corpos[a]['id']}}" style="margin-top: 117px;">
                                                                 <div style="position: relative; margin-left: 35px;">
                                                                     <img src="/static/img/custo_cristais.png" style="margin-top: 41px;">
                                                                 </div>
                                                                 <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                     {{corpos[a]['preco']}}
                                                                 </div>
-                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}', 4, '{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
                                                                     <img src="/static/img/btn_comprar.png">
                                                                 </a>
                                                             </div>
@@ -315,14 +328,17 @@
                                                                 <div style="padding-top: 29px; float: left; width: 100%; text-align: center;">
                                                                     <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                                 </div>
-                                                                <div style="margin-top: 117px;">
+                                                                <div id="setinha-{{corpos[a]['id']}}">
+
+                                                                </div>
+                                                                <div id="buy-{{corpos[a]['id']}}" style="margin-top: 117px;">
                                                                     <div style="position: relative; margin-left: 35px;">
                                                                         <img src="/static/img/custo_cristais.png" style="margin-top: 41px;">
                                                                     </div>
                                                                     <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                         {{corpos[a]['preco']}}
                                                                     </div>
-                                                                    <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                    <a onclick="comprar_acessorio('{{corpos[a]['id']}}', 4, '{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
                                                                         <img src="/static/img/btn_comprar.png">
                                                                     </a>
                                                                 </div>
@@ -490,9 +506,23 @@
                 }
             }
 
-             function comprar_acessorio(item){
+             function comprar_acessorio(item, tipo, item_name, item_id){
                 $.post('/comprar_item', {item:item},function(data){
-                    alert(data)
+                    if(data == '0'){
+                        alert("você não tem moedas o suficiente");
+                    }else{
+                        switch(tipo){
+                            case 3:
+                                change_avatar_acessorios(item_name, item_id);
+                                salvar_avatar();
+                            case 4:
+                                change_avatar_body(item_name, item_id);
+                                salvar_avatar();
+                        }
+
+                        $("#buy-"+item).remove();
+                        $("#setinha-"+item).append('<div style="position: absolute; top: 357px; margin-left: 78px;"><img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png"></div>');
+                    }
                  });
             }
             function salvar_avatar(){
