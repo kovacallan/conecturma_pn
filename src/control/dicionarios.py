@@ -86,8 +86,6 @@ TIPO_OAS = {
 
 TIPO_OAS_ID = {
     'MINI_GAME': '1',
-    'VIDEO': '2',
-    'CINEMATIC': '3'
 }
 
 UNIDADES = {
