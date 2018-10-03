@@ -233,12 +233,12 @@
                                                         <div class="col-md-12">
                                                             <label for="telefone">Escola</label>
                                                             <select id="professor_escola" class="custom-select custom-select-md">
-                                                               % if isinstance(escolas, list):
-                                                                    % for i in escolas:
+                                                               % if isinstance(escola, list):
+                                                                    % for i in escola:
                                                                         <option value="{{i['id']}}">{{i['nome']}}</option>
                                                                     % end
                                                                 % else:
-                                                                    <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
+                                                                    <option value="{{escola['id']}}">{{escola['nome']}}</option>
                                                                 % end
                                                             </select>
                                                         </div>
