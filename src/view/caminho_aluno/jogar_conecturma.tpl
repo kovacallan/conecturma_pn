@@ -52,7 +52,7 @@
                 %if cor != '0':
                     <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: relative;width: 80%; bottom: 77px; right: 26px;">
                 %else:
-                    <img src="/static/img/body/avatar-naked.png" style="z-index: 11; position: relative;width: 80%; bottom: 0px; right: -12px;">
+                    <img src="/static/img/body/avatar-naked.png" style="z-index: 11; position: relative;width: 70%; bottom: 0px; right: -12px;">
                 %end
                 %if rosto != '0':
                     <img src="/static/img/rosto/2{{rosto}}" style="z-index: 12; position: absolute; width: 80%; right: 79px; top: -82px;">

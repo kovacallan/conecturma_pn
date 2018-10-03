@@ -94,24 +94,6 @@ def view_ambiente_de_aprendizagem():
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         jogador = facade.search_aluno_id_facade(id_aluno=usuario['id'])
-        if jogador['cor'] != '0':
-            cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
-        else:
-            cor = jogador['cor']
-
-        if jogador['rosto'] != '0':
-            rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
-        else:
-            rosto = jogador['rosto']
-        if jogador['acessorio'] != '0':
-            acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
-        else:
-            acessorio = jogador['acessorio']
-        if jogador['corpo'] != '0':
-            corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
-        else:
-            corpo = jogador['corpo']
-
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
 
@@ -120,12 +102,31 @@ def view_ambiente_de_aprendizagem():
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
 
-        cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
-        rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
-        acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
-        corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
+    avatar = set_avatar_jogador(jogador)
 
-    return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
+    return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=avatar['cor'], rosto=avatar['rosto'],
+                acessorio=avatar['acessorio'], corpo=avatar['corpo'])
+
+def set_avatar_jogador(jogador):
+    if jogador['cor'] != '0':
+        cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
+    else:
+        cor = jogador['cor']
+
+    if jogador['rosto'] != '0':
+        rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
+    else:
+        rosto = jogador['rosto']
+    if jogador['acessorio'] != '0':
+        acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
+    else:
+        acessorio = jogador['acessorio']
+    if jogador['corpo'] != '0':
+        corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
+    else:
+        corpo = jogador['corpo']
+
+    return dict(cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
 
 def registrarConclusao():
     """responsavel por desbloquear o proximo OA"""

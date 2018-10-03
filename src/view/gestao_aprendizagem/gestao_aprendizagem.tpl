@@ -1,20 +1,22 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-gestao-aprendizagem.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
-<div class="col-md-9 order-md-3 texto-inicial" style="margin-top: 70px;">
+<div class="col-md-9 order-md-3 texto-inicial" style="margin-top: 15px;">
     <div style="margin-left: 41px;">
         <div class="row">
 <div class="col-md-3" id='inter' style="border-radius: 113px;position:relative;z-index:5;">
                 <form id="image_form" method="POST" enctype="multipart/form-data" action="/upload_img">
-                        <div class="col-md-12 doughnut" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" >
-                            <div id="image" class="" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
+                        <div class="col-md-12" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" >
+                            <div id="image" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
                                 <label for="img-obs">
-                                    <img src="/static/fotos_usuarios/{{foto_obs}}" class="profile-image blah img-responsive img-circle" style="margin-top: 25px;" >
+                                    <img src="/static/fotos_usuarios/{{foto_obs}}" class="img-thumbnail rounded-circle" style="margin-top: 25px;" >
+                                    <!--<div class="doughnut"></div>-->
                                 </label>
                                 <input type="file" id="img-obs" name="uploadfile" onchange="readURL(this);" style="  display:none;"><br>
                             </div>
                         </div>
                 </form>
             </div>
+
 
             <div class="col-md-9" style="padding-left: 60px;">
                 <div class="row fonte-texto" style="margin-top:18px;">

@@ -488,7 +488,6 @@
                     document.getElementById('bloco-'+ elemento+'-'+(bloco_visivel+1)).style.display = 'block';
                     bloco_visivel ++;
                     if(bloco_visivel == total_blocos){
-                        document.getElementById('right_button_'+elemento).style.display = 'none';
                         document.getElementById('left_button_'+elemento).style.display = 'block';
                     }
                 }
@@ -556,15 +555,14 @@
                 $("#avatar_usuario").append("<input id='avatar-itens-body-id' type='hidden' value='"+id+"'><img id='avatar-itens-body' src='/static/img/corpo/2"+body+"' class='avatar-itens-corpo' style='z-index: 12;position: absolute;top: -165px;left: -84px;'>");
             }
 
-              function scale_click (id) {
+            function scale_click (id) {
+                element = document.getElementById(id);
+                $("#"+id).removeClass('scale-bounce')
+                    element.offsetWidth = element.offsetWidth;
+                $("#"+id).addClass('scale-bounce')
+                    console.log("opa, coloquei");
 
-                element =  document.getElementById(id);
-                   $("#"+id).removeClass('scale-bounce')
-                       element.offsetWidth = element.offsetWidth;
-                    $("#"+id).addClass('scale-bounce')
-                     console.log("opa, coloquei");
-
-               }
+            }
         </script>
     </body>
 </html>
