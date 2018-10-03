@@ -32,6 +32,7 @@ def view_usuario_index(norepeat=False):
     observador = usuario_logado()
 
     usuario = controller_index_usuario(observador)
+
     escola, rede = get_escolas_e_rede_permissao()
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
     return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma)
@@ -47,6 +48,12 @@ def cadastro_usuario():
         send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['diretor']:
         diretor_create(usuario)
+        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+    elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['responsavel']:
+        responsavel_create(usuario)
+        send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
+    elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['coordenador']:
+        coordenador_create(usuario)
         send_email_confirmation(nome=usuario['nome'], email=usuario['email'])
     else:
         gestor_create(usuario)
@@ -85,6 +92,13 @@ def create_student_login(nome_completo):
     else:
         return nome_login
 
+def responsavel_create(usuario):
+    responsavel = facade.create_observador_facade(tipo=TIPO_USUARIOS['responsavel'], nome=usuario['nome'],
+                                                senha=sha512_crypt.hash(password_generate()),email=usuario['email'])
+    if isinstance(responsavel, object):
+        itens = facade.set_itens_responsaveis_facade(id=responsavel.id, itens=facade.get_itens_free_facade())
+        if itens:
+            return '/gestao_aprendizagem/usuario'
 
 def professor_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
@@ -110,6 +124,18 @@ def diretor_create(usuario):
                                               vinculo_escola=usuario['vinculo_escola'])
     if isinstance(diretor, object):
         itens = facade.set_itens_responsaveis_facade(id=diretor.id, itens=facade.get_itens_free_facade())
+        if itens:
+            return '/gestao_aprendizagem/usuario'
+
+def coordenador_create(usuario):
+    vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
+    coordenador = facade.create_observador_facade(tipo=TIPO_USUARIOS['coordenador'], nome=usuario['nome'],
+                                              senha=sha512_crypt.hash(password_generate()),
+                                              data_nascimento=usuario['nascimento'], email=usuario['email'],
+                                              vinculo_rede=vinculo_rede['vinculo_rede'],
+                                              vinculo_escola=usuario['vinculo_escola'])
+    if isinstance(coordenador, object):
+        itens = facade.set_itens_responsaveis_facade(id=coordenador.id, itens=facade.get_itens_free_facade())
         if itens:
             return '/gestao_aprendizagem/usuario'
 

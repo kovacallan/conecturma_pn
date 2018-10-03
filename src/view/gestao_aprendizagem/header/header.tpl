@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="../static/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css-gestao-aprendizagem.css">
     <link rel="stylesheet" href="../static/{{css}}">
+    <style>
+        button{
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     
