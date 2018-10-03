@@ -481,9 +481,13 @@
                 total_blocos = parseInt(total_elementos)/3;
                 if (elemento_ant != elemento){
                     elemento_ant = elemento
+
                     bloco_visivel = 1
+
                 }
+
                 if(bloco_visivel != total_blocos){
+                 document.getElementById('left_button_'+elemento).style.display = 'block';
                     document.getElementById('bloco-'+ elemento+'-'+bloco_visivel).style.display = 'none';
                     document.getElementById('bloco-'+ elemento+'-'+(bloco_visivel+1)).style.display = 'block';
                     bloco_visivel ++;
@@ -497,6 +501,7 @@
                 if(bloco_visivel >= 1){
                     document.getElementById('bloco-'+elemento+'-'+bloco_visivel).style.display = 'none';
                     document.getElementById('bloco-'+elemento+'-'+(bloco_visivel-1)).style.display = 'block';
+                    document.getElementById('right_button_'+elemento).style.display = 'block';
                     bloco_visivel --;
                     if(bloco_visivel == 1){
                         document.getElementById('right_button_'+elemento).style.display = 'block';
