@@ -410,6 +410,8 @@ def view_turma(no_repeat=False):
     return view_turma()
 
 
+
+
 @route('/turma/cadastro_turma', method='POST')
 @permissao('diretor')
 def controller_create_turma(no_repeat=False):
@@ -435,6 +437,7 @@ def controller_update_turma(no_repeat=False):
 def controller_entregar_medalha_aluno():
     from control.gestao_aprendizagem_controller import controller_entregar_medalha_aluno
     return controller_entregar_medalha_aluno()
+
 
 @route('/turma/entregar_medalha_todos_alunos', method='POST')
 @permissao('professor')
