@@ -135,6 +135,9 @@
                                             <p>Professor
                                                 <i class="far fa-question-circle"></i>
                                             </p>
+                                            <br>
+
+                                            <span>+</span>
                                         </div>
                                         % for z in i['professor']:
                                         <div class="row">

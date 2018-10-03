@@ -25,7 +25,30 @@
                 </td>
             </tr>
             <tr>
+
                 <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
+                     <div class="circles">
+                                <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
+                                    <div style="align-items: center">
+                                        <span class="number"> 0000</span><br>
+                                        <span class="word"> Vezes</span>
+                                    </div>
+                                </div>
+
+                                <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
+                                    <div style="align-items: center">
+                                        <span class="number"> 0000</span><br>
+                                        <span class="word"> Média</span>
+                                    </div>
+                                </div>
+
+                                <div class="circle"  style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
+                                    <div style="align-items: center">
+                                        <span class="number"> 0000</span><br>
+                                        <span class="word" style="margin-left: 22px;"> Final</span>
+                                    </div>
+                                </div>
+                       </div>
                 <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>
             </tr>
           % else:

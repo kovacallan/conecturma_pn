@@ -475,6 +475,7 @@ def read_medalha_album(aluno):
         else:
             medalha_jogo.append(medalha)
     medalha_recente = []
+    medalha_ultima = []
     if medalha_aluno != []:
 
         if len(medalha_aluno) > 4:
@@ -488,6 +489,6 @@ def read_medalha_album(aluno):
         for i in medalha_jogo:
             if str(i['id']) in z:
                 medalha_recente.append(i)
-
-    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno)
+    medalha_ultima = medalha_ultima[len(medalha_recente) -1]
+    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno,medalha_ultima=medalha_ultima)
 
