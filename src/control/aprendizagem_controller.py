@@ -479,13 +479,26 @@ def create_or_update_oa(id_aluno, unidade, objeto_aprendizagem, parametros):
 def pegar_maior_pontuacao(parametros):
     teste = False
     for i in parametros:
-        if i['termino'] == True:
-            teste = i
+        print('pegar maior pontuaçao', parametros)
+        try:
+            if i['termino'] == True:
+                teste = i
+        except Exception as exu:
+            print('excessao',exu)
+
+            if i['percentualConcluido']==100:
+                i['termino']=True
+                teste=i
+            else:
+                i['termino']=False
+                teste=i
+            print('entrei na excessao',exu,i['termino'],i)
 
     return teste
 
 
 def parametros_json_jogos(parametro):
+
     for p in parametro:
         parametros = list(p)[0]
     parametros = json.loads(parametros)

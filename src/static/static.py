@@ -121,6 +121,11 @@ def assets_path(path):
     """
     return static_file(path, root='././jogo/ASSETS')
 
+@route('/ASSETS_2/<path:path>')
+def assets_path(path):
+
+    return static_file(path, root='././jogo/ASSETS_2')
+
 @route('/UV1/<path:path>')
 def uv1_path(path):
     """

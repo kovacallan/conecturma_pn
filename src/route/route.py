@@ -276,11 +276,14 @@ def check_change_mudanca_alun():
 
 @route('/aluno/update_aluno', method='POST')
 def aluno_edit():
+    from control.dicionarios import TIPO_ESTRUTURA
     id = request.params['id']
     nome = request.params['nome']
     nome_login = request.params['login']
+    turma_al = request.params['turma']
+    print('turma_al',turma_al)
     aluno_c = Aluno_controler()
-    return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login)
+    return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login,turma=turma_al)
 
 
 @get('/observador/editar')
@@ -580,7 +583,6 @@ def upload():
         upload_file.save('view/app/fotos_usuarios', overwrite=True)
         redirect('/')
     except AttributeError:
-
         redirect('/')
 
 

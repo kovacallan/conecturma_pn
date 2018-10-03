@@ -48,7 +48,9 @@
 <div class="container corpo-pag">
     <div class="row">
         <div class="col-md-3 avatar-std">
+
             <div class="avatar_usuario" style="position: absolute;">
+                <a href="/aluno/guarda_roupa">
                 %if cor != '0':
                     <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: relative;width: 80%; bottom: 77px; right: 26px;">
                 %else:
@@ -63,9 +65,11 @@
                 %if corpo != '0':
                     <img src="/static/img/corpo/2{{corpo}}" style="z-index: 12; position: absolute; width: 80%; left: -24px; top: -75px;">
                 %end
+                    </a>
             </div>
+
             <img src="/static/img/acess.png" style="width: 156px; height: 208px;margin-left: 139px;">
-            <a href="/aluno/guarda_roupa" style="left: 82%;width: 58px;height: 60px;position:  absolute;top: 3px;"></a>
+            <a href="/aluno/guarda_roupa" id="roupa" style="left: 82%;width: 58px;height: 60px;position:  absolute;top: 3px;"></a>
             <div class="avatar-base-box" style="position:absolute;">
                 <img src="/static/img/avatar-base1.png" class="avatar-ship img-fluid" style=" position: relative; bottom: 28px; right: 16px;"> <br>
                 <img src="/static/img/avatar-box-name2.png" style=" position: relative;  bottom: 31px;  left: 8px;">

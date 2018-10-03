@@ -58,6 +58,7 @@
         <%
             for index,i in enumerate(usuarios):
         %>
+
            %include('gestao_aprendizagem/usuario/usuario_template_edicao.tpl')
         <%
             end

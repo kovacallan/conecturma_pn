@@ -710,36 +710,36 @@ function update_aluno(id){
     id = document.getElementById('id_aluno'+id).value;
     nome = document.getElementById('nome'+id).value;
     login = document.getElementById('aluno_login'+id).value;
-    console.log('testando',id,nome,login);
+    turma = document.getElementById('aluno_turma'+id).value;
+    console.log('id ,nome ,login ',id,nome,login,turma);
 
-    if (nome != '' && nome != null){
-        if(login != '' && login != null){
-            $.post('/checar_login_existente', {login:login},function(data){
-            console.log("hm",data.resposta);
-            if (data.resposta =='nao existe login'){
-                console.log('eits',nome,id);
-                $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
-                    console.log("hm");
-                });
-            location.reload();
-            }else{
-            alert('ja existe esse login');
+
+ //   try { // statements to try
+ // monthName = getMonthName(myMonth); // função poderia lançar uma exceção
+//}
+//catch (e) {
+ // monthName = "unknown";
+  //logMyErrors(e); // passa a exceção para o manipulador de erro -> sua função local.
+//}
+
+    if (turma != '' && turma !=null){
+        if (nome != '' && nome != null){
+            if(login != '' && login != null){
+                    console.log('eits',nome,id);
+                    $.post('/aluno/update_aluno', {id:id, nome:nome,login:login,turma:turma},function(data){
+                        console.log("hm");
+                    });
+//                location.reload();
+                }
+                else{
+            alert('o campo login nao pode estar vazio ');
             }
-            });
-
+        }else{
+            alert('O campo nome é obrigatório.');
+            document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
             }
-            else{
-        alert('o campo login nao pode estar vazio ');
-
         }
-    }else{
-        alert('O campo nome é obrigatório.');
-        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
-        }
-        }
-
-
-
+    }
 
 
 function update_observador(id){

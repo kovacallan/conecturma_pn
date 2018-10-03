@@ -34,6 +34,7 @@ def view_usuario_index(norepeat=False):
     usuario = controller_index_usuario(observador)
     escola, rede = get_escolas_e_rede_permissao()
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
+    # turmas_da_escola= get_turma_de_acordo_com_escola_aluno()
     return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma)
 
 
@@ -197,9 +198,17 @@ def lista_de_usuarios_caso_observador_for_administrador(no_repeat=False):
     for a in aluno:
         a['email'] = ''
         a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
+        id_escola=a['vinculo_escola']
         a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
         a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
         a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
+        print('escolaaaa',a['vinculo_escola'])
+        turmas = facade.search_estrutura_turma_by_escola_facade(id_escola)
+        print('uyte',turmas)
+        for i in turmas :
+            turmi=get_nome_turma(i['id'])
+            a['turmas_escola']={i['id']:turmi}
+
         usuario.append(a)
 
     for o in observador:
