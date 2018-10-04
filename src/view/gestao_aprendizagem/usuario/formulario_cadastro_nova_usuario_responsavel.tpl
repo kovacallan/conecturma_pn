@@ -44,8 +44,8 @@
                             <div class="col-md-4">
                                 <label for="telefone">Aluno</label>
                                 <select id="responsavel_aluno" class="custom-select custom-select-md">
-                                   % if isinstance(escolas, list):
-                                        % for i in escolas:
+                                   % if isinstance(aluno, list):
+                                        % for i in aluno:
                                             <option value="{{i['id']}}">{{i['nome']}}</option>
                                         % end
                                     % else:

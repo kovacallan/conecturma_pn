@@ -207,7 +207,7 @@ def view_gestao_aprendizagem(no_repeat=False):
 @route('/gestao_aprendizagem/usuario')
 # @permissao('professor')
 @view('gestao_aprendizagem/usuario/usuario')
-@permissao('professor')
+@permissao('responsavel_varejo')
 def view_usuario_index(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_usuario_index
     return view_usuario_index()

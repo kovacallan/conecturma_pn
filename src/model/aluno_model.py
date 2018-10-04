@@ -33,6 +33,7 @@ class DbAluno(Model):
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, default='0')
     vinculo_serie = TextField(fts=True, default='0')
+    vinculo_responsavel = TextField(fts=True, default='0')
 
     ultimo_oa_jogado=TextField(fts=True,default='0')
     ultima_aventura = TextField(fts=True, default='0')

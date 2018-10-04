@@ -23,7 +23,6 @@ def view_gestao_aprendizagem(norepeat=False):
                 css_foto=obs['aux_css_foto'])
 
 
-@permissao('professor')
 def view_usuario_index(norepeat=False):
     """
     mostra todos os usuarios , escolas e redes cadastradas
@@ -31,11 +30,11 @@ def view_usuario_index(norepeat=False):
     """
     observador = usuario_logado()
 
-    usuario = controller_index_usuario(observador)
+    usuario, aluno = controller_index_usuario(observador)
 
     escola, rede = get_escolas_e_rede_permissao()
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
-    return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma)
+    return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma, aluno=aluno)
 
 
 # colocar permissao para historico funcionar
@@ -203,19 +202,19 @@ def novasenha():
     redirect('/')
 
 
-@permissao('professor')
+@permissao('responsavel_varejo')
 def controller_index_usuario(observador, no_repeat=False):
     if observador['tipo'] == TIPO_USUARIOS['administrador']:
         return lista_de_usuarios_caso_observador_for_administrador()
     elif observador['tipo'] == TIPO_USUARIOS['professor']:
         return lista_de_usuarios_caso_observador_for_professor(observador['vinculo_turma'])
-    elif observador['tipo'] == TIPO_USUARIOS['diretor']:
+    elif observador['tipo'] == TIPO_USUARIOS['diretor']  or observador['tipo'] == TIPO_USUARIOS['coordenador']:
         return lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])
     elif observador['tipo'] == TIPO_USUARIOS['gestor']:
         return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
 
 
-@permissao('administrador', )
+@permissao('administrador')
 def lista_de_usuarios_caso_observador_for_administrador(no_repeat=False):
     usuario = []
     aluno = facade.read_aluno_facade()
@@ -237,7 +236,7 @@ def lista_de_usuarios_caso_observador_for_administrador(no_repeat=False):
             o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
             usuario.append(o)
 
-    return usuario
+    return usuario, aluno
 
 
 @permissao('gestor')
@@ -264,7 +263,7 @@ def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede, norepeat=False):
     return usuario
 
 
-@permissao('diretor')
+@permissao('coordenador')
 def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola, norepeat=False):
     usuario = []
     aluno = facade.search_aluno_escola_facade(vinculo_escola=vinculo_escola)
@@ -280,7 +279,7 @@ def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola, norepeat=False
         a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
         usuario.append(a)
     for o in observador:
-        if int(o['tipo']) > int(TIPO_USUARIOS['diretor']):
+        if o['tipo'] > TIPO_USUARIOS['coordenador']:
             if o['vinculo_rede'] != '0':
                 o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
             o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
@@ -537,6 +536,8 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
         return escola, rede
+    elif usuario['tipo'] == TIPO_USUARIOS['responsavel']:
+        pass
 
     else:
         escola = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
@@ -651,7 +652,7 @@ def get_turma_de_acordo_com_tipo_usuario_logado():
             i.update({'aluno': aluno})
             turma.append(i)
         return turma
-    elif usuario['tipo'] == TIPO_USUARIOS['diretor']:
+    elif usuario['tipo'] == TIPO_USUARIOS['diretor'] or usuario['tipo'] == TIPO_USUARIOS['coordenador']:
         turma = []
         for i in facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma']):
             if i['vinculo_escola'] == usuario['vinculo_escola']:

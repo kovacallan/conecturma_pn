@@ -52,6 +52,7 @@ PAGINA_INICIAL = dict(
     administrador='/administrador/pag_administrador',#'/gestao_aprendizagem'
     gestor='/gestao_aprendizagem',
     diretor='/gestao_aprendizagem',
+    coordenador='/gestao_aprendizagem',
     professor='/gestao_aprendizagem',
     responsavel='/gestao_aprendizagem',
     responsavel_varejo='/gestao_aprendizagem',
