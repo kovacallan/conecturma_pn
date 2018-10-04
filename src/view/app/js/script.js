@@ -710,17 +710,14 @@ function update_aluno(id){
     id = document.getElementById('id_aluno'+id).value;
     nome = document.getElementById('nome'+id).value;
     login = document.getElementById('aluno_login'+id).value;
+      try { // statements to try
     turma = document.getElementById('aluno_turma'+id).value;
     console.log('id ,nome ,login ',id,nome,login,turma);
 
 
- //   try { // statements to try
- // monthName = getMonthName(myMonth); // função poderia lançar uma exceção
-//}
-//catch (e) {
- // monthName = "unknown";
-  //logMyErrors(e); // passa a exceção para o manipulador de erro -> sua função local.
-//}
+
+
+
 
     if (turma != '' && turma !=null){
         if (nome != '' && nome != null){
@@ -729,7 +726,7 @@ function update_aluno(id){
                     $.post('/aluno/update_aluno', {id:id, nome:nome,login:login,turma:turma},function(data){
                         console.log("hm");
                     });
-//                location.reload();
+                location.reload();
                 }
                 else{
             alert('o campo login nao pode estar vazio ');
@@ -739,6 +736,26 @@ function update_aluno(id){
             document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
             }
         }
+
+}
+       catch (e) {
+  console.log('erro',e);
+   if (nome != '' && nome != null){
+            if(login != '' && login != null){
+                    console.log('eits',nome,id);
+                    $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
+                        console.log("hm");
+                    });
+                location.reload();
+                }
+                else{
+            alert('o campo login nao pode estar vazio ');
+            }
+        }else{
+            alert('O campo nome é obrigatório.');
+            document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+            }
+}
     }
 
 

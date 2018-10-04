@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from bottle import redirect, response, request
 from datetime import datetime
 from control.dicionarios import *

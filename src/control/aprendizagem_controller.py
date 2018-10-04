@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 import json
 from bottle import route, view, request, redirect, response, get, template
 
@@ -84,7 +86,7 @@ def verificarConclusoesObjetosAprendizagem():
                     elif len(desempenho_oa[0]['jogo_jogado'])== 3:
                         teste.append(i)
                 except Exception as e:
-                    print('erro',e)
+                    print('errio',e)
 
 
             retorno = {'objetosConcluidos': teste}

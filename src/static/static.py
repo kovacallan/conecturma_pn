@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from bottle import route, static_file
 
 @route('/static/<filename>')

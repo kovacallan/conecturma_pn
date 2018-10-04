@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from control.classes.permissao import usuario_logado
 
 class Relatorio(object):

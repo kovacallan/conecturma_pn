@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from bottle import default_app, run
 from route.route import *
 from static.static import *

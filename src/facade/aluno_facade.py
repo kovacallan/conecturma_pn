@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from model.aluno_model import DbAluno
 
 
@@ -14,7 +16,7 @@ class AlunoFacade:
         return self.aluno.read_aluno()
 
     def update_aluno_facade(self, id:int, nome:str,nome_login:str,turma):
-        return self.aluno.update_aluno(update_id=id, nome=nome,nome_login=nome_login,turma=turma)
+        return self.aluno.update_aluno(update_id=id, nome=nome,nome_login=nome_login,vinculo_turma=turma)
 
     def set_itens_student_facade(self, id, itens):
         return self.aluno.set_itens_student(id, itens)

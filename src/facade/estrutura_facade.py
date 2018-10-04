@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from model.estrutura_model import DbEstrutura
 
 

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
+
 import os
 
 from bottle import route, view, get, request, post, redirect, Bottle, delete
@@ -280,10 +281,15 @@ def aluno_edit():
     id = request.params['id']
     nome = request.params['nome']
     nome_login = request.params['login']
-    turma_al = request.params['turma']
-    print('turma_al',turma_al)
-    aluno_c = Aluno_controler()
-    return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login,turma=turma_al)
+    try:
+        request.params['turma']
+        turma_al = request.params['turma']
+        print('turma_al',turma_al)
+        aluno_c = Aluno_controler()
+        return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login,turma=turma_al)
+    except KeyError:
+        aluno_c = Aluno_controler()
+        return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login)
 
 
 @get('/observador/editar')

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from walrus import *
 from random import randrange
 
@@ -31,7 +33,7 @@ class DbAluno(Model):
 
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
-    vinculo_turma = TextField(fts=True, default='0')
+    vinculo_turma = TextField(fts=True, index=True, default='0')
     vinculo_serie = TextField(fts=True, default='0')
 
     ultimo_oa_jogado=TextField(fts=True,default='0')
@@ -48,8 +50,8 @@ class DbAluno(Model):
         return self.create(**kwargs)
 
 
-    def update_aluno(self, update_id, nome, nome_login, turma='0', escola='0', rede='0'):
-        print('update_aluno',turma)
+    def update_aluno(self, update_id, nome, nome_login, vinculo_turma='0', escola='0', rede='0'):
+        print('update_aluno',vinculo_turma)
         aluno_up = self.load(update_id)
         [setattr(aluno_up, parametro, valor) for parametro, valor in locals().items() if
          valor != aluno_up.all()]

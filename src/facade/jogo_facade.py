@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from model.jogo_model import DesempenhoJogo
 
 class OaConcluidoFacade:

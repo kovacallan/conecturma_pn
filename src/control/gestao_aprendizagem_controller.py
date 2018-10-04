@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
@@ -202,13 +204,15 @@ def lista_de_usuarios_caso_observador_for_administrador(no_repeat=False):
         a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
         a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
         a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
-        print('escolaaaa',a['vinculo_escola'])
+        print(id_escola)
         turmas = facade.search_estrutura_turma_by_escola_facade(id_escola)
-        print('uyte',turmas)
+        print('uyte',len(turmas),turmas)
+        a['turmas_escola']=[]
         for i in turmas :
             turmi=get_nome_turma(i['id'])
-            a['turmas_escola']={i['id']:turmi}
-
+            a['turmas_escola'].append({i['id']:turmi})
+            print('tete',a['turmas_escola'])
+        print('tttete',a['turmas_escola'])
         usuario.append(a)
 
     for o in observador:
