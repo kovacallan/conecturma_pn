@@ -46,10 +46,10 @@
                                 <select id="responsavel_aluno" class="custom-select custom-select-md">
                                    % if isinstance(aluno, list):
                                         % for i in aluno:
-                                            <option value="{{i['id']}}">{{i['nome']}}</option>
+                                            <option value="{{i['id']}}">{{i['nome']}} -- {{i['vinculo_turma']}}</option>
                                         % end
                                     % else:
-                                        <option value="{{escolas['id']}}">{{escolas['nome']}}</option>
+                                        <option value="{{aluno['id']}}">{{aluno['nome']}}</option>
                                     % end
                                 </select>
                             </div>

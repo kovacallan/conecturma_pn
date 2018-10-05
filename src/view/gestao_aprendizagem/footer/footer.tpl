@@ -12,6 +12,28 @@
 <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../static/js/graficoRelatorio.js"></script>
 <script type="text/javascript" src="../static/js/script.js"></script>
+<script type="text/javascript">
+
+    
+    function show_options(){
+        menu = document.getElementById("id-menu-ambiente");
+        if(menu.style.display == "none"){
+            document.getElementById("id-menu-ambiente").style.display = "block";
+        }
+        else{
+            document.getElementById("id-menu-ambiente").style.display = "none";
+        }
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.btn_show_menu')) {
+            if(document.getElementById("id-menu-ambiente").style.display == "block"){
+                show_options()
+            }
+        }
+    }
+
+</script>
 
 <!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
 

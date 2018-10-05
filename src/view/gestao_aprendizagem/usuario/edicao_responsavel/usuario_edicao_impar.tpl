@@ -43,7 +43,13 @@
                                         <input type="text" class="form-control disabledo{{i['id']}}" size="30" name="" id="nome_obs{{i['id']}}"
                                                value="{{i['nome']}}" disabled>
                                     </div>
-
+                                    <div class="col-md-" style="padding-left: 10px">
+                                        <label style="background-color: inherit;">Aluno: </label>
+                                        % for a in i['vinculo_aluno']:
+                                            <input type="text" class="form-control disabledo{{a['id']}}" size="30" name="" id="nome_obs{{a['id']}}"
+                                                   value="{{a['nome']}}" disabled>
+                                        % end
+                                    </div>
                                 </div>
                                 <h5>Acesso</h5>
                                 <div class="row distanciamento" style="margin-left: 5px;">

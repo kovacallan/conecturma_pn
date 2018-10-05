@@ -34,12 +34,14 @@ def view_usuario_index(norepeat=False):
 
     escola, rede = get_escolas_e_rede_permissao()
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
-    return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma, aluno=aluno)
 
+
+    return dict(tipo=observador['tipo'], usuarios=usuario, rede=rede, escolas=escola, turmas=turma, aluno=aluno)
 
 # colocar permissao para historico funcionar
 def cadastro_usuario():
     usuario = request.params
+
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
         aluno_create(usuario=usuario)
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
@@ -63,6 +65,7 @@ def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
     nome_login = create_student_login(usuario['nome'])
     cor = []
+
 
     aluno = facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
                                        primeiro_nome=usuario['nome'].split()[0].upper(),
@@ -96,7 +99,9 @@ def responsavel_create(usuario):
                                                 senha=sha512_crypt.hash(password_generate()),email=usuario['email'])
     if isinstance(responsavel, object):
         itens = facade.set_itens_responsaveis_facade(id=responsavel.id, itens=facade.get_itens_free_facade())
-        if itens:
+        aluno = facade.vincular_responsavel_facade(id_aluno=request.params['vinculo_aluno'], id_responsavel=responsavel.id)
+        print(aluno.vinculo_responsavel, responsavel.id)
+        if itens and aluno.vinculo_responsavel == str(responsavel.id):
             return '/gestao_aprendizagem/usuario'
 
 def professor_create(usuario):
@@ -234,7 +239,10 @@ def lista_de_usuarios_caso_observador_for_administrador(no_repeat=False):
                 o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
             o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
             o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
+            o['vinculo_aluno'] = facade.get_alunos_viculo_responsavel_facade(id_responsavel=o['id'])
             usuario.append(o)
+
+    aluno = facade.get_alunos_sem_responsaveis_facade()
 
     return usuario, aluno
 
@@ -260,7 +268,8 @@ def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede, norepeat=False):
             o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
             o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
             usuario.append(o)
-    return usuario
+    aluno = facade.get_alunos_sem_responsaveis_facade(vinculo_rede=vinculo_rede)
+    return usuario, aluno
 
 
 @permissao('coordenador')
@@ -287,7 +296,10 @@ def lista_de_usuarios_caso_observador_for_diretor(vinculo_escola, norepeat=False
                 o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
             o['tipo'] = TIPO_USUARIOS_ID[o['tipo']]
             usuario.append(o)
-    return usuario
+
+    aluno = facade.get_alunos_sem_responsaveis_facade(vinculo_escola=vinculo_escola)
+
+    return usuario,aluno
 
 
 @permissao('professor')
@@ -303,7 +315,9 @@ def lista_de_usuarios_caso_observador_for_professor(vinculo_turma, norepeat=Fals
         a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
         usuario.append(a)
 
-    return usuario
+    aluno = facade.get_alunos_sem_responsaveis_facade(vinculo_turma=vinculo_turma)
+    
+    return usuario, aluno
 
 
 @permissao('professor')

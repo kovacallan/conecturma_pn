@@ -547,6 +547,15 @@ function cadastro_usuario(tipo){
         nome = document.getElementById(tipo+'_nome').value;
         email = document.getElementById(tipo+'_email').value;
         aluno = document.getElementById(tipo+'_aluno').value;
+		if (nome != '' && nome != null){
+			if (email != '' && email != null && emailValidador(tipo+'_email')){
+				if(!validar_se_email_existe(email)){
+					$.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, email:email, vinculo_aluno:aluno},function(data){
+						window.location.replace(data);
+					});
+				}
+			}
+		}
         $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, email:email, vinculo_aluno:aluno},function(data){
             window.location.replace(data);
         });

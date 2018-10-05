@@ -321,6 +321,40 @@ class DbAluno(Model):
 
         return aluno.medalhas
 
+    def vincular_responsavel(self, id_aluno, id_responsavel):
+        aluno = DbAluno.load(int(id_aluno))
+        aluno.vinculo_responsavel = str(id_responsavel)
+        aluno.save()
+
+        return aluno
+
+    def get_alunos_sem_responsaveis(self, vinculo_rede, vinculo_escola, vinculo_turma):
+        aluno = []
+        if vinculo_rede:
+            for i in DbAluno.query((DbAluno.vinculo_rede == vinculo_rede) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        elif vinculo_escola:
+            for i in DbAluno.query((DbAluno.vinculo_escola == vinculo_escola) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        elif vinculo_turma:
+            for i in DbAluno.query((DbAluno.vinculo_turma == vinculo_turma) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        else:
+            for i in DbAluno.query((DbAluno.vinculo_responsavel == '0'), order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+
+        return aluno
+
+    def get_alunos_viculo_responsavel(self, id_responsavel):
+        aluno = []
+
+        for i in DbAluno.query((DbAluno.vinculo_responsavel == id_responsavel), order_by=DbAluno.nome):
+            aluno.append(vars(i)["_data"])
+
+        return aluno
 
     def apagartudo(self):
         db.flushall()
