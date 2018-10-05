@@ -35,6 +35,7 @@ class DbAluno(Model):
     vinculo_escola = TextField(fts=True, default='0')
     vinculo_turma = TextField(fts=True, index=True, default='0')
     vinculo_serie = TextField(fts=True, default='0')
+    vinculo_responsavel = TextField(fts=True, default='0')
 
     ultimo_oa_jogado=TextField(fts=True,default='0')
     ultima_aventura = TextField(fts=True, default='0')
@@ -222,16 +223,16 @@ class DbAluno(Model):
         item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
-
-        if usuario.pontos_de_moedas < preco:
-            print("você não tem moeda")
-        else:
-            dinheiros= int(usuario.pontos_de_moedas)
+        if int(usuario.pontos_de_moedas) >= int(preco):
+            dinheiros = int(usuario.pontos_de_moedas)
             dinheiros -= int(preco)
             usuario.pontos_de_moedas = str(dinheiros)
             usuario.armario.append(id_item)
             usuario.save()
-            print('comprou o item')
+            return True
+        else:
+            print("você não tem moeda")
+            return False
 
     def ver_itens_comprados(self, id_usuario):
         #         id_usuario
@@ -321,6 +322,40 @@ class DbAluno(Model):
 
         return aluno.medalhas
 
+    def vincular_responsavel(self, id_aluno, id_responsavel):
+        aluno = DbAluno.load(int(id_aluno))
+        aluno.vinculo_responsavel = str(id_responsavel)
+        aluno.save()
+
+        return aluno
+
+    def get_alunos_sem_responsaveis(self, vinculo_rede, vinculo_escola, vinculo_turma):
+        aluno = []
+        if vinculo_rede:
+            for i in DbAluno.query((DbAluno.vinculo_rede == vinculo_rede) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        elif vinculo_escola:
+            for i in DbAluno.query((DbAluno.vinculo_escola == vinculo_escola) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        elif vinculo_turma:
+            for i in DbAluno.query((DbAluno.vinculo_turma == vinculo_turma) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        else:
+            for i in DbAluno.query((DbAluno.vinculo_responsavel == '0'), order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+
+        return aluno
+
+    def get_alunos_viculo_responsavel(self, id_responsavel):
+        aluno = []
+
+        for i in DbAluno.query((DbAluno.vinculo_responsavel == id_responsavel), order_by=DbAluno.nome):
+            aluno.append(vars(i)["_data"])
+
+        return aluno
 
     def apagartudo(self):
         db.flushall()

@@ -123,7 +123,10 @@ def buy_item():
     from control.guarda_roupa_controller import Guarda_roupa
 
     guarda_roupa = Guarda_roupa(usuario_logado=usuario_logado())
-    guarda_roupa.buy_item(id_item=request.params['item'])
+    if guarda_roupa.buy_item(id_item=request.params['item']):
+        return '1'
+    else:
+        return '0'
 
 @route('/equipar_item', method='POST')
 @permissao('aluno_varejo')
@@ -212,7 +215,7 @@ def view_gestao_aprendizagem(no_repeat=False):
 @route('/gestao_aprendizagem/usuario')
 # @permissao('professor')
 @view('gestao_aprendizagem/usuario/usuario')
-@permissao('professor')
+@permissao('responsavel_varejo')
 def view_usuario_index(no_repeat=False):
     from control.gestao_aprendizagem_controller import view_usuario_index
     return view_usuario_index()
@@ -428,6 +431,8 @@ def view_turma(no_repeat=False):
     return view_turma()
 
 
+
+
 @route('/turma/cadastro_turma', method='POST')
 @permissao('diretor')
 def controller_create_turma(no_repeat=False):
@@ -453,6 +458,7 @@ def controller_update_turma(no_repeat=False):
 def controller_entregar_medalha_aluno():
     from control.gestao_aprendizagem_controller import controller_entregar_medalha_aluno
     return controller_entregar_medalha_aluno()
+
 
 @route('/turma/entregar_medalha_todos_alunos', method='POST')
 @permissao('professor')
@@ -500,13 +506,25 @@ def relatorio_aluno(no_repeat=False):
     relatorio.set_pontuacao_porcentagem()
 
     return dict(tipo=usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo)
+                pontos=relatorio.porcentagem_solo, vezes = relatorio.vezes_jogada)
 
 
 @route('/trazer_oas')
+@view('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')
 def levar_oas_matematica():
-    from control.gestao_aprendizagem_controller import levar_oas_matematica
-    return levar_oas_matematica()
+    from control.relatorio_controller import Relatorio
+    relatorio = Relatorio()
+
+    aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
+    turma = facade.search_estrutura_id_facade(id=aluno['vinculo_turma'])
+
+    relatorio.get_matematica_or_portugues_descritor(serie=turma['serie'], diciplina=request.params['diciplina'])
+    relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
+    relatorio.convert_nivel_for_numeric()
+    relatorio.set_color_face()
+    relatorio.set_pontuacao_porcentagem()
+
+    return dict(oa=relatorio.descritores, aluno=aluno, porcentagem=relatorio.porcentagem, pontos=relatorio.porcentagem_solo)
 
 
 """
@@ -596,9 +614,10 @@ def upload():
         usuario.nome_foto_perfil = nome_foto
         usuario.save()
         upload_file.save('view/app/fotos_usuarios', overwrite=True)
-        redirect('/')
+        redirect('/gestao_aprendizagem')
     except AttributeError:
-        redirect('/')
+        redirect('/gestao_aprendizagem')
+
 
 
 @route('/salvar_css_foto', method='post')

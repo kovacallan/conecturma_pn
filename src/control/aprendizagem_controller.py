@@ -95,24 +95,6 @@ def view_ambiente_de_aprendizagem():
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['aluno']:
         jogador = facade.search_aluno_id_facade(id_aluno=usuario['id'])
-        if jogador['cor'] != '0':
-            cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
-        else:
-            cor = jogador['cor']
-
-        if jogador['rosto'] != '0':
-            rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
-        else:
-            rosto = jogador['rosto']
-        if jogador['acessorio'] != '0':
-            acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
-        else:
-            acessorio = jogador['acessorio']
-        if jogador['corpo'] != '0':
-            corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
-        else:
-            corpo = jogador['corpo']
-
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
 
@@ -141,8 +123,32 @@ def view_ambiente_de_aprendizagem():
 
         vida = jogador['pontos_de_vida']
         moedas = jogador['pontos_de_moedas']
+    avatar = set_avatar_jogador(jogador)
 
-    return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
+    return dict(apelido=jogador['apelido'], vida=vida, moedas=moedas, cor=avatar['cor'], rosto=avatar['rosto'],
+                acessorio=avatar['acessorio'], corpo=avatar['corpo'])
+
+def set_avatar_jogador(jogador):
+    if jogador['cor'] != '0':
+        cor = facade.search_estrutura_id_facade(id=jogador['cor'])['image_name']
+    else:
+        cor = jogador['cor']
+
+    if jogador['rosto'] != '0':
+        rosto = facade.search_estrutura_id_facade(id=jogador['rosto'])['image_name']
+    else:
+        rosto = jogador['rosto']
+    if jogador['acessorio'] != '0':
+        acessorio = facade.search_estrutura_id_facade(id=jogador['acessorio'])['image_name']
+    else:
+        acessorio = jogador['acessorio']
+    if jogador['corpo'] != '0':
+        corpo = facade.search_estrutura_id_facade(id=jogador['corpo'])['image_name']
+    else:
+        corpo = jogador['corpo']
+
+    return dict(cor=cor, rosto=rosto, acessorio=acessorio, corpo=corpo)
+
 
 def registrarConclusao():
     """responsavel por desbloquear o proximo OA"""
@@ -191,7 +197,7 @@ def registrarConclusao():
                 (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
                  oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
     else:
-        gamificacao = gamificacao_moeda_xp(parametros = parametros_json_jogos(request.params.items()))
+        gamificacao = gamificacao_moeda_xp(parametros=parametros_json_jogos(request.params.items()))
         premios = {
             'medalhas': [''],
             'moedas': gamificacao['moedas'],
@@ -540,6 +546,7 @@ def read_medalha_album(aluno):
         else:
             medalha_jogo.append(medalha)
     medalha_recente = []
+    medalha_ultima = []
     if medalha_aluno != []:
 
         if len(medalha_aluno) > 4:
@@ -553,6 +560,6 @@ def read_medalha_album(aluno):
         for i in medalha_jogo:
             if str(i['id']) in z:
                 medalha_recente.append(i)
-
-    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno)
+    medalha_ultima = medalha_ultima[len(medalha_recente) -1]
+    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno,medalha_ultima=medalha_ultima)
 

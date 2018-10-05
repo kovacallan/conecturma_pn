@@ -186,6 +186,17 @@
         </div>
         <br>
     </div>
+
+    <!-- POP PARABENS -->
+        <div id="pop">
+            <a href="#" onclick="document.getElementById('pop').style.display='none';"><img  id="fechar"src="x.png"></a>
+            <br/>
+            <img id="parabens" src="parabens.png">
+            <br>
+            <img style="width: 190px;height: auto; margin-left: 75px;" src="img/eu-penso-eu-consigo.jpg">
+
+        </div>
+
 </main>
 
 <script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>

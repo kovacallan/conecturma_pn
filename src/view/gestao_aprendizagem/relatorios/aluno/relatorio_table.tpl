@@ -1,6 +1,8 @@
 <table class="table table-bordered" style="margin-top:0;">
-    <thead style="background-color:#9ed0f6;">
+   <thead style="background-color:#9ed0f6;">
       <tr style="color:#fff;">
+
+
         <th scope="col" >Descritor</th>
         <th scope="col">Desempenho</th>
       </tr>
@@ -23,7 +25,37 @@
                 </td>
             </tr>
             <tr>
+
                 <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
+                    <div class="col-md-12" style="margin-top: 15px;">
+                        <div class="row">
+                            <div class="col-md-2 offset-md-3">
+                                <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
+                                    <div style="align-items: center">
+                                        <span class="number">{{vezes[teste]}}</span>
+                                        <span class="word"> Vezes</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
+                                    <div style="align-items: center">
+                                        <span class="number">{{porcentagem[teste]}}</span>
+                                        <span class="word"> Média</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="circle"  style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
+                                    <div style="align-items: center">
+                                        <span class="number">000</span>
+                                        <span class="word" style="margin-left: 22px;"> Final</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     
                 <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>
             </tr>
           % else:
@@ -35,4 +67,5 @@
          %teste+=1
         % end
     </tbody>
+
 </table>
