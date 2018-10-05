@@ -488,7 +488,7 @@ def relatorio_aluno(no_repeat=False):
     relatorio.set_pontuacao_porcentagem()
 
     return dict(tipo=usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo)
+                pontos=relatorio.porcentagem_solo, vezes = relatorio.vezes_jogada)
 
 
 @route('/trazer_oas')

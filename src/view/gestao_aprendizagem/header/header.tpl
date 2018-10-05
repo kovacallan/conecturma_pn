@@ -33,18 +33,19 @@
                 <h1 id="header-text">Gestão de Aprendizagem</h1>
             </div>
 
-            <div class="dropdown offset-md-1 header-dropdown" mouse>
-                <div id="show_menu" class="btn_show_menu btn btn-info btn-primary btn-lg dropdown-toggle " onclick="show_options()" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform:uppercase; background-color:#1079c8;">
+            <div class="dropdown offset-md-1 header-dropdown">
+                <div class="btn btn-info dropdown-toggle " role="button" id="dropdownMenuLink" data-toggle="dropdown" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform:uppercase; background-color:#1079c8;" aria-haspopup="true" aria-expanded="false">
                     ambientes
                 </div>
 
-                <div id="id-menu-ambiente" style="display:none; font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform: uppercase; background-color: rgb(158, 208, 246); position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform: uppercase; background-color: rgb(158, 208, 246); position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
                     <!--<a class="dropdown-item" href="#" style="color:#fff;">Administrativo</a>
                     <div class="dropdown-divider"></div>-->
                     <a class="dropdown-item" href="/aluno/area_aluno" style="color:#fff;">Aprendizagem</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/sair" style="color:#fff;">Sair</a>
                 </div>
+            </div>
             </div>
         </div>
         </header>
