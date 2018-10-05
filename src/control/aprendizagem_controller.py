@@ -12,8 +12,6 @@ facade = Facade()
 
 
 
-
-
 def itens_cadastrados_sistema():
     itens = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['item'])
     return itens

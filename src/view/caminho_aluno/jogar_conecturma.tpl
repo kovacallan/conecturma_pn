@@ -253,7 +253,7 @@
             $(".portal").show();
             $.ajax({
                 type: "POST",
-               // url: '/AcademicoConecturma/AmbienteAprendizagem/ObterValoresHud',
+                url: '/ObterValoresHud',
                 dataType: "json",
                 success: function (hud) {
                     $('div.coins').text(hud.moedas);

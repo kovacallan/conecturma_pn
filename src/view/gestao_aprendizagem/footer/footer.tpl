@@ -11,7 +11,7 @@
 <script type="text/javascript" src="../static/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../static/js/graficoRelatorio.js"></script>
-<script type="text/javascript" src="../static/js/script.js"></script>
+<script type="text/javascript" src="../static/js/script.js" charset="UTF-8"></script>
 
 <!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
 

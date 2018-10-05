@@ -398,7 +398,7 @@ function cadastro_usuario(tipo){
         sexo = document.getElementById(tipo+'_sexo').value;
         escola = document.getElementById(tipo+'_escola').value;
         turma = document.getElementById(tipo+'_turma').value;
-
+        console.log('nome aluno',nome);
         if (nome != '' && nome != null){
 //            if (nascimento != '' && nascimento != null){
                 if (escola != '' && escola != null){
@@ -629,34 +629,7 @@ function cadastro_usuario(tipo){
     var nome = document.getElementById('nome'+nun_id).value;
     var login= document.getElementById('aluno_login'+nun_id).value;
 
-    $.post('/check_mudanca_cadastro_aluno', {id:ide, nome:nome, login:login}, function (data){
-      if(data.resposta =='teve mudança'){
-                    console.log('toniif');
-                    alert('voce nao salvou os dados de'+data.nome);
 
-                        }
-       else{
-      console.log(ide);
-       setinha = document.getElementById(ide).querySelectorAll("#setinha");
-    console.log(ide,setinha);
-    if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up" style="padding-right: 15px;padding-top: 15px;"></i>';
-    } else {
-        document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down" style="padding-right: 15px;padding-top: 15px;"></i>';
-    }
-
-       }
-       });
-    }else{
-    var nome = document.getElementById('nome_obs'+nun_id).value;
-    var email= document.getElementById('email'+nun_id).value;
-    $.post('/check_mudanca_cadastro ', {id:ide, nome:nome, email:email}, function (data){
-      if(data.resposta =='teve mudança'){
-      console.log(nome)
-                    alert('voce nao salvou os dados de'+data.nome);
-
-                        }
-       else{
        console.log(ide);
        setinha = document.getElementById(ide).querySelectorAll("#setinha");
     console.log(ide,setinha);
@@ -667,7 +640,7 @@ function cadastro_usuario(tipo){
     }
 
        }
-       });
+
     }
 //    var nome = document.getElementById('nome_obs'+nun_id).value;
 //    var email= document.getElementById('email'+nun_id).value;
@@ -684,7 +657,7 @@ function cadastro_usuario(tipo){
 //
 //       }
 //       });
-       }
+
 
 function setinha_aux(ide){
     setinha = document.getElementById(ide).querySelectorAll("#setinha");
@@ -710,13 +683,10 @@ function update_aluno(id){
     id = document.getElementById('id_aluno'+id).value;
     nome = document.getElementById('nome'+id).value;
     login = document.getElementById('aluno_login'+id).value;
+
       try { // statements to try
     turma = document.getElementById('aluno_turma'+id).value;
     console.log('id ,nome ,login ',id,nome,login,turma);
-
-
-
-
 
 
     if (turma != '' && turma !=null){
@@ -742,7 +712,7 @@ function update_aluno(id){
   console.log('erro',e);
    if (nome != '' && nome != null){
             if(login != '' && login != null){
-                    console.log('eits',nome,id);
+                    console.log('dados aluno',nome,login);
                     $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
                         console.log("hm");
                     });

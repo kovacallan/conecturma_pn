@@ -42,7 +42,11 @@ def view_usuario_index(norepeat=False):
 
 # colocar permissao para historico funcionar
 def cadastro_usuario():
-    usuario = request.params
+    usuario={}
+    for i in request.params:
+        usuario[i] = request.params.getunicode(i)
+        print('key,value',i,usuario[i])
+
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
         aluno_create(usuario=usuario)
     elif TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['professor']:
@@ -60,7 +64,7 @@ def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
     nome_login = create_student_login(usuario['nome'])
     cor = []
-
+    print('aluno, tudo ...',usuario['nome'],usuario)
     aluno = facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
                                        primeiro_nome=usuario['nome'].split()[0].upper(),
                                        nascimento=usuario['nascimento'],
@@ -204,15 +208,12 @@ def lista_de_usuarios_caso_observador_for_administrador(no_repeat=False):
         a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
         a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
         a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
-        print(id_escola)
         turmas = facade.search_estrutura_turma_by_escola_facade(id_escola)
-        print('uyte',len(turmas),turmas)
         a['turmas_escola']=[]
         for i in turmas :
             turmi=get_nome_turma(i['id'])
             a['turmas_escola'].append({i['id']:turmi})
-            print('tete',a['turmas_escola'])
-        print('tttete',a['turmas_escola'])
+
         usuario.append(a)
 
     for o in observador:

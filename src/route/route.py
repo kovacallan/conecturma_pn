@@ -140,6 +140,13 @@ def equip_item():
         facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])
     facade.equipar_item_facade(id=usuario['id'], itens=item)
 
+@route('/ObterValoresHud', method='POST')
+@permissao('aluno_varejo')
+def valores_moedas_vidas_hud():
+
+    aluno_c = Aluno_controler()
+    return aluno_c.obter_moedas_e_vidas_hud()
+
 @route('/jogo')
 def jogo():
     from bottle import template
@@ -215,8 +222,11 @@ def view_usuario_index(no_repeat=False):
 @permissao('professor')
 def cadastro_usuario(no_repeat=False):
     from control.gestao_aprendizagem_controller import cadastro_usuario
+
     if no_repeat:
-        usuario=request.params
+        usuario={}
+        for i in request.params:
+            usuario[i] = request.params.getunicode(i)
         return usuario
     return cadastro_usuario()
 
@@ -279,10 +289,9 @@ def check_change_mudanca_alun():
 def aluno_edit():
     from control.dicionarios import TIPO_ESTRUTURA
     id = request.params['id']
-    nome = request.params['nome']
+    nome = request.params.getunicode('nome')
     nome_login = request.params['login']
     try:
-        request.params['turma']
         turma_al = request.params['turma']
         print('turma_al',turma_al)
         aluno_c = Aluno_controler()
