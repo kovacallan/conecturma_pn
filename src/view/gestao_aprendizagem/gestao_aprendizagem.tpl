@@ -8,7 +8,7 @@
                         <div class="col-md-12 doughnut" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" ><!--onclick="getElementById(&#39;image&#39;).style.zIndex=&#39;1&#39;"-->
                             <div id="image" class="" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
                                 <!--<div>-->
-                                <img src="/static/fotos_usuarios/{{foto_obs}}" class="profile-image blah img-responsive img-circle" style="margin-top: 25px;" >
+                                <img src="/static/fotos_usuarios/{{foto_obs}}" class="profile-image blah img-responsive img-circle" style="\margin-top: 25px;" >
 
                                 <!--</div>-->
                             </div>
