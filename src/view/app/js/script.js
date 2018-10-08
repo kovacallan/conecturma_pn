@@ -6,6 +6,8 @@ $("#new_user").on("click",function(){
     diretor = document.getElementById('2').style.display;
     professor = document.getElementById('3').style.display;
     aluno = document.getElementById('4').style.display;
+    responsavel = document.getElementById('5').style.display;
+    coordenador_ped = document.getElementById('6').style.display;
     if (radioValue =='1'){
     diretor = document.getElementById('2').style.display='none';
     professor = document.getElementById('3').style.display='none';
