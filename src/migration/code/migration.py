@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from src.facade.facade_main import *
 from src.control.dicionarios import TIPO_ESTRUTURA,TIPO_USUARIOS,TIPO_OAS_ID,TIPO_MEDALHA_NOME
 from passlib.hash import sha512_crypt

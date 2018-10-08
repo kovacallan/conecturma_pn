@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
+
 import os
 
 from bottle import route, view, get, request, post, redirect, Bottle, delete
@@ -142,6 +143,13 @@ def equip_item():
         facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])
     facade.equipar_item_facade(id=usuario['id'], itens=item)
 
+@route('/ObterValoresHud', method='POST')
+@permissao('aluno_varejo')
+def valores_moedas_vidas_hud():
+
+    aluno_c = Aluno_controler()
+    return aluno_c.obter_moedas_e_vidas_hud()
+
 @route('/jogo')
 def jogo():
     from bottle import template
@@ -217,8 +225,11 @@ def view_usuario_index(no_repeat=False):
 @permissao('professor')
 def cadastro_usuario(no_repeat=False):
     from control.gestao_aprendizagem_controller import cadastro_usuario
+
     if no_repeat:
-        usuario=request.params
+        usuario={}
+        for i in request.params:
+            usuario[i] = request.params.getunicode(i)
         return usuario
     return cadastro_usuario()
 
@@ -279,11 +290,18 @@ def check_change_mudanca_alun():
 
 @route('/aluno/update_aluno', method='POST')
 def aluno_edit():
+    from control.dicionarios import TIPO_ESTRUTURA
     id = request.params['id']
-    nome = request.params['nome']
+    nome = request.params.getunicode('nome')
     nome_login = request.params['login']
-    aluno_c = Aluno_controler()
-    return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login)
+    try:
+        turma_al = request.params['turma']
+        print('turma_al',turma_al)
+        aluno_c = Aluno_controler()
+        return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login,turma=turma_al)
+    except KeyError:
+        aluno_c = Aluno_controler()
+        return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login)
 
 
 @get('/observador/editar')
@@ -599,6 +617,7 @@ def upload():
         redirect('/gestao_aprendizagem')
     except AttributeError:
         redirect('/gestao_aprendizagem')
+
 
 
 @route('/salvar_css_foto', method='post')

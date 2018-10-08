@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from control.classes.permissao import usuario_logado
 
 class Relatorio(object):
@@ -57,7 +59,7 @@ class Relatorio(object):
 
         for i in descritores:
             if 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
-                desempenho = facade.search_oa_facade(id_aluno=str(aluno['id']), objeto_aprendizagem=i['sigla_oa'])
+                desempenho = facade.search_oa_facade(id_aluno=aluno['id'], objeto_aprendizagem=i['sigla_oa'])
                 pontuacao.append(desempenho)
 
         self.desempenho = pontuacao

@@ -397,7 +397,7 @@ function cadastro_usuario(tipo){
         sexo = document.getElementById(tipo+'_sexo').value;
         escola = document.getElementById(tipo+'_escola').value;
         turma = document.getElementById(tipo+'_turma').value;
-
+        console.log('nome aluno',nome);
         if (nome != '' && nome != null){
 //            if (nascimento != '' && nascimento != null){
                 if (escola != '' && escola != null){
@@ -593,7 +593,6 @@ function cadastro_usuario(tipo){
     }
     }
 
-
   function allow_edit(content_class_id){
     console.log('teste');
 
@@ -608,36 +607,50 @@ function update_aluno(id){
     id = document.getElementById('id_aluno'+id).value;
     nome = document.getElementById('nome'+id).value;
     login = document.getElementById('aluno_login'+id).value;
-    console.log('testando',id,nome,login);
 
-    if (nome != '' && nome != null){
-        if(login != '' && login != null){
-            $.post('/checar_login_existente', {login:login},function(data){
-            console.log("hm",data.resposta);
-            if (data.resposta =='nao existe login'){
-                console.log('eits',nome,id);
-                $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
-                    console.log("hm");
-                });
-            location.reload();
-            }else{
-            alert('ja existe esse login');
+      try { // statements to try
+    turma = document.getElementById('aluno_turma'+id).value;
+    console.log('id ,nome ,login ',id,nome,login,turma);
+
+
+    if (turma != '' && turma !=null){
+        if (nome != '' && nome != null){
+            if(login != '' && login != null){
+                    console.log('eits',nome,id);
+                    $.post('/aluno/update_aluno', {id:id, nome:nome,login:login,turma:turma},function(data){
+                        console.log("hm");
+                    });
+                location.reload();
+                }
+                else{
+            alert('o campo login nao pode estar vazio ');
             }
-            });
-
+        }else{
+            alert('O campo nome é obrigatório.');
+            document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
             }
-            else{
-        alert('o campo login nao pode estar vazio ');
-
-        }
-    }else{
-        alert('O campo nome é obrigatório.');
-        document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
-        }
         }
 
-
-
+}
+       catch (e) {
+  console.log('erro',e);
+   if (nome != '' && nome != null){
+            if(login != '' && login != null){
+                    console.log('dados aluno',nome,login);
+                    $.post('/aluno/update_aluno', {id:id, nome:nome,login:login},function(data){
+                        console.log("hm");
+                    });
+                location.reload();
+                }
+                else{
+            alert('o campo login nao pode estar vazio ');
+            }
+        }else{
+            alert('O campo nome é obrigatório.');
+            document.getElementById("nome").style.boxShadow = "0px 0px 12px #fe1313";
+            }
+}
+    }
 
 
 function update_observador(id){
