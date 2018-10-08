@@ -12,11 +12,11 @@
                 <div class="row">
                     <div class="menu col-md-9 offset-md-2">
                         <ul>
-                            <li class="c"></li>
-                            <li class="ambiente"><a href="#"></a></li>
-                            <li class="facebook offset-md-1"><a href="#"></a></li>
-                            <li class="youtube offset-md-1"><a href="#"></a></li>'
-                            <li class="sair offset-md-1"><a href="#"></a></li>
+                            <li class="c"><a href="/aluno/area_aluno"></a></li>
+                            <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
+                            <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
+                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
+                            <li class="sair offset-md-1"><a href="/sair"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -217,6 +217,7 @@
                                                                     <img src="/static/img/btn_comprar.png">
                                                                 </a>
                                                             </div>
+
                                                         %end
                                                     </div>
                                                 %end
@@ -255,6 +256,7 @@
                                                                         <img src="/static/img/btn_comprar.png">
                                                                     </a>
                                                                 </div>
+
                                                             %end
                                                         </div>
                                                     %else:
@@ -301,7 +303,9 @@
                                                                 <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                     {{corpos[a]['preco']}}
                                                                 </div>
+
                                                                 <a onclick="comprar_acessorio('{{corpos[a]['id']}}', 4, '{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+
                                                                     <img src="/static/img/btn_comprar.png">
                                                                 </a>
                                                             </div>
@@ -338,7 +342,9 @@
                                                                     <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                         {{corpos[a]['preco']}}
                                                                     </div>
+
                                                                     <a onclick="comprar_acessorio('{{corpos[a]['id']}}', 4, '{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+
                                                                         <img src="/static/img/btn_comprar.png">
                                                                     </a>
                                                                 </div>
@@ -510,6 +516,7 @@
                 }
             }
 
+
              function comprar_acessorio(item, tipo, item_name, item_id){
                 $.post('/comprar_item', {item:item},function(data){
                     if(data == '0'){
@@ -527,6 +534,7 @@
                         $("#buy-"+item).remove();
                         $("#setinha-"+item).append('<div style="position: absolute; top: 357px; margin-left: 78px;"><img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png"></div>');
                     }
+
                  });
             }
             function salvar_avatar(){

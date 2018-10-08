@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from facade.facade_main import Facade
 from control.dicionarios import TIPO_ITEM, TIPO_ESTRUTURA
 

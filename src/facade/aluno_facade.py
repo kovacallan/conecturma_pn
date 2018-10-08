@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from model.aluno_model import DbAluno
 
 
@@ -10,13 +12,11 @@ class AlunoFacade:
     def create_aluno_facade(self, **kwargs:str):
         return self.aluno.create_aluno(**kwargs)
 
-
     def read_aluno_facade(self):
         return self.aluno.read_aluno()
 
-
-    def update_aluno_facade(self, id:int, nome:str,nome_login:str):
-        return self.aluno.update_aluno(update_id=id, nome=nome,nome_login=nome_login)
+    def update_aluno_facade(self, id:int, nome:str,nome_login:str,turma):
+        return self.aluno.update_aluno(update_id=id, nome=nome,nome_login=nome_login,vinculo_turma=turma)
 
     def set_itens_student_facade(self, id, itens):
         return self.aluno.set_itens_student(id, itens)
@@ -64,7 +64,7 @@ class AlunoFacade:
         return self.aluno.ver_itens_comprados(id_usuario)
 
 
-    def equipar_item_facade(self, id:int, itens:int):
+    def equipar_item_facade(self, id:int, itens:list):
         return self.aluno.equipar_item(id_usuario=id, itens=itens)
 
 

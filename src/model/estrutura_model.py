@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from walrus import *
 from control.dicionarios import TIPO_ESTRUTURA
 
@@ -116,11 +118,11 @@ class DbEstrutura(Model):
 
     def search_turma_by_escola(self, vinculo_escola):
         turma = []
-        for lista in DbEstrutura.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_escola == vinculo_escola),
+        for lista in self.query((DbEstrutura.tipo_estrutura == '3') & (DbEstrutura.vinculo_escola == vinculo_escola),
                                 order_by=DbEstrutura.nome):
             turma.append(vars(lista)["_data"])
 
-            return turma
+        return turma
 
     def search_descritor_serie(self,serie):
         from control.dicionarios import TIPO_ESTRUTURA

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 TIPO_USUARIOS = dict(
     administrador='0',
     gestor='1',
