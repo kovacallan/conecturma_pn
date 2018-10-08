@@ -1,32 +1,56 @@
 $("#new_user").on("click",function(){
+    //bastante otimizavel , olhar depois
     var radioValue = $("input[name='tipo_usuario']:checked").val();
     $("#" + radioValue).css("display","block");
 
-    gestor = document.getElementById('1').style.display;
-    diretor = document.getElementById('2').style.display;
-    professor = document.getElementById('3').style.display;
-    aluno = document.getElementById('4').style.display;
-    responsavel = document.getElementById('5').style.display;
-    coordenador_ped = document.getElementById('6').style.display;
+    gestor = document.getElementById('1').style;
+    diretor = document.getElementById('2').style;
+    professor = document.getElementById('3').style;
+    aluno = document.getElementById('4').style;
+    responsavel = document.getElementById('5').style;
+    coordenador_ped = document.getElementById('6').style;
+
     if (radioValue =='1'){
-    diretor = document.getElementById('2').style.display='none';
-    professor = document.getElementById('3').style.display='none';
-    aluno = document.getElementById('4').style.display='none';
+    diretor.display='none';
+    professor.display='none';
+    aluno.display='none';
+    responsavel.display='none';
+    coordenador_ped.display='none';
     }
     else if(radioValue =='2') {
-    gestor = document.getElementById('1').style.display='none';
-    professor = document.getElementById('3').style.display='none';
-    aluno = document.getElementById('4').style.display='none';
+    gestor.display='none';
+    professor.display='none';
+    aluno.display='none';
+    responsavel.display='none';
+    coordenador_ped.display='none';
     }
     else if(radioValue =='3'){
-    gestor = document.getElementById('1').style.display='none';
-    diretor = document.getElementById('2').style.display='none';
-    aluno = document.getElementById('4').style.display='none';
+    gestor.display='none';
+    diretor.display='none';
+    aluno.display='none';
+    responsavel.display='none';
+    coordenador_ped.display='none';
     }
     else if(radioValue =='4'){
-    gestor = document.getElementById('1').style.display='none';
-    diretor = document.getElementById('2').style.display='none';
-    professor = document.getElementById('3').style.display='none';
+    gestor.display='none';
+    diretor.display='none';
+    professor.display='none';
+    aluno.display='none';
+    coordenador_ped.display='none';
+    }
+    else if(radioValue =='5'){
+    gestor.display='none';
+    diretor.display='none';
+    aluno.display='none';
+    professor.display='none';
+    coordenador_ped.display='none';
+    }
+    else{
+    gestor.display='none';
+    diretor.display='none';
+    professor.display='none';
+    aluno.display='none';
+    responsavel.display='none';
     }
 });
 
