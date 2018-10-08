@@ -4,6 +4,7 @@
     <div style="margin-left: 41px;">
         <div class="row">
 <div class="col-md-3" id='inter' style="border-radius: 113px;position:relative;z-index:5;">
+
                 <form id="image_form" method="POST" enctype="multipart/form-data" action="/upload_img">
                         <div class="col-md-12" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" >
                             <div id="image" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
@@ -12,6 +13,7 @@
                                     <!--<div class="doughnut"></div>-->
                                 </label>
                                 <input type="file" id="img-obs" name="uploadfile" onchange="readURL(this);" style="  display:none;"><br>
+
                             </div>
                         </div>
                 </form>

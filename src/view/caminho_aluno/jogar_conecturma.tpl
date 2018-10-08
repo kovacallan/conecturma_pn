@@ -263,4 +263,4 @@
         }
 </script>
 </div>
-%include('gestao_aprendizagem/footer/footer.tpl')
+%include('gestao_aprendizagem/footer/footer1.tpl')

@@ -69,9 +69,11 @@ input {
   }
   .word{
     font-family: Calibri, sans-serif;
+    position: relative;
     font-size: 16px;
-    margin-left: 17px;
+    margin-left: 13px;
     font-weight: bold;
+    bottom: 6px;
   }
   .circles{
     display: inline-flex;
