@@ -1,8 +1,9 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
 <div class="col-md-9 order-md-3 botao-tabela">
+
     <div style="left: -14px;margin-bottom: 30px;position: relative;">
-        <p class="top-escolas-tabela">Usuários</p>
+
         %include('gestao_aprendizagem/usuario/selecao_novo_usuario.tpl')
     </div>
 
