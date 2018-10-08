@@ -35,7 +35,8 @@ class Login_Observador(object):
                     facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'],
                                                    nome_usuario=observador_logado['nome'],
                                                    tipo_usuario=observador_logado['tipo'])
-                    return PAGINA_INICIAL[tipo_observador(observador_logado['tipo'])]
+
+                    return PAGINA_INICIAL[TIPO_USUARIOS_ID[observador_logado['tipo']].lower()]
                 else:
                     return '/'
             else:
@@ -126,7 +127,7 @@ def algum_usuario_logado(function):
         banana = request.get_cookie("KIM", secret=KEY_HASH)
         que = request.get_cookie("BUMBA", secret=banana)
         if que and banana:
-            redirect(PAGINA_INICIAL[tipo_observador(que['tipo'])])
+            redirect(PAGINA_INICIAL[TIPO_USUARIOS_ID[que['tipo']].lower()])
         else:
             return function(*args, **kwargs)
 
@@ -139,7 +140,7 @@ def permissao(quem_tem_permissao):
             banana = request.get_cookie("KIM", secret=KEY_HASH)
             que = request.get_cookie("BUMBA", secret=banana)
             if banana and que:
-                if int(TIPO_USUARIOS[quem_tem_permissao]) >= int(que['tipo']):
+                if TIPO_USUARIOS[quem_tem_permissao] >= que['tipo']:
                     try:
                         histo = HistoricoFacade()
                         if 'get'in function.__name__:

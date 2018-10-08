@@ -3,7 +3,7 @@
 <div class="col-md-9 order-md-3 botao-tabela" style="margin-top: 6px;">
   <div style="left: -14px;margin-bottom: 30px;position: relative;">
     <p class="top-escolas-tabela">Turma</p>
-    % if tipo != '3':
+    % if tipo < '2':
     <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
       <i class="fas fa-plus"></i>
       &nbsp;Nova Turma
