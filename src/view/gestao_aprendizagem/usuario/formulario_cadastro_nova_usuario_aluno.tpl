@@ -94,7 +94,7 @@
                             </button>
                         </div>
                         <div class="col-md-1">
-                            <img id= "loading" src="/static/img/loading.gif" style="margin-left:10px;margin-top:20px;display:block;">
+                            <img id= "loading" src="/static/img/loading.gif" style="margin-left:10px;margin-top:20px;display:none;">
                         </div>
 
                     </div>

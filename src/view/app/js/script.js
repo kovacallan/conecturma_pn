@@ -35,7 +35,7 @@ $("#new_user").on("click",function(){
     gestor.display='none';
     diretor.display='none';
     professor.display='none';
-    aluno.display='none';
+    responsavel.display='none';
     coordenador_ped.display='none';
     }
     else if(radioValue =='5'){
@@ -580,7 +580,8 @@ function cadastro_usuario(tipo){
 
 		if (nome != '' && nome != null){
 			if (email != '' && email != null && emailValidador(tipo+'_email')){
-			    if (aluno != ' ' && aluno != null){
+			    if (aluno != '' && aluno != null){
+			        console.log('ue');
 				    if(!validar_se_email_existe(email)){
 				        $("#loading").css('display','block');
 					    $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, email:email, vinculo_aluno:aluno},function(data){

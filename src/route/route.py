@@ -148,7 +148,7 @@ def equip_item():
 def valores_moedas_vidas_hud():
 
     aluno_c = Aluno_controler()
-    return aluno_c.obter_moedas_e_vidas_hud()
+    return aluno_c.obter_moedas_e_vidas_hud(usuario=usuario_logado())
 
 @route('/jogo')
 def jogo():

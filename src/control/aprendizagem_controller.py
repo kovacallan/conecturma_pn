@@ -560,6 +560,11 @@ def read_medalha_album(aluno):
         for i in medalha_jogo:
             if str(i['id']) in z:
                 medalha_recente.append(i)
-    medalha_ultima = medalha_ultima[len(medalha_recente) -1]
-    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno,medalha_ultima=medalha_ultima)
+
+        '''variavel medalha_recente da problema se n tiver medalha, ou se so tiver uma , pelo que parece '''
+        try:
+            medalha_ultima = medalha_ultima[len(medalha_recente) -1]
+        except Exception as e:
+            print('que ser esse erro? olhe depois , por favor',e)
+    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno,medalha_ultima=medalha_ultima,usuario=usuario_logado())
 
