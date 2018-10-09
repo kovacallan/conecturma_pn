@@ -431,8 +431,6 @@ def view_turma(no_repeat=False):
     return view_turma()
 
 
-
-
 @route('/turma/cadastro_turma', method='POST')
 @permissao('diretor')
 def controller_create_turma(no_repeat=False):
@@ -626,10 +624,8 @@ def salvar_css_foto():
     observador.aux_css_foto = request.params['posicao_foto']
     observador.save()
 
-# @route('/gestao_aprendizagem2')
-# # @permissao('responsavel_varejo')
-# @view('gestao_aprendizagem/gestao_aprendizagem2')
-# @permissao('responsavel_varejo')
-# def view_gestao_aprendizagem(no_repeat=False):
-#     from control.gestao_aprendizagem_controller import view_gestao_aprendizagem
-#     return view_gestao_aprendizagem()
+@route('/recurso')
+@view('recurso/index.html')
+def recurso_pedagogico():
+    return
+
