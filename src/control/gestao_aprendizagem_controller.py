@@ -528,9 +528,15 @@ def view_escola_index():
                     professor.append(z)
             i.update({'professor': professor})
             escola.append(i)
-
+    escola = get_turma_escola(escola=escola)
     return dict(tipo=usuario_logado()['tipo'], escola=escola, rede=rede_no_sistema)
 
+def get_turma_escola(escola):
+    for i in escola:
+        turma = facade.search_estrutura_turma_by_escola_facade(vinculo_escola=i['id'])
+        i.update({'turmas': turma})
+
+    return escola
 
 def get_escolas_e_rede_permissao():
     usuario = usuario_logado()

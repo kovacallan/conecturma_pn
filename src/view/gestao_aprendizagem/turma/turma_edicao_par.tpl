@@ -98,6 +98,7 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-11">
+                                            % if index % 2 ==0:
                                                 <div class="row row-impar nome-prof">
                                                     <div class="col-md-4" style="margin-top: 4px;">
                                                         Nome: {{z['nome']}}
@@ -116,13 +117,41 @@
                                                              style="padding-left:11px;width: 15%;margin-right:5px;">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            % if tipo == TIPO_USUARIOS['professor']:
-                                                <div class="col-md-1 row-impar nome-prof">
-                                                    <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal" data-target="#medalha_janela{{z['id']}}" style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
+                                                % if tipo == TIPO_USUARIOS['professor']:
+                                                    <div class="col-md-1 row-impar nome-prof">
+                                                        <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal" data-target="#medalha_janela{{z['id']}}" style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
+                                                    </div>
+                                                    %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                                % end
+                                             % else:
+
+                                                <div class="row row-par nome-prof">
+                                                    <div class="col-md-4" style="margin-top: 4px;">
+                                                        Nome: {{z['nome']}}
+                                                        <br>
+                                                        Login :{{z['nome_login']}}
+                                                    </div>
+                                                    <div class="col-md-6 offset-md-2" style="padding:10px">
+                                                        <span style="margin-left: 17px;"> &nbsp;senha :</span>
+                                                        <img src="/static/img/{{z['senha'][0]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][1]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][2]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                        <img src="/static/img/{{z['senha'][3]}}.png"
+                                                             style="padding-left:11px;width: 15%;margin-right:5px;">
+                                                    </div>
                                                 </div>
-                                                %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
-                                            % end
+                                                % if tipo == TIPO_USUARIOS['professor']:
+                                                    <div class="col-md-1 row-par nome-prof">
+                                                        <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal" data-target="#medalha_janela{{z['id']}}" style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
+                                                    </div>
+                                                    %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                                % end
+
+                                             % end
+                                            </div>
                                         </div>
                                     </div>
                                 %end
