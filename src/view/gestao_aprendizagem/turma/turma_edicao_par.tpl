@@ -8,7 +8,7 @@
 
 <!-- aqui começa os dados internos do acordeon -->
 <div class="container">
-    <div class="row row-par">
+    <div class="row">
         <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel"
              aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
@@ -25,11 +25,16 @@
                                    aria-controls="escola-do-rock-prof" aria-selected="false">Alunos
                                 </a>
                             </li>
+                            <!--<li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#aventura"
+                                   aria-controls="aventura" aria-selected="false">Aventura
+                                </a>
+                            </li>-->
                         </ul>
                     </div>
                 </div>
                 <!-- aqui começa o conteudo das guias  -->
-                <div class="tab-content row-par">
+                <div class="tab-content">
                     <div class="tab-pane container active" id="{{i['id']}}">
                         <form>
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
@@ -124,6 +129,87 @@
                         </div>
                     </div>
                     <br>
+                </div>
+                <div class="tab-pane fade aba-prof" id="aventura" role="tabpanel"
+                         aria-labelledby="aventura">
+                    <div class="row" style="margin-top: 12px;">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 1
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 2
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 3
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 4
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 5
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 6
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 7
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="row row-impar nome-prof" >
+                                            <div class="col-md-4" style="margin-top: 4px;">
+                                                Semana 8
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
                     <div class="row" style="margin-bottom: 10px">

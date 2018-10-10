@@ -514,7 +514,7 @@ def view_escola_index():
         for i in escolas_no_sistema:
             professor = []
             for z in facade.search_observador_escola(vinculo_escola=i['id']):
-                if z['tipo'] != '2':
+                if z['tipo'] != TIPO_USUARIOS['diretor'] and z['tipo'] != TIPO_USUARIOS['coordenador']:
                     professor.append(z)
             i.update({'professor': professor})
             escola.append(i)
@@ -524,7 +524,7 @@ def view_escola_index():
         for i in escolas_no_sistema_lista:
             professor = []
             for z in facade.search_observador_escola(vinculo_escola=i['id']):
-                if z['tipo'] != '2':
+                if z['tipo'] != TIPO_USUARIOS['diretor'] and z['tipo'] != TIPO_USUARIOS['coordenador']:
                     professor.append(z)
             i.update({'professor': professor})
             escola.append(i)
@@ -630,6 +630,7 @@ def view_turma():
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
     medalha = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'])
     medalhas = []
+
     for i in medalha:
         if i['tipo_medalha'] == TIPO_MEDALHA_NOME['SocioEmocional']:
             medalhas.append(i)

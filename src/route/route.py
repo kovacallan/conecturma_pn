@@ -624,8 +624,4 @@ def salvar_css_foto():
     observador.aux_css_foto = request.params['posicao_foto']
     observador.save()
 
-@route('/recurso')
-@view('recurso/index.html')
-def recurso_pedagogico():
-    return
 
