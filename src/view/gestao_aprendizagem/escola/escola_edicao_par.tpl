@@ -2,10 +2,7 @@
        aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
 </div>
-
-
 <!--fim das informaçoes da tabela-->
-
 <!-- aqui começa os dados internos do acordeon -->
 <div class="container">
     <div class="row">
@@ -19,7 +16,13 @@
                             <a class="nav-link active " data-toggle="tab" href="#{{i['id']}}" role="tab" aria-controls="escola-do-rock" aria-selected="true">Dados da Gerais</a>
                         </li>
                         <li class="nav-item">
+                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-coordenador" aria-controls="escola-do-rock-coordenador" aria-selected="false">Coordenadores</button>
+                        </li>
+                        <li class="nav-item">
                             <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-prof" aria-controls="escola-do-rock-prof" aria-selected="false">Professores</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-toggle="tab" href="#{{i['id']}}-alunos" aria-controls="escola-do-rock-aluno" aria-selected="false">Alunos</button>
                         </li>
                     </ul>
                 </div>
@@ -113,39 +116,19 @@
                             </div>
                         </div>
                 </div>
-                <!-- aqui termina o conteudo da guia do dados de escola  -->
-                <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel" aria-labelledby="{{i['nome']}}-prof">
-                    <div class="row">
 
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastroProf{{i['id']}}" style="position: absolute; right: 71px; top: 75px;">
-                            + Novo Professor
-                        </button>
-
-                        <div class="container">
-                            <div class="offset-md-1 distanciamento col-md-" style="margin-top: 41px;">
-
-                            </div>
-                            % for z in i['professor']:
-                                <div class="row">
-                                    <div class="col-md-11">
-                                        <div class="offset-md-1 nome-prof row row-impar">
-                                            <div class="col-md-11">
-                                                {{z['nome']}}
-                                            </div>
-                                            <div class="col-md-1 item-tabela">
-                                                <a href="">
-                                                    <i class="fas fa-edit edit-ico"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            %end
-
-                        </div>
-                    </div>
+                <div class="tab-pane fade aba-prof" id="{{i['id']}}-coordenador" role="tabpanel" aria-labelledby="{{i['nome']}}-coordenador">
+                    %include('gestao_aprendizagem/escola/escola_edicao_aba_coordenador.tpl')
                 </div>
-                <br>
+
+                <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel" aria-labelledby="{{i['nome']}}-prof">
+                    %include('gestao_aprendizagem/escola/escola_edicao_aba_professor.tpl')
+                </div>
+
+                <div class="tab-pane fade aba-prof" id="{{i['id']}}-alunos" role="tabpanel" aria-labelledby="{{i['nome']}}-alunos">
+                    %include('gestao_aprendizagem/escola/escola_edicao_aba_aluno.tpl')
+                </div>
+
             </div>
             <div class="container">
                 <div class="row" style="margin-bottom: 10px">
@@ -171,78 +154,9 @@
         </div>
     </div>
     </form>
-
         <!-- Modal -->
-        <div class="modal fade" id="cadastroProf{{i['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content row-impar" style="height: 349px;">
-              <div class="modal-header">
-                <div class="offset-md-1">
-                    <h5 class="modal-title" id="exampleModalLabel">Novo Professor</h5>
-                </div>
-              </div>
-              <div class="modal-body">
-                <div class="row row-impar" id="novo-professor" style="display: block">
-                    <div class="container">
-                        <div id="teste" class="row new-scola">
-                            <div class="tab-content row-impar" id="nav-tabContent">
-                                <div class="row">
-                                    <div class="tab-pane fade show active container active" role="tabpanel" aria-labelledby="home-tab"
-                                         id="dados-da-escola">
-                                        <div class="row">
-                                            <input type="hidden" id="professor_escola" value="{{i['id']}}">
-                                            <div class="col-md-4 offset-md-1">
-                                                <label for="nome" style="background-color: inherit;">Nome Completo
-                                                    <span style="color:#ff0000">*</span>
-                                                </label>
-                                                <input type="text" class="form-control" size="30" name="" id="professor_nome"
-                                                       onchange="document.getElementById('professor_nome').style.boxShadow = 'none'">
-                                            </div>
-                                            <div class="col-md-6" style="padding-left: 10px">
-                                                <label for="data">Data de nascimeto</label>
-                                                <span style="color:#ff0000">*</span>
-                                                <br>
-                                                <input type="date" size="25" class="form-control" required name="" id="professor_nascimento" onchange="document.getElementById('professor_nascimento').style.boxShadow = 'none'">
-                                            </div>
-
-                                            <div class="col-md-10 offset-md-1" style="margin-top: 10px;">
-                                                <label for="telefone">Email</label>
-                                                <span style="color:#ff0000">*</span>
-                                                <input type="email" size="25" class="form-control" placeholder="exemplo@exemplo.com"  required name="" id="professor_email" onchange="emailValidador('professor_email')">
-                                            </div>
-                                            <div class="col-md-10 offset-md-1" style="margin-top: 10px;">
-                                                <label for="turma">Turma</label>
-                                                <select id="professor_turma" class="custom-select custom-select-md">
-                                                    <option value="0"></option>
-                                                    %if i['turmas'] != []:
-                                                        % for j in i['turmas']:
-                                                            <option value="{{j['id']}}">{{j['nome']}}</option>
-                                                        % end
-                                                    % end
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- aqui termina o conteudo da guia do dados de escola  -->
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                        <!--fim do nova escola-->
-                        <!-- acordeon -->
-                    </div>
-                </div>
-              </div> <!-- modal body-->
-              <div class="modal-footer">
-                <button type="submit" class="botao-salvar" onclick="cadastro_usuario('professor')"
-                        style="margin-left: 10px;">salvar
-                </button>
-                <button class="botao-salvar" style="background-color:#ff0000"
-                        onclick='document.getElementById("3").style.display = "none"'>cancelar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-</div>
+        %include('gestao_aprendizagem/escola/escola_modal_criacao_professor.tpl')
+        %include('gestao_aprendizagem/escola/escola_modal_criacao_coordenador.tpl')
+        %include('gestao_aprendizagem/escola/escola_modal_criacao_aluno.tpl')
+    </div>
 </div>

@@ -390,6 +390,80 @@ function update_turma(id){
     }
 }
 
+function cadastro_usuario_via_escola(tipo, id){
+	switch(tipo){
+		case 'professor':
+			nome = document.getElementById(tipo+'_nome_'+id).value;
+			nascimento = document.getElementById(tipo+'_nascimento_'+id).value;
+			email = document.getElementById(tipo+'_email_'+id).value;
+			escola = document.getElementById(tipo+'_escola_'+id).value;
+			turma = document.getElementById(tipo+'_turma_'+id).value;
+
+			if (nome != '' && nome != null){     
+				if (email != '' && email != null && emailValidador(tipo+'_email_'+id)){
+					if(!validar_se_email_existe(email)){
+						if (escola != '' && escola != null){
+							$.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola, vinculo_turma:turma},function(data){
+								window.location.replace(data);
+							});
+							location.reload();
+						}
+						else{
+							alert('O campo escola é obrigatório.');
+							document.getElementById(tipo+'_escola').style.boxShadow = "0px 0px 12px #fe1313";
+						}
+
+					}
+					else{
+						alert('O email digitado já foi cadastrado no nosso sitema.');
+						document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
+					}
+				}
+				else{
+					alert('O campo email é obrigatório.');
+					document.getElementById(tipo+'_email').style.boxShadow = "0px 0px 12px #fe1313";
+				}
+			}
+			else{
+				alert('O campo nome é obrigatório.');
+				document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
+            }
+            
+        case 'coordenador':
+            nome = document.getElementById(tipo+'_nome_'+id).value;
+            nascimento = document.getElementById(tipo+'_nascimento_'+id).value;
+            email = document.getElementById(tipo+'_email_'+id).value;
+            escola = document.getElementById(tipo+'_escola_'+id).value;
+            $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola},function(data){
+                window.location.replace(data);
+            });
+
+        case 'aluno':
+            nome = document.getElementById(tipo+'_nome_'+id).value;
+            nascimento = document.getElementById(tipo+'_nascimento_'+id).value;
+            sexo = document.getElementById(tipo+'_sexo_'+id).value;
+            escola = document.getElementById(tipo+'_escola_'+id).value;
+            turma = document.getElementById(tipo+'_turma_'+id).value;
+            if (nome != '' && nome != null){
+                if (escola != '' && escola != null){
+                    $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, sexo:sexo, vinculo_escola:escola, vinculo_turma:turma},function(data){
+                        window.location.replace(data);
+                    });
+                    
+                }
+                else{
+                    alert('O campo escola é obrigatório.');
+                    document.getElementById(tipo+'_escola').style.boxShadow = "0px 0px 12px #fe1313";
+                }
+            }
+            else{
+                alert('O campo nome é obrigatório.');
+                document.getElementById(tipo+'_nome').style.boxShadow = "0px 0px 12px #fe1313";
+            }
+    }
+       
+}
+
 function cadastro_usuario(tipo){
     if (tipo == 'aluno'){
         nome = document.getElementById(tipo+'_nome').value;
@@ -397,7 +471,6 @@ function cadastro_usuario(tipo){
         sexo = document.getElementById(tipo+'_sexo').value;
         escola = document.getElementById(tipo+'_escola').value;
         turma = document.getElementById(tipo+'_turma').value;
-        console.log('nome aluno',nome);
         if (nome != '' && nome != null){
 //            if (nascimento != '' && nascimento != null){
                 if (escola != '' && escola != null){
