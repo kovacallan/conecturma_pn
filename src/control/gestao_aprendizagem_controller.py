@@ -212,14 +212,24 @@ def novasenha():
 
 @permissao('responsavel_varejo')
 def controller_index_usuario(observador, no_repeat=False):
-    if observador['tipo'] == TIPO_USUARIOS['administrador']:
-        return lista_de_usuarios_caso_observador_for_administrador()
-    elif observador['tipo'] == TIPO_USUARIOS['professor']:
-        return lista_de_usuarios_caso_observador_for_professor(observador['vinculo_turma'])
-    elif observador['tipo'] == TIPO_USUARIOS['diretor']  or observador['tipo'] == TIPO_USUARIOS['coordenador']:
-        return lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])
-    elif observador['tipo'] == TIPO_USUARIOS['gestor']:
-        return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
+    if no_repeat== True:
+        if observador['tipo'] == TIPO_USUARIOS['administrador']:
+            return 'lista_de_usuarios_caso_observador_for_administrador'
+        elif observador['tipo'] == TIPO_USUARIOS['professor']:
+            return 'lista_de_usuarios_caso_observador_for_professor(observador["vinculo_turma"])'
+        elif observador['tipo'] == TIPO_USUARIOS['diretor'] or observador['tipo'] == TIPO_USUARIOS['coordenador']:
+            return "lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])"
+        elif observador['tipo'] == TIPO_USUARIOS['gestor']:
+            return "lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])"
+    else:
+        if observador['tipo'] == TIPO_USUARIOS['administrador']:
+            return lista_de_usuarios_caso_observador_for_administrador()
+        elif observador['tipo'] == TIPO_USUARIOS['professor']:
+            return lista_de_usuarios_caso_observador_for_professor(observador['vinculo_turma'])
+        elif observador['tipo'] == TIPO_USUARIOS['diretor']  or observador['tipo'] == TIPO_USUARIOS['coordenador']:
+            return lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])
+        elif observador['tipo'] == TIPO_USUARIOS['gestor']:
+            return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
 
 
 @permissao('administrador')

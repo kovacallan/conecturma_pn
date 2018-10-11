@@ -156,12 +156,8 @@ def registrarConclusao():
     dados_jogo= parametros_json_jogos(request.params.items())
     print('todos dados jogo',dados_jogo)
     if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
-        try:
-            print('dados2',len(dados_jogo['niveis']),dados_jogo['niveis'])
-        except Exception as e:
-            print('aaaaa',e)
         if len(dados_jogo['niveis'])==3:
-            print('dados jogo',dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True)
+            print('dados jogo ',dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino'])
             premios={
                 'OA': is_oa,
                 'VC': is_vc_or_cn,
@@ -174,7 +170,7 @@ def registrarConclusao():
              oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
 
         elif dados_jogo['niveis'][len(dados_jogo['niveis'])-1]==True:
-            print('dados jogo', dados_jogo['niveis'][len(dados_jogo['niveis']) - 1]['termino'] == True)
+            print('dados jogo1 ', dados_jogo['niveis'][len(dados_jogo['niveis']) - 1]['termino'])
             premios = {
                 'OA': is_oa,
                 'VC': is_vc_or_cn,
@@ -362,6 +358,9 @@ def testa_medalha_false(medalhas):
 def testar_se_ja_medalha(id_usuario, medalha):
     pass
 
+
+""" INICIO DOS METODOS REFERENTES A MEDALHAS"""
+
 def primeiro_jogo(oa_concluido):
 
     if oa_concluido == []:
@@ -489,9 +488,9 @@ def pegar_maior_pontuacao(parametros):
         try:
             if i['termino'] == True:
                 teste = i
+                print('rodou com termino',teste,i)
         except Exception as exu:
             print('excessao',exu)
-
             if i['percentualConcluido']==100:
                 i['termino']=True
                 teste=i

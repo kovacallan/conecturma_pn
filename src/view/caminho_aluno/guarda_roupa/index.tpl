@@ -374,8 +374,12 @@
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script>
-
+            aux_ac=0;
+            aux_cor=0;
+            aux_rosto=0;
+            aux_corp=0;
             %if cor != '0':
                 cor = "botao_ok_{{cor['id']}}"
                 $("#"+cor).removeAttr('style');
@@ -394,21 +398,64 @@
             %end
 
             function check_color_cor(id){
+
+                console.log('oi');
                 document.getElementById(cor).style.filter = "grayscale(100%)";
                 $("#"+id).removeAttr('style');
                 cor=id;
+
             }
             function check_color_rosto(id){
-                document.getElementById(rosto).style.filter = "grayscale(100%)";
-                $("#"+id).removeAttr('style');
+                console.log('check rosto');
+
+                if(rosto == id){
+                console.log('if');
+                document.getElementById(id).style.filter = "grayscale(100%)";
+
+                    if(aux_rosto!=0){
+                        console.log('if we',aux_rosto);
+                        aux_rosto=0;
+                         $("#"+id).removeAttr('style');
+                    }else{
+                        aux_rosto++
+                    }
+                }
+                else{
+                    console.log('else');
+                    document.getElementById(rosto).style.filter = "grayscale(100%)";
+                    $("#"+id).removeAttr('style');
+                }
+
+
                 rosto=id;
             }
             function check_color_acessorios(id){
+                console.log(acessorio ,id);
+                if(acessorio == id){
+                console.log('if');
+                document.getElementById(id).style.filter = "grayscale(100%)";
+
+                    if(aux_ac!=0){
+                    console.log('if we',aux_ac);
+                    aux_ac=0;
+
+                    $("#"+id).removeAttr('style');
+
+                    }else{
+                    aux_ac++;
+                    }
+                }
+                else{
+                console.log('else');
                 document.getElementById(acessorio).style.filter = "grayscale(100%)";
                 $("#"+id).removeAttr('style');
+                }
+
                 acessorio=id;
             }
             function check_color_corpo(id){
+                console.log('check corpo');
+
                 document.getElementById(corpo).style.filter = "grayscale(100%)";
                 $("#"+id).removeAttr('style');
                 corpo=id;
@@ -538,8 +585,11 @@
                  });
             }
             function salvar_avatar(){
+                console.log('oir');
+                //if
                 $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
                 ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value, apelido:document.getElementById("apelido").value},function(data){
+
                  });
             }
             var flag_rosto = 0;
@@ -553,7 +603,25 @@
                 face=face.toLowerCase();
                 $("#avatar-itens-rosto").remove();
                 $("#avatar-itens-rosto-id").remove();
+                console.log('face',id,rosto);
+                if(rosto=='botao_ok_'+id){
+                    console.log('if change id',id);
+                    try{
+                    console.log('i');
+                    var cara=document.getElementById(avatar-itens-rosto-id);
+
+                    element.parentNode.removeChild(cara);
+                    }
+                    catch (e){
+                    console.log('pois',e);
+                    //$("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
+                    }
+
+                }
+                else{
+                console.log('else change face');
                 $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
+                }
             }
             function change_avatar_acessorios(acessorios, id){
                 acessorios=acessorios.toLowerCase();
