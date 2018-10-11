@@ -416,7 +416,25 @@
                         console.log('if we',aux_rosto);
                         aux_rosto=0;
                          $("#"+id).removeAttr('style');
+                         try{
+                        var cara=document.getElementById(avatar-itens-rosto);
+
+                        element.parentNode.removeChild(cara);
+                        document.getElementById(avatar-itens-rosto).value=0;
+                        }
+                        catch(e){
+                        console.log('eif',e);
+
+                        }
                     }else{
+                        try{
+                        var cara=document.getElementById(avatar-itens-rosto-id);
+
+                        element.parentNode.removeChild(cara);
+                        }
+                        catch(e){
+                        console.log('eelse',e);
+                        }
                         aux_rosto++
                     }
                 }
@@ -424,10 +442,11 @@
                     console.log('else');
                     document.getElementById(rosto).style.filter = "grayscale(100%)";
                     $("#"+id).removeAttr('style');
+
                 }
-
-
                 rosto=id;
+
+
             }
             function check_color_acessorios(id){
                 console.log(acessorio ,id);
@@ -436,13 +455,15 @@
                 document.getElementById(id).style.filter = "grayscale(100%)";
 
                     if(aux_ac!=0){
-                    console.log('if we',aux_ac);
-                    aux_ac=0;
-
-                    $("#"+id).removeAttr('style');
-
+                        console.log('if we',aux_ac);
+                        aux_ac=0;
+                        $("#"+id).removeAttr('style');
+                        var acessorio=document.getElementById(avatar-itens-acessorio-id);
+                        element.parentNode.removeChild(acessorio);
                     }else{
-                    aux_ac++;
+                        var acessorio=document.getElementById(avatar-itens-acessorio-id);
+                        element.parentNode.removeChild(acessorio);
+                        aux_ac++;
                     }
                 }
                 else{
@@ -585,12 +606,15 @@
                  });
             }
             function salvar_avatar(){
-                console.log('oir');
-                //if
-                $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
+
+                try{
+                                $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
                 ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value, apelido:document.getElementById("apelido").value},function(data){
 
                  });
+                 }catch(e){
+                 console.log('hmm  ',e);
+                 }
             }
             var flag_rosto = 0;
             function change_avatar_color(color, id){
@@ -605,19 +629,10 @@
                 $("#avatar-itens-rosto-id").remove();
                 console.log('face',id,rosto);
                 if(rosto=='botao_ok_'+id){
-                    console.log('if change id',id);
-                    try{
-                    console.log('i');
-                    var cara=document.getElementById(avatar-itens-rosto-id);
-
-                    element.parentNode.removeChild(cara);
+                    if(aux_rosto!=0){
+                        $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
                     }
-                    catch (e){
-                    console.log('pois',e);
-                    //$("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
                     }
-
-                }
                 else{
                 console.log('else change face');
                 $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
@@ -627,7 +642,15 @@
                 acessorios=acessorios.toLowerCase();
                 $("#avatar-itens-acessorios").remove();
                 $("#avatar-itens-acessorios-id").remove();
+                console.log('face',id,rosto);
+                if(acessorios=='botao_ok_'+id){
+                    if(aux_ac!=0){
+                        $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorios+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorios.slice(0,10)+"' style='z-index: 13; position: absolute;top: -168px; left: -81px;'>");
+                    }
+                    }
+                else{
                 $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorios+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorios.slice(0,10)+"' style='z-index: 13; position: absolute;top: -168px; left: -81px;'>");
+                }
             }
             function change_avatar_body(body, id){
                 body=body.toLowerCase();
