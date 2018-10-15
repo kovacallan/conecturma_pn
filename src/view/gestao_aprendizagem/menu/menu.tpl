@@ -164,7 +164,7 @@
             <a href="/gestao_aprendizagem/usuario" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Usuário</span></a>
         </div>
 
-        <a class="list-group-item recursos-ped recursos-ped-background" href="#"> <img src="/static/img/recursos_ico.png" class="mr-2 recursos-ico"> Recursos pedagogicos</a>
+        <a class="list-group-item recursos-ped recursos-ped-background" href="/recurso"> <img src="/static/img/recursos_ico.png" class="mr-2 recursos-ico"> Recursos pedagogicos</a>
     </div>
 </div>
 % elif tipo == '2.5':
