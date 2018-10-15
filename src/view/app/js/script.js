@@ -785,3 +785,13 @@ function allow_edit_obs(content_class_id){
 //
 //
 //}
+
+
+
+
+$('#page-content').easyPaginate({
+    paginateElement: 'div',
+    elementsPerPage: 1,
+    effect: 'default'
+});
+
