@@ -145,12 +145,16 @@ def permissao(quem_tem_permissao):
                 if TIPO_USUARIOS[quem_tem_permissao] >= que['tipo']:
                     try:
                         histo = HistoricoFacade()
-                        if 'get'in function.__name__:
+                        if 'get'in function.__name__ or 'lista' in function.__name__:
                             pass
                         elif 'view' in function.__name__:
                             histo.create_historico_facade(acao=function.__name__, nome_usuario=usuario_logado()['nome'],
                                                           momento=datetime.now())
+                        elif 'controller' in function.__name__:
 
+                            retorno_da_func = function(observador=usuario_logado(),no_repeat=True)
+                            histo.create_historico_facade(acao=function.__name__, nome_usuario=usuario_logado()['nome'],
+                                                          momento=datetime.now())
                         else:
                             retorno_da_func=function(no_repeat=True)
 
