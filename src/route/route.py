@@ -610,7 +610,7 @@ def upload():
     try:
         upload_file = request.POST['uploadfile']
         ext = upload_file.filename.split('.')[1]
-        nome_foto = upload_file.filename = usuario_logado()['nome'] + '.' + ext
+        nome_foto = upload_file.filename = str(usuario_logado()['id']) + '.' + ext
         if ext not in ('png', 'jpeg', 'jpg'):
             redirect('/gestao_aprendizagem2')
         usuario = DbObservador.load(usuario_logado()['id'])
