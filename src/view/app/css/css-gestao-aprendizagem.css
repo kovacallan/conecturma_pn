@@ -343,3 +343,26 @@ background-color: #0391E6;
     height: 193px;
     width: 205px;
 }
+
+.printar {
+    display: none;
+}
+@media print {
+   .no-print {
+       display: none;
+    }
+    .printar {
+       display: block;
+    }
+}
+
+#h1-admin{
+color: #0391e6;
+font-family: "Arial";
+font-size: 27.9px;
+margin-top: 18px;
+margin-left: 172px;
+position: relative;
+top: 16px;
+
+}

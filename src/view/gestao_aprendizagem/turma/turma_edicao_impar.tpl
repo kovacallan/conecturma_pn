@@ -26,7 +26,7 @@
                 <!-- aqui começa o conteudo das guias  -->
                 <div class="tab-content row-impar">
                     <div class="tab-pane container active" id="nossa-escola">
-                        <form>
+                        <form class="">
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row" style="margin-top: 30px">
                                 <div class="col-md-12" style="height: 215px;">
@@ -85,8 +85,8 @@
                     <!-- aqui termina o conteudo da guia do dados de escola  -->
                     <div class="tab-pane fade aba-prof" id="nossa-escola-prof" role="tabpanel"
                          aria-labelledby="escola-do-rock-prof">
-                        <div class="row" style="margin-top: 12px;">
-                            <div class="container">
+                        <div class="row" style="margin-top: 12px;" id="page-content">
+                            <div  class="container">
                                 % for z in i['aluno']:
                                     <div class="col-md-12">
                                         <div class="row">
@@ -134,14 +134,18 @@
                 </div>
                 % end
                 <div class="offset-md-10 col-md-1">
-                    <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
-                          style="cursor:pointer;">
-                        <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
+                    <!--<span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"-->
+                          <!--style="cursor:pointer;">-->
+                        <!--<i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>-->
+                    <!--</span>-->
+
+                    <span onclick="window.print()">
+                        <i class="fas fa-print" style="color: #969696;margin-left: -10px;cursor:pointer;"></i>
                     </span>
-                    <span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"
-                          style="cursor:pointer;display:none;">
-                            <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
-                    </span>
+                    <!--<span onclick="update_turma({{i['id']}})" id="edit{{i['id']}}"-->
+                          <!--style="cursor:pointer;display:none;">-->
+                            <!--<i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>-->
+                    <!--</span>-->
                 </div>
             </div>
         </div>

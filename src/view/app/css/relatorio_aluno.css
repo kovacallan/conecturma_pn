@@ -85,3 +85,9 @@ input {
   {
    margin-right: 97px;
    }
+
+   @media print {
+  .container {
+    width: auto;
+  }
+}

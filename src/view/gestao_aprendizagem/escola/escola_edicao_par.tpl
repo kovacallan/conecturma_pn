@@ -126,6 +126,7 @@
                                 </p>
                             </div>
                             % for z in i['professor']:
+                            <div id="pagination"
                                 <div class="row">
                                     <div class="col-md-11">
                                         <div class="offset-md-1 nome-prof row row-impar">
@@ -141,7 +142,7 @@
                                     </div>
                                 </div>
                             %end
-
+                                </div> <!-- PAGINAÇÃO -->
                         </div>
                     </div>
                 </div>

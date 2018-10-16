@@ -363,9 +363,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="botoes">
+                            <div class="botoes" style="top: 102%;">
                                 <a href="/"  onclick="salvar_avatar()" >
-                                    <img src="/static/img/btn-salvar.png" style="cursor:pointer;">
+                                    <img  src="/static/img/bt-voltar.png" style="cursor:pointer;">
                                 </a>
                             </div>
                         </div>
