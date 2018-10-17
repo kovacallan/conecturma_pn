@@ -9,14 +9,14 @@
                         <div class="col-md-12" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" >
                             <div id="image" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
                                 <label for="img-obs">
-                                    <img src="/static/fotos_usuarios/{{foto_obs}}" class="img-thumbnail rounded-circle" style="margin-top: 25px;" >
+                                    <img src="/static/fotos_usuarios/{{foto_obs}}" class="img-thumbnail rounded-circle" data-toggle="modal" data-target="#exampleModal" style="margin-top: 25px;" >
                                     <!--<div class="doughnut"></div>-->
                                 </label>
-                                <input type="file" id="img-obs" name="uploadfile" onchange="readURL(this);" style="  display:none;"><br>
-
                             </div>
                         </div>
                 </form>
+
+
             </div>
 
 
@@ -70,30 +70,62 @@
 
 </div>
 
-<!--<script src="../static/js/interact.min.js"></script>-->
-<!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-lg" style="width: 769px; right: 105px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Atualizar foto de perfil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <style type="text/css">
+          .cropperContainer {
+            float: left;
+            border: 0px solid #eee;
+            min-width: 440px;/*Used to improve layout during loading the image.*/
+            min-height: 327px;
+          }
+          .previews {
+            float: left;
+            margin-left: 0px;
+          }
+          .previewSmall {
+            margin: 40px;
+            width: 60px;
+            height: 60px;
+          }
 
-<!--<div class="resize-container" style="background-color: #29e;-->
-<!--color: white;-->
-<!--font-size: 20px;-->
-<!--font-family: sans-serif;-->
-<!--border-radius: 8px;-->
-<!--padding: 20px;-->
-<!--margin: 30px 20px;-->
-<!--width: 500px;-->
-<!--height:500px;-->
-<!--box-sizing: border-box;">-->
-<!--<div class="resize-drag draggable" style=" display: inline-block;-->
-<!--width: 100px;-->
-<!--height: 140px;-->
-<!--background-color:black;">-->
-<!--Resize from any edge or corner-->
-<!--</div>-->
-<!--</div>-->
-
-
+          .info {
+            clear: both;
+            padding: 5px;
+            font-family: Arial;
+            font-size: 12px;
+            color: #777;
+          }
+      </style>
+      <div class="modal-body">
+        <input type="file" id="img-obs" onchange="readURL(this)" name="uploadfile" style="display:none;">
+        <div id="demo1" class="demoWrapper">
+          <div id="cropperContainer1" class="cropperContainer" style="width:600px;"></div>
+          <div class="previews">
+              <div id="previewSmall1" class="previewSmall rounded-circle" style="width: 200px; height: 200px;"></div>
+          </div>
+          </div>
+          <!--<input id="left" name="left" class="info">
+          <input id="top" name="top" class="info">
+          <input id="width" name="width" class="info">
+          <input id="height" name="height" class="info">-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 %include('gestao_aprendizagem/footer/footer.tpl')
+<script src="../static/js/icropper.js"></script>
 <script>
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -106,14 +138,24 @@ function readURL(input) {
             alert('por favor selecione uma imagem ate 1MB');
         }
         else{
-            document.getElementById("image_form").submit();
-            //getElementById('image').style.zIndex='1';
-            //$('#salv').css('display','block');
-            //var element = document.getElementById("image");
-            //element.classList.add("draggable");
-            //reader.onload = function (e) {
-            //    $('.blah').attr('src', e.target.result)
-            //};
+          reader.onload = function (e){
+            var infoLeft = document.getElementById('left');
+            var infoTop = document.getElementById('top');
+            var infoWidth = document.getElementById('width');
+            var infoHeight = document.getElementById('height');
+            var ic1 = new ICropper(
+              'cropperContainer1'
+              ,{
+                  ratio: 1
+                  ,image: e.target.result
+                  ,onChange: function(info){	//onChange must be set when constructing.
+                  }
+                  ,preview: [
+                      'previewSmall1'
+                  ]
+            });
+          };
+            //document.getElementById("image_form").submit();
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -157,5 +199,4 @@ function dragMoveListener (event) {
     type: 'post'
     });
 }
-
 </script>
