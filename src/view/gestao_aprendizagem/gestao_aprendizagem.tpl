@@ -5,16 +5,14 @@
         <div class="row">
 <div class="col-md-3" id='inter' style="border-radius: 113px;position:relative;z-index:5;">
 
-                <form id="image_form" method="POST" enctype="multipart/form-data" action="/upload_img">
-                        <div class="col-md-12" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" >
-                            <div id="image" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
-                                <label for="img-obs">
-                                    <img src="/static/fotos_usuarios/{{foto_obs}}" class="img-thumbnail rounded-circle" data-toggle="modal" data-target="#exampleModal" style="margin-top: 25px;" >
-                                    <!--<div class="doughnut"></div>-->
-                                </label>
-                            </div>
-                        </div>
-                </form>
+  <div class="col-md-12" style="height: 165px;position:relative;transform:translate(9px, -18px);left: 22px;" >
+      <div id="image" style="position: relative; z-index: 1; {{css_foto}} ;margin-left: -50px;">
+          <label for="img-obs">
+              <img src="/static/fotos_usuarios/{{foto_obs}}" class="img-thumbnail rounded-circle" data-toggle="modal" data-target="#exampleModal" style="width: 150px; height: 150px;margin-top: 25px;" >
+              <!--<div class="doughnut"></div>-->
+          </label>
+      </div>
+  </div>
 
 
             </div>
@@ -72,7 +70,7 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content modal-lg" style="width: 769px; right: 105px;">
+    <div class="modal-content modal-lg" style="width: 769px; right: 105px; height: 469px;">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Atualizar foto de perfil</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -84,7 +82,7 @@
             float: left;
             border: 0px solid #eee;
             min-width: 440px;/*Used to improve layout during loading the image.*/
-            min-height: 327px;
+            min-height: 300px;
           }
           .previews {
             float: left;
@@ -94,6 +92,10 @@
             margin: 40px;
             width: 60px;
             height: 60px;
+          }
+          .icropper img {
+            width:450px;
+            height: 300px;
           }
 
           .info {
@@ -105,20 +107,24 @@
           }
       </style>
       <div class="modal-body">
-        <input type="file" id="img-obs" onchange="readURL(this)" name="uploadfile" style="display:none;">
+          <form id="image_form" method="POST" enctype="multipart/form-data" action="/upload_img">
+              <input type="file" id="img-obs" onchange="readURL(this)" name="uploadfile" style="display:none;">
+
+              <input type="hidden" id="left" name="left" class="info">
+              <input type="hidden" id="top" name="top" class="info">
+              <input type="hidden" id="width" name="width" class="info">
+              <input type="hidden" id="height" name="height" class="info">
+              <input type="hidden" id="imgheight" name="imgheight" class="info">
+          </form>
         <div id="demo1" class="demoWrapper">
-          <div id="cropperContainer1" class="cropperContainer" style="width:600px;"></div>
+          <div id="cropperContainer1" class="cropperContainer" ></div>
           <div class="previews">
-              <div id="previewSmall1" class="previewSmall rounded-circle" style="width: 200px; height: 200px;"></div>
+              <div id="previewSmall1" class="previewSmall rounded-circle" style="width: 150px; height: 150px;"></div>
           </div>
           </div>
-          <!--<input id="left" name="left" class="info">
-          <input id="top" name="top" class="info">
-          <input id="width" name="width" class="info">
-          <input id="height" name="height" class="info">-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Salvar</button>
+        <button type="button" onclick="crop_image_save()" class="btn btn-primary">Salvar</button>
       </div>
     </div>
   </div>
@@ -143,12 +149,18 @@ function readURL(input) {
             var infoTop = document.getElementById('top');
             var infoWidth = document.getElementById('width');
             var infoHeight = document.getElementById('height');
+            document.getElementById('height');
             var ic1 = new ICropper(
               'cropperContainer1'
               ,{
                   ratio: 1
                   ,image: e.target.result
                   ,onChange: function(info){	//onChange must be set when constructing.
+                    infoLeft.value = info.l;
+                    infoTop.value = info.t;
+                    infoWidth.value = info.w;
+                    infoHeight.value = info.h;
+
                   }
                   ,preview: [
                       'previewSmall1'
@@ -160,6 +172,11 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function crop_image_save(){
+  document.getElementById("image_form").submit()
+}
+
 interact('.draggable').draggable({
     // enable inertial throwing
     inertia: false,
