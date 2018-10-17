@@ -243,7 +243,20 @@ class DbAluno(Model):
 
     def equipar_item(self, id_usuario, itens):
         usuario = self.load(id_usuario)
-        for i in itens:
+
+        x=itens
+        # for i in itens:
+        for index, i in enumerate(itens):
+           print('vish',index,i)
+           if i==-1:
+               # if index==1:
+               #     usuario.cor='0'
+               if index==1:
+                   usuario.rosto='0'
+               if index==2:
+                   usuario.acessorio='0'
+               if index==3:
+                   usuario.corpo='0'
            if i != -1:
                 if i['tipo_item'] == '1':
                     usuario.cor = i['id']
@@ -253,6 +266,7 @@ class DbAluno(Model):
                     usuario.acessorio = i['id']
                 elif i['tipo_item'] == '4':
                     usuario.corpo = i['id']
+
         usuario.save()
 
 
