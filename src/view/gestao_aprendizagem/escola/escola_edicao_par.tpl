@@ -121,41 +121,12 @@
                     %include('gestao_aprendizagem/escola/escola_edicao_aba_coordenador.tpl')
                 </div>
 
-<<<<<<< HEAD
-                        <div class="container">
-                            <div class="offset-md-1 distanciamento col-md-" style="margin-top: 20px">
-                                <p>Professor
-                                    <i class="far fa-question-circle"></i>
-                                </p>
-                            </div>
-                            % for z in i['professor']:
-                            <div id="pagination"
-                                <div class="row">
-                                    <div class="col-md-11">
-                                        <div class="offset-md-1 nome-prof row row-impar">
-                                            <div class="col-md-11">
-                                                {{z['nome']}}
-                                            </div>
-                                            <div class="col-md-1 item-tabela">
-                                                <a href="">
-                                                    <i class="fas fa-edit edit-ico"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            %end
-                                </div> <!-- PAGINAÇÃO -->
-                        </div>
-                    </div>
-=======
                 <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel" aria-labelledby="{{i['nome']}}-prof">
                     %include('gestao_aprendizagem/escola/escola_edicao_aba_professor.tpl')
                 </div>
 
                 <div class="tab-pane fade aba-prof" id="{{i['id']}}-alunos" role="tabpanel" aria-labelledby="{{i['nome']}}-alunos">
                     %include('gestao_aprendizagem/escola/escola_edicao_aba_aluno.tpl')
->>>>>>> 6f80b69ea5e988f267ee1119a690079deed49e25
                 </div>
 
             </div>
