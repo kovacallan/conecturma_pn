@@ -332,3 +332,15 @@ textarea{
  .circles{display: inline-flex;
                     }
  .circle{ margin-right: 30px;}
+
+.printar {
+
+}
+@media print {
+   .no-print {
+       display: none;
+    }
+    .printar {
+       display: block;
+    }
+}

@@ -62,6 +62,7 @@ input {
 .hiddenRow {
     padding: 0 !important;
 }
+
   .number{
     font-family: Calibri, sans-serif;
     font-size: 30px;
@@ -85,3 +86,8 @@ input {
   {
    margin-right: 97px;
    }
+
+   @media print {
+  .container {
+    width: auto;
+  }

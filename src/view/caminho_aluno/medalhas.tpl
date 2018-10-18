@@ -117,7 +117,7 @@
                                  id="{{i['id']}}"
                                  src="/static/img/medalha/jogo-{{i['id']}}.png" style="">
                         </div>
-                            %elif usuario['tipo'] >=6:
+                            %elif usuario['tipo'] >='6':
                                 % if str(i['id']) in medalha_aluno:
                         <div class="todasmedalhas bounce"
                              style="background-image: url('/static/img/medalha/fundo-medalha-todas.png');width: 150px;height: 150px;text-align: center;margin: 10px -8px 10px 30px;display: block;opacity: 1;">
