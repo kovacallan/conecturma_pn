@@ -927,3 +927,8 @@ function allow_edit_obs(content_class_id){
 //
 //
 //}
+
+
+
+
+

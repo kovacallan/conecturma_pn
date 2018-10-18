@@ -1,3 +1,4 @@
+<div class="no-print">
 % if tipo == '3':
 <div class="row" style="margin-right: 0px;margin-top:20px;">
         <div class="col-md-3 order-md-1" style="margin-top: 15px;">
@@ -240,5 +241,4 @@
         <a class="list-group-item recursos-ped recursos-ped-background" href="#"> <img src="/static/img/recursos_ico.png" class="mr-2 recursos-ico"> Recursos pedagogicos</a>
     </div>
 </div>
-
-
+</div> <!-- FECHANDO DIV NO PRINTER -->
