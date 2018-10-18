@@ -231,14 +231,10 @@
             );
         });
         function enviarRequisicaoAjax(parametros, callbackSucesso, callbackErro) {
-<<<<<<< HEAD
+
             //HOST = 'http://localhost:8080/'
             HOST = 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com/'
-=======
-            HOST = 'http://localhost:8080/'
-            //HOST = 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com/'
->>>>>>> ed08c95592d9d2710657c6f43987ba59ac333829
-            console.log("enviarRequisicaoAjax parametros", parametros);
+          console.log("enviarRequisicaoAjax parametros", parametros);
             console.log(parametros.operacao);
             var jqXhr = jQuery.ajax({
                 type: "POST",
