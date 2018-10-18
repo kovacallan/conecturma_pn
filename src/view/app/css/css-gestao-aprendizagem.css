@@ -361,8 +361,15 @@ color: #0391e6;
 font-family: "Arial";
 font-size: 27.9px;
 margin-top: 18px;
-margin-left: 172px;
+margin-left: 296px;
 position: relative;
 top: 16px;
+
+}
+#paginas{
+border: 1px solid #ddd;
+margin: 0 4px;
+cursor: pointer;
+padding: 0 5px;
 
 }

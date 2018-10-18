@@ -156,12 +156,8 @@ def registrarConclusao():
     dados_jogo= parametros_json_jogos(request.params.items())
     print('todos dados jogo',dados_jogo)
     if usuario['tipo'] == TIPO_USUARIOS['aluno'] :
-        try:
-            print('dados2',len(dados_jogo['niveis']),dados_jogo['niveis'])
-        except Exception as e:
-            print('aaaaa',e)
         if len(dados_jogo['niveis'])==3:
-            print('dados jogo',dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino']==True)
+            print('dados jogo ',dados_jogo['niveis'][len(dados_jogo['niveis'])-1]['termino'])
             premios={
                 'OA': is_oa,
                 'VC': is_vc_or_cn,
@@ -174,7 +170,7 @@ def registrarConclusao():
              oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
 
         elif dados_jogo['niveis'][len(dados_jogo['niveis'])-1]==True:
-            print('dados jogo', dados_jogo['niveis'][len(dados_jogo['niveis']) - 1]['termino'] == True)
+            print('dados jogo1 ', dados_jogo['niveis'][len(dados_jogo['niveis']) - 1]['termino'])
             premios = {
                 'OA': is_oa,
                 'VC': is_vc_or_cn,
@@ -362,6 +358,9 @@ def testa_medalha_false(medalhas):
 def testar_se_ja_medalha(id_usuario, medalha):
     pass
 
+
+""" INICIO DOS METODOS REFERENTES A MEDALHAS"""
+
 def primeiro_jogo(oa_concluido):
 
     if oa_concluido == []:
@@ -489,9 +488,9 @@ def pegar_maior_pontuacao(parametros):
         try:
             if i['termino'] == True:
                 teste = i
+                print('rodou com termino',teste,i)
         except Exception as exu:
             print('excessao',exu)
-
             if i['percentualConcluido']==100:
                 i['termino']=True
                 teste=i
@@ -560,6 +559,11 @@ def read_medalha_album(aluno):
         for i in medalha_jogo:
             if str(i['id']) in z:
                 medalha_recente.append(i)
-    medalha_ultima = medalha_ultima[len(medalha_recente) -1]
-    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno,medalha_ultima=medalha_ultima)
+
+        '''variavel medalha_recente da problema se n tiver medalha, ou se so tiver uma , pelo que parece '''
+        try:
+            medalha_ultima = medalha_ultima[len(medalha_recente) -1]
+        except Exception as e:
+            print('que ser esse erro? olhe depois , por favor',e)
+    return dict(medalha_socio=medalha_socio,medalha_jogo=medalha_jogo,medalha_recente=medalha_recente,medalha_aluno=medalha_aluno,medalha_ultima=medalha_ultima,usuario=usuario_logado())
 

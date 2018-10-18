@@ -174,7 +174,7 @@ def send_email_confirmation(nome, email):
     from email.mime.text import MIMEText
     import smtplib
 
-    url = 'http://ec2-18-231-72-172.sa-east-1.compute.amazonaws.com/new_senha?email='+email
+    url = 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com/new_senha?email='+email
 
     msg = MIMEMultipart()
     msg['From'] = "ti@conecturma.com.br"
@@ -212,14 +212,24 @@ def novasenha():
 
 @permissao('responsavel_varejo')
 def controller_index_usuario(observador, no_repeat=False):
-    if observador['tipo'] == TIPO_USUARIOS['administrador']:
-        return lista_de_usuarios_caso_observador_for_administrador()
-    elif observador['tipo'] == TIPO_USUARIOS['professor']:
-        return lista_de_usuarios_caso_observador_for_professor(observador['vinculo_turma'])
-    elif observador['tipo'] == TIPO_USUARIOS['diretor']  or observador['tipo'] == TIPO_USUARIOS['coordenador']:
-        return lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])
-    elif observador['tipo'] == TIPO_USUARIOS['gestor']:
-        return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
+    if no_repeat== True:
+        if observador['tipo'] == TIPO_USUARIOS['administrador']:
+            return 'lista_de_usuarios_caso_observador_for_administrador'
+        elif observador['tipo'] == TIPO_USUARIOS['professor']:
+            return 'lista_de_usuarios_caso_observador_for_professor(observador["vinculo_turma"])'
+        elif observador['tipo'] == TIPO_USUARIOS['diretor'] or observador['tipo'] == TIPO_USUARIOS['coordenador']:
+            return "lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])"
+        elif observador['tipo'] == TIPO_USUARIOS['gestor']:
+            return "lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])"
+    else:
+        if observador['tipo'] == TIPO_USUARIOS['administrador']:
+            return lista_de_usuarios_caso_observador_for_administrador()
+        elif observador['tipo'] == TIPO_USUARIOS['professor']:
+            return lista_de_usuarios_caso_observador_for_professor(observador['vinculo_turma'])
+        elif observador['tipo'] == TIPO_USUARIOS['diretor']  or observador['tipo'] == TIPO_USUARIOS['coordenador']:
+            return lista_de_usuarios_caso_observador_for_diretor(observador['vinculo_escola'])
+        elif observador['tipo'] == TIPO_USUARIOS['gestor']:
+            return lista_de_usuarios_caso_observador_for_gestor(observador['vinculo_rede'])
 
 
 @permissao('administrador')
@@ -510,27 +520,23 @@ def view_escola_index():
     """
     escola = []
     escolas_no_sistema, rede_no_sistema = get_escolas_e_rede_permissao()
-    if isinstance(escolas_no_sistema, list):
-        for i in escolas_no_sistema:
-            professor = []
-            for z in facade.search_observador_escola(vinculo_escola=i['id']):
-                if z['tipo'] != '2':
-                    professor.append(z)
-            i.update({'professor': professor})
-            escola.append(i)
-    else:
-        escolas_no_sistema_lista = []
-        escolas_no_sistema_lista.append(escolas_no_sistema)
-        for i in escolas_no_sistema_lista:
-            professor = []
-            for z in facade.search_observador_escola(vinculo_escola=i['id']):
-                if z['tipo'] != '2':
-                    professor.append(z)
-            i.update({'professor': professor})
-            escola.append(i)
+    for i in escolas_no_sistema:
+        diretor = []
+        coordenador = []
+        professor = []
+        aluno = facade.search_aluno_escola_facade(vinculo_escola=i['id'])
+        for z in facade.search_observador_escola(vinculo_escola=i['id']):
+            if z['tipo'] == TIPO_USUARIOS['diretor']:
+                diretor.append(z)
+            elif z['tipo'] == TIPO_USUARIOS['coordenador']:
+                coordenador.append(z)
+            else:
+                professor.append(z)
+
+        i.update({'aluno': aluno,'professor': professor, 'diretor': diretor, 'coordenador': coordenador})
+        escola.append(i)
 
     return dict(tipo=usuario_logado()['tipo'], escola=escola, rede=rede_no_sistema)
-
 
 def get_escolas_e_rede_permissao():
     usuario = usuario_logado()
@@ -544,8 +550,12 @@ def get_escolas_e_rede_permissao():
             else:
                 i['vinculo_rede_id'] = i['vinculo_rede']
                 i['vinculo_rede'] = ' '
+
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
+
+            i.update({'turmas': facade.search_estrutura_turma_by_escola_facade(vinculo_escola=i['id'])})
+
             escola.append(i)
 
         return escola, rede
@@ -560,18 +570,20 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
         return escola, rede
+
     elif usuario['tipo'] == TIPO_USUARIOS['responsavel']:
         pass
 
     else:
         escola = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
+
+        escola = [] if escola == -1 else escola
         if escola['vinculo_rede'] != '0':
             escola['vinculo_rede_id'] = escola['vinculo_rede']
             escola['vinculo_rede'] = get_nome_rede(vinculo_rede=escola['vinculo_rede'])
         escola['vinculo_diretor_escola'] = usuario['nome']
         rede = facade.search_estrutura_id_facade(id=usuario['vinculo_rede'])
         return escola, rede
-
 
 def get_nome_diretor_da_escola(vinculo_escola):
     diretor = facade.search_diretor_vinculo_escola_facade(vinculo_escola=vinculo_escola)
@@ -630,6 +642,7 @@ def view_turma():
     turma = get_turma_de_acordo_com_tipo_usuario_logado()
     medalha = facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['medalha'])
     medalhas = []
+
     for i in medalha:
         if i['tipo_medalha'] == TIPO_MEDALHA_NOME['SocioEmocional']:
             medalhas.append(i)

@@ -40,7 +40,7 @@
                     ambientes
                 </div>
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform: uppercase; background-color: rgb(158, 208, 246); position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform: uppercase; background-color: rgb(158, 208, 246); position: absolute; " x-placement="bottom-start">
                     <!--<a class="dropdown-item" href="#" style="color:#fff;">Administrativo</a>
                     <div class="dropdown-divider"></div>-->
                     <a class="dropdown-item" href="/aluno/area_aluno" style="color:#fff;">Aprendizagem</a>

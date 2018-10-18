@@ -62,6 +62,7 @@ input {
 .hiddenRow {
     padding: 0 !important;
 }
+
   .number{
     font-family: Calibri, sans-serif;
     font-size: 30px;
@@ -90,4 +91,3 @@ input {
   .container {
     width: auto;
   }
-}
