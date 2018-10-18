@@ -10,7 +10,7 @@ class DesempenhoJogo(Model):
     id_aluno=TextField(fts=True)
     unidade=TextField(fts=True, default='0')
     objeto_aprendizagem=TextField(fts=True, default='0')
-    jogo_jogado = ListField()
+    jogo_jogado = ListField()#pega o maior score de cada jogo no formato list(dict(nivel:xxx, percentual:0-100,termino:true ou false))
 
 
 
@@ -41,8 +41,8 @@ class DesempenhoJogo(Model):
                                       order_by=DesempenhoJogo.id):
 
             conclucoes.append(dict(id=i.id, id_aluno=i.id_aluno,unidade=i.unidade,objeto_aprendizagem=i.objeto_aprendizagem,
-                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]
-                            ))
+                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]))
+
         return conclucoes
 
     def search_oa(self,id_aluno,oa):
