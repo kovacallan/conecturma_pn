@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/icropper.css">
     <link rel="stylesheet" href="../static/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css-gestao-aprendizagem.css">
-    <link rel="stylesheet" href="../static/{{css}}">
+    <link rel="stylesheet" href="../static/css-gestao-aprendizagem.css" media="all">
+    <link rel="stylesheet" href="../static/paginate.css">
+    <link rel="stylesheet" href="../static/{{css}}" media="all">
     <style>
         button{
             cursor: pointer;
@@ -40,7 +41,7 @@
                     ambientes
                 </div>
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform: uppercase; background-color: rgb(158, 208, 246); position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-family: 'Myriad-Condlt', sans-serif; width: 159px; font-weight: bold; font-size: 12.84px; text-transform: uppercase; background-color: rgb(158, 208, 246); position: absolute; " x-placement="bottom-start">
                     <!--<a class="dropdown-item" href="#" style="color:#fff;">Administrativo</a>
                     <div class="dropdown-divider"></div>-->
                     <a class="dropdown-item" href="/aluno/area_aluno" style="color:#fff;">Aprendizagem</a>

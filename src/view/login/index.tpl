@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogar Conecturma</title>
-    <link rel="icon" type="image/png" href="../static/img/logo-ico.png">
+    <link rel="icon" type="image/png" href="../static/img/icon_conecturma.png">
     <link rel="stylesheet" href="../static/reset.css">
     <link rel="stylesheet" href="../static/bootstrap.min.css">
     <link rel="stylesheet" href="../static/style.css">
