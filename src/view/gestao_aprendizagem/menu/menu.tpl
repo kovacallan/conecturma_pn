@@ -1,3 +1,4 @@
+<div class="no-print">
 % if tipo == '3':
 <div class="row" style="margin-right: 0px;margin-top:20px;">
         <div class="col-md-3 order-md-1" style="margin-top: 15px;">
@@ -164,7 +165,7 @@
             <a href="/gestao_aprendizagem/usuario" class="list-group-item li-background  justify-content-between li-background lh-condensed"><span style="margin-left: 54px;">Usuário</span></a>
         </div>
 
-        <a class="list-group-item recursos-ped recursos-ped-background" href="#"> <img src="/static/img/recursos_ico.png" class="mr-2 recursos-ico"> Recursos pedagogicos</a>
+        <a class="list-group-item recursos-ped recursos-ped-background" href="/recurso"> <img src="/static/img/recursos_ico.png" class="mr-2 recursos-ico"> Recursos pedagogicos</a>
     </div>
 </div>
 % elif tipo == '2.5':
@@ -240,5 +241,4 @@
         <a class="list-group-item recursos-ped recursos-ped-background" href="#"> <img src="/static/img/recursos_ico.png" class="mr-2 recursos-ico"> Recursos pedagogicos</a>
     </div>
 </div>
-
-
+</div> <!-- FECHANDO DIV NO PRINTER -->

@@ -136,3 +136,6 @@ def uv1_path(path):
     :return:
     """
     return static_file(path, root='././jogo/UV1')
+
+
+
