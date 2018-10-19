@@ -135,7 +135,11 @@
                                             <p>Professor
                                                 <i class="far fa-question-circle"></i>
                                             </p>
+                                            <br>
+
+                                            <span>+</span>
                                         </div>
+                                         <div id="pagination">
                                         % for z in i['professor']:
                                         <div class="row">
                                             <div class="col-md-11">
@@ -152,6 +156,7 @@
                                             </div>
                                         </div>
                                         %end
+                                         </div> <!-- PAGINATION -->
                                     </div>
                                 </div>
                             </div>

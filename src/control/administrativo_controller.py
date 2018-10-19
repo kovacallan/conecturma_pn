@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from bottle import route, view, get, request, redirect, template
 from control.classes.validar_cadastros_updates import *
 from facade.facade_main import Facade
@@ -68,4 +70,4 @@ def desativados():
 def index_historico_controller():
     historico = facade.read_historico_facade()
 
-    return dict(usuario=historico)
+    return dict(usuario=historico ,tipo=usuario_logado()['tipo'])

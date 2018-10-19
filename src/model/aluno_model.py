@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from walrus import *
 from random import randrange
 
@@ -31,8 +33,9 @@ class DbAluno(Model):
 
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
-    vinculo_turma = TextField(fts=True, default='0')
+    vinculo_turma = TextField(fts=True, index=True, default='0')
     vinculo_serie = TextField(fts=True, default='0')
+    vinculo_responsavel = TextField(fts=True, default='0')
 
     ultimo_oa_jogado=TextField(fts=True,default='0')
     ultima_aventura = TextField(fts=True, default='0')
@@ -48,8 +51,8 @@ class DbAluno(Model):
         return self.create(**kwargs)
 
 
-    def update_aluno(self, update_id, nome, nome_login, turma='0', escola='0', rede='0'):
-
+    def update_aluno(self, update_id, nome, nome_login, vinculo_turma='0', escola='0', rede='0'):
+        print('update_aluno',vinculo_turma)
         aluno_up = self.load(update_id)
         [setattr(aluno_up, parametro, valor) for parametro, valor in locals().items() if
          valor != aluno_up.all()]
@@ -220,15 +223,16 @@ class DbAluno(Model):
         item = DbEstrutura()
         usuario = DbAluno.load(id_usuario)
         preco = item.search_estrutura_id(id_item)['preco']
-
-        if usuario.pontos_de_moedas < preco:
-            print("você não tem moeda")
-        else:
-            dinheiros= int(usuario.pontos_de_moedas)
+        if int(usuario.pontos_de_moedas) >= int(preco):
+            dinheiros = int(usuario.pontos_de_moedas)
             dinheiros -= int(preco)
             usuario.pontos_de_moedas = str(dinheiros)
             usuario.armario.append(id_item)
             usuario.save()
+            return True
+        else:
+            print("você não tem moeda")
+            return False
 
     def ver_itens_comprados(self, id_usuario):
         #         id_usuario
@@ -239,7 +243,20 @@ class DbAluno(Model):
 
     def equipar_item(self, id_usuario, itens):
         usuario = self.load(id_usuario)
-        for i in itens:
+
+        x=itens
+        # for i in itens:
+        for index, i in enumerate(itens):
+           print('vish',index,i)
+           if i==-1:
+               # if index==1:
+               #     usuario.cor='0'
+               if index==1:
+                   usuario.rosto='0'
+               if index==2:
+                   usuario.acessorio='0'
+               if index==3:
+                   usuario.corpo='0'
            if i != -1:
                 if i['tipo_item'] == '1':
                     usuario.cor = i['id']
@@ -249,6 +266,7 @@ class DbAluno(Model):
                     usuario.acessorio = i['id']
                 elif i['tipo_item'] == '4':
                     usuario.corpo = i['id']
+
         usuario.save()
 
 
@@ -318,6 +336,40 @@ class DbAluno(Model):
 
         return aluno.medalhas
 
+    def vincular_responsavel(self, id_aluno, id_responsavel):
+        aluno = DbAluno.load(int(id_aluno))
+        aluno.vinculo_responsavel = str(id_responsavel)
+        aluno.save()
+
+        return aluno
+
+    def get_alunos_sem_responsaveis(self, vinculo_rede, vinculo_escola, vinculo_turma):
+        aluno = []
+        if vinculo_rede:
+            for i in DbAluno.query((DbAluno.vinculo_rede == vinculo_rede) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        elif vinculo_escola:
+            for i in DbAluno.query((DbAluno.vinculo_escola == vinculo_escola) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        elif vinculo_turma:
+            for i in DbAluno.query((DbAluno.vinculo_turma == vinculo_turma) & (DbAluno.vinculo_responsavel == '0'),
+                                   order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+        else:
+            for i in DbAluno.query((DbAluno.vinculo_responsavel == '0'), order_by=DbAluno.nome):
+                aluno.append(vars(i)["_data"])
+
+        return aluno
+
+    def get_alunos_viculo_responsavel(self, id_responsavel):
+        aluno = []
+
+        for i in DbAluno.query((DbAluno.vinculo_responsavel == id_responsavel), order_by=DbAluno.nome):
+            aluno.append(vars(i)["_data"])
+
+        return aluno
 
     def apagartudo(self):
         db.flushall()

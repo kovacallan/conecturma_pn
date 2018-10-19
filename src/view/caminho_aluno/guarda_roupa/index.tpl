@@ -12,11 +12,11 @@
                 <div class="row">
                     <div class="menu col-md-9 offset-md-2">
                         <ul>
-                            <li class="c"></li>
-                            <li class="ambiente"><a href="#"></a></li>
-                            <li class="facebook offset-md-1"><a href="#"></a></li>
-                            <li class="youtube offset-md-1"><a href="#"></a></li>'
-                            <li class="sair offset-md-1"><a href="#"></a></li>
+                            <li class="c"><a href="/aluno/area_aluno"></a></li>
+                            <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
+                            <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
+                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
+                            <li class="sair offset-md-1"><a href="/sair"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -203,15 +203,21 @@
                                                             <div style="float: left; width: 100%; text-align: center;">
                                                                 <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top:-36px;">
                                                             </div>
-                                                            <div style="position: relative; margin-left: 35px;">
-                                                            <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                            <div id="setinha-{{acessorios[a]['id']}}">
+
                                                             </div>
-                                                            <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
-                                                                {{acessorios[a]['preco']}}
+                                                            <div id="buy-{{acessorios[a]['id']}}">
+                                                                <div style="position: relative; margin-left: 35px;">
+                                                                <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                                </div>
+                                                                <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
+                                                                    {{acessorios[a]['preco']}}
+                                                                </div>
+                                                                <a onclick="comprar_acessorio('{{acessorios[a]['id']}}', 3, '{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                    <img src="/static/img/btn_comprar.png">
+                                                                </a>
                                                             </div>
-                                                            <a onclick="comprar_acessorio('{{acessorios[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
-                                                                <img src="/static/img/btn_comprar.png">
-                                                            </a>
+
                                                         %end
                                                     </div>
                                                 %end
@@ -236,15 +242,21 @@
                                                                 <div style="float: left; width: 100%; text-align: center;">
                                                                     <img class="acessorio" src="/static/img/acessorio/{{acessorios[a]['image_name']}}" style="max-height: 222px; margin-top:-36px;">
                                                                 </div>
-                                                                <div style="position: relative; margin-left: 35px;">
-                                                                <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                                <div id="setinha-{{acessorios[a]['id']}}">
+
                                                                 </div>
-                                                                <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
-                                                                    {{acessorios[a]['preco']}}
+                                                                <div id="buy-{{acessorios[a]['id']}}">
+                                                                    <div style="position: relative; margin-left: 35px;">
+                                                                    <img src="/static/img/custo_cristais.png" style="margin-top: -25px;">
+                                                                    </div>
+                                                                    <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
+                                                                        {{acessorios[a]['preco']}}
+                                                                    </div>
+                                                                    <a onclick="comprar_acessorio('{{acessorios[a]['id']}}', 3, '{{acessorios[a]['image_name']}}','{{acessorios[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+                                                                        <img src="/static/img/btn_comprar.png">
+                                                                    </a>
                                                                 </div>
-                                                                <a onclick="comprar_acessorio('{{acessorios[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
-                                                                    <img src="/static/img/btn_comprar.png">
-                                                                </a>
+
                                                             %end
                                                         </div>
                                                     %else:
@@ -273,7 +285,7 @@
                                                         % if str(corpos[a]['id']) in itens_usuario or usuario_logado['tipo']<= '5':
                                                             <div style="padding-top: 35px; float: left; width: 100%; text-align: center;" onclick="change_avatar_body('{{corpos[a]['image_name']}}','{{corpos[a]['id']}}'); salvar_avatar(); check_color_corpo('botao_ok_{{corpos[a]['id']}}');">
                                                                 <div style="position: absolute; top: 357px; margin-left: 78px;">
-                                                                    <img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png" style="opacity: 0.5;grayscale(100%);-webkit-filter: grayscale(100%);">
+                                                                    <img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png">
                                                                 </div>
                                                                 <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                             </div>
@@ -281,14 +293,19 @@
                                                             <div style="padding-top: 29px; float: left; width: 100%; text-align: center;">
                                                                 <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                             </div>
-                                                            <div style="margin-top: 117px;">
+                                                            <div id="setinha-{{corpos[a]['id']}}">
+
+                                                            </div>
+                                                            <div id="buy-{{corpos[a]['id']}}" style="margin-top: 117px;">
                                                                 <div style="position: relative; margin-left: 35px;">
                                                                     <img src="/static/img/custo_cristais.png" style="margin-top: 41px;">
                                                                 </div>
                                                                 <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                     {{corpos[a]['preco']}}
                                                                 </div>
-                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+
+                                                                <a onclick="comprar_acessorio('{{corpos[a]['id']}}', 4, '{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+
                                                                     <img src="/static/img/btn_comprar.png">
                                                                 </a>
                                                             </div>
@@ -315,14 +332,19 @@
                                                                 <div style="padding-top: 29px; float: left; width: 100%; text-align: center;">
                                                                     <img class="acessorio" src="/static/img/corpo/{{corpos[a]['image_name']}}" style="width: 50%;">
                                                                 </div>
-                                                                <div style="margin-top: 117px;">
+                                                                <div id="setinha-{{corpos[a]['id']}}">
+
+                                                                </div>
+                                                                <div id="buy-{{corpos[a]['id']}}" style="margin-top: 117px;">
                                                                     <div style="position: relative; margin-left: 35px;">
                                                                         <img src="/static/img/custo_cristais.png" style="margin-top: 41px;">
                                                                     </div>
                                                                     <div style="top: -50px; float: left; position: relative; padding-left: 110px;" class="custo-cristais-loja">
                                                                         {{corpos[a]['preco']}}
                                                                     </div>
-                                                                    <a onclick="comprar_acessorio('{{corpos[a]['id']}}')" style="position: relative; margin-left: 44px; float: left;top: -26px;">
+
+                                                                    <a onclick="comprar_acessorio('{{corpos[a]['id']}}', 4, '{{corpos[a]['image_name']}}','{{corpos[a]['id']}}')" style="cursor: pointer; position: relative; margin-left: 44px; float: left;top: -26px;">
+
                                                                         <img src="/static/img/btn_comprar.png">
                                                                     </a>
                                                                 </div>
@@ -341,9 +363,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="botoes">
+                            <div class="botoes" style="top: 102%;">
                                 <a href="/"  onclick="salvar_avatar()" >
-                                    <img src="/static/img/btn-salvar.png" style="cursor:pointer;">
+                                    <img  src="/static/img/bt-voltar.png" style="cursor:pointer;">
                                 </a>
                             </div>
                         </div>
@@ -352,44 +374,143 @@
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script>
-
+            var aux_ac=0;
+            var aux_cor=0;
+            var aux_rosto=0;
+            var aux_corpo=0;
             %if cor != '0':
-                cor = "botao_ok_{{cor['id']}}"
+                cor = "botao_ok_{{cor['id']}}";
                 $("#"+cor).removeAttr('style');
             %end
             %if rosto != '0':
-                rosto = "botao_ok_{{rosto['id']}}"
+                rosto = "botao_ok_{{rosto['id']}}";
                 $("#"+rosto).removeAttr('style');
             %end
+
             %if acessorio != '0':
-                acessorio = "botao_ok_{{acessorio['id']}}"
-                $("#"+acessorio).removeAttr('style');
+                acessorios = "botao_ok_{{acessorio['id']}}";
+                $("#"+acessorios).removeAttr('style');
             %end
             %if corpo != '0':
-                corpo = "botao_ok_{{corpo['id']}}"
+                corpo = "botao_ok_{{corpo['id']}}";
                 $("#"+corpo).removeAttr('style');
             %end
 
             function check_color_cor(id){
+
+                console.log('oi');
                 document.getElementById(cor).style.filter = "grayscale(100%)";
                 $("#"+id).removeAttr('style');
                 cor=id;
+
             }
             function check_color_rosto(id){
-                document.getElementById(rosto).style.filter = "grayscale(100%)";
-                $("#"+id).removeAttr('style');
+                console.log('check rosto',rosto,id);
+
+                if(rosto == id){
+                    console.log('if');
+                    document.getElementById(id).style.filter = "grayscale(100%)";
+
+                    if(aux_rosto!=0){
+                        console.log('if we',aux_rosto);
+                        aux_rosto=0;
+                         $("#"+id).removeAttr('style');
+                         document.getElementById('avatar-itens-rosto-id').value='0';
+                    }else{
+                        document.getElementById('avatar-itens-rosto-id').value='0';
+                        aux_rosto++;
+                    }
+                }else{
+                    console.log('else');
+                    try{
+                        document.getElementById(rosto).style.filter = "grayscale(100%)";
+                        $("#"+id).removeAttr('style');
+                    }
+                    catch(e){
+                        console.log('tinha um erro aqui , corrigir dpois ',e);
+                        $("#"+id).removeAttr('style');
+                    }
+
+                }
                 rosto=id;
+
+
             }
             function check_color_acessorios(id){
-                document.getElementById(acessorio).style.filter = "grayscale(100%)";
-                $("#"+id).removeAttr('style');
-                acessorio=id;
+                console.log('check acessorio', acessorios ,id);
+
+                if(acessorios == id){
+                console.log('if');
+                document.getElementById(id).style.filter = "grayscale(100%)";
+
+                    if(aux_ac!=0){
+                        console.log('if we',aux_ac);
+                        aux_ac=0;
+                        $("#"+id).removeAttr('style');
+
+                        document.getElementById('avatar-itens-acessorios-id').value='0';
+
+                   }else{
+                   document.getElementById('avatar-itens-acessorios-id').value='0';
+
+                        aux_ac++;
+                    }
+                }
+                else{
+                    console.log('else');
+                    try{
+                        document.getElementById(acessorios).style.filter = "grayscale(100%)";
+                        $("#"+id).removeAttr('style');
+                    }
+                    catch(e){
+                        console.log('tinha um erro aqui , corrigir dpois ',e);
+                        $("#"+id).removeAttr('style');
+                    }
+                }
+
+                acessorios=id;
             }
             function check_color_corpo(id){
-                document.getElementById(corpo).style.filter = "grayscale(100%)";
-                $("#"+id).removeAttr('style');
+                console.log('check corpo',corpo,id);
+
+                if(corpo==id){
+                    console.log('if');
+                    document.getElementById(id).style.filter="grayscale(100%)";
+
+                        if(aux_corpo!=0){
+                        console.log('if aox',aux_corpo,id);
+                        aux_corpo=0;
+                        try{
+                        ja_ok=document.getElementById(id);
+                        console.log('ja ta sem estilo?',ja_ok.style.filter,ja_ok)
+                        }
+                        catch(e){
+                        console.log('claro',e);
+                        }
+                        $("#"+id).removeAttr('style');
+                        $("#"+corpo).removeAttr('style');
+                        document.getElementById('avatar-itens-body-id').value=0;
+                        }else{
+                        document.getElementById('avatar-itens-body-id').value=0;
+                        aux_corpo++;
+                    }
+                }else{
+                    console.log('else');
+                    try{
+                        document.getElementById(corpo).style.filter="grayscale(100%)";
+                        $("#"+id).removeAttr('style');
+                    }
+                    catch(e){
+                        console.log('tinha um erro aqui , corrija dpois',e);
+                        $("#"+id).removeAttr('style');
+                    }
+                }
+
                 corpo=id;
+
+
             }
 
             var display=1;
@@ -465,14 +586,17 @@
                 total_blocos = parseInt(total_elementos)/3;
                 if (elemento_ant != elemento){
                     elemento_ant = elemento
+
                     bloco_visivel = 1
+
                 }
+
                 if(bloco_visivel != total_blocos){
+                 document.getElementById('left_button_'+elemento).style.display = 'block';
                     document.getElementById('bloco-'+ elemento+'-'+bloco_visivel).style.display = 'none';
                     document.getElementById('bloco-'+ elemento+'-'+(bloco_visivel+1)).style.display = 'block';
                     bloco_visivel ++;
                     if(bloco_visivel == total_blocos){
-                        document.getElementById('right_button_'+elemento).style.display = 'none';
                         document.getElementById('left_button_'+elemento).style.display = 'block';
                     }
                 }
@@ -482,6 +606,7 @@
                 if(bloco_visivel >= 1){
                     document.getElementById('bloco-'+elemento+'-'+bloco_visivel).style.display = 'none';
                     document.getElementById('bloco-'+elemento+'-'+(bloco_visivel-1)).style.display = 'block';
+                    document.getElementById('right_button_'+elemento).style.display = 'block';
                     bloco_visivel --;
                     if(bloco_visivel == 1){
                         document.getElementById('right_button_'+elemento).style.display = 'block';
@@ -490,14 +615,45 @@
                 }
             }
 
-             function comprar_acessorio(item){
+
+             function comprar_acessorio(item, tipo, item_name, item_id){
                 $.post('/comprar_item', {item:item},function(data){
+                    if(data == '0'){
+                        alert("você não tem moedas o suficiente");
+                    }else{
+                        switch(tipo){
+                            case 3:
+                                change_avatar_acessorios(item_name, item_id);
+                                salvar_avatar();
+                            case 4:
+                                change_avatar_body(item_name, item_id);
+                                salvar_avatar();
+                        }
+
+                        $("#buy-"+item).remove();
+                        $("#setinha-"+item).append('<div style="position: absolute; top: 357px; margin-left: 78px;"><img id="botao_ok_{{corpos[a]['id']}}" src="/static/img/botao_ok.png"></div>');
+                    }
+
                  });
             }
             function salvar_avatar(){
-                $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
+
+               // avatar_cor=document.getElementById("avatar-itens-cor-id").value;
+                //avatar_rosto=document.getElementById("avatar-itens-rosto-id").value;
+                //avatar_acessorios=document.getElementById("avatar-itens-acessorios-id");
+                //avatar_body:document.getElementById("avatar-itens-body-id").value;
+                //console.log('avatar cor',avatar_cor);
+                //console.log('avatar rosto',avatar_rosto);
+                //console.log('avatar acessorio',avatar_acessorios);
+                //console.log('avatar body',avatar_body);
+                try{
+                                $.post('/equipar_item', {avatar_cor:document.getElementById("avatar-itens-cor-id").value,avatar_rosto:document.getElementById("avatar-itens-rosto-id").value
                 ,avatar_acessorios:document.getElementById("avatar-itens-acessorios-id").value,avatar_body:document.getElementById("avatar-itens-body-id").value, apelido:document.getElementById("apelido").value},function(data){
+
                  });
+                 }catch(e){
+                 console.log('hmm  ',e);
+                 }
             }
             var flag_rosto = 0;
             function change_avatar_color(color, id){
@@ -510,30 +666,65 @@
                 face=face.toLowerCase();
                 $("#avatar-itens-rosto").remove();
                 $("#avatar-itens-rosto-id").remove();
-                $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
+                console.log('face',id,rosto);
+                if(rosto=='botao_ok_'+id){
+                    if(aux_rosto!=0){
+                        $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
+                    }
+                    else{
+                    $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'>");
+                    }
+                }else{
+                        console.log('else change face');
+                        $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
+                }
             }
-            function change_avatar_acessorios(acessorios, id){
-                acessorios=acessorios.toLowerCase();
+            function change_avatar_acessorios(acessorio, id){
+                acessorio=acessorio.toLowerCase();
                 $("#avatar-itens-acessorios").remove();
                 $("#avatar-itens-acessorios-id").remove();
-                $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorios+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorios.slice(0,10)+"' style='z-index: 13; position: absolute;top: -168px; left: -81px;'>");
+                console.log('acessorios',id,acessorios,acessorio);
+                if(acessorios=='botao_ok_'+id){
+                    console.log('if aux',aux_ac);
+                    if(aux_ac!=0){
+                    console.log('if aux',aux_ac);
+                        $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorio+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorio.slice(0,10)+"' style='z-index: 13; position: absolute;top: -168px; left: -81px;'>");
+                    }
+                    else{
+                        $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'>");
+                    }
+                }else{
+                    console.log('else change acessorio');
+                    $("#avatar_usuario").append("<input id='avatar-itens-acessorios-id' type='hidden' value='"+id+"'><img id='avatar-itens-acessorios' src='/static/img/acessorio/"+acessorio+"' class='avatar-itens-acessorio imagem-pocicao-"+acessorio.slice(0,10)+"' style='z-index: 13; position: absolute;top: -168px; left: -81px;'>");
+                }
             }
             function change_avatar_body(body, id){
                 body=body.toLowerCase();
                 $("#avatar-itens-body").remove();
                 $("#avatar-itens-body-id").remove();
+                console.log('body',body,id,corpo)
+                if(corpo=='botao_ok_'+id){
+                    if(aux_corpo!=0){
+                        $("#avatar_usuario").append("<input id='avatar-itens-body-id' type='hidden' value='"+id+"'><img id='avatar-itens-body' src='/static/img/corpo/2"+body+"' class='avatar-itens-corpo' style='z-index: 12;position: absolute;top: -165px;left: -84px;'>");
+
+                    }
+                    else{
+                        console.log('else change body');
+                        $("#avatar_usuario").append("<input id='avatar-itens-body-id' type='hidden' value='"+id+"'>");
+                    }
+                }else{
                 $("#avatar_usuario").append("<input id='avatar-itens-body-id' type='hidden' value='"+id+"'><img id='avatar-itens-body' src='/static/img/corpo/2"+body+"' class='avatar-itens-corpo' style='z-index: 12;position: absolute;top: -165px;left: -84px;'>");
+                }
             }
 
-              function scale_click (id) {
+            function scale_click (id) {
+                element = document.getElementById(id);
+                $("#"+id).removeClass('scale-bounce')
+                    element.offsetWidth = element.offsetWidth;
+                $("#"+id).addClass('scale-bounce')
+                    console.log("opa, coloquei");
 
-                element =  document.getElementById(id);
-                   $("#"+id).removeClass('scale-bounce')
-                       element.offsetWidth = element.offsetWidth;
-                    $("#"+id).addClass('scale-bounce')
-                     console.log("opa, coloquei");
-
-               }
+            }
         </script>
     </body>
 </html>

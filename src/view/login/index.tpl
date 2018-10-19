@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogar Conecturma</title>
-    <link rel="icon" type="image/png" href="../static/img/logo-ico.png">
+    <link rel="icon" type="image/png" href="../static/img/icon_conecturma.png">
     <link rel="stylesheet" href="../static/reset.css">
     <link rel="stylesheet" href="../static/bootstrap.min.css">
     <link rel="stylesheet" href="../static/style.css">
@@ -167,9 +167,6 @@
     </div>
     </div>
 
-
-
-
     <script type="text/javascript">
         (function($) {
                 (function($) {
@@ -192,12 +189,12 @@
                             }
                             senhaAluno.val(senhaDigitada);
                         });
-                    };
-                };
+                    });
+                });
     </script>
     <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-    <script  type="text/javascript" src="/static/js/bootstrap.bundle.min" ></script>
+    <script  type="text/javascript" src="/static/js/bootstrap.bundle.min.js" ></script>
     <script type="text/javascript" src="/static/js/script.js"></script>
 
 
@@ -207,17 +204,6 @@
         <img src="/static/img/edufuturo-1.png">
 
     </footer>
-
-
-    <script type="text/javascript">
-
-
- document.addEventListener('keydown', function(event) {
-        if (event.keyCode == 13) {// enter
-        	login_professor();
-        }
-    });
-    </script>
 
 </body>
 </html>
