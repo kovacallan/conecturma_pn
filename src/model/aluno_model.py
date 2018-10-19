@@ -153,18 +153,9 @@ class DbAluno(Model):
 
     def search_aluno_by_turma(self, vinculo_turma):
         alunos = []
-        for search in DbAluno.query((DbAluno.vinculo_turma == vinculo_turma), order_by=DbAluno.nome):
-            alunos.append(
-                dict(
-                    id=search.id, matricula=search.matricula, nome=search.nome, senha=search.senha,
-                    tipo=search.tipo_aluno, armario=search.armario, cor=search.cor, medalha = [''.join(str(i.decode('utf-8'))) for i in search.medalhas],
-                    rosto=search.rosto, acessorio=search.acessorio, corpo=search.corpo,
-                    pontos_de_vida=search.pontos_de_vida, pontos_de_moedas=search.pontos_de_moedas,
-                    vinculo_escola=search.vinculo_escola, vinculo_rede=search.vinculo_rede,
-                    vinculo_turma=search.vinculo_turma, email=search.email, cpf='', nome_login=search.nome_login,
-                    nascimento=search.nascimento
-                )
-            )
+        for index,search in enumerate(DbAluno.query((DbAluno.vinculo_turma == vinculo_turma), order_by=DbAluno.nome)):
+            alunos.append(vars(search)['_data'])
+            alunos[index]['medalha'] = [''.join(str(i.decode('utf-8'))) for i in search.medalhas]
         return alunos
 
     def search_aluno_by_serie(self,vinculo_serie):

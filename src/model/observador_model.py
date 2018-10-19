@@ -93,9 +93,11 @@ class DbObservador(Model):
             return False
 
     def search_observador_id(self, id):
-
-        observador = self.load(id)
-        retorno = vars(observador)["_data"]
+        if(id):
+            observador = self.load(id)
+            retorno = vars(observador)["_data"]
+        else:
+            retorno = -1
 
         return retorno
 
