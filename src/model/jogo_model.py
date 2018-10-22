@@ -15,15 +15,14 @@ class DesempenhoJogo(Model):
 
 
     def create_desempenho_jogo(self, *args,**kwargs):
+        print('create desempenho jogo', locals())
         return self.create(**kwargs)
 
     def search_desempenho_concluido_id_aluno(self, id_aluno):
         obj = []
         for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno),order_by=DesempenhoJogo.objeto_aprendizagem):
             obj.append(dict(id=i.id, id_aluno=i.id_aluno,unidade=i.unidade,objeto_aprendizagem=i.objeto_aprendizagem,
-                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]
-                            )
-                       )
+                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]))
         return obj
 
     def unidade_teste(self, id_aluno, unidade):
@@ -65,6 +64,12 @@ class DesempenhoJogo(Model):
         return conclucoes
 
     def armazenando_dados_jogo(self,id_obj, lista_dados_jogo):
+        """
+
+        :param id_obj:
+        :param lista_dados_jogo:
+        :return:
+        """
         desempenho=self.load(id_obj)
         desempenho.jogo_jogado.append(lista_dados_jogo)
         desempenho.save()
