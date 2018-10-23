@@ -30,18 +30,19 @@ class RelatorioTurma(object):
         alunos = self.get_alunos(vinculo_turma=turma)
         for i in alunos:
             desempenho = self.facade.search_desempenho_concluido_id_aluno_facade(id_aluno=i['id'])
-            i['media'] = {}
+            i['media'] = None
+            media = []
             for y in desempenho:
                 if 'VC' not in y['objeto_aprendizagem'] and 'CN' not in y['objeto_aprendizagem']:
                     pontuacao_numeric = self.convert_nivel_for_numeric(jogo_jogado=y['jogo_jogado'])
                     pontuacao = 0
-                    media = []
                     for z in pontuacao_numeric:
                         pontuacao += int(z)
                         ponto_esperado = 2 * len(pontuacao_numeric)
                         media.append(self.media(ponto=pontuacao, esperado=ponto_esperado))
-                    i['media'].append(media)
+                    i['media'] = media
         return alunos
+
     def media(self, ponto, esperado):
         return (ponto * 100)/esperado
 
