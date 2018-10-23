@@ -3,7 +3,7 @@
 import os
 
 from bottle import route, view, get, request, post, redirect, Bottle, delete
-
+from route.relatorio_turma_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
@@ -607,6 +607,7 @@ def novasenha():
 
 @post('/upload_img')
 def upload():
+    from PIL import Image
     try:
         upload_file = request.POST['uploadfile']
         ext = upload_file.filename.split('.')[1]
@@ -617,6 +618,19 @@ def upload():
         usuario.nome_foto_perfil = nome_foto
         usuario.save()
         upload_file.save('view/app/fotos_usuarios', overwrite=True)
+
+        coordenadas = (int(request.params['top']), int(request.params['left']), int(request.params['width']) + int(request.params['top']),
+                        int(request.params['height']) + int(request.params['left']))
+
+        print(coordenadas)
+
+        image_obj = Image.open('view/app/fotos_usuarios/' + str(usuario_logado()['id']) + '.' + ext)
+        print(image_obj.size)
+        image_obj = image_obj.resize((450, 300) , Image.ANTIALIAS)
+        image_obj.save('view/app/fotos_usuarios/' + str(usuario_logado()['id']) + '.' + ext)
+        cropped_image = image_obj.crop(coordenadas)
+        cropped_image.save('view/app/fotos_usuarios/' + str(usuario_logado()['id']) + '.' + ext)
+
         redirect('/gestao_aprendizagem')
     except AttributeError:
         redirect('/gestao_aprendizagem')
