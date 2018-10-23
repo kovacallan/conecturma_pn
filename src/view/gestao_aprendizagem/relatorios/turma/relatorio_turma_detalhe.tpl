@@ -3,16 +3,15 @@
 <div class="col-md-9 order-md-2 texto-inicial" style="margin-top: 15px;">
     <section class="container">
         <div class="col-md text-rel" style="padding-left:0px;">
-          <h2>Relatório de aluno </h2>
+          <h2>Relatório de Turma </h2>
         </div>
 
         <div class="col-md nome_aluno" style="padding-left:0px;">
-          <span> {{aluno['nome']}} </span> - Turma: <span id="turma-num">{{aluno['vinculo_turma']}}</span>
+          <span> {{turma['nome']}} </span> - Turma: <span id="turma-num">{{turma['serie']}}</span>
         </div>
 
-        <div class="input-group checkbox-group">
-            <input type="checkbox" onchange="filtro_relatorio_aluno_detalhe({{aluno['id']}})" id="portugues" value="portugues" checked> <label  class="portugues" for="portugues">Língua Portuguesa</label>
-            <input type="checkbox" onchange="filtro_relatorio_aluno_detalhe({{aluno['id']}})" id="matematica" value="matematica" checked> <label class="matematica" for="matematica">Matemática</label>
+        <div id="teste">
+            % include('gestao_aprendizagem/relatorios/turma/relatorio_table.tpl')
         </div>
 
         <div class="container offset-md-8" style="position:relative; right:27px;">

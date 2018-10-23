@@ -8,6 +8,7 @@ class RelatorioTurma(object):
         self._descritores = None
         self._media_alunos = None
         self._pontuacao = None
+        self._pontuacao_turma = None
 
     def get_alunos(self, vinculo_rede = None, vinculo_escola = None, vinculo_turma = None):
         if(vinculo_rede != None):
@@ -30,7 +31,7 @@ class RelatorioTurma(object):
         alunos = self.get_alunos(vinculo_turma=turma)
         for i in alunos:
             desempenho = self.facade.search_desempenho_concluido_id_aluno_facade(id_aluno=i['id'])
-            i['media'] = None
+            i['media'] = []
             media = []
             for y in desempenho:
                 if 'VC' not in y['objeto_aprendizagem'] and 'CN' not in y['objeto_aprendizagem']:
@@ -38,13 +39,33 @@ class RelatorioTurma(object):
                     pontuacao = 0
                     for z in pontuacao_numeric:
                         pontuacao += int(z)
-                        ponto_esperado = 2 * len(pontuacao_numeric)
-                        media.append(self.media(ponto=pontuacao, esperado=ponto_esperado))
+                    ponto_esperado = 2 * len(pontuacao_numeric)
+                    media.append(self.media(ponto=pontuacao, esperado=ponto_esperado))
                     i['media'] = media
+            if i['media'] != []:
+                i['media'].append(-1)
         return alunos
 
     def media(self, ponto, esperado):
-        return (ponto * 100)/esperado
+        return int((ponto * 100)/esperado)
+
+    def get_pontuacao_turma(self, medias):
+        lista = []
+        t = 0
+        for index,z  in enumerate(self._descritores):
+            flag = []
+            for i in medias:
+                try:
+                    if i['media'][index] != [] and i['media'][index] != -1:
+                        print(i['media'][index])
+                        flag.insert(t, i['media'][index])
+                except IndexError:
+                    pass
+            lista.append(self.calc_media_turma(flag))
+        return lista
+
+    def calc_media_turma(self, valores:list):
+        return sum(valores) / len(valores) if valores != [] else -1
 
     def convert_nivel_for_numeric(self, jogo_jogado):
         niveis_pontuação = {

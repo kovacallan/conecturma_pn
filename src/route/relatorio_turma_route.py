@@ -19,6 +19,7 @@ def relatorio_aluno(no_repeat=False):
     turma = observador.get_turma(id_turma=request.params['turma'])
     descritores = relatorio.get_descritores(serie=turma['serie'])
     medias = relatorio.get_media_alunos(turma=turma['id'])
-    print(medias)
-    #return template(path_template + 'relatorio_turma_detalhe',tipo=usuario_logado()['tipo'], aluno=relatorio.get_alunos(vinculo_turma=str(turma['id'])), oa=relarotio_aluno.descritores, porcentagem=relarotio_aluno.porcentagem,
-    #          pontos=relarotio_aluno.porcentagem_solo,)
+    porcentagem = relatorio.get_pontuacao_turma(medias=medias)
+
+    return template(path_template + 'relatorio_turma_detalhe', tipo = observador.get_observador_tipo(), turma = turma,
+                    oa = descritores, porcentagem = porcentagem)

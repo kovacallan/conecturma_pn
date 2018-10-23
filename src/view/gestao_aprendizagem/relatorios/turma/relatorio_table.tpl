@@ -12,7 +12,7 @@
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
-            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
+            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}')">
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
                     %if int(porcentagem[teste]) >= 70:
@@ -32,7 +32,7 @@
                             <div class="col-md-2 offset-md-3">
                                 <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
                                     <div style="align-items: center">
-                                        <span class="number" style="margin-left: 25px;">{{vezes[teste]}}</span>
+                                        <span class="number" style="margin-left: 25px;"></span>
                                         <span class="word"> Vezes</span>
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                             <div class="col-md-2">
                                 <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
                                     <div style="align-items: center">
-                                        <span class="number">{{porcentagem[teste]}}</span>
+                                        <span class="number"></span>
                                         <span class="word"> Média</span>
                                     </div>
                                 </div>
