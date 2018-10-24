@@ -12,6 +12,7 @@
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
+        {{type(pontos[teste])}}
             <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
                 <td>{{i['descricao_descritor']}}</td>
                   <td>

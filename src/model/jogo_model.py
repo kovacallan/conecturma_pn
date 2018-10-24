@@ -15,7 +15,7 @@ class DesempenhoJogo(Model):
 
 
     def create_desempenho_jogo(self, *args,**kwargs):
-        print('create desempenho jogo', locals())
+
         return self.create(**kwargs)
 
     def search_desempenho_concluido_id_aluno(self, id_aluno):

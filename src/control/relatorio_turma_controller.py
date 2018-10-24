@@ -42,6 +42,7 @@ class RelatorioTurma(object):
                     ponto_esperado = 2 * len(pontuacao_numeric)
                     media.append(self.media(ponto=pontuacao, esperado=ponto_esperado))
                     i['media'] = media
+
             if i['media'] != []:
                 i['media'].append(-1)
         return alunos
@@ -57,7 +58,7 @@ class RelatorioTurma(object):
             for i in medias:
                 try:
                     if i['media'][index] != [] and i['media'][index] != -1:
-                        print(i['media'][index])
+
                         flag.insert(t, i['media'][index])
                 except IndexError:
                     pass
@@ -78,6 +79,7 @@ class RelatorioTurma(object):
 
         for z in jogo_jogado:
             dict_dado_jogo = self.convertendo_str_in_dict(z)
+            print(dict_dado_jogo)
             if dict_dado_jogo['termino'] == True:
                 pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
 

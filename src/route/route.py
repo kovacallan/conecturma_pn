@@ -297,7 +297,7 @@ def aluno_edit():
     nome_login = request.params['login']
     try:
         turma_al = request.params['turma']
-        print('turma_al', turma_al)
+
         aluno_c = Aluno_controler()
         return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login, turma=turma_al)
     except KeyError:
@@ -622,10 +622,9 @@ def upload():
         coordenadas = (int(request.params['top']), int(request.params['left']), int(request.params['width']) + int(request.params['top']),
                         int(request.params['height']) + int(request.params['left']))
 
-        print(coordenadas)
 
         image_obj = Image.open('view/app/fotos_usuarios/' + str(usuario_logado()['id']) + '.' + ext)
-        print(image_obj.size)
+
         image_obj = image_obj.resize((450, 300) , Image.ANTIALIAS)
         image_obj.save('view/app/fotos_usuarios/' + str(usuario_logado()['id']) + '.' + ext)
         cropped_image = image_obj.crop(coordenadas)

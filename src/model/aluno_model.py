@@ -52,7 +52,7 @@ class DbAluno(Model):
 
 
     def update_aluno(self, update_id, nome, nome_login, vinculo_turma='0', escola='0', rede='0'):
-        print('update_aluno',vinculo_turma)
+
         aluno_up = self.load(update_id)
         [setattr(aluno_up, parametro, valor) for parametro, valor in locals().items() if
          valor != aluno_up.all()]
@@ -238,7 +238,7 @@ class DbAluno(Model):
         x=itens
         # for i in itens:
         for index, i in enumerate(itens):
-           print('vish',index,i)
+
            if i==-1:
                # if index==1:
                #     usuario.cor='0'
