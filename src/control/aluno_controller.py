@@ -5,9 +5,6 @@ from facade.facade_main import Facade
 
 facade = Facade()
 
-
-
-
 class Aluno_controler(object):
 
 
