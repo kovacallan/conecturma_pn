@@ -86,7 +86,7 @@ def verificarConclusoesObjetosAprendizagem():
                 if desempenho_oa != []:
                     for jogo in desempenho_oa[0]['jogo_jogado']:
                         nivel_jogo=convertendo_str_in_dict(jogo)
-                        print('nivel jogo',nivel_jogo)
+                        print('nivel jogo VCO',nivel_jogo,desempenho_oa)
                         try:
                             if nivel_jogo['nivel']!='facil' and nivel_jogo['termino']==True:
                                 teste.append(k)
