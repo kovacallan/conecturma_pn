@@ -4,6 +4,7 @@ import os
 
 from bottle import route, view, get, request, post, redirect, Bottle, delete
 from route.relatorio_turma_route import *
+from route.relatorio_escola_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado

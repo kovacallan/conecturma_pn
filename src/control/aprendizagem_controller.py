@@ -129,9 +129,6 @@ def registrarConclusao():
                 'CN': is_vc_or_cn
             }
             # if autorizaçao_professor()==True:
-            print('registrar conclusao return 1.1o if',premios[dados_jogo['objetoAprendizagem'][9:11]]\
-            (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
-             oa=parametros_json_jogos(request.params.items())['objetoAprendizagem']))
 
             return premios[dados_jogo['objetoAprendizagem'][9:11]]\
             (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
@@ -146,10 +143,6 @@ def registrarConclusao():
             }
             # if autorizaçao_professor()==True:
 
-            print('registrar conclusao return 1.2o if',premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
-                (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
-                 oa=parametros_json_jogos(request.params.items())['objetoAprendizagem']))
-
             return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
                 (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
                  oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
@@ -161,9 +154,6 @@ def registrarConclusao():
                 'VC': is_vc_or_cn,
                 'CN': is_vc_or_cn
             }
-            print('registrar conclusao return 1.else' ,premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
-                (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
-                 oa=parametros_json_jogos(request.params.items())['objetoAprendizagem']))
 
             return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
                 (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),

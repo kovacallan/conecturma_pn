@@ -35,6 +35,6 @@ def relatorio_aluno(no_repeat=False):
             except IndexError:
                 pass
         notas.append(nota)
-    print(notas)
+
     return template(path_template + 'relatorio_turma_detalhe', tipo=observador.get_observador_tipo(), alunos=alunos, notas=notas,
                     turma=turma,oa=descritores, porcentagem=porcentagem)

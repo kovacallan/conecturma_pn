@@ -41,7 +41,7 @@
                             <div class="col-md-2">
                                 <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
                                     <div style="align-items: center">
-                                        <span class="number">{{int(porcentagem[teste])}}</span>
+                                        <span class="number"></span>
                                         <span class="word"> Média</span>
                                     </div>
                                 </div>

@@ -118,6 +118,7 @@ function grafico_turma(id, alunos, notas){
         }
     }
     lista.push(0);
+    lista.push(100);
     var ctx = document.getElementById('myChart_'+id).getContext('2d');
     var options = {
             title : {
