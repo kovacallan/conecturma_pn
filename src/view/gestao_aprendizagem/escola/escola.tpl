@@ -60,13 +60,6 @@
     }
   }
 
-  function seta(ide) {
-    setinha = document.getElementById(ide).querySelectorAll("#setinha");
-    if (setinha[0].className == 'fas fa-angle-down') {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-up"></i>';
-    } else {
-      document.getElementById(ide).innerHTML = '<i id="setinha" class="fas fa-angle-down"></i>';
-    }
-  };
+
 </script>
 %include('gestao_aprendizagem/footer/footer.tpl')

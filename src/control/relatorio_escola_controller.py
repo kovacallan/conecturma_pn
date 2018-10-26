@@ -1,14 +1,15 @@
 from facade.facade_main import Facade
 from control.dicionarios import TIPO_ESTRUTURA
-class RelatorioTurma(object):
+class RelatorioEscola(object):
 
     def __init__(self):
         self.facade = Facade()
-        self._alunos = []
+        self._alunos = None
         self._descritores = None
         self._media_alunos = None
         self._pontuacao = None
         self._pontuacao_turma = None
+        self._pontuacao_escola = []
 
     def get_alunos(self, vinculo_rede = None, vinculo_escola = None, vinculo_turma = None):
         if(vinculo_rede != None):
@@ -16,8 +17,8 @@ class RelatorioTurma(object):
         elif (vinculo_escola != None):
             self._alunos = self.facade.search_aluno_escola_facade(vinculo_escola=str(vinculo_escola))
         elif (vinculo_turma != None):
-            for i in self.facade.search_aluno_by_turma_facade(vinculo_turma=str(vinculo_turma)):
-                self._alunos.append(i)
+            self._alunos = self.facade.search_aluno_by_turma_facade(vinculo_turma=str(vinculo_turma))
+
 
         return self._alunos
 
@@ -45,6 +46,7 @@ class RelatorioTurma(object):
 
             if i['media'] != []:
                 i['media'].append(-1)
+
         return alunos
 
     def media(self, ponto, esperado):
@@ -68,6 +70,20 @@ class RelatorioTurma(object):
     def calc_media_turma(self, valores:list):
         return sum(valores) / len(valores) if valores != [] else -1
 
+    def get_media_escola(self, turma_media, descritor):
+        for index,i in enumerate(descritor):
+            lista = []
+            for z in turma_media:
+                try:
+                    lista.append(z['media'][index])
+                except IndexError:
+                    pass
+            if lista != []:
+                self._pontuacao_escola.append(self.calc_media_escola(valores=lista))
+        return self._pontuacao_escola
+
+    def calc_media_escola(self, valores):
+        return sum(valores) / len(valores)
     def convert_nivel_for_numeric(self, jogo_jogado):
         niveis_pontuação = {
             'dificil': 2,
@@ -79,13 +95,13 @@ class RelatorioTurma(object):
 
         for z in jogo_jogado:
             dict_dado_jogo = self.convertendo_str_in_dict(z)
-            print(dict_dado_jogo)
             if dict_dado_jogo['termino'] == True:
                 pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
 
         self._pontuacao = pontuacao
 
         return self._pontuacao
+
 
     def convertendo_str_in_dict(self, str):
         from ast import literal_eval

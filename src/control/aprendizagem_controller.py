@@ -129,7 +129,6 @@ def registrarConclusao():
             }
             # if autorizaçao_professor()==True:
 
-
             return premios[dados_jogo['objetoAprendizagem'][9:11]]\
             (aluno=usuario['id'],parametros=parametros_json_jogos(request.params.items()),
              oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
@@ -143,8 +142,6 @@ def registrarConclusao():
             }
             # if autorizaçao_professor()==True:
 
-
-
             return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
                 (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
                  oa=parametros_json_jogos(request.params.items())['objetoAprendizagem'])
@@ -156,7 +153,6 @@ def registrarConclusao():
                 'VC': is_vc_or_cn,
                 'CN': is_vc_or_cn
             }
-
 
             return premios[parametros_json_jogos(request.params.items())['objetoAprendizagem'][9:11]] \
                 (aluno=usuario['id'], parametros=parametros_json_jogos(request.params.items()),
@@ -230,7 +226,7 @@ def verificarAcessoAventura():
     from control.dicionarios import AVENTURAS_CONECTURMA
     usuario = usuario_logado()
 
-    if int(usuario['tipo']) < 6:
+    if usuario['tipo'] < '6':
         parametros = parametros_json_jogos(request.params.items())
 
 

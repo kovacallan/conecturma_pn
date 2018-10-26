@@ -4,6 +4,8 @@ import os
 
 from bottle import route, view, get, request, post, redirect, Bottle, delete
 from route.relatorio_turma_route import *
+from route.relatorio_escola_route import *
+from route.relatorio_escola_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
@@ -297,7 +299,7 @@ def aluno_edit():
     nome_login = request.params['login']
     try:
         turma_al = request.params['turma']
-        print('turma_al', turma_al)
+
         aluno_c = Aluno_controler()
         return aluno_c.update_aluno(id=id, nome=nome, nome_login=nome_login, turma=turma_al)
     except KeyError:
@@ -506,9 +508,11 @@ def relatorio_aluno(no_repeat=False):
     relatorio.convert_nivel_for_numeric()
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
+    for i in relatorio.pontuacao:
+        ultima_vez = int((i[-1] * 100) / 2)
 
     return dict(tipo=usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada)
+                pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
 
 
 @route('/trazer_oas')
@@ -622,10 +626,9 @@ def upload():
         coordenadas = (int(request.params['top']), int(request.params['left']), int(request.params['width']) + int(request.params['top']),
                         int(request.params['height']) + int(request.params['left']))
 
-        print(coordenadas)
 
         image_obj = Image.open('view/app/fotos_usuarios/' + str(usuario_logado()['id']) + '.' + ext)
-        print(image_obj.size)
+
         image_obj = image_obj.resize((450, 300) , Image.ANTIALIAS)
         image_obj.save('view/app/fotos_usuarios/' + str(usuario_logado()['id']) + '.' + ext)
         cropped_image = image_obj.crop(coordenadas)
