@@ -12,12 +12,12 @@
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
-        {{type(pontos[teste])}}
-            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
+            <tr class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
+
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
                     %if int(porcentagem[teste]) >= 70:
-                        <img src="/static/img/feed-pos.png" style="display: block; margin-left: auto; margin-right: auto">
+                        <img src="/static/img/feed-pos.png" style=" display: block; margin-left: auto; margin-right: auto">
                     %elif int(porcentagem[teste]) >= 50 and int(porcentagem[teste]) <= 69:
                         <img src="/static/img/feed-med.png" style="display: block; margin-left: auto; margin-right: auto">
                     %elif int(porcentagem[teste]) >= 0 and int(porcentagem[teste]) <= 49:
@@ -25,7 +25,7 @@
                     %end
                 </td>
             </tr>
-            <tr>
+            <tr class="hoover">
 
                 <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
                     <div class="col-md-12" style="margin-top: 15px;">
@@ -60,7 +60,7 @@
                 <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>
             </tr>
           % else:
-            <tr>
+            <tr class="hoover">
                 <td>{{i['descricao_descritor']}}</td>
                 <td></td>
             </tr>

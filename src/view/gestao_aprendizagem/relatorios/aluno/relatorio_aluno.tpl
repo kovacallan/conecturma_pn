@@ -16,9 +16,9 @@
 
     <tbody style="background-color:#f3f3f3;">
         % for i in alunos:
-          <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{i['id']}})">
-            <td>{{i['nome']}}</td>
-            <td>{{i['vinculo_turma']}}</td>
+          <tr   class="hoover"onclick="redirect_vizualizar_relatorio({{i['id']}})">
+            <td class="hoover" style="cursor: pointer; ">{{i['nome']}}</td>
+            <td class="hoover">{{i['vinculo_turma']}}</td>
           </tr>
         % end
     </tbody>

@@ -185,3 +185,8 @@ display:none;
 
 
     }
+
+  table tr td:hover {
+    background-color: #0391E6;
+    color: white;
+    }
