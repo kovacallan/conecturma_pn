@@ -3,15 +3,16 @@
 <div class="col-md-9 order-md-2 texto-inicial" style="margin-top: 15px;">
     <section class="container">
         <div class="col-md text-rel" style="padding-left:0px;">
-          <h2>Relatório de Turma </h2>
+          <h2>Relatório de Escola </h2>
         </div>
-
-        <div class="col-md nome_aluno" style="padding-left:0px;">
-          <span> {{turma['nome']}} </span> - Turma: <span id="turma-num">{{turma['serie']}}</span>
-        </div>
+        % if isinstance(escola,list):
+            % for i in escola:
+            <div class="col-md nome_aluno" style="padding-left:0px;">
+              <span> {{i['nome']}} </span>
+            </div>
 
         <div id="teste">
-            % include('gestao_aprendizagem/relatorios/turma/relatorio_table.tpl')
+            % include('gestao_aprendizagem/relatorios/escola/relatorio_table.tpl')
         </div>
 
         <div class="container offset-md-8" style="position:relative; right:27px;">

@@ -31,7 +31,7 @@
 </div>
 <script>
     function redirect_vizualizar_relatorio(id){
-        window.location.replace("/relatorios/selecao_serie");
+        window.location.replace("/relatorios/selecao_serie?id="+id);
     }
 
 </script>

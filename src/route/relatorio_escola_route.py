@@ -23,16 +23,34 @@ def relatorio_aluno(no_repeat=False):
     serie = request.params['serie']
     descritores = relatorio.get_descritores(serie=serie)
     turmas = observador.get_turma(serie=serie)
+    turma = []
     for i in turmas:
-        i['mendia']
         media_alunos = relatorio.get_media_alunos(turma=i['id'])
-        i['media'].append(relatorio.get_pontuacao_turma(medias=media_alunos))
-    turmas = i
+        i['media'] = []
+        for z in relatorio.get_pontuacao_turma(medias=media_alunos):
+            if z != -1:
+                i['media'].append(int(z))
 
-    print(turmas)
+        turma.append(i)
+    media_escola = relatorio.get_media_escola(turma_media=turma, descritor=descritores)
 
-    #return template(path_template + 'relatorio_turma_detalhe', tipo=observador.get_observador_tipo(), turma=turmas, notas=notas,
-     #               escola=escola,oa=descritores, porcentagem=porcentagem)
+    turma = []
+    notas = []
+    for index, i in enumerate(descritores):
+        nota = []
+        for z in turmas:
+            if z['nome'] not in turma:
+                turma.append(z['nome'])
+            try:
+                nota.append(str(z['media'][index]))
+            except IndexError:
+                pass
+        notas.append(nota)
+
+    print(media_escola)
+
+    return template(path_template + 'relatorio_escola_detalhe', tipo=observador.get_observador_tipo(),turma = turma, notas=notas, escola=escola,
+                    porcentagem=media_escola, oa = descritores)
 
 @route('/relatorios/selecao_serie')
 def selecao_serie():
