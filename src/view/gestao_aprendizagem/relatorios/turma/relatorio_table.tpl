@@ -12,12 +12,12 @@
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
-            <tr class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
 
+            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle hoover" onclick="grafico_turma('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}})">
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
                     %if int(porcentagem[teste]) >= 70:
-                        <img src="/static/img/feed-pos.png" style=" display: block; margin-left: auto; margin-right: auto">
+                        <img src="/static/img/feed-pos.png" style="display: block; margin-left: auto; margin-right: auto">
                     %elif int(porcentagem[teste]) >= 50 and int(porcentagem[teste]) <= 69:
                         <img src="/static/img/feed-med.png" style="display: block; margin-left: auto; margin-right: auto">
                     %elif int(porcentagem[teste]) >= 0 and int(porcentagem[teste]) <= 49:
@@ -25,21 +25,18 @@
                     %end
                 </td>
             </tr>
-            <tr class="hoover">
+            <tr>
 
                 <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
                     <div class="col-md-12" style="margin-top: 15px;">
-                        <span class="word">Quantidades de vezes jogadas: {{vezes[teste]}}</span>
-                        <br>
-                        <span class="word">Média do aluno: {{porcentagem[teste]}}</span>
-                        <br>
-                        <span class="word">Nota da ultima vez jogada: {{ultima_vez}}</span>
+                        <span class="word">Média da turma: {{int(porcentagem[teste])}}</span>
+
                     </div>
                      
                 <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>
             </tr>
           % else:
-            <tr class="hoover">
+            <tr>
                 <td>{{i['descricao_descritor']}}</td>
                 <td></td>
             </tr>
