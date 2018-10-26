@@ -19,13 +19,13 @@
             % for i in turma:
               <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{i['id']}})">
                 <td>{{i['nome']}}</td>
-                <td>{{i['serie']}}</td>
+                <td>{{teste_serie[i['serie']]}}</td>
               </tr>
             % end
         % else:
             <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{turma['id']}})">
                 <td>{{turma['nome']}}</td>
-                <td>{{turma['serie']}}</td>
+                <td>{{teste_serie[turma['serie']]}}</td>
             </tr>
         %end
     </tbody>

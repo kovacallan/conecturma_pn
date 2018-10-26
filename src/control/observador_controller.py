@@ -24,9 +24,13 @@ class Observador(object):
             self._rede = self.facade.search_estrutura_id_facade(id=self._rede)
         return self._rede
 
-    def get_escola(self):
+    def get_escola(self, id_escola=None):
         if (self._observador_tipo == TIPO_USUARIOS['administrador']):
-            self._escola = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+            if id_escola == None:
+                self._escola = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+            else:
+                self._escola = self.facade.search_estrutura_id_facade(id=id_escola)
+
         elif (self._observador_tipo == TIPO_USUARIOS['gestor']):
             self._escola = self.facade.search_estrutura_escola_by_rede_facade(vinculo_rede=self.get_rede()['id'])
         else:
@@ -34,10 +38,25 @@ class Observador(object):
 
         return self._escola
 
-    def get_turma(self,id_turma = None, serie = None):
+    def get_turma(self,id_turma = None, serie = None, id_escola = None):
         if(id_turma == None):
             if (self._observador_tipo == TIPO_USUARIOS['administrador']):
-                self._turma = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+                if id_escola != None:
+                    self._turma = []
+                    turma = self.facade.search_estrutura_turma_by_escola_facade(vinculo_escola=id_escola)
+                    if serie != None:
+                        for i in turma:
+                            if i['serie'] == serie:
+                                self._turma.append(i)
+                    else:
+                        self._turma = turma
+                elif serie != None:
+                    self._turma = []
+                    for i in self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma']):
+                        if i['serie'] == serie:
+                            self._turma.append(i)
+                else:
+                    self._turma = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
             elif (self._observador_tipo == TIPO_USUARIOS['gestor']):
                 self._turma = self.facade.search_estrutura_turma_by_rede_facade(vinculo_rede=self._rede)
             elif (self._observador_tipo == TIPO_USUARIOS['diretor']):

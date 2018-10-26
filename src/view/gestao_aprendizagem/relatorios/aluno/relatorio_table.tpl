@@ -29,32 +29,11 @@
 
                 <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
                     <div class="col-md-12" style="margin-top: 15px;">
-                        <div class="row">
-                            <div class="col-md-2 offset-md-3">
-                                <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
-                                    <div style="align-items: center">
-                                        <span class="number" style="margin-left: 25px;">{{vezes[teste]}}</span>
-                                        <span class="word"> Vezes</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
-                                    <div style="align-items: center">
-                                        <span class="number">{{porcentagem[teste]}}</span>
-                                        <span class="word"> Média</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="circle"  style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">
-                                    <div style="align-items: center">
-                                        <span class="number">000</span>
-                                        <span class="word" style="margin-left: 17px;"> Final</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <span class="word">Quantidades de vezes jogadas: {{vezes[teste]}}</span>
+                        <br>
+                        <span class="word">Média do aluno: {{porcentagem[teste]}}</span>
+                        <br>
+                        <span class="word">Nota da ultima vez jogada: {{ultima_vez}}</span>
                     </div>
                      
                 <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>

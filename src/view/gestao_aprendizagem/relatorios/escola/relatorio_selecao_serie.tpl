@@ -30,7 +30,7 @@
 </div>
 <script>
     function redirect_vizualizar_relatorio(id, escola_id){
-        window.location.replace("/relatorios/visualizar_relatorio_escola?serie="+id);
+        window.location.replace("/relatorios/visualizar_relatorio_escola?serie="+id+"&escola="+{{escola}});
     }
 
 </script>

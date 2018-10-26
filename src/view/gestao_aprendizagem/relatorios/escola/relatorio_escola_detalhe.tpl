@@ -5,10 +5,8 @@
         <div class="col-md text-rel" style="padding-left:0px;">
           <h2>Relatório de Escola </h2>
         </div>
-        % if isinstance(escola,list):
-            % for i in escola:
             <div class="col-md nome_aluno" style="padding-left:0px;">
-              <span> {{i['nome']}} </span>
+              <span> {{escola['nome']}} </span>
             </div>
 
         <div id="teste">

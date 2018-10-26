@@ -3,7 +3,7 @@ from control.classes.permissao import permissao, usuario_logado
 from control.observador_controller import Observador
 from control.relatorio_turma_controller import RelatorioTurma
 from control.relatorio_controller import Relatorio
-
+from control.dicionarios import SERIE
 path_template = 'gestao_aprendizagem/relatorios/turma/'
 
 
@@ -12,7 +12,7 @@ path_template = 'gestao_aprendizagem/relatorios/turma/'
 def relatorio_turma_view(no_repeat=False):
     observador = Observador(observador_logado=usuario_logado())
     return template(path_template + 'relatorio_turma', tipo=observador.get_observador_tipo(),
-                    turma=observador.get_turma())
+                    turma=observador.get_turma(), teste_serie = SERIE)
 
 
 @route('/relatorios/visualizar_relatorio_turma')
@@ -35,6 +35,12 @@ def relatorio_aluno(no_repeat=False):
             except IndexError:
                 pass
         notas.append(nota)
+    por = []
+    for i in porcentagem:
+        if i != -1:
+            por.append(i)
+    porcentagem = por
+    print(porcentagem)
 
     return template(path_template + 'relatorio_turma_detalhe', tipo=observador.get_observador_tipo(), alunos=alunos, notas=notas,
                     turma=turma,oa=descritores, porcentagem=porcentagem)

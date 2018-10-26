@@ -5,6 +5,7 @@ import os
 from bottle import route, view, get, request, post, redirect, Bottle, delete
 from route.relatorio_turma_route import *
 from route.relatorio_escola_route import *
+from route.relatorio_escola_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
@@ -507,9 +508,11 @@ def relatorio_aluno(no_repeat=False):
     relatorio.convert_nivel_for_numeric()
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
+    for i in relatorio.pontuacao:
+        ultima_vez = int((i[-1] * 100) / 2)
 
     return dict(tipo=usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada)
+                pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
 
 
 @route('/trazer_oas')
