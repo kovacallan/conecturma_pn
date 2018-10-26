@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel"
-             aria-labelledby="headingOne" data-parent="#accordion">
+             data-parent="#accordion">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -97,8 +97,8 @@
                                 %include('gestao_aprendizagem/turma/medalha_aluno_todos.tpl')
                             </div> <!--Fechando janela de dar medalhas -->
                             % end
-                    </div> <!-- fechando col-md-12 -->
-                </div>
+                     <!-- fechando col-md-12 -->
+
                 </form>
             </div>
 
@@ -282,7 +282,9 @@
             </div>
         </div>
     </div>
-    </form>
+        </div>
+    </div>
 </div>
+
 
 <!-- NO PRINT -->

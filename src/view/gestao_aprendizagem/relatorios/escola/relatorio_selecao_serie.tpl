@@ -8,19 +8,19 @@
 
     <table class="table table-bordered" style="margin-top:0;">
     <thead style="background-color:#9ed0f6;">
-      <tr style="color:#fff;">
+      <tr  style="color:#fff;">
         <th scope="col" colspan="2">Série</th>
       </tr>
     </thead>
 
     <tbody style="background-color:#f3f3f3;">
-        <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('1')">
+        <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('1')">
             <td colspan="2">1ª Série</td>
         </tr>
-        <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('2')">
+        <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('2')">
             <td colspan="2">2ª Série</td>
         </tr>
-        <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('3')">
+        <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('3')">
             <td colspan="2">3ª Série</td>
         </tr>
 
