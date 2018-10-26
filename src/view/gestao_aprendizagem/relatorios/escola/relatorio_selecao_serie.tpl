@@ -3,31 +3,34 @@
 
 <div class="col-md-9 order-md-2" style="margin-top: 6px;">
     <div class="col-md text-rel" style="padding-left:0px;">
-        <h2>Selecione o Aluno</h2>
+        <h2>Selecione a Série</h2>
     </div>
 
     <table class="table table-bordered" style="margin-top:0;">
     <thead style="background-color:#9ed0f6;">
-      <tr style="color:#fff;">
-        <th scope="col">Nome</th>
-        <th scope="col">Turma</th>
+      <tr  style="color:#fff;">
+        <th scope="col" colspan="2">Série</th>
       </tr>
     </thead>
 
     <tbody style="background-color:#f3f3f3;">
-        % for i in alunos:
-          <tr   class="hoover"onclick="redirect_vizualizar_relatorio({{i['id']}})">
-            <td class="hoover" style="cursor: pointer; ">{{i['nome']}}</td>
-            <td class="hoover">{{i['vinculo_turma']}}</td>
-          </tr>
-        % end
+        <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('1')">
+            <td colspan="2">1ª Série</td>
+        </tr>
+        <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('2')">
+            <td colspan="2">2ª Série</td>
+        </tr>
+        <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('3')">
+            <td colspan="2">3ª Série</td>
+        </tr>
+
     </tbody>
   </table>
 
 </div>
 <script>
-    function redirect_vizualizar_relatorio(id){
-        window.location.replace("/relatorios/visualizar_relatorio_aluno?aluno="+id);
+    function redirect_vizualizar_relatorio(id, escola_id){
+        window.location.replace("/relatorios/visualizar_relatorio_escola?serie="+id+"&escola="+{{escola}});
     }
 
 </script>

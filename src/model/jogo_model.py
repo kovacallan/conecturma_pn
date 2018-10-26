@@ -10,20 +10,19 @@ class DesempenhoJogo(Model):
     id_aluno=TextField(fts=True)
     unidade=TextField(fts=True, default='0')
     objeto_aprendizagem=TextField(fts=True, default='0')
-    jogo_jogado = ListField()
+    jogo_jogado = ListField()#pega o maior score de cada jogo no formato list(dict(nivel:xxx, percentual:0-100,termino:true ou false))
 
 
 
     def create_desempenho_jogo(self, *args,**kwargs):
+
         return self.create(**kwargs)
 
     def search_desempenho_concluido_id_aluno(self, id_aluno):
         obj = []
         for i in DesempenhoJogo.query((DesempenhoJogo.id_aluno == id_aluno),order_by=DesempenhoJogo.objeto_aprendizagem):
             obj.append(dict(id=i.id, id_aluno=i.id_aluno,unidade=i.unidade,objeto_aprendizagem=i.objeto_aprendizagem,
-                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]
-                            )
-                       )
+                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]))
         return obj
 
     def unidade_teste(self, id_aluno, unidade):
@@ -41,8 +40,8 @@ class DesempenhoJogo(Model):
                                       order_by=DesempenhoJogo.id):
 
             conclucoes.append(dict(id=i.id, id_aluno=i.id_aluno,unidade=i.unidade,objeto_aprendizagem=i.objeto_aprendizagem,
-                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]
-                            ))
+                                   jogo_jogado=[y.decode('utf-8') for y in i.jogo_jogado]))
+
         return conclucoes
 
     def search_oa(self,id_aluno,oa):
@@ -65,6 +64,12 @@ class DesempenhoJogo(Model):
         return conclucoes
 
     def armazenando_dados_jogo(self,id_obj, lista_dados_jogo):
+        """
+
+        :param id_obj:
+        :param lista_dados_jogo:
+        :return:
+        """
         desempenho=self.load(id_obj)
         desempenho.jogo_jogado.append(lista_dados_jogo)
         desempenho.save()

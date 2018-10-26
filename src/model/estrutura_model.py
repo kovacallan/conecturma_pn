@@ -124,6 +124,7 @@ class DbEstrutura(Model):
 
         return turma
 
+
     def search_descritor_serie(self,serie):
         from control.dicionarios import TIPO_ESTRUTURA
         oas = []

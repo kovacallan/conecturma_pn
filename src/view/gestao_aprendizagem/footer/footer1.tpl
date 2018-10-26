@@ -15,6 +15,17 @@
 });
 
 </script>
+<script>
+function Hover(){
+    $(document).ready(function(){
+    $(".change").hover(function(){
+        $(this).css("background-color", "blue");
+        }, function(){
+        $(this).css("background-color", "#dee2e6");
+    });
+});
+}
+</script>
 
 <!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
 
