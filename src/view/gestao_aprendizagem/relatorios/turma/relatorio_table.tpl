@@ -13,7 +13,7 @@
         %for i in oa:
             % if teste < len(porcentagem):
 
-            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="grafico_turma('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}})">
+            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle hoover" onclick="grafico_turma('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}})">
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
                     %if int(porcentagem[teste]) >= 70:
@@ -27,8 +27,8 @@
             </tr>
             <tr>
 
-                <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
-                    <div class="col-md-12" style="margin-top: 15px;">
+                <td  class="hiddenRow accordian-body collapse grafico{{i['id']}}" colspan="3"> <div class="">
+                    <div class="col-md-12 " style="margin-top: 15px;">
                         <div class="row">
                             <div class="col-md-2 offset-md-3">
                                 <div class="circle" style="border: 5px solid #0099ff; border-radius: 50px; width: 78px;height:78px ;">

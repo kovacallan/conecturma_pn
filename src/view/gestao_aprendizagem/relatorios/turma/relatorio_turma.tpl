@@ -17,7 +17,7 @@
     <tbody style="background-color:#f3f3f3;">
         % if isinstance(turma, list):
             % for i in turma:
-              <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{i['id']}})">
+              <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{i['id']}})">
                 <td>{{i['nome']}}</td>
                 <td>{{i['serie']}}</td>
               </tr>

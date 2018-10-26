@@ -16,12 +16,12 @@
     <tbody style="background-color:#f3f3f3;">
         % if isinstance(escola, list):
             % for i in escola:
-              <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{i['id']}})">
+              <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{i['id']}})">
                 <td colspan="2">{{i['nome']}}</td>
               </tr>
             % end
         % else:
-            <tr style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{escola['id']}})">
+            <tr  class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{escola['id']}})">
                 <td colspan="2">{{escola['nome']}}</td>
             </tr>
         %end
