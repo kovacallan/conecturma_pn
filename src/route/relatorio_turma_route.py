@@ -40,7 +40,7 @@ def relatorio_aluno(no_repeat=False):
         if i != -1:
             por.append(i)
     porcentagem = por
-    print(porcentagem)
+    print('porcentagem',porcentagem)
 
     return template(path_template + 'relatorio_turma_detalhe', tipo=observador.get_observador_tipo(), alunos=alunos, notas=notas,
                     turma=turma,oa=descritores, porcentagem=porcentagem)

@@ -92,7 +92,7 @@ def verificarConclusoesObjetosAprendizagem():
                                 teste.append(k)
                         except Exception as aaa:
                             for x in nivel_jogo:
-                                print('fuuuu',x,aaa)
+                                print('fuuuu',x,aaa,desempenho_oa[0]['objeto_aprendizagem'])
 
             retorno = {'objetosConcluidos': teste}
     print("verificar Conclusoes Objetos Aprendizagem retorno",retorno)
