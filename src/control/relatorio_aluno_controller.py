@@ -109,6 +109,28 @@ class Relatorio(object):
         facade = Facade()
         self.descritores = facade.search_descritor_serie_diciplina_facade(serie = serie, diciplina=diciplina)
 
+    def media_portugues(self):
+        media_portugues = []
+        for index,i in enumerate(self.porcentagem):
+            if (index+1) % 2 == 0:
+                media_portugues.append(i)
+
+        return self.calc_media(valores=media_portugues)
+
+    def media_matematica(self):
+        media_matematica = []
+        for index,i in enumerate(self.porcentagem):
+            if (index+1) % 2 != 0:
+                media_matematica.append(i)
+
+        return self.calc_media(valores=media_matematica)
+
+    def media_geral(self):
+        return self.calc_media(valores=self.porcentagem)
+
+    def calc_media(self, valores:list):
+        return int(sum(valores) / len(valores))
+
     def convertendo_str_in_dict(self, str):
         from ast import literal_eval
 

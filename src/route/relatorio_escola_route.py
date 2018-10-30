@@ -2,7 +2,7 @@ from bottle import route, template, request
 from control.classes.permissao import permissao, usuario_logado
 from control.observador_controller import Observador
 from control.relatorio_escola_controller import RelatorioEscola
-from control.relatorio_controller import Relatorio
+from control.relatorio_aluno_controller import Relatorio
 
 path_template = 'gestao_aprendizagem/relatorios/escola/'
 
@@ -48,7 +48,9 @@ def relatorio_aluno(no_repeat=False):
                 pass
         notas.append(nota)
 
-    return template(path_template + 'relatorio_escola_detalhe', tipo=observador.get_observador_tipo(),turma=turma, notas=notas, escola=escola,
+    return template(path_template + 'relatorio_escola_detalhe', media_geral = relatorio.media_geral(pontuacao=media_escola),
+                    media_portugues=relatorio.media_portugues(pontuacao=media_escola),media_matematica=relatorio.media_matematica(pontuacao=media_escola),
+                    tipo=observador.get_observador_tipo(),turma=turma, notas=notas, escola=escola,
                     porcentagem=media_escola, oa=descritores)
 
 @route('/relatorios/selecao_serie')

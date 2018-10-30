@@ -46,8 +46,8 @@
 </footer>-->
 <script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
 <script type="text/javascript" src="../static/js/Chart.min.js"></script>
-<script type="text/javascript" src="../static/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../static/js/graficoRelatorio.js"></script>
 
 %include('gestao_aprendizagem/footer/footer.tpl')

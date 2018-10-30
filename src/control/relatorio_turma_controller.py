@@ -87,6 +87,29 @@ class RelatorioTurma(object):
 
         return self._pontuacao
 
+    def media_portugues(self, pontuacao):
+        media_portugues = []
+        for index,i in enumerate(pontuacao):
+            if (index+1) % 2 == 0:
+                media_portugues.append(i)
+        print(media_portugues)
+        return self.calc_media(valores=media_portugues)
+
+    def media_matematica(self,pontuacao):
+        media_matematica = []
+        for index,i in enumerate(pontuacao):
+            if (index+1) % 2 != 0:
+                media_matematica.append(i)
+        print(media_matematica)
+        return self.calc_media(valores=media_matematica)
+
+    def media_geral(self,pontuacao):
+        return self.calc_media(valores=pontuacao)
+
+    def calc_media(self, valores:list):
+        return int(sum(valores) / len(valores))
+
+
     def convertendo_str_in_dict(self, str):
         from ast import literal_eval
 

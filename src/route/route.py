@@ -482,7 +482,7 @@ def descritores():
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno')
 @permissao('professor')
 def relatorio_aluno_view(no_repeat=False):
-    from control.relatorio_controller import Relatorio
+    from control.relatorio_aluno_controller import Relatorio
     from control.gestao_aprendizagem_controller import get_nome_turma
 
     relatorio = Relatorio()
@@ -496,7 +496,7 @@ def relatorio_aluno_view(no_repeat=False):
 def relatorio_aluno(no_repeat=False):
     from bottle import request
     from facade.facade_main import Facade
-    from control.relatorio_controller import Relatorio
+    from control.relatorio_aluno_controller import Relatorio
 
     relatorio = Relatorio()
 
@@ -508,17 +508,18 @@ def relatorio_aluno(no_repeat=False):
     relatorio.convert_nivel_for_numeric()
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
+    ultima_vez = []
     for i in relatorio.pontuacao:
-        ultima_vez = int((i[-1] * 100) / 2)
+        ultima_vez.append(int((i[-1] * 100) / 2))
 
-    return dict(tipo=usuario_logado()['tipo'], aluno=aluno, oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
+    return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
 
 
 @route('/trazer_oas')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')
 def levar_oas_matematica():
-    from control.relatorio_controller import Relatorio
+    from control.relatorio_aluno_controller import Relatorio
     relatorio = Relatorio()
 
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
