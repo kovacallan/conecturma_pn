@@ -669,14 +669,14 @@
                 console.log('face',id,rosto);
                 if(rosto=='botao_ok_'+id){
                     if(aux_rosto!=0){
-                        $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
+                        $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 21px;'>");
                     }
                     else{
                     $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'>");
                     }
                 }else{
                         console.log('else change face');
-                        $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 30px;'>");
+                        $("#avatar_usuario").append("<input id='avatar-itens-rosto-id' type='hidden' value='"+id+"'><img id='avatar-itens-rosto' src='/static/img/rosto/"+face+"' class='avatar-itens-rosto imagem-pocicao-"+face.slice(0,8)+"' style='z-index: 12; position: absolute; top: 37px; left: 21px;'>");
                 }
             }
             function change_avatar_acessorios(acessorio, id){
@@ -723,6 +723,14 @@
                     element.offsetWidth = element.offsetWidth;
                 $("#"+id).addClass('scale-bounce')
                     console.log("opa, coloquei");
+
+            }
+
+            function resetar_avatar(acessorio, body, id){
+              acessorio = acessorio.toLowerCase();
+              body = body.toLoweCase();
+
+                $("#avatar-itens-acessorios").remove();
 
             }
         </script>
