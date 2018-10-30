@@ -13,7 +13,7 @@
         %for i in oa:
             % if teste < len(porcentagem):
 
-            <tr class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target="#grafico{{i['id']}}" class="accordion-toggle" onclick="grafico_escola('grafico{{i['id']}}', {{turma}}, {{notas[teste]}})">
+            <tr class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="grafico_turma('grafico{{i['id']}}', {{turma}}, {{notas[teste]}})">
                 <td colspan="1">{{i['sigla_oa'][8:9]}}.{{i['sigla_oa'][12]}}</td>
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
@@ -26,17 +26,14 @@
                     %end
                 </td>
             </tr>
-            <tr id="row" style="display:none">
+            <tr >
 
-                <td  class="hiddenRow" colspan="3">
-                    <div id="grafico{{i['id']}}" class="accordian-body collapse grafico{{i['id']}}">
-                        <div class="col-md-12" style="margin-top: 15px;">
-                            <span class="word">Média da escola: {{int(porcentagem[teste])}}</span>
-                        </div>
-
-                        <canvas id="myChart_grafico{{i['id']}}"></canvas>
+                <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
+                    <div class="col-md-12" style="margin-top: 15px;">
+                        <span class="word">Média da escola: {{int(porcentagem[teste])}}</span>
                     </div>
-                </td>
+                     
+                <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>
             </tr>
           % else:
             <tr>
@@ -50,19 +47,3 @@
     </tbody>
 
 </table>
-<script>
-    function mostrar_esconder(id){
-    linha = document.getElementById(id);
-    row = document.getElementById('row')
-    if (linha.style.display == "none"){
-            console.log("entrei");
-        linha.style.display = "block";
-        row.style.display = "block";
-         console.log("entrei aqui também");
-      }
-    else
-    linha.style.display = "none";
-    row.style.display = "none";
-    }
-
-</script>
