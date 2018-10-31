@@ -3,8 +3,8 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
+from unicodedata import normalize
 import random
-
 from control.classes.permissao import usuario_logado, permissao
 from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_ITEM, TIPO_MEDALHA_NOME
 
@@ -68,20 +68,22 @@ def cadastro_usuario():
 
 def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    nome_login = create_student_login(usuario['nome'])
+    nome_login = removerAcentos(create_student_login(usuario['nome']))
     cor = []
     aluno = facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
-                                       primeiro_nome=usuario['nome'].split()[0].upper(),
+                                       primeiro_nome= usuario['nome'].split()[0].upper(),
                                        nascimento=usuario['nascimento'],
                                        sexo=usuario['sexo'], vinculo_rede=vinculo_rede['vinculo_rede'],
                                        vinculo_escola=usuario['vinculo_escola'], vinculo_turma=usuario['vinculo_turma'],
-                                       nome_login=nome_login, senha=password_student_generate())
+                                       nome_login= nome_login, senha=password_student_generate())
 
     if isinstance(aluno, object):
         itens = facade.set_itens_student_facade(id=aluno.id, itens=facade.get_itens_free_facade())
         if itens:
             return '/gestao_aprendizagem/usuario'
 
+def removerAcentos(aluno, codif='utf-8'):
+    return normalize('NFKD', aluno.decode(codif)).encode('ASCII', 'ignore')
 
 def password_student_generate():
     senha = random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'], 4)
