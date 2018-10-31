@@ -1,8 +1,7 @@
 from bottle import route, template, request
 from control.classes.permissao import permissao, usuario_logado
 from control.observador_controller import Observador
-from control.relatorio_turma_controller import RelatorioTurma
-from control.relatorio_aluno_controller import Relatorio
+from control.relatorios.relatorio_turma_controller import RelatorioTurma
 from control.dicionarios import SERIE
 path_template = 'gestao_aprendizagem/relatorios/turma/'
 
