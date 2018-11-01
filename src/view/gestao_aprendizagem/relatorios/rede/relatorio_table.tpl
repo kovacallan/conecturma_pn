@@ -13,7 +13,7 @@
         %for i in oa:
             % if teste < len(porcentagem):
 
-            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle hoover" onclick="grafico_turma('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}})">
+            <tr class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="grafico_turma('grafico{{i['id']}}', {{turma}}, {{notas[teste]}})">
                 <td colspan="1">{{i['sigla_oa'][8:9]}}.{{i['sigla_oa'][12]}}</td>
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
@@ -26,12 +26,11 @@
                     %end
                 </td>
             </tr>
-            <tr>
+            <tr >
 
                 <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
                     <div class="col-md-12" style="margin-top: 15px;">
-                        <span class="word">Média da turma: {{int(porcentagem[teste])}}</span>
-
+                        <span class="word">Média da escola: {{int(porcentagem[teste])}}</span>
                     </div>
                      
                 <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>

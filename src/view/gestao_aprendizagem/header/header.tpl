@@ -54,4 +54,4 @@
         </header>
     </div>
 </div>
-<div class="container" style="min-height: 768px;">
+<div class="container"  >

@@ -7,7 +7,12 @@
         </div>
 
         <div class="col-md nome_aluno" style="padding-left:0px;">
-          <span> {{turma['nome']}} </span> - Turma: <span id="turma-num">{{turma['serie']}}</span>
+            <span> {{turma['nome']}} </span> - <span id="turma-num">{{teste_serie[turma['serie']]}}</span>
+        </div>
+        <div>
+            Média geral: {{media_geral}} ,
+            Média geral Língua Portuguesa:{{media_portugues}} ,
+            Média geral Matemática:{{media_matematica}}
         </div>
 
         <div id="teste">
