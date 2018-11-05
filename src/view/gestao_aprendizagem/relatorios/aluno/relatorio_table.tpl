@@ -12,7 +12,7 @@
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
-            <tr class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
+            <tr style="cursor: pointer;"  data-toggle="collapse"  class="ex" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}}); esconder('grafico{{i['id']}}')">
 
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
@@ -27,7 +27,7 @@
             </tr>
             <tr class="hoover">
 
-                <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
+                <td  class="hiddenRow" colspan="3"> <div class="collapse grafico{{i['id']}}">
                     <div class="col-md-12" style="margin-top: 15px;">
                         <span class="word">Quantidades de vezes jogadas: {{vezes[teste]}}</span>
                         <br>
