@@ -14,6 +14,11 @@
             <input type="checkbox" onchange="filtro_relatorio_aluno_detalhe({{aluno['id']}})" id="portugues" value="portugues" checked> <label  class="portugues" for="portugues">Língua Portuguesa</label>
             <input type="checkbox" onchange="filtro_relatorio_aluno_detalhe({{aluno['id']}})" id="matematica" value="matematica" checked> <label class="matematica" for="matematica">Matemática</label>
         </div>
+        <div>
+            Média geral: {{media_geral}} ,
+            Média geral Língua Portuguesa:{{media_portugues}} ,
+            Média geral Matemática:{{media_matematica}}
+        </div>
 
         <div class="container offset-md-8" style="position:relative; right:27px;">
             <a href="" class="offset-md-4" > <img src="img/print-icon.png" alt="" style="width:2%; height:auto;"> </a>
