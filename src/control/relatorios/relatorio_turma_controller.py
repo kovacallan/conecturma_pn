@@ -48,10 +48,11 @@ class RelatorioTurma(object):
         return alunos
 
     def media(self, ponto, esperado):
-        print('media, ponto , esperado',ponto,esperado)
-        if esperado == 0 :
-            return int(0)
-        return int((ponto * 100)/esperado)
+        if esperado != 0:
+            return int((ponto * 100)/esperado)
+        
+        return int(ponto * 100)
+
 
     def get_pontuacao_turma(self, medias):
         lista = []
@@ -82,11 +83,12 @@ class RelatorioTurma(object):
 
         for z in jogo_jogado:
             dict_dado_jogo = self.convertendo_str_in_dict(z)
-            print('convert nivel for numeric,dados_jogo',dict_dado_jogo)
-            if type(dict_dado_jogo) is list:
+            print(dict_dado_jogo)
+            if isinstance(dict_dado_jogo, list):
                 pass
             elif dict_dado_jogo['termino'] == True:
                 pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
+            
 
         self._pontuacao = pontuacao
 
@@ -112,7 +114,8 @@ class RelatorioTurma(object):
         return self.calc_media(valores=pontuacao)
 
     def calc_media(self, valores:list):
-        return int(sum(valores) / len(valores))
+        if len()
+        return int(sum(valores) / len(valores) )
 
 
     def convertendo_str_in_dict(self, str):
