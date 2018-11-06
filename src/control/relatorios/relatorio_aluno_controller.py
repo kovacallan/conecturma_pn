@@ -89,15 +89,9 @@ class Relatorio(object):
                 pontuacao = []
                 for z in i['jogo_jogado']:
                     dict_dado_jogo = self.convertendo_str_in_dict(z)
-<<<<<<< HEAD
                     if isinstance(dict_dado_jogo, list):
                         pass
-                    if dict_dado_jogo['termino'] == True:
-=======
-                    if type(dict_dado_jogo) is list:
-                        pass
                     elif dict_dado_jogo['termino'] == True:
->>>>>>> cc181708e397b75838f023cf2a78c665a16c9f43
                         pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
                 dicionario.append(pontuacao)
 
