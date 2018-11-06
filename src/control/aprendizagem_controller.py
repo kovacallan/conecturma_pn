@@ -36,7 +36,6 @@ def obterUltimaConclusao():
 def verificarAcessoObjetoAprendizagem():
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
-    print('verificar acesso OA ',parametros)
     if usuario['tipo'] < TIPO_USUARIOS['aluno']:
         retorno = {'objetosAprendizagemAcessiveis': parametros['objetosAprendizagem']}
     else:
@@ -54,12 +53,13 @@ def verificarAcessoObjetoAprendizagem():
                     break
                 else:
                     teste.append(i)
+
             retorno = {'objetosAprendizagemAcessiveis': teste}
-    print("VA OA returno",retorno)
     return retorno
 
 
 def verificarConclusoesObjetosAprendizagem():
+
     '''
     Comentario feito dia 17/10/1994
     A variavel parametros tem o o modelo de (em aventura 1)
@@ -68,7 +68,6 @@ def verificarConclusoesObjetosAprendizagem():
     'objetosAprendizagem': ['UV1AV1UD1OA01', 'UV1AV1UD1OA02', 'UV1AV1UD1OA03', 'UV1AV1UD1OA04', 'UV1AV1UD1OA05', 'UV1AV1UD1OA06', 'UV1AV1UD1CN01', 'UV1AV1UD1CN02', 'UV1AV1UD1VC01']}
     :return:
     '''
-
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
     print('parametros conclusao OA',parametros)
@@ -85,15 +84,15 @@ def verificarConclusoesObjetosAprendizagem():
             for k in parametros['objetosAprendizagem']:
                 desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=k)
                 if desempenho_oa != []:
-                    print('vish',desempenho_oa)
                     for jogo in desempenho_oa[0]['jogo_jogado']:
                         nivel_jogo=convertendo_str_in_dict(jogo)
+                        print('nivel jogo VCO',nivel_jogo,desempenho_oa)
                         try:
                             if nivel_jogo['nivel']!='facil' and nivel_jogo['termino']==True:
                                 teste.append(k)
                         except Exception as aaa:
                             for x in nivel_jogo:
-                                print('fuuuu',x,aaa)
+                                print('fuuuu',x,aaa,desempenho_oa[0]['objeto_aprendizagem'])
 
             retorno = {'objetosConcluidos': teste}
     print("verificar Conclusoes Objetos Aprendizagem retorno",retorno)
@@ -171,7 +170,7 @@ def registrarConclusao():
 
 def obterPremiacao():
     parametros = parametros_json_jogos(request.params.items())
-    print('obter premiaçao',parametros)
+
     #Comentario colocado dia 17/10/2018 , verifique a nescessidade de atualiza-la
     #a variavel parametros recebe valores no formato de :
     #{'uuid': nome da funçao encodada, 'operacao': nome da funçao, 'objetoAprendizagem': 'UV1AVX"+'UDX'+'OAXX'} nao sei se o é ativada com os videoclipes ou cinamticas
