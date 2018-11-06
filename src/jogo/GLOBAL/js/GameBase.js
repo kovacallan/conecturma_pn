@@ -680,7 +680,7 @@ showTextVictory: function() {
     },
 
     gameOverLose: function() {
-
+        console.log("GAME OVER");
         if(!BasicGame.isOnline) {
             this.createDelayTime(500, this.backButton);
             return;
@@ -689,8 +689,10 @@ showTextVictory: function() {
         var _this = this;
         BasicGame.OnlineAPI.registrarConclusao(this.listCorrects, function(data) {
             _this.createDelayTime(500, _this.backButton);
+            return; //Parte de voltar ao mapa pelo botao
         }, function(error) {
-            console.log(error)
+            console.log('ERRO?',error);
+
         });
 
     },
