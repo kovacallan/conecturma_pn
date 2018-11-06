@@ -53,6 +53,7 @@ class RelatorioTurma(object):
         
         return int(ponto * 100)
 
+
     def get_pontuacao_turma(self, medias):
         lista = []
         t = 0

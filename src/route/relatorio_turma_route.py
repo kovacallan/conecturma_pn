@@ -27,18 +27,22 @@ def relatorio_aluno(no_repeat=False):
     for index,i in enumerate(descritores):
         nota = []
         for z in medias:
+            print("aqui, allan", z['nome'],z['media'])
             if z['nome'] not in alunos:
                 alunos.append(z['nome'])
             try:
                 nota.append(str(z['media'][index]))
             except IndexError:
-                pass
+                nota.append(0)
         notas.append(nota)
+
     por = []
     for i in porcentagem:
         if i != -1:
             por.append(i)
     porcentagem = por
+
+    print(notas)
 
     return template(path_template + 'relatorio_turma_detalhe', media_geral=relatorio.media_geral(porcentagem),
                     media_portugues = relatorio.media_portugues(pontuacao=porcentagem),
