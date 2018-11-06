@@ -12,8 +12,8 @@
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
+            <tr  style="cursor: pointer;" class="accordion-toggle hoover ex" onclick="grafico_turma('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}});esconder('grafico{{i['id']}}')">
 
-            <tr style="cursor: pointer;" data-toggle="collapse" data-target=".grafico{{i['id']}}" class="accordion-toggle hoover" onclick="grafico_turma('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}})">
                 <td colspan="1">{{i['sigla_oa'][8:9]}}.{{i['sigla_oa'][12]}}</td>
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
@@ -48,3 +48,7 @@
     </tbody>
 
 </table>
+<script>
+
+
+</script>

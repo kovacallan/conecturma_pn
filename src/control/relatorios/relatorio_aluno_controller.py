@@ -131,7 +131,10 @@ class Relatorio(object):
         return self.calc_media(valores=self.porcentagem)
 
     def calc_media(self, valores:list):
-        return int(sum(valores) / len(valores))
+        if len(valores) == 0:
+            return sum(valores)
+        else:
+            return int(sum(valores) / len(valores))
 
     def convertendo_str_in_dict(self, str):
         from ast import literal_eval

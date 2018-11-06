@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from bottle import view, get, post, redirect
+from route.relatorio_turma_route import *
 from route.relatorio_escola_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler

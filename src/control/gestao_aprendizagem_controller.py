@@ -3,8 +3,9 @@
 from bottle import route, view, request, redirect, get, template
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
+import unicodedata
+import re
 import random
-
 from control.classes.permissao import usuario_logado, permissao
 from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_ITEM, TIPO_MEDALHA_NOME
 
@@ -68,19 +69,31 @@ def cadastro_usuario():
 
 def aluno_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
-    nome_login = create_student_login(usuario['nome'])
+    nome_login = usuario['nome']
     cor = []
     aluno = facade.create_aluno_facade(tipo_aluno=TIPO_USUARIOS['aluno'], nome=usuario['nome'],
-                                       primeiro_nome=usuario['nome'].split()[0].upper(),
-                                       nascimento=usuario['nascimento'],
-                                       sexo=usuario['sexo'], vinculo_rede=vinculo_rede['vinculo_rede'],
-                                       vinculo_escola=usuario['vinculo_escola'], vinculo_turma=usuario['vinculo_turma'],
-                                       nome_login=nome_login, senha=password_student_generate())
+                                       primeiro_nome = usuario['nome'].split()[0].upper(),
+                                       nascimento = usuario['nascimento'],
+                                       sexo = usuario['sexo'], vinculo_rede=vinculo_rede['vinculo_rede'],
+                                       vinculo_escola=usuario['vinculo_escola'], vinculo_turma = usuario['vinculo_turma'],
+                                       nome_login = removerAcentos(nome_login), senha = password_student_generate())
 
     if isinstance(aluno, object):
         itens = facade.set_itens_student_facade(id=aluno.id, itens=facade.get_itens_free_facade())
         if itens:
             return '/gestao_aprendizagem/usuario'
+
+
+
+def removerAcentos(palavra):
+
+
+    nfkd = unicodedata.normalize('NFKD', palavra)
+    nome_login = u"".join([c for c in nfkd if not unicodedata.combining(c)])
+
+
+    return nome_login.split()[0].upper()
+
 
 
 def password_student_generate():
@@ -90,7 +103,7 @@ def password_student_generate():
 
 
 def create_student_login(nome_completo):
-    nome_login = nome_completo.split()[0].upper()
+    nome_login = removerAcentos(nome_completo)
     existe_usuario = facade.search_aluno_primeiro_nome_facade(nome_login)
     if existe_usuario != []:
         return nome_login + str(len(existe_usuario))
