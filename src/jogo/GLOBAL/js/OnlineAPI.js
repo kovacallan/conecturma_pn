@@ -31,11 +31,11 @@ BasicGame.OnlineAPI = {
 
             var resposta = (event.data);
 
-            console.log(event.data);
+            console.log("event.data",event.data);
 
             var parametrosOriginais = _this.mapaChamadasFuncoes[resposta.uuid];
-            console.log(resposta);
-            console.log(parametrosOriginais);
+            console.log("resposta",resposta);
+            console.log("parametrosOriginais",parametrosOriginais);
 
             if (resposta.tipoErro || (resposta.mensagensErro && resposta.mensagensErro.length > 0)) {
                 if (!parametrosOriginais.erro) {
@@ -208,6 +208,11 @@ BasicGame.OnlineAPI = {
                 _hasError = false;
             }
         }
+        if(corrects[0] == -1){
+            corrects[0]=0;
+            _hasError = false;
+        }
+        console.log("registrar conclusao OnlineApi 214",corrects,corrects.length,_hasError)
         if(_hasError) {
             onError(null);
             return;

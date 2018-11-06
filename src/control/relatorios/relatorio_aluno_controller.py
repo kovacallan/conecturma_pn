@@ -69,8 +69,9 @@ class Relatorio(object):
         vezes = []
         for i in self.pontuacao:
             vezes.append(len(i))
-            porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
-
+            if len(i) !=0:
+                porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
+        print("Teste porcentage", self.pontuacao)
         self.vezes_jogada = vezes
         self.porcentagem = porcentagem
 
@@ -88,7 +89,15 @@ class Relatorio(object):
                 pontuacao = []
                 for z in i['jogo_jogado']:
                     dict_dado_jogo = self.convertendo_str_in_dict(z)
+<<<<<<< HEAD
+                    if isinstance(dict_dado_jogo, list):
+                        pass
                     if dict_dado_jogo['termino'] == True:
+=======
+                    if type(dict_dado_jogo) is list:
+                        pass
+                    elif dict_dado_jogo['termino'] == True:
+>>>>>>> cc181708e397b75838f023cf2a78c665a16c9f43
                         pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
                 dicionario.append(pontuacao)
 
@@ -108,6 +117,31 @@ class Relatorio(object):
         from facade.facade_main import Facade
         facade = Facade()
         self.descritores = facade.search_descritor_serie_diciplina_facade(serie = serie, diciplina=diciplina)
+
+    def media_portugues(self):
+        media_portugues = []
+        for index,i in enumerate(self.porcentagem):
+            if (index+1) % 2 == 0:
+                media_portugues.append(i)
+
+        return self.calc_media(valores=media_portugues)
+
+    def media_matematica(self):
+        media_matematica = []
+        for index,i in enumerate(self.porcentagem):
+            if (index+1) % 2 != 0:
+                media_matematica.append(i)
+
+        return self.calc_media(valores=media_matematica)
+
+    def media_geral(self):
+        return self.calc_media(valores=self.porcentagem)
+
+    def calc_media(self, valores:list):
+        if len(valores) == 0:
+            return sum(valores)
+        else:
+            return int(sum(valores) / len(valores))
 
     def convertendo_str_in_dict(self, str):
         from ast import literal_eval

@@ -1,8 +1,7 @@
 from bottle import route, template, request
 from control.classes.permissao import permissao, usuario_logado
 from control.observador_controller import Observador
-from control.relatorio_turma_controller import RelatorioTurma
-from control.relatorio_controller import Relatorio
+from control.relatorios.relatorio_turma_controller import RelatorioTurma
 from control.dicionarios import SERIE
 path_template = 'gestao_aprendizagem/relatorios/turma/'
 
@@ -28,19 +27,24 @@ def relatorio_aluno(no_repeat=False):
     for index,i in enumerate(descritores):
         nota = []
         for z in medias:
+            print("aqui, allan", z['nome'],z['media'])
             if z['nome'] not in alunos:
                 alunos.append(z['nome'])
             try:
                 nota.append(str(z['media'][index]))
             except IndexError:
-                pass
+                nota.append(0)
         notas.append(nota)
+
     por = []
     for i in porcentagem:
         if i != -1:
             por.append(i)
     porcentagem = por
-    print(porcentagem)
 
-    return template(path_template + 'relatorio_turma_detalhe', tipo=observador.get_observador_tipo(), alunos=alunos, notas=notas,
-                    turma=turma,oa=descritores, porcentagem=porcentagem)
+    print(notas)
+
+    return template(path_template + 'relatorio_turma_detalhe', media_geral=relatorio.media_geral(porcentagem),
+                    media_portugues = relatorio.media_portugues(pontuacao=porcentagem),
+                    media_matematica=relatorio.media_matematica(porcentagem), tipo=observador.get_observador_tipo(),
+                    alunos=alunos, notas=notas, turma=turma,oa=descritores, porcentagem=porcentagem, teste_serie = SERIE)

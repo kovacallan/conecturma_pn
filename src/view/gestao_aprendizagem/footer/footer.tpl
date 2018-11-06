@@ -1,8 +1,7 @@
     </div>
 </div>
 
-
- <footer  style="position: relative; bottom: 0px; background-color: #bed7ea;width: 100%; padding-bottom: 21px; padding-top:5px;margin-top: 10px;">
+ <footer>
         <h4 id="footer-text" align="center" style="font-size: 18.12px;  font-family: 'Calibri';color: #9bacba;font-weight: lighter;">
 
      Políticas de privacidade | copyright 2018  </h4>
@@ -79,6 +78,17 @@
 
 
 </script>
+
+
+    <script>
+    function esconder(id){
+
+
+        $("."+id).toggle();
+
+        }
+</script>
+
 
 
 <!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
