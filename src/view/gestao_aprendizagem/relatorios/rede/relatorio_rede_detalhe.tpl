@@ -8,11 +8,6 @@
             <div class="col-md nome_aluno" style="padding-left:0px;">
               <span> {{escola['nome']}} </span>
             </div>
-        <div>
-            Média geral: {{media_geral}} ,
-            Média geral Língua Portuguesa:{{media_portugues}} ,
-            Média geral Matemática:{{media_matematica}}
-        </div>
 
         <div id="teste">
             % include('gestao_aprendizagem/relatorios/escola/relatorio_table.tpl')

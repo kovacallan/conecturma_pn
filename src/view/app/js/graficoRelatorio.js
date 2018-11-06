@@ -1,6 +1,11 @@
 function funcoes(ide, pontos){
-    seta(ide);
     grafico(ide,pontos);
+    if(document.getElementById(ide).style.display == "none"){
+        document.getElementById(ide).style.display = "block"
+    }
+    else{
+        document.getElementById(ide).style.display = "none"
+    }
  }
 
 flag = 0;
@@ -80,14 +85,7 @@ function grafico(ide, pontos){
                 label: "Pontuaçao",
                 // backgroundColor: 'rgb(255, 99, 132)',
                 backgroundColor: bg_color,
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                borderColor: bg_color,
                 data: lista,
             }]
         },
@@ -101,6 +99,9 @@ function grafico_turma(id, alunos, notas){
 
     lista = []
     bg_color =  []
+
+    console.log(notas);
+    
     for(i = 0; i<notas.length; i++){
         if (notas[i] != -1)
             lista.push(notas[i]);
@@ -153,14 +154,7 @@ function grafico_turma(id, alunos, notas){
                 label: "pontuação",
                 // backgroundColor: 'rgb(255, 99, 132)',
                 backgroundColor: bg_color,
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                borderColor: bg_color,
                 data: lista,
             }]
         },

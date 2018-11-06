@@ -1,15 +1,14 @@
 from facade.facade_main import Facade
 from control.dicionarios import TIPO_ESTRUTURA
-class RelatorioEscola(object):
+class RelatorioTurma(object):
 
     def __init__(self):
         self.facade = Facade()
-        self._alunos = None
+        self._alunos = []
         self._descritores = None
         self._media_alunos = None
         self._pontuacao = None
         self._pontuacao_turma = None
-        self._pontuacao_escola = []
 
     def get_alunos(self, vinculo_rede = None, vinculo_escola = None, vinculo_turma = None):
         if(vinculo_rede != None):
@@ -17,8 +16,8 @@ class RelatorioEscola(object):
         elif (vinculo_escola != None):
             self._alunos = self.facade.search_aluno_escola_facade(vinculo_escola=str(vinculo_escola))
         elif (vinculo_turma != None):
-            self._alunos = self.facade.search_aluno_by_turma_facade(vinculo_turma=str(vinculo_turma))
-
+            for i in self.facade.search_aluno_by_turma_facade(vinculo_turma=str(vinculo_turma)):
+                self._alunos.append(i)
 
         return self._alunos
 
@@ -46,11 +45,14 @@ class RelatorioEscola(object):
 
             if i['media'] != []:
                 i['media'].append(-1)
-
         return alunos
 
     def media(self, ponto, esperado):
-        return int((ponto * 100)/esperado)
+        if esperado != 0:
+            return int((ponto * 100)/esperado)
+        
+        return int(ponto * 100)
+
 
     def get_pontuacao_turma(self, medias):
         lista = []
@@ -70,20 +72,6 @@ class RelatorioEscola(object):
     def calc_media_turma(self, valores:list):
         return sum(valores) / len(valores) if valores != [] else -1
 
-    def get_media_escola(self, turma_media, descritor):
-        for index,i in enumerate(descritor):
-            lista = []
-            for z in turma_media:
-                try:
-                    lista.append(z['media'][index])
-                except IndexError:
-                    pass
-            if lista != []:
-                self._pontuacao_escola.append(self.calc_media_escola(valores=lista))
-        return self._pontuacao_escola
-
-    def calc_media_escola(self, valores):
-        return sum(valores) / len(valores)
     def convert_nivel_for_numeric(self, jogo_jogado):
         niveis_pontuação = {
             'dificil': 2,
@@ -95,12 +83,40 @@ class RelatorioEscola(object):
 
         for z in jogo_jogado:
             dict_dado_jogo = self.convertendo_str_in_dict(z)
-            if dict_dado_jogo['termino'] == True:
+            print(dict_dado_jogo)
+            if isinstance(dict_dado_jogo, list):
+                pass
+            elif dict_dado_jogo['termino'] == True:
                 pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
+            
 
         self._pontuacao = pontuacao
 
         return self._pontuacao
+
+    def media_portugues(self, pontuacao):
+        media_portugues = []
+        for index,i in enumerate(pontuacao):
+            if (index+1) % 2 == 0:
+                media_portugues.append(i)
+        print(media_portugues)
+        return self.calc_media(valores=media_portugues)
+
+    def media_matematica(self,pontuacao):
+        media_matematica = []
+        for index,i in enumerate(pontuacao):
+            if (index+1) % 2 != 0:
+                media_matematica.append(i)
+        print(media_matematica)
+        return self.calc_media(valores=media_matematica)
+
+    def media_geral(self,pontuacao):
+        return self.calc_media(valores=pontuacao)
+
+    def calc_media(self, valores:list):
+        if len(valores) != 0:
+            return int(sum(valores) / len(valores) )
+        return int(sum(valores))
 
 
     def convertendo_str_in_dict(self, str):
