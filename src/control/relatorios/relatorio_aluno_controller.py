@@ -69,7 +69,10 @@ class Relatorio(object):
         vezes = []
         for i in self.pontuacao:
             vezes.append(len(i))
-            porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
+            try:
+                porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
+            except Exception as e:
+                print('rel 75 al', e)
 
         self.vezes_jogada = vezes
         self.porcentagem = porcentagem

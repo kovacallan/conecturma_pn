@@ -697,7 +697,7 @@ showTextVictory: function() {
             _this.time.events.removeAll();
             _this.tweens.removeAll();
             _this.tweenBack();
-            _this.registrarConclusao(true);
+            //_this.registrarConclusao(true);
 
 
 
