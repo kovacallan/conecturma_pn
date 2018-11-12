@@ -129,8 +129,7 @@
     </div>
   </div>
 </div>
-
-%include('gestao_aprendizagem/footer/footer.tpl')
+</div>
 <script src="../static/js/icropper.js"></script>
 <script>
 function readURL(input) {
@@ -217,3 +216,6 @@ function dragMoveListener (event) {
     });
 }
 </script>
+
+
+%include('gestao_aprendizagem/footer/footer.tpl')
