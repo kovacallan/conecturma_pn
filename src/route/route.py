@@ -131,7 +131,7 @@ def buy_item(no_repeat=False):
     else:
         return '0'
 
-
+#GETUNICODE PARA ARMEZANAR PALAVRAS COM ACENTO
 @route('/equipar_item', method='POST')
 @permissao('aluno_varejo')
 def equip_item(no_repeat=False):
@@ -143,7 +143,7 @@ def equip_item(no_repeat=False):
         if i != 'apelido':
             item.append(facade.search_estrutura_id_facade(id=request.params[i]))
     if request.params['apelido'] != '0' or request.params['apelido'] != "" or request.params['apelido'] != None:
-        facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])
+        facade.set_apelido_facade(id=usuario['id'], apelido=request.params.getunicode('apelido'))
     facade.equipar_item_facade(id=usuario['id'], itens=item)
 
 
