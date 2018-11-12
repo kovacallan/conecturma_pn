@@ -37,6 +37,9 @@ BasicGame.OnlineAPI = {
             console.log("resposta",resposta);
             console.log("parametrosOriginais",parametrosOriginais);
 
+            resposta['xp']=" ";
+
+
             if (resposta.tipoErro || (resposta.mensagensErro && resposta.mensagensErro.length > 0)) {
                 if (!parametrosOriginais.erro) {
                     console.error("A operacao retornou um objeto de erro, mas nenhum callback de erro foi informado.");

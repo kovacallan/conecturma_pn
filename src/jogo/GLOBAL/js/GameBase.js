@@ -690,8 +690,6 @@ showTextVictory: function() {
         BasicGame.OnlineAPI.registrarConclusao(this.listCorrects, function(data) {
             _this.createDelayTime(500, _this.backButton); //Parte de voltar ao mapa pelo botao
         }, function(error) {
-            console.log('ERRO?',error);
-
 
             _this.eventConclusao = new Phaser.Signal();
             _this.time.events.removeAll();

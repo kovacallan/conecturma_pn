@@ -34,6 +34,13 @@ def obterUltimaConclusao():
 
 
 def verificarAcessoObjetoAprendizagem():
+    """
+    percorre todas as OAs da semana e se o aluno tiver terminado o jogo anterior ao menos no medio , debloqueia o prox jogo
+    se for um cinematic, apenas adiciona a lista
+    verifica se jogou o anterior , se tem dados do anterior , verifica se nao é lista, porque se concluir o jogo no facil vem uma lista (dado anomalo)
+
+    :return:
+    """
     usuario = usuario_logado()
     parametros = parametros_json_jogos(request.params.items())
     if usuario['tipo'] < TIPO_USUARIOS['aluno']:
@@ -45,54 +52,69 @@ def verificarAcessoObjetoAprendizagem():
         else:
             teste = []
             for i in parametros['objetosAprendizagem']:
-                print("verificar acesso OA",i,len(i),i[11:13])
 
                 e=list(i)
-                print("lista da OA",e[len(e)-1],e)
-                if (e[len(e)-1] !="1" and e[len(e)-1] !=1)  or e[9]!='C':
+                print("lista da OA",[len(e)-1],e)
+                if (e[len(e)-1] !="1" and e[len(e)-1] !=1) and e[9]!='C':
                     e[len(e)-1]=str(int(e[len(e)-1])-1)
                     anterior=''.join(e)
                     desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
                     desempenho_oa_anterior=facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=anterior)
 
-                    print(desempenho_oa_anterior,desempenho_oa)
+
                     if desempenho_oa_anterior!=[]:
 
                         last_best_game = convertendo_str_in_dict(desempenho_oa_anterior[0]['jogo_jogado'][0])
-                        print('hhm',anterior,last_best_game,desempenho_oa,desempenho_oa_anterior)
+
 
                         if desempenho_oa == [] and not isinstance(last_best_game,list):
-                            print('aaaa')
+
                             if last_best_game['termino'] == True:
                                 if last_best_game['nivel'] == "facil":
-                                    for x in range(0,len(desempenho_oa_anterior[0]['jogo_jogado'][0])):
-                                        best_game_list=convertendo_str_in_dict(desempenho_oa_anterior[0]['jogo_jogado'][x])
-                                        if best_game_list["nivel"]!= "facil" and best_game_list["termino"]==True:
-                                            teste.append(i)
-                                            break
-                                    break
+
+                                    try:#excessao feita por causa do jogo UV1AV1UD6OA03 que gera um dado anormal "certo" , possivel erro do jogo (era para ter 3 niveis?)
+                                        for x in range(len(desempenho_oa_anterior[0]['jogo_jogado'][0])):
+                                            best_game_list=convertendo_str_in_dict(desempenho_oa_anterior[0]['jogo_jogado'][x])
+                                            if best_game_list["nivel"]!= "facil" and best_game_list["termino"]==True:
+                                                teste.append(i)
+                                                break
+                                        break
+                                    except IndexError:
+                                        teste.append(i)
+                                        break#
                                 else:
-                                    print('if')
+
                                     teste.append(i)
-                                    break
+                                    break#
+
                         elif not isinstance(last_best_game,list):
                             if last_best_game['termino'] == True:
-                                print('if')
-                                teste.append(i)
-                        elif i== "UV1AV1UD4OA05":
-                            teste.append(i)
-                        else:
-                            teste.append(i)
 
-                    else:
-                        if desempenho_oa == []:
+                                teste.append(i)
+                        elif i== "UV1AV1UD4OA05" or i=="UV1AV2UD8OA02":
                             teste.append(i)
-                            break
+                        elif desempenho_oa == [] and isinstance(last_best_game,list):
+                            if last_best_game[0]['nivel']=="facil":
+
+                                for x in range(len(desempenho_oa_anterior[0]["jogo_jogado"])):
+                                    try:
+                                        last_facil=convertendo_str_in_dict(desempenho_oa_anterior[0]["jogo_jogado"][x])
+                                        if last_facil["termino"]==True:
+                                            teste.append(i)
+                                            break
+
+                                    except Exception as aaa:
+                                        continue
+
+                            else:
+                                teste.append(i)
+                    else:
+                        teste.append(i)
+                        break
 
                 else:
-
                     desempenho_oa = facade.oa_teste_facade(id_aluno=str(usuario['id']), oa=i)
-                    if desempenho_oa == []:
+                    if desempenho_oa == [] and e[len(e)-1]:
                         teste.append(i)
 
             retorno = {'objetosAprendizagemAcessiveis': teste}
