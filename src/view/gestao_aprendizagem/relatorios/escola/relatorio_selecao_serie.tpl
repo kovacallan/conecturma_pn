@@ -1,6 +1,14 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="relatorio_aluno.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
 
+<style>
+    footer{
+
+        position:absolute;
+
+    }
+</style>
+
 <div class="col-md-9 order-md-2" style="margin-top: 6px;">
     <div class="col-md text-rel" style="padding-left:0px;">
         <h2>Selecione a Série</h2>
@@ -15,13 +23,13 @@
 
     <tbody style="background-color:#f3f3f3;">
         <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('1')">
-            <td colspan="2">1ª Série</td>
+            <td colspan="2">1º Ano</td>
         </tr>
         <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('2')">
-            <td colspan="2">2ª Série</td>
+            <td colspan="2">2º Ano</td>
         </tr>
         <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio('3')">
-            <td colspan="2">3ª Série</td>
+            <td colspan="2">3º Ano</td>
         </tr>
 
     </tbody>

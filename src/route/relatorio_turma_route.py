@@ -27,7 +27,6 @@ def relatorio_aluno(no_repeat=False):
     for index,i in enumerate(descritores):
         nota = []
         for z in medias:
-            print("aqui, allan", z['nome'],z['media'])
             if z['nome'] not in alunos:
                 alunos.append(z['nome'])
             try:
@@ -42,9 +41,13 @@ def relatorio_aluno(no_repeat=False):
             por.append(i)
     porcentagem = por
 
-    print(notas)
 
     return template(path_template + 'relatorio_turma_detalhe', media_geral=relatorio.media_geral(porcentagem),
                     media_portugues = relatorio.media_portugues(pontuacao=porcentagem),
                     media_matematica=relatorio.media_matematica(porcentagem), tipo=observador.get_observador_tipo(),
                     alunos=alunos, notas=notas, turma=turma,oa=descritores, porcentagem=porcentagem, teste_serie = SERIE)
+
+
+@route('/ordenar/GraficoRelatorio', method='POST')
+def reordenar_grafico_relatorio():
+    pass

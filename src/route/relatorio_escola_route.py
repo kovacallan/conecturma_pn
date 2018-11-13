@@ -30,7 +30,8 @@ def relatorio_aluno(no_repeat=False):
         for z in relatorio.get_pontuacao_turma(medias=media_alunos):
             if z != -1:
                 i['media'].append(int(z))
-
+            else:
+                i['media'].append(0)
         turma.append(i)
     media_escola = relatorio.get_media_escola(turma_media=turma, descritor=descritores)
 

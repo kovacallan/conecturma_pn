@@ -1,5 +1,13 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="css-listagem-escolas.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
+
+<style>
+    footer{
+        bottom: -37px;
+        position:relative;
+    }
+</style>
+
 <div class="col-md-9 order-md-3 botao-tabela">
     <div style="left: -14px;margin-bottom: 30px;position: relative;">
         <p class="top-escolas-tabela">Usuários</p>
@@ -87,6 +95,7 @@
 
       <!-- bloco de cabeçalho da lista -->
   </div>
+</div>
 </div>
 </div>
 <script type="text/javascript" src="/static/js/jquery-3.3.1-min.js"></script>

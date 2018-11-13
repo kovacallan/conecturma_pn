@@ -837,6 +837,75 @@ function allow_edit_obs(content_class_id){
     $('#edito'+content_class_id).show();
 
 }
+
+function ordenarGraficoRelatorio(id, alunos, notas){
+    valor = document.getElementById("ordenarGraficoRelatorio_"+id).value;
+    alunosNotas = []
+    for(i = 0; i<alunos.length; i++){
+        alunosNotas.push({nome:alunos[i], nota:notas[i]});
+    }
+    switch(valor){
+        case '1':
+            grafico_turma(id, alunos, notas)
+            break;
+        case '2':
+            ordenarGraficoRelatorioMenorNota(id, alunosNotas);
+            break;
+        case '3':
+            ordenarGraficoRelatorioMaiorNota(id, alunosNotas);
+            break;
+    }
+}
+
+function ordenarGraficoRelatorioMenorNota(id, alunosNotas){
+    for(z=0; z<alunosNotas.length; z++){
+        for(i = 0; i<alunosNotas.length; i++){
+            if(alunosNotas[z].nota < alunosNotas[i].nota){
+                aux = alunosNotas[z];
+                alunosNotas[z] = alunosNotas[i];
+                alunosNotas[i] = aux;
+            }
+        }
+    }
+
+    alunos = [];
+    notas = [];
+    for(z=0; z<alunosNotas.length; z++){
+        alunos.push(alunosNotas[z].nome);
+        notas.push(alunosNotas[z].nota);
+    }  
+
+    document.getElementById('myChart_'+id).remove();
+    
+    $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
+
+    grafico_turma(id, alunos, notas);
+}
+
+function ordenarGraficoRelatorioMaiorNota(id, alunosNotas){
+    for(z=0; z<alunosNotas.length; z++){
+        for(i = 0; i<alunosNotas.length; i++){
+            if(alunosNotas[z].nota > alunosNotas[i].nota){
+                aux = alunosNotas[z];
+                alunosNotas[z] = alunosNotas[i];
+                alunosNotas[i] = aux;
+            }
+        }
+    }
+    
+
+    alunos = [];
+    notas = [];
+    for(z=0; z<alunosNotas.length; z++){
+        alunos.push(alunosNotas[z].nome);
+        notas.push(alunosNotas[z].nota);
+    }
+
+    document.getElementById('myChart_'+id).remove();   
+    $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
+
+    grafico_turma(id, alunos, notas);
+}
 //function readURL(input) {
 //            if (input.files && input.files[0]) {
 //                var reader = new FileReader();
