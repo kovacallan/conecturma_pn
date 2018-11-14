@@ -114,8 +114,9 @@ class RelatorioTurma(object):
         return self.calc_media(valores=pontuacao)
 
     def calc_media(self, valores:list):
-        # if len()
-        return int(sum(valores) / len(valores) )
+        if len(valores) != 0:
+            return int(sum(valores) / len(valores) )
+        return int(sum(valores))
 
 
     def convertendo_str_in_dict(self, str):

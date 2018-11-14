@@ -69,11 +69,8 @@ class Relatorio(object):
         vezes = []
         for i in self.pontuacao:
             vezes.append(len(i))
-            try:
+            if len(i) !=0:
                 porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
-            except Exception as e:
-                print('rel 75 al', e)
-
         self.vezes_jogada = vezes
         self.porcentagem = porcentagem
 
@@ -91,9 +88,9 @@ class Relatorio(object):
                 pontuacao = []
                 for z in i['jogo_jogado']:
                     dict_dado_jogo = self.convertendo_str_in_dict(z)
-                    if type(dict_dado_jogo) is list:
+                    if isinstance(dict_dado_jogo, list):
                         pass
-                    elif dict_dado_jogo['termino'] == True:
+                    if dict_dado_jogo['termino'] == True:
                         pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
                 dicionario.append(pontuacao)
 
