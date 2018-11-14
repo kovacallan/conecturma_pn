@@ -32,15 +32,22 @@ def relatorio_aluno(no_repeat=False):
             try:
                 nota.append(str(z['media'][index]))
             except IndexError:
-                pass
+                nota.append(0)
         notas.append(nota)
+
     por = []
     for i in porcentagem:
         if i != -1:
             por.append(i)
     porcentagem = por
 
+
     return template(path_template + 'relatorio_turma_detalhe', media_geral=relatorio.media_geral(porcentagem),
                     media_portugues = relatorio.media_portugues(pontuacao=porcentagem),
                     media_matematica=relatorio.media_matematica(porcentagem), tipo=observador.get_observador_tipo(),
                     alunos=alunos, notas=notas, turma=turma,oa=descritores, porcentagem=porcentagem, teste_serie = SERIE)
+
+
+@route('/ordenar/GraficoRelatorio', method='POST')
+def reordenar_grafico_relatorio():
+    pass

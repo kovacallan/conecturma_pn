@@ -99,6 +99,7 @@ function grafico_turma(id, alunos, notas){
 
     lista = []
     bg_color =  []
+    
     for(i = 0; i<notas.length; i++){
         if (notas[i] != -1)
             lista.push(notas[i]);
@@ -115,8 +116,10 @@ function grafico_turma(id, alunos, notas){
             bg_color.push('rgb(255, 0, 0)');
         }
     }
+
     lista.push(0);
     lista.push(100);
+    
     var ctx = document.getElementById('myChart_'+id).getContext('2d');
     var options = {
             title : {

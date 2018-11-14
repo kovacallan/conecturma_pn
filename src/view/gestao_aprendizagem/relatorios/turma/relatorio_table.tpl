@@ -31,10 +31,16 @@
                 <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
                     <div class="col-md-12" style="margin-top: 15px;">
                         <span class="word">Média da turma: {{int(porcentagem[teste])}}</span>
-
+                        <select id="ordenarGraficoRelatorio_grafico{{i['id']}}" onchange="ordenarGraficoRelatorio('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}})">
+                            <option value="1">Ordenar por ordem alfabética</option>
+                            <option value="2">Ordenar pela menor nota</option>
+                            <option value="3">Ordenar pela maior nota</option>
+                        </select>
                     </div>
-                     
-                <canvas id="myChart_grafico{{i['id']}}"></canvas> </div> </td>
+                    <div id="grafico_grafico{{i['id']}}">
+                        <canvas id="myChart_grafico{{i['id']}}"></canvas> 
+                    </div> 
+                </td>
             </tr>
           % else:
             <tr>

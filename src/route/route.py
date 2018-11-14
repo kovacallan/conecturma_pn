@@ -128,7 +128,7 @@ def buy_item(no_repeat=False):
     else:
         return '0'
 
-
+#GETUNICODE PARA ARMEZANAR PALAVRAS COM ACENTO
 @route('/equipar_item', method='POST')
 @permissao('aluno_varejo')
 def equip_item(no_repeat=False):
@@ -140,7 +140,7 @@ def equip_item(no_repeat=False):
         if i != 'apelido':
             item.append(facade.search_estrutura_id_facade(id=request.params[i]))
     if request.params['apelido'] != '0' or request.params['apelido'] != "" or request.params['apelido'] != None:
-        facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])
+        facade.set_apelido_facade(id=usuario['id'], apelido=request.params.getunicode('apelido'))
     facade.equipar_item_facade(id=usuario['id'], itens=item)
 
 
@@ -505,13 +505,18 @@ def relatorio_aluno(no_repeat=False):
     relatorio.set_pontuacao_porcentagem()
     ultima_vez = []
     for i in relatorio.pontuacao:
-        print('reoute 508',i)
-        try:
+        if len(i) != 0:
             ultima_vez.append(int((i[-1] * 100) / 2))
-        except Exception as r:
-            print('route 511',r)
+
+    pontos = []
+    for index,t in enumerate(relatorio.porcentagem_solo):
+        if len(t) > 10:
+            pontos.append(t[(len(t) - 10): len(t)])
+        else:
+            pontos.append(t)
+
     return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
+                pontos=pontos, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
 
 
 @route('/trazer_oas')
@@ -529,8 +534,18 @@ def levar_oas_matematica():
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
 
-    return dict(oa=relatorio.descritores, aluno=aluno, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo)
+    pontos = relatorio.porcentagem_solo[(len(relatorio.porcentagem_solo)-10): len(relatorio.porcentagem_solo)]
+
+    ultima_vez = []
+    for i in relatorio.pontuacao:
+        if len(i) != 0:
+            ultima_vez.append(int((i[-1] * 100) / 2))
+
+    print("Aqui Allan", len(relatorio.descritores))
+    return dict(oa=relatorio.descritores, aluno=aluno, porcentagem=relatorio.porcentagem, pontos=pontos, vezes=relatorio.vezes_jogada,
+                ultima_vez = ultima_vez)
+
+
 
 
 """
