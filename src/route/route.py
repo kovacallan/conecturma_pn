@@ -507,7 +507,7 @@ def relatorio_aluno(no_repeat=False):
     for i in relatorio.pontuacao:
         if len(i) != 0:
             ultima_vez.append(int((i[-1] * 100) / 2))
-
+            
     return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
 

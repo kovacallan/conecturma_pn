@@ -71,7 +71,6 @@ class Relatorio(object):
             vezes.append(len(i))
             if len(i) !=0:
                 porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
-        print("Teste porcentage", self.pontuacao)
         self.vezes_jogada = vezes
         self.porcentagem = porcentagem
 
