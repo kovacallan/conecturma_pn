@@ -598,6 +598,7 @@
                     bloco_visivel ++;
                     if(bloco_visivel == total_blocos){
                         document.getElementById('left_button_'+elemento).style.display = 'block';
+                        document.getElementById('right_button_'+elemento).style.display='none';
                     }
                 }
             }
