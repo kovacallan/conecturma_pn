@@ -99,6 +99,9 @@ function grafico_turma(id, alunos, notas){
 
     lista = []
     bg_color =  []
+
+    console.log(notas);
+    
     for(i = 0; i<notas.length; i++){
         if (notas[i] != -1)
             lista.push(notas[i]);

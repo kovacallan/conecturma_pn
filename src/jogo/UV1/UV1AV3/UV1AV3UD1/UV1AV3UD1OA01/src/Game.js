@@ -782,11 +782,11 @@ BasicGame.Game.prototype.extends = {
             break;
             case 0: // toca som de resumo
                 this.lives = 0;
-
-                this.createDelayTime(500, function() {
+                console.log("cabo as vidas");
+                //this.createDelayTime(500, function() {
                     this.hideLevel();
                     this.showResumo(); 
-                });
+                //});
                 
             break;
         }

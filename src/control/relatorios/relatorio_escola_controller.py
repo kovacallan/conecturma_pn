@@ -50,7 +50,9 @@ class RelatorioEscola(object):
         return alunos
 
     def media(self, ponto, esperado):
-        return int((ponto * 100)/esperado)
+        if esperado != 0:
+            return int((ponto * 100)/esperado)
+        return int(ponto * 100)
 
     def get_pontuacao_turma(self, medias):
         lista = []
@@ -95,7 +97,9 @@ class RelatorioEscola(object):
 
         for z in jogo_jogado:
             dict_dado_jogo = self.convertendo_str_in_dict(z)
-            if dict_dado_jogo['termino'] == True:
+            if isinstance(dict_dado_jogo, list):
+                pass
+            elif dict_dado_jogo['termino'] == True:
                 pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
 
         self._pontuacao = pontuacao

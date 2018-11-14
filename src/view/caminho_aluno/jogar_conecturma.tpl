@@ -49,7 +49,7 @@
     <div class="row">
         <div class="col-md-3 avatar-std">
 
-            <div class="avatar_usuario" style="position: absolute;">
+            <div class="avatar_usuario" style="position:absolute;">
                 <a href="/aluno/guarda_roupa">
                 %if cor != '0':
                     <img src="/static/img/body/2{{cor}}" style="z-index: 11; position: relative;width: 80%; bottom: 77px; right: 26px;">
@@ -233,7 +233,9 @@
         function enviarRequisicaoAjax(parametros, callbackSucesso, callbackErro) {
 
             HOST = 'http://localhost:8080/'
+
            // HOST = 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com/'
+
           console.log("enviarRequisicaoAjax parametros", parametros);
             console.log(parametros.operacao);
             var jqXhr = jQuery.ajax({
