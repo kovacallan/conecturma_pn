@@ -734,8 +734,10 @@
             }
 
            function resetar_avatar(){
-                 $("#avatar_usuario").append("<img id='' src='/static/img/body/avatar-naked.png'>");
-
+                avatar_nu = '<img id="avatar" src="/static/img/body/avatar-naked.png">';
+                elemento = document.getElementById('avatar_usuario');
+                elemento.removeChild(elemento.childNodes[0]);
+                $("#avatar_usuario").append(avatar_nu);
             }
         </script>
     </body>
