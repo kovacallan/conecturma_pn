@@ -15,7 +15,7 @@
                             <li class="c"><a href="/aluno/area_aluno"></a></li>
                             <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
                             <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
-                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
+                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>
                             <li class="sair offset-md-1"><a href="/sair"></a></li>
                         </ul>
                     </div>
