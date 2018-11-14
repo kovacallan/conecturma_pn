@@ -41,7 +41,7 @@
                                 <div class="pass col-md container">
                                     <br>
                                     <span class="pass-title">Senha</span>
-                                    <img src="/static/img/btn-interrogacao.png" id="btn-interrogacao" class="img-fluid" alt="Responsive image">
+                                    <img src="/static/img/btn-interrogacao.png" id="btn-interrogacao" class="img-fluid" alt="Responsive image" data-toggle="tooltip" data-placement="right" title="Informar senha do aluno">
 
                                     <div class="cartoons-pass">
 

@@ -89,7 +89,26 @@
         }
 </script>
 
+<script>
 
+ console.log('Total width/height: ' + screen.width + 'x' + screen.height);
+    width = screen.width;
+    height = screen.height;
+
+
+    if (width <= 800 || height <= 600)
+    {
+    alert("A resolução da tela do seu monitor é " + width + "x" + height + ". Para visualizar o site é recomendado uma resolução de no mínimo 1024x768.");
+     $( "div" ).remove();
+     $( "footer" ).remove();
+     $("body").append("<header style='background-color: #0391E6;'><div align='center' style='padding-bottom: 14px;'><img  src='/static/img/conecturma-logo.png' id='conecturma-logo' class='img img-fluid'></div></header");
+     $("body").append("<main align='center'>Mas se quiser ver como está ficando clique no link</main>");
+     $("body").append("<footer style='position: absolute; bottom: 0px; background-color: #bed7ea;width: 100%; padding-bottom: 21px; padding-top:5px;margin-top: 10px;'><h4 id='footer-text' align='center' style='font-size:18.12px;  font-family:'Calibri';color:#9bacba; font-weight:lighter;'>Políticas de privacidade | copyright 2018</h4></footer>");
+    }
+
+
+
+</script>
 
 <!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
 
