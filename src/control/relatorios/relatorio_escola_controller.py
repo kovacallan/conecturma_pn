@@ -85,7 +85,9 @@ class RelatorioEscola(object):
         return self._pontuacao_escola
 
     def calc_media_escola(self, valores):
+        print("calc_media_escola",valores)
         return sum(valores) / len(valores)
+
     def convert_nivel_for_numeric(self, jogo_jogado):
         niveis_pontuação = {
             'dificil': 2,

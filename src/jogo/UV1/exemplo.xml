@@ -44,7 +44,7 @@
 									<Nome>Treinando a leitura com a Poly</Nome>
 									<Descricao>Alunos poderão treinar a capacidade de identificar letras maiúsculas usando a personagem Poly</Descricao>
 									<Sigla>UV1AV2UD1OA01</Sigla>
-									<NivelMinimoAprovacao></NivelMinimoAprovacao>
+									<NivelMinimoAprovacao>f</NivelMinimoAprovacao>
 									<Tipo>Video</Tipo>
 									<Descritor>PORT0001</Descritor>
 								</Oa>
@@ -52,7 +52,7 @@
 									<Nome>Treinando a escrita</Nome>
 									<Descricao>Alunos poderão treinar a leitura</Descricao>
 									<Sigla>UV1AV2UD1OA02</Sigla>
-									<NivelMinimoAprovacao></NivelMinimoAprovacao>
+									<NivelMinimoAprovacao>f</NivelMinimoAprovacao>
 									<Tipo>Video</Tipo>
 									<Descritor>PORT0002</Descritor>
 								</Oa>
@@ -67,7 +67,7 @@
 									<Nome>Treinando a leitura com a Poly</Nome>
 									<Descricao>Alunos poderão treinar a capacidade de identificar letras maiúsculas usando a personagem Poly</Descricao>
 									<Sigla>UV1AV2UD2OA01</Sigla>
-									<NivelMinimoAprovacao></NivelMinimoAprovacao>
+									<NivelMinimoAprovacao>f</NivelMinimoAprovacao>
 									<Tipo>Video</Tipo>
 									<Descritor>PORT0001</Descritor>								
 								</Oa>

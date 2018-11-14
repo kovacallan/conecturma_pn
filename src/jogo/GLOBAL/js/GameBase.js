@@ -154,16 +154,16 @@ BasicGame.GameBase.prototype = {
         var hud = this.add.group();
         this.add.sprite(0,0, "hud", 0, hud);
 
-        this.livesTextShadow = this.add.bitmapText(111,36, "lucky32", this.lives.toString(), 18);
-        this.livesTextShadow.tint = 0x010101;
-        this.livesText = this.add.bitmapText(110,35, "lucky32", this.lives.toString(), 18);
+//        this.livesTextShadow = this.add.bitmapText(111,36, "lucky32", this.lives.toString(), 18);
+//        this.livesTextShadow.tint = 0x010101;
+//        this.livesText = this.add.bitmapText(110,35, "lucky32", this.lives.toString(), 18);
 
-        hud.add(this.livesTextShadow);
-        hud.add(this.livesText);
+//        hud.add(this.livesTextShadow);
+//        hud.add(this.livesText);
 
-        this.pointsTextShadow = this.add.bitmapText(51,102, "lucky32", BasicGame.Pontuacao.moedas.toString(), 18);
+        this.pointsTextShadow = this.add.bitmapText(73,84, "lucky32", BasicGame.Pontuacao.moedas.toString(), 18);
         this.pointsTextShadow.tint = 0x010101;
-        this.pointsText = this.add.bitmapText(50,101, "lucky32", BasicGame.Pontuacao.moedas.toString(), 18);
+        this.pointsText = this.add.bitmapText(72,83, "lucky32", BasicGame.Pontuacao.moedas.toString(), 18);
 
         hud.add(this.pointsTextShadow);
         hud.add(this.pointsText);
@@ -173,7 +173,7 @@ BasicGame.GameBase.prototype = {
         var _xp = this.add.bitmapText(30,190, "lucky32", BasicGame.Pontuacao.xp.toString(), 18);
 
         hud.add(coin);
-        hud.add(_xp);
+//        hud.add(_xp);
 
         return hud;
     },
@@ -688,10 +688,16 @@ showTextVictory: function() {
 
         var _this = this;
         BasicGame.OnlineAPI.registrarConclusao(this.listCorrects, function(data) {
-            _this.createDelayTime(500, _this.backButton);
-            return; //Parte de voltar ao mapa pelo botao
+            _this.createDelayTime(500, _this.backButton); //Parte de voltar ao mapa pelo botao
         }, function(error) {
-            console.log('ERRO?',error);
+
+            _this.eventConclusao = new Phaser.Signal();
+            _this.time.events.removeAll();
+            _this.tweens.removeAll();
+            _this.tweenBack();
+            //_this.registrarConclusao(true);
+
+
 
         });
 
