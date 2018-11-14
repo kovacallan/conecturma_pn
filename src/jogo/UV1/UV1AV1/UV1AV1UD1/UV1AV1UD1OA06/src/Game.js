@@ -171,9 +171,9 @@ BasicGame.Game.prototype = {
 //        this.livesTextShadow.tint = 0x010101;
 //        this.livesText = this.add.bitmapText(110,35, "JandaManateeSolid", this.lives.toString(), 18);
 
-        this.pointsTextShadow = this.add.bitmapText(81,82, "JandaManateeSolid", BasicGame.Pontuacao.moedas.toString(), 18);
+        this.pointsTextShadow = this.add.bitmapText(73,84, "JandaManateeSolid", BasicGame.Pontuacao.moedas.toString(), 18);
         this.pointsTextShadow.tint = 0x010101;
-        this.pointsText = this.add.bitmapText(80,81, "JandaManateeSolid", BasicGame.Pontuacao.moedas.toString(), 18);
+        this.pointsText = this.add.bitmapText(72,83, "JandaManateeSolid", BasicGame.Pontuacao.moedas.toString(), 18);
 
         var _cVal = 0;// this.rnd.integerInRange(100,999);
         var coin = this.add.bitmapText(31,191, "JandaManateeSolid", BasicGame.Pontuacao.xp.toString(), 18);
