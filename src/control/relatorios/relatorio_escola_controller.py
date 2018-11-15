@@ -85,7 +85,6 @@ class RelatorioEscola(object):
         return self._pontuacao_escola
 
     def calc_media_escola(self, valores):
-        print("calc_media_escola",valores)
         return sum(valores) / len(valores)
 
     def convert_nivel_for_numeric(self, jogo_jogado):
@@ -113,7 +112,7 @@ class RelatorioEscola(object):
         for index,i in enumerate(pontuacao):
             if (index+1) % 2 == 0:
                 media_portugues.append(i)
-        print(media_portugues)
+
         return self.calc_media(valores=media_portugues)
 
     def media_matematica(self,pontuacao):
@@ -121,7 +120,6 @@ class RelatorioEscola(object):
         for index,i in enumerate(pontuacao):
             if (index+1) % 2 != 0:
                 media_matematica.append(i)
-        print(media_matematica)
         return self.calc_media(valores=media_matematica)
 
     def media_geral(self,pontuacao):

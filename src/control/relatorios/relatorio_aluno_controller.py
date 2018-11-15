@@ -97,6 +97,21 @@ class Relatorio(object):
 
         self.pontuacao = dicionario
 
+    def nova_pontuacao(self):
+        nota={
+            '2': 100,
+            '1':50,
+            '0':5,
+        }
+        nova_pontuacao = []
+        for i in self.pontuacao:
+            t = []
+            for z in i:
+                t.append(nota[str(z)])
+            nova_pontuacao.append(t)
+
+        return nova_pontuacao
+
     def set_pontuacao_porcentagem(self):
         for i in self.pontuacao:
             tamanho = len(i)

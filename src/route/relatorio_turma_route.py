@@ -15,6 +15,7 @@ def relatorio_turma_view(no_repeat=False):
 
 
 @route('/relatorios/visualizar_relatorio_turma')
+@permissao('professor')
 def relatorio_aluno(no_repeat=False):
     observador = Observador(observador_logado=usuario_logado())
     relatorio = RelatorioTurma()
@@ -48,6 +49,3 @@ def relatorio_aluno(no_repeat=False):
                     alunos=alunos, notas=notas, turma=turma,oa=descritores, porcentagem=porcentagem, teste_serie = SERIE)
 
 
-@route('/ordenar/GraficoRelatorio', method='POST')
-def reordenar_grafico_relatorio():
-    pass
