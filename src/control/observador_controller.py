@@ -17,25 +17,31 @@ class Observador(object):
     def get_observador_tipo(self):
         return self._observador_tipo
 
-    def get_rede(self):
+    def get_rede(self, id_rede=None):
         if(self._observador_tipo == TIPO_USUARIOS['administrador']):
-            self._rede = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
+            if(id_rede == None):
+                self._rede = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['rede'])
+            else:
+                self._rede = self.facade.search_estrutura_id_facade(id=id_rede)
         else:
             self._rede = self.facade.search_estrutura_id_facade(id=self._rede)
+
         return self._rede
 
-    def get_escola(self, id_escola=None):
-        if (self._observador_tipo == TIPO_USUARIOS['administrador']):
-            if id_escola == None:
-                self._escola = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+    def get_escola(self, id_escola=None, id_rede=None):
+        if(id_rede == None):
+            if (self._observador_tipo == TIPO_USUARIOS['administrador']):
+                if id_escola == None:
+                    self._escola = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
+                else:
+                    self._escola = self.facade.search_estrutura_id_facade(id=id_escola)
+
+            elif (self._observador_tipo == TIPO_USUARIOS['gestor']):
+                self._escola = self.facade.search_estrutura_escola_by_rede_facade(vinculo_rede=self.get_rede()['id'])
             else:
-                self._escola = self.facade.search_estrutura_id_facade(id=id_escola)
-
-        elif (self._observador_tipo == TIPO_USUARIOS['gestor']):
-            self._escola = self.facade.search_estrutura_escola_by_rede_facade(vinculo_rede=self.get_rede()['id'])
+                self._escola = self.facade.search_estrutura_id_facade(id=self._escola)
         else:
-            self._escola = self.facade.search_estrutura_id_facade(id=self._escola)
-
+            self._escola = self.facade.search_estrutura_escola_by_rede_facade(vinculo_rede=id_rede)
         return self._escola
 
     def get_turma(self,id_turma = None, serie = None, id_escola = None):

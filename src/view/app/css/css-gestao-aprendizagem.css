@@ -276,7 +276,7 @@ display:inline;
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	background-color: #BED7EA;
+	background-color: #3cabd0;
 	color: white;
 	text-align: center;
 }
@@ -345,9 +345,12 @@ background-color: #0391E6;
 }
 
 footer{
-
-position: relative; bottom: 0px; background-color: #bed7ea;width: 100%; padding-bottom: 1px; padding-top:5px;margin-top: 10px;
-
+    bottom: 0px;
+    background-color: #3cabd0;
+    width: 100%;
+    padding-bottom: 1px;
+    padding-top:5px;
+    margin-top: 10px;
 }
 
 .printar {

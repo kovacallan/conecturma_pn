@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css.map">
         <link rel="stylesheet" type="text/css" href="/static/style_loja.css">
+        <meta charset="utf-8">
     </head>    
     <body>
         <div class="bg_ground">
@@ -15,7 +16,7 @@
                             <li class="c"><a href="/aluno/area_aluno"></a></li>
                             <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
                             <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
-                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
+                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>
                             <li class="sair offset-md-1"><a href="/sair"></a></li>
                         </ul>
                     </div>
@@ -364,15 +365,21 @@
                                 </div>
                             </div>
                             <div class="botoes" style="top: 102%;">
-                                <a href="/"  onclick="salvar_avatar()" >
+                                <a href="/"  onclick="salvar_avatar()">
                                     <img  src="/static/img/bt-voltar.png" style="cursor:pointer;">
                                 </a>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+          <div class="" style="top: 106%;left: 1;">
+                                <a href="#"  onclick="resetar_avatar()" >
+                                    RESETAR
+                                </a>
+                            </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script>
@@ -598,6 +605,7 @@
                     bloco_visivel ++;
                     if(bloco_visivel == total_blocos){
                         document.getElementById('left_button_'+elemento).style.display = 'block';
+                        document.getElementById('right_button_'+elemento).style.display='none';
                     }
                 }
             }
@@ -726,12 +734,11 @@
 
             }
 
-            function resetar_avatar(acessorio, body, id){
-              acessorio = acessorio.toLowerCase();
-              body = body.toLoweCase();
-
-                $("#avatar-itens-acessorios").remove();
-
+           function resetar_avatar(){
+                avatar_nu = '<img id="avatar" src="/static/img/body/avatar-naked.png">';
+                elemento = document.getElementById('avatar_usuario');
+                elemento.removeChild(elemento.childNodes[0]);
+                $("#avatar_usuario").append(avatar_nu);
             }
         </script>
     </body>

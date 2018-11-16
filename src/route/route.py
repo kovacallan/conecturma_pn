@@ -3,6 +3,7 @@
 from bottle import view, get, post, redirect
 from route.relatorio_turma_route import *
 from route.relatorio_escola_route import *
+from route.relatorio_rede_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
@@ -128,7 +129,7 @@ def buy_item(no_repeat=False):
     else:
         return '0'
 
-
+#GETUNICODE PARA ARMEZANAR PALAVRAS COM ACENTO
 @route('/equipar_item', method='POST')
 @permissao('aluno_varejo')
 def equip_item(no_repeat=False):
@@ -140,7 +141,7 @@ def equip_item(no_repeat=False):
         if i != 'apelido':
             item.append(facade.search_estrutura_id_facade(id=request.params[i]))
     if request.params['apelido'] != '0' or request.params['apelido'] != "" or request.params['apelido'] != None:
-        facade.set_apelido_facade(id=usuario['id'], apelido=request.params['apelido'])
+        facade.set_apelido_facade(id=usuario['id'], apelido=request.params.getunicode('apelido'))
     facade.equipar_item_facade(id=usuario['id'], itens=item)
 
 
@@ -474,7 +475,7 @@ def descritores():
 
 
 @route('/relatorios/aluno')
-# @permissao('professor')
+@permissao('responsavel')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno')
 @permissao('professor')
 def relatorio_aluno_view(no_repeat=False):
@@ -488,6 +489,7 @@ def relatorio_aluno_view(no_repeat=False):
 
 
 @route('/relatorios/visualizar_relatorio_aluno')
+@permissao('responsavel')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe')
 def relatorio_aluno(no_repeat=False):
     from bottle import request
@@ -508,8 +510,14 @@ def relatorio_aluno(no_repeat=False):
         if len(i) != 0:
             ultima_vez.append(int((i[-1] * 100) / 2))
 
+    pontos = []
+    for index,t in enumerate(relatorio.porcentagem_solo):
+        if len(t) > 10:
+            pontos.append(t[(len(t) - 10): len(t)])
+        else:
+            pontos.append(t)
     return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
+                pontos=relatorio.nova_pontuacao(), vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
 
 
 @route('/trazer_oas')
@@ -527,8 +535,18 @@ def levar_oas_matematica():
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
 
-    return dict(oa=relatorio.descritores, aluno=aluno, porcentagem=relatorio.porcentagem,
-                pontos=relatorio.porcentagem_solo)
+    pontos = relatorio.porcentagem_solo[(len(relatorio.porcentagem_solo)-10): len(relatorio.porcentagem_solo)]
+
+    ultima_vez = []
+    for i in relatorio.pontuacao:
+        if len(i) != 0:
+            ultima_vez.append(int((i[-1] * 100) / 2))
+
+    print("Aqui Allan", len(relatorio.descritores))
+    return dict(oa=relatorio.descritores, aluno=aluno, porcentagem=relatorio.porcentagem, pontos=pontos, vezes=relatorio.vezes_jogada,
+                ultima_vez = ultima_vez)
+
+
 
 
 """

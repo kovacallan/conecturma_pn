@@ -2,7 +2,7 @@
 
 {
 	"filename": "hud",
-	"frame": {"x":2,"y":182,"w":146,"h":237},
+	"frame": {"x":4,"y":184,"w":146,"h":237},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":146,"h":237},

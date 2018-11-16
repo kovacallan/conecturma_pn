@@ -105,6 +105,12 @@
             font-size: 12px;
             color: #777;
           }
+
+          footer{
+
+           position: absolute;
+
+          }
       </style>
       <div class="modal-body">
           <form id="image_form" method="POST" enctype="multipart/form-data" action="/upload_img">
@@ -128,6 +134,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 <script src="../static/js/icropper.js"></script>

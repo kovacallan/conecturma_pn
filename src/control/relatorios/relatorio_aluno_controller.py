@@ -71,7 +71,6 @@ class Relatorio(object):
             vezes.append(len(i))
             if len(i) !=0:
                 porcentagem.append(int((sum(i) * 100)/(2 * len(i))))
-        print("Teste porcentage", self.pontuacao)
         self.vezes_jogada = vezes
         self.porcentagem = porcentagem
 
@@ -88,14 +87,31 @@ class Relatorio(object):
             if i != None:
                 pontuacao = []
                 for z in i['jogo_jogado']:
-                    dict_dado_jogo = self.convertendo_str_in_dict(z)
+                    dict_dado_jogo = self.convertendo_str_in_dict(z)    
                     if isinstance(dict_dado_jogo, list):
-                        pass
+                        if len(dict_dado_jogo) != 0:
+                            pontuacao.append(niveis_pontuação[dict_dado_jogo[-1]['nivel']])
+
                     elif dict_dado_jogo['termino'] == True:
                         pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
                 dicionario.append(pontuacao)
 
         self.pontuacao = dicionario
+
+    def nova_pontuacao(self):
+        nota={
+            '2': 100,
+            '1':50,
+            '0':5,
+        }
+        nova_pontuacao = []
+        for i in self.pontuacao:
+            t = []
+            for z in i:
+                t.append(nota[str(z)])
+            nova_pontuacao.append(t)
+
+        return nova_pontuacao
 
     def set_pontuacao_porcentagem(self):
         for i in self.pontuacao:

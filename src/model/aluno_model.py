@@ -131,6 +131,7 @@ class DbAluno(Model):
                     nome_login= search.nome_login
                 )
             )
+
         return alunos
 
     def search_aluno_by_escola(self, escola):

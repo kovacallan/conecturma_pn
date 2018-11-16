@@ -1,6 +1,12 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="relatorio_aluno.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
+<style>
+    footer{
 
+        position:absolute;
+
+    }
+</style>
 <div class="col-md-9 order-md-2" style="margin-top: 6px;">
     <div class="col-md text-rel" style="padding-left:0px;">
         <h2>Selecione o Aluno</h2>
