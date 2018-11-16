@@ -733,10 +733,14 @@
 
             }
 
-           function resetar_avatar(){
-                 $("#avatar_usuario").append("<img id='' src='/static/img/body/avatar-naked.png'>");
+        function resetar_avatar(){
+           var myNode = document.getElementById("avatar_usuario");
+           while (myNode.firstChild) {
+           myNode.removeChild(myNode.firstChild);
+                                        }
+             $("#avatar_usuario").append("<img id='' src='/static/img/body/avatar-naked.png' style='position: relative;bottom: 0px;'>");
 
-            }
+                                        }
         </script>
     </body>
 </html>
