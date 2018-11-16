@@ -20,7 +20,7 @@
                         <img src="/static/img/feed-pos.png" style="display: block; margin-left: auto; margin-right: auto">
                     %elif int(porcentagem[teste]) >= 50 and int(porcentagem[teste]) <= 69:
                         <img src="/static/img/feed-med.png" style="display: block; margin-left: auto; margin-right: auto">
-                    %elif int(porcentagem[teste]) >= 0 and int(porcentagem[teste]) <= 49:
+                    %elif int(porcentagem[teste]) >= 5 and int(porcentagem[teste]) <= 49:
                         <img src="/static/img/feed-neg.png" style="display: block; margin-left: auto; margin-right: auto">
                     %end
                 </td>
@@ -30,9 +30,15 @@
                     <div id="grafico{{i['id']}}" class="accordian-body collapse grafico{{i['id']}}">
                         <div class="col-md-12" style="margin-top: 15px;">
                             <span class="word">Média da escola: {{int(porcentagem[teste])}}</span>
+                            <select id="ordenarGraficoRelatorio_grafico{{i['id']}}" onchange="ordenarGraficoRelatorio('grafico{{i['id']}}', {{turma}}, {{notas[teste]}})">
+                                <option value="1">Ordenar por ordem alfabética</option>
+                                <option value="2">Ordenar pela menor nota</option>
+                                <option value="3">Ordenar pela maior nota</option>
+                            </select>
                         </div>
-
-                        <canvas id="myChart_grafico{{i['id']}}"></canvas>
+                        <div id="grafico_grafico{{i['id']}}">
+                            <canvas id="myChart_grafico{{i['id']}}"></canvas>
+                        </div>
                     </div>
                 </td>
             </tr>

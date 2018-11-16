@@ -16,8 +16,8 @@
         </div>
         <div>
             Média geral: {{media_geral}} ,
-            Média geral Língua Portuguesa:{{media_portugues}} ,
-            Média geral Matemática:{{media_matematica}}
+            Média Língua Portuguesa:{{media_portugues}} ,
+            Média Matemática:{{media_matematica}}
         </div>
 
         <div class="container offset-md-8" style="position:relative; right:27px;">

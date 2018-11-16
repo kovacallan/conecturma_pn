@@ -6,8 +6,8 @@ BasicGame.OnlineAPI = {
 
 
 
-//	HOST_PLATAFORMA: 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com',
-	HOST_PLATAFORMA: 'http://localhost:8080/aluno/area_aluno',
+	HOST_PLATAFORMA: 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com',
+//	HOST_PLATAFORMA: 'http://localhost:8080/aluno/area_aluno',
 
 
 
@@ -36,6 +36,9 @@ BasicGame.OnlineAPI = {
             var parametrosOriginais = _this.mapaChamadasFuncoes[resposta.uuid];
             console.log("resposta",resposta);
             console.log("parametrosOriginais",parametrosOriginais);
+
+            resposta['xp']=" ";
+
 
             if (resposta.tipoErro || (resposta.mensagensErro && resposta.mensagensErro.length > 0)) {
                 if (!parametrosOriginais.erro) {

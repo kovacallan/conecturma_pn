@@ -7,7 +7,7 @@ path_template = 'gestao_aprendizagem/relatorios/escola/'
 
 
 @route('/relatorios/escola')
-@permissao('professor')
+@permissao('diretor')
 def relatorio_turma_view(no_repeat=False):
     observador = Observador(observador_logado=usuario_logado())
     return template(path_template + 'relatorio_escola', tipo=observador.get_observador_tipo(),
@@ -15,6 +15,7 @@ def relatorio_turma_view(no_repeat=False):
 
 
 @route('/relatorios/visualizar_relatorio_escola')
+@permissao('diretor')
 def relatorio_aluno(no_repeat=False):
     observador = Observador(observador_logado=usuario_logado())
     relatorio = RelatorioEscola()
@@ -30,7 +31,8 @@ def relatorio_aluno(no_repeat=False):
         for z in relatorio.get_pontuacao_turma(medias=media_alunos):
             if z != -1:
                 i['media'].append(int(z))
-
+            else:
+                i['media'].append(0)
         turma.append(i)
     media_escola = relatorio.get_media_escola(turma_media=turma, descritor=descritores)
 
@@ -53,6 +55,7 @@ def relatorio_aluno(no_repeat=False):
                     porcentagem=media_escola, oa=descritores)
 
 @route('/relatorios/selecao_serie')
+@permissao('diretor')
 def selecao_serie():
     observador = Observador(observador_logado=usuario_logado())
 

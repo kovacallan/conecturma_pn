@@ -16,7 +16,7 @@
                             <li class="c"><a href="/aluno/area_aluno"></a></li>
                             <li class="ambiente"><a href="/gestao_aprendizagem"></a></li>
                             <li class="facebook offset-md-1"><a href="https://www.facebook.com/conecturmaoficial/" target="_blank"></a></li>
-                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>'
+                            <li class="youtube offset-md-1"><a href="https://www.youtube.com/conecturma" target="_blank"></a></li>
                             <li class="sair offset-md-1"><a href="/sair"></a></li>
                         </ul>
                     </div>
@@ -605,6 +605,7 @@
                     bloco_visivel ++;
                     if(bloco_visivel == total_blocos){
                         document.getElementById('left_button_'+elemento).style.display = 'block';
+                        document.getElementById('right_button_'+elemento).style.display='none';
                     }
                 }
             }
@@ -733,6 +734,7 @@
 
             }
 
+
         function resetar_avatar(){
            var myNode = document.getElementById("avatar_usuario");
            while (myNode.firstChild) {
@@ -741,6 +743,7 @@
              $("#avatar_usuario").append("<img id='' src='/static/img/body/avatar-naked.png' style='position: relative;bottom: 0px;'>");
 
                                         }
+
         </script>
     </body>
 </html>

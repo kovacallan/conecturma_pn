@@ -1,9 +1,17 @@
 %include('gestao_aprendizagem/header/header.tpl', title="Gestão Aprendizagem", css="relatorio_aluno.css")
 %include('gestao_aprendizagem/menu/menu.tpl')
 
+<style>
+    footer{
+
+        position:absolute;
+
+    }
+</style>
+
 <div class="col-md-9 order-md-2" style="margin-top: 6px;">
     <div class="col-md text-rel" style="padding-left:0px;">
-        <h2>Selecione a Escola</h2>
+        <h2>Selecione a Rede</h2>
     </div>
 
     <table class="table table-bordered" style="margin-top:0;">
@@ -14,15 +22,15 @@
     </thead>
 
     <tbody style="background-color:#f3f3f3;">
-        % if isinstance(escola, list):
-            % for i in escola:
+        % if isinstance(rede, list):
+            % for i in rede:
               <tr class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{i['id']}})">
                 <td colspan="2">{{i['nome']}}</td>
               </tr>
             % end
         % else:
             <tr  class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{escola['id']}})">
-                <td colspan="2">{{escola['nome']}}</td>
+                <td colspan="2">{{rede['nome']}}</td>
             </tr>
         %end
     </tbody>
@@ -31,7 +39,7 @@
 </div>
 <script>
     function redirect_vizualizar_relatorio(id){
-        window.location.replace("/relatorios/selecao_serie?id="+id);
+        window.location.replace("/relatorios/selecao_serie_rede?id="+id);
     }
 
 </script>

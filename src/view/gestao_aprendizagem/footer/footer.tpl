@@ -1,10 +1,10 @@
-    </div>
+<div id="footer"></div>
 </div>
 
  <footer>
-        <h4 id="footer-text" align="center" style="font-size: 18.12px;  font-family: 'Calibri';color: #9bacba;font-weight: lighter;">
-
-     Políticas de privacidade | copyright 2018  </h4>
+    <h4 id="footer-text" align="center" style   ="font-size: 18.12px;  font-family: 'Calibri';color: #fff; font-weight: lighter;">
+        Políticas de privacidade | copyright 2018
+    </h4>
  </footer>
 <script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
 <script type="text/javascript" src="../static/js/Chart.min.js"></script>
