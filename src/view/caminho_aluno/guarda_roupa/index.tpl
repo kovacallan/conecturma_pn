@@ -734,12 +734,16 @@
 
             }
 
-           function resetar_avatar(){
-                avatar_nu = '<img id="avatar" src="/static/img/body/avatar-naked.png">';
-                elemento = document.getElementById('avatar_usuario');
-                elemento.removeChild(elemento.childNodes[0]);
-                $("#avatar_usuario").append(avatar_nu);
-            }
+
+        function resetar_avatar(){
+           var myNode = document.getElementById("avatar_usuario");
+           while (myNode.firstChild) {
+           myNode.removeChild(myNode.firstChild);
+                                        }
+             $("#avatar_usuario").append("<img id='' src='/static/img/body/avatar-naked.png' style='position: relative;bottom: 0px;'>");
+
+                                        }
+
         </script>
     </body>
 </html>
