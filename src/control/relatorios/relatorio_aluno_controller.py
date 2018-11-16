@@ -91,6 +91,7 @@ class Relatorio(object):
                     if isinstance(dict_dado_jogo, list):
                         if len(dict_dado_jogo) != 0:
                             pontuacao.append(niveis_pontuação[dict_dado_jogo[-1]['nivel']])
+
                     elif dict_dado_jogo['termino'] == True:
                         pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
                 dicionario.append(pontuacao)
