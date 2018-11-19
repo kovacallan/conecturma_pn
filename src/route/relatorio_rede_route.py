@@ -14,6 +14,7 @@ def relatorio_turma_view(no_repeat=False):
 @route('/relatorios/visualizar_relatorio_rede')
 def relatorio_aluno(no_repeat=False):
     pass
+
 @route('/relatorios/selecao_serie')
 def selecao_serie():
     pass

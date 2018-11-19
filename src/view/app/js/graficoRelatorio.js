@@ -23,7 +23,7 @@ function seta(ide){
 
 }
 
-function grafico(ide, pontos){
+function grafico(ide, pontos){//grafico aluno
     window.onclick = function(event) {
       if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -42,7 +42,7 @@ function grafico(ide, pontos){
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação",
+                text : "Desempenho das últimas 10 vezes jogadas",
                 fontSize : 18,
                 fontColor : "#111"
             },
@@ -125,7 +125,7 @@ function grafico_turma(id, alunos, notas){
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação",
+                text : "Pontuação média dos alunos da turma",
                 fontSize : 18,
                 fontColor : "#111"
             },
@@ -192,7 +192,81 @@ function grafico_escola(id, turma, notas){
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação",
+                text : "Pontuação média das turmas da escola",
+                fontSize : 18,
+                fontColor : "#111"
+            },
+            legend : {
+                display : true,
+                position : "bottom"
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        max: 100,
+                        min: 0,
+                        stepSize: 10
+                    }
+                }]
+            },
+        };
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'horizontalBar',
+
+        // The data for our dataset
+        data: {
+            labels: turma,
+            datasets: [{
+                label: "pontuação",
+                // backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor: bg_color,
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                data: lista,
+            }]
+        },
+
+        // Configuration options go here
+        options: options
+    });
+
+}
+
+function grafico_rede(id, turma, notas){
+
+    lista = []
+    bg_color =  []
+    for(i = 0; i<notas.length; i++){
+        if (notas[i] != -1)
+            lista.push(notas[i]);
+        else
+            lista.push(0);
+
+        if (notas[i] >= 70){
+            bg_color.push('rgb(0, 255, 0)');
+        }
+        else if(notas[i] < 70 && notas[i] >= 50){
+            bg_color.push('rgb(255, 202, 0)');
+        }
+        else{
+            bg_color.push('rgb(255, 0, 0)');
+        }
+    }
+    lista.push(0);
+    lista.push(100);
+    var ctx = document.getElementById('myChart_'+id).getContext('2d');
+    var options = {
+            title : {
+                display : true,
+                position : "top",
+                text : "Pontuação média das turmas da escola",
                 fontSize : 18,
                 fontColor : "#111"
             },
