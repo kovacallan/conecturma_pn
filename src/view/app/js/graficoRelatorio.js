@@ -47,7 +47,7 @@ function grafico(ide, pontos){//grafico aluno
                 fontColor : "#111"
             },
             legend : {
-                display : true,
+                display : false,
                 position : "bottom"
             },
             scales: {
@@ -130,7 +130,7 @@ function grafico_turma(id, alunos, notas){
                 fontColor : "#111"
             },
             legend : {
-                display : true,
+                display : false,
                 position : "bottom"
             },
             scales: {
@@ -197,7 +197,7 @@ function grafico_escola(id, turma, notas){
                 fontColor : "#111"
             },
             legend : {
-                display : true,
+                display : false,
                 position : "bottom"
             },
             scales: {
@@ -266,12 +266,12 @@ function grafico_rede(id, turma, notas){
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação média das turmas da escola",
+                text : "Pontuação média das escolas da rede",
                 fontSize : 18,
                 fontColor : "#111"
             },
             legend : {
-                display : true,
+                display : false,
                 position : "bottom"
             },
             scales: {
