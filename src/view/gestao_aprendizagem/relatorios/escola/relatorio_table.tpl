@@ -1,17 +1,18 @@
 <table class="table table-bordered" style="margin-top:0;">
-   <thead style="background-color:#9ed0f6;">
-      <tr style="color:#fff;">
+    <thead style="background-color:#9ed0f6;">
+    <tr style="color:#fff;">
 
-        <th scope="col" >Id</th>
-        <th scope="col" >Descritor</th>
+        <th scope="col">Id</th>
+        <th scope="col">Descritor</th>
         <th scope="col">Desempenho</th>
-      </tr>
+    </tr>
     </thead>
 
     <tbody style="background-color:#f3f3f3;">
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
+            
             <tr class="hoover ex"   style="cursor: pointer;"  onclick="grafico_turma('grafico{{i['id']}}', {{turma}}, {{notas[teste]}});esconder('grafico{{i['id']}}')">
                 <td colspan="1">{{i['sigla_oa'][8:9]}}.{{i['sigla_oa'][12]}}</td>
                 <td>{{i['descricao_descritor']}}</td>
