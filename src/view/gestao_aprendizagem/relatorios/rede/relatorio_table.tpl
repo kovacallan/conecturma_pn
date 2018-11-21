@@ -34,7 +34,7 @@
                     <div id="grafico{{i['id']}}" class="accordian-body collapse grafico{{i['id']}}">
                         <div class="col-md-12" style="margin-top: 15px;">
                             <span class="word">Média da escola: {{int(porcentagem[teste])}}</span>
-                            <select id="ordenarGraficoRelatorio_grafico{{i['id']}}" onchange="ordenarGraficoRelatorio('grafico{{i['id']}}', {{turma}}, {{notas[teste]}})">
+                            <select id="ordenarGraficoRelatorio_grafico{{i['id']}}" onchange="ordenarGraficoRelatorio('grafico{{i['id']}}', {{turma}}, {{notas[teste]}}, 3)">
                                 <option value="1">Ordenar por ordem alfabética</option>
                                 <option value="2">Ordenar pela menor nota</option>
                                 <option value="3">Ordenar pela maior nota</option>

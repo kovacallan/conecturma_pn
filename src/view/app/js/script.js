@@ -796,7 +796,6 @@ function update_aluno(id){
 
 
 function update_observador(id){
-    console.log('entrei?');
     id = document.getElementById("observador_id"+id).value;
     nome = document.getElementById("nome_obs"+id).value;
     email= document.getElementById("email"+id).value;
@@ -829,16 +828,13 @@ function update_observador(id){
         }
 
 function allow_edit_obs(content_class_id){
-    console.log('teste');
-
-    console.log('teste');
     $('.disabledo'+content_class_id).prop("disabled", false);
     $('#icone_edito'+content_class_id).hide();
     $('#edito'+content_class_id).show();
 
 }
 
-function ordenarGraficoRelatorio(id, alunos, notas){
+function ordenarGraficoRelatorio(id, alunos, notas, estrutura){
     valor = document.getElementById("ordenarGraficoRelatorio_"+id).value;
     alunosNotas = []
     for(i = 0; i<alunos.length; i++){
@@ -851,18 +847,28 @@ function ordenarGraficoRelatorio(id, alunos, notas){
     
             $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
 
-            grafico_turma(id, alunos, notas)
+            switch(estrutura){
+                case 1:
+                    grafico_turma(id, alunos, notas);
+                    break;
+                case 2:
+                    grafico_escola(id, alunos, notas);
+                    break;
+                case 3:
+                    grafico_rede(id, alunos, notas);
+                    break;
+            }
             break;
         case '2':
-            ordenarGraficoRelatorioMenorNota(id, alunosNotas);
+            ordenarGraficoRelatorioMenorNota(id, alunosNotas, estrutura);
             break;
         case '3':
-            ordenarGraficoRelatorioMaiorNota(id, alunosNotas);
+            ordenarGraficoRelatorioMaiorNota(id, alunosNotas, estrutura);
             break;
     }
 }
 
-function ordenarGraficoRelatorioMenorNota(id, alunosNotas){
+function ordenarGraficoRelatorioMenorNota(id, alunosNotas, estrutura){
     for(z=0; z<alunosNotas.length; z++){
         for(i = z; i<alunosNotas.length; i++){
             if(parseInt(alunosNotas[z].nota) > parseInt(alunosNotas[i].nota)){
@@ -879,17 +885,26 @@ function ordenarGraficoRelatorioMenorNota(id, alunosNotas){
         alunos.push(alunosNotas[z].nome);
         notas.push(alunosNotas[z].nota);
     }
-    
-    alert(alunos);
-    alert(notas);
+
     document.getElementById('myChart_'+id).remove();
     
     $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
 
-    grafico_turma(id, alunos, notas);
+    switch(estrutura){
+        case 1:
+            grafico_turma(id, alunos, notas);
+            break;
+        case 2:
+            grafico_escola(id, alunos, notas);
+            break;
+        case 3:
+            grafico_rede(id, alunos, notas);
+            break;
+    }
+    
 }
 
-function ordenarGraficoRelatorioMaiorNota(id, alunosNotas){
+function ordenarGraficoRelatorioMaiorNota(id, alunosNotas, estrutura){
     for(z=0; z<alunosNotas.length; z++){
         for(i = 0; i<alunosNotas.length; i++){
             if(parseInt(alunosNotas[z].nota) > parseInt(alunosNotas[i].nota)){
@@ -911,7 +926,17 @@ function ordenarGraficoRelatorioMaiorNota(id, alunosNotas){
        
     $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
 
-    grafico_turma(id, alunos, notas);
+    switch(estrutura){
+        case 1:
+            grafico_turma(id, alunos, notas);
+            break;
+        case 2:
+            grafico_escola(id, alunos, notas);
+            break;
+        case 3:
+            grafico_rede(id, alunos, notas);
+            break;
+    }
 }
 //function readURL(input) {
 //            if (input.files && input.files[0]) {
