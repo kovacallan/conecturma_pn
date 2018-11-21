@@ -310,5 +310,4 @@ function grafico_rede(id, turma, notas){
         // Configuration options go here
         options: options
     });
-
 }
