@@ -13,10 +13,16 @@ def main():
 
     application = default_app()
 
+<<<<<<< HEAD
 
     # run(host='0.0.0.0', port=80, reload=True, server='gunicorn', workers=4)
 	# run(host='localhost', port=8080, reload=True)
     run(host='localhost', port=8080, reload=True, server='gunicorn', workers=4)
+=======
+    # run(host='0.0.0.0', port=80, reload=True, server='gunicorn', workers=4)
+    run(host='localhost', port=8080, reload=True)
+    # run(host='localhost', port=8080, reload=True, server='gunicorn', workers=4)
+>>>>>>> 60cdf034989fded98744f01337e74c4c3417c8b0
 
 
 @route('/error403')
