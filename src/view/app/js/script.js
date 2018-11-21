@@ -846,6 +846,11 @@ function ordenarGraficoRelatorio(id, alunos, notas){
     }
     switch(valor){
         case '1':
+
+            document.getElementById('myChart_'+id).remove();
+    
+            $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
+
             grafico_turma(id, alunos, notas)
             break;
         case '2':
@@ -859,11 +864,11 @@ function ordenarGraficoRelatorio(id, alunos, notas){
 
 function ordenarGraficoRelatorioMenorNota(id, alunosNotas){
     for(z=0; z<alunosNotas.length; z++){
-        for(i = 0; i<alunosNotas.length; i++){
-            if(alunosNotas[z].nota < alunosNotas[i].nota){
-                aux = alunosNotas[z];
-                alunosNotas[z] = alunosNotas[i];
-                alunosNotas[i] = aux;
+        for(i = z; i<alunosNotas.length; i++){
+            if(parseInt(alunosNotas[z].nota) > parseInt(alunosNotas[i].nota)){
+                aux = alunosNotas[i];
+                alunosNotas[i] = alunosNotas[z];
+                alunosNotas[z] = aux; 
             }
         }
     }
@@ -873,8 +878,10 @@ function ordenarGraficoRelatorioMenorNota(id, alunosNotas){
     for(z=0; z<alunosNotas.length; z++){
         alunos.push(alunosNotas[z].nome);
         notas.push(alunosNotas[z].nota);
-    }  
-
+    }
+    
+    alert(alunos);
+    alert(notas);
     document.getElementById('myChart_'+id).remove();
     
     $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
@@ -885,14 +892,13 @@ function ordenarGraficoRelatorioMenorNota(id, alunosNotas){
 function ordenarGraficoRelatorioMaiorNota(id, alunosNotas){
     for(z=0; z<alunosNotas.length; z++){
         for(i = 0; i<alunosNotas.length; i++){
-            if(alunosNotas[z].nota > alunosNotas[i].nota){
+            if(parseInt(alunosNotas[z].nota) > parseInt(alunosNotas[i].nota)){
                 aux = alunosNotas[z];
                 alunosNotas[z] = alunosNotas[i];
                 alunosNotas[i] = aux;
             }
         }
     }
-    
 
     alunos = [];
     notas = [];
@@ -901,7 +907,8 @@ function ordenarGraficoRelatorioMaiorNota(id, alunosNotas){
         notas.push(alunosNotas[z].nota);
     }
 
-    document.getElementById('myChart_'+id).remove();   
+    document.getElementById('myChart_'+id).remove();
+       
     $("#grafico_"+id).append('<canvas id="myChart_'+id+'"></canvas>');
 
     grafico_turma(id, alunos, notas);
