@@ -91,11 +91,27 @@ class Relatorio(object):
                     if isinstance(dict_dado_jogo, list):
                         if len(dict_dado_jogo) != 0:
                             pontuacao.append(niveis_pontuação[dict_dado_jogo[-1]['nivel']])
+
                     elif dict_dado_jogo['termino'] == True:
                         pontuacao.append(niveis_pontuação[dict_dado_jogo['nivel']])
                 dicionario.append(pontuacao)
 
         self.pontuacao = dicionario
+
+    def nova_pontuacao(self):
+        nota={
+            '2': 100,
+            '1':50,
+            '0':5,
+        }
+        nova_pontuacao = []
+        for i in self.pontuacao:
+            t = []
+            for z in i:
+                t.append(nota[str(z)])
+            nova_pontuacao.append(t)
+
+        return nova_pontuacao
 
     def set_pontuacao_porcentagem(self):
         for i in self.pontuacao:

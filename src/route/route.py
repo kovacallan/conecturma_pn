@@ -3,6 +3,7 @@
 from bottle import view, get, post, redirect
 from route.relatorio_turma_route import *
 from route.relatorio_escola_route import *
+from route.relatorio_rede_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
 from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
@@ -474,7 +475,7 @@ def descritores():
 
 
 @route('/relatorios/aluno')
-# @permissao('professor')
+@permissao('responsavel')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno')
 @permissao('professor')
 def relatorio_aluno_view(no_repeat=False):
@@ -488,6 +489,7 @@ def relatorio_aluno_view(no_repeat=False):
 
 
 @route('/relatorios/visualizar_relatorio_aluno')
+@permissao('responsavel')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe')
 def relatorio_aluno(no_repeat=False):
     from bottle import request
@@ -514,9 +516,8 @@ def relatorio_aluno(no_repeat=False):
             pontos.append(t[(len(t) - 10): len(t)])
         else:
             pontos.append(t)
-
     return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
-                pontos=pontos, vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
+                pontos=relatorio.nova_pontuacao(), vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
 
 
 @route('/trazer_oas')

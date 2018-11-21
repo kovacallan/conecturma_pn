@@ -21,7 +21,7 @@
                         <img src="/static/img/feed-pos.png" style="display: block; margin-left: auto; margin-right: auto">
                     %elif int(porcentagem[teste]) >= 50 and int(porcentagem[teste]) <= 69:
                         <img src="/static/img/feed-med.png" style="display: block; margin-left: auto; margin-right: auto">
-                    %elif int(porcentagem[teste]) >= 0 and int(porcentagem[teste]) <= 49:
+                    %elif int(porcentagem[teste]) >5 and int(porcentagem[teste]) <= 49:
                         <img src="/static/img/feed-neg.png" style="display: block; margin-left: auto; margin-right: auto">
                     %end
                 </td>
