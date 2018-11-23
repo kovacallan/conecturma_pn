@@ -1,14 +1,4 @@
-<table  class="table table-bordered d-print-table" style="margin-top:0;">
-   <thead style="background-color:#9ed0f6;">
-      <tr style="color:#fff;">
-
-        <th scope="col" >Id</th>
-        <th scope="col" >Descritor</th>
-        <th scope="col">Desempenho</th>
-      </tr>
-    </thead>
-
-    <tbody  style="background-color:#f3f3f3;">
+<tbody class="d-print-table"  style="background-color:#f3f3f3;">
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
@@ -52,5 +42,3 @@
         % end
 
     </tbody>
-                    <a href="relatorio_aluno_impressao" target="_blank">Imprimir</a>
-</table>
