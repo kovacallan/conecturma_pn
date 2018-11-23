@@ -313,7 +313,7 @@ textarea{
 
 }
 .modal-body{
-    height: 250px;
+    height: 303px;
     overflow-y: auto;
     overflow-x:hidden;
 }

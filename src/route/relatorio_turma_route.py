@@ -42,6 +42,7 @@ def relatorio_aluno(no_repeat=False):
             por.append(i)
     porcentagem = por
 
+    print(alunos)
 
     return template(path_template + 'relatorio_turma_detalhe', media_geral=relatorio.media_geral(porcentagem),
                     media_portugues = relatorio.media_portugues(pontuacao=porcentagem),

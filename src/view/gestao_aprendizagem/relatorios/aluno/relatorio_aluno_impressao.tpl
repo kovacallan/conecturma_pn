@@ -1,44 +1,164 @@
-<tbody class="d-print-table"  style="background-color:#f3f3f3;">
-        %teste = 0
-        %for i in oa:
-            % if teste < len(porcentagem):
-            <tr  class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target="#grafico{{i['id']}}" aria-expanded="false" aria-controls="grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
-                <td colspan="1">{{i['sigla_oa'][8:9]}}.{{i['sigla_oa'][12]}}</td>
-                <td>{{i['descricao_descritor']}}</td>
-                  <td>
-                    %if int(porcentagem[teste]) >= 70:
-                        <img src="/static/img/feed-pos.png" style=" display: block; margin-left: auto; margin-right: auto">
-                    %elif int(porcentagem[teste]) >= 50 and int(porcentagem[teste]) <= 69:
-                        <img src="/static/img/feed-med.png" style="display: block; margin-left: auto; margin-right: auto">
-                    %elif int(porcentagem[teste]) >= 0 and int(porcentagem[teste]) <= 49:
-                        <img src="/static/img/feed-neg.png" style="display: block; margin-left: auto; margin-right: auto">
-                    %end
-                </td>
-            </tr>
-            <tr>
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Impressão</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-10">
+        <canvas id="myChart_mat"></canvas>
 
-                <td id="printableArea" class="hiddenRow" colspan="3">
-                    <div style="display:none" id = "grafico{{i['id']}}" class="accordian-body collapse grafico{{i['id']}}">
-                        <div class="col-md-12" style="margin-top: 15px;">
-                            <span class="word">Quantidades de vezes jogadas: {{vezes[teste]}}</span>
-                            <br>
-                            <span class="word">Média do aluno: {{porcentagem[teste]}}</span>
-                            <br>
-                            <span class="word">Nota da última vez jogada: {{ultima_vez[teste]}}</span>
-                        </div>
+        <canvas id="myChart_port"></canvas>
+    </div>
+</div>
 
-                        <canvas id="myChart_grafico{{i['id']}}"></canvas>
-                    </div>
-                </td>
-            </tr>
-          % else:
-            <tr>
-                <td colspan="1">{{i['sigla_oa'][8:9]}}.{{i['sigla_oa'][12]}}</td>
-                <td>{{i['descricao_descritor']}}</td>
-                <td></td>
-            </tr>
-          % end
-         %teste+=1
-        % end
 
-    </tbody>
+<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>
+<script type="text/javascript" src="../static/js/Chart.min.js"></script>
+<script>
+    lista = []
+    bg_color =  []
+    notas = {{pontos_mat}};
+    for(i = 0; i<notas.length; i++){
+        if (notas[i] != -1)
+            lista.push(notas[i]);
+        else
+            lista.push(0);
+
+        if (notas[i] >= 70){
+            bg_color.push('rgb(0, 255, 0)');
+        }
+        else if(notas[i] < 70 && notas[i] >= 50){
+            bg_color.push('rgb(255, 202, 0)');
+        }
+        else{
+            bg_color.push('rgb(255, 0, 0)');
+        }
+    }
+
+    lista.push(0);
+    lista.push(100);
+
+    var ctx = document.getElementById('myChart_mat').getContext('2d');
+    var options = {
+            title : {
+                display : true,
+                position : "top",
+                text : "Pontuação média dos alunos da turma",
+                fontSize : 18,
+                fontColor : "#111"
+            },
+            legend : {
+                display : false,
+                position : "bottom"
+            },
+            scales: {
+               xAxes: [{
+                    ticks: {
+                        min:0,
+                        max:100,
+                       callback: function(value){return value+ "%"}
+
+                    }
+                }]
+
+            },
+        };
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'horizontalBar',
+
+        // The data for our dataset
+        data: {
+            labels: {{oa_mat}},
+            datasets: [{
+                label: "pontuação",
+                // backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor: bg_color,
+                borderColor: bg_color,
+                data: lista,
+            }]
+
+        },
+
+        // Configuration options go here
+        options: options
+    });
+</script>
+<script>
+    lista = []
+    bg_color =  []
+    notas = {{pontos_port}}
+    for(i = 0; i<notas.length; i++){
+        if (notas[i] != -1)
+            lista.push(notas[i]);
+        else
+            lista.push(0);
+
+        if (notas[i] >= 70){
+            bg_color.push('rgb(0, 255, 0)');
+        }
+        else if(notas[i] < 70 && notas[i] >= 50){
+            bg_color.push('rgb(255, 202, 0)');
+        }
+        else{
+            bg_color.push('rgb(255, 0, 0)');
+        }
+    }
+
+    lista.push(0);
+    lista.push(100);
+
+    var ctx = document.getElementById('myChart_port').getContext('2d');
+    var options = {
+            title : {
+                display : true,
+                position : "top",
+                text : "Pontuação média dos alunos da turma",
+                fontSize : 18,
+                fontColor : "#111"
+            },
+            legend : {
+                display : false,
+                position : "bottom"
+            },
+            scales: {
+               xAxes: [{
+                    ticks: {
+                        min:0,
+                        max:100,
+                       callback: function(value){return value+ "%"}
+
+                    }
+                }]
+
+            },
+        };
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'horizontalBar',
+
+        // The data for our dataset
+        data: {
+            labels: {{oa_port}},
+            datasets: [{
+                label: "pontuação",
+                // backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor: bg_color,
+                borderColor: bg_color,
+                data: lista,
+            }]
+
+        },
+
+        // Configuration options go here
+        options: options
+    });
+</script>
+</body>
+</html>

@@ -20,6 +20,11 @@
             Média Matemática:{{media_matematica}}
         </div>
 
+        <form action="relatorio_aluno_impressao" method="post">
+            <input type="hidden" name="aluno" value="{{aluno['id']}}">
+            <input type="submit" value="imprimir">
+        </form>
+
         <div class="container offset-md-8" style="position:relative; right:27px;">
             <a href="" class="offset-md-4" > <img src="img/print-icon.png" alt="" style="width:2%; height:auto;"> </a>
         </div>

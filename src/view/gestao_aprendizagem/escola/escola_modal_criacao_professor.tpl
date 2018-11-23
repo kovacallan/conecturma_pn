@@ -3,7 +3,7 @@
         <div class="modal-content row-impar" style="height: 349px;">
             <div class="modal-header">
                 <div class="offset-md-1">
-                    <h5 class="modal-title" id="exampleModalLabel">Novo Professor</h5>
+                    <h2 class="modal-title" id="exampleModalLabel" style="color:#299ae8;" >Novo Professor</h2>
                 </div>
             </div>
             <div class="modal-body">
@@ -16,24 +16,28 @@
                                          id="dados-da-escola">
                                         <div class="row">
                                             <input type="hidden" id="professor_escola_{{i['id']}}" value="{{i['id']}}">
-                                            <div class="col-md-4 offset-md-1">
+                                            <div class="col-md-10 offset-md-1">
                                                 <label for="nome" style="background-color: inherit;">Nome Completo
                                                     <span style="color:#ff0000">*</span>
                                                 </label>
                                                 <input type="text" class="form-control" size="30" name="" id="professor_nome_{{i['id']}}"
                                                        onchange="document.getElementById('professor_nome').style.boxShadow = 'none'">
                                             </div>
-                                            <div class="col-md-6" style="padding-left: 10px">
-                                                <label for="data">Data de nascimeto</label>
-                                                <span style="color:#ff0000">*</span>
-                                                <br>
-                                                <input type="date" size="25" class="form-control" required name="" id="professor_nascimento_{{i['id']}}" onchange="document.getElementById('professor_nascimento').style.boxShadow = 'none'">
-                                            </div>
+                                            <div class="col-md-12" style="margin-top:10px;">
+                                                <div class="row">
+                                                    <div class="col-md-4 offset-md-1">
+                                                        <label for="data">Data de nascimeto</label>
+                                                        <span style="color:#ff0000">*</span>
+                                                        <br>
+                                                        <input type="date" size="25" class="form-control" required name="" id="professor_nascimento_{{i['id']}}" onchange="document.getElementById('professor_nascimento').style.boxShadow = 'none'">
+                                                    </div>
 
-                                            <div class="col-md-10 offset-md-1" style="margin-top: 10px;">
-                                                <label for="telefone">Email</label>
-                                                <span style="color:#ff0000">*</span>
-                                                <input type="email" size="25" class="form-control" placeholder="exemplo@exemplo.com"  required name="" id="professor_email_{{i['id']}}" onchange="emailValidador('professor_email_{{i['id']}}')">
+                                                    <div class="col-md-6">
+                                                        <label for="telefone">Email</label>
+                                                        <span style="color:#ff0000">*</span>
+                                                        <input type="email" size="25" class="form-control" placeholder="exemplo@exemplo.com"  required name="" id="professor_email_{{i['id']}}" onchange="emailValidador('professor_email_{{i['id']}}')">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-10 offset-md-1" style="margin-top: 10px;">
                                                 <label for="turma">Turma</label>
@@ -59,11 +63,11 @@
                 </div>
             </div> <!-- modal body-->
             <div class="modal-footer">
-                <button type="submit" class="botao-salvar" onclick="cadastro_usuario_via_escola('professor', '{{i['id']}}')"   style="margin-left: 10px;">
-                    salvar
-                </button>
-                <button class="botao-salvar" style="background-color:#ff0000"
+                <button class="botao-salvar" style="background-color:#ff4d4d"
                         onclick='document.getElementById("3").style.display = "none"'>cancelar
+                </button>
+                <button type="submit" class="botao-salvar" onclick="cadastro_usuario_via_escola('aluno', '{{i['id']}}')"   style="margin-left: 10px;">
+                    salvar
                 </button>
             </div>
         </div>
