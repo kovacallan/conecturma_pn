@@ -9,10 +9,10 @@
     height: 100%;
     z-index: 10;}
 .light-box .bg-error{
-    background: url(/static/bg-erro.png) 0 0 no-repeat;
+    background: url(/static/img/bg-erro.png) 0 0 no-repeat;
     width: 453px;
     height: 293px;
-    margin: 299px 0 0 259px;
+    margin: 189px 0 0 0px;
     text-align: center;
     padding: 45px 0 0 0;
 }

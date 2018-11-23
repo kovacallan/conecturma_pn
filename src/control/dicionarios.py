@@ -59,7 +59,8 @@ PAGINA_INICIAL = dict(
     responsavel='/gestao_aprendizagem',
     responsavel_varejo='/gestao_aprendizagem',
     aluno='/aluno/area_aluno',
-    aluno_varejo='/aluno/area_aluno'
+    aluno_varejo='/aluno/area_aluno',
+    error="error"
 )
 
 

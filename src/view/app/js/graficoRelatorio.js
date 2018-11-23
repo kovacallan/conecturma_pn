@@ -55,9 +55,10 @@ function grafico(ide, pontos){//grafico aluno
                     ticks: {
                         max: 100,
                         min: 0,
-                        stepSize: 10
+                         callback: function(value){return value+ "%"}
                     }
                 }]
+
             },
         };
         lista = [];
@@ -134,13 +135,15 @@ function grafico_turma(id, alunos, notas){
                 position : "bottom"
             },
             scales: {
-                yAxes: [{
+               xAxes: [{
                     ticks: {
-                        max: 100,
-                        min: 0,
-                        stepSize: 10
+                        min:0,
+                        max:100,
+                       callback: function(value){return value+ "%"}
+
                     }
                 }]
+
             },
         };
     var chart = new Chart(ctx, {
@@ -157,6 +160,7 @@ function grafico_turma(id, alunos, notas){
                 borderColor: bg_color,
                 data: lista,
             }]
+
         },
 
         // Configuration options go here
@@ -207,6 +211,7 @@ function grafico_escola(id, turma, notas){
                         min: 0,
                         stepSize: 10
                     }
+
                 }]
             },
         };

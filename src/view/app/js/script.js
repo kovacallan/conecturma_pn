@@ -178,7 +178,12 @@ function login_aluno(){
   senha = senha.join('')
   $.post('/login/login_aluno', {aluno_login_nome:nome, aluno_senha:senha},function(data){
       console.log(data);
-     window.location.replace(data);
+      if(data == "error"){
+        document.getElementById("divRecuperarSenha").style.display="block";
+      }
+      else{
+      window.location.replace(data);
+      }
   });
 }
 
@@ -189,9 +194,15 @@ function login_professor(){
   if (email != '' && senha !=''){
     $.post('/login/login_observador', {observador_login_email:email, observador_senha:senha},function(data){
         console.log(data);
-       window.location.replace(data);
+        if(data == "error"){
+        document.getElementById("divRecuperarSenha").style.display="block";
+      }
+      else{
+      window.location.replace(data);
+      }
     });
   }
+
 }
 
 function filtro_relatorio_aluno_detalhe(teste){
