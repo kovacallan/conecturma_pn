@@ -109,7 +109,29 @@
 
 
 </script>
+<script>
+function printContent(name) {
 
+var canvas=document.getElementById("canvas");
+    var ctx=canvas.getContext("2d");
+
+    ctx.fillStyle="gold";
+    ctx.strokeStyle="blue";
+    ctx.lineWidth=5;
+    ctx.rect(50,50,100,100);
+    ctx.fill();
+    ctx.stroke();
+
+     var printContents = document.getElementById(name).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
 <!--<script type="text/javascript" src="../static/js/jquery-3.3.1-min.js"></script>-->
 
 </body>

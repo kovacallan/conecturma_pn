@@ -488,6 +488,13 @@ def relatorio_aluno_view(no_repeat=False):
     return dict(tipo=usuario_logado()['tipo'], alunos=relatorio.alunos)
 
 
+
+@route('/relatorios/relatorio_aluno_impressao')
+@view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_impressao')
+def relatorio_impressao():
+    return
+
+
 @route('/relatorios/visualizar_relatorio_aluno')
 @permissao('responsavel')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe')
