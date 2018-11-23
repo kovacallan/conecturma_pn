@@ -9,13 +9,26 @@
     <link rel="stylesheet" href="../static/reset.css">
     <link rel="stylesheet" href="../static/bootstrap.min.css">
     <link rel="stylesheet" href="../static/style.css">
-
+    <link rel="stylesheet" href="../static/error.css">
 </head>
 
 <body>
-    <div class="container-fluid bg">
+   <div class="light-box" id="divRecuperarSenha" style="display:none">
 
-        <div class="container">
+    <div align="center">
+          <div class="bg-error">
+                <span class="title-erro">Estamos confusos</span>
+                <span style="padding-left:40px; padding-right: 40px;">
+                    Ops! Você não escolheu as figurinhas corretas! Tente mais uma vez!
+                </span>
+
+               <a href="#" onclick="document.getElementById('divRecuperarSenha').style.display='none'"><img src="/static/img/btn-voltar-ligh.png"></a>
+            </div>
+
+        </div>
+</div>
+    <div class="container-fluid bg">
+          <div class="container">
             <div class="col-md-12" style="top: 29px;">
                 <div class="bg_login">
                     <main class="row">

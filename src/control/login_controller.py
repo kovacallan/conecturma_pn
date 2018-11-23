@@ -17,9 +17,9 @@ def login_observador_controller():
     senha = request.params['observador_senha']
 
     login = Login_Observador(email=email, senha=senha)
-    login.login()
+    return login.login()
 
-    return
+
 
 
 def login_aluno_controller():
