@@ -29,7 +29,8 @@
 
                 <td id="printableArea" class="hiddenRow" colspan="3">
                     <div style="display:none" id = "grafico{{i['id']}}" class="accordian-body collapse grafico{{i['id']}}">
-                        <div class="col-md-12" style="margin-top: 15px;">
+                        <h2 align="center" style="color:#299ae8;">Desempenho das últimas 10 vezes jogadas</h2>
+                        <div class="col-md-12" style="margin-top: 15px; display:inline-flex;">
                             <span class="word">Quantidades de vezes jogadas: {{vezes[teste]}}</span>
                             <br>
                             <span class="word">Média do aluno: {{porcentagem[teste]}}</span>

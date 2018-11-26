@@ -36,6 +36,7 @@
                     <div class="tab-pane container active" id="{{i['id']}}">
                         <form>
                             <input type="hidden" id="id_aluno{{i['id']}}" value="{{i['id']}}">
+                            <button class="" style="float:right;">imprimir</button>
                             <div class="row distanciamento" style="margin-top: 30px">
                                 <div class="col-md-12">
                                     <div class="row distanciamento" style="margin-left: 5px;">

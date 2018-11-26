@@ -42,7 +42,7 @@ function grafico(ide, pontos){//grafico aluno
             title : {
                 display : true,
                 position : "top",
-                text : "Desempenho das últimas 10 vezes jogadas",
+                text : "",
                 fontSize : 18,
                 fontColor : "#111"
             },
@@ -126,7 +126,7 @@ function grafico_turma(id, alunos, notas){
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação média dos alunos da turma",
+                text : "",
                 fontSize : 18,
                 fontColor : "#111"
             },
@@ -196,7 +196,7 @@ function grafico_escola(id, turma, notas){
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação média das turmas da escola",
+                text : "",
                 fontSize : 18,
                 fontColor : "#111"
             },
