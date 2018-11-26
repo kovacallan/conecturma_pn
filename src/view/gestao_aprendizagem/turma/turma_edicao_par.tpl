@@ -105,11 +105,17 @@
             <!-- aqui termina o conteudo da guia do dados de escola  -->
             <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel"
                  aria-labelledby="{{i['nome']}}-prof">
-                <div class="row" style="margin-top: 12px;">
+                <div  class="row" style="margin-top: 12px;">
+                    <form id="impressao{{i['id']}}" action="turma/turma_impressa_alunos" method="post">
+                        <input name="turma" type="hidden" value="{{i['id']}}">
+                    </form>
                     <div class="container">
+                       <div class="offset-md-11">
+                            <i onclick="formSubmit({{i['id']}})" align="right" class="fas fa-print" style="cursor:pointer;"></i>
+                        </div>
                         % for z in i['aluno']:
                         <div class="col-md-12">
-                            <div class="row">
+                            <div class="row" style="clear: both;">
                                 <div class="col-md-11">
                                     % if index % 2 ==0:
                                     <div class="row row-impar nome-prof">
@@ -118,6 +124,7 @@
                                             <br>
                                             Login :{{z['nome_login']}}
                                         </div>
+
                                         <div class="col-md-6 offset-md-2" style="padding:10px">
                                             <span style="margin-left: 17px;"> &nbsp;senha :</span>
                                             <img src="/static/img/{{z['senha'][0]}}.png"
@@ -285,6 +292,11 @@
         </div>
     </div>
 </div>
+<script>
+    function formSubmit(id){
+        document.getElementById("impressao"+id).submit();
 
+    }
+</script>
 
 <!-- NO PRINT -->

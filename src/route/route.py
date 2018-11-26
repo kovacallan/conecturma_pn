@@ -222,6 +222,18 @@ def view_usuario_index(no_repeat=False):
     return view_usuario_index()
 
 
+@route('aluno/impressao_login', method='POST')
+@view('gestao_aprendizagem/usuario/edicao_aluno/aluno_impressao')
+def impressao_login_aluno():
+    from bottle import request
+
+    aluno=request.params['aluno_id']
+    alun=facade.search_aluno_id_facade(aluno)
+
+    return dict(aluno=alun)
+
+
+
 @route('/usuario/cadastro_usuario', method='POST')
 @permissao('professor')
 def cadastro_usuario(no_repeat=False):
@@ -517,6 +529,17 @@ def relatorio_aluno(no_repeat=False):
             pontos.append(t)
     return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.nova_pontuacao(), vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
+@route('/turma/turma_impressa_alunos', method='POST')
+@view('gestao_aprendizagem/turma/impressao_turma')
+def turma_impressao():
+    from bottle import request
+
+    tur = request.params['turma']
+
+    alunos= facade.search_aluno_by_turma_facade(tur)
+
+    return dict(aluno=alunos)
+
 
 @route('/relatorios/relatorio_aluno_impressao', method='POST')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_impressao')

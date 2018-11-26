@@ -50,6 +50,7 @@
 <script>
     function formSubmit(){
         document.getElementById("impressao").submit();
+
     }
 </script>
 

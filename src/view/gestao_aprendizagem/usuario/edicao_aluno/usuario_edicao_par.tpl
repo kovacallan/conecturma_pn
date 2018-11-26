@@ -89,7 +89,9 @@
                                     %end
                                     <h5>Acesso</h5>
                                     <div class="row distanciamento" style="margin-left: 5px;">
-
+                                        <form id="impressao" action="relatorio_aluno_impressao" method="post">
+                                            <input type="hidden" name="aluno" value="{{aluno['id']}}">
+                                        </form>
                                         <div class="col-md-">
                                             <label for="login">login</label>
                                             <span style="color:#ff0000">*</span>
