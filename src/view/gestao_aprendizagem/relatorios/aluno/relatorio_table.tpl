@@ -53,5 +53,4 @@
         % end
 
     </tbody>
-                    <a href="relatorio_aluno_impressao" target="_blank">Imprimir</a>
 </table>
