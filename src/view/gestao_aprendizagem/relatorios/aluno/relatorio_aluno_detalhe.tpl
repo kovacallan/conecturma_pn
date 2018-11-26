@@ -14,19 +14,19 @@
             <input type="checkbox" onchange="filtro_relatorio_aluno_detalhe({{aluno['id']}})" id="portugues" value="portugues" checked> <label  class="portugues" for="portugues">Língua Portuguesa</label>
             <input type="checkbox" onchange="filtro_relatorio_aluno_detalhe({{aluno['id']}})" id="matematica" value="matematica" checked> <label class="matematica" for="matematica">Matemática</label>
         </div>
+
         <div>
             Média geral: {{media_geral}} ,
             Média Língua Portuguesa:{{media_portugues}} ,
             Média Matemática:{{media_matematica}}
         </div>
 
-        <form action="relatorio_aluno_impressao" method="post">
+        <form id="impressao" action="relatorio_aluno_impressao" method="post">
             <input type="hidden" name="aluno" value="{{aluno['id']}}">
-            <input type="submit" value="imprimir">
         </form>
 
-        <div class="container offset-md-8" style="position:relative; right:27px;">
-            <a href="" class="offset-md-4" > <img src="img/print-icon.png" alt="" style="width:2%; height:auto;"> </a>
+        <div class="container offset-md-11" style="color:#666666;">
+            <i onclick="formSubmit()" class="fas fa-print" style="cursor:pointer;"></i>
         </div>
         <div id="teste">
             % include('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')
@@ -47,5 +47,10 @@
 <script type="text/javascript" src="../static/js/graficoRelatorio.js"></script>
 <script type="text/javascript" src="../static/js/script.js"></script>
 
+<script>
+    function formSubmit(){
+        document.getElementById("impressao").submit();
+    }
+</script>
 
 %include('gestao_aprendizagem/footer/footer.tpl')

@@ -9,7 +9,14 @@
     <link rel="stylesheet" href="../static/bootstrap.min.css">
 </head>
 <body>
+
 <div class="container">
+    <div class="col-md-10">
+        <div class="col-md nome_aluno" style="margin-top:15px; padding-left:0px; color:#299ae8;">
+            <h2>Nome do Aluno: {{aluno['nome']}}</h2><br>
+            <h3>Turma do Aluno: <span id="turma-num">{{aluno['vinculo_turma']}}</span></h3>
+        </div>
+    </div>
     <div class="col-md-10">
         <canvas id="myChart_mat"></canvas>
 
@@ -49,7 +56,7 @@
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação média dos alunos da turma",
+                text : "Pontuação média do aluno nas Oas de Matemática",
                 fontSize : 18,
                 fontColor : "#111"
             },
@@ -119,7 +126,7 @@
             title : {
                 display : true,
                 position : "top",
-                text : "Pontuação média dos alunos da turma",
+                text : "Pontuação média do aluno nas Oas de Português",
                 fontSize : 18,
                 fontColor : "#111"
             },

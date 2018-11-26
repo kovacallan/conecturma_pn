@@ -559,7 +559,7 @@ def relatorio_impressao():
                     pass
                 teste+=1
 
-    return dict(media_portugues=relatorio.media_portugues(), oa_mat=oa_mat, oa_port=oa_port, pontos_mat= pontos_mat, pontos_port=pontos_port)
+    return dict(media_portugues=relatorio.media_portugues(), aluno=aluno , oa_mat=oa_mat, oa_port=oa_port, pontos_mat= pontos_mat, pontos_port=pontos_port)
 
 @route('/trazer_oas')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')
