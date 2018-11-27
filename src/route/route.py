@@ -222,6 +222,18 @@ def view_usuario_index(no_repeat=False):
     return view_usuario_index()
 
 
+@route('/gestao_aprendizagem/aluno/impressao_login', method='POST')
+@view('gestao_aprendizagem/usuario/edicao_aluno/aluno_impressao')
+def impressao_login_aluno():
+    from bottle import request
+    print(locals())
+    aluno=request.params['aluno_id']
+    alun=facade.search_aluno_id_facade(aluno)
+
+    return dict(aluno=alun)
+
+
+
 @route('/usuario/cadastro_usuario', method='POST')
 @permissao('professor')
 def cadastro_usuario(no_repeat=False):
@@ -487,7 +499,6 @@ def relatorio_aluno_view(no_repeat=False):
 
     return dict(tipo=usuario_logado()['tipo'], alunos=relatorio.alunos)
 
-
 @route('/relatorios/visualizar_relatorio_aluno')
 @permissao('responsavel')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_detalhe')
@@ -518,7 +529,60 @@ def relatorio_aluno(no_repeat=False):
             pontos.append(t)
     return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.nova_pontuacao(), vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
+@route('/turma/turma_impressa_alunos', method='POST')
+@view('gestao_aprendizagem/turma/impressao_turma')
+def turma_impressao():
+    from bottle import request
 
+    tur = request.params['turma']
+
+    alunos= facade.search_aluno_by_turma_facade(tur)
+
+    return dict(aluno=alunos)
+
+
+@route('/relatorios/relatorio_aluno_impressao', method='POST')
+@view('gestao_aprendizagem/relatorios/aluno/relatorio_aluno_impressao')
+def relatorio_impressao():
+    from bottle import request
+    from control.relatorios.relatorio_aluno_controller import Relatorio
+    from control.dicionarios import DICIPLINA_NOME
+    relatorio = Relatorio()
+
+    aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
+    turma = facade.search_estrutura_id_facade(id=aluno['vinculo_turma'])
+
+    relatorio.get_descritores(serie=turma['serie'])
+    relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
+    relatorio.convert_nivel_for_numeric()
+    relatorio.set_color_face()
+    relatorio.set_pontuacao_porcentagem()
+    ultima_vez = []
+
+    #novo for
+    oa_mat = []
+    pontos_mat = []
+    oa_port = []
+    pontos_port = []
+    teste = 0
+    for index,i in enumerate(relatorio.descritores):
+        if i['disciplina'] == DICIPLINA_NOME['matematica']:
+            try:
+                pontos_mat.append(relatorio.porcentagem[teste])
+                oa_mat.append(float(i['sigla_oa'][8:9] + "." + i['sigla_oa'][12]))
+            except:
+                pass
+            teste+=1
+        else:
+            if i['sigla_oa'][9:11] != 'VC' and i['sigla_oa'][9:11] != 'CN':
+                try:
+                    pontos_port.append(relatorio.porcentagem[teste])
+                    oa_port.append(float(i['sigla_oa'][8:9] + "." + i['sigla_oa'][12]))
+                except:
+                    pass
+                teste+=1
+
+    return dict(media_portugues=relatorio.media_portugues(), aluno=aluno , oa_mat=oa_mat, oa_port=oa_port, pontos_mat= pontos_mat, pontos_port=pontos_port)
 
 @route('/trazer_oas')
 @view('gestao_aprendizagem/relatorios/aluno/relatorio_table.tpl')

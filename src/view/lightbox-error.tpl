@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/static//css/error.css">
+<link rel="stylesheet" href="/static/css/error.css">
 
 <div class="light-box" id="divRecuperarSenha" style="display: block">
 

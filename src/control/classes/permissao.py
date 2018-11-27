@@ -29,22 +29,20 @@ class Login_Observador(object):
 
         observador_logado = facade.search_observador_email_facade(email=self.email)
         if observador_logado != None:
-            if observador_logado['email'] == self.email:
-                if sha512_crypt.verify(self.senha, observador_logado['senha']):
-                    response.set_cookie("BUMBA", observador_logado, path='/', secret=hash)
-                    now = datetime.now()
-                    facade.login_date_facade(observador_logado['id'], now)
-                    facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'],
-                                                   nome_usuario=observador_logado['nome'],
-                                                   tipo_usuario=observador_logado['tipo'])
+            if sha512_crypt.verify(self.senha, observador_logado['senha']):
+                response.set_cookie("BUMBA", observador_logado, path='/', secret=hash)
+                now = datetime.now()
+                facade.login_date_facade(observador_logado['id'], now)
+                facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'],
+                                               nome_usuario=observador_logado['nome'],
+                                               tipo_usuario=observador_logado['tipo'])
 
-                    return PAGINA_INICIAL[TIPO_USUARIOS_ID[observador_logado['tipo']].lower()]
-                else:
-                    return '/'
+                return PAGINA_INICIAL[TIPO_USUARIOS_ID[observador_logado['tipo']].lower()]
             else:
-                return '/'
+                return PAGINA_INICIAL['error']
         else:
             print("Usuario não encontrado !")
+            return PAGINA_INICIAL['error']
 
     def gerar_hash(self):
         """
@@ -72,27 +70,30 @@ class Login_Aluno(object):
         print('nome',self.nome, self.senha)
         aluno = facade.search_aluno_nome_login_facade(nome_login=self.nome.upper())
         print(aluno)
-        if aluno['nome_login'] == self.nome.upper():
-            if aluno['senha'] == self.senha:
-                response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
-                """aluno_logado = dict(
-                    id=aluno['id'],
-                    nome=aluno['nome'],
-                    tipo=aluno['tipo_aluno'],
-                    vinculo_rede=aluno['vinculo_rede'],
-                    vinculo_escola=aluno['vinculo_escola'],
-                    vinculo_turma=aluno['vinculo_turma'],
-                    # ultimo_oa = aluno['ultimo_objeto_aprendizagem'],
-                    ultima_unidade= aluno['ultima_unidade'],
-                    ultima_aventura= aluno['ultima_aventura'],
-                    moeda=aluno['pontos_de_moedas'],
-                    xp=aluno['pontos_de_vida']
-                )"""
-                print('entrei aqui')
-                response.set_cookie("BUMBA", aluno, path='/', secret=hash)
-                return PAGINA_INICIAL[tipo_observador(aluno['tipo'])]
-        else:
-            return '/'
+        try:
+            if aluno['nome_login'] == self.nome.upper():
+                if aluno['senha'] == self.senha:
+                    response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
+                    """aluno_logado = dict(
+                        id=aluno['id'],
+                        nome=aluno['nome'],
+                        tipo=aluno['tipo_aluno'],
+                        vinculo_rede=aluno['vinculo_rede'],
+                        vinculo_escola=aluno['vinculo_escola'],
+                        vinculo_turma=aluno['vinculo_turma'],
+                        # ultimo_oa = aluno['ultimo_objeto_aprendizagem'],
+                        ultima_unidade= aluno['ultima_unidade'],
+                        ultima_aventura= aluno['ultima_aventura'],
+                        moeda=aluno['pontos_de_moedas'],
+                        xp=aluno['pontos_de_vida']
+                    )"""
+                    print('entrei aqui')
+                    response.set_cookie("BUMBA", aluno, path='/', secret=hash)
+                    return PAGINA_INICIAL[tipo_observador(aluno['tipo'])]
+                else:
+                    return PAGINA_INICIAL['error']
+        except TypeError:
+            return PAGINA_INICIAL["error"]
 
 
     def gerar_hash(self):

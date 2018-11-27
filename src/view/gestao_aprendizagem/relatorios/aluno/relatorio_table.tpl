@@ -1,4 +1,4 @@
-<table class="table table-bordered" style="margin-top:0;">
+<table  class="table table-bordered d-print-table" style="margin-top:0;">
    <thead style="background-color:#9ed0f6;">
       <tr style="color:#fff;">
 
@@ -8,11 +8,11 @@
       </tr>
     </thead>
 
-    <tbody style="background-color:#f3f3f3;">
+    <tbody  style="background-color:#f3f3f3;">
         %teste = 0
         %for i in oa:
             % if teste < len(porcentagem):
-            <tr class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target="#grafico{{i['id']}}" aria-expanded="false" aria-controls="grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
+            <tr  class="hoover" style="cursor: pointer;" data-toggle="collapse" data-target="#grafico{{i['id']}}" aria-expanded="false" aria-controls="grafico{{i['id']}}" class="accordion-toggle" onclick="funcoes('grafico{{i['id']}}',{{pontos[teste]}})">
                 <td colspan="1">{{i['sigla_oa'][8:9]}}.{{i['sigla_oa'][12]}}</td>
                 <td>{{i['descricao_descritor']}}</td>
                   <td>
@@ -27,17 +27,19 @@
             </tr>
             <tr>
 
-                <td  class="hiddenRow" colspan="3">
-                    <div style="display:none" id = "grafico{{i['id']}}" class="accordian-body collapse grafico{{i['id']}}">
-                        <div class="col-md-12" style="margin-top: 15px;">
+                <td id="printableArea" class="hiddenRow" colspan="3">
+                    <div style="display:none" id = "grafico{{i['id']}}" align="center" class="accordian-body collapse grafico{{i['id']}} col-md-11">
+                        <span align="center" style="color:#299ae8; font-size: 20px;">Desempenho das últimas 10 vezes jogadas</span>
+                        <div class="col-md-12" style="margin-top: 15px; display:inline-flex;">
                             <span class="word">Quantidades de vezes jogadas: {{vezes[teste]}}</span>
                             <br>
                             <span class="word">Média do aluno: {{porcentagem[teste]}}</span>
                             <br>
                             <span class="word">Nota da última vez jogada: {{ultima_vez[teste]}}</span>
                         </div>
-
-                        <canvas id="myChart_grafico{{i['id']}}"></canvas>
+                        <div style="margin-left: 23px;margin-bottom: 30px;">
+                            <canvas id="myChart_grafico{{i['id']}}"></canvas>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -50,6 +52,6 @@
           % end
          %teste+=1
         % end
-    </tbody>
 
+    </tbody>
 </table>

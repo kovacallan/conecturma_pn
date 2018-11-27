@@ -28,10 +28,11 @@
             </tr>
             <tr>
 
-                <td  class="hiddenRow" colspan="3"> <div class="accordian-body collapse grafico{{i['id']}}">
+                <td  class="hiddenRow" colspan="3"> <div align="center" class="accordian-body collapse grafico{{i['id']}} col-md-11">
+                    <span align="center" style="color:#299ae8; font-size: 20px;">Pontuação média dos alunos da turma</span>
                     <div class="col-md-12" style="margin-top: 15px;">
                         <span class="word">Média da turma: {{int(porcentagem[teste])}}</span>
-                        <select id="ordenarGraficoRelatorio_grafico{{i['id']}}" onchange="ordenarGraficoRelatorio('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}})">
+                        <select id="ordenarGraficoRelatorio_grafico{{i['id']}}" onchange="ordenarGraficoRelatorio('grafico{{i['id']}}', {{alunos}}, {{notas[teste]}}, 1)">
                             <option value="1">Ordenar por ordem alfabética</option>
                             <option value="2">Ordenar pela menor nota</option>
                             <option value="3">Ordenar pela maior nota</option>

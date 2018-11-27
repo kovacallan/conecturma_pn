@@ -1,3 +1,6 @@
+body {
+    -webkit-print-color-adjust: exact;
+}
 table.table-bordered{
     border:2px solid #fff;
     margin-top:20px;
@@ -93,7 +96,6 @@ input {
    margin-right: 97px;
    }
 
-   @media print {
-  .container {
-    width: auto;
-  }
+.titulo-grafico{
+color:#299ae8;
+}
