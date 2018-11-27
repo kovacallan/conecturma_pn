@@ -222,11 +222,11 @@ def view_usuario_index(no_repeat=False):
     return view_usuario_index()
 
 
-@route('aluno/impressao_login', method='POST')
+@route('/gestao_aprendizagem/aluno/impressao_login', method='POST')
 @view('gestao_aprendizagem/usuario/edicao_aluno/aluno_impressao')
 def impressao_login_aluno():
     from bottle import request
-
+    print(locals())
     aluno=request.params['aluno_id']
     alun=facade.search_aluno_id_facade(aluno)
 
