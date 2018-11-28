@@ -1,5 +1,5 @@
 body{
-    background:url("/static/img/_tela_ambiente-do-aluno_versao-2.png") no-repeat center center fixed;
+    background:url("/static/img/tela-login_fundo2.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -118,8 +118,8 @@ body{
 
 .sol{
     position: absolute;
-    margin-left: 67px;
-    width: 80%;
+    margin-left: 122px;
+
     margin-bottom: 35px;
     margin-top: 18px;
 
@@ -161,11 +161,11 @@ display:none;
     left: 196px;
     color: #fff;
     font-weight: bold;
-    top: 18%;
+    top: 30%;
 }
 #HP {
     position: absolute;
-    top: 32%;
+    top: 53%;
     left: 260px;
     color: #fff;
     font-weight: bold;
