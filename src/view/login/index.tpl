@@ -50,10 +50,8 @@
                     <main class="row">
 
                         <div class="form-group">
-                         <img src="/static/img/login-img-2.png" id="login-img"   alt="Responsive image">
-                            <section class="content-login col-md">
-
-                                <div class="student col-md">
+                         <img src="/static/img/login-img-new.png" id="login-img" class="col-md-4"  alt="Responsive image">
+                                <div class="student col-md" style="margin-left: 248px;margin-top: 24px;">
                                     <div id="titulo-aluno">
                                         <img src="/static/img/aluno-seta.png" id="aluno-seta" class="img-fluid" alt="Responsive image">
                                         <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
@@ -154,7 +152,7 @@
 
                                 </div>
                                 <input data-val="true" data-val-required="A senha do usuário é obrigatória" id="senhaAluno" name="Senha" type="hidden" value="">
-                        </section>
+
                         </div>
 
 
