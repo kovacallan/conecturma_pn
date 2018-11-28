@@ -75,20 +75,20 @@
                 <div class="row" style="margin-bottom: 10px">
                     % if tipo < '2':
                     <div class="col-md-1">
-              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+              <!--<span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                 <i class="far fa-trash-alt" style="color:#969696;"></i>
-              </span>
+              </span>-->
                     </div>
                     % end
                     <div class="offset-md-10 col-md-1">
-                        <span onclick="allow_edit_obs({{i['id']}})" class="{{i['id']}}" id="icone_edito{{i['id']}}"
+                        <!--<span onclick="allow_edit_obs({{i['id']}})" class="{{i['id']}}" id="icone_edito{{i['id']}}"
                               style="cursor:pointer;display:block;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
                         </span>
                         <span onclick="update_observador({{i['id']}})" id="edito{{i['id']}}"
                               style="cursor:pointer;display:none;">
                             <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
-                        </span>
+                        </span>-->
                     </div>
                 </div>
 

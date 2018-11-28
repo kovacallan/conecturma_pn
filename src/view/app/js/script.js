@@ -358,8 +358,11 @@ function update_rede(id){
         if (telefone != '' && telefone != null && telefone.length >= 10){
             $.post('/rede/editar_rede', {id:id, nome:nome, cnpj:cnpj, telefone:telefone,
             endereco:endereco, numero:numero, bairro:bairro, complemento:complemento, cep:cep, estado:estado, municipio:municipio},function(data){
+                if (data == '1'){
+                    location.reload();
+                }
             });
-            location.reload();
+
         }
         else{
             alert('O campo telefone é obrigatório.');

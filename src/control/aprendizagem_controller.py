@@ -606,9 +606,6 @@ def getMedalhas(aluno):
         else:
             medalha_jogo.append(i)
 
-    print('hie',len(todas_medalhas),len(medalha_socio),len(medalha_jogo))
-
-
     return dict(medalha_aluno=todas_medalhas,medalha_jogo=medalha_jogo,medalha_socio=medalha_socio,medalha_recente=[],aluno_id=aluno,usuario=usuario_logado())
 
 

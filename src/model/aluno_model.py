@@ -30,6 +30,7 @@ class DbAluno(Model):
     pontos_de_vida = TextField(fts=True,default='0')
     pontos_de_moedas = TextField(fts=True,default='0')
     medalhas = ListField()
+    motivo = ListField()
 
     vinculo_rede = TextField(fts=True, default='0')
     vinculo_escola = TextField(fts=True, default='0')
@@ -312,15 +313,14 @@ class DbAluno(Model):
         return aluno['ultimo_oa_jogado']
 
     def set_medalha(self, id_aluno, medalha, motivo):
-        try:
-            aluno = DbAluno.load(int(id_aluno))
-            aluno.medalhas.append(dict(id_medalha=medalha, motivo_medalha=motivo))
-        except KeyError:
 
-            return False
-        else:
-            aluno.save()
-            return True
+        aluno = DbAluno.load(int(id_aluno))
+        print(medalha, motivo)
+        dicio = dict(id_medalha=medalha, motivo_medalha=motivo)
+        aluno.medalhas.append(dicio)
+
+        aluno.save()
+        return True
 
     def get_medalhas(self, id_aluno):
 

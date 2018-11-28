@@ -402,7 +402,9 @@ def controller_editar_rede(no_repeat=False):
     if no_repeat:
         estrutura = request.params
         return estrutura
-    return controller_editar_rede()
+    retorno = controller_editar_rede()
+    print(retorno)
+    return str(retorno)
 
 
 @route('/escola')
