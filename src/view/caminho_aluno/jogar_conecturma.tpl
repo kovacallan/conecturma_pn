@@ -89,10 +89,10 @@
         <div class="col-md-6 portal">
             <div id="sol">
 
-                <img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
+
                 <a href="javascript:void(0)" class="btn-sun" style="cursor: pointer;">
                     <div class="sun" style="display: block;">
-                        &nbsp;<img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
+                        &nbsp;<img src="/static/img/portal-1.png" class="img-fluid sol">
                     </div>
                 </a>
 
@@ -102,9 +102,7 @@
                 <img src="/static/img/disco-voador2.png" class="img-fluid disco">
 
             </div>
-            <div>
-                <img src="/static/img/criancas.png" class="img-fluid criancas">
-            </div>
+
         </div>
 
         <div class="col-md-3">
