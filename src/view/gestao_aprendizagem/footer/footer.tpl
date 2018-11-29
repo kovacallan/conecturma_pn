@@ -1,7 +1,7 @@
-<div id="footer"></div>
+
 </div>
 
- <footer>
+ <footer class="footer">
     <h4 id="footer-text" align="center" style   ="font-size: 18.12px;  font-family: 'Calibri';color: #fff; font-weight: lighter;">
         Políticas de privacidade | copyright 2018
     </h4>
