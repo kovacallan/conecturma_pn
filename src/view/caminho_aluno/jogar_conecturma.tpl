@@ -45,7 +45,7 @@
 </div>
 
 
-<div class="container corpo-pag">
+<div class="container corpo-pag" style="margin-top: 61px;">
     <div class="row">
         <div class="col-md-3 avatar-std">
 
