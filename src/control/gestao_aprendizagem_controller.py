@@ -150,8 +150,8 @@ def diretor_create(usuario):
 def coordenador_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
     coordenador = facade.create_observador_facade(tipo=TIPO_USUARIOS['coordenador'], nome=usuario['nome'],
-                                              senha=sha512_crypt.hash(password_generate()),
-                                              data_nascimento=usuario['nascimento'], email=usuario['email'],
+                                              senha=sha512_crypt.hash(password_generate())
+                                             , email=usuario['email'],
                                               vinculo_rede=vinculo_rede['vinculo_rede'],
                                               vinculo_escola=usuario['vinculo_escola'])
     if isinstance(coordenador, object):
@@ -345,7 +345,7 @@ def lista_de_usuarios_caso_observador_for_professor(vinculo_turma, norepeat=Fals
         a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
         a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
         a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
-        a['tipo'] = TIPO_USUARIOS_ID[a['tipo_aluno']]
+        a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
         usuario.append(a)
 
     aluno = facade.get_alunos_sem_responsaveis_facade(vinculo_turma=vinculo_turma)
@@ -522,7 +522,7 @@ def controller_create_rede(no_repeat):
         return '/rede'
 
 def controller_editar_rede():
-    return facade.update_estrutura_facade(estrutura=request.params)
+    facade.update_estrutura_facade(estrutura=request.params)
 
 
 def view_escola_index():
@@ -533,23 +533,39 @@ def view_escola_index():
     """
     escola = []
     escolas_no_sistema, rede_no_sistema = get_escolas_e_rede_permissao()
-    for i in escolas_no_sistema:
-        diretor = []
-        coordenador = []
+
+    if usuario_logado()['tipo']==TIPO_USUARIOS['diretor']:
+        coordenador=[]
         professor = []
-        aluno = facade.search_aluno_escola_facade(vinculo_escola=i['id'])
-        for z in facade.search_observador_escola(vinculo_escola=i['id']):
-            if z['tipo'] == TIPO_USUARIOS['diretor']:
-                diretor.append(z)
-            elif z['tipo'] == TIPO_USUARIOS['coordenador']:
+        aluno=facade.search_aluno_escola_facade(vinculo_escola=usuario_logado()['vinculo_escola'])
+        for z in facade.search_observador_escola(vinculo_escola=usuario_logado()['vinculo_escola']):
+            if z['tipo']==TIPO_USUARIOS['coordenador']:
                 coordenador.append(z)
-            else:
+            elif z['tipo']==TIPO_USUARIOS['professor']:
                 professor.append(z)
+        escolas_no_sistema.update({'turmas': facade.search_estrutura_turma_by_escola_facade(vinculo_escola=usuario_logado()['vinculo_escola'])})
+        escolas_no_sistema.update({'aluno': aluno, 'professor': professor, 'diretor': usuario_logado(), 'coordenador': coordenador})
+        escola.append(escolas_no_sistema)
+        return dict(tipo=usuario_logado()['tipo'], escola=escola, rede=rede_no_sistema)
+    else:
+            for i in escolas_no_sistema:
+                diretor = []
+                coordenador = []
+                professor = []
+                aluno = facade.search_aluno_escola_facade(vinculo_escola=i['id'])
+                for z in facade.search_observador_escola(vinculo_escola=i['id']):
+                    if z['tipo'] == TIPO_USUARIOS['diretor']:
+                        diretor.append(z)
+                    elif z['tipo'] == TIPO_USUARIOS['coordenador']:
+                        coordenador.append(z)
+                    else:
+                        professor.append(z)
+                i.update({'turmas': facade.search_estrutura_turma_by_escola_facade(
+                    vinculo_escola=usuario_logado()['vinculo_escola'])})
+                i.update({'aluno': aluno,'professor': professor, 'diretor': diretor, 'coordenador': coordenador})
+                escola.append(i)
 
-        i.update({'aluno': aluno,'professor': professor, 'diretor': diretor, 'coordenador': coordenador})
-        escola.append(i)
-
-    return dict(tipo=usuario_logado()['tipo'], escola=escola, rede=rede_no_sistema)
+            return dict(tipo=usuario_logado()['tipo'], escola=escola, rede=rede_no_sistema)
 
 def get_escolas_e_rede_permissao():
     usuario = usuario_logado()
@@ -581,9 +597,6 @@ def get_escolas_e_rede_permissao():
             i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
-
-            i.update({'turmas': facade.search_estrutura_turma_by_escola_facade(vinculo_escola=i['id'])})
-
             escola.append(i)
         return escola, rede
 

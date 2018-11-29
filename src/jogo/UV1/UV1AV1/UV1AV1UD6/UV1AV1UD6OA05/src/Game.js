@@ -170,9 +170,9 @@ BasicGame.Game.prototype = {
 
         this.add.sprite(0,0, "hud");
 
-//        this.livesTextShadow = this.add.bitmapText(111,36, "JandaManateeSolid", this.lives.toString(), 18);
-//        this.livesTextShadow.tint = 0x010101;
-//        this.livesText = this.add.bitmapText(110,35, "JandaManateeSolid", this.lives.toString(), 18);
+        this.livesTextShadow = this.add.bitmapText(111,-100, "JandaManateeSolid", this.lives.toString(), 18);
+        this.livesTextShadow.tint = 0x010101;
+        this.livesText = this.add.bitmapText(110,-100, "JandaManateeSolid", this.lives.toString(), 18);
 
         this.pointsTextShadow = this.add.bitmapText(73,84, "JandaManateeSolid", BasicGame.Pontuacao.moedas.toString(), 18);
         this.pointsTextShadow.tint = 0x010101;

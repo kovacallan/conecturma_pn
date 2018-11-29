@@ -29,7 +29,7 @@
               </tr>
             % end
         % else:
-            <tr  class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{escola['id']}})">
+            <tr  class="hoover" style="cursor: pointer;" onclick="redirect_vizualizar_relatorio({{rede['id']}})">
                 <td colspan="2">{{rede['nome']}}</td>
             </tr>
         %end
