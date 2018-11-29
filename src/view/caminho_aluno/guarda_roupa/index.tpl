@@ -26,7 +26,7 @@
                         <div class="cristais">
                            <img src="/static/img/total_cristais_loja.png">
                             <span style="    font-family: 'arial';color: #fff;text-shadow: 2px 2px #733e00;font-size: 20px;position: absolute;top: 60px;    margin-left: 38px;z-index: 50;">{{cristais}}</span>
-                                <div class="" style="left: 345px; bottom: 56px; position: absolute;">
+                                <div class="" style="left: 345px; bottom: 56px; position: absolute; z-index:500;">
                                     <a href="#"  onclick="resetar_avatar()" >
                                      <img src="/static/img/bt-reset.png">
                                     </a>
