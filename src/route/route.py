@@ -226,7 +226,7 @@ def view_usuario_index(no_repeat=False):
 @view('gestao_aprendizagem/usuario/edicao_aluno/aluno_impressao')
 def impressao_login_aluno():
     from bottle import request
-    print(locals())
+
     aluno=request.params['aluno_id']
     alun=facade.search_aluno_id_facade(aluno)
 

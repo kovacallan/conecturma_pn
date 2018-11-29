@@ -186,11 +186,10 @@ class DbAluno(Model):
         return aluno_pes
 
     def search_aluno_id(self,id_aluno):
-
+        print(id_aluno)
         aluno = DbAluno.load(int(id_aluno))
         alun_pes = vars(aluno)["_data"]
         alun_pes['medalha'] = aluno.medalhas
-
         return alun_pes
 
     def set_apelido(self, id, apelido):
