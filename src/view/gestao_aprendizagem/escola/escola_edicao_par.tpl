@@ -194,3 +194,4 @@
         %include('gestao_aprendizagem/escola/escola_modal_criacao_aluno.tpl')
     </div>
 </div>
+

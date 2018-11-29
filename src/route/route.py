@@ -226,7 +226,7 @@ def view_usuario_index(no_repeat=False):
 @view('gestao_aprendizagem/usuario/edicao_aluno/aluno_impressao')
 def impressao_login_aluno():
     from bottle import request
-    print(locals())
+
     aluno=request.params['aluno_id']
     alun=facade.search_aluno_id_facade(aluno)
 
@@ -512,7 +512,6 @@ def relatorio_aluno(no_repeat=False):
 
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
     turma = facade.search_estrutura_id_facade(id=aluno['vinculo_turma'])
-    print(aluno)
     relatorio.get_descritores(serie=turma['serie'])
     relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
     relatorio.convert_nivel_for_numeric()

@@ -77,5 +77,5 @@
 </div>
 </div>
 </div>
-</div>
+
 %include('gestao_aprendizagem/footer/footer.tpl')

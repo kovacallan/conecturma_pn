@@ -533,8 +533,7 @@ def view_escola_index():
     """
     escola = []
     escolas_no_sistema, rede_no_sistema = get_escolas_e_rede_permissao()
-    print("GA 536",escolas_no_sistema)
-    print(rede_no_sistema)
+
     if usuario_logado()['tipo']==TIPO_USUARIOS['diretor']:
         coordenador=[]
         professor = []
@@ -561,7 +560,8 @@ def view_escola_index():
                         coordenador.append(z)
                     else:
                         professor.append(z)
-
+                i.update({'turmas': facade.search_estrutura_turma_by_escola_facade(
+                    vinculo_escola=usuario_logado()['vinculo_escola'])})
                 i.update({'aluno': aluno,'professor': professor, 'diretor': diretor, 'coordenador': coordenador})
                 escola.append(i)
 
