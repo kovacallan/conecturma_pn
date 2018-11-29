@@ -581,6 +581,9 @@ def get_escolas_e_rede_permissao():
             i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
+
+            i.update({'turmas': facade.search_estrutura_turma_by_escola_facade(vinculo_escola=i['id'])})
+
             escola.append(i)
         return escola, rede
 
