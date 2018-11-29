@@ -345,7 +345,7 @@ def lista_de_usuarios_caso_observador_for_professor(vinculo_turma, norepeat=Fals
         a['vinculo_rede'] = get_nome_rede(a['vinculo_rede'])
         a['vinculo_escola'] = get_nome_escola(a['vinculo_escola'])
         a['vinculo_turma'] = get_nome_turma(a['vinculo_turma'])
-        a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
+        a['tipo'] = TIPO_USUARIOS_ID[a['tipo_aluno']]
         usuario.append(a)
 
     aluno = facade.get_alunos_sem_responsaveis_facade(vinculo_turma=vinculo_turma)
@@ -522,7 +522,7 @@ def controller_create_rede(no_repeat):
         return '/rede'
 
 def controller_editar_rede():
-    facade.update_estrutura_facade(estrutura=request.params)
+    return facade.update_estrutura_facade(estrutura=request.params)
 
 
 def view_escola_index():
@@ -597,6 +597,9 @@ def get_escolas_e_rede_permissao():
             i['vinculo_rede'] = get_nome_rede(vinculo_rede=i['vinculo_rede'])
             if i['vinculo_diretor_escola'] != '0':
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
+
+            i.update({'turmas': facade.search_estrutura_turma_by_escola_facade(vinculo_escola=i['id'])})
+
             escola.append(i)
         return escola, rede
 

@@ -34,8 +34,13 @@
                 <!-- aqui começa o conteudo das guias  -->
                 <div class="tab-content">
                     <div class="tab-pane container active" id="{{i['id']}}">
-                        <form>
-                            <input type="hidden" id="id_aluno{{i['id']}}" value="{{i['id']}}">
+                        <form id="impressao{{i['id']}}" action="aluno/impressao_login" method="post">
+                            <input name="aluno_id" type="hidden" id="id_aluno{{i['id']}}" value="{{i['id']}}">
+                        </form>
+                             <div class="offset-md-11">
+                                 <i onclick="formSubmit({{i['id']}})" align="right" class="fas fa-print" style="cursor:pointer;"></i>
+                              </div>
+
                             <div class="row distanciamento" style="margin-top: 30px">
                                 <div class="col-md-12">
                                     <div class="row distanciamento" style="margin-left: 5px;">
@@ -88,7 +93,9 @@
                                     %end
                                     <h5>Acesso</h5>
                                     <div class="row distanciamento" style="margin-left: 5px;">
-
+                                        <form id="impressao" action="relatorio_aluno_impressao" method="post">
+                                            <input type="hidden" name="aluno" value="{{i['id']}}">
+                                        </form>
                                         <div class="col-md-">
                                             <label for="login">login</label>
                                             <span style="color:#ff0000">*</span>
@@ -114,15 +121,15 @@
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div>
                                 <div class="col-md-1">
-              <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+              <!--<span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                 <i class="far fa-trash-alt" style="color:#969696;"></i>
-              </span>
+              </span>-->
                                 </div>
                                 <div class="offset-md-10 col-md-1">
-                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                        <!--<span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
                               style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
-                        </span>
+                        </span>-->
                                     <span onclick="update_aluno({{i['id']}})" id="edit{{i['id']}}"
                                           style="cursor:pointer;display:none;">
                             <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
@@ -133,7 +140,7 @@
                             <!-- aqui termina o conteudo da guia do dados de escola  -->
 
                             <br>
-                        </form>
+                        <!--</form>-->
                     </div>
                 </div>
 
@@ -157,3 +164,9 @@
         </div>
     </div>
 </div>
+<script>
+    function formSubmit(id){
+        document.getElementById("impressao"+id).submit();
+
+    }
+</script>

@@ -27,17 +27,31 @@
 
         </div>
 </div>
+     <header id="header-login" class="col-md-12" >
+        <div id="header-c" class="offset-md-3">
+            <img style="position: relative;top: 9px;" src="/static/img/header-c.png">
+        </div>
+                                            <div class="col-md-4 offset-md-6" style="display:initial;position: relative;bottom: 95px;">
+                                                <label style="color:#fff;font-weight:bold; text-shadow: 1px 5px 5px #000;position: relative;top: 10px;left: -8px;">Professores e<br>Responsáveis</label>
+                                            <input type="text" id="inputEmail" class="email-prof" placeholder="Email" required="">
+                                            <input type="password" id="inputPassword" class="senha-prof" placeholder="Senha" required="">
+                                            <button onclick="login_professor()" id="btn-professor" style="cursor: pointer;"></button>
+
+                                            <!--<a href="#" onclick="" class="lost-pass">Esqueci minha senha</a>-->
+
+
+                                                </div>
+        </header>
     <div class="container-fluid bg">
+
           <div class="container">
             <div class="col-md-12" style="top: 29px;">
                 <div class="bg_login">
                     <main class="row">
 
                         <div class="form-group">
-                         <img src="/static/img/login-img-2.png" id="login-img"   alt="Responsive image">
-                            <section class="content-login col-md">
-
-                                <div class="student col-md">
+                         <img src="/static/img/login-img-new.png" id="login-img" class="col-md-4"  alt="Responsive image">
+                                <div class="student col-md" style="margin-left: 248px;margin-top: 24px;">
                                     <div id="titulo-aluno">
                                         <img src="/static/img/aluno-seta.png" id="aluno-seta" class="img-fluid" alt="Responsive image">
                                         <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
@@ -47,12 +61,13 @@
                                         <br>
                                     <label>Nome do usuário</label>
                                     <br>
+                                    <br>
                                     <input data-val="true" data-val-required="O Login do usuário é obrigatório" id="Login" name="Login" type="text" value="" placeholder="Login Aluno" style="text-transform:uppercase;">
 
                                 </div>
 
-                                <div class="pass col-md container">
-                                    <br>
+                                <div class="pass col-md-  offset-md-6">
+
                                     <span class="pass-title">Senha</span>
                                     <img src="/static/img/btn-interrogacao.png" id="btn-interrogacao" class="img-fluid" alt="Responsive image" data-toggle="tooltip" data-placement="right" title="Informar senha do aluno">
 
@@ -137,34 +152,19 @@
 
                                 </div>
                                 <input data-val="true" data-val-required="A senha do usuário é obrigatória" id="senhaAluno" name="Senha" type="hidden" value="">
-                        </section>
+
                         </div>
-                        <div id="Login-div">
-                            <div class="form-group">
-                                <div class="col-md">
-                                   <section class="content-professor">
-                                        <div class="professor">
-                                            <div id="titulo-prof">
-                                                <img src="/static/img/professor-seta.png" id="professor-seta" class="img-fluid" alt="Responsive image">
-                                                <h2 class="h3 mb-3 font-weight-normal professor-text">Professor</h2>
-                                            </div>
-                                            <label for="inputEmail" class="label-prof-email">Email</label><br>
-                                            <input type="text" id="inputEmail" class="email-prof" placeholder="Email" required="">
-                                            <br>
-                                            <br>
-                                            <label for="inputPassword" class="label-prof-senha" style="margin-bottom: 0;">Senha</label><br>
-                                            <input type="password" id="inputPassword" class="senha-prof" placeholder="Senha" required=""><br>
-                                             <!--<a href="#" onclick="" class="lost-pass">Esqueci minha senha</a> -->
-                                            <br>
-                                            <br>
-                                            <button onclick="login_professor()" id="btn-professor" style="cursor: pointer;"></button>
-                                        </div>
 
 
-          </section>
-          </div>
-          </div>
-          </div>
+
+
+
+
+
+
+
+
+
 
 
 

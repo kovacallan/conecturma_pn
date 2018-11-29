@@ -43,12 +43,12 @@
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row distanciamento" style="margin-top: 30px">
                                 <div class="col-md-12" style="height: 215px;">
-                                     <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}"
+                                     <!--<span onclick="allow_edit({{i['id']}})" class="{{i['id']}}"
                                            id="icone_edit{{i['id']}}"
                                            style="cursor:pointer; position: absolute; right: 0;">
                                             <i class="fas fa-edit edit-ico"
                                                style="color: #969696;padding-right: 27px;"></i>
-                                        </span>
+                                        </span>-->
 
 
                                     <div class="row distanciamento">
@@ -105,20 +105,27 @@
             <!-- aqui termina o conteudo da guia do dados de escola  -->
             <div class="tab-pane fade aba-prof" id="{{i['id']}}-prof" role="tabpanel"
                  aria-labelledby="{{i['nome']}}-prof">
-                <div class="row" style="margin-top: 12px;">
+                <div  class="row" style="margin-top: 12px;">
+                    <form id="impressao{{i['id']}}" action="turma/turma_impressa_alunos" method="post">
+                        <input name="turma" type="hidden" value="{{i['id']}}">
+                    </form>
                     <div class="container">
+                       <div class="offset-md-11">
+                            <i onclick="formSubmit({{i['id']}})" align="right" class="fas fa-print" style="cursor:pointer;"></i>
+                        </div>
                         % for z in i['aluno']:
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-11">
+                            <div class="row" style="clear: both;">
+                                <div class="col-md-12">
                                     % if index % 2 ==0:
                                     <div class="row row-impar nome-prof">
-                                        <div class="col-md-4" style="margin-top: 4px;">
+                                        <div class="col-md-5" style="margin-top: 4px;">
                                             Nome: {{z['nome']}}
                                             <br>
                                             Login :{{z['nome_login']}}
                                         </div>
-                                        <div class="col-md-6 offset-md-2" style="padding:10px">
+
+                                        <div class="col-md-6" style="padding:10px">
                                             <span style="margin-left: 17px;"> &nbsp;senha :</span>
                                             <img src="/static/img/{{z['senha'][0]}}.png"
                                                  style="padding-left:11px;width: 15%;margin-right:5px;">
@@ -129,25 +136,24 @@
                                             <img src="/static/img/{{z['senha'][3]}}.png"
                                                  style="padding-left:11px;width: 15%;margin-right:5px;">
                                         </div>
+                                        % if tipo == TIPO_USUARIOS['professor']:
+                                            <div class="col-md-1 row-impar nome-prof">
+                                                <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal"
+                                                     data-target="#medalha_janela{{z['id']}}"
+                                                     style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
+                                            </div>
+                                            %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                        % end
                                     </div>
-
-                                    % if tipo == TIPO_USUARIOS['professor']:
-                                    <div class="col-md-1 row-impar nome-prof">
-                                        <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal"
-                                             data-target="#medalha_janela{{z['id']}}"
-                                             style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
-                                    </div>
-                                    %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
-                                    % end
                                     % else:
 
                                     <div class="row row-par nome-prof">
-                                        <div class="col-md-4" style="margin-top: 4px;">
+                                        <div class="col-md-5" style="margin-top: 4px;">
                                             Nome: {{z['nome']}}
                                             <br>
                                             Login :{{z['nome_login']}}
                                         </div>
-                                        <div class="col-md-6 offset-md-2" style="padding:10px">
+                                        <div class="col-md-6 offset-md-1" style="padding:10px">
                                             <span style="margin-left: 17px;"> &nbsp;senha :</span>
                                             <img src="/static/img/{{z['senha'][0]}}.png"
                                                  style="padding-left:11px;width: 15%;margin-right:5px;">
@@ -173,7 +179,6 @@
                             </div>
                         </div>
                         %end
-
                     </div>
                     <br>
                 </div>
@@ -265,9 +270,9 @@
                 <div class="row" style="margin-bottom: 10px">
                     % if tipo != '2':
                     <div class="col-md-1">
-                            <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+                            <!--<span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                                 <i class="far fa-trash-alt" style="color:#969696;"></i>
-                            </span>
+                            </span>-->
                     </div>
                     % end
                     <div class="offset-md-10 col-md-1">
@@ -285,6 +290,11 @@
         </div>
     </div>
 </div>
+<script>
+    function formSubmit(id){
+        document.getElementById("impressao"+id).submit();
 
+    }
+</script>
 
 <!-- NO PRINT -->

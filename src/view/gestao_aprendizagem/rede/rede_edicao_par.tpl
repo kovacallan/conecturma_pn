@@ -133,20 +133,20 @@
             </div>
             <div class="container">
                 <div class="row" style="margin-bottom: 10px">
-                    % if tipo != '2':
-                        <div class="col-md-1">
-                            <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
-                                <i class="far fa-trash-alt" style="color:#969696;"></i>
-                            </span>
+                        <div class="col-md-2">
+                            % if tipo == '0':
+                                <button class="botao-salvar" style="background-color:#ff4d4d" onclick="delete_estrutura({{i['id']}})">
+                                    Deletar Rede
+                                </button>
+                            %end
                         </div>
-                    % end
-                    <div class="offset-md-10 col-md-1">
-                        <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}" style="cursor:pointer;">
-                            <i class="fas fa-edit edit-ico" style="color: #969696;"></i>
-                        </span>
-                        <span onclick="update_rede({{i['id']}})" id="edit{{i['id']}}" style="cursor:pointer;display:none;">
-                            <i class="far fa-save fa-lg" style="color: #969696;padding-left: 16px;"></i>
-                        </span>
+                    <div class="offset-md-8 col-md-2">
+                        <button id="icone_edit{{i['id']}}"  class="botao-salvar" onclick="allow_edit({{i['id']}})" style="margin-left: 10px;">
+                            Editar
+                        </button>
+                        <button onclick="update_rede({{i['id']}})" id="edit{{i['id']}}"  class="botao-salvar" style="margin-left: 10px;display:none;">
+                            Salvar
+                        </button>
                     </div>
                 </div>
             </div>

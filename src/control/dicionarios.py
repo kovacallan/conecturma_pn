@@ -51,7 +51,7 @@ SERIE = {
 }
 
 PAGINA_INICIAL = dict(
-    administrador='/administrador/pag_administrador',#'/gestao_aprendizagem'
+    administrador='/gestao_aprendizagem',#/administrador/pag_administrador
     gestor='/gestao_aprendizagem',
     diretor='/gestao_aprendizagem',
     coordenador='/gestao_aprendizagem',

@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-10">
         <canvas id="myChart_mat"></canvas>
-
+        <br>
         <canvas id="myChart_port"></canvas>
     </div>
 </div>
@@ -167,5 +167,9 @@
         options: options
     });
 </script>
+<script>
+    window.onload = window.print();
+</script>
+
 </body>
 </html>

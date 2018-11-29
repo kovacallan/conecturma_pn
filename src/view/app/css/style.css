@@ -5,23 +5,27 @@
 body{
 overflow: hidden;
 }
+#header-login{
+background-color:#0391e6;
+height: 98px;
+}
 
 .bg{
 
 	background:url("img/tela-login_fundo.png") no-repeat center center;
-	height: 110vh;
-    background-size: 110% 100%;
+	height: 88vh;
+    background-size: 100% 114%;
 
 
 }
 
 .bg_login{
-	background:url("img/fundo-copy.png") no-repeat center center ;
-	height: 100vh;
+	background:url("img/fundo.png") no-repeat center center ;
+
     max-width:1000px ;
     max-height: 800px;
 
-    background-size: 74% 99%;
+
 }
 
 #Login{
@@ -43,9 +47,7 @@ overflow: hidden;
 #login-img{
 
 position: relative;
-bottom: 10px;
 margin-left: 220px;
-width:35%;
 
 
 }
@@ -123,14 +125,10 @@ cartoons-pass figure:hover img,figure.hover img {
 }*/
 
 
-
-#professor-seta{
-	margin: 0;
-	padding: 0;
-	border:0;
-	position: relative;
-	right: 35px;
-	top: 36px;
+.pass{
+position: relative;
+ bottom: 87px;
+ margin-left: 530px;
 }
 
 
@@ -166,11 +164,11 @@ cartoons-pass figure:hover img,figure.hover img {
 
 /* Botoes */
 .pass button {
-	background: url(img/btn-aluno.png) 0 0 no-repeat;
+	background: url(img/btn-login-aluno.png) 0 0 no-repeat;
     width: 110px;
     height: 55px;
     border: none;
-    margin-left: 81px;
+    margin-left: 99px;
     margin-top: 30px;
     position: relative;
     left: 27px;
@@ -179,13 +177,15 @@ cartoons-pass figure:hover img,figure.hover img {
 
 
 
-#Login-div .professor  button{
-	background: url(img/btn-prof.png) 0 0 no-repeat;
-	width: 110px;
-    height: 55px;
+#btn-professor{
+	background: url(img/new-btn-prof-1.png) 0 0 no-repeat;
+	width: 61px;
+    height: 32px;
     border: none;
-   margin-left: 80px;
-    margin-top: 20px;
+    margin-left: 0px;
+    margin-top: 21px;
+    top: 11px;
+    position: relative;
   }
 
 
@@ -260,7 +260,13 @@ footer{
 .bg_login{
 
 	height: 80vh;
-    background-size: 107% 109%;
+    background-size: 100% 100%;
+}
+main{
+position:relative;
+top:40px;
+
+
 }
 }
 

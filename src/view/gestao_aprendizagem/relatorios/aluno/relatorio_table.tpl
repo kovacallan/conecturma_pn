@@ -28,16 +28,18 @@
             <tr>
 
                 <td id="printableArea" class="hiddenRow" colspan="3">
-                    <div style="display:none" id = "grafico{{i['id']}}" class="accordian-body collapse grafico{{i['id']}}">
-                        <div class="col-md-12" style="margin-top: 15px;">
+                    <div style="display:none" id = "grafico{{i['id']}}" align="center" class="accordian-body collapse grafico{{i['id']}} col-md-11">
+                        <span align="center" style="color:#299ae8; font-size: 20px;">Desempenho das últimas 10 vezes jogadas</span>
+                        <div class="col-md-12" style="margin-top: 15px; display:inline-flex;">
                             <span class="word">Quantidades de vezes jogadas: {{vezes[teste]}}</span>
                             <br>
                             <span class="word">Média do aluno: {{porcentagem[teste]}}</span>
                             <br>
                             <span class="word">Nota da última vez jogada: {{ultima_vez[teste]}}</span>
                         </div>
-
-                        <canvas id="myChart_grafico{{i['id']}}"></canvas>
+                        <div style="margin-left: 23px;margin-bottom: 30px;">
+                            <canvas id="myChart_grafico{{i['id']}}"></canvas>
+                        </div>
                     </div>
                 </td>
             </tr>
