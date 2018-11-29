@@ -512,12 +512,13 @@ def relatorio_aluno(no_repeat=False):
 
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
     turma = facade.search_estrutura_id_facade(id=aluno['vinculo_turma'])
-
+    print(aluno)
     relatorio.get_descritores(serie=turma['serie'])
     relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
     relatorio.convert_nivel_for_numeric()
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
+
     ultima_vez = []
     for i in relatorio.pontuacao:
         if len(i) != 0:
@@ -529,8 +530,12 @@ def relatorio_aluno(no_repeat=False):
             pontos.append(t[(len(t) - 10): len(t)])
         else:
             pontos.append(t)
-    return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
+
+    return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno,
+                media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica(),
+                oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.nova_pontuacao(), vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
+
 @route('/turma/turma_impressa_alunos', method='POST')
 @view('gestao_aprendizagem/turma/impressao_turma')
 def turma_impressao():

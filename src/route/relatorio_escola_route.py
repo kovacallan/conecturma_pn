@@ -19,11 +19,14 @@ def relatorio_turma_view(no_repeat=False):
 def relatorio_aluno(no_repeat=False):
     observador = Observador(observador_logado=usuario_logado())
     relatorio = RelatorioEscola()
+
     serie = request.params['serie']
     escolas = request.params['escola']
+
     escola = observador.get_escola(id_escola=escolas)
     descritores = relatorio.get_descritores(serie=serie)
     turmas = observador.get_turma(serie=serie, id_escola=escolas)
+
     turma = []
     for i in turmas:
         media_alunos = relatorio.get_media_alunos(turma=i['id'])
@@ -60,5 +63,43 @@ def selecao_serie():
     observador = Observador(observador_logado=usuario_logado())
 
     return template(path_template + 'relatorio_selecao_serie', tipo=observador.get_observador_tipo(), escola=request.params['id'])
+
+
+@route('/relatorios/relatorio_escola_impressao', method='POST')
+def relatorio_impressao():
+    from bottle import request
+    from control.relatorios.relatorio_escola_controller import RelatorioEscola
+    from control.dicionarios import DICIPLINA_NOME
+    relatorio = RelatorioEscola()
+    observador = Observador(observador_logado=usuario_logado())
+
+    observador.get_turma(id_escola=observador)
+    ultima_vez = []
+
+    #novo for
+    oa_mat = []
+    pontos_mat = []
+    oa_port = []
+    pontos_port = []
+    teste = 0
+    for index,i in enumerate(relatorio.descritores):
+        if i['disciplina'] == DICIPLINA_NOME['matematica']:
+            try:
+                pontos_mat.append(relatorio.porcentagem[teste])
+                oa_mat.append(float(i['sigla_oa'][8:9] + "." + i['sigla_oa'][12]))
+            except:
+                pass
+            teste+=1
+        else:
+            if i['sigla_oa'][9:11] != 'VC' and i['sigla_oa'][9:11] != 'CN':
+                try:
+                    pontos_port.append(relatorio.porcentagem[teste])
+                    oa_port.append(float(i['sigla_oa'][8:9] + "." + i['sigla_oa'][12]))
+                except:
+                    pass
+                teste+=1
+
+    return template(path_template +'relatorio_escola_impressao', media_portugues=relatorio.media_portugues(),
+                    aluno=aluno , oa_mat=oa_mat, oa_port=oa_port, pontos_mat= pontos_mat, pontos_port=pontos_port)
 
 
