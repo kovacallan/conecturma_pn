@@ -46,7 +46,6 @@ def cadastro_usuario():
     usuario={}
     for i in request.params:
         usuario[i] = request.params.getunicode(i)
-        print('key,value',i,usuario[i])
 
     if TIPO_USUARIOS[usuario['tipo']] == TIPO_USUARIOS['aluno']:
         aluno_create(usuario=usuario)
@@ -116,7 +115,6 @@ def responsavel_create(usuario):
     if isinstance(responsavel, object):
         itens = facade.set_itens_responsaveis_facade(id=responsavel.id, itens=facade.get_itens_free_facade())
         aluno = facade.vincular_responsavel_facade(id_aluno=request.params['vinculo_aluno'], id_responsavel=responsavel.id)
-        print(aluno.vinculo_responsavel, responsavel.id)
         if itens and aluno.vinculo_responsavel == str(responsavel.id):
             return '/gestao_aprendizagem/usuario'
 
@@ -151,7 +149,7 @@ def coordenador_create(usuario):
     vinculo_rede = facade.search_estrutura_id_facade(id=usuario['vinculo_escola'])
     coordenador = facade.create_observador_facade(tipo=TIPO_USUARIOS['coordenador'], nome=usuario['nome'],
                                               senha=sha512_crypt.hash(password_generate()),
-                                              data_nascimento=usuario['nascimento'], email=usuario['email'],
+                                              email=usuario['email'],
                                               vinculo_rede=vinculo_rede['vinculo_rede'],
                                               vinculo_escola=usuario['vinculo_escola'])
     if isinstance(coordenador, object):

@@ -82,7 +82,7 @@ class Observador(object):
                         if i['serie'] == serie:
                             self._turma.append(i)
                 else:
-                    self._turma = self.facade.search_estrutura_turma_by_escola_facade(vinculo_escola=self._escola['id'])
+                    self._turma = self.facade.search_estrutura_turma_by_escola_facade(vinculo_escola=self._escola)
 
 
             else:
