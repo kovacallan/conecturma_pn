@@ -8,6 +8,16 @@ body{
     
 }
 
+.portal-sun{
+  width: 412px;
+  height: 366px;
+  background:url("/static/img/efeito-portal.png") left center;
+  animation: play 0.8s steps(10) infinite;
+}
+@keyframes play {
+   100% { background-position: -1900px; }
+}
+
 .menu{
    background-image: url(/static/img/menu/barra.png);
    height: 120px;
