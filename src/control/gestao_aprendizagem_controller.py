@@ -291,7 +291,7 @@ def lista_de_usuarios_caso_observador_for_gestor(vinculo_rede, norepeat=False):
         a['tipo'] = TIPO_USUARIOS_ID[a['tipo']]
         usuario.append(a)
     for o in observador:
-        if int(o['tipo']) > int(TIPO_USUARIOS['gestor']):
+        if float(o['tipo']) > float(TIPO_USUARIOS['gestor']):
             o['vinculo_rede'] = get_nome_rede(o['vinculo_rede'])
             o['vinculo_escola'] = get_nome_escola(o['vinculo_escola'])
             o['vinculo_turma'] = get_nome_turma(o['vinculo_turma'])
@@ -393,9 +393,13 @@ def controller_observador_update(no_repeat=False):
     except KeyError:
         observador = facade.search_observador_id_facade(request.params['id'])
         email = observador['email']
+        telefone=observador['telefone']
+        cpf=observador['cpf']
+        vinculo_turma=observador['vinculo_turma']
+        vinculo_escola=observador['vinculo_escola']
         if no_repeat:
             return locals()
-    facade.update_observador_facade(id=request.params['id'], nome=request.params['nome'],
+    facade.update_observador_facade(id=request.params['id'], nome=request.params['nome'],cpf=cpf,vinculo_escola=vinculo_escola,vinculo_turma=vinculo_turma,telefone=telefone,
                                     email=email)
     # redirect('/observador/read_observador')
 
@@ -454,8 +458,8 @@ def view_index_rede():
             for z in facade.search_estrutura_escola_by_rede_facade(vinculo_rede=str(i['id'])):
                 escola.append(z)
 
-                # i.update({'escola': escola})
-                i.append({'escola': escola})
+                i.update({'escola': escola})
+                # i.append({'escola': escola})
             redes.append(i)
 
     return dict(tipo=usuario_logado()['tipo'], rede=redes)
@@ -622,7 +626,7 @@ def get_escolas_e_rede_permissao():
                 i['vinculo_diretor_escola'] = get_nome_diretor_da_escola(vinculo_escola=str(i['id']))
             escola.append(i)
 
-        print("nandato",escola)
+
         return escola, rede
 
     elif usuario['tipo'] == TIPO_USUARIOS['responsavel']:

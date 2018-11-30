@@ -130,10 +130,14 @@
                               style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
                         </span>-->
-                                    <span onclick="update_aluno({{i['id']}})" id="edit{{i['id']}}"
-                                          style="cursor:pointer;display:none;">
-                            <i class="far fa-save fa-lg" style="color: #969696;margin-left: -10px"></i>
-                        </span>
+                                  <div class="offset-md-8 col-md-2">
+                        <button id="icone_edit{{i['id']}}"  class="botao-salvar" onclick="allow_edit({{i['id']}})" style="margin-left: 10px;">
+                            Editar
+                        </button>
+                        <button onclick="update_aluno({{i['id']}})" id="edit{{i['id']}}"  class="botao-salvar" style="margin-left: 10px;display:none;">
+                            Salvar
+                        </button>
+                    </div>
                                 </div>
                             </div>
 

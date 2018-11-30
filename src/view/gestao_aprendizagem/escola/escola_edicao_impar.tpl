@@ -1,7 +1,6 @@
-
-
-<div style="cursor: pointer;" class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}" aria-expanded="true"
-       aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
+<div style="cursor: pointer;" class="col-md-12 item-tabela " data-toggle="collapse" data-target="#collapse{{i['id']}}"
+     aria-expanded="true"
+     aria-controls="collapse{{i['id']}}" id="id-nossa-escola" onclick="seta('id-nossa-escola')">
     {{i['nome']}}
 </div>
 
@@ -139,24 +138,24 @@
 
                                             <span>+</span>
                                         </div>
-                                         <div id="pagination">
-                                        % for z in i['professor']:
-                                        <div class="row">
-                                            <div class="col-md-11">
-                                                <div class="offset-md-1 nome-prof row row-par">
-                                                    <div class="col-md-11">
-                                                        {{z['nome']}}
-                                                    </div>
-                                                    <div class="col-md-1 item-tabela">
-                                                        <a href="">
-                                                            <i class="fas fa-edit edit-ico"></i>
-                                                        </a>
+                                        <div id="pagination">
+                                            % for z in i['professor']:
+                                            <div class="row">
+                                                <div class="col-md-11">
+                                                    <div class="offset-md-1 nome-prof row row-par">
+                                                        <div class="col-md-11">
+                                                            {{z['nome']}}
+                                                        </div>
+                                                        <div class="col-md-1 item-tabela">
+                                                            <a href="">
+                                                                <i class="fas fa-edit edit-ico"></i>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        %end
-                                         </div> <!-- PAGINATION -->
+                                            %end
+                                        </div> <!-- PAGINATION -->
                                     </div>
                                 </div>
                             </div>
