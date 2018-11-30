@@ -99,7 +99,7 @@
             </div>
             <div>
 
-                <img src="/static/img/disco-voador2.png" class="img-fluid disco">
+                <img src="/static/img/tela-login_personagens.png" class="img-fluid disco">
 
             </div>
 

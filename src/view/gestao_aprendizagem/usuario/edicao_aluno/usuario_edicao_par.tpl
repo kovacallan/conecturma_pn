@@ -130,6 +130,7 @@
                               style="cursor:pointer;">
                             <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 27px;"></i>
                         </span>-->
+
                                   <div class="offset-md-8 col-md-2">
                         <button id="icone_edit{{i['id']}}"  class="botao-salvar" onclick="allow_edit({{i['id']}})" style="margin-left: 10px;">
                             Editar
