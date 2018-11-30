@@ -13,8 +13,21 @@
 </head>
 
 <body>
-   <div class="light-box" id="divRecuperarSenha" style="display:none">
+   <div class="light-box" id="esqueciSenha" style="display:none">
 
+    <div align="center">
+          <div class="bg-error">
+                <span class="title-erro">Recuperar senha</span>
+                <span style="padding-left:40px; padding-right: 40px;">
+                    Informe seu e-mail de cadastro:
+                </span>
+                    <input type="text" style="position: relative; bottom: 28px;">
+               <a href="#" onclick="document.getElementById('esqueciSenha').style.display='none'" style="position: relative;bottom: -24px;left: -90px;"><img src="/static/img/btn-enviar.png"></a>
+            </div>
+
+        </div>
+</div>
+<div  class="light-box" id="divRecuperarSenha" style="display:none">
     <div align="center">
           <div class="bg-error">
                 <span class="title-erro">Estamos confusos</span>
@@ -27,6 +40,11 @@
 
         </div>
 </div>
+
+
+
+
+
      <header id="header-login" class="col-md-12" >
         <div id="header-c" class="offset-md-3">
             <img style="margin-left: 65px; position: relative;top: 9px;" src="/static/img/header-c.png">
@@ -37,7 +55,7 @@
                                             <input type="password" id="inputPassword" class="senha-prof" placeholder="Senha" required="">
                                             <button onclick="login_professor()" id="btn-professor" style="cursor: pointer;"></button>
 
-                                            <!--<a href="#" onclick="" class="lost-pass">Esqueci minha senha</a>-->
+                                            <a href="#" onclick="document.getElementById('esqueciSenha').style.display='block'" class="lost-pass">Esqueci minha senha</a>
 
 
                                                 </div>
