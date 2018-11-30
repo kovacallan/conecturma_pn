@@ -62,6 +62,7 @@
                                             <input type="text" size="24" class="form-control disabled{{i['id']}}"
                                                    name="" id="cnpj{{i['id']}}" value="{{i['cnpj']}}" disabled>
                                         </div>
+                                        
                                     </div>
                                     <div class="row distanciamento">
                                         <div class="col-md-">
@@ -95,6 +96,7 @@
                                             %end
                                         </div>
                                     </div>
+
                                     <!--fim da div dos dados ao lado da imagem-->
                                 </div>
                                 <div class="offset-md-1 distanciamento row" style="">
@@ -157,41 +159,57 @@
                         %include('gestao_aprendizagem/escola/escola_edicao_aba_professor.tpl')
                     </div>
 
+
                     <div class="tab-pane fade aba-prof" id="{{i['id']}}-alunos" role="tabpanel"
                          aria-labelledby="{{i['nome']}}-alunos">
                         %include('gestao_aprendizagem/escola/escola_edicao_aba_aluno.tpl')
                     </div>
-            </div>
-            <div class="container">
-                <div class="row" style="margin-bottom: 10px">
-                    % if tipo != '2':
+
+                </div>
+                <div class="container">
+                    <div class="row" style="margin-bottom: 10px">
+                        % if tipo != '2':
+
                         <!--<div class="col-md-1">
                             <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                                 <i class="far fa-trash-alt" style="color:#969696;"></i>
                             </span>
                         </div>-->
-                    % end
-                    <div class="offset-md-10 col-md-1">
-                        <!--<span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
+                        % end
+                        <div class="offset-md-10 col-md-1">
+                            <!--<span onclick="allow_edit({{i['id']}})" class="{{i['id']}}" id="icone_edit{{i['id']}}"
 
-                              style="cursor:pointer;">
-                            <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 12px;"></i>
-                        </span>
-                            <span onclick="update_escola({{i['id']}})" id="edit{{i['id']}}"
-                                  style="cursor:pointer;display:none;">
-                            <i class="far fa-save fa-lg" style="color: #969696;padding-left: 7px;"></i>
-                        </span>
+                                  style="cursor:pointer;">
+                                <i class="fas fa-edit edit-ico" style="color: #969696;padding-right: 12px;"></i>
+                            </span>
+                                <span onclick="update_escola({{i['id']}})" id="edit{{i['id']}}"
+                                      style="cursor:pointer;display:none;">
+                                <i class="far fa-save fa-lg" style="color: #969696;padding-left: 7px;"></i>
+                            </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+            Modal -->
+                            %include('gestao_aprendizagem/escola/escola_modal_criacao_professor.tpl')
+                            %include('gestao_aprendizagem/escola/escola_modal_criacao_coordenador.tpl')
+                            %include('gestao_aprendizagem/escola/escola_modal_criacao_aluno.tpl')
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
+
         </form>
         <!-- Modal -->
         %include('gestao_aprendizagem/escola/escola_modal_criacao_professor.tpl')
         %include('gestao_aprendizagem/escola/escola_modal_criacao_coordenador.tpl')
         %include('gestao_aprendizagem/escola/escola_modal_criacao_aluno.tpl')
+
     </div>
 </div>
 

@@ -2,10 +2,11 @@
 %include('gestao_aprendizagem/menu/menu.tpl')
 
 <!--<style>-->
-    <!--footer{-->
-        <!--bottom: -37px;-->
-        <!--position:relative;-->
-    <!--}-->
+<!--footer{-->
+<!--bottom: -37px;-->
+<!--position:relative;-->
+<!--}-->
+
 
 <!--</style>-->
 
@@ -69,8 +70,6 @@
       // document.getElementById(drop).style.display='block':
     }
   }
-
-
 
 </script>
 </div>

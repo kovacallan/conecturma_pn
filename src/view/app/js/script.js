@@ -825,13 +825,8 @@ function update_observador(id){
                 $.post('/observador/update_observador', {id:id, nome:nome,email:email},function(data){
                     console.log("hm");
                 });
-                location.reload();
+                window.reload();
                 }
-                else{
-                console.log("hm,emailnao existe");
-                $.post('/observador/update_observador', {id:id, nome:nome},function(data){
-                });
-//                location.reload();
                 }
                }else{
             alert('Por favor , digite um email valido');
