@@ -75,7 +75,8 @@ class Observador(object):
                         if i['serie'] == serie:
                             self._turma.append(i)
 
-            elif (self._observador_tipo == TIPO_USUARIOS['diretor']):
+
+            elif (self._observador_tipo == TIPO_USUARIOS['diretor'] or self._observador_tipo==TIPO_USUARIOS['coordenador']):
                 if serie != None:
                     self._turma = []
                     for i in self.facade.search_estrutura_turma_by_escola_facade(vinculo_escola=self._escola['id']):
@@ -87,7 +88,9 @@ class Observador(object):
 
 
             else:
+
                 self._turma = self.facade.search_estrutura_id_facade(id=self._turma)
+
         else:
             self._turma = self.facade.search_estrutura_id_facade(id=id_turma)
 
