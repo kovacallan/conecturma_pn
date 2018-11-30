@@ -92,7 +92,7 @@
 
                 <a href="javascript:void(0)" class="btn-sun" style="cursor: pointer;">
                     <div class="sun" style="display: block;">
-                        &nbsp;<img src="/static/img/portal-1.png" class="img-fluid sol">
+                        &nbsp;<img id="sol" src="/static/img/portal-1.png" class="img-fluid sol">
                     </div>
                 </a>
 
@@ -120,8 +120,18 @@
         crossorigin="anonymous"></script>
 
 <script src="../static/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/rotate.js"></script>
 
 <script>
+    $("#sol").rotate({
+      bind:
+      {
+        click: function(){
+          $(this).rotate({ angle:0,animateTo:180,easing: $.easing.easeInOutExpo })
+        }
+      }
+
+    });
         $(document).ready(function () {
             $(".btn-sun").click(function () {
                hide_sun_elements();

@@ -248,6 +248,8 @@
      $("body").append("<main align='center'>Mas se quiser ver como está ficando clique no link</main>");
      $("body").append("<footer style='position: absolute; bottom: 0px; background-color: #bed7ea;width: 100%; padding-bottom: 21px; padding-top:5px;margin-top: 10px;'><h4 id='footer-text' align='center' style='font-size:18.12px;  font-family:'Calibri';color:#9bacba; font-weight:lighter;'>Políticas de privacidade | copyright 2018</h4></footer>");
     }
+
+
 </script>
 </body>
 </html>
