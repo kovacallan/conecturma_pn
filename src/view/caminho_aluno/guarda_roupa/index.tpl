@@ -24,8 +24,13 @@
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-md-4">
                         <div class="cristais">
-                            <img src="/static/img/total_cristais_loja.png">
+                           <img src="/static/img/total_cristais_loja.png">
                             <span style="    font-family: 'arial';color: #fff;text-shadow: 2px 2px #733e00;font-size: 20px;position: absolute;top: 60px;    margin-left: 38px;z-index: 50;">{{cristais}}</span>
+                                <div class="" style="left: 345px; bottom: 56px; position: absolute; z-index:500;">
+                                    <a href="#"  onclick="resetar_avatar()" >
+                                     <img src="/static/img/bt-reset.png">
+                                    </a>
+                                </div>
                         </div>
                         <div class="loja_space_avatar">
                              % if apelido != '0':
@@ -375,11 +380,7 @@
                 </div>
             </div>
         </div>
-          <div class="" style="top: 106%;left: 1;">
-                                <a href="#"  onclick="resetar_avatar()" >
-                                    RESETAR
-                                </a>
-                            </div>
+         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <script>
