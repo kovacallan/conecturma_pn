@@ -13,8 +13,21 @@
 </head>
 
 <body>
-   <div class="light-box" id="divRecuperarSenha" style="display:none">
+   <div class="light-box" id="esqueciSenha" style="display:none">
 
+    <div align="center">
+          <div class="bg-error">
+                <span class="title-erro">Recuperar senha</span>
+                <span style="padding-left:40px; padding-right: 40px;">
+                    Informe seu e-mail de cadastro:
+                </span>
+                    <input type="text" style="position: relative; bottom: 28px;">
+               <a href="#" onclick="document.getElementById('esqueciSenha').style.display='none'" style="position: relative;bottom: -24px;left: -90px;"><img src="/static/img/btn-enviar.png"></a>
+            </div>
+
+        </div>
+</div>
+<div  class="light-box" id="divRecuperarSenha" style="display:none">
     <div align="center">
           <div class="bg-error">
                 <span class="title-erro">Estamos confusos</span>
@@ -27,9 +40,14 @@
 
         </div>
 </div>
+
+
+
+
+
      <header id="header-login" class="col-md-12" >
         <div id="header-c" class="offset-md-3">
-            <img style="position: relative;top: 9px;" src="/static/img/header-c.png">
+            <img style="margin-left: 65px; position: relative;top: 9px;" src="/static/img/header-c.png">
         </div>
                                             <div class="col-md-4 offset-md-6" style="display:initial;position: relative;bottom: 95px;">
                                                 <label style="color:#fff;font-weight:bold; text-shadow: 1px 5px 5px #000;position: relative;top: 10px;left: -8px;">Professores e<br>Responsáveis</label>
@@ -37,7 +55,7 @@
                                             <input type="password" id="inputPassword" class="senha-prof" placeholder="Senha" required="">
                                             <button onclick="login_professor()" id="btn-professor" style="cursor: pointer;"></button>
 
-                                            <!--<a href="#" onclick="" class="lost-pass">Esqueci minha senha</a>-->
+                                            <a href="#" onclick="document.getElementById('esqueciSenha').style.display='block'" class="lost-pass">Esqueci minha senha</a>
 
 
                                                 </div>
@@ -50,10 +68,8 @@
                     <main class="row">
 
                         <div class="form-group">
-                         <img src="/static/img/login-img-2.png" id="login-img"   alt="Responsive image">
-                            <section class="content-login col-md">
-
-                                <div class="student col-md">
+                         <img src="/static/img/login-img-new.png" id="login-img" class="col-md-4"  alt="Responsive image">
+                                <div class="student col-md" style="margin-left: 248px;margin-top: 24px;">
                                     <div id="titulo-aluno">
                                         <img src="/static/img/aluno-seta.png" id="aluno-seta" class="img-fluid" alt="Responsive image">
                                         <span id="aluno" class="h3 mb-3 font-weight-normal">Aluno</span>
@@ -154,7 +170,7 @@
 
                                 </div>
                                 <input data-val="true" data-val-required="A senha do usuário é obrigatória" id="senhaAluno" name="Senha" type="hidden" value="">
-                        </section>
+
                         </div>
 
 
@@ -232,6 +248,8 @@
      $("body").append("<main align='center'>Mas se quiser ver como está ficando clique no link</main>");
      $("body").append("<footer style='position: absolute; bottom: 0px; background-color: #bed7ea;width: 100%; padding-bottom: 21px; padding-top:5px;margin-top: 10px;'><h4 id='footer-text' align='center' style='font-size:18.12px;  font-family:'Calibri';color:#9bacba; font-weight:lighter;'>Políticas de privacidade | copyright 2018</h4></footer>");
     }
+
+
 </script>
 </body>
 </html>

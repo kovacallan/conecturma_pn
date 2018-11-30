@@ -45,7 +45,7 @@
 </div>
 
 
-<div class="container corpo-pag">
+<div class="container corpo-pag" style="margin-top: 61px;">
     <div class="row">
         <div class="col-md-3 avatar-std">
 
@@ -89,22 +89,20 @@
         <div class="col-md-6 portal">
             <div id="sol">
 
-                <img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
+
                 <a href="javascript:void(0)" class="btn-sun" style="cursor: pointer;">
                     <div class="sun" style="display: block;">
-                        &nbsp;<img src="/static/img/sol-e-sombra.png" class="img-fluid sol">
+                        &nbsp;<img id="sol" src="/static/img/portal-1.png" class="img-fluid sol">
                     </div>
                 </a>
 
             </div>
             <div>
 
-                <img src="/static/img/disco-voador2.png" class="img-fluid disco">
+                <img src="/static/img/tela-login_personagens.png" class="img-fluid disco">
 
             </div>
-            <div>
-                <img src="/static/img/criancas.png" class="img-fluid criancas">
-            </div>
+
         </div>
 
         <div class="col-md-3">
@@ -122,8 +120,18 @@
         crossorigin="anonymous"></script>
 
 <script src="../static/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/rotate.js"></script>
 
 <script>
+    $("#sol").rotate({
+      bind:
+      {
+        click: function(){
+          $(this).rotate({ angle:0,animateTo:180,easing: $.easing.easeInOutExpo })
+        }
+      }
+
+    });
         $(document).ready(function () {
             $(".btn-sun").click(function () {
                hide_sun_elements();
@@ -232,9 +240,9 @@
         });
         function enviarRequisicaoAjax(parametros, callbackSucesso, callbackErro) {
 
-            HOST = 'http://localhost:8080/'
+            //HOST = 'http://localhost:8080/'
 
-           // HOST = 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com/'
+           HOST = 'http://ec2-18-231-198-115.sa-east-1.compute.amazonaws.com/'
 
           console.log("enviarRequisicaoAjax parametros", parametros);
             console.log(parametros.operacao);

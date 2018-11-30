@@ -1,11 +1,21 @@
 body{
-    background:url("/static/img/_tela_ambiente-do-aluno_versao-2.png") no-repeat center center fixed;
+    background:url("/static/img/tela-login_fundo2.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     overflow: hidden;
     
+}
+
+.portal-sun{
+  width: 412px;
+  height: 366px;
+  background:url("/static/img/efeito-portal.png") left center;
+  animation: play 0.8s steps(10) infinite;
+}
+@keyframes play {
+   100% { background-position: -1900px; }
 }
 
 .menu{
@@ -118,8 +128,8 @@ body{
 
 .sol{
     position: absolute;
-    margin-left: 67px;
-    width: 80%;
+    margin-left: 122px;
+
     margin-bottom: 35px;
     margin-top: 18px;
 
@@ -132,16 +142,16 @@ body{
 }
 .disco{
    position: relative;
-    top:280px;
-    margin-left: 210px;
-    width: 41%;
+    top:175px;
+    margin-left: 149px;
+    width: 54%;
     animation: animacao 4s infinite;
 }
 
 @keyframes animacao{
-    0%{ top: 280px;}
-    50%{ top: 251px;}
-    100% {top:280px;}
+    0%{ top: 175px;}
+    50%{ top: 190px;}
+    100% {top:175px;}
 }
 
 .portal-edit{
@@ -161,11 +171,11 @@ display:none;
     left: 196px;
     color: #fff;
     font-weight: bold;
-    top: 18%;
+    top: 30%;
 }
 #HP {
     position: absolute;
-    top: 32%;
+    top: 53%;
     left: 260px;
     color: #fff;
     font-weight: bold;

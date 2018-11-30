@@ -178,10 +178,9 @@ class DbEstrutura(Model):
         for i in new_data_estrutura:
             if new_data_estrutura[i] and new_data_estrutura[i] != ' ':
                 setattr(estrutura, i, new_data_estrutura[i])
-        if estrutura.save():
-            return True
-        else:
-            return False
+
+        estrutura.save()
+        return 1
 
     def delete_estrutura(self, id):
         estrutura = self.load(int(id))

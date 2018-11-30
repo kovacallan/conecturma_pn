@@ -226,7 +226,7 @@ def view_usuario_index(no_repeat=False):
 @view('gestao_aprendizagem/usuario/edicao_aluno/aluno_impressao')
 def impressao_login_aluno():
     from bottle import request
-    print(locals())
+
     aluno=request.params['aluno_id']
     alun=facade.search_aluno_id_facade(aluno)
 
@@ -402,7 +402,9 @@ def controller_editar_rede(no_repeat=False):
     if no_repeat:
         estrutura = request.params
         return estrutura
-    return controller_editar_rede()
+    retorno = controller_editar_rede()
+    print(retorno)
+    return str(retorno)
 
 
 @route('/escola')
@@ -516,6 +518,7 @@ def relatorio_aluno(no_repeat=False):
     relatorio.convert_nivel_for_numeric()
     relatorio.set_color_face()
     relatorio.set_pontuacao_porcentagem()
+
     ultima_vez = []
     for i in relatorio.pontuacao:
         if len(i) != 0:
@@ -527,8 +530,12 @@ def relatorio_aluno(no_repeat=False):
             pontos.append(t[(len(t) - 10): len(t)])
         else:
             pontos.append(t)
-    return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno, media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica() ,oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
+
+    return dict(tipo=usuario_logado()['tipo'], media_geral=relatorio.media_geral(),aluno=aluno,
+                media_portugues=relatorio.media_portugues() ,media_matematica=relatorio.media_matematica(),
+                oa=relatorio.descritores, porcentagem=relatorio.porcentagem,
                 pontos=relatorio.nova_pontuacao(), vezes=relatorio.vezes_jogada, ultima_vez = ultima_vez)
+
 @route('/turma/turma_impressa_alunos', method='POST')
 @view('gestao_aprendizagem/turma/impressao_turma')
 def turma_impressao():

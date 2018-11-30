@@ -5,6 +5,7 @@
     footer{
         bottom: -37px;
         position:relative;
+
     }
 </style>
 
@@ -15,10 +16,10 @@
 
       <p class="top-escolas-tabela">Redes</p>
         %if tipo =='0':
-      <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
-          <i class="fas fa-plus"></i>
-          &nbsp;nova rede
-      </button>
+          <button type="button" class="botao-nova-escola" onclick="document.getElementById('new_school').style.display = 'inline'">
+              <i class="fas fa-plus"></i>
+              &nbsp;nova rede
+          </button>
         %end
     </div>
 
@@ -32,7 +33,7 @@
       <!-- inicio da tabela -->
 
       <div class="row">
-        <div class="col-md-12 item-tabela topo-tab">
+        <div class="col-md-12 item-tabela topo-tab" style="font-weight: bold;">
           Rede
         </div>
       </div>

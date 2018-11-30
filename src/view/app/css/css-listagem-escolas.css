@@ -6,6 +6,11 @@
 	font-family: "Arial";
 	color:#ffffff;
 }
+@media only screen and (min-width: 1900px){
+.footer{
+bottom:-42vh;
+}
+}
 .abas{
 	/*border:10px;*/
 	margin-right: 10px;

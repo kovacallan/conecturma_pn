@@ -12,7 +12,7 @@
 <!-- aqui começa os dados internos do acordeon -->
 <div class="container">
     <div class="row">
-        <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel"
+        <div id="collapse{{i['id']}}" class="collapse col-md-12 item-tabela" role="tabpanel" aria-labelledby="headingOne"
              data-parent="#accordion">
             <div class="card-body">
                 <div class="row">
@@ -43,12 +43,12 @@
                             <input type="hidden" id="id_turma{{i['id']}}" value="{{i['id']}}">
                             <div class="row distanciamento" style="margin-top: 30px">
                                 <div class="col-md-12" style="height: 215px;">
-                                     <span onclick="allow_edit({{i['id']}})" class="{{i['id']}}"
+                                     <!--<span onclick="allow_edit({{i['id']}})" class="{{i['id']}}"
                                            id="icone_edit{{i['id']}}"
                                            style="cursor:pointer; position: absolute; right: 0;">
                                             <i class="fas fa-edit edit-ico"
                                                style="color: #969696;padding-right: 27px;"></i>
-                                        </span>
+                                        </span>-->
 
 
                                     <div class="row distanciamento">
@@ -116,16 +116,16 @@
                         % for z in i['aluno']:
                         <div class="col-md-12">
                             <div class="row" style="clear: both;">
-                                <div class="col-md-11">
+                                <div class="col-md-12">
                                     % if index % 2 ==0:
                                     <div class="row row-impar nome-prof">
-                                        <div class="col-md-4" style="margin-top: 4px;">
+                                        <div class="col-md-5" style="margin-top: 4px;">
                                             Nome: {{z['nome']}}
                                             <br>
                                             Login :{{z['nome_login']}}
                                         </div>
 
-                                        <div class="col-md-6 offset-md-2" style="padding:10px">
+                                        <div class="col-md-6" style="padding:10px">
                                             <span style="margin-left: 17px;"> &nbsp;senha :</span>
                                             <img src="/static/img/{{z['senha'][0]}}.png"
                                                  style="padding-left:11px;width: 15%;margin-right:5px;">
@@ -136,25 +136,24 @@
                                             <img src="/static/img/{{z['senha'][3]}}.png"
                                                  style="padding-left:11px;width: 15%;margin-right:5px;">
                                         </div>
+                                        % if tipo == TIPO_USUARIOS['professor']:
+                                            <div class="col-md-1 row-impar nome-prof">
+                                                <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal"
+                                                     data-target="#medalha_janela{{z['id']}}"
+                                                     style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
+                                            </div>
+                                            %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
+                                        % end
                                     </div>
-
-                                    % if tipo == TIPO_USUARIOS['professor']:
-                                    <div class="col-md-1 row-impar nome-prof">
-                                        <img src="/static/img/icone-medalha-do-aluno.png" data-toggle="modal"
-                                             data-target="#medalha_janela{{z['id']}}"
-                                             style="cursor: pointer;margin-top: 12px;margin-left: -5px;">
-                                    </div>
-                                    %include('gestao_aprendizagem/turma/medalha_aluno.tpl')
-                                    % end
                                     % else:
 
                                     <div class="row row-par nome-prof">
-                                        <div class="col-md-4" style="margin-top: 4px;">
+                                        <div class="col-md-5" style="margin-top: 4px;">
                                             Nome: {{z['nome']}}
                                             <br>
                                             Login :{{z['nome_login']}}
                                         </div>
-                                        <div class="col-md-6 offset-md-2" style="padding:10px">
+                                        <div class="col-md-6 offset-md-1" style="padding:10px">
                                             <span style="margin-left: 17px;"> &nbsp;senha :</span>
                                             <img src="/static/img/{{z['senha'][0]}}.png"
                                                  style="padding-left:11px;width: 15%;margin-right:5px;">
@@ -180,7 +179,6 @@
                             </div>
                         </div>
                         %end
-
                     </div>
                     <br>
                 </div>
@@ -272,9 +270,9 @@
                 <div class="row" style="margin-bottom: 10px">
                     % if tipo != '2':
                     <div class="col-md-1">
-                            <span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
+                            <!--<span onclick="delete_estrutura({{i['id']}})" style="cursor:pointer;">
                                 <i class="far fa-trash-alt" style="color:#969696;"></i>
-                            </span>
+                            </span>-->
                     </div>
                     % end
                     <div class="offset-md-10 col-md-1">

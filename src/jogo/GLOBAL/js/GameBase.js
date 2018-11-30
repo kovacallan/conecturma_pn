@@ -154,12 +154,12 @@ BasicGame.GameBase.prototype = {
         var hud = this.add.group();
         this.add.sprite(0,0, "hud", 0, hud);
 
-//        this.livesTextShadow = this.add.bitmapText(111,36, "lucky32", this.lives.toString(), 18);
-//        this.livesTextShadow.tint = 0x010101;
-//        this.livesText = this.add.bitmapText(110,35, "lucky32", this.lives.toString(), 18);
+        this.livesTextShadow = this.add.bitmapText(200,-100, "lucky32", this.lives.toString(), 18);
+        this.livesTextShadow.tint = 0x010101;
+        this.livesText = this.add.bitmapText(200,-100, "lucky32", this.lives.toString(), 18);
 
-//        hud.add(this.livesTextShadow);
-//        hud.add(this.livesText);
+        hud.add(this.livesTextShadow);
+        hud.add(this.livesText);
 
         this.pointsTextShadow = this.add.bitmapText(73,84, "lucky32", BasicGame.Pontuacao.moedas.toString(), 18);
         this.pointsTextShadow.tint = 0x010101;
