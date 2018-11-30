@@ -56,7 +56,6 @@ class Relatorio(object):
         facade = Facade()
 
         pontuacao = []
-
         for i in descritores:
             if 'VC' not in i['sigla_oa'] and 'CN' not in i['sigla_oa']:
                 desempenho = facade.search_oa_facade(id_aluno=aluno['id'], objeto_aprendizagem=i['sigla_oa'])

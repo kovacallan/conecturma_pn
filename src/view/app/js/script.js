@@ -516,6 +516,7 @@ function cadastro_usuario(tipo){
                 if (escola != '' && escola != null){
                     $("#loading").css('display','none')
                     $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, sexo:sexo, vinculo_escola:escola, vinculo_turma:turma},function(data){
+                        console.log('alun',data);
                         window.location.replace(data);
                     });
                     
@@ -593,6 +594,7 @@ function cadastro_usuario(tipo){
                         if (escola != '' && escola != null){
                             $("#loading").css('display','block');
                             $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, nascimento:nascimento, email:email, vinculo_escola:escola},function(data){
+                                console.log("diretor",data)
                                 window.location.replace(data);
                             });
                             
@@ -703,7 +705,7 @@ function cadastro_usuario(tipo){
 			    if(escola != '' && escola !=null){
 				    if(!validar_se_email_existe(email)){
 				        $("#loading").css('display','block');
-					    $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, email:email, vinculo_aluno:aluno},function(data){
+					    $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, email:email, vinculo_escola:escola},function(data){
 						    window.location.replace(data);
 					            });
 					}else{

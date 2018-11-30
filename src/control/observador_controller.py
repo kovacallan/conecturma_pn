@@ -35,9 +35,11 @@ class Observador(object):
                     self._escola = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['escola'])
                 else:
                     self._escola = self.facade.search_estrutura_id_facade(id=id_escola)
-
             elif (self._observador_tipo == TIPO_USUARIOS['gestor']):
-                self._escola = self.facade.search_estrutura_escola_by_rede_facade(vinculo_rede=self.get_rede()['id'])
+                if(id_escola == None):
+                    self._escola = self.facade.search_estrutura_escola_by_rede_facade(vinculo_rede=self.get_rede()['id'])
+                else:
+                    self._escola = self.facade.search_estrutura_id_facade(id=id_escola)
             else:
                 self._escola = self.facade.search_estrutura_id_facade(id=self._escola)
         else:
@@ -63,8 +65,16 @@ class Observador(object):
                             self._turma.append(i)
                 else:
                     self._turma = self.facade.read_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['turma'])
+
             elif (self._observador_tipo == TIPO_USUARIOS['gestor']):
-                self._turma = self.facade.search_estrutura_turma_by_rede_facade(vinculo_rede=self._rede)
+                if(id_escola == None):
+                    self._turma = self.facade.search_estrutura_turma_by_rede_facade(vinculo_rede=self._rede)
+                else:
+                    self._turma = []
+                    for i in self.facade.search_estrutura_turma_by_escola_facade(vinculo_escola=id_escola):
+                        if i['serie'] == serie:
+                            self._turma.append(i)
+
             elif (self._observador_tipo == TIPO_USUARIOS['diretor']):
                 if serie != None:
                     self._turma = []
@@ -72,7 +82,8 @@ class Observador(object):
                         if i['serie'] == serie:
                             self._turma.append(i)
                 else:
-                    self._turma = self.facade.search_estrutura_turma_by_escola_facade(vinculo_escola=self._escola['id'])
+                    print(self._escola)
+                    self._turma = self.facade.search_estrutura_turma_by_escola_facade(vinculo_escola=self._escola)
 
 
             else:
