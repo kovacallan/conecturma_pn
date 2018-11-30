@@ -140,7 +140,7 @@ body{
 
 @keyframes animacao{
     0%{ top: 175px;}
-    50%{ top: 215px;}
+    50%{ top: 190px;}
     100% {top:175px;}
 }
 
