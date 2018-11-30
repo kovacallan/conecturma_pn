@@ -38,7 +38,7 @@
                                                         <input type="email" size="25" class="form-control" placeholder="exemplo@exemplo.com"  required name="" id="professor_email_{{i['id']}}" onchange="emailValidador('professor_email_{{i['id']}}')">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>.
                                             <div class="col-md-10 offset-md-1" style="margin-top: 10px;">
                                                 <label for="turma">Turma</label>
                                                 <select id="professor_turma_{{i['id']}}" class="custom-select custom-select-md">

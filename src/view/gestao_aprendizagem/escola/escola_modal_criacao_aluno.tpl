@@ -42,7 +42,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>.
 
                                             <div class="col-md-10 offset-md-1" style="margin-top: 10px;">
                                                 <label for="turma">Turma</label>
