@@ -169,7 +169,9 @@
     });
 </script>
 <script>
-    window.onload = window.print();
+    window.onload = setTimeout(function(){
+            window.print();
+        }, 1000);
 </script>
 
 </body>
