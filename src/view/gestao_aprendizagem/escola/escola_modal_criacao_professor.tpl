@@ -43,7 +43,7 @@
                                                 <label for="turma">Turma</label>
                                                 <select id="professor_turma_{{i['id']}}" class="custom-select custom-select-md">
                                                     <option value="0"></option>
-                                                    %print(escola)
+
                                                     %if i['turmas'] != []:
                                                         % for j in i['turmas']:
                                                             <option value="{{j['id']}}">{{j['nome']}}</option>
