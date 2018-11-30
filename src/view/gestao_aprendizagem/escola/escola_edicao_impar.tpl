@@ -38,7 +38,7 @@
                                         <div class=" col-md-">
                                             <label for="nome" style="background-color: inherit;">Nome:
                                                 <span style="color:#ff0000">*
-                        </span>
+                                                </span>
                                             </label>
                                             <input type="text" class="form-control disabled{{i['id']}}" size="30"
                                                    name="" id="nome{{i['id']}}" value="{{i['nome']}}" disabled>

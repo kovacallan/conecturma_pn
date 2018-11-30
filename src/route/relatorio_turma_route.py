@@ -10,6 +10,7 @@ path_template = 'gestao_aprendizagem/relatorios/turma/'
 @permissao('professor')
 def relatorio_turma_view(no_repeat=False):
     observador = Observador(observador_logado=usuario_logado())
+
     return template(path_template + 'relatorio_turma', tipo=observador.get_observador_tipo(),
                     turma=observador.get_turma(), teste_serie = SERIE)
 
@@ -25,6 +26,7 @@ def relatorio_aluno(no_repeat=False):
     porcentagem = relatorio.get_pontuacao_turma(medias=medias)
     alunos = []
     notas = []
+
     for index,i in enumerate(descritores):
         nota = []
         for z in medias:

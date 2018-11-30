@@ -6,7 +6,7 @@
           <h2>Relatório de Escola </h2>
         </div>
             <div class="col-md nome_aluno" style="padding-left:0px;">
-                % print(escola)
+
               <span> {{escola['nome']}} </span>
             </div>
         <div>

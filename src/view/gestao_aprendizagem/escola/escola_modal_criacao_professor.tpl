@@ -43,15 +43,18 @@
                                                 <label for="turma">Turma</label>
                                                 <select id="professor_turma_{{i['id']}}" class="custom-select custom-select-md">
                                                     <option value="0"></option>
-                                                    %try:
-
+                                                    <option value="0">
+                                                        %try:
                                                     %if i['turmas'] != []:
                                                         % for j in i['turmas']:
                                                             <option value="{{j['id']}}">{{j['nome']}}</option>
                                                         % end
                                                     % end
-                                                    %except Exception as e:
+
+                                                        %except Exception as error:
                                                     nao tem turma
+                                                    <!--aaaaaaaaaa , resolver pf-->
+                                                    <option value=""></option>
                                                     %end
                                                 </select>
                                             </div>
