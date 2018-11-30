@@ -13,7 +13,7 @@
 <div class="container">
     <div class="col-md-10">
         <div class="col-md nome_aluno" style="margin-top:15px; padding-left:0px; color:#299ae8;">
-            <h2>Nome da Escola: {{escola['nome']}}</h2><br>
+            <h2>Nome da Turma: {{turma['nome']}}</h2><br>
         </div>
     </div>
     <div class="col-md-10">

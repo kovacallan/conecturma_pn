@@ -29,7 +29,7 @@
 </div>
      <header id="header-login" class="col-md-12" >
         <div id="header-c" class="offset-md-3">
-            <img style="position: relative;top: 9px;" src="/static/img/header-c.png">
+            <img style="margin-left: 65px; position: relative;top: 9px;" src="/static/img/header-c.png">
         </div>
                                             <div class="col-md-4 offset-md-6" style="display:initial;position: relative;bottom: 95px;">
                                                 <label style="color:#fff;font-weight:bold; text-shadow: 1px 5px 5px #000;position: relative;top: 10px;left: -8px;">Professores e<br>Responsáveis</label>
