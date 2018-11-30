@@ -132,16 +132,16 @@ body{
 }
 .disco{
    position: relative;
-    top:280px;
-    margin-left: 210px;
-    width: 41%;
+    top:175px;
+    margin-left: 149px;
+    width: 54%;
     animation: animacao 4s infinite;
 }
 
 @keyframes animacao{
-    0%{ top: 280px;}
-    50%{ top: 251px;}
-    100% {top:280px;}
+    0%{ top: 175px;}
+    50%{ top: 215px;}
+    100% {top:175px;}
 }
 
 .portal-edit{
