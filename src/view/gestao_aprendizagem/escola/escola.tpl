@@ -7,6 +7,7 @@
 <!--position:relative;-->
 <!--}-->
 
+
 <!--</style>-->
 
 <div class="col-md-9 order-md-3 botao-tabela" style="margin-top: 6px;">
@@ -69,9 +70,6 @@
       // document.getElementById(drop).style.display='block':
     }
   }
-
-
-
 
 </script>
 </div>

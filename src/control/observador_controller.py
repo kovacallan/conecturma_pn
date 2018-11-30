@@ -75,6 +75,7 @@ class Observador(object):
                         if i['serie'] == serie:
                             self._turma.append(i)
 
+
             elif (self._observador_tipo == TIPO_USUARIOS['diretor'] or self._observador_tipo==TIPO_USUARIOS['coordenador']):
                 if serie != None:
                     self._turma = []

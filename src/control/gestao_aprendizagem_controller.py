@@ -592,7 +592,6 @@ def view_escola_index():
 
         return dict(tipo=usuario_logado()['tipo'], escola=escola, rede=rede_no_sistema)
 
-
 def get_escolas_e_rede_permissao():
     usuario = usuario_logado()
     if usuario['tipo'] == TIPO_USUARIOS['administrador']:
