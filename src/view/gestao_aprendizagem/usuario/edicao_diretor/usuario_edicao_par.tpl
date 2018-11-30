@@ -104,7 +104,8 @@
                                 <!--</span>-->
                             <!--</div>-->
 
-                   <div class="offset-md-8 col-md-2">
+                   <div class="offset-md-10 col-md-1">
+                       <div class="offset-md-8 col-md-2">
                         <button id="icone_edit{{i['id']}}"  class="botao-salvar" onclick="allow_edit({{i['id']}})" style="margin-left: 10px;">
                             Editar
                         </button>
@@ -112,6 +113,7 @@
                             Salvar
                         </button>
                     </div>
+                        </div>
                 <!--</div>&ndash;&gt;-->
             <!--</div>-->
         </div>
