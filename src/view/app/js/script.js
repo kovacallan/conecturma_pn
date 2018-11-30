@@ -705,7 +705,6 @@ function cadastro_usuario(tipo){
 			    if(escola != '' && escola !=null){
 				    if(!validar_se_email_existe(email)){
 				        $("#loading").css('display','block');
-
 					    $.post('/usuario/cadastro_usuario', {tipo:tipo, nome:nome, email:email, vinculo_escola:escola},function(data){
 						    window.location.replace(data);
 					            });

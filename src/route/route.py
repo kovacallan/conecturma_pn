@@ -512,6 +512,7 @@ def relatorio_aluno(no_repeat=False):
 
     aluno = facade.search_aluno_id_facade(id_aluno=request.params['aluno'])
     turma = facade.search_estrutura_id_facade(id=aluno['vinculo_turma'])
+
     relatorio.get_descritores(serie=turma['serie'])
     relatorio.get_desempenho(descritores=relatorio.descritores, aluno=aluno)
     relatorio.convert_nivel_for_numeric()
