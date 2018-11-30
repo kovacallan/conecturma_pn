@@ -143,6 +143,10 @@ position: relative;
 .lost-pass{
 	color: #90EE90;
 	text-decoration: underline;
+	position:absolute;
+	right: 91px;
+    bottom: -29px;
+
 }
 
 
