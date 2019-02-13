@@ -5,7 +5,7 @@ from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
 import unicodedata
 import random
-from control.relatorios.permissao import usuario_logado, permissao
+from control.permissao import usuario_logado, permissao
 from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_MEDALHA_NOME
 
 facade = Facade()

@@ -5,7 +5,7 @@ from bottle import request
 
 from control.gestao_aprendizagem_controller import convertendo_str_in_dict
 from facade.facade_main import Facade
-from control.relatorios.permissao import usuario_logado
+from control.permissao import usuario_logado
 from control.dicionarios import *
 
 facade = Facade()
@@ -304,7 +304,7 @@ def verificarAcessoAventura():
         return AVENTURAS_CONECTURMA[serie_turma['serie']]
 
 def is_oa(aluno, parametros, oa):
-    from control.relatorios.permissao import update_cookie
+    from control.permissao import update_cookie
     gamificacao = gamificacao_moeda_xp(parametros)
 
     premios = {

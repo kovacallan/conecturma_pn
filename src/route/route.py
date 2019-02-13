@@ -4,7 +4,7 @@ from bottle import view, get, post, redirect
 from route.relatorio_rede_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
-from control.relatorios.permissao import permissao, usuario_logado
+from control.permissao import permissao, usuario_logado
 from facade.facade_main import Facade
 # from model.historico_model import DbHistorico
 from model.observador_model import DbObservador

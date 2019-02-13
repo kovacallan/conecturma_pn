@@ -1,5 +1,5 @@
 from bottle import route, template, request
-from control.relatorios.permissao import permissao, usuario_logado
+from control.permissao import permissao, usuario_logado
 from control.observador_controller import Observador
 from control.relatorios.relatorio_turma_controller import RelatorioTurma
 from control.dicionarios import SERIE

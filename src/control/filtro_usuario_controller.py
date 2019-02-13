@@ -2,7 +2,7 @@
 
 from bottle import route, request, template
 from facade.facade_main import Facade
-from control.relatorios.permissao import usuario_logado
+from control.permissao import usuario_logado
 from control.dicionarios import TIPO_USUARIOS_ID, TIPO_ESTRUTURA
 
 facade = Facade()

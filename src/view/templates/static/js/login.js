@@ -54,6 +54,7 @@ function login_professor(){
   if (email != '' && senha !=''){
     $.post('/login/login_observador', {observador_login_email:email, observador_senha:senha},function(data){
         if(data == "error"){
+        alert(data);
         document.getElementById("divRecuperarSenha").style.display="block";
       }
       else{

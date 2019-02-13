@@ -2,7 +2,7 @@
 
 
 from control.gestao_aprendizagem_controller import *
-from control.relatorios.permissao import usuario_logado
+from control.permissao import usuario_logado
 from control.dicionarios import TIPO_USUARIOS_ID
 
 facade = Facade()

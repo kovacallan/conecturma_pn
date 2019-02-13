@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from bottle import request, redirect,response, template, route, view
-from control.relatorios.permissao import  Login_Aluno, usuario_logado, algum_usuario_logado
+from control.permissao import  Login_Observador, Login_Aluno, usuario_logado, algum_usuario_logado
 from facade.facade_main import *
 
 facade = Facade()
@@ -18,10 +18,10 @@ def login_controller(usuario_tipo):
         email = request.params['observador_login_email']
         senha = request.params['observador_senha']
 
-        from model.new_model.observador_model import Observador
-        observador = Observador()
+        login = Login_Observador(email=email, senha=senha)
 
-        return observador.login(email=email,senha=senha)
+        return login.login()
+
     elif usuario_tipo == 'login_aluno':
         nome = request.params['aluno_login_nome']
         senha = request.params['aluno_senha']

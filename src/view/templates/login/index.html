@@ -11,7 +11,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div  class="light-box" id="divRecuperarSenha" style="display:none">
+        <div align="center">
+              <div class="bg-error">
+                    <span class="title-erro">Estamos confusos</span>
+                    <span id="text-erro " style="padding-left:40px; padding-right: 40px;">
+                        Ops! Você não escolheu as figurinhas corretas! Tente mais uma vez!
+                    </span>
+                    <img src="img/btn-voltar-ligh.png" onclick="document.getElementById('divRecuperarSenha').style.display='none'">
+              </div>
+        </div>
+    </div>
     <div class="container-fluid">
+
         <div id="bg_title" class="row">
             <div class="container">
                 <div class="row">
@@ -31,6 +43,7 @@
             </div>
         </div>
     </div>
+
     <div class="container" class="text-center">
         <div id="login_aluno">
             <div id="bg_login_aluno">
