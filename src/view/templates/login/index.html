@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jogar Conecturma</title>
+    <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="bg_title" class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-md-1">
+                        <img src="img/header-c.png">
+                    </div>
+                    <div class="offset-md-3 col-md-6">
+                        <span id="titulo-login-observador">Professores e Responsáveis</span>
+                        <div id="input-login-observador" class="row">
+                            <input type="email" placeholder="email@exemplo.com" name="email" id="inputEmail">
+                            <input type="password" placeholder="senha" name="senha" id="inputPassword">
+                            <button onclick="login_professor()" id="btn-professor" style="cursor: pointer;"></button>
+                        </div>
+                        <a id="esqueci_senha">Esqueci a senha</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" class="text-center">
+        <div id="login_aluno">
+            <div id="bg_login_aluno">
+                <div class="offset-md-3 col-md-3">
+                    <img id="login-img" src="img/login/login-img.png" class="img-fluid">
+                </div>
+                <div class="offset-md-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="img/login/aluno-seta.png">
+                            <span id="aluno">Aluno</span>
+                            <br>
+                            <label>Nome do aluno</label>
+                            <input id="login_aluno_input" placeholder="LOGIN ALUNO" type="text" name="login_aluno">
+                        </div>
+                        <div id="aluno-senha" class="offset-md-1 col-md-4">
+                            <label>Senha</label>
+                            <!--<img id="btn-interrogacao" src="img/login/btn-interrogacao.png">-->
+                            <div class="cartoons-pass">
+                                <div class="row">
+                                    <img onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)"
+                                         onclick="mudaEstado(this.id)" class="box-cartoons"
+                                         src="img/carinhas_personagens/a.png" id="a">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/b.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/c.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/d.png">
+                                </div>
+                                <div class="row">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/e.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/f.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/g.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/h.png">
+                                </div>
+                                <div class="row">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/i.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/j.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/k.png">
+                                    <img class="box-cartoons" src="img/carinhas_personagens/l.png">
+                                </div>
+                            </div>
+                            <div class="pass">
+                                <button id="botao_aluno" onclick="login_aluno()" style="cursor:pointer"></button>
+                            </div>
+                        </div>
+                    </div>  
+                </div>   
+            </div>
+        </div>
+        <div id="rodape_login"> 
+            <div class="col-md-12 text-center">
+                <img src="img/login/edufuturo-1.png">
+            </div>
+        </div>
+    </div>
+    <script  src="js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script  src="js/login.js"></script>
+</body>
+</html>

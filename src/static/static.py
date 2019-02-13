@@ -11,6 +11,15 @@ def css(filename):
     """
     return static_file(filename, root='././view/app/css')
 
+@route('/<path:path>')
+def static(path):
+    """
+    ligaçao com o arquivo css
+    :param filename:o caminho para onde esta o css
+    :return:
+    """
+    return static_file(path, root='././view/templates/static/')
+
 @route('/static/fontes/<filename>')
 def fontes(filename):
     """
