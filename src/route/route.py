@@ -1,12 +1,10 @@
 # encoding: utf-8
 
 from bottle import view, get, post, redirect
-from route.relatorio_turma_route import *
-from route.relatorio_escola_route import *
 from route.relatorio_rede_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
-from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
+from control.relatorios.permissao import permissao, usuario_logado
 from facade.facade_main import Facade
 # from model.historico_model import DbHistorico
 from model.observador_model import DbObservador

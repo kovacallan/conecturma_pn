@@ -67,6 +67,7 @@ label{
 
 #login_aluno_input{
     margin-top: 10px;
+    text-transform:uppercase;
 }
 #login_aluno_input::placeholder{
     margin-left: 10px;
@@ -95,6 +96,8 @@ label{
     padding: 3px 0 0 1px;
     border-radius: 10px;
 }
+
+
 
 .pass button {
     background: url(../img/login/btn-login-aluno.png) 0 0 no-repeat;

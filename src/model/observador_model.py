@@ -260,3 +260,49 @@ class DbObservador(Model):
                 observador.append(vars(i)["_data"])
 
         return observador
+
+    def login_observador(self, email, senha):
+        self.search_observador_email(email=email)
+
+class Login_Observador(object):
+
+    def __init__(self, email, senha):
+        self.email = email
+        self.senha = senha
+
+    def login(self):
+        facade = Facade()
+
+        hash = self.gerar_hash()
+        response.set_cookie("KIM", hash, path='/', secret=KEY_HASH)
+
+        observador_logado = facade.search_observador_email_facade(email=self.email)
+        if observador_logado != None:
+            if sha512_crypt.verify(self.senha, observador_logado['senha']):
+                response.set_cookie("BUMBA", observador_logado, path='/', secret=hash)
+                now = datetime.now()
+                facade.login_date_facade(observador_logado['id'], now)
+                facade.create_estrutura_facade(tipo_estrutura=TIPO_ESTRUTURA['historico'],
+                                               nome_usuario=observador_logado['nome'],
+                                               tipo_usuario=observador_logado['tipo'])
+
+                return PAGINA_INICIAL[TIPO_USUARIOS_ID[observador_logado['tipo']].lower()]
+            else:
+                return PAGINA_INICIAL['error']
+        else:
+            print("Usuario não encontrado !")
+            return PAGINA_INICIAL['error']
+
+    def gerar_hash(self):
+        """
+        Usa um algoritmo aleatório para criar um numero de matricula de 5 números
+
+        :return: O numero da matricula do aluno
+        """
+        from random import randrange
+
+        hash = []
+        for i in range(0, 5):
+            hash.append(randrange(1, 9))
+        matricula = ''.join(str(x) for x in hash)
+        return matricula

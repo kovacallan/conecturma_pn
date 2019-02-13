@@ -44,31 +44,65 @@
                             <span id="aluno">Aluno</span>
                             <br>
                             <label>Nome do aluno</label>
-                            <input id="login_aluno_input" placeholder="LOGIN ALUNO" type="text" name="login_aluno">
+                            <input id="login_aluno_input"  placeholder="LOGIN ALUNO" type="text" name="login_aluno">
                         </div>
                         <div id="aluno-senha" class="offset-md-1 col-md-4">
                             <label>Senha</label>
                             <!--<img id="btn-interrogacao" src="img/login/btn-interrogacao.png">-->
                             <div class="cartoons-pass">
                                 <div class="row">
-                                    <img onmouseout="mouse_out(this.id)" onmouseover="mouse_in(this.id)"
-                                         onclick="mudaEstado(this.id)" class="box-cartoons"
-                                         src="img/carinhas_personagens/a.png" id="a">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/b.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/c.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/d.png">
+                                    <div onmouseout="mouseOut('a')" onmouseover="mouseIn('a')"
+                                             onclick="mudaEstado('a')">
+                                        <img id="a"  class="box-cartoons" src="img/carinhas_personagens/a.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('b')" onmouseover="mouseIn('b')"
+                                             onclick="mudaEstado('b')">
+                                        <img id="b"  class="box-cartoons" src="img/carinhas_personagens/b.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('c')" onmouseover="mouseIn('c')"
+                                             onclick="mudaEstado('c')">
+                                        <img id="c"  class="box-cartoons" src="img/carinhas_personagens/c.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('d')" onmouseover="mouseIn('d')"
+                                             onclick="mudaEstado('d')">
+                                        <img id="d"  class="box-cartoons" src="img/carinhas_personagens/d.png">
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/e.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/f.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/g.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/h.png">
+                                    <div onmouseout="mouseOut('e')" onmouseover="mouseIn('e')"
+                                             onclick="mudaEstado('e')">
+                                        <img id="e"  class="box-cartoons" src="img/carinhas_personagens/e.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('f')" onmouseover="mouseIn('f')"
+                                             onclick="mudaEstado('f')">
+                                        <img id="f"  class="box-cartoons" src="img/carinhas_personagens/f.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('g')" onmouseover="mouseIn('g')"
+                                             onclick="mudaEstado('g')">
+                                        <img id="g"  class="box-cartoons" src="img/carinhas_personagens/g.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('h')" onmouseover="mouseIn('h')"
+                                             onclick="mudaEstado('h')">
+                                        <img id="h"  class="box-cartoons" src="img/carinhas_personagens/h.png">
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/i.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/j.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/k.png">
-                                    <img class="box-cartoons" src="img/carinhas_personagens/l.png">
+                                    <div onmouseout="mouseOut('i')" onmouseover="mouseIn('i')"
+                                             onclick="mudaEstado('i')">
+                                        <img id="i"  class="box-cartoons" src="img/carinhas_personagens/i.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('j')" onmouseover="mouseIn('j')"
+                                             onclick="mudaEstado('j')">
+                                        <img id="j"  class="box-cartoons" src="img/carinhas_personagens/j.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('k')" onmouseover="mouseIn('k')"
+                                             onclick="mudaEstado('k')">
+                                        <img id="k"  class="box-cartoons" src="img/carinhas_personagens/k.png">
+                                    </div>
+                                    <div onmouseout="mouseOut('l')" onmouseover="mouseIn('l')"
+                                             onclick="mudaEstado('l')">
+                                        <img id="l"  class="box-cartoons" src="img/carinhas_personagens/l.png">
+                                    </div>
                                 </div>
                             </div>
                             <div class="pass">
@@ -85,8 +119,9 @@
             </div>
         </div>
     </div>
-    <script  src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script  src="js/login.js"></script>
+
 </body>
 </html>

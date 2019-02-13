@@ -1,9 +1,8 @@
 # encoding: utf-8
 
 from bottle import request, redirect,response, template, route, view
-from control.classes.permissao import Login_Observador, Login_Aluno, usuario_logado, algum_usuario_logado
+from control.relatorios.permissao import  Login_Aluno, usuario_logado, algum_usuario_logado
 from facade.facade_main import *
-
 
 facade = Facade()
 
@@ -13,24 +12,24 @@ facade = Facade()
 def view_login_index():
     return
 
-@route('/login/login_observador', method='POST')
-def login_observador_controller():
-    email = request.params['observador_login_email']
-    senha = request.params['observador_senha']
+@route('/login/<usuario_tipo>', method='POST')
+def login_controller(usuario_tipo):
+    if usuario_tipo == 'login_observador':
+        email = request.params['observador_login_email']
+        senha = request.params['observador_senha']
 
-    login = Login_Observador(email=email, senha=senha)
-    return login.login()
+        from model.new_model.observador_model import Observador
+        observador = Observador()
 
+        return observador.login(email=email,senha=senha)
+    elif usuario_tipo == 'login_aluno':
+        nome = request.params['aluno_login_nome']
+        senha = request.params['aluno_senha']
 
+        login = Login_Aluno(nome=nome, senha=senha)
 
-@route('/login/login_aluno', method='POST')
-def login_aluno_controller():
-    nome = request.params['aluno_login_nome']
-    senha = request.params['aluno_senha']
+        return login.login()
 
-    login = Login_Aluno(nome=nome, senha=senha)
-
-    return login.login()
 
 @route('/esqueci_senha')
 def view_esqueci_senha():
@@ -63,3 +62,4 @@ def controller_login_sair():
     for i in cookies:
         response.delete_cookie(i)
     redirect('/')
+
