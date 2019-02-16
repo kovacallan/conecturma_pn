@@ -47,7 +47,7 @@ label{
 }
 
 #login_aluno{
-    margin-top:3em;
+    margin-top:2em;
 }
 #bg_login_aluno{
     background: url(../img/login/fundo.png) no-repeat center;
@@ -79,6 +79,10 @@ label{
 
 #btn-interrogacao{
     margin-left: 10px;
+}
+
+#rodape_login{
+    margin-top: -79px;
 }
 
 

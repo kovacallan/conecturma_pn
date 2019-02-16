@@ -9,14 +9,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="css/login.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="img/icon_conecturma.png">
 </head>
 <body>
+<div class="light-box" id="esqueciSenha" style="display:none">
+    <div align="center">
+        <div class="bg-error">
+            <span class="title-erro">Recuperar senha</span>
+            <span style="padding-left:40px; padding-right: 40px;">
+                Informe seu e-mail de cadastro:
+            </span>
+            <input type="text" style="position: relative; bottom: 28px;">
+            <a href="#" onclick="document.getElementById('esqueciSenha').style.display='none'" style="position: relative;bottom: -24px;left: -90px;"><img src="img/btn-enviar.png"></a>
+        </div>
+    </div>
+</div>
+
     <div  class="light-box" id="divRecuperarSenha" style="display:none">
         <div align="center">
               <div class="bg-error">
                     <span class="title-erro">Estamos confusos</span>
-                    <span id="text-erro " style="padding-left:40px; padding-right: 40px;">
-                        Ops! Você não escolheu as figurinhas corretas! Tente mais uma vez!
+                    <span id="text-erro" style="padding-left:40px; padding-right: 40px;">
+
                     </span>
                     <img src="img/btn-voltar-ligh.png" onclick="document.getElementById('divRecuperarSenha').style.display='none'">
               </div>
@@ -37,7 +51,8 @@
                             <input type="password" placeholder="senha" name="senha" id="inputPassword">
                             <button onclick="login_professor()" id="btn-professor" style="cursor: pointer;"></button>
                         </div>
-                        <a id="esqueci_senha">Esqueci a senha</a>
+                        <!--Finalizar a implementação depois-->
+                        <!--<a style="cursor: pointer;" id="esqueci_senha" onclick="document.getElementById('esqueciSenha').style.display='block'">Esqueci a senha</a>-->
                     </div>
                 </div>
             </div>

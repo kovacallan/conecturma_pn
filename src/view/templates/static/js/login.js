@@ -37,8 +37,8 @@ function login_aluno(){
   }
   senha = senha.join('')
   $.post('/login/login_aluno', {aluno_login_nome:nome, aluno_senha:senha},function(data){
-      console.log(data);
       if(data == "error"){
+        document.getElementById("text-erro").innerHTML = "Ops! Você não escolheu as figurinhas corretas! Tente mais uma vez!";
         document.getElementById("divRecuperarSenha").style.display="block";
       }
       else{
@@ -54,7 +54,7 @@ function login_professor(){
   if (email != '' && senha !=''){
     $.post('/login/login_observador', {observador_login_email:email, observador_senha:senha},function(data){
         if(data == "error"){
-        alert(data);
+        document.getElementById("text-erro").innerHTML = "Email ou senha incorretos. Tente novamente ou contate o seu administrador.";
         document.getElementById("divRecuperarSenha").style.display="block";
       }
       else{

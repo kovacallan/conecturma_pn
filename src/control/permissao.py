@@ -41,7 +41,6 @@ class Login_Observador(object):
             else:
                 return PAGINA_INICIAL['error']
         else:
-            print("Usuario não encontrado !")
             return PAGINA_INICIAL['error']
 
     def gerar_hash(self):

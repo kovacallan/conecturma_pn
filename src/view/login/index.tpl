@@ -24,8 +24,7 @@
                     <input type="text" style="position: relative; bottom: 28px;">
                <a href="#" onclick="document.getElementById('esqueciSenha').style.display='none'" style="position: relative;bottom: -24px;left: -90px;"><img src="/static/img/btn-enviar.png"></a>
             </div>
-
-        </div>
+    </div>
 </div>
 <div  class="light-box" id="divRecuperarSenha" style="display:none">
     <div align="center">
