@@ -12,7 +12,7 @@ from model.historico_model import DbHistorico
 
 """Constante para a key de hash temporariamente"""
 
-KEY_HASH = 'gu3 j0st0çur4'
+KEY_HASH = '77b15d221019f7c25c56c9982cd4e3c0'
 
 
 class Login_Observador(object):
@@ -41,7 +41,6 @@ class Login_Observador(object):
             else:
                 return PAGINA_INICIAL['error']
         else:
-            print("Usuario não encontrado !")
             return PAGINA_INICIAL['error']
 
     def gerar_hash(self):

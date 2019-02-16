@@ -1,65 +1,15 @@
 # encoding: utf-8
 
 from bottle import view, get, post, redirect
-from route.relatorio_turma_route import *
-from route.relatorio_escola_route import *
 from route.relatorio_rede_route import *
 from control.administrativo_controller import index_historico_controller
 from control.aluno_controller import Aluno_controler
-from control.classes.permissao import permissao, algum_usuario_logado, usuario_logado
+from control.permissao import permissao, usuario_logado
 from facade.facade_main import Facade
 # from model.historico_model import DbHistorico
 from model.observador_model import DbObservador
 
 facade = Facade()
-
-"""
-Rotas da Tela de Login
-"""
-
-
-@route('/')
-@algum_usuario_logado
-@view('login/index')
-def view_login_index():
-    return
-
-
-@route('/login/login_observador', method='POST')
-def login_observador_controller():
-    from control.login_controller import login_observador_controller
-    return login_observador_controller()
-
-
-@route('/login/login_aluno', method='POST')
-def login_aluno_controller():
-    from control.login_controller import login_aluno_controller
-    return login_aluno_controller()
-
-
-@route('/esqueci_senha')
-def view_esqueci_senha():
-    from control.login_controller import view_esqueci_senha
-    return view_esqueci_senha()
-
-
-@route('/view_reformular_senha')
-def view_reformular_senha():
-    from control.login_controller import view_reformular_senha
-    return view_reformular_senha()
-
-
-@route('/controller_reformular_senha', method="POST")
-def controller_esqueci_senha():
-    from control.login_controller import controller_esqueci_senha
-    return controller_esqueci_senha()
-
-
-@route('/sair')
-def controller_login_sair():
-    from control.login_controller import controller_login_sair
-    return controller_login_sair()
-
 
 """
                         ROTAS COM CAMINHO DO AMBIENTE DE APRENDIZAGEM

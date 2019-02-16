@@ -1,13 +1,12 @@
 # encoding: utf-8
 
-from bottle import route, view, request, redirect, get, template
+from bottle import request, redirect, template
 from facade.facade_main import Facade
 from passlib.hash import sha512_crypt
 import unicodedata
-import re
 import random
-from control.classes.permissao import usuario_logado, permissao
-from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_ITEM, TIPO_MEDALHA_NOME
+from control.permissao import usuario_logado, permissao
+from control.dicionarios import TIPO_USUARIOS_ID, TIPO_USUARIOS, TIPO_ESTRUTURA, SERIE, TIPO_MEDALHA_NOME
 
 facade = Facade()
 

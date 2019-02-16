@@ -260,3 +260,7 @@ class DbObservador(Model):
                 observador.append(vars(i)["_data"])
 
         return observador
+
+    def login_observador(self, email, senha):
+        self.search_observador_email(email=email)
+
