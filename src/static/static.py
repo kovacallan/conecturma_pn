@@ -11,7 +11,7 @@ def css(filename):
     """
     return static_file(filename, root='././view/app/css')
 
-@route('/<path:path>')
+@route('/new/<path:path>')
 def static(path):
     """
     ligaçao com o arquivo css

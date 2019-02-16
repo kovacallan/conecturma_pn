@@ -67,12 +67,11 @@ label{
 
 #login_aluno_input{
     margin-top: 10px;
-    text-transform:uppercase;
-}
-#login_aluno_input::placeholder{
     margin-left: 10px;
     padding-left: 10px;
+    text-transform:uppercase;
 }
+
 #aluno-senha{
     margin-top: 48px;
 }
