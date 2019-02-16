@@ -164,8 +164,6 @@ function mouse_out(letra){
 }
 
 
-
-
 function login_aluno(){
   nome = document.getElementById('Login').value;
   senha = [];

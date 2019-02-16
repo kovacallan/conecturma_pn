@@ -1,5 +1,5 @@
 # encoding: utf-8
-from control.classes.permissao import usuario_logado
+from control.permissao import usuario_logado
 from control.dicionarios import TIPO_USUARIOS
 from facade.facade_main import Facade
 

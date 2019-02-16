@@ -1,5 +1,5 @@
 from bottle import route, template, request
-from control.classes.permissao import permissao, usuario_logado
+from control.permissao import permissao, usuario_logado
 from control.observador_controller import Observador
 from control.relatorios.relatorio_turma_controller import RelatorioTurma
 from control.dicionarios import SERIE
@@ -54,7 +54,6 @@ def relatorio_aluno(no_repeat=False):
 @route('/relatorios/relatorio_turma_impressao', method='POST')
 def relatorio_impressao():
     from bottle import request
-    from control.relatorios.relatorio_escola_controller import RelatorioEscola
     from control.dicionarios import DICIPLINA_NOME
 
     relatorio = RelatorioTurma()

@@ -4,6 +4,7 @@ from bottle import default_app, run
 from route.route import *
 from static.static import *
 from jogo.static_game import *
+from control.login_controller import *
 
 def main():
     import bottle
@@ -14,8 +15,8 @@ def main():
     application = default_app()
 
     # run(host='0.0.0.0', port=80, reload=True, server='gunicorn', workers=4)
-    # run(host='localhost', port=8080, reload=True)
-    run(host='localhost', port=8080, reload=True, server='gunicorn', workers=4)
+    run(host='localhost', port=8080, debug=True, reload=True)
+    # run(host='localhost', port=8080, reload=True, server='gunicorn', workers=4)
 
 
 

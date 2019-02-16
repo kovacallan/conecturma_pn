@@ -1,10 +1,8 @@
 # encoding: utf-8
 
-from bottle import route, view, get, request, redirect, template
-from control.classes.validar_cadastros_updates import *
-from facade.facade_main import Facade
+
 from control.gestao_aprendizagem_controller import *
-from control.classes.permissao import permissao, usuario_logado
+from control.permissao import usuario_logado
 from control.dicionarios import TIPO_USUARIOS_ID
 
 facade = Facade()
